@@ -16,6 +16,7 @@ Skill 是擴充 AI Agent 能力的**模組化套件**：把專業知識、工作
 |-------|------|
 | **[skill-creator-design](skill-creator-design/)** | 建立與優化 Skill 的完整指南（中英混合）。包含核心原則、目錄結構、建立流程 Step 1～5，以及撰寫 SKILL.md 與 Bundled Resources 的要點。適合：要**新增或改寫 Skill** 時使用。 |
 | **[agent-creator-design](agent-creator-design/)** | 撰寫與設計 **system prompt**（Agent 指令主體）的規範與寫法。包含設計原則、命名與結構、內文寫法。適合：要**撰寫／重構／審查 system prompt** 時使用。 |
+| **[mcp-creator-design](mcp-creator-design/)** | 建立高品質 **MCP (Model Context Protocol) 伺服器**的指南。涵蓋研究規劃、實作（TypeScript/Python）、審查測試與評測建立。適合：要**開發 MCP server**、整合外部 API 或服務時使用。 |
 
 ---
 
