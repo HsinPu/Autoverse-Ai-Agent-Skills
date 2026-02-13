@@ -1,6 +1,7 @@
 ---
 name: agent-creator-design
-description: 撰寫與設計 system prompt（agent 指令主體）的規範與寫法。在以下情況使用：(1) 使用者要撰寫新的 system prompt，(2) 要設計或重構既有 prompt 結構，(3) 要修改、優化或審查 system prompt 內容。
+description: Guide for writing and designing system prompts (the main instruction body for agents). Use when (1) user wants to write a new system prompt, (2) design or refactor existing prompt structure, or (3) modify, optimize, or review system prompt content.
+license: Apache-2.0
 ---
 
 # System Prompt 撰寫規範與寫法
