@@ -1,12 +1,8 @@
----
-name: python-code-style
-description: Enforces consistent Python code style following PEP 8 and common conventions. Use when writing, reviewing, or refactoring Python code; when the user asks for style compliance, formatting, or PEP 8; or when ensuring naming, type hints, and docstrings follow project standards.
-license: Apache-2.0
----
-
-# Python 程式碼風格（Python Code Style）
+# Python 程式碼風格 — 參考資料
 
 撰寫或審查 Python 程式碼時，依下列規範保持風格一致。以 PEP 8 為基底，必要時可於專案內用 `pyproject.toml` 或 `.flake8` 覆寫。
+
+---
 
 ## 觸發時機
 
