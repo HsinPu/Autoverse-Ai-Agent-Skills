@@ -1,6 +1,6 @@
 ---
 name: git-operations
-description: Executes and guides Git workflows including clone, branch, commit, push, pull, merge, rebase, stash, and history on Windows. Use when the user asks to perform Git operations, write commit messages, manage branches, resolve conflicts, or inspect repository state.
+description: Executes and guides Git workflows on Windows (clone, branch, commit, push, pull, merge, rebase, stash, history). Use when the user asks to commit, make a commit, do a commit, 幫我 commit, 提交, push, pull, stage and commit, write commit message, write commit messages, manage branches, resolve conflicts, inspect repository state, or perform any Git operation.
 ---
 
 # Git 操作
