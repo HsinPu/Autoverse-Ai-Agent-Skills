@@ -1,6 +1,6 @@
 # Autoverse AI Agent Skills
 
-這裡放的是我平常在用的 **Skills**，整理成可重複使用的模組，方便在不同 AI Agent（例如 Cursor）裡套用與分享。
+可重複使用的 Agent Skill 模組，方便在 Cursor 等 AI Agent 中套用與分享。
 
 ---
 
@@ -17,6 +17,8 @@ Skill 是擴充 AI Agent 能力的**模組化套件**：把專業知識、工作
 | **[skill-creator-design](skill-creator-design/)** | 建立與優化 Skill 的完整指南（中英混合）。包含核心原則、目錄結構、建立流程 Step 1～5，以及撰寫 SKILL.md 與 Bundled Resources 的要點。適合：要**新增或改寫 Skill** 時使用。 |
 | **[agent-creator-design](agent-creator-design/)** | 撰寫與設計 **system prompt**（Agent 指令主體）的規範與寫法。包含設計原則、命名與結構、內文寫法。適合：要**撰寫／重構／審查 system prompt** 時使用。 |
 | **[mcp-creator-design](mcp-creator-design/)** | 建立高品質 **MCP (Model Context Protocol) 伺服器**的指南。涵蓋研究規劃、實作（TypeScript/Python）、審查測試與評測建立。適合：要**開發 MCP server**、整合外部 API 或服務時使用。 |
+| **[markdown-writer](markdown-writer/)** | 撰寫或產出 Markdown 時的指引。協助產出結構清晰、格式一致的 README、技術文件、筆記與說明，遵循 GFM 與標題階層。適合：要**撰寫或修改 .md 文件**、整理文件結構時使用。 |
+| **[python-development](python-development/)** | 撰寫或重構 Python 時的參考。提供程式碼風格（PEP 8、命名、型別、Docstring）與設計模式（KISS、SRP、組合、DI）。適合：要**撰寫或重構 Python 程式碼**、討論風格與架構時使用。 |
 
 ---
 
