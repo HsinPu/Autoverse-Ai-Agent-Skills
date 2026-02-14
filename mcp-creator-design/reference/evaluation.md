@@ -1,5 +1,28 @@
 # MCP Server 評測指南（Evaluation Guide）
 
+## 目錄（Table of Contents）
+
+- [總覽（Overview）](#總覽overview)
+- [快速參考（Quick Reference）](#快速參考quick-reference)
+- [評測目的（Purpose of Evaluations）](#評測目的purpose-of-evaluations)
+- [評測總覽（Evaluation Overview）](#評測總覽evaluation-overview)
+- [題目準則（Question Guidelines）](#題目準則question-guidelines)
+- [答案準則（Answer Guidelines）](#答案準則answer-guidelines)
+- [評測流程（Evaluation Process）](#評測流程evaluation-process)
+- [輸出格式（Output Format）](#輸出格式output-format)
+- [評測範例（Evaluation Examples）](#評測範例evaluation-examples)
+- [驗證流程（Verification Process）](#驗證流程verification-process)
+- [產出高品質評測的建議（Tips for Creating Quality Evaluations）](#產出高品質評測的建議tips-for-creating-quality-evaluations)
+- [設定（Setup）](#設定setup)
+- [評測檔格式（Evaluation File Format）](#評測檔格式evaluation-file-format)
+- [執行評測（Running Evaluations）](#執行評測running-evaluations)
+- [命令列選項（Command-Line Options）](#命令列選項command-line-options)
+- [輸出（Output）](#輸出output)
+- [完整範例流程（Complete Example Workflow）](#完整範例流程complete-example-workflow)
+- [疑難排解（Troubleshooting）](#疑難排解troubleshooting)
+
+---
+
 ## 總覽（Overview）
 
 本文件說明如何為 MCP 伺服器建立完整評測。評測用於驗證 LLM 能否**僅透過你提供的 tools**，有效回答貼近真實、具複雜度的問題。

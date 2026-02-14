@@ -10,17 +10,6 @@ license: Apache-2.0
 
 協助產出結構清晰、格式一致的 Markdown 文件，適用於 README、技術文件、筆記與說明。
 
----
-
-## 觸發時機（When to Use）
-
-- 使用者要求撰寫或產出 Markdown（.md）
-- 建立或修改 README、文件、說明頁
-- 將內容整理成 Markdown 格式
-- 討論或優化文件結構、標題階層、列表與程式碼區塊
-
----
-
 ## 撰寫原則（Principles）
 
 ### 語言與用語（Language）
@@ -113,6 +102,6 @@ license: Apache-2.0
 
 ---
 
-## 參考資料（Reference)
+## 進階與參考（Bundled resources）
 
-- **語法與風格** — GFM、標題、列表、表格、程式碼、連結：[reference/markdown-style.md](reference/markdown-style.md)
+- **語法與風格**：需查閱 GFM、標題、列表、表格、程式碼、連結等語法與慣例時，見 [reference/markdown-style.md](reference/markdown-style.md)。

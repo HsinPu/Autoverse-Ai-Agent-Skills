@@ -2,6 +2,18 @@
 
 撰寫或審查 Python 程式碼時，依下列規範保持風格一致。以 PEP 8 為基底，必要時可於專案內用 `pyproject.toml` 或 `.flake8` 覆寫。
 
+## 目錄（Table of Contents）
+
+- [觸發時機](#觸發時機)
+- [命名（Naming）](#命名naming)
+- [格式（Formatting）](#格式formatting)
+- [匯入（Imports）](#匯入imports)
+- [型別註解（Type Hints）](#型別註解type-hints)
+- [Docstring](#docstring)
+- [程式結構與慣例](#程式結構與慣例)
+- [工具建議](#工具建議)
+- [檢查清單（撰寫／審查時）](#檢查清單撰寫審查時)
+
 ---
 
 ## 觸發時機

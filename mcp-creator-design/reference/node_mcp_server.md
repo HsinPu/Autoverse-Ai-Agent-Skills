@@ -1,5 +1,30 @@
 # Node/TypeScript MCP Server 實作指南（Implementation Guide）
 
+## 目錄（Table of Contents）
+
+- [總覽（Overview）](#總覽overview)
+- [快速參考（Quick Reference）](#快速參考quick-reference)
+- [MCP TypeScript SDK](#mcp-typescript-sdk)
+- [伺服器命名規範（Server Naming Convention）](#伺服器命名規範server-naming-convention)
+- [專案結構（Project Structure）](#專案結構project-structure)
+- [Tool 實作（Tool Implementation）](#tool-實作tool-implementation)
+- [Zod Schema 輸入驗證（Zod Schemas for Input Validation）](#zod-schema-輸入驗證zod-schemas-for-input-validation)
+- [回應格式選項（Response Format Options）](#回應格式選項response-format-options)
+- [分頁實作（Pagination Implementation）](#分頁實作pagination-implementation)
+- [字元上限與截斷（Character Limits and Truncation）](#字元上限與截斷character-limits-and-truncation)
+- [錯誤處理（Error Handling）](#錯誤處理error-handling)
+- [共用工具（Shared Utilities）](#共用工具shared-utilities)
+- [Async/Await 最佳實踐（Async/Await Best Practices）](#asyncawait-最佳實踐asyncawait-best-practices)
+- [TypeScript 最佳實踐（TypeScript Best Practices）](#typescript-最佳實踐typescript-best-practices)
+- [套件設定（Package Configuration）](#套件設定package-configuration)
+- [完整範例（Complete Example）](#完整範例complete-example)
+- [進階 MCP 功能（Advanced MCP Features）](#進階-mcp-功能advanced-mcp-features)
+- [程式碼最佳實踐（Code Best Practices）](#程式碼最佳實踐code-best-practices)
+- [建置與執行（Building and Running）](#建置與執行building-and-running)
+- [品質檢查清單（Quality Checklist）](#品質檢查清單quality-checklist)
+
+---
+
 ## 總覽（Overview）
 
 本文件提供以 MCP TypeScript SDK 實作 MCP 伺服器時，Node/TypeScript 專用的最佳實踐與範例。涵蓋專案結構、伺服器設定、tool 註冊模式、以 Zod 做輸入驗證、錯誤處理，以及完整可運作範例。

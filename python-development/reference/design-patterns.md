@@ -2,6 +2,15 @@
 
 以基本設計原則撰寫可維護（maintainable）的 Python 程式碼，讓系統易於理解、測試與修改。
 
+## 目錄（Table of Contents）
+
+- [觸發時機（When to Use）](#觸發時機when-to-use)
+- [核心概念（Core Concepts）](#核心概念core-concepts)
+- [快速入門（Quick Start）](#快速入門quick-start)
+- [基礎模式（Fundamental Patterns）](#基礎模式fundamental-patterns)
+- [進階模式（Advanced Patterns）](#進階模式advanced-patterns)
+- [檢查清單（Best Practices Summary）](#檢查清單best-practices-summary)
+
 ---
 
 ## 觸發時機（When to Use）

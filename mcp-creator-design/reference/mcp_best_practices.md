@@ -2,6 +2,20 @@
 
 通用 MCP 準則：伺服器與 tool 命名、回應格式、分頁、傳輸選擇、安全與錯誤處理。
 
+## 目錄（Table of Contents）
+
+- [快速參考（Quick Reference）](#快速參考quick-reference)
+- [伺服器命名規範（Server Naming Conventions）](#伺服器命名規範server-naming-conventions)
+- [Tool 命名與設計（Tool Naming and Design）](#tool-命名與設計tool-naming-and-design)
+- [回應格式（Response Formats）](#回應格式response-formats)
+- [分頁（Pagination）](#分頁pagination)
+- [傳輸選項（Transport Options）](#傳輸選項transport-options)
+- [安全最佳實踐（Security Best Practices）](#安全最佳實踐security-best-practices)
+- [Tool 註解（Tool Annotations）](#tool-註解tool-annotations)
+- [錯誤處理（Error Handling）](#錯誤處理error-handling)
+- [測試需求（Testing Requirements）](#測試需求testing-requirements)
+- [文件需求（Documentation Requirements）](#文件需求documentation-requirements)
+
 ---
 
 ## 快速參考（Quick Reference）

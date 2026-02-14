@@ -106,7 +106,9 @@ license: Apache-2.0
 
 ---
 
-## Reference 文件一覽
+## 進階與參考（Bundled resources）
+
+需查閱下列主題時，依表格載入對應檔案：
 
 | 檔案 | 用途 |
 |------|------|
