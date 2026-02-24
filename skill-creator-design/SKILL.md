@@ -285,3 +285,40 @@ skill-name/
 **做法（What to do）**：用此 skill 處理**真實需求**（real requests），觀察**困難點**（pain points）與**誤觸發／未觸發**（false trigger / missed trigger）等情況，回頭調整 **SKILL.md**（description、body）、**scripts**、**references** 或 **assets**。必要時回到 Step 1～4 補齊範例、資源或描述。
 
 **完成條件（Completion criteria）**：**迭代**（iteration）可持續進行；當 skill 在**目標情境**（target context）下**穩定觸發**（triggers reliably）、**行為符合預期**（behaves as expected）時，即視為此輪建立完成。
+
+---
+
+## 檢查清單（Skill Review Checklist）
+
+建立或審查 Skill 時，逐項確認以下條件：
+
+### Frontmatter
+
+- [ ] `name` 已填寫且與**資料夾名稱一致**（lowercase, hyphen-separated）
+- [ ] `description` 包含「**做什麼**」與「**何時／什麼情境使用**」（triggers/contexts）
+- [ ] 觸發條件**只寫在 description**，不重複寫在 body（body 觸發後才載入，對觸發判斷無幫助）
+
+### SKILL.md Body
+
+- [ ] Body 控制在 **500 行以內**，避免 context 膨脹
+- [ ] 使用**祈使句／不定詞**語氣（imperative/infinitive）
+- [ ] 只保留 agent 執行任務**直接需要的指示**，不放開發過程說明、setup 流程、user-facing 文件
+
+### Progressive Disclosure（漸進式揭露）
+
+- [ ] 細節內容拆到 **reference/** 檔案，SKILL.md 只做**精簡入口**
+- [ ] 每個 reference 連結**說明「何時該讀」**，讓 agent 知道載入時機
+- [ ] Reference 只做**一層**，從 SKILL.md 直接連結（避免深層巢狀）
+- [ ] 超過 100 行的 reference 檔案**開頭有目錄**（Table of Contents）
+
+### 目錄結構
+
+- [ ] 不包含多餘文件（不要 README.md、CHANGELOG.md、INSTALLATION_GUIDE.md 等）
+- [ ] Scripts（若有）已**實際執行測試**，確認無 bug、輸出符合預期
+- [ ] 範例檔與目錄已**清理**，只保留必要資源
+
+### 品質
+
+- [ ] 問過自己：「agent **真的需要**這段說明嗎？這段文字**值得它消耗的 token** 嗎？」
+- [ ] 寧可多用**簡潔範例**，少用**冗長說明**
+- [ ] 同一資訊**不重複**出現在 SKILL.md 與 reference 中
