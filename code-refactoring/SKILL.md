@@ -61,4 +61,5 @@ license: MIT
 ## 進階與參考（Bundled resources）
 
 - **共通原則（語言無關）**：需查閱何時重構、Code smells、重構技巧、安全流程與檢查表時，見 [reference/universal-principles.md](reference/universal-principles.md)。Java、Python、TypeScript 等皆應遵守。
-- **實作範例（依語言）**：需 TypeScript 的 BEFORE / AFTER 範例時，見 [reference/examples-typescript.md](reference/examples-typescript.md)。Java、Python 等可另增對應檔案（如 `reference/examples-python.md`）。
+- **實作範例（TypeScript）**：需 TypeScript 的 BEFORE / AFTER 範例時，見 [reference/examples-typescript.md](reference/examples-typescript.md)。
+- **實作範例（Java）**：需 Java 的 BEFORE / AFTER 範例（含 Optional、Stream、Record、Enum 等 Java 特有重構）時，見 [reference/examples-java.md](reference/examples-java.md)。
