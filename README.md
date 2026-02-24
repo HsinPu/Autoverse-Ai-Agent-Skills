@@ -24,6 +24,7 @@ Skill 是擴充 AI Agent 能力的**模組化套件**：把專業知識、工作
 | **[code-review](code-review/)** | 依安全、效能、程式品質與測試四大面向嚴謹審查程式碼。輸出含嚴重度分級（Critical / Suggestions / Nits / What's Good）。適合：要**審查 Pull Request、程式變更或執行 code audit** 時使用。 |
 | **[code-refactoring](code-refactoring/)** | 在不改變行為的前提下改善程式結構與可讀性。涵蓋 code smells、重構技術、安全流程與語言無關原則（含 TypeScript 範例）。適合：要**整理舊程式碼、降低複雜度、提升可維護性**時使用。 |
 | **[database-design](database-design/)** | Schema 設計、索引、遷移與查詢優化。涵蓋正規化、反正規化、B-tree / GIN / Partial Index、zero-downtime migration。適合：要**設計 schema、寫 migration、優化查詢**時使用。 |
+| **[sql-best-practices](sql-best-practices/)** | SQL 撰寫風格、效能優化與安全性。涵蓋命名格式、JOIN/CTE 寫法、EXPLAIN 判讀、N+1、分頁策略、SQL injection 防範、參數化查詢、權限控制。與 `database-design` 互補（前者管 schema 設計，本 skill 管 SQL 撰寫）。適合：要**撰寫或審查 SQL、優化查詢效能、檢視 SQL 安全**時使用。 |
 | **[file-organizer](file-organizer/)** | 智慧整理電腦檔案與資料夾：分析結構、找重複檔、建議目錄架構、自動搬移與清理。環境預設 Windows（PowerShell）。適合：要**整理 Downloads / Documents、找重複檔、清理桌面**時使用。 |
 | **[frontend-design](frontend-design/)** | 建立具辨識度、可上線的前端介面，避免 generic AI 美學。涵蓋美學方向選定、字體排版、色彩、動態效果與空間構圖。適合：要**建立網頁元件、頁面、Landing Page 或美化 UI** 時使用。 |
 | **[ask-questions-if-underspecified](ask-questions-if-underspecified/)** | 先釐清需求再實作，問最少必要的澄清問題，避免做錯方向。**僅在使用者明確要求時使用**，不會自動套用。適合：要**釐清模糊需求、確認規格**時使用。 |
