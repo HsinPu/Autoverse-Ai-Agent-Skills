@@ -146,5 +146,5 @@ license: MIT
 
 特定語言的具體 BEFORE / AFTER 程式碼範例（包含各語言特有重構技巧），請參考各語言專屬的 Skill：
 
-- **TypeScript 範例**：見 `frontend-design` Skill 內的 `reference/refactoring-typescript.md`
+- **TypeScript 範例**：見 `typescript-development` Skill 內的 `reference/refactoring.md`
 - **Java 範例**：見 `java-development` Skill 內的 `reference/refactoring.md`

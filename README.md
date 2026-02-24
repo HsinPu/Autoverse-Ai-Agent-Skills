@@ -20,6 +20,7 @@ Skill 是擴充 AI Agent 能力的**模組化套件**：把專業知識、工作
 | **[markdown-writer](markdown-writer/)** | 撰寫或產出 Markdown 時的指引。協助產出結構清晰、格式一致的 README、技術文件、筆記與說明，遵循 GFM 與標題階層。適合：要**撰寫或修改 .md 文件**、整理文件結構時使用。 |
 | **[python-development](python-development/)** | 撰寫或重構 Python 時的參考。提供程式碼風格（PEP 8、命名、型別、Docstring）與設計模式（KISS、SRP、組合、DI）。適合：要**撰寫或重構 Python 程式碼**、討論風格與架構時使用。 |
 | **[java-development](java-development/)** | 撰寫或重構 Java 時的參考。提供程式碼風格（Google/Oracle 慣例、命名、格式、Javadoc、例外處理）、設計模式（SOLID、組合、DI、不可變性）以及重構技巧（Stream、Optional、Record 等）。基準版本 Java 11+。適合：要**撰寫或重構 Java 程式碼**、討論風格與架構時使用。 |
+| **[typescript-development](typescript-development/)** | 撰寫或重構 TypeScript/JavaScript 時的參考。目前提供 TS 的 BEFORE/AFTER 重構範例（包含 Extract Method、多型、參數物件等）。適合：要**撰寫或重構 TypeScript 程式碼**、討論 TS 模式時使用。 |
 | **[git-operations](git-operations/)** | 執行與規劃 Git 工作流（clone、branch、commit、push、pull、merge、rebase、stash）。環境預設 Windows（PowerShell / cmd），包含安全檢查與 Conventional Commits 規範。適合：要**執行任何 Git 操作**時使用。 |
 | **[code-review](code-review/)** | 依安全、效能、程式品質與測試四大面向嚴謹審查程式碼。輸出含嚴重度分級（Critical / Suggestions / Nits / What's Good）。適合：要**審查 Pull Request、程式變更或執行 code audit** 時使用。 |
 | **[code-refactoring](code-refactoring/)** | 在不改變行為的前提下改善程式結構與可讀性。涵蓋 code smells 定義、通用重構技巧、安全流程與語言無關原則。適合：要**探討重構策略、整理舊程式碼、降低複雜度**時使用（實作範例請參考對應語言的 Skill）。 |
