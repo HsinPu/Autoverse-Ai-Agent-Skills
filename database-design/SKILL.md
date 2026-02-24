@@ -1,8 +1,8 @@
 ---
 name: database-design
 description: Database schema design, optimization, and migration patterns for PostgreSQL, MySQL, and NoSQL. Use when designing schemas, writing migrations, optimizing queries, or discussing indexes, normalization, or data integrity.
-source: wshobson/agents
-license: MIT
+source: HsinPu/Autoverse-Ai-Agent-Skills
+license: Apache-2.0
 ---
 
 # Database Design

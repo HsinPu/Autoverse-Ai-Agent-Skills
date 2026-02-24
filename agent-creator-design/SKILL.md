@@ -1,6 +1,7 @@
 ---
 name: agent-creator-design
 description: Guide for writing and designing system prompts (the main instruction body for agents). Use when (1) user wants to write a new system prompt, (2) design or refactor existing prompt structure, or (3) modify, optimize, or review system prompt content.
+source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---
 

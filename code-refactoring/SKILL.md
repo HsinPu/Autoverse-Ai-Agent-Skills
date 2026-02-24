@@ -1,8 +1,8 @@
 ---
 name: code-refactoring
 description: Code refactoring patterns and techniques for improving code quality without changing behavior. Use when cleaning up legacy code, reducing complexity, or improving maintainability.
-source: wshobson/agents
-license: MIT
+source: HsinPu/Autoverse-Ai-Agent-Skills
+license: Apache-2.0
 ---
 
 # Code Refactoring（通用重構原則）

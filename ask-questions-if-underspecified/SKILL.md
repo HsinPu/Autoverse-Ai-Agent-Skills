@@ -1,7 +1,8 @@
 ---
 name: ask-questions-if-underspecified
 description: Clarify requirements before implementing by asking the minimum must-have questions. Do not use automatically; apply only when the user explicitly invokes this skill or asks to clarify requirements first.
-source: thsottiaux
+source: HsinPu/Autoverse-Ai-Agent-Skills
+license: Apache-2.0
 ---
 
 # Ask Questions If Underspecified

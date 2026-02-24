@@ -1,6 +1,8 @@
 ---
 name: file-organizer
 description: Intelligently organizes files and folders by understanding context, finding duplicates, suggesting structures, and automating cleanup. Use when organizing Downloads/Documents, finding duplicates, restructuring folders, cleaning desktop, or establishing file organization habits.
+source: HsinPu/Autoverse-Ai-Agent-Skills
+license: Apache-2.0
 ---
 
 # 檔案整理（File Organizer）
