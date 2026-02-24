@@ -14,3 +14,4 @@ license: Apache-2.0
 
 - **程式碼風格**：需查閱命名、格式、匯入、Javadoc、例外處理、慣例或工具時，見 [reference/code-style.md](reference/code-style.md)。
 - **設計模式**：需查閱 SOLID、組合優於繼承、依賴注入、不可變性時，見 [reference/design-patterns.md](reference/design-patterns.md)。
+- **重構與 Code Smells**：需查閱 Java 重構技巧（Extract Method、Optional、Stream、Record 等）與 Code Smells 改善範例時，見 [reference/refactoring.md](reference/refactoring.md)。

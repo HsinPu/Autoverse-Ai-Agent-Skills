@@ -1,6 +1,6 @@
 # Code Refactoring — 實作範例（TypeScript）
 
-以下為 **TypeScript** 的 BEFORE / AFTER 範例；共通原則與步驟見 [universal-principles.md](universal-principles.md)。Java 範例見 [examples-java.md](examples-java.md)。
+以下為 **TypeScript** 的 BEFORE / AFTER 範例；共通原則與步驟見 [universal-principles.md](universal-principles.md)。Java 範例見 `java-code-style` Skill 內的 `reference/refactoring.md`。
 
 ## 目錄（Table of Contents）
 

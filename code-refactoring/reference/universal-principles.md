@@ -147,4 +147,4 @@
 
 ## 實作範例
 
-共通原則在具體語言中的寫法，見主檔 [SKILL.md](../SKILL.md)「參考資料」之依語言分檔表；TypeScript 範例：[examples-typescript.md](examples-typescript.md)；Java 範例：[examples-java.md](examples-java.md)。
+共通原則在具體語言中的寫法，見主檔 [SKILL.md](../SKILL.md)「參考資料」之依語言分檔表；TypeScript 範例：[examples-typescript.md](examples-typescript.md)；Java 範例見 `java-code-style` Skill 內的 `reference/refactoring.md`。

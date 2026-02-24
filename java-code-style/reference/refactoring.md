@@ -1,6 +1,6 @@
-# Code Refactoring — 實作範例（Java）
+# Java 重構範例（Refactoring Examples）
 
-以下為 **Java 11+** 的 BEFORE / AFTER 範例；共通原則與步驟見 [universal-principles.md](universal-principles.md)。SOLID 與分層架構的 Java 範例見 `java-code-style` Skill 的 `reference/design-patterns.md`。
+以下為 **Java 11+** 的 BEFORE / AFTER 重構範例。通用重構原則（code smells、安全流程、checklist）見 `code-refactoring` Skill。SOLID 與分層架構見 [design-patterns.md](design-patterns.md)。
 
 ## 目錄（Table of Contents）
 
