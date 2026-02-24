@@ -62,4 +62,4 @@ license: MIT
 
 - **共通原則（語言無關）**：需查閱何時重構、Code smells、重構技巧、安全流程與檢查表時，見 [reference/universal-principles.md](reference/universal-principles.md)。Java、Python、TypeScript 等皆應遵守。
 - **實作範例（TypeScript）**：需 TypeScript 的 BEFORE / AFTER 範例時，見 [reference/examples-typescript.md](reference/examples-typescript.md)。
-- **實作範例（Java）**：需 Java 重構範例時，請載入並參考 `java-code-style` Skill 內的 `reference/refactoring.md`。
+- **實作範例（Java）**：需 Java 重構範例時，請載入並參考 `java-development` Skill 內的 `reference/refactoring.md`。

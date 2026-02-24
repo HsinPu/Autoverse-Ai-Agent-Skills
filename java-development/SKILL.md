@@ -1,5 +1,5 @@
 ---
-name: java-code-style
+name: java-development
 description: Read when writing Java. Provides reference for code style (Google/Oracle conventions, naming, formatting, Javadoc, exceptions) and design patterns (SOLID, composition, DI, immutability). Use when writing or refactoring Java code, or when user asks about style, structure, or patterns.
 license: Apache-2.0
 ---
