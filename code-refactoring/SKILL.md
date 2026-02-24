@@ -5,61 +5,146 @@ source: wshobson/agents
 license: MIT
 ---
 
-# Code Refactoring
+# Code Refactoring（通用重構原則）
 
-在不改變行為的前提下改善程式結構與可讀性。適用於整理舊程式碼、降低複雜度、提升可維護性。**重構原則與 code smells 為語言無關，Java、Python、TypeScript 等皆應遵守**；詳見 [reference/universal-principles.md](reference/universal-principles.md)。
+在不改變行為的前提下改善程式結構與可讀性。適用於整理舊程式碼、降低複雜度、提升可維護性。以下原則適用於 **Java、Python、TypeScript/JavaScript、C#、Go** 等任何語言。重構時應遵守這些共通準則，再依語言慣例撰寫程式。
+
+---
+
+## 核心原則
+
+- **不改變行為**：重構只改結構與可讀性，對外行為與結果不變。
+- **小步進行**：一次一種重構，每步都可驗證、可還原。
+- **先有保護再動**：有測試或可驗證方式再重構，避免無意改壞行為。
+
+---
 
 ## 何時重構 / 何時不重構
 
-**適合重構時機**：加新功能前（先讓改動變容易）、測試通過後（red-green-refactor）、發現 code smell、code review 建議時。
+### 適合重構的時機
 
-**不適合重構時機**：沒有測試覆蓋、時程緊且無安全網、程式即將被替換、尚未理解程式在做什麼。
+| 時機 | 說明 |
+|------|------|
+| 加新功能前 | 先讓「改動」變容易，再加功能（make change easy, then make easy change）。 |
+| 測試通過後 | 紅—綠—重構（red-green-refactor）：綠燈後再整理程式。 |
+| 發現 code smell | 辨識出下列臭味時，排入重構。 |
+| Code review 建議 | 審查時指出可讀性、複雜度、重複時，依建議重構。 |
+
+### 不適合重構的時機
+
+| 情況 | 說明 |
+|------|------|
+| 沒有測試覆蓋 | 無法確認行為不變，風險高；先補測試再重構。 |
+| 時程緊且無安全網 | 沒有自動化測試或回滾計畫時，避免大範圍重構。 |
+| 程式即將被替換 | 若短期內會整塊替換，重構效益低。 |
+| 尚未理解程式在做什麼 | 先讀懂、必要時加註解或小範圍補測試，再重構。 |
 
 ---
 
-## 常見 Code Smells
+## Code Smells（共通定義與應對）
 
-| Smell | 作法摘要 |
-|-------|----------|
-| **Long methods** | 抽出小方法/函式，單一職責；用描述性名稱。 |
-| **Deeply nested conditionals** | 用 early return（guard clauses）取代多層 if。 |
-| **Primitive obsession** | 用 value object 封裝驗證與語意（如 Email、Phone）。 |
-| **Feature envy** | 方法過度使用別物件的資料 → 考慮把方法移到資料所在處（Move Method）。 |
+不論語言，以下臭味與應對方向一致。
+
+### Long methods / Long functions
+
+- **定義**：一個方法/函式做多件事、過長、難以命名或難以測試。
+- **應對**：抽出「做一件事」的區塊成新方法/函式，用描述性名稱；保持單一職責。
+
+### Deeply nested conditionals
+
+- **定義**：多層 if/else 巢狀（箭頭式程式碼），難以閱讀與測試。
+- **應對**：用 early return（guard clauses）先處理不成立或邊界情況並回傳，讓主邏輯保持一層或少層巢狀。
+
+### Primitive obsession
+
+- **定義**：到處用基本型別（string、number）表示領域概念，驗證與語意分散重複。
+- **應對**：引入 value object / 小物件封裝（如 Email、Phone、Money），在建立時驗證，其餘程式使用型別而非裸 primitives。
+
+### Feature envy
+
+- **定義**：某方法大量使用「其他物件」的資料或 getter，自己的類別資料用得少。
+- **應對**：考慮將方法移到「資料所在」的類別（Move Method），或讓該類別提供一個完整行為介面，減少跨物件拉資料。
+
+### 其他常見臭味（共通）
+
+- **重複程式碼**：抽出共用函式/方法或模組，避免複製貼上。
+- **過多參數**：用參數物件或 options 結構收納，或拆成較小介面。
+- **魔術數字/字串**：用具名常數或列舉表達語意與修改點。
+- **過大類別/模組**：依職責拆成多個較小單元。
 
 ---
 
-## 重構技巧速查
+## 重構技巧（共通模式）
 
-- **Extract Method**：把「做一件事」的區塊抽成具名方法/函式，原處改為呼叫。
-- **Replace Conditional with Polymorphism**：依型別 switch → 改為多型（interface + 實作類別）。
-- **Introduce Parameter Object**：參數過多 → 收成一個參數物件（含巢狀結構如 priceRange、sort）。
-- **Replace Magic Numbers**：魔術數字 → 具名常數（MINIMUM_AGE、DISCOUNT_THRESHOLD 等）。
+以下為語言無關的「做什麼」與「步驟」，實作時用該語言的語法即可。
+
+### Extract Method / Extract Function
+
+- **意圖**：把一段「做一件事」的程式抽成獨立方法/函式。
+- **步驟**：  
+  1) 找出可命名的一區塊。  
+  2) 新增方法/函式，名稱描述該區塊的用途。  
+  3) 將區塊移入新方法，必要參數與回傳值明確化。  
+  4) 原處改為呼叫新方法。
+
+### Replace Conditional with Polymorphism
+
+- **意圖**：依型別/種類做不同行為時，用多型取代 if/switch。
+- **步驟**：  
+  1) 定義共通介面/抽象（單一行為方法，如 getArea）。  
+  2) 每種型別一個實作類別。  
+  3) 呼叫端依介面呼叫，由多型分派，不再依型別分支。
+
+### Introduce Parameter Object
+
+- **意圖**：參數過多時，收成一個參數物件/結構。
+- **步驟**：  
+  1) 定義結構/類別，欄位對應現有參數（可含巢狀，如 priceRange、sort）。  
+  2) 將函式簽名改為接受單一參數物件。  
+  3) 呼叫端改為組裝並傳入該物件。
+
+### Replace Magic Numbers / Strings with Named Constants
+
+- **意圖**：讓數字與字串的語意與修改點集中。
+- **步驟**：  
+  1) 找出代表業務或設定意義的魔術數字/字串。  
+  2) 以常數/列舉/設定檔具名（如 MINIMUM_AGE、DISCOUNT_THRESHOLD）。  
+  3) 原處改為使用該名稱。
+
+### Move Method
+
+- **意圖**：方法與某類別資料互動遠多於自己類別時，把方法移到該類別。
+- **步驟**：  
+  1) 在目標類別新增方法，必要時傳入原物件或其部分。  
+  2) 原方法改為委派給新方法，或呼叫端改為呼叫新位置。  
+  3) 移除原方法。
 
 ---
 
 ## 安全重構流程
 
-1. **先有測試** — 沒有就補，再重構。
-2. **小步進行** — 一次一種重構。
-3. **每次改動後跑測試** — 立刻發現行為變化。
-4. **常 commit** — 出問題可快速還原。
-5. **看 diff** — 確認只有結構變、行為不變。
+1. **先有測試**：沒有就補（單元或整合），再開始重構。
+2. **小步進行**：一次一種重構，不混入新功能。
+3. **每次改動後跑測試**：立刻發現行為變化。
+4. **常 commit**：每步可還原，commit message 說明重構內容。
+5. **檢查 diff**：確認只改結構與命名，不改行為與邊界條件。
 
 ---
 
 ## Refactoring Checklist
 
-- [ ] 重構前測試通過
-- [ ] 每次改動小且聚焦
+- [ ] 重構前測試通過（或已有可驗證方式）
+- [ ] 每次改動小且聚焦於單一重構
 - [ ] 每次改動後測試通過
-- [ ] 僅改結構，不改行為
-- [ ] 可讀性提升
-- [ ] Commit message 說明重構內容
+- [ ] 僅改結構、命名、組織，不改對外行為
+- [ ] 可讀性提升（命名、長度、層級）
+- [ ] Commit message 說明重構內容（例如：Extract method X、Replace magic number）
 
 ---
 
-## 進階與參考（Bundled resources）
+## 實作範例（跨檔案連結）
 
-- **共通原則（語言無關）**：需查閱何時重構、Code smells、重構技巧、安全流程與檢查表時，見 [reference/universal-principles.md](reference/universal-principles.md)。Java、Python、TypeScript 等皆應遵守。
-- **實作範例（TypeScript）**：需 TypeScript 的 BEFORE / AFTER 範例時，見 [reference/examples-typescript.md](reference/examples-typescript.md)。
-- **實作範例（Java）**：需 Java 重構範例時，請載入並參考 `java-development` Skill 內的 `reference/refactoring.md`。
+特定語言的具體 BEFORE / AFTER 程式碼範例（包含各語言特有重構技巧），請參考各語言專屬的 Skill：
+
+- **TypeScript 範例**：見 `frontend-design` Skill 內的 `reference/refactoring-typescript.md`
+- **Java 範例**：見 `java-development` Skill 內的 `reference/refactoring.md`

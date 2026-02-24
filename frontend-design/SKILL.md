@@ -73,4 +73,6 @@ description: Create distinctive, production-ready frontend interfaces with high 
 - Minimalist 或 refined 設計需要節制、精準，以及對 spacing、typography 與細微細節的講究。
 - 優雅來自把願景執行到位。
 
-**記住**：全心投入一個 distinctive 願景。不要保留—展現跳脫框架、全力執行時能達成的成果。
+## 進階與參考（Bundled resources）
+
+- **TypeScript 重構**：在前端開發中若需進行複雜的 TypeScript 重構（如 Code Smells 改善、Extract Method、Introduce Parameter Object 等），請參考 [reference/refactoring-typescript.md](reference/refactoring-typescript.md)。
