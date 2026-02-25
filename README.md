@@ -39,6 +39,27 @@ Skill 是擴充 AI Agent 能力的**模組化套件**：把專業知識、工作
 
 ---
 
+## CLI（用 GitHub 安裝/更新 skills）
+
+如果你想用指令直接從 GitHub 抓 skills（不用手動複製資料夾），可以使用本 repo 的 CLI：`autoverse-cli.js`。
+
+需求：
+- Node.js 16+
+- git（CLI 會用 `git clone` 下載）
+
+安裝（直接從 GitHub；不用先 `git clone` 這個 repo）：
+- `npm i -g github:HsinPu/Autoverse-Ai-Agent-Skills`
+
+常用指令：
+- `autoverse list`
+- `autoverse search python`
+- `autoverse install python-development --agent cursor`
+- `autoverse update --all --agent cursor`
+
+備註：像 Cursor / VS Code 這類「專案內路徑」的 Agent，請在目標專案目錄下執行 `autoverse ...`，CLI 會安裝到該專案的 `.cursor/skills/` 或 `.github/skills/`。
+
+---
+
 ## 放置位置（Install Location）
 
 依你使用的 Agent 將 skill 資料夾放到對應路徑：

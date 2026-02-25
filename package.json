@@ -1,0 +1,27 @@
+{
+  "name": "autoverse-ai-agent-skills",
+  "version": "1.0.0",
+  "description": "Autoverse AI Agent Skills collection + CLI installer",
+  "license": "Apache-2.0",
+  "author": "HsinPu",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HsinPu/Autoverse-Ai-Agent-Skills.git"
+  },
+  "bugs": {
+    "url": "https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/issues"
+  },
+  "homepage": "https://github.com/HsinPu/Autoverse-Ai-Agent-Skills#readme",
+  "bin": {
+    "autoverse": "./autoverse-cli.js"
+  },
+  "files": [
+    "autoverse-cli.js",
+    "skills.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=16"
+  }
+}

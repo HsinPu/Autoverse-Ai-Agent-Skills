@@ -340,7 +340,8 @@ ${skill.description}
 標籤: ${skill.tags ? skill.tags.join(', ') : '無'}
 
 安裝:
-  node autoverse-cli.js install ${skill.name} --agent cursor
+  autoverse install ${skill.name} --agent cursor
+  (若未安裝 autoverse 指令，可用: node autoverse-cli.js install ${skill.name} --agent cursor)
 `);
 }
 
@@ -349,7 +350,8 @@ function showHelp() {
 Autoverse AI Agent Skills - 技能管理工具
 
 用法:
-  node autoverse-cli.js <指令> [選項]
+  autoverse <指令> [選項]
+  (或: node autoverse-cli.js <指令> [選項])
 
 指令:
   list                  列出所有可用技能
@@ -371,11 +373,11 @@ Autoverse AI Agent Skills - 技能管理工具
   project, goose, opencode, letta, gemini
 
 範例:
-  node autoverse-cli.js list
-  node autoverse-cli.js search python
-  node autoverse-cli.js info python-development
-  node autoverse-cli.js install python-development --agent cursor
-  node autoverse-cli.js update --all --agent cursor
+  autoverse list
+  autoverse search python
+  autoverse info python-development
+  autoverse install python-development --agent cursor
+  autoverse update --all --agent cursor
 `);
 }
 
@@ -409,7 +411,7 @@ if (!command || command === 'help' || command === '--help' || command === '-h') 
 } else if (command === 'search' || command === 's') {
   if (!param) {
     console.log('請指定搜尋關鍵字');
-    console.log('用法: node autoverse-cli.js search <關鍵字>');
+    console.log('用法: autoverse search <關鍵字>');
   } else {
     searchSkills(param);
   }
@@ -422,7 +424,7 @@ if (!command || command === 'help' || command === '--help' || command === '-h') 
 } else if (command === 'install') {
   if (!param) {
     console.log('請指定技能名稱');
-    console.log('用法: node autoverse-cli.js install <技能名> [--agent cursor] [--all]');
+    console.log('用法: autoverse install <技能名> [--agent cursor] [--all]');
   } else if (allFlag) {
     Object.keys(AGENT_PATHS).forEach(a => installSkill(param, a));
   } else {
@@ -431,7 +433,7 @@ if (!command || command === 'help' || command === '--help' || command === '-h') 
 } else if (command === 'uninstall' || command === 'rm') {
   if (!param) {
     console.log('請指定技能名稱');
-    console.log('用法: node autoverse-cli.js uninstall <技能名> [--agent cursor] [--all]');
+    console.log('用法: autoverse uninstall <技能名> [--agent cursor] [--all]');
   } else if (allFlag) {
     Object.keys(AGENT_PATHS).forEach(a => uninstallSkill(param, a));
   } else {
@@ -443,8 +445,8 @@ if (!command || command === 'help' || command === '--help' || command === '-h') 
     agents.forEach(a => updateAllSkills(a));
   } else if (!param) {
     console.log('請指定技能名稱或使用 --all');
-    console.log('用法: node autoverse-cli.js update <技能名> [--agent cursor]');
-    console.log('      node autoverse-cli.js update --all');
+    console.log('用法: autoverse update <技能名> [--agent cursor]');
+    console.log('      autoverse update --all');
   } else if (allFlag) {
     Object.keys(AGENT_PATHS).forEach(a => updateSkill(param, a));
   } else {
