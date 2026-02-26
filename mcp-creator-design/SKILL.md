@@ -39,6 +39,7 @@ license: Apache-2.0
 - **MCP 最佳實踐**：必讀 [reference/mcp_best_practices.md](reference/mcp_best_practices.md)
 - **TypeScript**：以 WebFetch 載入 `https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/README.md`，並參閱 [reference/node_mcp_server.md](reference/node_mcp_server.md)
 - **Python**：以 WebFetch 載入 `https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/README.md`，並參閱 [reference/python_mcp_server.md](reference/python_mcp_server.md)
+- **Java**：以 WebFetch 載入 `https://raw.githubusercontent.com/modelcontextprotocol/java-sdk/main/README.md`，並參閱 [reference/java_mcp_server.md](reference/java_mcp_server.md)
 
 ### 1.4 規劃實作
 
@@ -53,6 +54,7 @@ license: Apache-2.0
 
 - TypeScript：見 [reference/node_mcp_server.md](reference/node_mcp_server.md) 的專案結構、package.json、tsconfig.json
 - Python：見 [reference/python_mcp_server.md](reference/python_mcp_server.md) 的模組與依賴
+- Java：見 [reference/java_mcp_server.md](reference/java_mcp_server.md) 的 Maven/Gradle 依賴與結構
 
 ### 2.2 核心基礎設施
 
@@ -87,6 +89,7 @@ license: Apache-2.0
 
 - **TypeScript**：`npm run build` 確認編譯；以 MCP Inspector 測試：`npx @modelcontextprotocol/inspector`
 - **Python**：`python -m py_compile your_server.py` 檢查語法；以 MCP Inspector 測試
+- **Java**：`mvn -q test` 或 `./mvnw test`；以 MCP Inspector 測試
 
 語言別檢查清單見對應 reference。
 
@@ -116,6 +119,7 @@ license: Apache-2.0
 | [reference/mcp_best_practices.md](reference/mcp_best_practices.md) | 命名、回應格式、分頁、傳輸、安全與錯誤處理 |
 | [reference/node_mcp_server.md](reference/node_mcp_server.md) | TypeScript 專案結構、Zod、tool 註冊、範例與檢查清單 |
 | [reference/python_mcp_server.md](reference/python_mcp_server.md) | Python/FastMCP 結構、Pydantic、`@mcp.tool`、範例與檢查清單 |
+| [reference/java_mcp_server.md](reference/java_mcp_server.md) | Java/MCP Java SDK 結構、Tool 註冊、傳輸（stdio/streamable HTTP）、範例與檢查清單 |
 | [reference/evaluation.md](reference/evaluation.md) | 評測題目產出流程、XML 格式與範例 |
 
 **外部文件（Phase 1 依需載入）**：MCP 規格自 sitemap 取得；TypeScript SDK README、Python SDK README 見 Phase 1.3 所列 URL。
