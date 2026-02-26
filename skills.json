@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-02-24T00:00:00Z",
-  "total": 16,
+  "updated": "2026-02-26T00:00:00Z",
+  "total": 17,
   "skills": [
     {
       "name": "todo-first",
@@ -92,6 +92,15 @@
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
       "tags": ["java", "code-style", "design-patterns"]
+    },
+    {
+      "name": "javascript-development",
+      "description": "Read when writing JavaScript. Provides best practices for code style, module structure, async/error handling, security, and testing in modern JS (Node.js and browser). Use when writing, reviewing, or refactoring JavaScript.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": ["javascript", "nodejs", "code-style", "async", "security", "testing"]
     },
     {
       "name": "markdown-writer",
