@@ -34,6 +34,7 @@ $("#items").html(html);
 
 - 動態新增的元素不要直接 `.on("click", ...)` 綁在元素上。
 - 用委派：`$container.on("click", ".selector", handler)`。
+- **委派的綁定點要靠近目標**：不要無腦綁 `document` / `body`；事件觸發時 jQuery 會沿路比對 selector，綁得越上層成本越高。
 
 ```js
 const $table = $("#orders");
@@ -44,7 +45,23 @@ $table.on("click", "[data-action='remove']", async (e) => {
 });
 ```
 
+## 動態 selector 與 escape
+
+若需要用「外部資料」組成 selector（例如動態 id），請先 escape，避免 selector 語法錯誤或 selector 注入：
+
+```js
+const id = "abc.def"; // 可能含 '.' 等特殊字元
+const $el = $("#" + $.escapeSelector(id));
+```
+
 ## 動畫與操作
 
 - 避免在大量元素上頻繁 `.show()`/`.hide()`；用 class 切換更穩定：`$el.toggleClass("is-hidden", true)`。
 - 若使用 jQuery animation（`slideUp`/`fadeIn`），注意 stop/queue。
+
+---
+
+## 參考
+
+- jQuery API: `.on()`（delegation/performance notes）：https://api.jquery.com/on/
+- jQuery API: `jQuery.escapeSelector()`：https://api.jquery.com/jQuery.escapeSelector/

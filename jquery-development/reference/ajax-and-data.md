@@ -8,6 +8,7 @@
 
 - 一律處理失敗（HTTP 非 2xx、timeout、JSON parse error）。
 - 對會修改資料的請求加上 CSRF header（依專案機制）。
+- 避免 `async: false`（會鎖 UI；jQuery 也不鼓勵）。
 
 ```js
 export function apiPost(url, data, { timeoutMs = 15000 } = {}) {
@@ -22,6 +23,26 @@ export function apiPost(url, data, { timeoutMs = 15000 } = {}) {
 }
 ```
 
+## jqXHR 的正確用法（done/fail/always）
+
+`$.ajax()` 回傳的是 jqXHR（Promise-like）。
+
+- 建議：`.done()` / `.fail()` / `.always()`
+- 不要用：`jqXHR.success()` / `jqXHR.error()` / `jqXHR.complete()`（jQuery 3.0 起移除）
+
+```js
+$.ajax({ url: "/api/users", dataType: "json" })
+  .done((data) => {
+    // ...
+  })
+  .fail((jqXHR, textStatus, errorThrown) => {
+    // ...
+  })
+  .always(() => {
+    // ...
+  });
+```
+
 ## jqXHR 與 Promise
 
 - jqXHR 是 thenable，但行為不完全等同原生 Promise。
@@ -29,6 +50,20 @@ export function apiPost(url, data, { timeoutMs = 15000 } = {}) {
 
 ```js
 const result = await Promise.resolve($.getJSON("/api/users"));
+```
+
+## 取消與逾時
+
+若你需要「逾時即取消」，可以用 `jqXHR.abort()`：
+
+```js
+export function ajaxWithTimeout(settings, timeoutMs) {
+  const jqxhr = $.ajax(settings);
+  const timer = setTimeout(() => jqxhr.abort("timeout"), timeoutMs);
+
+  jqxhr.always(() => clearTimeout(timer));
+  return jqxhr;
+}
 ```
 
 ## 表單序列化
@@ -41,3 +76,16 @@ const result = await Promise.resolve($.getJSON("/api/users"));
 - 連續輸入（搜尋、autocomplete）要做：
   - 取消前一個請求（若用 fetch/AbortController）
   - 或用 requestId/時間戳只接受最新回應
+
+## 跨網域 script 與 JSONP（安全）
+
+- 跨網域載入 script 時，jQuery 3.0 起需要顯式指定 `dataType: "script"`。
+- JSONP 風險高（屬於 script injection 形式）；除非必要，不建議。
+- 若你不信任目標站台，`$.ajax` 可設 `jsonp: false` 避免自動注入 callback。
+
+---
+
+## 參考
+
+- jQuery API: `jQuery.ajax()`：https://api.jquery.com/jQuery.ajax/
+- jQuery Upgrade Guide 3.0（Ajax/Deferred breaking changes）：https://jquery.com/upgrade-guide/3.0/

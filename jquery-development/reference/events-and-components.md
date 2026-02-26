@@ -23,6 +23,8 @@ function bindUserEvents($root) {
 }
 ```
 
+建議：用「namespace + selector」精準移除，避免影響其他功能綁定的 handler。
+
 ## `this` 與 `e.currentTarget`
 
 - 在 jQuery handler：
@@ -35,6 +37,32 @@ function onSave(e) {
   $btn.prop("disabled", true);
 }
 ```
+
+注意：`e.target` 可能是更深層的子元素（例如 icon），在委派事件中多數情況你要用 `e.currentTarget`。
+
+## `return false` 的語意
+
+在 jQuery 事件 handler 裡 `return false` 會同時執行：
+
+- `e.preventDefault()`
+- `e.stopPropagation()`
+
+這常常比預期「更強」；除非你真的要同時阻止預設行為與冒泡，不然建議明確呼叫其中一個。
+
+## focus/blur 與委派
+
+原生 `focus`/`blur` 不 bubble；jQuery 會用 `focusin`/`focusout` 做跨瀏覽器一致化。
+
+委派時建議直接用 `focusin`/`focusout`：
+
+```js
+$root.on("focusin.form", "input, textarea", onFocus);
+$root.on("focusout.form", "input, textarea", onBlur);
+```
+
+## Delegation 限制
+
+- jQuery 官方文件註記：委派事件不支援 SVG。
 
 ## 資料來源
 
@@ -68,3 +96,11 @@ export function createToast($root) {
 
 - 只在需要跨頁重用、可配置、可鏈式操作時才做 plugin。
 - 使用 `$.fn.myPlugin = function(options) { ...; return this; }`。
+
+---
+
+## 參考
+
+- jQuery API: `.on()`：https://api.jquery.com/on/
+- jQuery API: `.off()`（namespaces best practice）：https://api.jquery.com/off/
+- jQuery Learning Center: Event Delegation：https://learn.jquery.com/events/event-delegation/
