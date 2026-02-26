@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-02-26T00:00:00Z",
-  "total": 18,
+  "updated": "2026-02-26T15:12:23Z",
+  "total": 19,
   "skills": [
     {
       "name": "todo-first",
@@ -104,12 +104,12 @@
     },
     {
       "name": "jquery-development",
-      "description": "Read when working with jQuery in legacy or hybrid frontends. Provides best practices for selectors, event delegation, DOM performance, plugin patterns, AJAX, security, and migration guidance.",
+      "description": "Read when working with jQuery in legacy or hybrid frontends. Provides best practices for selectors, event delegation, DOM performance, plugin patterns, AJAX, security (XSS), and upgrade/migration guidance.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
-      "tags": ["jquery", "dom", "ajax", "legacy", "security", "migration"]
+      "tags": ["jquery", "dom", "ajax", "legacy", "security", "xss", "upgrade", "migration"]
     },
     {
       "name": "markdown-writer",
@@ -155,6 +155,15 @@
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
       "tags": ["sql", "performance", "security", "best-practices"]
+    },
+    {
+      "name": "spring-development",
+      "description": "Read when building Spring / Spring Boot applications. Provides best practices for layering, dependency injection, configuration, web APIs, data access, security, testing, and observability.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": ["spring", "spring-boot", "java", "web", "data", "security", "testing", "observability"]
     },
     {
       "name": "typescript-development",
