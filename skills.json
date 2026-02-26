@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "updated": "2026-02-26T00:00:00Z",
-  "total": 17,
+  "total": 18,
   "skills": [
     {
       "name": "todo-first",
@@ -101,6 +101,15 @@
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
       "tags": ["javascript", "nodejs", "code-style", "async", "security", "testing"]
+    },
+    {
+      "name": "jquery-development",
+      "description": "Read when working with jQuery in legacy or hybrid frontends. Provides best practices for selectors, event delegation, DOM performance, plugin patterns, AJAX, security, and migration guidance.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": ["jquery", "dom", "ajax", "legacy", "security", "migration"]
     },
     {
       "name": "markdown-writer",
