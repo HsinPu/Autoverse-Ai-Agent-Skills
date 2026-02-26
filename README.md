@@ -29,6 +29,7 @@ Skill 是擴充 AI Agent 能力的**模組化套件**：把專業知識、工作
 | **[file-organizer](file-organizer/)** | 智慧整理電腦檔案與資料夾：分析結構、找重複檔、建議目錄架構、自動搬移與清理。環境預設 Windows（PowerShell）。適合：要**整理 Downloads / Documents、找重複檔、清理桌面**時使用。 |
 | **[frontend-design](frontend-design/)** | 建立具辨識度、可上線的前端介面，避免 generic AI 美學。涵蓋美學方向選定、字體排版、色彩、動態效果與空間構圖。適合：要**建立網頁元件、頁面、Landing Page 或美化 UI** 時使用。 |
 | **[ask-questions-if-underspecified](ask-questions-if-underspecified/)** | 先釐清需求再實作，問最少必要的澄清問題，避免做錯方向。**僅在使用者明確要求時使用**，不會自動套用。適合：要**釐清模糊需求、確認規格**時使用。 |
+| **[todo-first](todo-first/)** | 在開始執行多步驟或非單純任務前，先建立並維護 todo list（使用 `todowrite`）。適合：要**實作功能、重構、多指令流程、或有 tests/build 驗證**的任務；單一步驟小任務則跳過。 |
 
 ---
 
@@ -49,6 +50,10 @@ Skill 是擴充 AI Agent 能力的**模組化套件**：把專業知識、工作
 
 安裝（直接從 GitHub；不用先 `git clone` 這個 repo）：
 - `npm i -g github:HsinPu/Autoverse-Ai-Agent-Skills`
+
+移除（移除全域 CLI）：
+- `npm uninstall -g autoverse-ai-agent-skills`
+- （可選）先查看已安裝清單：`npm ls -g --depth=0`
 
 常用指令：
 - `autoverse list`

@@ -1,8 +1,17 @@
 {
   "version": "1.0.0",
   "updated": "2026-02-24T00:00:00Z",
-  "total": 15,
+  "total": 16,
   "skills": [
+    {
+      "name": "todo-first",
+      "description": "Create and maintain a structured todo list before executing multi-step or non-trivial tasks. Use when implementing features, refactoring, running multi-command workflows, handling user-provided task lists, or when verification (tests/build/lint) is needed. Skip for single-step or trivial requests.",
+      "category": "productivity",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": ["planning", "workflow", "todowrite", "execution"]
+    },
     {
       "name": "agent-creator-design",
       "description": "Guide for writing and designing system prompts (the main instruction body for agents). Use when (1) user wants to write a new system prompt, (2) design or refactor existing prompt structure, or (3) modify, optimize, or review system prompt content.",
