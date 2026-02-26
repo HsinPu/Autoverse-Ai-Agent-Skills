@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-02-26T15:46:07Z",
-  "total": 20,
+  "updated": "2026-02-26T16:00:06Z",
+  "total": 21,
   "skills": [
     {
       "name": "todo-first",
@@ -56,6 +56,15 @@
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
       "tags": ["code-review", "security", "best-practices"]
+    },
+    {
+      "name": "css-development",
+      "description": "Read when writing or refactoring CSS. Provides best practices for cascade management, selectors, responsive design, layout (flex/grid), tokens, and maintainable architecture.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": ["css", "frontend", "responsive", "flexbox", "grid", "tokens", "architecture"]
     },
     {
       "name": "database-design",
