@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-02-26T15:12:23Z",
-  "total": 19,
+  "updated": "2026-02-26T15:46:07Z",
+  "total": 20,
   "skills": [
     {
       "name": "todo-first",
@@ -29,6 +29,15 @@
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
       "tags": ["clarification", "requirements", "workflow"]
+    },
+    {
+      "name": "answer-writing",
+      "description": "Read when writing final user-facing responses. Provides best practices and templates for clear, actionable answers (Traditional Chinese by default, optionally mixed with English).",
+      "category": "productivity",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": ["writing", "communication", "templates", "support"]
     },
     {
       "name": "code-refactoring",
