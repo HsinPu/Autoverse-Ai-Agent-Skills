@@ -76,6 +76,13 @@ function getSkillInfo(skillName) {
   return data.skills.find(s => s.name === skillName);
 }
 
+function isSkillInstalled(skillName, agent) {
+  const destDir = AGENT_PATHS[agent];
+  if (!destDir) return false;
+  const destPath = path.join(destDir, skillName);
+  return fs.existsSync(destPath) && fs.existsSync(path.join(destPath, 'SKILL.md'));
+}
+
 function installFromGitHub(skillName, repo, agent) {
   const destDir = AGENT_PATHS[agent];
   if (!destDir) {
@@ -124,6 +131,17 @@ function installFromGitHub(skillName, repo, agent) {
 }
 
 function installSkill(skillName, agent) {
+  const destDir = AGENT_PATHS[agent];
+  if (!destDir) {
+    console.log(`錯誤: 不支援的 Agent "${agent}"`);
+    return 'failed';
+  }
+
+  if (isSkillInstalled(skillName, agent)) {
+    console.log(`已安裝，略過: ${skillName} -> ${agent}`);
+    return 'skipped';
+  }
+
   const skillInfo = getSkillInfo(skillName);
   
   if (!skillInfo) {
@@ -133,16 +151,48 @@ function installSkill(skillName, agent) {
     if (available.length > 0) {
       console.log(`可用技能: ${available.slice(0, 5).join(', ')}${available.length > 5 ? '...' : ''}`);
     }
-    return false;
+    return 'failed';
   }
 
   const repo = skillInfo.source;
   if (!repo) {
     console.log(`錯誤: 技能 "${skillName}" 沒有定義來源`);
-    return false;
+    return 'failed';
   }
 
-  return installFromGitHub(skillName, repo, agent);
+  return installFromGitHub(skillName, repo, agent) ? 'installed' : 'failed';
+}
+
+function installAllSkills(agent, category = null) {
+  const destDir = AGENT_PATHS[agent];
+  if (!destDir) {
+    console.log(`錯誤: 不支援的 Agent "${agent}"`);
+    return;
+  }
+
+  const data = loadSkillsJson();
+  let skills = data.skills || [];
+
+  if (category) {
+    skills = skills.filter(s => s.category === category);
+  }
+
+  if (skills.length === 0) {
+    console.log(category ? `沒有找到任何技能 (類別: ${category})` : '沒有找到任何技能');
+    return;
+  }
+
+  console.log(`安裝 ${agent} 的 ${skills.length} 個技能...\n`);
+  let installed = 0;
+  let skipped = 0;
+  let failed = 0;
+  for (const s of skills) {
+    const result = installSkill(s.name, agent);
+    if (result === 'installed') installed++;
+    else if (result === 'skipped') skipped++;
+    else failed++;
+  }
+  console.log(`\n完成: ${installed} 安裝, ${skipped} 略過, ${failed} 失敗 (共 ${skills.length} 個) -> ${agent}`);
 }
 
 function uninstallSkill(skillName, agent) {
@@ -359,13 +409,15 @@ Autoverse AI Agent Skills - 技能管理工具
   search <關鍵字>       搜尋技能
   info <技能名>         顯示技能詳細資訊
   install <技能名>      安裝技能 (從 GitHub)
+  install --all         安裝全部技能到同一個 Agent
   uninstall <技能名>    移除技能
   update <技能名>       更新技能 (從 GitHub)
   update --all          更新所有技能
 
 選項:
   --agent <名稱>        指定目標 Agent (預設: claude)
-  --all                 安裝/移除/更新到所有 Agent
+  --all                 install: 全部技能(無技能名) 或 同技能到所有 Agent(有技能名)
+                        uninstall/update: 到所有 Agent
   --category <類別>     依類別過濾
 
 支援的 Agent:
@@ -377,6 +429,7 @@ Autoverse AI Agent Skills - 技能管理工具
   autoverse search python
   autoverse info python-development
   autoverse install python-development --agent cursor
+  autoverse install --all --agent opencode
   autoverse update --all --agent cursor
 `);
 }
@@ -423,8 +476,13 @@ if (!command || command === 'help' || command === '--help' || command === '-h') 
   }
 } else if (command === 'install') {
   if (!param) {
-    console.log('請指定技能名稱');
-    console.log('用法: autoverse install <技能名> [--agent cursor] [--all]');
+    if (allFlag) {
+      installAllSkills(agent, category);
+    } else {
+      console.log('請指定技能名稱或使用 --all');
+      console.log('用法: autoverse install <技能名> [--agent cursor] [--all]');
+      console.log('      autoverse install --all [--agent opencode] [--category <類別>]');
+    }
   } else if (allFlag) {
     Object.keys(AGENT_PATHS).forEach(a => installSkill(param, a));
   } else {
