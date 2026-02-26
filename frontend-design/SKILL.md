@@ -9,6 +9,12 @@ license: Apache-2.0
 
 引導建立具辨識度、可上線的前端介面。產出可實際運作的程式碼，並在美學細節與創意選擇上格外用心。避免 generic「AI slop」美學。
 
+## 進階與參考（Bundled resources）
+
+- **落地檢查清單**：響應式、a11y、狀態、效能與交付物要求，見 [reference/implementation-checklist.md](reference/implementation-checklist.md)。
+- **A11y（無障礙）**：鍵盤操作、focus、對比、reduced motion、語意化 HTML，見 [reference/accessibility.md](reference/accessibility.md)。
+- **CSS tokens**：CSS variables、主題一致性、層級與間距尺度，見 [reference/css-tokens.md](reference/css-tokens.md)。
+
 ## 設計思維 Design Thinking（動手寫程式前）
 
 理解脈絡並**明確選定**一個美學方向：
@@ -16,6 +22,7 @@ license: Apache-2.0
 - **目的 Purpose**：介面要解決什麼問題？誰在使用？
 - **調性 Tone**：選一個極端並精準執行—例如 brutally minimal（極簡）、maximalist chaos（極繁混亂）、retro-futuristic（復古未來）、organic/natural（有機／自然）、luxury/refined（奢華／精緻）、playful/toy-like（玩趣／玩具感）、editorial/magazine（雜誌編輯風）、brutalist/raw（粗獷／原生）、art deco/geometric（裝飾藝術／幾何）、soft/pastel（柔和／粉彩）、industrial/utilitarian（工業／實用）。可作靈感，但設計要忠於所選方向。
 - **限制 Constraints**：技術需求（framework、效能、accessibility 無障礙）。
+- **既有系統 Existing system**：若在既有網站/設計系統內工作，優先沿用現有的 layout、元件模式、字體與 tone；差異化只能在系統允許的範圍內做。
 - **差異化 Differentiation**：什麼會讓人**難忘 unforgettable**？使用者會記住哪一點？
 
 **關鍵**：選定清晰的概念方向並精準執行。大膽極繁與精煉極簡都成立—重點是 intentionality（意圖明確），不是 intensity（強度）。
@@ -31,12 +38,14 @@ license: Apache-2.0
 - 選用美觀、有特色、有趣的字體。
 - 避免 generic 字體（Arial、Inter、Roboto、系統預設）。
 - 偏好 distinctive、characterful 的選擇；以一款突出的 display 字體搭配一款精緻的 body 字體。
+- 字體必須可載入：提供可靠的 fallback、避免 FOIT，並注意字重與字距在小螢幕的可讀性。
 
 ### 色彩與主題 Color & Theme
 
 - 鎖定一致的美學；用 CSS variables 維持一致性。
 - 主色＋鮮明重點色，優於 timid、evenly-distributed 的配色。
 - 不要預設使用 clichéd 配色（例如 purple gradients on white 白底紫漸層）。
+- 一次選定 1 個主背景語言（mesh / pattern / solid + texture），不要同頁混多種背景邏輯。
 
 ### 動態與動畫 Motion
 
@@ -44,16 +53,19 @@ license: Apache-2.0
 - HTML 優先以純 CSS 實作；React 可搭配 Motion library。
 - 聚焦高光時刻：一次有節奏的 page load 搭配 staggered reveals（`animation-delay`）比零散 micro-interactions 更有感。
 - 善用 scroll-triggering 與令人驚喜的 hover 狀態。
+- 尊重 `prefers-reduced-motion`；對 reduced motion 使用淡入/無動畫替代。
 
 ### 空間與版面 Spatial Composition
 
 - 偏好 unexpected 版面：asymmetry（不對稱）、overlap（疊合）、diagonal flow（對角流動）、grid-breaking 元素。
 - 大量 negative space（留白）**或**受控的 density（密度）—擇一貫徹。
+- 在小螢幕上要能自動收斂：優先調整版面秩序與資訊層級，而不是把所有元素等比縮小。
 
 ### 背景與視覺細節 Backgrounds & Visual Details
 
 - 營造 atmosphere 與 depth；不要只靠 solid colors。
 - 依整體美學加入情境效果與紋理：gradient meshes、noise textures、geometric patterns、layered transparencies、dramatic shadows、decorative borders、custom cursors、grain overlays（漸層網格、噪點紋理、幾何圖案、層疊透明、戲劇性陰影、裝飾邊框、自訂游標、顆粒疊加）。
+- 每個裝飾元素都要有目的（導視、分層、節奏），不要只是塞滿特效。
 
 ---
 
@@ -63,6 +75,8 @@ license: Apache-2.0
 - Cliched 配色（尤其是 purple gradients on white）。
 - Predictable 版面與 cookie-cutter 元件套路。
 - 缺乏 context-specific character 的設計。
+- 沒有 focus/disabled/loading/empty/error 等狀態，只做「截圖式」UI。
+- 只靠陰影、發光與玻璃化（glassmorphism）當成整體風格。
 
 以創意解讀需求，做出真正符合情境的意外選擇。每次設計都應不同；在 light/dark themes、字體與美學風格之間變化。不要在不同產出中收斂到常見選擇（例如 Space Grotesk）。
 
@@ -74,5 +88,12 @@ license: Apache-2.0
 - Maximalist 設計需要完整程式：大量 animations 與 effects。
 - Minimalist 或 refined 設計需要節制、精準，以及對 spacing、typography 與細微細節的講究。
 - 優雅來自把願景執行到位。
+
+交付物最低標準：
+
+- **響應式**：手機/桌機都正確；必要時提供 2–3 個 breakpoints。
+- **可用性**：表單/按鈕有 hover/focus/disabled；列表有 empty/loading/error。
+- **語意與 a11y**：語意化 HTML、鍵盤可操作、對比可讀。
+- **可維護**：CSS variables/tokens、一致 spacing/type scale、避免到處 hardcode。
 
 **記住**：全心投入一個 distinctive 願景。不要保留—展現跳脫框架、全力執行時能達成的成果。
