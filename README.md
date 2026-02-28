@@ -59,7 +59,14 @@ Skill 是擴充 AI Agent 能力的**模組化套件**：把專業知識、工作
 - `autoverse list`
 - `autoverse search python`
 - `autoverse install python-development --agent cursor`
+- `autoverse install --all --agent opencode`
+- `autoverse install --all --agent opencode --category <類別>`
 - `autoverse update --all --agent cursor`
+
+安裝行為：
+- 若目標 Agent 已經存在同名 skill（且包含 `SKILL.md`），`install` 會顯示「已安裝，略過」並跳過；需要覆蓋更新請用 `autoverse update <skill> --agent <agent>`
+- `autoverse install <skill> --all`：把同一個 skill 安裝到所有支援的 Agent
+- `autoverse install --all --agent <agent>`：把 skills.json 內所有 skills 安裝到同一個 Agent（可搭配 `--category` 過濾）
 
 備註：像 Cursor / VS Code 這類「專案內路徑」的 Agent，請在目標專案目錄下執行 `autoverse ...`，CLI 會安裝到該專案的 `.cursor/skills/` 或 `.github/skills/`。
 
