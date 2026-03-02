@@ -75,6 +75,7 @@ license: Apache-2.0
 - Cliched 配色（尤其是 purple gradients on white）。
 - Predictable 版面與 cookie-cutter 元件套路。
 - 缺乏 context-specific character 的設計。
+- 用 `alert()` / `confirm()` / `prompt()` 當成互動回饋或錯誤提示（改用 inline 狀態、toast/snackbar、banner、modal 等非阻塞 UI）。
 - 沒有 focus/disabled/loading/empty/error 等狀態，只做「截圖式」UI。
 - 只靠陰影、發光與玻璃化（glassmorphism）當成整體風格。
 
