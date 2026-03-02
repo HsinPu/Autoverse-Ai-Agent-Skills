@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-03-02T05:26:12Z",
-  "total": 24,
+  "updated": "2026-03-02T05:35:52Z",
+  "total": 25,
   "skills": [
     {
       "name": "todo-first",
@@ -218,6 +218,15 @@
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
       "tags": ["nuxt", "vue", "ssr", "nitro", "fullstack", "seo", "data-fetching", "typescript", "performance", "security", "deployment"]
+    },
+    {
+      "name": "tailwind-development",
+      "description": "Read when building UIs with Tailwind CSS (v4+). Best practices for utility-first architecture, design tokens with theme variables, managing duplication, safe class composition, custom CSS layers/directives, dark mode, Preflight, and class detection/build output size.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": ["tailwind", "tailwindcss", "css", "frontend", "design-tokens", "utility-first", "dark-mode", "performance", "architecture"]
     }
   ],
   "categories": [
