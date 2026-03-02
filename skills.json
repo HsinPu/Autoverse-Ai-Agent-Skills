@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-03-02T05:19:01Z",
-  "total": 23,
+  "updated": "2026-03-02T05:26:12Z",
+  "total": 24,
   "skills": [
     {
       "name": "todo-first",
@@ -209,6 +209,15 @@
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
       "tags": ["vue", "vue3", "frontend", "sfc", "composition-api", "pinia", "vue-router", "typescript", "testing", "performance", "security"]
+    },
+    {
+      "name": "nuxt-development",
+      "description": "Read when building Nuxt (Nuxt 3/4) applications. Best practices for directory structure, rendering modes (SSR/CSR/hybrid), data fetching, Nitro server routes, runtime config, SEO/head management, performance, security, and deployment.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": ["nuxt", "vue", "ssr", "nitro", "fullstack", "seo", "data-fetching", "typescript", "performance", "security", "deployment"]
     }
   ],
   "categories": [
