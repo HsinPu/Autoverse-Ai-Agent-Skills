@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-02-26T16:00:06Z",
-  "total": 21,
+  "updated": "2026-03-02T04:58:05Z",
+  "total": 22,
   "skills": [
     {
       "name": "todo-first",
@@ -110,6 +110,15 @@
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
       "tags": ["java", "code-style", "design-patterns"]
+    },
+    {
+      "name": "mybatis-development",
+      "description": "Read when using MyBatis (and MyBatis-Spring / MyBatis-Spring-Boot-Starter) in Java projects. Provides best practices for mapper design, XML/dynamic SQL, result mapping, Spring transaction integration, performance, and security.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": ["mybatis", "java", "sql", "persistence", "spring", "transactions", "security", "performance"]
     },
     {
       "name": "javascript-development",
