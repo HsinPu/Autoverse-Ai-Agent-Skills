@@ -2,6 +2,10 @@
 
 可重複使用的 Agent Skill 模組，方便在 Cursor 等 AI Agent 中套用與分享。
 
+![License](https://img.shields.io/github/license/HsinPu/Autoverse-Ai-Agent-Skills)
+![Version](https://img.shields.io/npm/v/autoverse-ai-agent-skills)
+![Node](https://img.shields.io/node/v/autoverse-ai-agent-skills)
+
 ---
 
 ## 什麼是 Skill？
@@ -10,74 +14,79 @@ Skill 是擴充 AI Agent 能力的**模組化套件**：把專業知識、工作
 
 ---
 
-## 目前收錄的 Skills
+## 快速開始
+
+### 方式一：使用 CLI 安裝（推薦）
+
+```bash
+# 全域安裝 CLI
+npm i -g github:HsinPu/Autoverse-Ai-Agent-Skills
+
+# 安裝單一 skill 到指定 Agent
+autoverse install python-development --agent cursor
+
+# 安裝所有 skills 到指定 Agent
+autoverse install --all --agent cursor
+```
+
+### 方式二：手動複製
+
+將需要的 skill 資料夾複製到你的 Agent 對應目錄（詳見下方「放置位置」）。
+
+---
+
+## 收錄 Skills
+
+### 🛠️ Development（開發）
 
 | Skill | 說明 |
 |-------|------|
-| **[skill-creator-design](skill-creator-design/)** | 建立與優化 Skill 的完整指南（中英混合）。包含核心原則、目錄結構、建立流程 Step 1～5，以及撰寫 SKILL.md 與 Bundled Resources 的要點。適合：要**新增或改寫 Skill** 時使用。 |
-| **[agent-creator-design](agent-creator-design/)** | 撰寫與設計 **system prompt**（Agent 指令主體）的規範與寫法。包含設計原則、命名與結構、內文寫法。適合：要**撰寫／重構／審查 system prompt** 時使用。 |
-| **[mcp-creator-design](mcp-creator-design/)** | 建立高品質 **MCP (Model Context Protocol) 伺服器**的指南。涵蓋研究規劃、實作（TypeScript/Python）、審查測試與評測建立。適合：要**開發 MCP server**、整合外部 API 或服務時使用。 |
-| **[markdown-writer](markdown-writer/)** | 撰寫或產出 Markdown 時的指引。協助產出結構清晰、格式一致的 README、技術文件、筆記與說明，遵循 GFM 與標題階層。適合：要**撰寫或修改 .md 文件**、整理文件結構時使用。 |
-| **[python-development](python-development/)** | 撰寫或重構 Python 時的參考。提供程式碼風格（PEP 8、命名、型別、Docstring）與設計模式（KISS、SRP、組合、DI）。適合：要**撰寫或重構 Python 程式碼**、討論風格與架構時使用。 |
-| **[java-development](java-development/)** | 撰寫或重構 Java 時的參考。提供程式碼風格（Google/Oracle 慣例、命名、格式、Javadoc、例外處理）、設計模式（SOLID、組合、DI、不可變性）以及重構技巧（Stream、Optional、Record 等）。基準版本 Java 11+。適合：要**撰寫或重構 Java 程式碼**、討論風格與架構時使用。 |
-| **[typescript-development](typescript-development/)** | 撰寫或重構 TypeScript/JavaScript 時的參考。目前提供 TS 的 BEFORE/AFTER 重構範例（包含 Extract Method、多型、參數物件等）。適合：要**撰寫或重構 TypeScript 程式碼**、討論 TS 模式時使用。 |
-| **[git-operations](git-operations/)** | 執行與規劃 Git 工作流（clone、branch、commit、push、pull、merge、rebase、stash）。環境預設 Windows（PowerShell / cmd），包含安全檢查與 Conventional Commits 規範。適合：要**執行任何 Git 操作**時使用。 |
-| **[code-review](code-review/)** | 依安全、效能、程式品質與測試四大面向嚴謹審查程式碼。輸出含嚴重度分級（Critical / Suggestions / Nits / What's Good）。適合：要**審查 Pull Request、程式變更或執行 code audit** 時使用。 |
-| **[code-refactoring](code-refactoring/)** | 在不改變行為的前提下改善程式結構與可讀性。涵蓋 code smells 定義、通用重構技巧、安全流程與語言無關原則。適合：要**探討重構策略、整理舊程式碼、降低複雜度**時使用（實作範例請參考對應語言的 Skill）。 |
-| **[database-design](database-design/)** | Schema 設計、索引、遷移與查詢優化。涵蓋正規化、反正規化、B-tree / GIN / Partial Index、zero-downtime migration。適合：要**設計 schema、寫 migration、優化查詢**時使用。 |
-| **[sql-best-practices](sql-best-practices/)** | SQL 撰寫風格、效能優化與安全性。涵蓋命名格式、JOIN/CTE 寫法、EXPLAIN 判讀、N+1、分頁策略、SQL injection 防範、參數化查詢、權限控制。與 `database-design` 互補（前者管 schema 設計，本 skill 管 SQL 撰寫）。適合：要**撰寫或審查 SQL、優化查詢效能、檢視 SQL 安全**時使用。 |
-| **[file-organizer](file-organizer/)** | 智慧整理電腦檔案與資料夾：分析結構、找重複檔、建議目錄架構、自動搬移與清理。環境預設 Windows（PowerShell）。適合：要**整理 Downloads / Documents、找重複檔、清理桌面**時使用。 |
-| **[frontend-design](frontend-design/)** | 建立具辨識度、可上線的前端介面，避免 generic AI 美學。涵蓋美學方向選定、字體排版、色彩、動態效果與空間構圖。適合：要**建立網頁元件、頁面、Landing Page 或美化 UI** 時使用。 |
-| **[ask-questions-if-underspecified](ask-questions-if-underspecified/)** | 先釐清需求再實作，問最少必要的澄清問題，避免做錯方向。**僅在使用者明確要求時使用**，不會自動套用。適合：要**釐清模糊需求、確認規格**時使用。 |
-| **[todo-first](todo-first/)** | 在開始執行多步驟或非單純任務前，先建立並維護 todo list（使用 `todowrite`）。適合：要**實作功能、重構、多指令流程、或有 tests/build 驗證**的任務；單一步驟小任務則跳過。 |
+| **[typescript-development](typescript-development/)** | TypeScript/JavaScript 開發參考。型別安全、設計模式、重構技巧 |
+| **[javascript-development](javascript-development/)** | 現代 JavaScript 開發最佳實踐（Node.js 與瀏覽器） |
+| **[python-development](python-development/)** | Python 開發參考（PEP 8、型別、Docstring、設計模式） |
+| **[java-development](java-development/)** | Java 開發參考（程式碼風格、SOLID、設計模式）基準 Java 11+ |
+| **[spring-development](spring-development/)** | Spring / Spring Boot 開發最佳實踐（DI、Web API、Security、Testing） |
+| **[mybatis-development](mybatis-development/)** | MyBatis 開發最佳實踐（Mapper、XML、Spring 整合、效能優化） |
+| **[vue-development](vue-development/)** | Vue 3 開發最佳實踐（Composition API、Pinia、Vue Router、TypeScript） |
+| **[nuxt-development](nuxt-development/)** | Nuxt 3/4 開發最佳實踐（SSR、Nitro、SEO、資料抓取） |
+| **[css-development](css-development/)** | CSS 開發最佳實踐（Cascade、RWD、Flex/Grid、維護架構） |
+| **[tailwind-development](tailwind-development/)** | Tailwind CSS v4+ 開發最佳實踐（Utility-first、Design Tokens、Dark Mode） |
+| **[frontend-design](frontend-design/)** | 建立具辨識度的前端介面，避免 generic AI 美學 |
+| **[jquery-development](jquery-development/)** | jQuery 開發最佳實踐（Legacy 專案、遷移指南） |
+| **[database-design](database-design/)** | 資料庫 Schema 設計、索引優化、Migration 模式（PostgreSQL/MySQL/NoSQL） |
+| **[sql-best-practices](sql-best-practices/)** | SQL 撰寫風格、效能優化、安全性（防 SQL Injection） |
+| **[git-operations](git-operations/)** | Git 工作流（clone、branch、commit、push、merge、rebase）Windows 環境 |
+| **[code-review](code-review/)** | 自動化程式碼審查（安全、效能、品質、測試）含嚴重度分級 |
+| **[code-refactoring](code-refactoring/)** | 程式碼重構技巧（Code Smells、安全流程、語言無關原則） |
+| **[mcp-creator-design](mcp-creator-design/)** | 建立高品質 MCP Server（TypeScript/Python）整合外部 API |
+| **[git-readme-writer](git-readme-writer/)** | 分析 Git 專案結構並撰寫專業的 README.md |
+
+### 📋 Productivity（生產力）
+
+| Skill | 說明 |
+|-------|------|
+| **[skill-creator-design](skill-creator-design/)** | 建立與優化 Skill 的完整指南（建立流程、SKILL.md 撰寫） |
+| **[agent-creator-design](agent-creator-design/)** | 撰寫與設計 System Prompt 的規範（命名、結構、內文寫法） |
+| **[markdown-writer](markdown-writer/)** | Markdown 撰寫指引（README、技術文件、GFM 規範） |
+| **[todo-first](todo-first/)** | 多步驟任務前先建立 todo list（使用 `todowrite`） |
+| **[ask-questions-if-underspecified](ask-questions-if-underspecified/)** | 需求不明時先問澄清問題（僅使用者明確要求時使用） |
+| **[answer-writing](answer-writing/)** | 撰寫最終回應的指引（繁體中文預設、清晰可行動） |
+| **[file-organizer](file-organizer/)** | 智慧整理電腦檔案（找重複檔、建議架構、自動清理）Windows 環境 |
 
 ---
 
 ## 使用方式
 
-- 將需要的 skill 資料夾（含其中的 `SKILL.md` 與資源）複製到下方對應的**放置位置**，依該 Agent 的說明啟用即可。
-- 各 skill 的 `SKILL.md` 開頭有 `name` 與 `description`，Agent 會依 **description** 判斷何時載入該 skill。
-
----
-
-## CLI（用 GitHub 安裝/更新 skills）
-
-如果你想用指令直接從 GitHub 抓 skills（不用手動複製資料夾），可以使用本 repo 的 CLI：`autoverse-cli.js`。
-
-需求：
-- Node.js 16+
-- git（CLI 會用 `git clone` 下載）
-
-安裝（直接從 GitHub；不用先 `git clone` 這個 repo）：
-- `npm i -g github:HsinPu/Autoverse-Ai-Agent-Skills`
-
-移除（移除全域 CLI）：
-- `npm uninstall -g autoverse-ai-agent-skills`
-- （可選）先查看已安裝清單：`npm ls -g --depth=0`
-
-常用指令：
-- `autoverse list`
-- `autoverse search python`
-- `autoverse install python-development --agent cursor`
-- `autoverse install --all --agent opencode`
-- `autoverse install --all --agent opencode --category <類別>`
-- `autoverse update --all --agent cursor`
-
-安裝行為：
-- 若目標 Agent 已經存在同名 skill（且包含 `SKILL.md`），`install` 會顯示「已安裝，略過」並跳過；需要覆蓋更新請用 `autoverse update <skill> --agent <agent>`
-- `autoverse install <skill> --all`：把同一個 skill 安裝到所有支援的 Agent
-- `autoverse install --all --agent <agent>`：把 skills.json 內所有 skills 安裝到同一個 Agent（可搭配 `--category` 過濾）
-
-備註：像 Cursor / VS Code 這類「專案內路徑」的 Agent，請在目標專案目錄下執行 `autoverse ...`，CLI 會安裝到該專案的 `.cursor/skills/` 或 `.github/skills/`。
+1. **選擇 Skill**：根據你的任務選擇對應的 Skill
+2. **放置到正確位置**：將 skill 資料夾複製到你的 Agent 目錄
+3. **自動載入**：Agent 會依 `SKILL.md` 中的 `description` 自動判斷何時載入
 
 ---
 
 ## 放置位置（Install Location）
 
-依你使用的 Agent 將 skill 資料夾放到對應路徑：
-
-| Agent | Install Location |
-|-------|------------------|
+| Agent | 放置路徑 |
+|-------|----------|
 | Claude Code | `~/.claude/skills/` |
 | Cursor | `.cursor/skills/` |
 | Codex | `~/.codex/skills/` |
@@ -85,17 +94,80 @@ Skill 是擴充 AI Agent 能力的**模組化套件**：把專業知識、工作
 | VS Code / Copilot | `.github/skills/` |
 | Gemini CLI | `~/.gemini/skills/` |
 | Goose | `~/.config/goose/skills/` |
-| OpenCode（專案級） | `.opencode/skills/` |
-| OpenCode（全域級） | `~/.config/opencode/skills/` |
+| OpenCode（專案） | `.opencode/skills/` |
+| OpenCode（全域） | `~/.config/opencode/skills/` |
 | Letta | `~/.letta/skills/` |
-| Portable | `.skills/`（任一 Agent 皆可用） |
+| Portable | `.skills/` |
 
-> **備註**：OpenCode 也相容 `.claude/skills/` 與 `.agents/skills/` 路徑（專案級與全域級皆可）。詳見 [OpenCode Agent Skills 文件](https://opencode.ai/docs/skills/)。
+> **備註**：OpenCode 也相容 `.claude/skills/` 與 `.agents/skills/` 路徑。詳見 [OpenCode Agent Skills 文件](https://opencode.ai/docs/skills/)。
 
 ---
 
-## 授權（License）
+## CLI 指令參考
 
-本專案採用 **Apache License 2.0**，詳見 [LICENSE](LICENSE)。各 skill 目錄內若有標示授權則從其約定；未標示者依本專案授權。
+### 安裝
 
-若你覺得某個 skill 有用，歡迎取用或改寫，也歡迎回饋與建議。
+```bash
+# 安裝單一 skill
+autoverse install <skill-name> --agent <agent-name>
+
+# 安裝所有 skills
+autoverse install --all --agent <agent-name>
+
+# 安裝到所有支援的 Agent
+autoverse install <skill-name> --all
+```
+
+### 更新
+
+```bash
+# 更新單一 skill
+autoverse update <skill-name> --agent <agent-name>
+
+# 更新所有 skills
+autoverse update --all --agent <agent-name>
+```
+
+### 查詢
+
+```bash
+# 列出所有可用 skills
+autoverse list
+
+# 搜尋 skill
+autoverse search <keyword>
+```
+
+### 移除 CLI
+
+```bash
+npm uninstall -g autoverse-ai-agent-skills
+```
+
+---
+
+## 貢獻
+
+歡迎貢獻新的 Skill 或改進現有的 Skill！
+
+1. Fork 本專案
+2. 建立新的 branch（`git checkout -b feature/your-skill`）
+3. 提交變更（`git commit -m 'feat: add your skill'`）
+4. 推送到遠端（`git push origin feature/your-skill`）
+5. 建立 Pull Request
+
+---
+
+## 授權
+
+本專案採用 **Apache License 2.0**，詳見 [LICENSE](LICENSE)。
+
+各 skill 目錄內若有標示授權則從其約定；未標示者依本專案授權。
+
+---
+
+## 連結
+
+- [GitHub Repository](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills)
+- [NPM Package](https://www.npmjs.com/package/autoverse-ai-agent-skills)
+- [Issue Tracker](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/issues)
