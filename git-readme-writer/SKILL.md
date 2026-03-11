@@ -1,6 +1,8 @@
 ---
 name: git-readme-writer
 description: Analyze Git repository structure and write professional README.md documentation. Use when the user wants to create or write a README file for a Git repository, document a project, or generate project documentation.
+source: HsinPu/Autoverse-Ai-Agent-Skills
+license: Apache-2.0
 ---
 
 # Git README Writer
