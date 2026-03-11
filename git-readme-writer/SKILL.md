@@ -1,6 +1,6 @@
 ---
 name: git-readme-writer
-description: 分析 Git 專案並撰寫專業的 README.md 介紹文件。Use when the user wants to create or write a README file for a Git repository, document a project, or generate project documentation.
+description: Analyze Git repository structure and write professional README.md documentation. Use when the user wants to create or write a README file for a Git repository, document a project, or generate project documentation.
 ---
 
 # Git README Writer
