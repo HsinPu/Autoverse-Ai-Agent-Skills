@@ -104,10 +104,16 @@ def find_user(user_id: int, include_inactive: bool = False) -> Optional[dict]:
 
 ## Docstring
 
-- 模組：簡短說明用途；若有公開 API，可列重點。
-- 類別：說明職責與使用情境。
-- 函式／方法：一句摘要；必要時補充 Args / Returns / Raises。
-- 語言：使用繁體中文與英文混合（Technical terms 保持英文）。
+- **模組**：簡短說明用途、主要功能與公開 API 列表。
+- **類別**：說明職責、使用情境、重要屬性與方法。
+- **函式／方法**：
+  - 第一行：一句簡潔摘要（做什么）。
+  - 第二行起：詳細說明（如何運作、使用場景、注意事項）。
+  - Args：每個參數都要說明類型、用途、預設值與限制。
+  - Returns：詳細描述回傳值的結構與語意。
+  - Raises：列出所有可能拋出的例外與觸發條件。
+  - Example：必要時提供使用範例。
+- **語言**：使用繁體中文與英文混合（Technical terms 保持英文）。
 
 風格擇一並一致（Google / NumPy / Sphinx 等）。範例（Google 風格）：
 
@@ -115,15 +121,26 @@ def find_user(user_id: int, include_inactive: bool = False) -> Optional[dict]:
 def parse_config(path: str, encoding: str = "utf-8") -> dict:
     """從檔案路徑讀取並解析設定檔。
 
+    此函式會讀取指定路徑的設定檔，根據檔案副檔名自動判斷格式（JSON、YAML、INI），
+    並回傳統一的字典結構。支援 UTF-8 與 Big5 編碼。
+
     Args:
-        path: 設定檔路徑 (file path)。
-        encoding: 檔案編碼 (encoding)，預設 utf-8。
+        path: 設定檔路徑 (file path)。必須為有效路徑且檔案存在。
+        encoding: 檔案編碼 (encoding)，預設為 "utf-8"。支援 "utf-8"、"big5"、"latin-1"。
 
     Returns:
-        解析後的鍵值對 (parsed key-value pairs)。
+        解析後的鍵值對 (parsed key-value pairs)。結構為 {str: Any}，
+        若為巢狀結構則回傳嵌套 dict。
 
     Raises:
         FileNotFoundError: 當 path 不存在時 (when path does not exist)。
+        ValueError: 當檔案格式不支援或解析失敗時 (when format is unsupported or parsing fails)。
+        PermissionError: 當沒有檔案讀取權限時 (when lacking read permission)。
+
+    Example:
+        >>> config = parse_config("settings.json")
+        >>> print(config["database"]["host"])
+        "localhost"
     """
     ...
 ```
