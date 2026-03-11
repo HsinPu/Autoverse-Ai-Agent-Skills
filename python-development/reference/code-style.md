@@ -107,6 +107,7 @@ def find_user(user_id: int, include_inactive: bool = False) -> Optional[dict]:
 - 模組：簡短說明用途；若有公開 API，可列重點。
 - 類別：說明職責與使用情境。
 - 函式／方法：一句摘要；必要時補充 Args / Returns / Raises。
+- 語言：使用繁體中文與英文混合（Technical terms 保持英文）。
 
 風格擇一並一致（Google / NumPy / Sphinx 等）。範例（Google 風格）：
 
@@ -115,14 +116,14 @@ def parse_config(path: str, encoding: str = "utf-8") -> dict:
     """從檔案路徑讀取並解析設定檔。
 
     Args:
-        path: 設定檔路徑。
-        encoding: 檔案編碼，預設 utf-8。
+        path: 設定檔路徑 (file path)。
+        encoding: 檔案編碼 (encoding)，預設 utf-8。
 
     Returns:
-        解析後的鍵值對。
+        解析後的鍵值對 (parsed key-value pairs)。
 
     Raises:
-        FileNotFoundError: 當 path 不存在時。
+        FileNotFoundError: 當 path 不存在時 (when path does not exist)。
     """
     ...
 ```
