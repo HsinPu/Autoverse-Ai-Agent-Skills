@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "updated": "2026-03-02T05:35:52Z",
-  "total": 25,
+  "total": 26,
   "skills": [
     {
       "name": "todo-first",
@@ -101,6 +101,15 @@
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
       "tags": ["git", "version-control", "workflow"]
+    },
+    {
+      "name": "git-readme-writer",
+      "description": "Analyze Git-based repositories and write or update professional README.md documentation for Git, GitHub, or Gerrit-hosted projects. Use when the user wants to create, rewrite, expand, or standardize project documentation after inspecting repository structure, setup steps, usage flows, contribution process, or platform-specific links and review workflow.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": ["markdown", "documentation", "readme", "git", "github", "gerrit"]
     },
     {
       "name": "java-development",
