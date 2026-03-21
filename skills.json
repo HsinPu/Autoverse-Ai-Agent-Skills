@@ -5,7 +5,7 @@
   "skills": [
     {
       "name": "todo-first",
-      "description": "Create and maintain a structured todo list before executing multi-step or non-trivial tasks. Use when implementing features, refactoring, running multi-command workflows, handling user-provided task lists, or when verification (tests/build/lint) is needed. Skip for single-step or trivial requests.",
+      "description": "Create and maintain a structured todo list before executing multi-step or non-trivial work. Use when tasks have 3+ steps, span multiple files or commands, include verification, or bundle several user requests. Skip for single-step, trivial, or purely informational requests.",
       "category": "productivity",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
