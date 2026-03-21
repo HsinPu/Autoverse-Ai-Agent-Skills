@@ -1,16 +1,21 @@
 {
   "version": "1.0.0",
-  "updated": "2026-03-02T05:35:52Z",
+  "updated": "2026-03-21T16:00:58Z",
   "total": 26,
   "skills": [
     {
       "name": "todo-first",
-      "description": "Create and maintain a structured todo list before executing multi-step or non-trivial work. Use when tasks have 3+ steps, span multiple files or commands, include verification, or bundle several user requests. Skip for single-step, trivial, or purely informational requests.",
+      "description": "Create and maintain a structured todo list before executing multi-step or non-trivial work. Use when tasks have 3+ steps, span multiple files or commands, include verification, or bundle several user requests. Use todowrite to track pending/in_progress/completed/cancelled items during execution. Skip for single-step, trivial, or purely informational requests.",
       "category": "productivity",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
-      "tags": ["planning", "workflow", "todowrite", "execution"]
+      "tags": [
+        "planning",
+        "workflow",
+        "todowrite",
+        "execution"
+      ]
     },
     {
       "name": "agent-creator-design",
@@ -19,7 +24,11 @@
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
-      "tags": ["agent", "system-prompt", "design"]
+      "tags": [
+        "agent",
+        "system-prompt",
+        "design"
+      ]
     },
     {
       "name": "ask-questions-if-underspecified",
@@ -28,7 +37,11 @@
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
-      "tags": ["clarification", "requirements", "workflow"]
+      "tags": [
+        "clarification",
+        "requirements",
+        "workflow"
+      ]
     },
     {
       "name": "answer-writing",
@@ -37,7 +50,12 @@
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
-      "tags": ["writing", "communication", "templates", "support"]
+      "tags": [
+        "writing",
+        "communication",
+        "templates",
+        "support"
+      ]
     },
     {
       "name": "code-refactoring",
@@ -46,7 +64,11 @@
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
-      "tags": ["refactoring", "code-quality", "clean-code"]
+      "tags": [
+        "refactoring",
+        "code-quality",
+        "clean-code"
+      ]
     },
     {
       "name": "code-review",
@@ -55,7 +77,11 @@
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
-      "tags": ["code-review", "security", "best-practices"]
+      "tags": [
+        "code-review",
+        "security",
+        "best-practices"
+      ]
     },
     {
       "name": "css-development",
@@ -64,7 +90,15 @@
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
-      "tags": ["css", "frontend", "responsive", "flexbox", "grid", "tokens", "architecture"]
+      "tags": [
+        "css",
+        "frontend",
+        "responsive",
+        "flexbox",
+        "grid",
+        "tokens",
+        "architecture"
+      ]
     },
     {
       "name": "database-design",
@@ -73,7 +107,13 @@
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
-      "tags": ["database", "sql", "schema", "postgresql", "mysql"]
+      "tags": [
+        "database",
+        "sql",
+        "schema",
+        "postgresql",
+        "mysql"
+      ]
     },
     {
       "name": "file-organizer",
@@ -82,25 +122,39 @@
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
-      "tags": ["file-management", "organization", "cleanup"]
+      "tags": [
+        "file-management",
+        "organization",
+        "cleanup"
+      ]
     },
     {
       "name": "frontend-design",
-      "description": "Create distinctive, production-ready frontend interfaces with high design quality and polished, creative code; avoid generic AI aesthetics. Use when the user asks to build web components, pages, artifacts, posters, or applications.",
+      "description": "Create distinctive, production-ready frontend interfaces with high design quality and polished, creative code; avoid generic AI aesthetics. Use when the user asks to build web components, pages, artifacts, posters, or applications (e.g. websites, landing pages, dashboards, React components, HTML/CSS layouts), or when styling/beautifying any web UI.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
-      "tags": ["frontend", "design", "react", "css", "ui"]
+      "tags": [
+        "frontend",
+        "design",
+        "react",
+        "css",
+        "ui"
+      ]
     },
     {
       "name": "git-operations",
-      "description": "Executes and guides Git workflows on Windows (clone, branch, commit, push, pull, merge, rebase, stash, history). Use when the user asks to commit, push, pull, manage branches, resolve conflicts, or perform any Git operation.",
+      "description": "Executes and guides Git workflows on Windows (clone, branch, commit, push, pull, merge, rebase, stash, history). Use when the user asks to commit, make a commit, do a commit, push, pull, stage and commit, write commit message, write commit messages, manage branches, resolve conflicts, inspect repository state, or perform any Git operation.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
-      "tags": ["git", "version-control", "workflow"]
+      "tags": [
+        "git",
+        "version-control",
+        "workflow"
+      ]
     },
     {
       "name": "git-readme-writer",
@@ -109,16 +163,27 @@
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
-      "tags": ["markdown", "documentation", "readme", "git", "github", "gerrit"]
+      "tags": [
+        "markdown",
+        "documentation",
+        "readme",
+        "git",
+        "github",
+        "gerrit"
+      ]
     },
     {
       "name": "java-development",
-      "description": "Read when writing Java. Provides reference for code style (Google/Oracle conventions, naming, formatting, Javadoc, exceptions) and design patterns (SOLID, composition, DI, immutability). Use when writing or refactoring Java code.",
+      "description": "Read when writing Java. Provides reference for code style (Google/Oracle conventions, naming, formatting, Javadoc, exceptions) and design patterns (SOLID, composition, DI, immutability). Use when writing or refactoring Java code, or when user asks about style, structure, or patterns.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
-      "tags": ["java", "code-style", "design-patterns"]
+      "tags": [
+        "java",
+        "code-style",
+        "design-patterns"
+      ]
     },
     {
       "name": "mybatis-development",
@@ -127,7 +192,16 @@
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
-      "tags": ["mybatis", "java", "sql", "persistence", "spring", "transactions", "security", "performance"]
+      "tags": [
+        "mybatis",
+        "java",
+        "sql",
+        "persistence",
+        "spring",
+        "transactions",
+        "security",
+        "performance"
+      ]
     },
     {
       "name": "javascript-development",
@@ -136,43 +210,74 @@
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
-      "tags": ["javascript", "nodejs", "code-style", "async", "security", "testing"]
+      "tags": [
+        "javascript",
+        "nodejs",
+        "code-style",
+        "async",
+        "security",
+        "testing"
+      ]
     },
     {
       "name": "jquery-development",
-      "description": "Read when working with jQuery in legacy or hybrid frontends. Provides best practices for selectors, event delegation, DOM performance, plugin patterns, AJAX, security (XSS), and upgrade/migration guidance.",
+      "description": "Read when working with jQuery in legacy or hybrid frontends. Provides best practices for selectors, event delegation, DOM performance, plugin patterns, AJAX, security, and migration guidance.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
-      "tags": ["jquery", "dom", "ajax", "legacy", "security", "xss", "upgrade", "migration"]
+      "tags": [
+        "jquery",
+        "dom",
+        "ajax",
+        "legacy",
+        "security",
+        "xss",
+        "upgrade",
+        "migration"
+      ]
     },
     {
       "name": "markdown-writer",
-      "description": "Writes and structures Markdown for README, documentation, notes, and technical docs. Follows GFM conventions, consistent heading hierarchy, and clear formatting. Use when the user asks to write markdown, create README, or produce .md files.",
+      "description": "Writes and structures Markdown for README, documentation, notes, and technical docs. Follows GFM conventions, consistent heading hierarchy, and clear formatting. Use when the user asks to write markdown, create README, format documentation, write docs, or produce .md files.",
       "category": "productivity",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
-      "tags": ["markdown", "documentation", "readme"]
+      "tags": [
+        "markdown",
+        "documentation",
+        "readme"
+      ]
     },
     {
       "name": "mcp-creator-design",
-      "description": "Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers in Python (FastMCP) or Node/TypeScript (MCP SDK).",
+      "description": "Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
-      "tags": ["mcp", "api", "integration", "python", "typescript"]
+      "tags": [
+        "mcp",
+        "api",
+        "integration",
+        "python",
+        "typescript"
+      ]
     },
     {
       "name": "python-development",
-      "description": "Read when writing Python. Provides reference for code style (PEP 8, naming, types, docstrings) and design patterns (KISS, SRP, composition, DI). Use when writing or refactoring Python code.",
+      "description": "Read when writing Python. Provides reference for code style (PEP 8, naming, types, docstrings) and design patterns (KISS, SRP, composition, DI). Use when writing or refactoring Python code, or when user asks about style, structure, or patterns.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
-      "tags": ["python", "code-style", "design-patterns", "pep8"]
+      "tags": [
+        "python",
+        "code-style",
+        "design-patterns",
+        "pep8"
+      ]
     },
     {
       "name": "skill-creator-design",
@@ -181,16 +286,26 @@
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
-      "tags": ["skill", "creator", "agent", "prompt-engineering"]
+      "tags": [
+        "skill",
+        "creator",
+        "agent",
+        "prompt-engineering"
+      ]
     },
     {
       "name": "sql-best-practices",
-      "description": "Read when writing SQL. Provides reference for SQL code style, performance optimization, and security. Use when writing or reviewing SQL queries, optimizing query performance, or discussing SQL security practices.",
+      "description": "Read when writing SQL. Provides reference for SQL code style (naming, formatting, JOIN, subqueries), performance optimization (EXPLAIN analysis, N+1, pagination, batch operations), and security (SQL injection prevention, parameterized queries, permissions). Use when writing or reviewing SQL queries, optimizing query performance, or discussing SQL security practices. Complements database-design (which covers schema/index/migration design).",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
-      "tags": ["sql", "performance", "security", "best-practices"]
+      "tags": [
+        "sql",
+        "performance",
+        "security",
+        "best-practices"
+      ]
     },
     {
       "name": "spring-development",
@@ -199,16 +314,30 @@
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
-      "tags": ["spring", "spring-boot", "java", "web", "data", "security", "testing", "observability"]
+      "tags": [
+        "spring",
+        "spring-boot",
+        "java",
+        "web",
+        "data",
+        "security",
+        "testing",
+        "observability"
+      ]
     },
     {
       "name": "typescript-development",
-      "description": "Read when writing TypeScript or JavaScript. Provides reference for code style, type safety, design patterns, and refactoring techniques. Use when writing, reviewing, or refactoring TypeScript code.",
+      "description": "Read when writing TypeScript or JavaScript. Provides reference for code style, type safety, design patterns, and refactoring techniques. Use when writing, reviewing, or refactoring TypeScript code, or when user asks about TS patterns, types, and structure.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
-      "tags": ["typescript", "javascript", "code-style", "types"]
+      "tags": [
+        "typescript",
+        "javascript",
+        "code-style",
+        "types"
+      ]
     },
     {
       "name": "vue-development",
@@ -217,7 +346,19 @@
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
-      "tags": ["vue", "vue3", "frontend", "sfc", "composition-api", "pinia", "vue-router", "typescript", "testing", "performance", "security"]
+      "tags": [
+        "vue",
+        "vue3",
+        "frontend",
+        "sfc",
+        "composition-api",
+        "pinia",
+        "vue-router",
+        "typescript",
+        "testing",
+        "performance",
+        "security"
+      ]
     },
     {
       "name": "nuxt-development",
@@ -226,7 +367,19 @@
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
-      "tags": ["nuxt", "vue", "ssr", "nitro", "fullstack", "seo", "data-fetching", "typescript", "performance", "security", "deployment"]
+      "tags": [
+        "nuxt",
+        "vue",
+        "ssr",
+        "nitro",
+        "fullstack",
+        "seo",
+        "data-fetching",
+        "typescript",
+        "performance",
+        "security",
+        "deployment"
+      ]
     },
     {
       "name": "tailwind-development",
@@ -235,7 +388,17 @@
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
-      "tags": ["tailwind", "tailwindcss", "css", "frontend", "design-tokens", "utility-first", "dark-mode", "performance", "architecture"]
+      "tags": [
+        "tailwind",
+        "tailwindcss",
+        "css",
+        "frontend",
+        "design-tokens",
+        "utility-first",
+        "dark-mode",
+        "performance",
+        "architecture"
+      ]
     }
   ],
   "categories": [

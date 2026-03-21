@@ -37,28 +37,30 @@ autoverse install --all --agent cursor
 
 ## 收錄 Skills
 
+目前共收錄 **26** 個 skills：**19** 個 Development、**7** 個 Productivity。
+
 ### 🛠️ Development（開發）
 
 | Skill | 說明 |
 |-------|------|
-| **[typescript-development](typescript-development/)** | TypeScript/JavaScript 開發參考。型別安全、設計模式、重構技巧 |
+| **[typescript-development](typescript-development/)** | TypeScript / JavaScript 開發參考（型別安全、設計模式、重構、TS patterns） |
 | **[javascript-development](javascript-development/)** | 現代 JavaScript 開發最佳實踐（Node.js 與瀏覽器） |
 | **[python-development](python-development/)** | Python 開發參考（PEP 8、型別、Docstring、設計模式） |
-| **[java-development](java-development/)** | Java 開發參考（程式碼風格、SOLID、設計模式）基準 Java 11+ |
+| **[java-development](java-development/)** | Java 開發參考（程式碼風格、Javadoc、SOLID、設計模式） |
 | **[spring-development](spring-development/)** | Spring / Spring Boot 開發最佳實踐（DI、Web API、Security、Testing） |
 | **[mybatis-development](mybatis-development/)** | MyBatis 開發最佳實踐（Mapper、XML、Spring 整合、效能優化） |
 | **[vue-development](vue-development/)** | Vue 3 開發最佳實踐（Composition API、Pinia、Vue Router、TypeScript） |
 | **[nuxt-development](nuxt-development/)** | Nuxt 3/4 開發最佳實踐（SSR、Nitro、SEO、資料抓取） |
 | **[css-development](css-development/)** | CSS 開發最佳實踐（Cascade、RWD、Flex/Grid、維護架構） |
 | **[tailwind-development](tailwind-development/)** | Tailwind CSS v4+ 開發最佳實踐（Utility-first、Design Tokens、Dark Mode） |
-| **[frontend-design](frontend-design/)** | 建立具辨識度的前端介面，避免 generic AI 美學 |
+| **[frontend-design](frontend-design/)** | 建立具辨識度的前端介面與視覺成品（網站、landing page、dashboard、React/HTML/CSS UI） |
 | **[jquery-development](jquery-development/)** | jQuery 開發最佳實踐（Legacy 專案、遷移指南） |
 | **[database-design](database-design/)** | 資料庫 Schema 設計、索引優化、Migration 模式（PostgreSQL/MySQL/NoSQL） |
-| **[sql-best-practices](sql-best-practices/)** | SQL 撰寫風格、效能優化、安全性（防 SQL Injection） |
-| **[git-operations](git-operations/)** | Git 工作流（clone、branch、commit、push、merge、rebase）Windows 環境 |
+| **[sql-best-practices](sql-best-practices/)** | SQL 撰寫風格、JOIN / subqueries、效能優化與安全性（防 SQL Injection） |
+| **[git-operations](git-operations/)** | Git 工作流（clone、branch、stage、commit、push、pull、merge、rebase）與狀態檢查，Windows 環境 |
 | **[code-review](code-review/)** | 自動化程式碼審查（安全、效能、品質、測試）含嚴重度分級 |
 | **[code-refactoring](code-refactoring/)** | 程式碼重構技巧（Code Smells、安全流程、語言無關原則） |
-| **[mcp-creator-design](mcp-creator-design/)** | 建立高品質 MCP Server（TypeScript/Python）整合外部 API |
+| **[mcp-creator-design](mcp-creator-design/)** | 建立高品質 MCP Server（Python FastMCP / Node/TypeScript MCP SDK）整合外部 API / services |
 | **[git-readme-writer](git-readme-writer/)** | 依專案類型與 GitHub / Gerrit 平台差異選擇合適的 README 結構 |
 
 ### 📋 Productivity（生產力）
@@ -67,8 +69,8 @@ autoverse install --all --agent cursor
 |-------|------|
 | **[skill-creator-design](skill-creator-design/)** | 建立與優化 Skill 的完整指南（建立流程、SKILL.md 撰寫） |
 | **[agent-creator-design](agent-creator-design/)** | 撰寫與設計 System Prompt 的規範（命名、結構、內文寫法） |
-| **[markdown-writer](markdown-writer/)** | Markdown 撰寫指引（README、技術文件、GFM 規範） |
-| **[todo-first](todo-first/)** | 多步驟任務前先建立 todo list（使用 `todowrite`） |
+| **[markdown-writer](markdown-writer/)** | Markdown 撰寫指引（README、技術文件、格式化 docs、GFM 規範） |
+| **[todo-first](todo-first/)** | 多步驟或 non-trivial 任務前先建立 todo list（含狀態維護與驗證追蹤） |
 | **[ask-questions-if-underspecified](ask-questions-if-underspecified/)** | 需求不明時先問澄清問題（僅使用者明確要求時使用） |
 | **[answer-writing](answer-writing/)** | 撰寫最終回應的指引（繁體中文預設、清晰可行動） |
 | **[file-organizer](file-organizer/)** | 智慧整理電腦檔案（找重複檔、建議架構、自動清理）Windows 環境 |
