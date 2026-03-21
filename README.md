@@ -59,7 +59,7 @@ autoverse install --all --agent cursor
 | **[code-review](code-review/)** | 自動化程式碼審查（安全、效能、品質、測試）含嚴重度分級 |
 | **[code-refactoring](code-refactoring/)** | 程式碼重構技巧（Code Smells、安全流程、語言無關原則） |
 | **[mcp-creator-design](mcp-creator-design/)** | 建立高品質 MCP Server（TypeScript/Python）整合外部 API |
-| **[git-readme-writer](git-readme-writer/)** | 分析 Git / GitHub / Gerrit 專案並撰寫、重構或標準化 README.md |
+| **[git-readme-writer](git-readme-writer/)** | 依專案類型與 GitHub / Gerrit 平台差異選擇合適的 README 結構 |
 
 ### 📋 Productivity（生產力）
 
