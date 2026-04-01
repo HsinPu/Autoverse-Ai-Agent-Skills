@@ -1,6 +1,7 @@
 ---
 name: agent-creator-design
 description: Guide for writing and designing system prompts (the main instruction body for agents). Use when (1) user wants to write a new system prompt, (2) design or refactor existing prompt structure, or (3) modify, optimize, or review system prompt content.
+always: true
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---
@@ -8,6 +9,8 @@ license: Apache-2.0
 # System Prompt 撰寫規範與寫法
 
 本 skill 規範 **system prompt**（agent 的指令主體）的設計原則與內文寫法。不涉及 Cursor Skill／Subagent 的建立或存放位置。
+
+若將 system prompt 寫成檔案，請先在檔案最上方寫 **metadata**，再開始正文。
 
 ---
 
@@ -28,10 +31,12 @@ license: Apache-2.0
 - 名稱長度 ≤ 64 字元、語意清楚；避免 `helper`、`utils`、`tools` 等籠統命名。
 - 存成檔案或標題時，命名需與職責對應，利於辨識與維護。
 
-### 1.3 Metadata（撰寫時一併加上）
+### 1.3 Metadata（先寫在最上方）
 
-- 將 system prompt 存成檔案或模組時，**一併撰寫 metadata**，方便辨識、版本與維護。
-- **必填**：`name`、`description`（一句話說明用途與 **trigger** 情境）。
+- 將 system prompt 存成檔案或模組時，**先在最上方寫 metadata**，再開始正文，方便辨識、版本與維護。
+- `metadata` 建議使用 **YAML frontmatter**，並固定放在檔案開頭。
+- **必填**：`name`、`description`、`always`。
+- `always` 使用布林值；本規範中的寫法固定為 `true`。
 - **選填**：`version`、`scope`、`language` 等；同一專案內格式一致。
 
 **Example（YAML frontmatter）**
@@ -40,6 +45,7 @@ license: Apache-2.0
 ---
 name: code-reviewer
 description: 針對已修改的程式進行品質與安全檢視，產出檢查清單。於 code review 或提交前觸發。
+always: true
 version: "1.0"
 scope: code-review
 ---
@@ -52,6 +58,8 @@ scope: code-review
 ### 2.0 內文結構（四大項）
 
 System prompt 內文**只分四大項**，依序為：
+
+`metadata` 不算在這四大項內；它固定放在檔案最上方。
 
 | 項目 | 說明 |
 |------|------|
@@ -102,7 +110,7 @@ System prompt 內文**只分四大項**，依序為：
 
 - [ ] 職責單一，可一句話說明「這個 prompt 要模型做什麼」
 - [ ] 命名符合規範（lowercase、hyphen 或一致風格，語意清楚）
-- [ ] 存成檔案時已加上 **metadata**（`name`、`description`；選填 `version`／`scope` 等）
+- [ ] 存成檔案時已在**最上方**加上 **metadata**（至少含 `name`、`description`、`always`；選填 `version`／`scope` 等）
 - [ ] 內文僅分四大項：角色、任務、規範、輸出
 - [ ] 流程步驟化、可執行
 - [ ] 術語一致、無冗長重複
