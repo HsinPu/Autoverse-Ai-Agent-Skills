@@ -37,6 +37,7 @@ license: Apache-2.0
 - `metadata` 建議使用 **YAML frontmatter**，並固定放在檔案開頭。
 - **必填**：`name`、`description`、`always`。
 - `description` 必須寫得**具體且足夠詳細**，至少說明這個 prompt 的角色/能力範圍、典型任務，以及會在什麼情境或需求下被使用；避免只寫過短、籠統、難以判斷的句子。
+- `description` **必須使用英文**，讓 agent 在跨專案與跨語系情境下更穩定判斷觸發條件。
 - 若 `description` 寫得太短，agent 很難正確判斷何時該載入或使用此 prompt；優先使用完整的一到兩句描述，而不是模糊標籤。
 - `always` 使用布林值；本規範中的寫法固定為 `true`。
 - **選填**：`version`、`scope`、`language` 等；同一專案內格式一致。
@@ -114,6 +115,7 @@ System prompt 內文**只分四大項**，依序為：
 - [ ] 命名符合規範（lowercase、hyphen 或一致風格，語意清楚）
 - [ ] 存成檔案時已在**最上方**加上 **metadata**（至少含 `name`、`description`、`always`；選填 `version`／`scope` 等）
 - [ ] `description` 不是籠統短句，而是足夠詳細到能說明角色、典型任務與觸發情境
+- [ ] `description` 使用英文撰寫
 - [ ] 內文僅分四大項：角色、任務、規範、輸出
 - [ ] 流程步驟化、可執行
 - [ ] 術語一致、無冗長重複

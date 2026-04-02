@@ -136,7 +136,7 @@ skill-name/
 
 每份 SKILL.md 包含**兩部分**（two parts）：
 
-- **Frontmatter**（YAML）：**必填欄位**（required）為 `name`、`description`；**選填**（optional）可加 `license`、`metadata`、`compatibility`。只有 `name` 與 `description` 會被 agent 用來判斷何時**觸發**（trigger）此 skill，因此 `description` 必須寫得**清楚、完整、且足夠詳細**，能直接說明技能內容、適用情境、常見觸發語句或任務類型；不要只寫過短或籠統的一句話。`compatibility` 用於標註**環境需求**（environment requirements），多數 skill 不必填。
+- **Frontmatter**（YAML）：**必填欄位**（required）為 `name`、`description`；**選填**（optional）可加 `license`、`metadata`、`compatibility`。只有 `name` 與 `description` 會被 agent 用來判斷何時**觸發**（trigger）此 skill，因此 `description` 必須寫得**清楚、完整、且足夠詳細**，能直接說明技能內容、適用情境、常見觸發語句或任務類型；不要只寫過短或籠統的一句話。`description` 也**必須使用英文**，讓 agent 在跨專案與跨語系情境下更穩定判斷觸發條件。`compatibility` 用於標註**環境需求**（environment requirements），多數 skill 不必填。
 - **Body**（Markdown）：使用此 skill 的**指示與指引**（instructions and guidance）。只有在 skill 觸發後才會載入（若有的話）。
 
 #### Bundled Resources（選填，optional）
@@ -277,6 +277,7 @@ skill-name/
 - **`description`**：skill 的**主要觸發依據**（primary triggering mechanism），供 agent 判斷何時使用。
   - 須包含：**做什麼**＋**何時／在什麼情境用**（triggers/contexts）。「何時使用」只寫在 description，不要寫在 body（body 觸發後才載入，寫在 body 對觸發判斷無幫助）。
   - 要寫得**詳細且可判斷**，至少讓 agent 看完後知道：這個 skill 解決什麼問題、典型在哪些任務中該觸發、處理哪些代表性工作，必要時可補充技術範圍、平台、框架、輸入輸出或限制。
+  - `description` **必須使用英文**，不要混用中文作為主描述。
   - 不要只寫成過短、抽象、難以觸發的句子，例如 `Help with logging`、`Skill for coding`、`Use for docs`。
   - 優先使用 1-3 句完整英文描述；若技能範圍較廣，可用第二句補充具體觸發條件、常見任務或代表性例子。
   - description 應盡量包含使用者或任務中可能出現的關鍵詞，讓 agent 更容易在正確時機載入 skill。
@@ -304,6 +305,7 @@ skill-name/
 - [ ] `name` 已填寫且與**資料夾名稱一致**（lowercase, hyphen-separated）
 - [ ] `description` 包含「**做什麼**」與「**何時／什麼情境使用**」（triggers/contexts）
 - [ ] `description` 不是過短的泛稱，而是有足夠細節讓 agent 可直接判斷是否該觸發
+- [ ] `description` 使用英文撰寫
 - [ ] 觸發條件**只寫在 description**，不重複寫在 body（body 觸發後才載入，對觸發判斷無幫助）
 
 ### SKILL.md Body
