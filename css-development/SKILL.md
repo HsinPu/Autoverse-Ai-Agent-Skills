@@ -1,6 +1,7 @@
 ---
 name: css-development
 description: Read when writing or refactoring CSS. Provides best practices for cascade management, selectors, responsive design, layout (flex/grid), tokens, and maintainable architecture.
+always: true
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

@@ -1,6 +1,7 @@
 ---
 name: answer-writing
 description: Read when writing final user-facing responses. Provides best practices and templates for clear, actionable answers (Traditional Chinese by default, optionally mixed with English).
+always: true
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

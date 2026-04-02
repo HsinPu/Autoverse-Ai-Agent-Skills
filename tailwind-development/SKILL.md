@@ -1,6 +1,7 @@
 ---
 name: tailwind-development
 description: Read when building UIs with Tailwind CSS (v4+). Best practices for utility-first architecture, design tokens with theme variables, managing duplication, safe class composition, custom CSS layers/directives, dark mode, Preflight, and class detection/build output size.
+always: true
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

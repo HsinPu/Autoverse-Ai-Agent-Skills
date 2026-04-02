@@ -1,6 +1,7 @@
 ---
 name: python-development
 description: Read when writing Python. Provides reference for code style (PEP 8, naming, types, docstrings) and design patterns (KISS, SRP, composition, DI). Use when writing or refactoring Python code, or when user asks about style, structure, or patterns.
+always: true
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

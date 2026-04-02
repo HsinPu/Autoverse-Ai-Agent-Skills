@@ -1,6 +1,7 @@
 ---
 name: javascript-development
 description: Read when writing JavaScript. Provides best practices for code style, module structure, async/error handling, security, and testing in modern JS (Node.js and browser). Use when writing, reviewing, or refactoring JavaScript.
+always: true
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

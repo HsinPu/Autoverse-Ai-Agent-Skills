@@ -1,6 +1,7 @@
 ---
 name: vue-development
 description: Read when building Vue.js (Vue 3) applications. Provides best practices for SFC structure, Composition API, component design, state management (Pinia), routing (Vue Router), performance, security, TypeScript, testing, and tooling.
+always: true
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

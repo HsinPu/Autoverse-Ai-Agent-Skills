@@ -1,6 +1,7 @@
 ---
 name: todo-first
 description: Create and maintain a structured todo list before executing multi-step or non-trivial work. Use when tasks have 3+ steps, span multiple files or commands, include verification, or bundle several user requests. Use todowrite to track pending/in_progress/completed/cancelled items during execution. Skip for single-step, trivial, or purely informational requests.
+always: true
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---
