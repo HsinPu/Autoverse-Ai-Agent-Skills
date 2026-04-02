@@ -1,11 +1,12 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-02T07:16:41Z",
+  "updated": "2026-04-02T09:34:56Z",
   "total": 27,
   "skills": [
     {
       "name": "todo-first",
       "description": "Create and maintain a structured todo list before executing multi-step or non-trivial work. Use when tasks have 3+ steps, span multiple files or commands, include verification, or bundle several user requests. Use todowrite to track pending/in_progress/completed/cancelled items during execution. Skip for single-step, trivial, or purely informational requests.",
+      "always": true,
       "category": "productivity",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -20,6 +21,7 @@
     {
       "name": "agent-creator-design",
       "description": "Guide for writing and designing system prompts (the main instruction body for agents). Use when (1) user wants to write a new system prompt, (2) design or refactor existing prompt structure, or (3) modify, optimize, or review system prompt content.",
+      "always": true,
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -33,6 +35,7 @@
     {
       "name": "ask-questions-if-underspecified",
       "description": "Clarify requirements before implementing by asking the minimum must-have questions. Do not use automatically; apply only when the user explicitly invokes this skill or asks to clarify requirements first.",
+      "always": true,
       "category": "productivity",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -46,6 +49,7 @@
     {
       "name": "answer-writing",
       "description": "Read when writing final user-facing responses. Provides best practices and templates for clear, actionable answers (Traditional Chinese by default, optionally mixed with English).",
+      "always": true,
       "category": "productivity",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -60,6 +64,7 @@
     {
       "name": "code-refactoring",
       "description": "Code refactoring patterns and techniques for improving code quality without changing behavior. Use when cleaning up legacy code, reducing complexity, or improving maintainability.",
+      "always": true,
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -73,6 +78,7 @@
     {
       "name": "code-review",
       "description": "Automated code review for pull requests using specialized review patterns. Analyzes code for quality, security, performance, and best practices. Use when reviewing code changes, PRs, or doing code audits.",
+      "always": true,
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -86,6 +92,7 @@
     {
       "name": "css-development",
       "description": "Read when writing or refactoring CSS. Provides best practices for cascade management, selectors, responsive design, layout (flex/grid), tokens, and maintainable architecture.",
+      "always": true,
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -103,6 +110,7 @@
     {
       "name": "database-design",
       "description": "Database schema design, optimization, and migration patterns for PostgreSQL, MySQL, and NoSQL. Use when designing schemas, writing migrations, optimizing queries, or discussing indexes, normalization, or data integrity.",
+      "always": true,
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -118,6 +126,7 @@
     {
       "name": "file-organizer",
       "description": "Intelligently organizes files and folders by understanding context, finding duplicates, suggesting structures, and automating cleanup. Use when organizing Downloads/Documents, finding duplicates, restructuring folders, cleaning desktop, or establishing file organization habits.",
+      "always": true,
       "category": "productivity",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -131,6 +140,7 @@
     {
       "name": "frontend-design",
       "description": "Create distinctive, production-ready frontend interfaces with high design quality and polished, creative code; avoid generic AI aesthetics. Use when the user asks to build web components, pages, artifacts, posters, or applications (e.g. websites, landing pages, dashboards, React components, HTML/CSS layouts), or when styling/beautifying any web UI.",
+      "always": true,
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -146,6 +156,7 @@
     {
       "name": "git-operations",
       "description": "Executes and guides Git workflows on Windows (clone, branch, commit, push, pull, merge, rebase, stash, history). Use when the user asks to commit, make a commit, do a commit, push, pull, stage and commit, write commit message, write commit messages, manage branches, resolve conflicts, inspect repository state, or perform any Git operation.",
+      "always": true,
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -159,6 +170,7 @@
     {
       "name": "git-readme-writer",
       "description": "Analyze Git-based repositories and choose the right README structure for app, library, CLI, API, template, monorepo, or internal/enterprise/Gerrit projects. Use when the user wants to create, rewrite, expand, or standardize README documentation for Git, GitHub, or Gerrit-hosted repositories after inspecting project structure, setup flow, usage patterns, contribution process, and platform-specific review links.",
+      "always": true,
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -175,6 +187,7 @@
     {
       "name": "java-development",
       "description": "Read when writing Java. Provides reference for code style (Google/Oracle conventions, naming, formatting, Javadoc, exceptions) and design patterns (SOLID, composition, DI, immutability). Use when writing or refactoring Java code, or when user asks about style, structure, or patterns.",
+      "always": true,
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -188,6 +201,7 @@
     {
       "name": "mybatis-development",
       "description": "Read when using MyBatis (and MyBatis-Spring / MyBatis-Spring-Boot-Starter) in Java projects. Provides best practices for mapper design, XML/dynamic SQL, result mapping, Spring transaction integration, performance, and security.",
+      "always": true,
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -206,6 +220,7 @@
     {
       "name": "javascript-development",
       "description": "Read when writing JavaScript. Provides best practices for code style, module structure, async/error handling, security, and testing in modern JS (Node.js and browser). Use when writing, reviewing, or refactoring JavaScript.",
+      "always": true,
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -222,6 +237,7 @@
     {
       "name": "jquery-development",
       "description": "Read when working with jQuery in legacy or hybrid frontends. Provides best practices for selectors, event delegation, DOM performance, plugin patterns, AJAX, security, and migration guidance.",
+      "always": true,
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -240,6 +256,7 @@
     {
       "name": "logging-patterns",
       "description": "Write clean, consistent log statements with stable message patterns, sensible log levels, and low-noise context fields. Use when adding, refactoring, or reviewing application logs so messages stay readable, searchable, and easy to correlate.",
+      "always": true,
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -254,6 +271,7 @@
     {
       "name": "markdown-writer",
       "description": "Writes and structures Markdown for README, documentation, notes, and technical docs. Follows GFM conventions, consistent heading hierarchy, and clear formatting. Use when the user asks to write markdown, create README, format documentation, write docs, or produce .md files.",
+      "always": true,
       "category": "productivity",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -267,6 +285,7 @@
     {
       "name": "mcp-creator-design",
       "description": "Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).",
+      "always": true,
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -282,6 +301,7 @@
     {
       "name": "python-development",
       "description": "Read when writing Python. Provides reference for code style (PEP 8, naming, types, docstrings) and design patterns (KISS, SRP, composition, DI). Use when writing or refactoring Python code, or when user asks about style, structure, or patterns.",
+      "always": true,
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -296,6 +316,7 @@
     {
       "name": "skill-creator-design",
       "description": "Guide for creating effective skills. Use when users want to create a new skill (or update an existing skill) that extends the agent's capabilities with specialized knowledge, workflows, or tool integrations.",
+      "always": true,
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -310,6 +331,7 @@
     {
       "name": "sql-best-practices",
       "description": "Read when writing SQL. Provides reference for SQL code style (naming, formatting, JOIN, subqueries), performance optimization (EXPLAIN analysis, N+1, pagination, batch operations), and security (SQL injection prevention, parameterized queries, permissions). Use when writing or reviewing SQL queries, optimizing query performance, or discussing SQL security practices. Complements database-design (which covers schema/index/migration design).",
+      "always": true,
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -324,6 +346,7 @@
     {
       "name": "spring-development",
       "description": "Read when building Spring / Spring Boot applications. Provides best practices for layering, dependency injection, configuration, web APIs, data access, security, testing, and observability.",
+      "always": true,
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -342,6 +365,7 @@
     {
       "name": "typescript-development",
       "description": "Read when writing TypeScript or JavaScript. Provides reference for code style, type safety, design patterns, and refactoring techniques. Use when writing, reviewing, or refactoring TypeScript code, or when user asks about TS patterns, types, and structure.",
+      "always": true,
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -356,6 +380,7 @@
     {
       "name": "vue-development",
       "description": "Read when building Vue.js (Vue 3) applications. Provides best practices for SFC structure, Composition API, component design, state management (Pinia), routing (Vue Router), performance, security, TypeScript, testing, and tooling.",
+      "always": true,
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -377,6 +402,7 @@
     {
       "name": "nuxt-development",
       "description": "Read when building Nuxt (Nuxt 3/4) applications. Best practices for directory structure, rendering modes (SSR/CSR/hybrid), data fetching, Nitro server routes, runtime config, SEO/head management, performance, security, and deployment.",
+      "always": true,
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -398,6 +424,7 @@
     {
       "name": "tailwind-development",
       "description": "Read when building UIs with Tailwind CSS (v4+). Best practices for utility-first architecture, design tokens with theme variables, managing duplication, safe class composition, custom CSS layers/directives, dark mode, Preflight, and class detection/build output size.",
+      "always": true,
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
