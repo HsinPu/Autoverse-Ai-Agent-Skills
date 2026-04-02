@@ -124,7 +124,7 @@ agent 僅在使用者需要該功能時才讀 REDLINING.md 或 OOXML.md。
 ```
 skill-name/
 ├── SKILL.md (required)
-│   ├── YAML frontmatter (name, description)
+│   ├── YAML frontmatter (name, description, always)
 │   └── Markdown instructions
 └── Bundled Resources (optional)
     ├── scripts/      - Executable code
@@ -136,7 +136,7 @@ skill-name/
 
 每份 SKILL.md 包含**兩部分**（two parts）：
 
-- **Frontmatter**（YAML）：**必填欄位**（required）為 `name`、`description`；**選填**（optional）可加 `license`、`metadata`、`compatibility`。只有 `name` 與 `description` 會被 agent 用來判斷何時**觸發**（trigger）此 skill，因此 `description` 必須寫得**清楚、完整、且足夠詳細**，能直接說明技能內容、適用情境、常見觸發語句或任務類型；不要只寫過短或籠統的一句話。`description` 也**必須使用英文**，讓 agent 在跨專案與跨語系情境下更穩定判斷觸發條件。`compatibility` 用於標註**環境需求**（environment requirements），多數 skill 不必填。
+- **Frontmatter**（YAML）：**必填欄位**（required）為 `name`、`description`、`always`；**選填**（optional）可加 `license`、`metadata`、`compatibility`。其中 `name` 與 `description` 會被 agent 用來判斷何時**觸發**（trigger）此 skill，因此 `description` 必須寫得**清楚、完整、且足夠詳細**，能直接說明技能內容、適用情境、常見觸發語句或任務類型；不要只寫過短或籠統的一句話。`description` 也**必須使用英文**，讓 agent 在跨專案與跨語系情境下更穩定判斷觸發條件。`always` 使用布林值，本專案的 skill 寫法固定為 `true`。`compatibility` 用於標註**環境需求**（environment requirements），多數 skill 不必填。
 - **Body**（Markdown）：使用此 skill 的**指示與指引**（instructions and guidance）。只有在 skill 觸發後才會載入（若有的話）。
 
 #### Bundled Resources（選填，optional）
@@ -241,7 +241,7 @@ skill-name/
 
 **必備檔案（Required file）**：
 
-- **SKILL.md**：須含 YAML **frontmatter**，至少包含 `name`、`description`；內文為 **Markdown** 指示。其餘資源目錄（**scripts / references / assets**）依 Step 2 規劃按需建立。
+- **SKILL.md**：須含 YAML **frontmatter**，至少包含 `name`、`description`、`always: true`；內文為 **Markdown** 指示。其餘資源目錄（**scripts / references / assets**）依 Step 2 規劃按需建立。
 
 **完成條件（Completion criteria）**：目錄與 SKILL.md 已建立，即可進入 Step 4。
 
@@ -271,7 +271,7 @@ skill-name/
 
 **撰寫原則（Writing guidelines）**：一律使用**祈使句／不定詞**（imperative/infinitive）。
 
-**Frontmatter**：YAML 中只填 `name`、`description`。
+**Frontmatter**：YAML 中至少填 `name`、`description`、`always`。
 
 - **`name`**：skill 名稱。
 - **`description`**：skill 的**主要觸發依據**（primary triggering mechanism），供 agent 判斷何時使用。
@@ -283,6 +283,7 @@ skill-name/
   - description 應盡量包含使用者或任務中可能出現的關鍵詞，讓 agent 更容易在正確時機載入 skill。
   - 範例（`docx`）：*"Comprehensive document creation, editing, and analysis with support for tracked changes, comments, formatting preservation, and text extraction. Use when the agent needs to work with professional documents (.docx files) for: (1) Creating new documents, (2) Modifying or editing content, (3) Working with tracked changes, (4) Adding comments, or any other document tasks"*
   - 範例（`logging-patterns`）：*"Write clean, consistent log statements with stable message patterns, sensible log levels, and low-noise context fields. Use when adding, refactoring, or reviewing application logs so messages stay readable, searchable, and easy to correlate."*
+- **`always`**：必填布林值。本專案 skill 的 metadata 一律寫 `always: true`。
 
 **Body**：撰寫使用此 skill 及其 **bundled resources** 的**指示**（instructions）。
 
@@ -306,6 +307,7 @@ skill-name/
 - [ ] `description` 包含「**做什麼**」與「**何時／什麼情境使用**」（triggers/contexts）
 - [ ] `description` 不是過短的泛稱，而是有足夠細節讓 agent 可直接判斷是否該觸發
 - [ ] `description` 使用英文撰寫
+- [ ] `always: true` 已寫在 metadata 中
 - [ ] 觸發條件**只寫在 description**，不重複寫在 body（body 觸發後才載入，對觸發判斷無幫助）
 
 ### SKILL.md Body
