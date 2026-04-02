@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-03-21T16:00:58Z",
-  "total": 26,
+  "updated": "2026-04-02T07:16:41Z",
+  "total": 27,
   "skills": [
     {
       "name": "todo-first",
@@ -235,6 +235,20 @@
         "xss",
         "upgrade",
         "migration"
+      ]
+    },
+    {
+      "name": "logging-patterns",
+      "description": "Write clean, consistent log statements with stable message patterns, sensible log levels, and low-noise context fields. Use when adding, refactoring, or reviewing application logs so messages stay readable, searchable, and easy to correlate.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "logging",
+        "observability",
+        "code-style",
+        "debugging"
       ]
     },
     {

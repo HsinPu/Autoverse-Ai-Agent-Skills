@@ -37,7 +37,7 @@ autoverse install --all --agent cursor
 
 ## 收錄 Skills
 
-目前共收錄 **26** 個 skills：**19** 個 Development、**7** 個 Productivity。
+目前共收錄 **27** 個 skills：**20** 個 Development、**7** 個 Productivity。
 
 ### 🛠️ Development（開發）
 
@@ -60,6 +60,7 @@ autoverse install --all --agent cursor
 | **[git-operations](git-operations/)** | Git 工作流（clone、branch、stage、commit、push、pull、merge、rebase）與狀態檢查，Windows 環境 |
 | **[code-review](code-review/)** | 自動化程式碼審查（安全、效能、品質、測試）含嚴重度分級 |
 | **[code-refactoring](code-refactoring/)** | 程式碼重構技巧（Code Smells、安全流程、語言無關原則） |
+| **[logging-patterns](logging-patterns/)** | 撰寫乾淨一致的 log 訊息模式（level、message shape、context fields、低噪音） |
 | **[mcp-creator-design](mcp-creator-design/)** | 建立高品質 MCP Server（Python FastMCP / Node/TypeScript MCP SDK）整合外部 API / services |
 | **[git-readme-writer](git-readme-writer/)** | 依專案類型與 GitHub / Gerrit 平台差異選擇合適的 README 結構 |
 
