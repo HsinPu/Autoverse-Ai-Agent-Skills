@@ -1,7 +1,6 @@
 ---
 name: frontend-design
-description: Create distinctive, production-ready frontend interfaces with high design quality and polished, creative code; avoid generic AI aesthetics. Use when the user asks to build web components, pages, artifacts, posters, or applications (e.g. websites, landing pages, dashboards, React components, HTML/CSS layouts), or when styling/beautifying any web UI.
-always: true
+description: Frontend design guide for building distinctive, production-ready interfaces with polished visuals, strong hierarchy, and non-generic implementation details. Use when creating or restyling web pages, dashboards, landing pages, components, or other HTML/CSS/React UI work.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

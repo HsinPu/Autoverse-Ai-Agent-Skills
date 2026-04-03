@@ -1,7 +1,6 @@
 ---
 name: tailwind-development
-description: Read when building UIs with Tailwind CSS (v4+). Best practices for utility-first architecture, design tokens with theme variables, managing duplication, safe class composition, custom CSS layers/directives, dark mode, Preflight, and class detection/build output size.
-always: true
+description: Tailwind CSS development guide covering utility-first architecture, theme variables, class composition, custom layers and directives, dark mode, Preflight, and build output-size concerns. Use when building, reviewing, or refactoring Tailwind-based interfaces.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

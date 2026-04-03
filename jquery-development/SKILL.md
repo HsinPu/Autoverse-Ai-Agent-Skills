@@ -1,7 +1,6 @@
 ---
 name: jquery-development
-description: Read when working with jQuery in legacy or hybrid frontends. Provides best practices for selectors, event delegation, DOM performance, plugin patterns, AJAX, security, and migration guidance.
-always: true
+description: jQuery development guide for legacy or hybrid frontends, covering selectors, event delegation, DOM performance, plugin patterns, AJAX, security, and migration concerns. Use when maintaining, reviewing, or modernizing jQuery-based code.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

@@ -1,7 +1,6 @@
 ---
 name: markdown-writer
-description: Writes and structures Markdown for README, documentation, notes, and technical docs. Follows GFM conventions, consistent heading hierarchy, and clear formatting. Use when the user asks to write markdown, create README, format documentation, write docs, or produce .md files.
-always: true
+description: Markdown writing guide for README files, technical documentation, notes, and other structured docs, with consistent GFM formatting and heading hierarchy. Use when creating or revising Markdown content such as README files, docs, or notes.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

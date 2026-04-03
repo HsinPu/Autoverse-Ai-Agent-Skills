@@ -1,7 +1,6 @@
 ---
 name: nuxt-development
-description: Read when building Nuxt (Nuxt 3/4) applications. Best practices for directory structure, rendering modes (SSR/CSR/hybrid), data fetching, Nitro server routes, runtime config, SEO/head management, performance, security, and deployment.
-always: true
+description: Nuxt development guide covering application structure, rendering modes, data fetching, Nitro server routes, runtime config, SEO, performance, security, and deployment. Use when building, reviewing, or refactoring Nuxt 3/4 applications.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

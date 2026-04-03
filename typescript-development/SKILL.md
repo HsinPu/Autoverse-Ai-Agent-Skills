@@ -1,7 +1,6 @@
 ---
 name: typescript-development
-description: Read when writing TypeScript or JavaScript. Provides reference for code style, type safety, design patterns, and refactoring techniques. Use when writing, reviewing, or refactoring TypeScript code, or when user asks about TS patterns, types, and structure.
-always: true
+description: TypeScript development guide covering code style, type safety, design patterns, API design, and refactoring techniques for TypeScript-heavy codebases. Use when writing, reviewing, or restructuring TypeScript code, or when deciding type and module design.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

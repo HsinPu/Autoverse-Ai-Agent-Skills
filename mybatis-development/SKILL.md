@@ -1,7 +1,6 @@
 ---
 name: mybatis-development
-description: Read when using MyBatis (and MyBatis-Spring / MyBatis-Spring-Boot-Starter) in Java projects. Provides best practices for mapper design, XML/dynamic SQL, result mapping, Spring transaction integration, performance, and security.
-always: true
+description: MyBatis development guide covering mapper design, XML and dynamic SQL, result mapping, Spring transaction integration, performance, and security. Use when building or refactoring MyBatis-based persistence layers in Java projects.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

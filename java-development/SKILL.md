@@ -1,7 +1,6 @@
 ---
 name: java-development
-description: Read when writing Java. Provides reference for code style (Google/Oracle conventions, naming, formatting, Javadoc, exceptions) and design patterns (SOLID, composition, DI, immutability). Use when writing or refactoring Java code, or when user asks about style, structure, or patterns.
-always: true
+description: Java development guide covering code style, naming, formatting, Javadoc, exceptions, and design patterns such as SOLID, composition, dependency injection, and immutability. Use when writing, reviewing, or refactoring Java code, or when deciding Java structure and conventions.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

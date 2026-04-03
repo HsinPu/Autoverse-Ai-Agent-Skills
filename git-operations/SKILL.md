@@ -1,7 +1,6 @@
 ---
 name: git-operations
-description: Executes and guides Git workflows on Windows (clone, branch, commit, push, pull, merge, rebase, stash, history). Use when the user asks to commit, make a commit, do a commit, push, pull, stage and commit, write commit message, write commit messages, manage branches, resolve conflicts, inspect repository state, or perform any Git operation.
-always: true
+description: Git workflow guide for Windows covering repository state checks, branching, staging, commits, pulls, pushes, merges, rebases, stashes, and conflict handling. Use when performing or reviewing any Git operation such as commit, push, pull, branch management, or history inspection.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

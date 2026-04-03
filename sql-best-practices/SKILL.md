@@ -1,7 +1,6 @@
 ---
 name: sql-best-practices
-description: Read when writing SQL. Provides reference for SQL code style (naming, formatting, JOIN, subqueries), performance optimization (EXPLAIN analysis, N+1, pagination, batch operations), and security (SQL injection prevention, parameterized queries, permissions). Use when writing or reviewing SQL queries, optimizing query performance, or discussing SQL security practices. Complements database-design (which covers schema/index/migration design).
-always: true
+description: SQL writing and review guide covering naming, formatting, JOINs, subqueries, performance analysis, pagination, batch operations, and security practices. Use when writing, reviewing, or optimizing SQL queries, and pair it with database-design when schema or migration design is also involved.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

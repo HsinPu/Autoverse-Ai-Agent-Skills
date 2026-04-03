@@ -1,7 +1,6 @@
 ---
 name: file-organizer
-description: Intelligently organizes files and folders by understanding context, finding duplicates, suggesting structures, and automating cleanup. Use when organizing Downloads/Documents, finding duplicates, restructuring folders, cleaning desktop, or establishing file organization habits.
-always: true
+description: File organization guide for restructuring folders, finding duplicates, recommending cleaner hierarchies, and automating cleanup workflows. Use when organizing Downloads or Documents, cleaning a desktop, or improving ongoing file management habits.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

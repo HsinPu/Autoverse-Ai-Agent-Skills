@@ -1,7 +1,6 @@
 ---
 name: code-review
-description: Automated code review for pull requests using specialized review patterns. Analyzes code for quality, security, performance, and best practices. Use when reviewing code changes, PRs, or doing code audits.
-always: true
+description: Code review guide for identifying correctness, security, performance, maintainability, and testing issues in code changes. Use when reviewing pull requests, modified files, or code diffs and when the goal is to surface concrete findings and risks.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

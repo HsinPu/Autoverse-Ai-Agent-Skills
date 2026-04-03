@@ -1,7 +1,6 @@
 ---
 name: git-readme-writer
-description: Analyze Git-based repositories and choose the right README structure for app, library, CLI, API, template, monorepo, or internal/enterprise/Gerrit projects. Use when the user wants to create, rewrite, expand, or standardize README documentation for Git, GitHub, or Gerrit-hosted repositories after inspecting project structure, setup flow, usage patterns, contribution process, and platform-specific review links.
-always: true
+description: README design and authoring guide for Git-based repositories, covering apps, libraries, CLIs, APIs, templates, monorepos, and internal or Gerrit-based projects. Use when creating, rewriting, expanding, or standardizing repository README documentation after inspecting project structure, setup flow, and usage patterns.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

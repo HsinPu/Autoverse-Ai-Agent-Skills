@@ -1,7 +1,6 @@
 ---
 name: answer-writing
-description: Read when writing final user-facing responses. Provides best practices and templates for clear, actionable answers (Traditional Chinese by default, optionally mixed with English).
-always: true
+description: Final-response writing guide for producing clear, actionable user-facing answers with concise structure and strong readability. Use when preparing the final reply to the user, especially when the answer should be polished, direct, and easy to act on.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

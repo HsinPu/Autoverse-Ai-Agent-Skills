@@ -1,7 +1,6 @@
 ---
 name: skill-creator-design
-description: Guide for creating effective skills. Use when users want to create a new skill (or update an existing skill) that extends the agent's capabilities with specialized knowledge, workflows, or tool integrations.
-always: true
+description: Skill design guide for creating reusable skills with clear metadata, lean instructions, progressive disclosure, and the right mix of scripts, references, and assets. Use when creating a new skill or refining an existing one that extends agent capabilities.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

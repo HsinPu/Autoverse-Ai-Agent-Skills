@@ -1,7 +1,6 @@
 ---
 name: code-refactoring
-description: Code refactoring patterns and techniques for improving code quality without changing behavior. Use when cleaning up legacy code, reducing complexity, or improving maintainability.
-always: true
+description: Code refactoring guide for improving structure, readability, and maintainability without changing behavior. Use when cleaning up legacy code, reducing complexity, or simplifying code that has become hard to understand or extend.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

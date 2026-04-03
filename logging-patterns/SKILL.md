@@ -1,7 +1,6 @@
 ---
 name: logging-patterns
-description: Write clean, consistent log statements with stable message patterns, sensible log levels, and low-noise context fields. Use when adding, refactoring, or reviewing application logs so messages stay readable, searchable, and easy to correlate.
-always: true
+description: Logging guide for writing clean, consistent log statements with stable message patterns, sensible log levels, and low-noise context fields. Use when adding, refactoring, or reviewing application logs so messages stay readable, searchable, and easy to correlate.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

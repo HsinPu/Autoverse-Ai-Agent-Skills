@@ -1,7 +1,6 @@
 ---
 name: spring-development
-description: Read when building Spring / Spring Boot applications. Provides best practices for layering, dependency injection, configuration, web APIs, data access, security, testing, and observability.
-always: true
+description: Spring and Spring Boot development guide covering application layering, dependency injection, configuration, web APIs, data access, security, testing, and observability. Use when building, reviewing, or refactoring Spring-based services and applications.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

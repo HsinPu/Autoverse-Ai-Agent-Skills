@@ -1,7 +1,6 @@
 ---
 name: ask-questions-if-underspecified
-description: Clarify requirements before implementing by asking the minimum must-have questions. Do not use automatically; apply only when the user explicitly invokes this skill or asks to clarify requirements first.
-always: true
+description: Requirement-clarification guide for identifying the minimum missing information before implementation. Use when the user explicitly asks to clarify requirements first or requests a question-first approach before coding. Do not use automatically.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---
