@@ -35,21 +35,25 @@ autoverse install --all --agent cursor
 
 ---
 
-## Python 開發順序對應 Skills
+## 通用寫程式流程對應 Skills
 
-以下順序以一般 Python 專案為例，全部沿用現有 skills，沒有新增 skill。
+以下是常見的通用流程，不是每個小改動都要跑完全部步驟；大型需求或多人協作時會更完整。
 
-| 順序 | 階段 | 對應 Skills | 用途 |
+| 順序 | 階段 | 何時需要 | 對應 Skills |
 |---|---|---|---|
-| 1 | 需求釐清 | `ask-questions-if-underspecified` | 補齊需求、限制與驗收條件 |
-| 2 | 任務拆解 | `todo-first` | 建立待辦、拆分步驟、追蹤進度 |
-| 3 | 規格整理 | `specification-authoring` | 撰寫 Spec、章節結構、版本紀錄 |
-| 4 | 資料設計 | `database-design`, `sql-best-practices` | Schema、Migration、查詢與效能 |
-| 5 | 程式實作 | `python-development` | Python 架構、實作、型別與測試 |
-| 6 | 可觀測性與重構 | `logging-patterns`, `code-refactoring` | log 設計、結構整理、降複雜度 |
-| 7 | 程式審查 | `code-review` | 找 bug、風險、效能與測試缺口 |
-| 8 | 文件交付 | `markdown-writer`, `git-readme-writer` | README、技術文件與說明 |
-| 9 | 版本控制 | `git-operations` | branch、commit、merge、push |
+| 1 | 需求釐清 | 幾乎都需要 | `ask-questions-if-underspecified` |
+| 2 | 任務拆解 | 幾乎都需要 | `todo-first` |
+| 3 | 規格/設計 | 規模較大、多人協作時 | `specification-authoring` |
+| 4 | 資料設計 | 有資料庫或資料模型時 | `database-design`, `sql-best-practices` |
+| 5 | 程式實作 | 幾乎都需要 | `python-development`, `java-development`, `javascript-development`, `typescript-development`, `spring-development`, `vue-development`, `nuxt-development`, `css-development`, `tailwind-development`, `frontend-design`, `mybatis-development`, `jquery-development`, `mcp-creator-design` |
+| 6 | 驗證/修正 | 幾乎都需要 | `code-review`, `logging-patterns` |
+| 7 | 重構 | 視需要 | `code-refactoring` |
+| 8 | 文件交付 | 對外交付或交接時 | `markdown-writer`, `git-readme-writer` |
+| 9 | 版本控制 | 幾乎都需要 | `git-operations` |
+
+Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順序本身大致相同。
+
+如果有部署或維運需求，再接對應技術棧 skill；目前沒有獨立的通用部署 skill。
 
 ---
 
