@@ -44,10 +44,10 @@ license: Apache-2.0
 
 ```yaml
 ---
-name: code-reviewer
-description: Review modified code for quality and security issues, then produce a clear checklist of findings and risks. Use when running code review, checking changes before a commit, or when the user asks to review code changes.
+name: your-skill-name
+description: Describe what this agent does and when to use it.
 version: "1.0"
-scope: code-review
+scope: your-scope
 ---
 ```
 

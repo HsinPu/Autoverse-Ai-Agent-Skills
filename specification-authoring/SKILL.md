@@ -1,6 +1,8 @@
 ---
 name: specification-authoring
-description: "Author, restructure, and review Markdown technical specification documents (Spec / 技術規格說明書 / 規格書) for systems or modules with mandatory YAML front matter, eight fixed top-level chapters (including required vs optional-in-body sections), mirrored functional (Ch.3) and technical (Ch.4) submodule numbering, shared naming/business rules placement, API details under Ch.4, Mermaid-first diagrams, and synchronized version/changelog updates. Use when writing or editing Spec docs, filling specification templates, auditing completeness against an org spec standard, reviewing 功能規格/技術詳細設計 sections, producing Chinese-first technical specs with English technical terms where appropriate, or generating a Spec by scanning or reverse-engineering an existing codebase (map routes, data layer, and integrations into the standard chapter layout), including Java/Spring/Maven/Gradle or Python/FastAPI/Django/Flask/Celery codebases with stack-specific inventory guidance."
+description: "Technical specification authoring guide for writing, restructuring, and reviewing Spec documents with required YAML front matter, fixed chapter structure, mirrored functional and technical numbering, Mermaid diagrams, and code-to-spec workflow support. Use when producing a Spec from requirements or reverse-engineering a codebase, or when checking completeness and version history."
+source: HsinPu/Autoverse-Ai-Agent-Skills
+license: Apache-2.0
 ---
 
 # Technical specification authoring
