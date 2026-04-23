@@ -37,7 +37,7 @@ autoverse install --all --agent cursor
 
 ## 收錄 Skills
 
-目前共收錄 **27** 個 skills：**20** 個 Development、**7** 個 Productivity。
+目前共收錄 **28** 個 skills：**20** 個 Development、**8** 個 Productivity。
 
 ### 🛠️ Development（開發）
 
@@ -71,6 +71,7 @@ autoverse install --all --agent cursor
 | **[skill-creator-design](skill-creator-design/)** | 建立與優化 Skill 的完整指南（建立流程、SKILL.md 撰寫） |
 | **[agent-creator-design](agent-creator-design/)** | 撰寫與設計 System Prompt 的規範（命名、結構、內文寫法） |
 | **[markdown-writer](markdown-writer/)** | Markdown 撰寫指引（README、技術文件、格式化 docs、GFM 規範） |
+| **[specification-authoring](specification-authoring/)** | 技術規格說明書（Spec）撰寫、重整、審查與 code-to-spec 流程指引 |
 | **[todo-first](todo-first/)** | 多步驟或 non-trivial 任務前先建立 todo list（含狀態維護與驗證追蹤） |
 | **[ask-questions-if-underspecified](ask-questions-if-underspecified/)** | 需求不明時先問澄清問題（僅使用者明確要求時使用） |
 | **[answer-writing](answer-writing/)** | 撰寫最終回應的指引（繁體中文預設、清晰可行動） |
