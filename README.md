@@ -35,6 +35,24 @@ autoverse install --all --agent cursor
 
 ---
 
+## Python 開發順序對應 Skills
+
+以下順序以一般 Python 專案為例，全部沿用現有 skills，沒有新增 skill。
+
+| 順序 | 階段 | 對應 Skills | 用途 |
+|---|---|---|---|
+| 1 | 需求釐清 | `ask-questions-if-underspecified` | 補齊需求、限制與驗收條件 |
+| 2 | 任務拆解 | `todo-first` | 建立待辦、拆分步驟、追蹤進度 |
+| 3 | 規格整理 | `specification-authoring` | 撰寫 Spec、章節結構、版本紀錄 |
+| 4 | 資料設計 | `database-design`, `sql-best-practices` | Schema、Migration、查詢與效能 |
+| 5 | 程式實作 | `python-development` | Python 架構、實作、型別與測試 |
+| 6 | 可觀測性與重構 | `logging-patterns`, `code-refactoring` | log 設計、結構整理、降複雜度 |
+| 7 | 程式審查 | `code-review` | 找 bug、風險、效能與測試缺口 |
+| 8 | 文件交付 | `markdown-writer`, `git-readme-writer` | README、技術文件與說明 |
+| 9 | 版本控制 | `git-operations` | branch、commit、merge、push |
+
+---
+
 ## 收錄 Skills
 
 目前共收錄 **28** 個 skills：**20** 個 Development、**8** 個 Productivity。
