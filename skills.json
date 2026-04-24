@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-24T05:02:33Z",
-  "total": 30,
+  "updated": "2026-04-24T06:20:05Z",
+  "total": 31,
   "skills": [
     {
       "name": "todo-first",
@@ -141,6 +141,24 @@
         "react",
         "css",
         "ui"
+      ]
+    },
+    {
+      "name": "react-ui-patterns",
+      "description": "React UI state patterns for loading, error, empty, optimistic update, Suspense, and transition flows. Use when building or reviewing React components that fetch data, submit mutations, or need predictable async UX and state handling.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "react",
+        "ui",
+        "loading",
+        "error",
+        "empty-state",
+        "suspense",
+        "optimistic-updates",
+        "transitions"
       ]
     },
     {
