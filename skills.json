@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-24T07:58:14Z",
-  "total": 34,
+  "updated": "2026-04-24T08:20:56Z",
+  "total": 37,
   "skills": [
     {
       "name": "todo-first",
@@ -500,6 +500,51 @@
         "review",
         "vetting",
         "marketplace"
+      ]
+    },
+    {
+      "name": "word-document-ops",
+      "description": "Word document workflow for creating, editing, and converting .docx files with formatting, tracked changes, comments, and tables. Use when a Word doc or .docx file is the primary input or output, or when a report, memo, letter, or template needs docx formatting.",
+      "category": "productivity",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "docx",
+        "word",
+        "documents",
+        "tracked-changes",
+        "templates"
+      ]
+    },
+    {
+      "name": "spreadsheet-ops",
+      "description": "Spreadsheet workflow for reading, cleaning, editing, and generating .xlsx, .csv, and .tsv files with formulas, formatting, and charts. Use when a spreadsheet is the primary input or output, or when tabular cleanup and calculation matter.",
+      "category": "productivity",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "xlsx",
+        "csv",
+        "spreadsheets",
+        "formulas",
+        "charts"
+      ]
+    },
+    {
+      "name": "presentation-ops",
+      "description": "Presentation workflow for creating and editing PowerPoint decks (.pptx) with slides, layout fidelity, and editable output. Use when a deck, slide, or presentation is the primary input or output, or when charts, diagrams, or templates need to be preserved.",
+      "category": "productivity",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "pptx",
+        "slides",
+        "presentation",
+        "layout",
+        "charts"
       ]
     },
     {
