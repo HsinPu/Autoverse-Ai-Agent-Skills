@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-24T06:20:05Z",
-  "total": 31,
+  "updated": "2026-04-24T07:58:14Z",
+  "total": 34,
   "skills": [
     {
       "name": "todo-first",
@@ -486,6 +486,52 @@
         "dark-mode",
         "performance",
         "architecture"
+      ]
+    },
+    {
+      "name": "skill-security-review",
+      "description": "Security vetting workflow for evaluating third-party skills before install or use. Use when checking provenance, file contents, permissions, or suspicious patterns in a marketplace package or repo.",
+      "category": "productivity",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "security",
+        "review",
+        "vetting",
+        "marketplace"
+      ]
+    },
+    {
+      "name": "github-operations",
+      "description": "GitHub workflow guide for issues, pull requests, releases, CI checks, and API queries via gh. Use when checking repo status, reviewing workflow runs, commenting on issues or PRs, or automating GitHub tasks from the terminal.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "github",
+        "gh",
+        "pull-requests",
+        "issues",
+        "ci",
+        "api"
+      ]
+    },
+    {
+      "name": "pdf-operations",
+      "description": "PDF workflow for reading, extracting, merging, splitting, rotating, generating, and OCRing PDF documents. Use when a .pdf file is the primary input or output, or when scanned pages need layout-preserving extraction.",
+      "category": "productivity",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "pdf",
+        "documents",
+        "ocr",
+        "merge",
+        "split",
+        "layout"
       ]
     }
   ],
