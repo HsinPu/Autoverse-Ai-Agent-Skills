@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-24T08:20:56Z",
-  "total": 37,
+  "updated": "2026-04-24T08:45:50Z",
+  "total": 41,
   "skills": [
     {
       "name": "todo-first",
@@ -500,6 +500,64 @@
         "review",
         "vetting",
         "marketplace"
+      ]
+    },
+    {
+      "name": "summary-ops",
+      "description": "Summarization workflow for extracting concise summaries or transcripts from URLs, local files, podcasts, and videos. Use when a link, audio/video file, or long text needs a short summary, transcript, or quick triage.",
+      "category": "productivity",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "summary",
+        "transcript",
+        "research",
+        "url"
+      ]
+    },
+    {
+      "name": "web-research-ops",
+      "description": "Web research workflow for finding, checking, and synthesizing current information from the web. Use when a task needs fresh facts, source comparison, or evidence-backed answers from URLs and search results.",
+      "category": "productivity",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "search",
+        "research",
+        "verification",
+        "sources"
+      ]
+    },
+    {
+      "name": "mcp-ops",
+      "description": "MCP workflow for listing, configuring, authenticating, and calling MCP servers or tools from the terminal. Use when a task needs MCP server discovery, tool invocation, auth setup, or type and CLI generation.",
+      "category": "productivity",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "mcp",
+        "cli",
+        "tools",
+        "auth",
+        "codegen"
+      ]
+    },
+    {
+      "name": "workspace-google-ops",
+      "description": "Google Workspace workflow for Gmail, Calendar, Drive, Contacts, Sheets, and Docs via CLI. Use when an email, calendar, drive, contact, sheet, or document task needs command-line automation.",
+      "category": "productivity",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "gmail",
+        "calendar",
+        "drive",
+        "sheets",
+        "docs"
       ]
     },
     {
