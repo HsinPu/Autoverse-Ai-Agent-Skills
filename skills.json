@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-23T05:35:39Z",
-  "total": 28,
+  "updated": "2026-04-24T00:00:00Z",
+  "total": 29,
   "skills": [
     {
       "name": "todo-first",
@@ -141,6 +141,26 @@
         "react",
         "css",
         "ui"
+      ]
+    },
+    {
+      "name": "design-system",
+      "description": "Design system generation and visual audit guide for extracting cohesive tokens, producing preview artifacts, reviewing UI consistency, and spotting generic AI-style design patterns. Use when starting a new project, auditing an existing codebase, preparing a redesign, reviewing styling PRs, or diagnosing when the UI feels visually off.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "design-system",
+        "tokens",
+        "audit",
+        "visual-audit",
+        "slop-check",
+        "preview",
+        "css",
+        "tailwind",
+        "react",
+        "vue"
       ]
     },
     {
