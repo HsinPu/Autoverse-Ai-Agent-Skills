@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-24T00:00:00Z",
-  "total": 29,
+  "updated": "2026-04-24T05:02:33Z",
+  "total": 30,
   "skills": [
     {
       "name": "todo-first",
@@ -161,6 +161,26 @@
         "tailwind",
         "react",
         "vue"
+      ]
+    },
+    {
+      "name": "coding-standards",
+      "description": "Universal coding standards guide for TypeScript, JavaScript, React, and Node.js projects. Use when establishing or auditing code conventions, ESLint/Prettier/TypeScript strict settings, feature-based folder structure, layered services, React patterns, testing practices, performance, accessibility, or security hygiene.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "coding-standards",
+        "typescript",
+        "javascript",
+        "react",
+        "nodejs",
+        "eslint",
+        "prettier",
+        "testing",
+        "accessibility",
+        "security"
       ]
     },
     {
