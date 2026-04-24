@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-24T09:28:04Z",
-  "total": 44,
+  "updated": "2026-04-24T09:52:27Z",
+  "total": 47,
   "skills": [
     {
       "name": "todo-first",
@@ -518,6 +518,20 @@
       ]
     },
     {
+      "name": "self-improvement",
+      "description": "Continuous improvement workflow for logging learnings, errors, and feature requests into project-local memory files. Use when a command fails, the user corrects an answer, a tool behaves unexpectedly, or a better recurring approach is found.",
+      "category": "coding-agents-ides",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "learning",
+        "errors",
+        "memory",
+        "improvement"
+      ]
+    },
+    {
       "name": "summary-ops",
       "description": "Summarization workflow for extracting concise summaries or transcripts from URLs, local files, podcasts, and videos. Use when a link, audio/video file, or long text needs a short summary, transcript, or quick triage.",
       "category": "productivity",
@@ -681,6 +695,34 @@
         "split",
         "layout"
       ]
+    },
+    {
+      "name": "humanizer",
+      "description": "Text editing workflow for removing AI-generated patterns and making writing sound more natural and human. Use when revising copy, summaries, comments, or docs that feel stiff, repetitive, promotional, or formulaic.",
+      "category": "communication",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "writing",
+        "editing",
+        "tone",
+        "copy"
+      ]
+    },
+    {
+      "name": "terminal-ops",
+      "description": "Evidence-first repository execution workflow for running commands, checking repo state, debugging failures, and verifying narrow fixes. Use when the user needs exact command output, git state, or a proven local change.",
+      "category": "cli-utilities",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "terminal",
+        "verification",
+        "repo",
+        "commands"
+      ]
     }
   ],
   "categories": [
@@ -698,6 +740,21 @@
       "id": "search-research",
       "name": "Search & Research",
       "description": "Web search and research skills"
+    },
+    {
+      "id": "coding-agents-ides",
+      "name": "Coding Agents & IDEs",
+      "description": "Agent workflows, orchestration, and code-iteration skills"
+    },
+    {
+      "id": "communication",
+      "name": "Communication",
+      "description": "Writing and communication skills"
+    },
+    {
+      "id": "cli-utilities",
+      "name": "CLI Utilities",
+      "description": "Terminal and command-line workflow skills"
     },
     {
       "id": "productivity",
