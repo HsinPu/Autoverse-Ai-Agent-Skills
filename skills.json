@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-24T08:45:50Z",
-  "total": 41,
+  "updated": "2026-04-24T09:28:04Z",
+  "total": 44,
   "skills": [
     {
       "name": "todo-first",
@@ -503,6 +503,21 @@
       ]
     },
     {
+      "name": "repo-ready",
+      "description": "Repository setup and hygiene workflow for adding professional structure, documentation, CI/CD, quality tooling, and platform configuration. Use when starting a repo, hardening an existing one, or adding README, templates, linting, badges, or release automation.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "MIT",
+      "tags": [
+        "repo",
+        "hygiene",
+        "documentation",
+        "ci",
+        "release"
+      ]
+    },
+    {
       "name": "summary-ops",
       "description": "Summarization workflow for extracting concise summaries or transcripts from URLs, local files, podcasts, and videos. Use when a link, audio/video file, or long text needs a short summary, transcript, or quick triage.",
       "category": "productivity",
@@ -514,6 +529,21 @@
         "transcript",
         "research",
         "url"
+      ]
+    },
+    {
+      "name": "agent-reach-ops",
+      "description": "Cross-platform web research workflow for searching and reading current content across social, video, code, and RSS sources. Use when the task needs multi-source research, transcripts, or platform-specific web extraction.",
+      "category": "search-research",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "research",
+        "search",
+        "transcript",
+        "social",
+        "rss"
       ]
     },
     {
@@ -543,6 +573,21 @@
         "tools",
         "auth",
         "codegen"
+      ]
+    },
+    {
+      "name": "webapp-testing",
+      "description": "Local web application testing workflow with Playwright for verifying frontend behavior, debugging UI, capturing screenshots, and checking browser logs. Use when a local web app needs end-to-end validation or UI troubleshooting.",
+      "category": "browser-automation",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "playwright",
+        "testing",
+        "browser",
+        "frontend",
+        "screenshots"
       ]
     },
     {
@@ -643,6 +688,16 @@
       "id": "development",
       "name": "Development",
       "description": "Coding and software development skills"
+    },
+    {
+      "id": "browser-automation",
+      "name": "Browser Automation",
+      "description": "Browser and local web testing skills"
+    },
+    {
+      "id": "search-research",
+      "name": "Search & Research",
+      "description": "Web search and research skills"
     },
     {
       "id": "productivity",
