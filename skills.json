@@ -130,7 +130,7 @@
     },
     {
       "name": "frontend-design",
-      "description": "Frontend design guide for building distinctive, production-ready interfaces with polished visuals, strong hierarchy, and non-generic implementation details. Use when creating or restyling web pages, dashboards, landing pages, components, or other HTML/CSS/React UI work.",
+      "description": "Frontend design guide for creating distinctive, production-grade interfaces with clear visual direction, strong hierarchy, meaningful motion, and non-generic implementation details. Use when building or restyling web components, pages, or applications where the visual design matters as much as the code quality.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
