@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-25T10:08:47Z",
-  "total": 56,
+  "updated": "2026-04-25T13:14:57Z",
+  "total": 57,
   "skills": [
     {
       "name": "todo-first",
@@ -407,6 +407,20 @@
         "release",
         "evaluation",
         "skills"
+      ]
+    },
+    {
+      "name": "skillctl",
+      "description": "Skill CLI routing workflow for searching, installing, listing, and lightly validating skills from the command line. Use when you need a direct command-line path for skill discovery or management without deeper scanning or review.",
+      "category": "cli-utilities",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "cli",
+        "skills",
+        "install",
+        "search"
       ]
     },
     {
