@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-25T10:02:00Z",
-  "total": 54,
+  "updated": "2026-04-25T10:08:47Z",
+  "total": 55,
   "skills": [
     {
       "name": "todo-first",
@@ -406,6 +406,20 @@
         "quality",
         "release",
         "evaluation",
+        "skills"
+      ]
+    },
+    {
+      "name": "skill-explorer",
+      "description": "Skill discovery and navigation workflow for browsing available skills, understanding category coverage, and finding the right skill for a task. Use when the user needs help exploring the skill catalog or mapping a request to an existing skill.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "discovery",
+        "navigation",
+        "catalog",
         "skills"
       ]
     },
