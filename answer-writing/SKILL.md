@@ -21,6 +21,7 @@ license: Apache-2.0
 
 ## 進階與參考（Bundled resources）
 
+- **決策/比較**：使用者要你推薦、比較或取捨時，直接套用 [reference/templates.md](reference/templates.md) 的「決策建議型」，先給結論，再列差異與適用情境。
 - **回答原則**：結構、語氣、資訊密度與常見雷區，見 [reference/response-principles.md](reference/response-principles.md)。
 - **常用模板**：教學、除錯、實作交付、決策建議、摘要整理，見 [reference/templates.md](reference/templates.md)。
 - **提問策略**：何時要問、怎麼問、只問一題的寫法，見 [reference/clarifying-questions.md](reference/clarifying-questions.md)。
