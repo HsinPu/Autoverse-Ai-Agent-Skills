@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-24T09:52:27Z",
-  "total": 47,
+  "updated": "2026-04-25T09:46:30Z",
+  "total": 50,
   "skills": [
     {
       "name": "todo-first",
@@ -382,6 +382,20 @@
       ]
     },
     {
+      "name": "skill-lint",
+      "description": "Linting and validation workflow for SKILL.md files before publishing or using them. Use when checking structure, frontmatter, required sections, links, naming, or quality issues in an agent skill.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "lint",
+        "validation",
+        "skills",
+        "quality"
+      ]
+    },
+    {
       "name": "sql-best-practices",
       "description": "SQL writing and review guide covering naming, formatting, JOINs, subqueries, performance analysis, pagination, batch operations, and security practices. Use when writing, reviewing, or optimizing SQL queries, and pair it with database-design when schema or migration design is also involved.",
       "category": "development",
@@ -515,6 +529,20 @@
         "documentation",
         "ci",
         "release"
+      ]
+    },
+    {
+      "name": "spec-flow",
+      "description": "Spec-driven development workflow for turning requirements into a concise spec, task breakdown, and execution path. Use when a request needs structured decomposition, implementation planning, or a document-first development flow.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "spec",
+        "planning",
+        "tasks",
+        "execution"
       ]
     },
     {
@@ -722,6 +750,20 @@
         "verification",
         "repo",
         "commands"
+      ]
+    },
+    {
+      "name": "skill-executor",
+      "description": "Sandboxed execution workflow for running agent skills, checking outputs, and validating tool behavior. Use when a skill needs controlled execution, local verification, or a reproducible run before adoption.",
+      "category": "cli-utilities",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "sandbox",
+        "execution",
+        "verification",
+        "skills"
       ]
     }
   ],
