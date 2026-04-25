@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "updated": "2026-04-25T14:38:16Z",
-  "total": 59,
+  "total": 61,
   "skills": [
     {
       "name": "todo-first",
@@ -324,6 +324,20 @@
       ]
     },
     {
+      "name": "api-contract-design",
+      "description": "API contract design workflow for defining request and response shapes, error models, pagination, idempotency, and versioning so APIs evolve safely without breaking consumers. Use when designing or reviewing a public API or service contract.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "api",
+        "contracts",
+        "versioning",
+        "compatibility"
+      ]
+    },
+    {
       "name": "markdown-writer",
       "description": "Markdown writing guide for README files, technical documentation, notes, and other structured docs, with consistent GFM formatting and heading hierarchy. Use when creating or revising Markdown content such as README files, docs, or notes.",
       "category": "productivity",
@@ -641,6 +655,20 @@
         "release",
         "rollback",
         "smoke-test"
+      ]
+    },
+    {
+      "name": "incident-response-postmortems",
+      "description": "Incident response and postmortem workflow for triaging live issues, reconstructing timelines, capturing root cause, and tracking corrective actions. Use when a production incident or major failure needs structured follow-up and learning.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "incident-response",
+        "postmortem",
+        "root-cause",
+        "operations"
       ]
     },
     {
