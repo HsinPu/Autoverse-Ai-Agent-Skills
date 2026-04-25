@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-25T13:14:57Z",
-  "total": 57,
+  "updated": "2026-04-25T14:38:16Z",
+  "total": 59,
   "skills": [
     {
       "name": "todo-first",
@@ -81,6 +81,20 @@
         "code-review",
         "security",
         "best-practices"
+      ]
+    },
+    {
+      "name": "testing-strategy",
+      "description": "Testing strategy workflow for choosing the right test level, shaping fixtures and test data, and balancing confidence, speed, and maintenance cost. Use when planning test coverage or reviewing a feature's test plan.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "testing",
+        "strategy",
+        "fixtures",
+        "flakiness"
       ]
     },
     {
@@ -613,6 +627,20 @@
         "documentation",
         "ci",
         "release"
+      ]
+    },
+    {
+      "name": "deployment-operations",
+      "description": "Production deployment and release verification workflow for shipping builds, managing rollout and rollback, running smoke checks, and confirming post-deploy health. Use when code needs to be deployed to an environment or a release needs operational verification.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "deployment",
+        "release",
+        "rollback",
+        "smoke-test"
       ]
     },
     {
