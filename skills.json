@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-25T16:28:02Z",
-  "total": 64,
+  "updated": "2026-04-25T16:57:29Z",
+  "total": 70,
   "skills": [
     {
       "name": "todo-first",
@@ -381,7 +381,7 @@
     },
     {
       "name": "python-development",
-      "description": "Python development guide covering project architecture, package layout, PEP 8, typing, docstrings, design patterns, and modern Python tooling such as uv, ruff, pytest, pydantic, async I/O, and FastAPI. Use when designing, writing, reviewing, or refactoring general Python code, choosing package boundaries, or setting up packaging, testing, and toolchain conventions. For dataframe, ETL, notebook, file-based analytics, web page extraction, or local automation workflows, use the more specialized Python skills.",
+      "description": "Python development guide covering project architecture, package layout, PEP 8, typing, docstrings, design patterns, and modern Python tooling such as uv, ruff, pytest, pydantic, async I/O, and FastAPI. Use when designing, writing, reviewing, or refactoring general Python code, choosing package boundaries, or setting up packaging, testing, and toolchain conventions. For dataframe, ETL, notebook, file-based analytics, web page extraction, local automation, backend framework, testing implementation, debugging workflows, package release workflows, concurrency coordination, or security hardening, use the more specialized Python skills.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -461,6 +461,126 @@
         "batch",
         "typer",
         "click"
+      ]
+    },
+    {
+      "name": "python-backend-development",
+      "description": "Python backend development guide covering Django, Flask, ASGI/WSGI apps, routers, middleware, settings, ORM, migrations, background workers, and server-side web app structure. Use when building or refactoring Python web backends or DB-backed services, and when the task is framework structure or application flow rather than API contract design.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "python",
+        "backend",
+        "django",
+        "flask",
+        "asgi",
+        "wsgi",
+        "orm",
+        "migrations",
+        "middleware",
+        "workers"
+      ]
+    },
+    {
+      "name": "python-testing-engineering",
+      "description": "Python testing implementation guide covering pytest fixtures, parametrization, monkeypatching, mocks, async tests, temp paths, capture helpers, and framework-specific adapters. Use when writing, refactoring, or debugging Python tests and test harnesses, or when the task is about how to implement tests rather than choosing the test level.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "python",
+        "testing",
+        "pytest",
+        "fixtures",
+        "mocking",
+        "async",
+        "monkeypatch",
+        "coverage",
+        "tmp_path",
+        "parametrize"
+      ]
+    },
+    {
+      "name": "python-observability-debugging",
+      "description": "Python observability and debugging guide covering traceback triage, logging investigation, profiling, memory diagnosis, performance troubleshooting, and runtime failure analysis. Use when a Python system is failing, slow, memory-heavy, or hard to diagnose, and the task is to isolate root cause rather than design application code.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "python",
+        "debugging",
+        "observability",
+        "profiling",
+        "troubleshooting",
+        "traceback",
+        "memory",
+        "performance",
+        "runtime",
+        "diagnostics"
+      ]
+    },
+    {
+      "name": "python-packaging-release",
+      "description": "Python packaging and release engineering guide covering build backends, wheels, sdists, versioning, console scripts, publishing, and release workflows. Use when packaging a Python project for installation or distribution, choosing build metadata, or preparing a release to PyPI or another artifact target.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "python",
+        "packaging",
+        "release",
+        "wheel",
+        "sdist",
+        "versioning",
+        "pypi",
+        "entry-points",
+        "build",
+        "distribution"
+      ]
+    },
+    {
+      "name": "python-concurrency-patterns",
+      "description": "Python concurrency patterns guide covering asyncio coordination, TaskGroup usage, cancellation, backpressure, worker orchestration, and safe parallelism. Use when a Python system needs coordinated concurrent work, controlled fan-out/fan-in, or cancellation-aware task flow rather than general async I/O basics.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "python",
+        "asyncio",
+        "concurrency",
+        "taskgroup",
+        "cancellation",
+        "backpressure",
+        "queues",
+        "workers",
+        "parallelism",
+        "coordination"
+      ]
+    },
+    {
+      "name": "python-security-hardening",
+      "description": "Python security hardening guide covering secrets handling, unsafe deserialization, subprocess and filesystem boundaries, network trust boundaries, and supply-chain hygiene. Use when writing or reviewing Python code with security-sensitive inputs, dependencies, or execution boundaries, and when the task is to harden implementation details rather than review a diff for security findings.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "python",
+        "security",
+        "hardening",
+        "secrets",
+        "subprocess",
+        "deserialization",
+        "supply-chain",
+        "filesystem",
+        "network",
+        "trust-boundaries"
       ]
     },
     {
