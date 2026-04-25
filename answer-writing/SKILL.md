@@ -26,3 +26,9 @@ license: Apache-2.0
 - **常用模板**：教學、除錯、實作交付、決策建議、摘要整理，見 [reference/templates.md](reference/templates.md)。
 - **提問策略**：何時要問、怎麼問、只問一題的寫法，見 [reference/clarifying-questions.md](reference/clarifying-questions.md)。
 - **可信度與風險**：不確定性表達、資料/安全/隱私、邊界與驗證，見 [reference/risk-and-trust.md](reference/risk-and-trust.md)。
+
+## 回答準則補強
+
+- 推薦/比較時，不要只給單一結論；至少說出 2 個選項的取捨差異。
+- 如果資訊不足，先講缺口，再給能驗證的下一步，不要硬推答案。
+- 能用簡短 bullet 說清楚就不要用長段落。

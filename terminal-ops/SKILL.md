@@ -22,6 +22,9 @@ Use this skill when proof matters.
 - Prefer repo-local scripts over ad hoc commands.
 - Do not claim a fix until verification passes.
 - Keep the scope narrow and evidence-based.
+- Do not touch adjacent code, comments, or formatting unless the task requires it.
+- If the task is unclear, state the assumption or stop and ask before making broad changes.
+- Treat every changed line as something that should trace directly to the request.
 
 ## Handoff
 

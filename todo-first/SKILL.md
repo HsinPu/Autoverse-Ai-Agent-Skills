@@ -12,6 +12,7 @@ license: Apache-2.0
 - 在開始執行前，先判斷是否應建立 todo list。
 - 若需要 todo list，立即用 `todowrite` 建立並持續維護。
 - 用 `pending` / `in_progress` / `completed` / `cancelled` 讓執行進度可見且可信。
+- 在任務不清楚時先停一下，先做最小必要探索，再決定是否開 todo。
 
 ## Quick Decision
 
@@ -81,6 +82,12 @@ license: Apache-2.0
 4. 執行工作；完成後立刻更新狀態。
 5. 若工作途中出現新的必要步驟，立刻補進 todo list。
 6. 全部完成後，用簡短 recap 說明做了什麼、驗證結果、以及下一步（若有）。
+
+## Planning Rules
+
+- 不要默默假設需求；若存在多種合理解讀，先說明假設或請求澄清。
+- 不要把模糊任務直接攤平成大而空的 todo；先把成功條件具體化。
+- 若簡單任務其實會擴散成多步，及早把驗證項目一起列進 todo。
 
 ## Interaction Rules
 
