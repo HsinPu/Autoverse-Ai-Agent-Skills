@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-25T14:38:16Z",
-  "total": 61,
+  "updated": "2026-04-25T16:28:02Z",
+  "total": 64,
   "skills": [
     {
       "name": "todo-first",
@@ -381,7 +381,7 @@
     },
     {
       "name": "python-development",
-      "description": "Python development guide covering project architecture and package layout, PEP 8, naming, typing, docstrings, and design patterns such as KISS, SRP, composition, and dependency injection. Use when designing a Python project structure, writing, reviewing, or refactoring Python code, or when deciding package boundaries, import conventions, and code style.",
+      "description": "Python development guide covering project architecture, package layout, PEP 8, typing, docstrings, design patterns, and modern Python tooling such as uv, ruff, pytest, pydantic, async I/O, and FastAPI. Use when designing, writing, reviewing, or refactoring general Python code, choosing package boundaries, or setting up packaging, testing, and toolchain conventions. For dataframe, ETL, notebook, file-based analytics, web page extraction, or local automation workflows, use the more specialized Python skills.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -392,7 +392,75 @@
         "src-layout",
         "code-style",
         "design-patterns",
-        "pep8"
+        "pep8",
+        "tooling",
+        "testing",
+        "async",
+        "packaging",
+        "ruff",
+        "uv",
+        "fastapi",
+        "pydantic"
+      ]
+    },
+    {
+      "name": "python-data-engineering",
+      "description": "Python data engineering and analytics guide covering dataframe workflows, ETL/ELT pipelines, notebook-to-script promotion, and file formats such as CSV, Parquet, and JSON/NDJSON. Use when the task centers on tabular datasets, cleaning, joins, aggregations, validation, or reproducible data pipelines rather than spreadsheet editing or database schema design.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "python",
+        "data",
+        "analytics",
+        "etl",
+        "pandas",
+        "polars",
+        "duckdb",
+        "parquet",
+        "jupyter",
+        "dataframes"
+      ]
+    },
+    {
+      "name": "python-web-scraping",
+      "description": "Python web scraping and HTML extraction guide covering requests/httpx, HTML parsing, pagination, normalization, retries, and polite crawling of static or lightly dynamic sites. Use when collecting data from web pages, feeds, or HTML documents, and when the task is extraction rather than browser UI testing or general Python architecture.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "python",
+        "scraping",
+        "html",
+        "parsing",
+        "requests",
+        "httpx",
+        "bs4",
+        "lxml",
+        "crawling",
+        "pagination"
+      ]
+    },
+    {
+      "name": "python-automation-scripting",
+      "description": "Python automation and scripting guide covering command-line tools, filesystem automation, subprocess orchestration, scheduling, and utility scripts. Use when building or refactoring scripts that automate local files, shell commands, batch jobs, or small operational workflows rather than data analysis or web scraping.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "python",
+        "automation",
+        "scripting",
+        "cli",
+        "subprocess",
+        "pathlib",
+        "filesystem",
+        "batch",
+        "typer",
+        "click"
       ]
     },
     {
