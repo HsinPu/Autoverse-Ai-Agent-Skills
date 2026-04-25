@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-25T09:57:02Z",
-  "total": 53,
+  "updated": "2026-04-25T10:02:00Z",
+  "total": 54,
   "skills": [
     {
       "name": "todo-first",
@@ -393,6 +393,20 @@
         "validation",
         "skills",
         "quality"
+      ]
+    },
+    {
+      "name": "skillforge",
+      "description": "Skill quality-gate workflow for linting, signing, versioning, and evaluating SKILL.md packages before release or reuse. Use when a skill needs a stronger verification layer than linting or audit alone.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "quality",
+        "release",
+        "evaluation",
+        "skills"
       ]
     },
     {
