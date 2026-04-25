@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-25T09:46:30Z",
-  "total": 50,
+  "updated": "2026-04-25T09:57:02Z",
+  "total": 53,
   "skills": [
     {
       "name": "todo-first",
@@ -503,6 +503,34 @@
       ]
     },
     {
+      "name": "skill-audit",
+      "description": "Skill audit workflow for checking SKILL.md files and bundled content for quality, safety, and policy issues before adoption. Use when a skill needs a deeper structural or security review beyond a simple lint pass.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "audit",
+        "security",
+        "skills",
+        "review"
+      ]
+    },
+    {
+      "name": "drawio-skill",
+      "description": "Diagram generation workflow for turning text or rough ideas into draw.io diagrams and exportable visual assets. Use when a flowchart, architecture diagram, or visual explanation needs to be created or updated.",
+      "category": "productivity",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "diagram",
+        "drawio",
+        "visuals",
+        "architecture"
+      ]
+    },
+    {
       "name": "skill-security-review",
       "description": "Security vetting workflow for evaluating third-party skills before install or use. Use when checking provenance, file contents, permissions, or suspicious patterns in a marketplace package or repo.",
       "category": "productivity",
@@ -557,6 +585,20 @@
         "errors",
         "memory",
         "improvement"
+      ]
+    },
+    {
+      "name": "context-governance",
+      "description": "Context and lessons governance workflow for managing agent memory, context budget, and skill navigation. Use when a workflow needs to keep notes, prune repetition, or maintain reusable project memory.",
+      "category": "coding-agents-ides",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "context",
+        "memory",
+        "lessons",
+        "governance"
       ]
     },
     {
