@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-26T09:23:35Z",
-  "total": 81,
+  "updated": "2026-04-26T09:36:24Z",
+  "total": 84,
   "skills": [
     {
       "name": "todo-first",
@@ -173,6 +173,22 @@
       ]
     },
     {
+      "name": "animation-best-practices",
+      "description": "UI animation and motion guidance for hover states, button feedback, transitions, loading motion, and interaction polish in web interfaces. Use when a frontend task needs motion that improves clarity, responsiveness, or visual feel, or when fixing awkward, jittery, or excessive animation behavior.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "animation",
+        "motion",
+        "transitions",
+        "hover",
+        "buttons",
+        "ui"
+      ]
+    },
+    {
       "name": "design-consultation",
       "description": "Frontend design consultation for defining visual direction, including color palette, typography, spacing, layout, motion, and component style. Use when a task needs an explicit aesthetic plan before implementation or when restyling a screen, page, dashboard, or component so it feels intentionally designed rather than generic.",
       "category": "development",
@@ -201,6 +217,22 @@
         "aria",
         "react",
         "frontend"
+      ]
+    },
+    {
+      "name": "responsive-design",
+      "description": "Responsive frontend layout guidance for breakpoints, fluid typography, container queries, and adaptive component behavior. Use when building or restyling web UI that must work well on mobile, tablet, and desktop, or when fixing layout issues across screen sizes.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "responsive",
+        "layout",
+        "breakpoints",
+        "container-queries",
+        "mobile",
+        "typography"
       ]
     },
     {
@@ -236,6 +268,22 @@
         "suspense",
         "optimistic-updates",
         "transitions"
+      ]
+    },
+    {
+      "name": "design-system-patterns",
+      "description": "Design system architecture guidance for design tokens, theming infrastructure, component patterns, and theme switching in frontend codebases. Use when creating or extending a design system, standardizing UI variants, or aligning colors, spacing, typography, and surface styles across components.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "design-system",
+        "tokens",
+        "theming",
+        "components",
+        "architecture",
+        "theme-switching"
       ]
     },
     {
