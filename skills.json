@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-26T09:36:24Z",
-  "total": 86,
+  "updated": "2026-04-26T10:00:24Z",
+  "total": 88,
   "skills": [
     {
       "name": "todo-first",
@@ -1410,6 +1410,38 @@
         "execution",
         "verification",
         "skills"
+      ]
+    },
+    {
+      "name": "hotkey",
+      "description": "Keyboard shortcut guidance for web and React UI work, covering hotkey design, keybinding registration, shortcut conflict resolution, and discoverability. Use when implementing or reviewing keyboard shortcuts, command bindings, or keyboard-driven actions in an application.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "keyboard",
+        "hotkeys",
+        "shortcuts",
+        "keybindings",
+        "react",
+        "frontend"
+      ]
+    },
+    {
+      "name": "interaction-patterns",
+      "description": "Navigation interaction guidance for web UIs, covering tab overflow, scroll behavior, view transitions, progressive disclosure, and other movement-heavy interface patterns. Use when designing or fixing navigation, scrolling, or transition interactions that need to feel coherent across desktop and mobile.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "navigation",
+        "scroll",
+        "tabs",
+        "transitions",
+        "overflow",
+        "ui"
       ]
     }
   ],
