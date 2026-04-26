@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "updated": "2026-04-26T09:36:24Z",
-  "total": 84,
+  "total": 86,
   "skills": [
     {
       "name": "todo-first",
@@ -173,6 +173,22 @@
       ]
     },
     {
+      "name": "color-font-skill",
+      "description": "Color and typography guidance for choosing palettes, font pairings, and visual theme directions in frontend and design tasks. Use when a UI needs stronger color balance, brand-safe palettes, readable font pairing, or a deliberate visual identity before implementation.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "color",
+        "palette",
+        "typography",
+        "fonts",
+        "theme",
+        "branding"
+      ]
+    },
+    {
       "name": "animation-best-practices",
       "description": "UI animation and motion guidance for hover states, button feedback, transitions, loading motion, and interaction polish in web interfaces. Use when a frontend task needs motion that improves clarity, responsiveness, or visual feel, or when fixing awkward, jittery, or excessive animation behavior.",
       "category": "development",
@@ -186,6 +202,22 @@
         "hover",
         "buttons",
         "ui"
+      ]
+    },
+    {
+      "name": "dashboard-design",
+      "description": "Dashboard design guidance for planning layout, information hierarchy, widget arrangement, and card structure in analytics or product dashboards. Use when a task is about designing or restyling dashboards, KPI panels, monitoring views, or card-based overview screens so the layout is readable and decision-focused.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "dashboard",
+        "layout",
+        "cards",
+        "kpi",
+        "analytics",
+        "hierarchy"
       ]
     },
     {
