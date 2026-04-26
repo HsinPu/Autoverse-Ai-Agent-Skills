@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "updated": "2026-04-26T01:26:41Z",
-  "total": 71,
+  "total": 72,
   "skills": [
     {
       "name": "todo-first",
@@ -685,6 +685,21 @@
         "navigation",
         "catalog",
         "skills"
+      ]
+    },
+    {
+      "name": "skill-gap-analyzer",
+      "description": "Skill catalog gap analysis workflow for comparing local skills with LobeHub marketplace candidates to decide whether to upgrade an existing skill, add a new one, or keep the catalog unchanged. Use when evaluating coverage gaps, overlap, or upgrade opportunities in a skill catalog.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "skills",
+        "lobehub",
+        "marketplace",
+        "catalog",
+        "gap-analysis"
       ]
     },
     {
