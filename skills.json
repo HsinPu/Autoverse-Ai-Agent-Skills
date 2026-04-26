@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "updated": "2026-04-26T01:26:41Z",
-  "total": 74,
+  "total": 78,
   "skills": [
     {
       "name": "todo-first",
@@ -15,6 +15,21 @@
         "workflow",
         "todowrite",
         "execution"
+      ]
+    },
+    {
+      "name": "frontend-code-review",
+      "description": "Frontend code review guide for analyzing React, TypeScript, CSS, and UI changes in .tsx, .ts, .js, and style files. Use when reviewing frontend diffs, pull requests, or UI changes and the goal is to surface concrete bugs, regressions, and test gaps.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "frontend",
+        "review",
+        "react",
+        "typescript",
+        "ui"
       ]
     },
     {
@@ -176,6 +191,21 @@
       ]
     },
     {
+      "name": "frontend-testing",
+      "description": "Frontend testing guide for unit, component, and RTL-style tests in React and TypeScript projects. Use when writing or reviewing frontend tests, testing UI behavior, or deciding how to cover component and hook logic without full browser E2E.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "frontend",
+        "testing",
+        "react",
+        "rtl",
+        "vitest"
+      ]
+    },
+    {
       "name": "design-system",
       "description": "Design system generation and visual audit guide for extracting cohesive tokens, producing preview artifacts, reviewing UI consistency, and spotting generic AI-style design patterns. Use when starting a new project, auditing an existing codebase, preparing a redesign, reviewing styling PRs, or diagnosing when the UI feels visually off.",
       "category": "development",
@@ -196,6 +226,21 @@
       ]
     },
     {
+      "name": "shadcn-ui",
+      "description": "shadcn/ui integration guide for installing components, composing forms, handling theming, and building React UI patterns with Tailwind and Radix. Use when the user wants to add, customize, or reason about shadcn/ui components or project conventions.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "shadcn",
+        "radix",
+        "tailwind",
+        "react",
+        "forms"
+      ]
+    },
+    {
       "name": "coding-standards",
       "description": "Universal coding standards guide for TypeScript, JavaScript, React, and Node.js projects. Use when establishing or auditing code conventions, ESLint/Prettier/TypeScript strict settings, feature-based folder structure, layered services, React patterns, testing practices, performance, accessibility, or security hygiene.",
       "category": "development",
@@ -213,6 +258,21 @@
         "testing",
         "accessibility",
         "security"
+      ]
+    },
+    {
+      "name": "react-perf",
+      "description": "React performance guide for diagnosing re-render thrash, expensive computations, bundle growth, data waterfalls, and slow UI updates. Use when a React app feels sluggish, a component is too expensive, or performance work needs a focused review.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "react",
+        "performance",
+        "rendering",
+        "bundle",
+        "profiling"
       ]
     },
     {
