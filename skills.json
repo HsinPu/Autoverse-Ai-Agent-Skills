@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-26T10:00:24Z",
-  "total": 88,
+  "updated": "2026-04-26T10:36:46Z",
+  "total": 92,
   "skills": [
     {
       "name": "todo-first",
@@ -1426,6 +1426,22 @@
         "keybindings",
         "react",
         "frontend"
+      ]
+    },
+    {
+      "name": "command-palette",
+      "description": "Command palette guidance for designing, implementing, and reviewing quick switchers, fuzzy action launchers, and Spotlight-style menus in web apps. Use when building palettes that search, rank, and execute navigation or commands, or when tuning discoverability, empty states, scope, and keyboard-first interaction.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "command-palette",
+        "launcher",
+        "fuzzy-search",
+        "keyboard",
+        "navigation",
+        "ui"
       ]
     },
     {
