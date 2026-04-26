@@ -25,4 +25,5 @@ license: Apache-2.0
 - **打包 / 發佈**：以 build backend、wheel / sdist、版本、console scripts、發佈與 release 流程為主時，見 [python-packaging-release](../python-packaging-release/SKILL.md)。
 - **並行 / Concurrency**：以 asyncio coordination、TaskGroup、cancellation、backpressure 或 worker coordination 為主時，見 [python-concurrency-patterns](../python-concurrency-patterns/SKILL.md)。
 - **安全硬化**：以 secrets、unsafe deserialization、subprocess/file/network boundaries 或 supply-chain hygiene 為主時，見 [python-security-hardening](../python-security-hardening/SKILL.md)。
+- **API Client / SDK**：以 OpenAPI client、SDK、auth、pagination、retry、error mapping 或 generated client 維護為主時，見 [python-api-client-development](../python-api-client-development/SKILL.md)。
 - **設計模式**：需查閱 KISS、SRP、關注點分離、組合優於繼承、依賴注入時，見 [reference/design-patterns.md](reference/design-patterns.md)。

@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-25T16:57:29Z",
-  "total": 70,
+  "updated": "2026-04-26T01:26:41Z",
+  "total": 71,
   "skills": [
     {
       "name": "todo-first",
@@ -381,7 +381,7 @@
     },
     {
       "name": "python-development",
-      "description": "Python development guide covering project architecture, package layout, PEP 8, typing, docstrings, design patterns, and modern Python tooling such as uv, ruff, pytest, pydantic, async I/O, and FastAPI. Use when designing, writing, reviewing, or refactoring general Python code, choosing package boundaries, or setting up packaging, testing, and toolchain conventions. For dataframe, ETL, notebook, file-based analytics, web page extraction, local automation, backend framework, testing implementation, debugging workflows, package release workflows, concurrency coordination, or security hardening, use the more specialized Python skills.",
+      "description": "Python development guide covering project architecture, package layout, PEP 8, typing, docstrings, design patterns, and modern Python tooling such as uv, ruff, pytest, pydantic, async I/O, and FastAPI. Use when designing, writing, reviewing, or refactoring general Python code, choosing package boundaries, or setting up packaging, testing, and toolchain conventions. For dataframe, ETL, notebook, file-based analytics, web page extraction, local automation, backend framework, testing implementation, debugging workflows, package release workflows, concurrency coordination, security hardening, or API client development, use the more specialized Python skills.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -581,6 +581,26 @@
         "filesystem",
         "network",
         "trust-boundaries"
+      ]
+    },
+    {
+      "name": "python-api-client-development",
+      "description": "Python API client and SDK development guide covering OpenAPI-based clients, auth handling, pagination, retries, error mapping, transport setup, and generated client maintenance. Use when building or refactoring a Python client library or SDK that talks to an external HTTP API, including LobeHub OpenAPI-style integrations.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "python",
+        "sdk",
+        "client",
+        "openapi",
+        "auth",
+        "pagination",
+        "retries",
+        "error-mapping",
+        "transport",
+        "generated-code"
       ]
     },
     {
