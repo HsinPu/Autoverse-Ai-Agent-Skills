@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-26T01:26:41Z",
-  "total": 78,
+  "updated": "2026-04-26T09:23:35Z",
+  "total": 81,
   "skills": [
     {
       "name": "todo-first",
@@ -173,6 +173,22 @@
       ]
     },
     {
+      "name": "design-consultation",
+      "description": "Frontend design consultation for defining visual direction, including color palette, typography, spacing, layout, motion, and component style. Use when a task needs an explicit aesthetic plan before implementation or when restyling a screen, page, dashboard, or component so it feels intentionally designed rather than generic.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "design",
+        "color",
+        "typography",
+        "layout",
+        "buttons",
+        "theme"
+      ]
+    },
+    {
       "name": "accessibility",
       "description": "Accessibility guidelines for React and web UI work covering WCAG, ARIA, keyboard navigation, screen reader support, focus management, and semantic HTML. Use when auditing or building accessible frontend interfaces.",
       "category": "development",
@@ -185,6 +201,23 @@
         "aria",
         "react",
         "frontend"
+      ]
+    },
+    {
+      "name": "tailwind-patterns",
+      "description": "Tailwind CSS pattern guide for building polished layouts, buttons, cards, navigation, forms, typography, and responsive sections with clean utility composition. Use when styling or restyling frontend screens with Tailwind and the task is to make the UI feel balanced, consistent, and production-ready.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "tailwind",
+        "layout",
+        "buttons",
+        "forms",
+        "typography",
+        "responsive",
+        "ui"
       ]
     },
     {
@@ -203,6 +236,24 @@
         "suspense",
         "optimistic-updates",
         "transitions"
+      ]
+    },
+    {
+      "name": "ui-styling",
+      "description": "UI styling guide for composing shadcn/ui, Radix, and Tailwind components with polished color, button, form, and layout patterns. Use when building or restyling React UI components that need consistent spacing, theme-aware colors, and accessible visual polish.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "ui",
+        "styling",
+        "shadcn",
+        "tailwind",
+        "buttons",
+        "colors",
+        "layout",
+        "react"
       ]
     },
     {
