@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "updated": "2026-04-26T01:26:41Z",
-  "total": 72,
+  "total": 74,
   "skills": [
     {
       "name": "todo-first",
@@ -701,6 +701,38 @@
         "catalog",
         "gap-analysis",
         "keywords"
+      ]
+    },
+    {
+      "name": "git-advanced",
+      "description": "Advanced Git workflow guide for worktrees, bisect, interactive rebase, recovery, hooks, and history repair. Use when a Git task needs deeper control than basic commits, branches, merges, or push/pull flows.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "git",
+        "advanced",
+        "rebase",
+        "bisect",
+        "worktree",
+        "recovery"
+      ]
+    },
+    {
+      "name": "github-code-review",
+      "description": "GitHub pull request review workflow for analyzing diffs, comments, checks, and review context through gh. Use when reviewing a PR or GitHub change and the goal is to produce concrete findings, risks, and review guidance.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "github",
+        "pull-request",
+        "review",
+        "diff",
+        "checks",
+        "gh"
       ]
     },
     {
