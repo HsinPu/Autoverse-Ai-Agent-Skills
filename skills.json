@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-27T03:55:00Z",
-  "total": 104,
+  "updated": "2026-04-27T04:30:00Z",
+  "total": 108,
   "skills": [
     {
       "name": "todo-first",
@@ -1206,6 +1206,76 @@
         "testing",
         "performance",
         "security"
+      ]
+    },
+    {
+      "name": "vue-composition-api",
+      "description": "Vue 3 Composition API and SFC macro guide for script setup, defineProps, defineEmits, defineModel, composables, refs, computed values, watchers, lifecycle hooks, and reactivity performance. Use when writing or reviewing Vue 3 Single File Components, extracting composables, choosing ref versus reactive or shallowRef, or fixing Composition API misuse.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "vue",
+        "vue3",
+        "composition-api",
+        "script-setup",
+        "sfc",
+        "reactivity",
+        "composables",
+        "typescript"
+      ]
+    },
+    {
+      "name": "vue-testing",
+      "description": "Vue testing guide for Vitest, Vue Test Utils, component tests, composable tests, Pinia store setup, async rendering, Suspense, Teleport, browser versus jsdom runners, and Playwright end-to-end checks. Use when writing, reviewing, or fixing tests for Vue 3 components, composables, routes, stores, or user flows.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "vue",
+        "testing",
+        "vitest",
+        "vue-test-utils",
+        "pinia",
+        "playwright",
+        "components",
+        "composables"
+      ]
+    },
+    {
+      "name": "pinia-state-management",
+      "description": "Pinia state management guide for Vue applications covering setup stores, state, getters, actions, storeToRefs, plugins, composables inside stores, SSR hydration, Nuxt integration, testing with @pinia/testing, and avoiding circular store dependencies. Use when defining, reviewing, refactoring, or testing Pinia stores.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "vue",
+        "pinia",
+        "state-management",
+        "stores",
+        "ssr",
+        "nuxt",
+        "testing"
+      ]
+    },
+    {
+      "name": "vue-router-patterns",
+      "description": "Vue Router 4 guide for route records, nested routes, route params, query state, lazy loading, navigation guards, redirects, meta fields, data loading, cleanup, and route lifecycle pitfalls. Use when implementing, reviewing, or debugging Vue Router navigation, guards, route-driven components, or SPA routing behavior.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "vue",
+        "vue-router",
+        "routing",
+        "navigation-guards",
+        "spa",
+        "route-params",
+        "lazy-loading"
       ]
     },
     {
