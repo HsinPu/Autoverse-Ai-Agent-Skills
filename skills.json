@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-26T10:36:46Z",
-  "total": 92,
+  "updated": "2026-04-27T02:07:08Z",
+  "total": 93,
   "skills": [
     {
       "name": "todo-first",
@@ -34,7 +34,7 @@
     },
     {
       "name": "agent-creator-design",
-      "description": "System prompt and agent design guide for writing clear, maintainable instruction sets, metadata, structure, and output rules. Use when creating a new agent prompt, redesigning prompt structure, or refining existing system prompt content.",
+      "description": "System prompt design guide for writing maintainable agent instructions, YAML metadata, four-part body structure, templates, and output rules. Use when creating a new agent prompt, refining an existing system prompt, or deciding how to structure a focused role or workflow.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -1203,6 +1203,20 @@
         "memory",
         "lessons",
         "governance"
+      ]
+    },
+    {
+      "name": "subagent-architecture",
+      "description": "Subagent architecture and orchestration guide for splitting complex work into focused agents, defining responsibilities, handoff contracts, context limits, and parallel or sequential execution. Use when designing or creating subagents, planning multi-agent workflows, or deciding whether a task should stay in one agent or be delegated.",
+      "category": "coding-agents-ides",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "subagent",
+        "agents",
+        "orchestration",
+        "delegation"
       ]
     },
     {
