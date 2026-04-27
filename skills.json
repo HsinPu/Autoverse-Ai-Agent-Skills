@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "updated": "2026-04-27T02:35:00Z",
-  "total": 92,
+  "total": 97,
   "skills": [
     {
       "name": "todo-first",
@@ -322,6 +322,52 @@
       ]
     },
     {
+      "name": "ux-writing",
+      "description": "UX writing and interface microcopy guide for making product text clearer, shorter, warmer, and more action-oriented. Use when writing or revising button labels, empty states, error messages, loading text, onboarding copy, tooltips, form help, notifications, or any UI copy that affects user experience.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "ux-writing",
+        "microcopy",
+        "ui",
+        "copywriting",
+        "product-design"
+      ]
+    },
+    {
+      "name": "logo-design",
+      "description": "Logo design workflow for turning brand context into simple, recognizable logo concepts and SVG-ready visual directions. Use when creating or refining logos, brand marks, wordmarks, icon marks, monograms, brand symbols, or visual identity concepts for products, companies, apps, and communities.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "logo",
+        "branding",
+        "svg",
+        "visual-identity",
+        "design"
+      ]
+    },
+    {
+      "name": "ai-image-prompt-design",
+      "description": "AI image prompt design guide for expanding visual ideas into detailed prompts for Flux, Stable Diffusion, Midjourney, DALL-E, and similar image generation models. Use when crafting or improving image prompts, visual concepts, art direction, style references, composition, lighting, camera language, negative prompts, or prompt variants.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "image-generation",
+        "prompt-design",
+        "flux",
+        "midjourney",
+        "stable-diffusion",
+        "art-direction"
+      ]
+    },
+    {
       "name": "frontend-testing",
       "description": "Frontend testing guide for unit, component, and RTL-style tests in React and TypeScript projects. Use when writing or reviewing frontend tests, testing UI behavior, or deciding how to cover component and hook logic without full browser E2E.",
       "category": "development",
@@ -369,6 +415,38 @@
         "tailwind",
         "react",
         "forms"
+      ]
+    },
+    {
+      "name": "lobe-ui-development",
+      "description": "Lobe UI development guide for using @lobehub/ui in React, Next.js, and AIGC web app interfaces. Use when integrating Lobe UI components, ThemeProvider, I18nProvider, ConfigProvider motion setup, Ant Design compatibility, antd-style theming, or building AI product interfaces with the LobeHub UI ecosystem.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "lobehub",
+        "lobe-ui",
+        "react",
+        "nextjs",
+        "antd",
+        "aigc"
+      ]
+    },
+    {
+      "name": "lobe-icons-usage",
+      "description": "Lobe Icons usage guide for selecting and integrating AI, LLM, model, provider, and application brand icons from the @lobehub/icons ecosystem. Use when building model selectors, provider lists, AI dashboards, settings pages, marketplace cards, or brand/icon systems that need consistent AI product logos in React, React Native, SVG, PNG, or WebP form.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "lobehub",
+        "icons",
+        "ai-icons",
+        "llm",
+        "react",
+        "svg"
       ]
     },
     {
