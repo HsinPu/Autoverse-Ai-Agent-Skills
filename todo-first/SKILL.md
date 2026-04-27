@@ -1,6 +1,6 @@
 ---
 name: todo-first
-description: Structured task-planning and progress-tracking guide for multi-step or non-trivial work. Use when tasks have 3+ steps, span multiple files or commands, include verification, or bundle several user requests. Use todowrite to track pending/in_progress/completed/cancelled items during execution, and skip it for single-step, trivial, or purely informational requests.
+description: Structured task-planning and progress-tracking guide for multi-step or non-trivial work. Use when tasks have 3+ steps, span multiple files or commands, include verification, require many tool calls, risk losing context, or bundle several user requests. Use todowrite to track pending/in_progress/completed/cancelled items during execution, and skip it for single-step, trivial, or purely informational requests.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---
@@ -16,7 +16,7 @@ license: Apache-2.0
 
 ## Quick Decision
 
-- **符合任一條件就建 todo**：3+ 步驟、多檔案、多指令流程、需要驗證、使用者一次交代多件事。
+- **符合任一條件就建 todo**：3+ 步驟、多檔案、多指令流程、需要驗證、可能超過 5 次 tool calls、使用者一次交代多件事。
 - **符合任一條件就不要建 todo**：單一步驟、純資訊問題、只需回一句話、只改一個很明確的小地方。
 - **先探索再決定**：若任務表面上看起來很小，但你尚未知道影響範圍，先做最小必要探索，再判斷是否開 todo。
 
@@ -30,6 +30,7 @@ license: Apache-2.0
 - 需要驗證步驟（tests/build/lint/format/checks）。
 - 使用者提供多個任務（清單、條列、逗號分隔）。
 - 需要先探索範圍，再分段執行與收斂。
+- 任務可能跨很多 tool calls，或中途遺失 context 會造成重工。
 
 ## When NOT To Create A Todo List
 
@@ -88,6 +89,7 @@ license: Apache-2.0
 - 不要默默假設需求；若存在多種合理解讀，先說明假設或請求澄清。
 - 不要把模糊任務直接攤平成大而空的 todo；先把成功條件具體化。
 - 若簡單任務其實會擴散成多步，及早把驗證項目一起列進 todo。
+- 若同一動作失敗，不要原樣重試；先更新 todo 或補充新步驟，再換工具、假設或做法。
 
 ## Interaction Rules
 

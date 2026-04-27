@@ -5,7 +5,7 @@
   "skills": [
     {
       "name": "todo-first",
-      "description": "Structured task-planning and progress-tracking guide for multi-step or non-trivial work. Use when tasks have 3+ steps, span multiple files or commands, include verification, or bundle several user requests. Use todowrite to track pending/in_progress/completed/cancelled items during execution, and skip it for single-step, trivial, or purely informational requests.",
+      "description": "Structured task-planning and progress-tracking guide for multi-step or non-trivial work. Use when tasks have 3+ steps, span multiple files or commands, include verification, require many tool calls, risk losing context, or bundle several user requests. Use todowrite to track pending/in_progress/completed/cancelled items during execution, and skip it for single-step, trivial, or purely informational requests.",
       "category": "productivity",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -958,7 +958,7 @@
     },
     {
       "name": "skill-gap-analyzer",
-      "description": "Skill catalog gap analysis workflow for generating search keywords, comparing local skills with LobeHub marketplace candidates, and deciding whether to upgrade an existing skill, add a new one, or keep the catalog unchanged. Use when evaluating coverage gaps, overlap, or upgrade opportunities in a skill catalog.",
+      "description": "Skill catalog gap analysis workflow for generating search keywords, comparing local skills with LobeHub marketplace candidates, and deciding whether to upgrade an existing skill, add a new one, import marketplace ideas, or keep the catalog unchanged. Use when evaluating coverage gaps, overlap, or upgrade opportunities in a skill catalog.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
