@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-27T02:35:00Z",
-  "total": 97,
+  "updated": "2026-04-27T03:55:00Z",
+  "total": 104,
   "skills": [
     {
       "name": "todo-first",
@@ -527,6 +527,75 @@
       ]
     },
     {
+      "name": "java-architecture",
+      "description": "Java architecture guide for Clean Architecture, Hexagonal Architecture, Ports and Adapters, Domain-Driven Design, bounded contexts, aggregates, microservice boundaries, and framework-independent domain modeling. Use when designing or refactoring Java backend architecture, decomposing monoliths, defining package/module boundaries, or separating Spring, persistence, messaging, and external API concerns from domain logic.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "java",
+        "architecture",
+        "clean-architecture",
+        "hexagonal",
+        "ddd",
+        "microservices",
+        "spring"
+      ]
+    },
+    {
+      "name": "java-testing",
+      "description": "Java testing engineering guide for JUnit 5, Mockito, AssertJ, Spring test slices, Testcontainers, JaCoCo coverage, and deterministic test design. Use when writing, reviewing, or fixing Java or Spring tests, practicing TDD, adding regression tests, or diagnosing flaky JUnit test failures.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "java",
+        "testing",
+        "junit",
+        "mockito",
+        "spring",
+        "testcontainers",
+        "jacoco",
+        "tdd"
+      ]
+    },
+    {
+      "name": "jpa-hibernate-development",
+      "description": "JPA and Hibernate development guide for entity modeling, associations, fetch strategies, transactions, repositories, query optimization, migrations, auditing, pagination, indexing, and Spring Data JPA usage. Use when designing or refactoring Java persistence layers that use JPA/Hibernate rather than MyBatis, especially in Spring Boot services.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "java",
+        "jpa",
+        "hibernate",
+        "spring-data",
+        "persistence",
+        "database",
+        "performance"
+      ]
+    },
+    {
+      "name": "jvm-build-tooling",
+      "description": "JVM build tooling guide for Maven and Gradle projects, dependency management, wrapper usage, multi-module builds, plugin configuration, reproducible builds, CI commands, and Java version alignment. Use when editing pom.xml, build.gradle, build.gradle.kts, Maven/Gradle wrappers, dependency upgrades, build failures, or Java project setup.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "java",
+        "jvm",
+        "maven",
+        "gradle",
+        "build",
+        "dependencies",
+        "ci"
+      ]
+    },
+    {
       "name": "mybatis-development",
       "description": "MyBatis development guide covering mapper design, XML and dynamic SQL, result mapping, Spring transaction integration, performance, and security. Use when building or refactoring MyBatis-based persistence layers in Java projects.",
       "category": "development",
@@ -1033,6 +1102,57 @@
         "data",
         "security",
         "testing",
+        "observability"
+      ]
+    },
+    {
+      "name": "spring-security",
+      "description": "Spring Security guide for Spring Boot services covering authentication, authorization, OAuth2/OIDC, JWT resource servers, method security, CSRF, CORS, security headers, secrets, rate limiting, and secure error handling. Use when designing, implementing, reviewing, or debugging security in Spring MVC or WebFlux applications.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "spring",
+        "spring-security",
+        "oauth2",
+        "jwt",
+        "authorization",
+        "csrf",
+        "security"
+      ]
+    },
+    {
+      "name": "spring-webflux",
+      "description": "Spring WebFlux and Project Reactor guide for reactive HTTP APIs, WebClient, backpressure, non-blocking persistence, R2DBC, Reactor operators, error handling, testing with WebTestClient, and avoiding blocking calls. Use when building, reviewing, or debugging reactive Spring Boot applications or deciding between MVC and WebFlux.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "spring",
+        "webflux",
+        "reactor",
+        "reactive",
+        "webclient",
+        "r2dbc",
+        "testing"
+      ]
+    },
+    {
+      "name": "spring-cloud-microservices",
+      "description": "Spring Cloud and Spring Boot microservices guide covering service boundaries, configuration, discovery, API gateways, Resilience4j, OpenFeign/WebClient clients, messaging, Kafka, saga patterns, distributed tracing, service-to-service security, and operational readiness. Use when designing, building, or reviewing Spring-based distributed systems and cloud-native microservices.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "spring",
+        "spring-cloud",
+        "microservices",
+        "resilience4j",
+        "kafka",
+        "gateway",
         "observability"
       ]
     },
