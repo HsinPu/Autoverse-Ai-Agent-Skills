@@ -1,6 +1,6 @@
 ---
 name: code-review
-description: Code review guide for identifying correctness, security, performance, maintainability, and testing issues in code changes. Use when reviewing pull requests, modified files, or code diffs and when the goal is to surface concrete findings and risks.
+description: Code review guide for identifying correctness, security, performance, maintainability, architecture, and testing issues in code changes while providing constructive, actionable feedback. Use when reviewing pull requests, modified files, code diffs, or pasted code and when the goal is to surface concrete findings, risks, review decisions, and test gaps.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---
@@ -15,6 +15,7 @@ license: Apache-2.0
 - **逐項對照**：必須依下方審查類別與檢查清單逐項檢查，不得遺漏；無法檢查的項目須在輸出中註明「未檢查」及原因。
 - **證據導向**：每個 Critical 與 Suggestion 必須標註 **檔案與行號**，並簡述原因與建議修正方式。
 - **安全零妥協**：安全審查中任一項問題一律列為 Critical，不得降級為 Suggestion。
+- **建設性回饋**：先說明影響與證據，再給具體修法；避免抽象批評或只表達個人偏好。
 
 ## 審查類別（Review Categories）
 
@@ -72,6 +73,26 @@ license: Apache-2.0
 - **穩定性**：依時間、順序或外部狀態的測試（flaky）應改為可控或 mock。
 - **邊界與錯誤**：空值、邊界值、錯誤路徑應有測試。
 - **外部依賴**：外部服務/DB 應 mock 或使用 test double，避免測試依賴真實環境。
+
+### 5. 架構與相容性審查（Architecture and Compatibility）
+
+檢查項目：
+
+- **邊界破壞**：UI、API、domain、persistence、infrastructure 層直接互相穿透。
+- **隱性 breaking change**：公開 API、資料格式、DB migration、設定、CLI 行為或事件 schema 改變但未標註。
+- **資料遷移風險**：新增欄位、索引、約束或 migration 未考慮既有資料、rollback、部署順序。
+- **併發與一致性**：race condition、重複提交、idempotency、transaction boundary 或 retry 行為不明。
+- **可觀測性缺口**：關鍵錯誤沒有可追蹤 log、metric、trace 或 correlation context。
+
+## Review Quality
+
+- Prioritize shipped-risk findings over style preferences.
+- Group repeated instances of the same problem instead of flooding comments.
+- Use severity based on user impact, exploitability, data risk, and likelihood.
+- State assumptions and unknowns separately from confirmed findings.
+- Include positive observations only after findings and keep them brief.
+- Use `security-code-review` when the requested scope is a vulnerability audit or OWASP-style review.
+- Use `github-inline-review` when findings need to be posted as GitHub inline comments.
 
 ## 審查輸出格式（Review Output Format）
 

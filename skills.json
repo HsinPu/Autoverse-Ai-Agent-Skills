@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-27T04:30:00Z",
-  "total": 108,
+  "updated": "2026-04-27T05:10:00Z",
+  "total": 111,
   "skills": [
     {
       "name": "todo-first",
@@ -19,7 +19,7 @@
     },
     {
       "name": "frontend-code-review",
-      "description": "Frontend code review guide for analyzing React, TypeScript, CSS, and UI changes in .tsx, .ts, .js, and style files. Use when reviewing frontend diffs, pull requests, or UI changes and the goal is to surface concrete bugs, regressions, and test gaps.",
+      "description": "Frontend code review guide for analyzing React, TypeScript, CSS, state, accessibility, performance, business logic, and UI behavior changes in .tsx, .ts, .js, and style files. Use when reviewing frontend diffs, pending working-tree changes, pull requests, or specific frontend files to surface concrete bugs, regressions, and test gaps.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -29,7 +29,9 @@
         "review",
         "react",
         "typescript",
-        "ui"
+        "ui",
+        "accessibility",
+        "performance"
       ]
     },
     {
@@ -87,7 +89,7 @@
     },
     {
       "name": "code-review",
-      "description": "Code review guide for identifying correctness, security, performance, maintainability, and testing issues in code changes. Use when reviewing pull requests, modified files, or code diffs and when the goal is to surface concrete findings and risks.",
+      "description": "Code review guide for identifying correctness, security, performance, maintainability, architecture, and testing issues in code changes while providing constructive, actionable feedback. Use when reviewing pull requests, modified files, code diffs, or pasted code and when the goal is to surface concrete findings, risks, review decisions, and test gaps.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -95,7 +97,60 @@
       "tags": [
         "code-review",
         "security",
-        "best-practices"
+        "best-practices",
+        "testing",
+        "architecture"
+      ]
+    },
+    {
+      "name": "security-code-review",
+      "description": "Security-focused code review guide for finding high-confidence vulnerabilities in diffs, files, pull requests, and code snippets. Use when asked for a security review, vulnerability audit, OWASP-style review, or when reviewing code for injection, XSS, SSRF, auth/authz, deserialization, cryptography, secrets, supply-chain, or infrastructure security risks.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "security",
+        "code-review",
+        "vulnerability",
+        "owasp",
+        "audit",
+        "xss",
+        "injection",
+        "auth"
+      ]
+    },
+    {
+      "name": "github-inline-review",
+      "description": "GitHub inline PR review workflow for submitting line-level comments and suggestion blocks through the gh CLI and GitHub API. Use when posting review findings to an existing GitHub pull request, batching inline comments, adding GitHub suggestion blocks, approving, commenting, or requesting changes from review output.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "github",
+        "pull-request",
+        "code-review",
+        "inline-comments",
+        "suggestions",
+        "gh-cli"
+      ]
+    },
+    {
+      "name": "frontend-design-review",
+      "description": "Frontend design review guide for evaluating implemented UI, PRs, components, and pages against design quality, accessibility, responsive behavior, design-system compliance, visual hierarchy, motion, and production-grade craft. Use for UI code review, design-system audits, accessibility checks, responsive design checks, theme reviews, and detecting generic or inconsistent visual design.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "frontend",
+        "design-review",
+        "ui",
+        "accessibility",
+        "design-system",
+        "responsive",
+        "review"
       ]
     },
     {
