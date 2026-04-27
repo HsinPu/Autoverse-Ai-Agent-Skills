@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-27T02:07:08Z",
-  "total": 93,
+  "updated": "2026-04-27T02:35:00Z",
+  "total": 95,
   "skills": [
     {
       "name": "todo-first",
@@ -1018,6 +1018,22 @@
       ]
     },
     {
+      "name": "vite",
+      "description": "Vite build tool guidance for configuring vite.config.ts, plugins, dev server behavior, SSR, library builds, and migration work. Use when working in Vite projects, tuning build and dev tooling, or fixing Vite configuration and plugin issues.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "vite",
+        "build",
+        "plugins",
+        "ssr",
+        "dev-server",
+        "configuration"
+      ]
+    },
+    {
       "name": "vue-development",
       "description": "Vue 3 development guide covering SFC structure, Composition API, component design, Pinia state management, Vue Router, TypeScript, testing, performance, and security. Use when building, reviewing, or refactoring Vue applications.",
       "category": "development",
@@ -1036,6 +1052,22 @@
         "testing",
         "performance",
         "security"
+      ]
+    },
+    {
+      "name": "vue-debug-guides",
+      "description": "Vue debugging guidance for diagnosing runtime errors, warnings, SSR and hydration mismatches, reactivity issues, and component failures. Use when fixing Vue bugs, investigating warnings, or tracing broken behavior in Vue 3 applications.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "vue",
+        "debugging",
+        "errors",
+        "hydration",
+        "reactivity",
+        "ssr"
       ]
     },
     {
