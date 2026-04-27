@@ -9,6 +9,20 @@ license: Apache-2.0
 
 Skill 是**模組化套件**（modular package），透過提供**專業知識**（specialized knowledge）、**工作流程**（workflows）與**工具**（tools）來擴充 agent 的能力。
 
+## 使用邊界（Scope）
+
+- 若你要設計 **system prompt**，改看 `agent-creator-design`。
+- 若你要設計多 agent 協作、subagent 分工或 handoff，改看 `subagent-architecture`。
+- 這份 skill 只處理 skill 內容、目錄、資源拆分與迭代流程。
+
+## 快速流程（Quick Path）
+
+1. 先定義單一使用情境與觸發語句。
+2. 判斷哪些內容應留在 `SKILL.md`，哪些應拆到 `scripts/`、`references/` 或 `assets/`。
+3. 寫出可判斷、可觸發的 `name` 與 `description`。
+4. 讓 `SKILL.md` 只保留必要 workflow、限制與導流。
+5. 用真實任務測試觸發結果，再迭代縮減或補強。
+
 ## 核心原則（Core Principles）
 
 ### 簡潔為上（Concise is Key）
@@ -168,6 +182,15 @@ skill-name/
 - **範例（Examples）**：`assets/logo.png` 品牌素材、`assets/slides.pptx` 簡報範本、`assets/frontend-template/` HTML/React **boilerplate**、`assets/font.ttf` 字型。
 - **適用情境（Use cases）**：**範本**（templates）、圖片、圖示、**boilerplate** 程式碼、字型、會被**複製或修改**（copied or modified）的範例文件。
 - **優點（Benefits）**：把**輸出資源**（output resources）與文件分開，agent 可直接使用檔案而無須載入 **context**。
+
+**資源選擇速查（Resource Selection Cheat Sheet）**
+
+| 需求 | 放哪裡 | 例子 |
+|------|--------|------|
+| 需要可重複執行、結果要穩定 | `scripts/` | 批次轉檔、格式修正、旋轉 PDF |
+| 需要查詢、推理或決策的知識 | `references/` | schema、policy、API reference |
+| 需要可直接套用的輸出範本 | `assets/` | slide template、doc template、boilerplate |
+| 需要觸發條件、workflow 與限制 | `SKILL.md` | 使用時機、步驟、constraints |
 
 #### 不要納入的內容（What to Not Include in a Skill）
 
