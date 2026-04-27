@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "updated": "2026-04-27T02:35:00Z",
-  "total": 95,
+  "total": 92,
   "skills": [
     {
       "name": "todo-first",
@@ -237,21 +237,6 @@
       ]
     },
     {
-      "name": "accessibility",
-      "description": "Accessibility guidelines for React and web UI work covering WCAG, ARIA, keyboard navigation, screen reader support, focus management, and semantic HTML. Use when auditing or building accessible frontend interfaces.",
-      "category": "development",
-      "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
-      "license": "Apache-2.0",
-      "tags": [
-        "a11y",
-        "wcag",
-        "aria",
-        "react",
-        "frontend"
-      ]
-    },
-    {
       "name": "responsive-design",
       "description": "Responsive frontend layout guidance for breakpoints, fluid typography, container queries, and adaptive component behavior. Use when building or restyling web UI that must work well on mobile, tablet, and desktop, or when fixing layout issues across screen sizes.",
       "category": "development",
@@ -337,21 +322,6 @@
       ]
     },
     {
-      "name": "generate-frontend-forms",
-      "description": "Frontend form generation guide for building React forms with validation, auto-save, field composition, and clear submission states. Use when implementing forms, form fields, validation, or form-heavy UI flows.",
-      "category": "development",
-      "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
-      "license": "Apache-2.0",
-      "tags": [
-        "forms",
-        "validation",
-        "react",
-        "ui",
-        "frontend"
-      ]
-    },
-    {
       "name": "frontend-testing",
       "description": "Frontend testing guide for unit, component, and RTL-style tests in React and TypeScript projects. Use when writing or reviewing frontend tests, testing UI behavior, or deciding how to cover component and hook logic without full browser E2E.",
       "category": "development",
@@ -364,21 +334,6 @@
         "react",
         "rtl",
         "vitest"
-      ]
-    },
-    {
-      "name": "react-dev",
-      "description": "React development guide covering component architecture, hooks, event typing, state handling, Server Components, and modern React 18/19 patterns. Use when building or reviewing React components and frontend code.",
-      "category": "development",
-      "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
-      "license": "Apache-2.0",
-      "tags": [
-        "react",
-        "typescript",
-        "hooks",
-        "components",
-        "frontend"
       ]
     },
     {
