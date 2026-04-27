@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-27T05:10:00Z",
-  "total": 111,
+  "updated": "2026-04-27T05:45:00Z",
+  "total": 115,
   "skills": [
     {
       "name": "todo-first",
@@ -687,7 +687,7 @@
     },
     {
       "name": "jquery-development",
-      "description": "jQuery development guide for legacy or hybrid frontends, covering selectors, event delegation, DOM performance, plugin patterns, AJAX, security, and migration concerns. Use when maintaining, reviewing, or modernizing jQuery-based code.",
+      "description": "jQuery development guide for legacy or hybrid frontends, covering selectors, event delegation, DOM performance, plugin patterns, AJAX, security, jQuery 3/4 upgrade concerns, and migration to modern browser APIs. Use when maintaining, reviewing, debugging, or modernizing jQuery-based code, plugins, widgets, or server-rendered pages with jQuery behavior.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -701,6 +701,75 @@
         "xss",
         "upgrade",
         "migration"
+      ]
+    },
+    {
+      "name": "jquery-4-migration",
+      "description": "jQuery 4 migration guide for upgrading jQuery 3.x legacy frontends, WordPress themes/plugins, and hybrid web apps. Use when upgrading to jQuery 4, fixing removed API errors such as $.isArray, $.trim, $.parseJSON, $.type, $.now, handling focus/blur event-order changes, choosing slim versus full builds, replacing Deferred/AJAX patterns, or testing with jQuery Migrate.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "jquery",
+        "jquery4",
+        "migration",
+        "upgrade",
+        "legacy",
+        "wordpress",
+        "ajax"
+      ]
+    },
+    {
+      "name": "jquery-version-migration",
+      "description": "jQuery version migration guide for auditing and upgrading projects across jQuery 1.x, 2.x, 3.x, and 4.x. Use when a legacy frontend may contain mixed jQuery versions, old plugins, deprecated APIs, IE-era compatibility, jQuery Migrate warnings, or when planning staged upgrades from 1 to 2, 2 to 3, 3 to 4, or directly toward a supported target version.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "jquery",
+        "jquery1",
+        "jquery2",
+        "jquery3",
+        "jquery4",
+        "migration",
+        "legacy",
+        "plugins"
+      ]
+    },
+    {
+      "name": "legacy-frontend-modernization",
+      "description": "Legacy frontend modernization guide for incrementally refactoring jQuery, Bootstrap-era, global-script, and framework-mixed web apps without breaking existing behavior. Use when planning or executing gradual migration to vanilla DOM APIs, TypeScript, modules, React/Vue/Alpine/HTMX, modern build tooling, or strangler-style replacement of old frontend screens.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "frontend",
+        "legacy",
+        "modernization",
+        "jquery",
+        "migration",
+        "refactoring",
+        "typescript"
+      ]
+    },
+    {
+      "name": "frontend-stack-inference",
+      "description": "Frontend stack inference workflow for identifying JavaScript frameworks, jQuery, Bootstrap, CSS frameworks, build tools, meta-frameworks, and legacy patterns from repository files, HTML, DOM attributes, global variables, script URLs, package metadata, and bundle signals. Use when auditing an unknown frontend, planning migration, documenting tech stack, or deciding which frontend skill to load next.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "frontend",
+        "tech-stack",
+        "inference",
+        "jquery",
+        "bootstrap",
+        "migration",
+        "audit"
       ]
     },
     {

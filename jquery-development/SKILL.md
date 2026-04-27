@@ -1,6 +1,6 @@
 ---
 name: jquery-development
-description: jQuery development guide for legacy or hybrid frontends, covering selectors, event delegation, DOM performance, plugin patterns, AJAX, security, and migration concerns. Use when maintaining, reviewing, or modernizing jQuery-based code.
+description: jQuery development guide for legacy or hybrid frontends, covering selectors, event delegation, DOM performance, plugin patterns, AJAX, security, jQuery 3/4 upgrade concerns, and migration to modern browser APIs. Use when maintaining, reviewing, debugging, or modernizing jQuery-based code, plugins, widgets, or server-rendered pages with jQuery behavior.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---
@@ -20,6 +20,13 @@ license: Apache-2.0
 - **AJAX 與資料流**：`$.ajax` / `$.getJSON`、timeout、錯誤處理、序列化與防呆，見 [reference/ajax-and-data.md](reference/ajax-and-data.md)。
 - **安全**：XSS/HTML 注入、DOM-based XSS、URL 與 selector 注入等，見 [reference/security.md](reference/security.md)。
 - **遷移**：逐步減少 jQuery、與原生 DOM/現代框架共存、`noConflict`，見 [reference/migration.md](reference/migration.md)。
+
+## 相關技能（Related Skills）
+
+- **jQuery 1/2/3/4 版本升級**：盤點混用版本、Migrate warnings、1.x/2.x/3.x 分段升級時，用 `jquery-version-migration`。
+- **jQuery 4 升級**：處理 removed APIs、jQuery Migrate、slim/full build、WordPress 相容性時，用 `jquery-4-migration`。
+- **Legacy 前端現代化**：規劃 jQuery 到現代架構的漸進式替換時，用 `legacy-frontend-modernization`。
+- **未知前端盤點**：先判斷專案是否使用 jQuery、Bootstrap、Vite/Webpack、React/Vue 時，用 `frontend-stack-inference`。
 
 ---
 
