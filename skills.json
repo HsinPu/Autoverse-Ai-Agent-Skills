@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-05-05T07:16:30Z",
-  "total": 121,
+  "updated": "2026-05-05T08:01:41Z",
+  "total": 125,
   "skills": [
     {
       "name": "todo-first",
@@ -516,6 +516,66 @@
         "media",
         "compression",
         "conversion"
+      ]
+    },
+    {
+      "name": "text-to-speech",
+      "description": "Text-to-speech and voiceover workflow for turning scripts, UI copy, accessibility reads, narration, and batch prompts into spoken audio. Use when the user asks to generate speech, create voiceover, read text aloud, choose voices, or prepare narration for video and product content.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "audio",
+        "tts",
+        "voiceover",
+        "speech",
+        "narration"
+      ]
+    },
+    {
+      "name": "audio-transcription",
+      "description": "Speech-to-text workflow for transcribing audio or video files, meetings, interviews, podcasts, voice notes, and multilingual recordings. Use when the user asks to extract spoken text, identify speakers, produce transcripts, translate speech, or prepare recordings for summarization.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "audio",
+        "transcription",
+        "speech-to-text",
+        "diarization",
+        "whisper"
+      ]
+    },
+    {
+      "name": "subtitle-captions",
+      "description": "Subtitle and caption workflow for generating, aligning, converting, proofreading, and burning SRT, VTT, ASS, or timed captions into audio/video content. Use when adding subtitles to videos, creating captions from transcripts, syncing text to speech, or preparing accessible media.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "subtitles",
+        "captions",
+        "srt",
+        "vtt",
+        "accessibility"
+      ]
+    },
+    {
+      "name": "audio-generation",
+      "description": "AI audio generation workflow for creating music beds, sound effects, ambience, jingles, and text-to-audio assets. Use when the user asks to generate music, sound effects, background audio, sonic branding, or audio assets for video, games, presentations, or product demos.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "audio",
+        "music-generation",
+        "sound-effects",
+        "text-to-audio",
+        "media"
       ]
     },
     {

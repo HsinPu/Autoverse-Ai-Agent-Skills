@@ -59,7 +59,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 
 ## 收錄 Skills
 
-目前共收錄 **121** 個 skills：**96** 個 Development、**16** 個 Productivity、**1** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
+目前共收錄 **125** 個 skills：**100** 個 Development、**16** 個 Productivity、**1** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
 
 ### 前端技能快速索引（按用途）
 
@@ -99,7 +99,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 - `frontend-design-review`
 - `logo-design`
 
-**影像 / 影片**
+**影像 / 影片 / 音訊**
 
 - `ai-image-prompt-design`
 - `ai-image-prompts-skill`
@@ -108,6 +108,10 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 - `image-utils`
 - `remotion-video-toolkit`
 - `video-edit`
+- `text-to-speech`
+- `audio-transcription`
+- `subtitle-captions`
+- `audio-generation`
 
 **可用性 / 互動**
 
@@ -185,6 +189,10 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 | **[image-utils](image-utils/)** | 圖片 resize、crop、format conversion、optimization 與 deterministic 後處理 |
 | **[remotion-video-toolkit](remotion-video-toolkit/)** | Remotion / React 程式化影片、動畫、字幕、音訊與 render workflow |
 | **[video-edit](video-edit/)** | 本地影片剪輯、合併、resize、壓縮、轉檔與音訊抽取 |
+| **[text-to-speech](text-to-speech/)** | TTS、voiceover、旁白、朗讀與批次語音生成 workflow |
+| **[audio-transcription](audio-transcription/)** | Speech-to-text、錄音/影片轉文字、speaker labels 與 transcript workflow |
+| **[subtitle-captions](subtitle-captions/)** | SRT/VTT/ASS 字幕產生、對齊、轉換、校對與燒錄 workflow |
+| **[audio-generation](audio-generation/)** | 音樂、音效、ambience、jingle 與 text-to-audio 生成 workflow |
 | **[hotkey](hotkey/)** | Web keyboard shortcuts 與 keybindings（hotkeys、command bindings） |
 | **[command-palette](command-palette/)** | 指令面板 / quick switcher / Spotlight 式快速執行（搜尋、排序、執行） |
 | **[responsive-design](responsive-design/)** | 響應式版面與自適應布局（breakpoints、container queries、fluid typography） |
