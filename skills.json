@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-27T05:45:00Z",
-  "total": 115,
+  "updated": "2026-05-05T06:49:09Z",
+  "total": 117,
   "skills": [
     {
       "name": "todo-first",
@@ -420,6 +420,38 @@
         "midjourney",
         "stable-diffusion",
         "art-direction"
+      ]
+    },
+    {
+      "name": "remotion-video-toolkit",
+      "description": "Programmatic video creation guidance for Remotion and React, covering compositions, timing, animation, captions, audio, rendering, and reusable video templates. Use when creating data-driven videos, product demos, animated explainers, or video generation pipelines with Remotion.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "video",
+        "remotion",
+        "react",
+        "animation",
+        "captions",
+        "rendering"
+      ]
+    },
+    {
+      "name": "video-edit",
+      "description": "Local video editing workflow for trimming, concatenating, resizing, compressing, converting, extracting audio, and inspecting media files with tools such as ffmpeg. Use when editing existing videos or preparing clips for sharing, social platforms, documentation, or downstream video generation.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "video",
+        "editing",
+        "ffmpeg",
+        "media",
+        "compression",
+        "conversion"
       ]
     },
     {
