@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-05-05T08:01:41Z",
-  "total": 125,
+  "updated": "2026-05-05T08:46:29Z",
+  "total": 127,
   "skills": [
     {
       "name": "todo-first",
@@ -1826,6 +1826,36 @@
         "browser",
         "frontend",
         "screenshots"
+      ]
+    },
+    {
+      "name": "browser-automation",
+      "description": "Browser automation workflow for navigating websites, filling forms, clicking elements, taking screenshots, extracting data from JavaScript-rendered pages, and automating repeatable web interactions. Use when a task needs a real browser rather than static HTTP scraping or local web app verification.",
+      "category": "browser-automation",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "browser",
+        "automation",
+        "playwright",
+        "scraping",
+        "screenshots"
+      ]
+    },
+    {
+      "name": "e2e-testing-patterns",
+      "description": "End-to-end testing patterns for designing, writing, debugging, and maintaining browser E2E suites with tools such as Playwright or Cypress. Use when creating reliable E2E tests, choosing critical user flows, reducing flaky tests, designing fixtures, or integrating browser tests into CI.",
+      "category": "browser-automation",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "e2e",
+        "testing",
+        "playwright",
+        "cypress",
+        "flakiness"
       ]
     },
     {
