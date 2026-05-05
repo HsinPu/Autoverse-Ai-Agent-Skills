@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-05-05T08:56:33Z",
-  "total": 128,
+  "updated": "2026-05-05T09:49:03Z",
+  "total": 131,
   "skills": [
     {
       "name": "todo-first",
@@ -1857,6 +1857,54 @@
         "locators",
         "traces",
         "screenshots"
+      ]
+    },
+    {
+      "name": "chrome-devtools-debugging",
+      "description": "Chrome DevTools and CDP debugging workflow for inspecting console errors, network requests, runtime performance, DOM state, accessibility trees, storage, and page load behavior through Chrome DevTools, CDP, or Chrome DevTools MCP. Use when diagnosing web page behavior rather than only automating clicks.",
+      "category": "browser-automation",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "chrome-devtools",
+        "cdp",
+        "debugging",
+        "network",
+        "performance",
+        "console"
+      ]
+    },
+    {
+      "name": "visual-regression-testing",
+      "description": "Visual regression testing workflow for screenshot baselines, pixel diffs, layout comparisons, Percy, Chromatic, BackstopJS, Playwright screenshot tests, and UI change verification. Use when detecting unintended visual changes across components, pages, viewports, or themes.",
+      "category": "browser-automation",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "visual-regression",
+        "screenshots",
+        "percy",
+        "chromatic",
+        "backstopjs",
+        "ui-testing"
+      ]
+    },
+    {
+      "name": "browser-compatibility-testing",
+      "description": "Cross-browser compatibility testing workflow for validating web behavior across Chrome, Firefox, Safari, Edge, mobile browsers, BrowserStack, Selenium Grid, and Playwright browser projects. Use when diagnosing browser-specific bugs, viewport differences, unsupported APIs, CSS differences, or compatibility release risk.",
+      "category": "browser-automation",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "cross-browser",
+        "compatibility",
+        "browserstack",
+        "safari",
+        "firefox",
+        "mobile"
       ]
     },
     {

@@ -59,7 +59,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 
 ## 收錄 Skills
 
-目前共收錄 **128** 個 skills：**100** 個 Development、**16** 個 Productivity、**4** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
+目前共收錄 **131** 個 skills：**100** 個 Development、**16** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
 
 ### 前端技能快速索引（按用途）
 
@@ -298,6 +298,9 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 | **[webapp-testing](webapp-testing/)** | Playwright 本地 web app 測試、除錯與截圖 |
 | **[browser-automation](browser-automation/)** | 真實瀏覽器操作、表單、截圖、JS-heavy extraction 與 web workflow 自動化 |
 | **[playwright-automation](playwright-automation/)** | Playwright locators、screenshots、traces、console/network inspection 與 CLI/MCP 操作 |
+| **[chrome-devtools-debugging](chrome-devtools-debugging/)** | Chrome DevTools / CDP console、network、performance、DOM 與 a11y 診斷 |
+| **[visual-regression-testing](visual-regression-testing/)** | Screenshot baseline、pixel diff、Percy / Chromatic / BackstopJS 視覺回歸 |
+| **[browser-compatibility-testing](browser-compatibility-testing/)** | Chrome / Firefox / Safari / Edge / mobile 跨瀏覽器相容性驗證 |
 | **[e2e-testing-patterns](e2e-testing-patterns/)** | Playwright / Cypress E2E 測試設計、flakiness、fixtures 與 CI patterns |
 
 ---
