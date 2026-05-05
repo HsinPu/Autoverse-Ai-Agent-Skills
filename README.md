@@ -59,7 +59,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 
 ## 收錄 Skills
 
-目前共收錄 **117** 個 skills：**92** 個 Development、**16** 個 Productivity、**1** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
+目前共收錄 **121** 個 skills：**96** 個 Development、**16** 個 Productivity、**1** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
 
 ### 前端技能快速索引（按用途）
 
@@ -102,6 +102,10 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 **影像 / 影片**
 
 - `ai-image-prompt-design`
+- `ai-image-prompts-skill`
+- `baoyu-image-gen`
+- `stable-diffusion-image-generation`
+- `image-utils`
 - `remotion-video-toolkit`
 - `video-edit`
 
@@ -175,6 +179,10 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 | **[ux-writing](ux-writing/)** | UI microcopy、空狀態、錯誤訊息、CTA、onboarding 文案優化 |
 | **[logo-design](logo-design/)** | Logo / brand mark / SVG 視覺識別設計流程 |
 | **[ai-image-prompt-design](ai-image-prompt-design/)** | Flux、Stable Diffusion、Midjourney 等影像生成 prompt 設計 |
+| **[ai-image-prompts-skill](ai-image-prompts-skill/)** | AI image prompt library、prompt inspiration、style variants |
+| **[baoyu-image-gen](baoyu-image-gen/)** | OpenAI / Google / DashScope 文字生圖、reference image、aspect ratio |
+| **[stable-diffusion-image-generation](stable-diffusion-image-generation/)** | Stable Diffusion / Diffusers text-to-image、inpainting、pipeline guidance |
+| **[image-utils](image-utils/)** | 圖片 resize、crop、format conversion、optimization 與 deterministic 後處理 |
 | **[remotion-video-toolkit](remotion-video-toolkit/)** | Remotion / React 程式化影片、動畫、字幕、音訊與 render workflow |
 | **[video-edit](video-edit/)** | 本地影片剪輯、合併、resize、壓縮、轉檔與音訊抽取 |
 | **[hotkey](hotkey/)** | Web keyboard shortcuts 與 keybindings（hotkeys、command bindings） |

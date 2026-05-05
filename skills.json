@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-05-05T06:49:09Z",
-  "total": 117,
+  "updated": "2026-05-05T07:16:30Z",
+  "total": 121,
   "skills": [
     {
       "name": "todo-first",
@@ -420,6 +420,70 @@
         "midjourney",
         "stable-diffusion",
         "art-direction"
+      ]
+    },
+    {
+      "name": "baoyu-image-gen",
+      "description": "General AI image generation workflow for creating images from text prompts with provider-backed APIs such as OpenAI, Google, and DashScope. Use when the user asks to generate, create, draw, or produce images from text, with optional reference images, aspect ratios, or multiple output variants.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "image-generation",
+        "text-to-image",
+        "openai",
+        "google",
+        "dashscope",
+        "reference-image"
+      ]
+    },
+    {
+      "name": "stable-diffusion-image-generation",
+      "description": "Stable Diffusion image generation guidance for text-to-image, image-to-image, inpainting, and custom diffusion pipelines using tools such as HuggingFace Diffusers. Use when working with Stable Diffusion models, local or hosted diffusion workflows, generation parameters, seeds, schedulers, LoRA, or pipeline troubleshooting.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "stable-diffusion",
+        "diffusers",
+        "text-to-image",
+        "inpainting",
+        "lora",
+        "pipeline"
+      ]
+    },
+    {
+      "name": "ai-image-prompts-skill",
+      "description": "AI image prompt library and inspiration workflow for finding, adapting, and improving text-to-image prompts across models such as Midjourney, DALL-E, Flux, Stable Diffusion, GPT Image, and similar generators. Use when the user needs prompt ideas, reusable prompt patterns, style variants, or higher-quality image-generation wording.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "image-prompts",
+        "prompt-library",
+        "text-to-image",
+        "midjourney",
+        "dalle",
+        "flux"
+      ]
+    },
+    {
+      "name": "image-utils",
+      "description": "Deterministic image post-processing workflow for resizing, cropping, compositing, converting formats, optimizing assets, adding watermarks, and preparing generated images for web or documentation. Use when modifying existing image files with predictable pixel-level operations rather than generating new images.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "image-processing",
+        "resize",
+        "crop",
+        "conversion",
+        "optimization",
+        "post-processing"
       ]
     },
     {
