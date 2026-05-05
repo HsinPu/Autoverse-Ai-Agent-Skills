@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-05-05T08:46:29Z",
-  "total": 127,
+  "updated": "2026-05-05T08:56:33Z",
+  "total": 128,
   "skills": [
     {
       "name": "todo-first",
@@ -1840,6 +1840,22 @@
         "automation",
         "playwright",
         "scraping",
+        "screenshots"
+      ]
+    },
+    {
+      "name": "playwright-automation",
+      "description": "Playwright automation workflow for browser navigation, locators, screenshots, traces, console and network inspection, scripted interactions, MCP or CLI-driven browser control, and repeatable UI diagnostics. Use when the task specifically needs Playwright rather than general browser automation or E2E test strategy.",
+      "category": "browser-automation",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "playwright",
+        "browser",
+        "automation",
+        "locators",
+        "traces",
         "screenshots"
       ]
     },
