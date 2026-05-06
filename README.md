@@ -59,7 +59,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 
 ## 收錄 Skills
 
-目前共收錄 **134** 個 skills：**103** 個 Development、**16** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
+目前共收錄 **137** 個 skills：**106** 個 Development、**16** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
 
 ### 前端技能快速索引（按用途）
 
@@ -242,6 +242,9 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 | **[github-actions-ci](github-actions-ci/)** | GitHub Actions workflow、matrix、cache、artifacts、permissions 與 secrets |
 | **[docker-development](docker-development/)** | Dockerfile、multi-stage build、Compose、healthcheck 與 container workflow |
 | **[kubernetes-operations](kubernetes-operations/)** | Kubernetes manifests、kubectl 診斷、rollout、probes、logs 與 events |
+| **[terraform-infrastructure](terraform-infrastructure/)** | Terraform / OpenTofu IaC、modules、state、plan/apply、drift 與 backends |
+| **[observability-engineering](observability-engineering/)** | Metrics、logs、traces、SLI/SLO、alerts、Grafana / Prometheus / OpenTelemetry |
+| **[security-scanning](security-scanning/)** | SAST、dependency scan、secret scan、container / IaC scan、SBOM 與 CI gates |
 | **[incident-response-postmortems](incident-response-postmortems/)** | 事故 triage、timeline、root cause 與 postmortem |
 | **[spec-flow](spec-flow/)** | 需求拆解、spec、task、execution flow 的文件驅動流程 |
 

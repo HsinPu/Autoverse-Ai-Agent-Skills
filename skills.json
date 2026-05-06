@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-05-06T01:30:33Z",
-  "total": 134,
+  "updated": "2026-05-06T01:52:34Z",
+  "total": 137,
   "skills": [
     {
       "name": "todo-first",
@@ -1728,6 +1728,51 @@
         "kubectl",
         "deployment",
         "operations"
+      ]
+    },
+    {
+      "name": "terraform-infrastructure",
+      "description": "Terraform and OpenTofu infrastructure-as-code workflow for modules, providers, variables, state, plan/apply review, drift detection, imports, workspaces, backends, and safe cloud provisioning. Use when creating, reviewing, or troubleshooting Terraform/OpenTofu configuration rather than doing manual cloud changes.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "terraform",
+        "opentofu",
+        "iac",
+        "infrastructure",
+        "state"
+      ]
+    },
+    {
+      "name": "observability-engineering",
+      "description": "Production observability workflow for metrics, logs, traces, dashboards, alerts, SLI/SLO design, OpenTelemetry, Prometheus, Grafana, and incident-ready monitoring. Use when designing or improving system visibility, diagnosing reliability gaps, or setting up operational dashboards and alerts.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "observability",
+        "monitoring",
+        "metrics",
+        "tracing",
+        "slo"
+      ]
+    },
+    {
+      "name": "security-scanning",
+      "description": "Security scanning workflow for SAST, dependency vulnerability checks, secret scanning, container image scans, IaC scans, SBOM generation, CI security gates, and vulnerability triage. Use when running or configuring automated security tools rather than doing manual secure code review.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "security",
+        "sast",
+        "dependency-scan",
+        "secret-scan",
+        "sbom"
       ]
     },
     {
