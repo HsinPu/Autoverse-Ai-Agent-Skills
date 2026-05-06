@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-05-06T01:52:34Z",
-  "total": 137,
+  "updated": "2026-05-06T04:58:34Z",
+  "total": 143,
   "skills": [
     {
       "name": "todo-first",
@@ -516,6 +516,97 @@
         "media",
         "compression",
         "conversion"
+      ]
+    },
+    {
+      "name": "ai-video-generation",
+      "description": "AI video generation workflow for text-to-video, image-to-video, reference-driven clips, model selection, prompt iteration, parameters, and output review across tools such as Sora, Veo, Kling, Runway, Pika, Luma, Seedance, Wan, and similar generators. Use when creating new AI-generated video rather than editing existing footage or building deterministic Remotion templates.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "ai-video",
+        "text-to-video",
+        "image-to-video",
+        "sora",
+        "veo",
+        "runway"
+      ]
+    },
+    {
+      "name": "ai-video-prompting",
+      "description": "AI video prompt design guide for crafting prompts for Sora, Veo, Kling, Runway, Pika, Luma, Seedance, Wan, image-to-video, reference-based generation, cinematic shots, camera movement, motion continuity, timing, and negative prompts. Use when improving prompts for AI video quality rather than generating still images.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "ai-video",
+        "prompting",
+        "cinematography",
+        "camera",
+        "motion"
+      ]
+    },
+    {
+      "name": "storyboard-creation",
+      "description": "Storyboard and shot-list workflow for turning video ideas, scripts, product concepts, ads, tutorials, or explainers into scenes, shots, timing, dialogue, visual prompts, camera notes, and production-ready tables for AI video, filming, or animation. Use when planning video structure before generation or editing.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "storyboard",
+        "shot-list",
+        "video-planning",
+        "script",
+        "production"
+      ]
+    },
+    {
+      "name": "short-video-script",
+      "description": "Short-form video script workflow for TikTok, Reels, YouTube Shorts, Douyin, Xiaohongshu, and similar platforms, covering hooks, talking-head scripts, pacing, captions, CTAs, series planning, retention, and platform-specific creative constraints. Use when writing scripts for short social videos rather than long-form articles or generic marketing copy.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "short-video",
+        "script",
+        "tiktok",
+        "reels",
+        "youtube-shorts"
+      ]
+    },
+    {
+      "name": "ugc-video-ads",
+      "description": "UGC-style video ad workflow for AI-assisted creator ads, competitor ad analysis, hooks, creator personas, authentic scripts, product demos, objections, social proof, voiceover, B-roll, captions, and platform-specific deliverables. Use when creating paid or organic user-generated-content style ads for products or services.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "ugc",
+        "video-ads",
+        "marketing",
+        "creative",
+        "short-video"
+      ]
+    },
+    {
+      "name": "avatar-video-generation",
+      "description": "AI avatar, digital human, talking-head, and lip-sync video workflow for tools such as HeyGen, Synthesia, D-ID, EachLabs, DashScope human avatar, and similar services, covering avatar choice, script preparation, voice rights, pronunciation, lip-sync review, consent, and export QA. Use when generating presenter, spokesperson, or avatar videos.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "avatar",
+        "talking-head",
+        "lipsync",
+        "heygen",
+        "digital-human"
       ]
     },
     {

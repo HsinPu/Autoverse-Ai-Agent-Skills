@@ -59,7 +59,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 
 ## 收錄 Skills
 
-目前共收錄 **137** 個 skills：**106** 個 Development、**16** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
+目前共收錄 **143** 個 skills：**112** 個 Development、**16** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
 
 ### 前端技能快速索引（按用途）
 
@@ -108,6 +108,12 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 - `image-utils`
 - `remotion-video-toolkit`
 - `video-edit`
+- `ai-video-generation`
+- `ai-video-prompting`
+- `storyboard-creation`
+- `short-video-script`
+- `ugc-video-ads`
+- `avatar-video-generation`
 - `text-to-speech`
 - `audio-transcription`
 - `subtitle-captions`
@@ -189,6 +195,12 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 | **[image-utils](image-utils/)** | 圖片 resize、crop、format conversion、optimization 與 deterministic 後處理 |
 | **[remotion-video-toolkit](remotion-video-toolkit/)** | Remotion / React 程式化影片、動畫、字幕、音訊與 render workflow |
 | **[video-edit](video-edit/)** | 本地影片剪輯、合併、resize、壓縮、轉檔與音訊抽取 |
+| **[ai-video-generation](ai-video-generation/)** | AI text-to-video / image-to-video、模型選擇、prompt iteration 與輸出檢查 |
+| **[ai-video-prompting](ai-video-prompting/)** | AI 影片 prompt 設計、鏡頭語言、motion、timing、continuity 與 negative prompts |
+| **[storyboard-creation](storyboard-creation/)** | 影片分鏡、shot list、timing、voiceover、visual prompt 與 production table |
+| **[short-video-script](short-video-script/)** | TikTok / Reels / Shorts 短影音 hook、口播稿、CTA 與 retention scripts |
+| **[ugc-video-ads](ugc-video-ads/)** | UGC-style 影片廣告、creator persona、hook、product demo、B-roll 與平台素材 |
+| **[avatar-video-generation](avatar-video-generation/)** | AI avatar、digital human、talking-head、lipsync、consent 與 export QA |
 | **[text-to-speech](text-to-speech/)** | TTS、voiceover、旁白、朗讀與批次語音生成 workflow |
 | **[audio-transcription](audio-transcription/)** | Speech-to-text、錄音/影片轉文字、speaker labels 與 transcript workflow |
 | **[subtitle-captions](subtitle-captions/)** | SRT/VTT/ASS 字幕產生、對齊、轉換、校對與燒錄 workflow |
