@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-05-05T09:49:03Z",
-  "total": 131,
+  "updated": "2026-05-06T01:30:33Z",
+  "total": 134,
   "skills": [
     {
       "name": "todo-first",
@@ -1683,6 +1683,51 @@
         "release",
         "rollback",
         "smoke-test"
+      ]
+    },
+    {
+      "name": "github-actions-ci",
+      "description": "GitHub Actions CI workflow guide for designing, writing, debugging, and reviewing workflow YAML, jobs, matrix builds, caching, artifacts, permissions, secrets, pull request checks, and release automation. Use when creating or fixing GitHub Actions pipelines rather than general repository hygiene.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "github-actions",
+        "ci",
+        "workflow",
+        "yaml",
+        "automation"
+      ]
+    },
+    {
+      "name": "docker-development",
+      "description": "Docker development workflow for Dockerfiles, multi-stage builds, Docker Compose, image optimization, build contexts, healthchecks, environment variables, volumes, networking, and container security. Use when containerizing an application, debugging Docker builds, or improving local container workflows.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "docker",
+        "containers",
+        "dockerfile",
+        "compose",
+        "images"
+      ]
+    },
+    {
+      "name": "kubernetes-operations",
+      "description": "Kubernetes operations workflow for manifests, kubectl diagnosis, Deployments, Services, Ingress, ConfigMaps, Secrets, probes, resources, rollouts, logs, events, and troubleshooting cluster workloads. Use when deploying, inspecting, or debugging applications running on Kubernetes.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "kubernetes",
+        "k8s",
+        "kubectl",
+        "deployment",
+        "operations"
       ]
     },
     {

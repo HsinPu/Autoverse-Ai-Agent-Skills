@@ -59,7 +59,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 
 ## 收錄 Skills
 
-目前共收錄 **131** 個 skills：**100** 個 Development、**16** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
+目前共收錄 **134** 個 skills：**103** 個 Development、**16** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
 
 ### 前端技能快速索引（按用途）
 
@@ -239,6 +239,9 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 | **[git-readme-writer](git-readme-writer/)** | 依專案類型與 GitHub / Gerrit 平台差異選擇合適的 README 結構 |
 | **[repo-ready](repo-ready/)** | Repo 結構、CI/CD、文件、lint 與 release automation |
 | **[deployment-operations](deployment-operations/)** | 部署、rollout / rollback、smoke checks 與上線驗證 |
+| **[github-actions-ci](github-actions-ci/)** | GitHub Actions workflow、matrix、cache、artifacts、permissions 與 secrets |
+| **[docker-development](docker-development/)** | Dockerfile、multi-stage build、Compose、healthcheck 與 container workflow |
+| **[kubernetes-operations](kubernetes-operations/)** | Kubernetes manifests、kubectl 診斷、rollout、probes、logs 與 events |
 | **[incident-response-postmortems](incident-response-postmortems/)** | 事故 triage、timeline、root cause 與 postmortem |
 | **[spec-flow](spec-flow/)** | 需求拆解、spec、task、execution flow 的文件驅動流程 |
 
