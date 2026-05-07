@@ -26,6 +26,14 @@ Write logs that stay easy to scan in production and easy to search during debugg
 - Use `warn` for unexpected but handled conditions, degraded behavior, and skipped work.
 - Use `error` for failed operations that need attention; attach the error object separately when the logger supports it.
 
+## Debug Logging
+
+- Use `debug` for temporary instrumentation, branch decisions, and retry details.
+- Keep debug messages short and stable so they are easy to filter or remove later.
+- Add a narrow scope field such as `feature=checkout` or `scope=import-job` when isolating one path.
+- Prefer a few high-signal messages over repeated loop spam.
+- Remove temporary debug logs once the issue is understood.
+
 ## Message Shape
 
 - Prefer one of these stable patterns:

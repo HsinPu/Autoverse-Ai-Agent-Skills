@@ -45,7 +45,7 @@ autoverse install --all --agent cursor
 | 2 | 任務拆解 | 幾乎都需要 | `todo-first` |
 | 3 | 規格/設計 | 規模較大、多人協作時 | `specification-authoring` |
 | 4 | 資料設計 | 有資料庫或資料模型時 | `database-design`, `sql-best-practices` |
-| 5 | 程式實作 | 幾乎都需要 | `python-development`, `python-data-engineering`, `python-web-scraping`, `python-automation-scripting`, `python-backend-development`, `python-testing-engineering`, `python-observability-debugging`, `python-packaging-release`, `python-concurrency-patterns`, `python-security-hardening`, `python-api-client-development`, `java-development`, `java-architecture`, `java-testing`, `jvm-build-tooling`, `jpa-hibernate-development`, `javascript-development`, `typescript-development`, `spring-development`, `spring-security`, `spring-webflux`, `spring-cloud-microservices`, `vue-development`, `nuxt-development`, `css-development`, `tailwind-development`, `frontend-design`, `react-ui-patterns`, `mybatis-development`, `jquery-development`, `mcp-creator-design` |
+| 5 | 程式實作 | 幾乎都需要 | `python-development`, `python-data-engineering`, `python-web-scraping`, `python-automation-scripting`, `python-backend-development`, `python-testing-engineering`, `python-observability-debugging`, `python-packaging-release`, `python-concurrency-patterns`, `python-security-hardening`, `python-api-client-development`, `java-development`, `java-architecture`, `java-testing`, `jvm-build-tooling`, `jpa-hibernate-development`, `javascript-development`, `typescript-development`, `spring-development`, `spring-security`, `spring-webflux`, `spring-cloud-microservices`, `vue-development`, `nuxt-development`, `css-development`, `tailwind-development`, `frontend-design`, `react-ui-patterns`, `mybatis-development`, `jquery-development`, `mcp-creator-design`, `api-doc-comments` |
 | 6 | 驗證/修正 | 幾乎都需要 | `code-review`, `logging-patterns` |
 | 7 | 重構 | 視需要 | `code-refactoring` |
 | 8 | 文件交付 | 對外交付或交接時 | `markdown-writer`, `git-readme-writer` |
@@ -59,7 +59,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 
 ## 收錄 Skills
 
-目前共收錄 **143** 個 skills：**112** 個 Development、**16** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
+目前共收錄 **144** 個 skills：**113** 個 Development、**16** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
 
 ### 前端技能快速索引（按用途）
 
@@ -236,6 +236,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 | **[testing-strategy](testing-strategy/)** | 測試分層、fixtures、flakiness 與 coverage 取捨 |
 | **[code-refactoring](code-refactoring/)** | 程式碼重構技巧（Code Smells、安全流程、語言無關原則） |
 | **[logging-patterns](logging-patterns/)** | 撰寫乾淨一致的 log 訊息模式（level、message shape、context fields、低噪音） |
+| **[api-doc-comments](api-doc-comments/)** | 公共 API docstring / Javadoc / TSDoc 內容撰寫（契約、參數、回傳、例外、範例） |
 | **[api-contract-design](api-contract-design/)** | API request/response 契約、錯誤模型、版本與相容性設計 |
 | **[mcp-creator-design](mcp-creator-design/)** | 建立高品質 MCP Server（Python FastMCP / Node/TypeScript MCP SDK）整合外部 API / services |
 | **[skill-creator-design](skill-creator-design/)** | 建立與優化 Skill 的完整指南（建立流程、SKILL.md 撰寫） |

@@ -38,6 +38,14 @@
 - Good: `payment-api request failed`
 - Bad: `calling payment api now`
 
+### Debugging And Temporary Instrumentation
+
+- Good: `checkout retrying requestId=123 attempt=2`
+- Good: `import-job progress processed=8 total=32`
+- Good: `sync skipped reason=cache-hit scope=profile`
+- Bad: `debugging this now`
+- Bad: `log every row`
+
 ## Structured Context
 
 - Prefer: `logger.info("checkout started", { orderId, requestId })`

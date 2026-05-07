@@ -75,6 +75,12 @@ license: Apache-2.0
 - 不再需要或被取代的項目改成 `cancelled`。
 - 若中途發現新工作，立即把它新增到 todo list，而不是只記在腦中。
 
+## Durable Handoffs
+
+- 如果任務會跨 session 或可能被中斷，額外保留一段簡短 state note，記錄已完成項目、剩餘工作、阻塞點與下一步。
+- todo list 用來追蹤執行；state note 用來追蹤可恢復的背景資訊，兩者不要混在一起。
+- 重新接手時先讀 current state，再決定延續原 todo 或取消過時項目。
+
 ## Execution Workflow
 
 1. 做最小必要的探索/讀取 context，避免盲目開始。
