@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-05-07T06:03:31Z",
-  "total": 144,
+  "updated": "2026-05-09T06:58:35Z",
+  "total": 147,
   "skills": [
     {
       "name": "todo-first",
@@ -933,6 +933,21 @@
       ]
     },
     {
+      "name": "desktop-development",
+      "description": "Electron desktop development guide for implementing desktop features, IPC handlers, preload scripts, window management, menu configuration, and desktop-local tooling. Use when building or maintaining Electron apps, native-like desktop UIs, or app-specific desktop integrations rather than browser automation or front-end pages.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "electron",
+        "desktop",
+        "ipc",
+        "preload",
+        "windows"
+      ]
+    },
+    {
       "name": "jquery-development",
       "description": "jQuery development guide for legacy or hybrid frontends, covering selectors, event delegation, DOM performance, plugin patterns, AJAX, security, jQuery 3/4 upgrade concerns, and migration to modern browser APIs. Use when maintaining, reviewing, debugging, or modernizing jQuery-based code, plugins, widgets, or server-rendered pages with jQuery behavior.",
       "category": "development",
@@ -1049,6 +1064,21 @@
       ]
     },
     {
+      "name": "openapi-spec-generation",
+      "description": "OpenAPI specification workflow for generating, updating, validating, and reviewing OpenAPI 3.1 specs from code or design-first contracts. Use when creating API specifications, documenting endpoints, generating SDK inputs, or keeping API contract files consistent with implementation.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "openapi",
+        "swagger",
+        "api-spec",
+        "sdk",
+        "validation"
+      ]
+    },
+    {
       "name": "api-contract-design",
       "description": "API contract design workflow for defining request and response shapes, error models, pagination, idempotency, and versioning so APIs evolve safely without breaking consumers. Use when designing or reviewing a public API or service contract.",
       "category": "development",
@@ -1060,6 +1090,21 @@
         "contracts",
         "versioning",
         "compatibility"
+      ]
+    },
+    {
+      "name": "i18n-localization",
+      "description": "Internationalization and localization workflow for adding translations, managing locale files, handling pluralization, RTL support, and keeping localized UI text consistent across products. Use when implementing or reviewing i18n keys, locale management, translated strings, or localization updates in apps and extensions.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "i18n",
+        "localization",
+        "translation",
+        "locale",
+        "rtl"
       ]
     },
     {
