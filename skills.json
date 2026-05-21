@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-05-21T04:00:00Z",
-  "total": 164,
+  "updated": "2026-05-22T01:00:00Z",
+  "total": 168,
   "skills": [
     {
       "name": "todo-first",
@@ -871,6 +871,74 @@
         "database",
         "migrations",
         "sql"
+      ]
+    },
+    {
+      "name": "firebase-development",
+      "description": "Firebase development workflow covering Authentication, Firestore, Realtime Database, Security Rules, Cloud Functions, Storage, Cloud Messaging, Hosting, Emulator Suite, deploys, indexes, and production safety. Use when building, reviewing, or debugging Firebase-backed apps.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "firebase",
+        "firestore",
+        "auth",
+        "security-rules",
+        "cloud-functions",
+        "storage",
+        "emulator"
+      ]
+    },
+    {
+      "name": "postgres-operations",
+      "description": "PostgreSQL operations workflow covering roles, permissions, schema migrations, indexes, EXPLAIN, VACUUM, ANALYZE, locks, backups, restores, replication, connection pooling, pgvector, monitoring, and production troubleshooting. Use when operating, tuning, or debugging PostgreSQL databases.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "postgres",
+        "postgresql",
+        "database",
+        "indexes",
+        "explain",
+        "backup",
+        "operations"
+      ]
+    },
+    {
+      "name": "redis-upstash",
+      "description": "Redis and Upstash workflow covering caching, rate limiting, sessions, queues, pub/sub, serverless and edge runtime patterns, key design, TTLs, retries, connection management, observability, and production safety. Use when building or debugging Redis or Upstash-backed features.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "redis",
+        "upstash",
+        "cache",
+        "rate-limit",
+        "queues",
+        "sessions",
+        "serverless"
+      ]
+    },
+    {
+      "name": "mongodb-development",
+      "description": "MongoDB development workflow covering schema design, collections, indexes, aggregation pipelines, transactions, change streams, Atlas, security, backups, performance, and Node.js application integration. Use when building, reviewing, or debugging MongoDB-backed applications.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "mongodb",
+        "atlas",
+        "document-database",
+        "indexes",
+        "aggregation",
+        "transactions",
+        "change-streams"
       ]
     },
     {

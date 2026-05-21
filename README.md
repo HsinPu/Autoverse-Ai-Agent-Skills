@@ -59,7 +59,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 
 ## 收錄 Skills
 
-目前共收錄 **164** 個 skills：**133** 個 Development、**16** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
+目前共收錄 **168** 個 skills：**137** 個 Development、**16** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
 
 ### 前端技能快速索引（按用途）
 
@@ -79,6 +79,10 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 - `flutter-development`
 - `mobile-app-testing`
 - `app-store-release`
+- `firebase-development`
+- `postgres-operations`
+- `redis-upstash`
+- `mongodb-development`
 - `frontend-testing`
 - `frontend-code-review`
 - `shadcn-ui`
@@ -252,6 +256,10 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 | **[database-design](database-design/)** | 資料庫 Schema 設計、索引優化、Migration 模式（PostgreSQL/MySQL/NoSQL） |
 | **[sql-best-practices](sql-best-practices/)** | SQL 撰寫風格、JOIN / subqueries、效能優化與安全性（防 SQL Injection） |
 | **[prisma-drizzle](prisma-drizzle/)** | Prisma / Drizzle ORM schema、migrations、relations、query patterns、transactions 與 TypeScript database access |
+| **[firebase-development](firebase-development/)** | Firebase Auth、Firestore、Realtime Database、Security Rules、Functions、Storage、FCM、Emulator Suite 與 deploys |
+| **[postgres-operations](postgres-operations/)** | PostgreSQL roles、permissions、migrations、indexes、EXPLAIN、VACUUM、backups、replication、pgvector 與 troubleshooting |
+| **[redis-upstash](redis-upstash/)** | Redis / Upstash cache、rate limiting、sessions、queues、pub/sub、serverless/edge patterns、TTLs 與 observability |
+| **[mongodb-development](mongodb-development/)** | MongoDB schema design、indexes、aggregation pipelines、transactions、change streams、Atlas、security 與 performance |
 | **[openai-api-development](openai-api-development/)** | OpenAI Responses API、model selection、structured outputs、function calling、tools、streaming 與 production integration |
 | **[agents-sdk-development](agents-sdk-development/)** | OpenAI Agents SDK agents、tools、handoffs、guardrails、tracing、多 agent workflow 與 production observability |
 | **[rag-vector-search](rag-vector-search/)** | RAG / vector search ingestion、chunking、embeddings、hybrid retrieval、reranking、citations 與 retrieval evaluation |
