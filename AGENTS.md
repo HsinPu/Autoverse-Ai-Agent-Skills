@@ -25,9 +25,24 @@
 
 - `SKILL.md` frontmatter uses English `name`, `description`, `source`, and `license`; `description` is the trigger surface agents rely on.
 - Folder name and frontmatter `name` should match exactly.
-- Existing skills use `source: HsinPu/Autoverse-Ai-Agent-Skills` and `license: Apache-2.0`.
+- Existing first-party skills use `source: HsinPu/Autoverse-Ai-Agent-Skills` and `license: Apache-2.0`; preserve original source and license for adapted third-party skills.
 - Keep `SKILL.md` lean; put optional detailed material inside the skill folder as bundled references/assets/scripts only when needed.
 
 ## Packaging
 
 - `package.json` publishes only `autoverse-cli.js`, `skills.json`, `README.md`, and `LICENSE`; the CLI installs skills by cloning the GitHub repo named in `skills.json`, not from bundled npm skill directories.
+
+## Current Catalog Snapshot
+
+- Last reviewed: 2026-05-21.
+- `skills.json` currently lists 148 skills.
+- Root skill directories with `SKILL.md`: 148.
+- Catalog-to-folder check: no missing catalog entries and no missing skill directories were found.
+- Category counts: `development` 117, `productivity` 16, `browser-automation` 7, `cli-utilities` 3, `coding-agents-ides` 3, `communication` 1, `search-research` 1.
+- CLI smoke checks passed with `node autoverse-cli.js --help`, `node autoverse-cli.js list`, `node autoverse-cli.js search video`, and `node autoverse-cli.js info python-development`.
+
+## Known Issues
+
+- `repo-ready/SKILL.md` currently has `license: MIT`; verify whether it is intended as a third-party/adapted exception or should be normalized to `Apache-2.0`.
+- `README.md` appears mojibake/corrupted in terminal output; verify encoding before editing or publishing README changes.
+- Some user-facing status/error strings in `autoverse-cli.js` also appear mojibake/corrupted, though successful command parsing and catalog lookup still work.

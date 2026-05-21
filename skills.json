@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-05-09T06:58:35Z",
-  "total": 147,
+  "updated": "2026-05-21T00:00:00Z",
+  "total": 148,
   "skills": [
     {
       "name": "todo-first",
@@ -772,6 +772,23 @@
       ]
     },
     {
+      "name": "karpathy-guidelines",
+      "description": "Behavioral coding guidelines for reducing common LLM implementation mistakes. Use when writing, reviewing, or refactoring code to surface assumptions, avoid overengineering, keep changes surgical, and define verifiable success criteria before execution.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "multica-ai/andrej-karpathy-skills",
+      "license": "MIT",
+      "tags": [
+        "coding-guidelines",
+        "llm",
+        "simplicity",
+        "refactoring",
+        "code-review",
+        "verification",
+        "workflow"
+      ]
+    },
+    {
       "name": "react-perf",
       "description": "React performance guide for diagnosing re-render thrash, expensive computations, bundle growth, data waterfalls, and slow UI updates. Use when a React app feels sluggish, a component is too expensive, or performance work needs a focused review.",
       "category": "development",
@@ -1417,7 +1434,7 @@
     },
     {
       "name": "skillctl",
-      "description": "Skill CLI routing workflow for searching, installing, listing, and lightly validating skills from the command line. Use when you need a direct command-line path for skill discovery or management without deeper scanning or review.",
+      "description": "Skill CLI routing workflow for searching, installing, listing, updating, and lightly validating local or open-ecosystem skills from the command line. Use when you need a direct command-line path for skill discovery or management, including autoverse-cli.js and the open Skills CLI, without deeper scanning or review.",
       "category": "cli-utilities",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -1426,7 +1443,9 @@
         "cli",
         "skills",
         "install",
-        "search"
+        "search",
+        "skills-cli",
+        "skills.sh"
       ]
     },
     {
@@ -1459,7 +1478,7 @@
     },
     {
       "name": "skill-gap-analyzer",
-      "description": "Skill catalog gap analysis workflow for generating search keywords, comparing local skills with LobeHub marketplace candidates, and deciding whether to upgrade an existing skill, add a new one, import marketplace ideas, or keep the catalog unchanged. Use when evaluating coverage gaps, overlap, or upgrade opportunities in a skill catalog.",
+      "description": "Skill catalog gap analysis workflow for generating search keywords, comparing local skills with external marketplace or GitHub candidates, and deciding whether to upgrade an existing skill, add a new one, adapt marketplace ideas, or keep the catalog unchanged. Use when evaluating coverage gaps, overlap, or upgrade opportunities in a skill catalog.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -1468,6 +1487,8 @@
         "skills",
         "lobehub",
         "marketplace",
+        "skills.sh",
+        "github",
         "catalog",
         "gap-analysis",
         "keywords"
