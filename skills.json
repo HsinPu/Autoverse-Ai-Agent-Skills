@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-05-21T01:00:00Z",
-  "total": 153,
+  "updated": "2026-05-21T02:00:00Z",
+  "total": 157,
   "skills": [
     {
       "name": "todo-first",
@@ -871,6 +871,74 @@
         "database",
         "migrations",
         "sql"
+      ]
+    },
+    {
+      "name": "openai-api-development",
+      "description": "OpenAI API development guide covering Responses API, model selection, structured outputs, function calling, tools, files, streaming, multimodal inputs, error handling, rate limits, cost controls, and safe production integration. Use when building, reviewing, or debugging applications that call OpenAI APIs.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "openai",
+        "responses-api",
+        "structured-outputs",
+        "function-calling",
+        "streaming",
+        "tools",
+        "multimodal"
+      ]
+    },
+    {
+      "name": "agents-sdk-development",
+      "description": "OpenAI Agents SDK development guide covering agents, instructions, tools, handoffs, guardrails, tracing, streaming, context, multi-agent workflows, testing, and production observability. Use when building or reviewing agentic applications with the OpenAI Agents SDK.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "openai",
+        "agents-sdk",
+        "agents",
+        "tools",
+        "handoffs",
+        "guardrails",
+        "tracing"
+      ]
+    },
+    {
+      "name": "rag-vector-search",
+      "description": "Retrieval-augmented generation and vector search guide covering document ingestion, parsing, chunking, embeddings, metadata, hybrid retrieval, reranking, citations, freshness, access control, and retrieval evaluation. Use when building, reviewing, or debugging RAG systems or semantic search.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "rag",
+        "vector-search",
+        "embeddings",
+        "retrieval",
+        "reranking",
+        "citations",
+        "evaluation"
+      ]
+    },
+    {
+      "name": "llm-evals",
+      "description": "LLM evaluation guide covering golden datasets, prompt regression tests, graders, rubrics, LLM-as-judge, trace grading, RAG metrics, agent evals, online feedback, cost, latency, and release gates. Use when measuring or improving AI application quality.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "llm",
+        "evals",
+        "graders",
+        "regression",
+        "rag",
+        "agents",
+        "quality"
       ]
     },
     {

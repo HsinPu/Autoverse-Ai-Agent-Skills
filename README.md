@@ -59,7 +59,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 
 ## 收錄 Skills
 
-目前共收錄 **153** 個 skills：**122** 個 Development、**16** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
+目前共收錄 **157** 個 skills：**126** 個 Development、**16** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
 
 ### 前端技能快速索引（按用途）
 
@@ -104,6 +104,10 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 
 - `ai-image-prompt-design`
 - `ai-image-prompts-skill`
+- `openai-api-development`
+- `agents-sdk-development`
+- `rag-vector-search`
+- `llm-evals`
 - `baoyu-image-gen`
 - `stable-diffusion-image-generation`
 - `image-utils`
@@ -237,6 +241,10 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 | **[database-design](database-design/)** | 資料庫 Schema 設計、索引優化、Migration 模式（PostgreSQL/MySQL/NoSQL） |
 | **[sql-best-practices](sql-best-practices/)** | SQL 撰寫風格、JOIN / subqueries、效能優化與安全性（防 SQL Injection） |
 | **[prisma-drizzle](prisma-drizzle/)** | Prisma / Drizzle ORM schema、migrations、relations、query patterns、transactions 與 TypeScript database access |
+| **[openai-api-development](openai-api-development/)** | OpenAI Responses API、model selection、structured outputs、function calling、tools、streaming 與 production integration |
+| **[agents-sdk-development](agents-sdk-development/)** | OpenAI Agents SDK agents、tools、handoffs、guardrails、tracing、多 agent workflow 與 production observability |
+| **[rag-vector-search](rag-vector-search/)** | RAG / vector search ingestion、chunking、embeddings、hybrid retrieval、reranking、citations 與 retrieval evaluation |
+| **[llm-evals](llm-evals/)** | LLM evals、golden datasets、graders、prompt regression、trace grading、RAG/agent metrics 與 release gates |
 | **[supabase-development](supabase-development/)** | Supabase Postgres、RLS、Auth、Storage、Edge Functions、migrations 與 production workflow |
 | **[stripe-payments](stripe-payments/)** | Stripe Checkout、PaymentIntents、subscriptions、webhooks、idempotency、billing 與 payments testing |
 | **[auth-integration](auth-integration/)** | Auth.js / NextAuth / Better Auth / Clerk / Auth0 / Supabase Auth 等登入、session、OAuth/OIDC 與 authorization boundaries |
