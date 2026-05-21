@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-05-21T02:00:00Z",
-  "total": 157,
+  "updated": "2026-05-21T03:00:00Z",
+  "total": 161,
   "skills": [
     {
       "name": "todo-first",
@@ -939,6 +939,74 @@
         "rag",
         "agents",
         "quality"
+      ]
+    },
+    {
+      "name": "vercel-deployment",
+      "description": "Vercel deployment workflow covering projects, builds, environment variables, preview and production deployments, domains, redirects, functions, edge runtime, Next.js behavior, rollback, observability, and release checks. Use when deploying, debugging, or reviewing apps on Vercel.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "vercel",
+        "deployment",
+        "nextjs",
+        "preview",
+        "environment-variables",
+        "serverless",
+        "edge"
+      ]
+    },
+    {
+      "name": "cloudflare-development",
+      "description": "Cloudflare development workflow covering Workers, Pages, Wrangler, bindings, environment variables, D1, KV, R2, Durable Objects, Queues, Hyperdrive, local development, deployment, observability, and edge runtime constraints. Use when building or debugging apps on Cloudflare's developer platform.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "cloudflare",
+        "workers",
+        "pages",
+        "d1",
+        "r2",
+        "kv",
+        "durable-objects"
+      ]
+    },
+    {
+      "name": "aws-operations",
+      "description": "AWS operations workflow covering IAM, accounts, regions, Lambda, API Gateway, S3, CloudFront, ECS, RDS, VPC, CloudWatch, CDK, deployment safety, cost controls, security review, and incident response. Use when building, deploying, debugging, or reviewing AWS-backed systems.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "aws",
+        "iam",
+        "lambda",
+        "s3",
+        "cloudfront",
+        "cdk",
+        "operations"
+      ]
+    },
+    {
+      "name": "react-native-expo",
+      "description": "React Native and Expo development workflow covering Expo Router, native modules, permissions, app config, EAS Build, EAS Update, EAS Submit, iOS and Android release profiles, device testing, performance, accessibility, and store readiness. Use when building or debugging mobile apps with React Native or Expo.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "react-native",
+        "expo",
+        "mobile",
+        "eas",
+        "ios",
+        "android",
+        "app-store"
       ]
     },
     {

@@ -36,10 +36,10 @@
 ## Current Catalog Snapshot
 
 - Last reviewed: 2026-05-21.
-- `skills.json` currently lists 157 skills.
-- Root skill directories with `SKILL.md`: 157.
+- `skills.json` currently lists 161 skills.
+- Root skill directories with `SKILL.md`: 161.
 - Catalog-to-folder check: no missing catalog entries and no missing skill directories were found.
-- Category counts: `development` 126, `productivity` 16, `browser-automation` 7, `cli-utilities` 3, `coding-agents-ides` 3, `communication` 1, `search-research` 1.
+- Category counts: `development` 130, `productivity` 16, `browser-automation` 7, `cli-utilities` 3, `coding-agents-ides` 3, `communication` 1, `search-research` 1.
 - Catalog validation passed with `npm run validate`.
 - CLI smoke checks passed with `node autoverse-cli.js --help`, `node autoverse-cli.js list`, `node autoverse-cli.js search video`, and `node autoverse-cli.js info python-development`.
 
