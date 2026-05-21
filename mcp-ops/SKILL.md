@@ -1,6 +1,6 @@
 ---
 name: mcp-ops
-description: MCP workflow for listing, configuring, authenticating, and calling MCP servers or tools from the terminal. Use when a task needs MCP server discovery, tool invocation, auth setup, or type/CLI generation.
+description: MCP workflow for listing, configuring, authenticating, and calling MCP servers or tools from the terminal. Use when a task needs MCP server discovery, tool invocation, auth setup, or type and CLI generation.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

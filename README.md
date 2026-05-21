@@ -53,13 +53,13 @@ autoverse install --all --agent cursor
 
 Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順序本身大致相同。
 
-如果有部署或維運需求，再接對應技術棧 skill；目前沒有獨立的通用部署 skill。
+如果有部署或維運需求，再接 `deployment-operations` 或對應技術棧 skill。
 
 ---
 
 ## 收錄 Skills
 
-目前共收錄 **147** 個 skills：**116** 個 Development、**16** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
+目前共收錄 **148** 個 skills：**117** 個 Development、**16** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
 
 ### 前端技能快速索引（按用途）
 
@@ -222,6 +222,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 | **[lobe-ui-development](lobe-ui-development/)** | @lobehub/ui React / Next.js / AIGC UI 元件整合 |
 | **[lobe-icons-usage](lobe-icons-usage/)** | @lobehub/icons AI / LLM 品牌圖示選用與整合 |
 | **[coding-standards](coding-standards/)** | TS/JS/React/Node 通用程式規範與架構標準（lint、format、types、tests、a11y、security） |
+| **[karpathy-guidelines](karpathy-guidelines/)** | 降低 LLM coding 常見錯誤的行為準則（釐清假設、避免過度設計、精準修改、可驗證目標） |
 | **[jquery-development](jquery-development/)** | jQuery 開發最佳實踐（Legacy 專案、AJAX、安全、遷移指南） |
 | **[jquery-version-migration](jquery-version-migration/)** | jQuery 1.x / 2.x / 3.x / 4.x 版本盤點、Migrate warnings 與分段升級路線 |
 | **[jquery-4-migration](jquery-4-migration/)** | jQuery 3.x -> 4.x 升級（removed APIs、Migrate、slim/full、WordPress 相容） |
@@ -246,7 +247,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 | **[skillforge](skillforge/)** | Skill 打包、簽章、版本與評測的 quality gate |
 | **[skill-scan](skill-scan/)** | Skill package 第一輪掃描與風險 triage |
 | **[skill-explorer](skill-explorer/)** | Skill 搜尋、導覽與分類映射 |
-| **[skill-gap-analyzer](skill-gap-analyzer/)** | 比對本地 skills 與 LobeHub 市集，先產生搜尋關鍵字，再判斷要升級、補新 skill，或維持不變 |
+| **[skill-gap-analyzer](skill-gap-analyzer/)** | 比對本地 skills 與外部 marketplace / GitHub 候選，判斷要升級、補新 skill，或維持不變 |
 | **[git-advanced](git-advanced/)** | 進階 Git 工作流：worktree、bisect、rebase、recovery、hooks |
 | **[github-code-review](github-code-review/)** | GitHub PR / diff / check review，偏向找出具體問題與風險 |
 | **[github-inline-review](github-inline-review/)** | 使用 `gh api` 對 GitHub PR 批次送出 inline comments 與 suggestion blocks |
@@ -304,7 +305,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 |-------|------|
 | **[terminal-ops](terminal-ops/)** | 終端機執行 / 驗證 / repo 狀態 / 窄修復證據流程 |
 | **[skill-executor](skill-executor/)** | Skill 的 sandbox 執行、輸出驗證與可重現性檢查 |
-| **[skillctl](skillctl/)** | Skill 搜尋 / 安裝 / 列表 / 輕量驗證的 CLI 路由 |
+| **[skillctl](skillctl/)** | 本地與外部 skill 搜尋 / 安裝 / 列表 / 更新 / 輕量驗證的 CLI 路由 |
 
 ### 🌐 Search & Research（搜尋與研究）
 

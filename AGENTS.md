@@ -9,7 +9,8 @@
 
 ## Commands
 
-- There are no `package.json` scripts, dependencies, test runner, linter, formatter, or CI workflow configured.
+- There are no runtime dependencies, test runner, linter, or formatter configured.
+- Use `npm run validate` to check `skills.json`, root skill folders, frontmatter consistency, and README skill count.
 - Use `node autoverse-cli.js --help` to smoke-test CLI parsing.
 - Use `node autoverse-cli.js list`, `node autoverse-cli.js search <keyword>`, and `node autoverse-cli.js info <skill-name>` for focused catalog checks.
 - Avoid running `install`, `update`, or `uninstall` as validation unless the task is specifically about installation; those commands clone GitHub repos and write into user or project agent directories.
@@ -39,10 +40,10 @@
 - Root skill directories with `SKILL.md`: 148.
 - Catalog-to-folder check: no missing catalog entries and no missing skill directories were found.
 - Category counts: `development` 117, `productivity` 16, `browser-automation` 7, `cli-utilities` 3, `coding-agents-ides` 3, `communication` 1, `search-research` 1.
+- Catalog validation passed with `npm run validate`.
 - CLI smoke checks passed with `node autoverse-cli.js --help`, `node autoverse-cli.js list`, `node autoverse-cli.js search video`, and `node autoverse-cli.js info python-development`.
 
 ## Known Issues
 
 - `repo-ready/SKILL.md` currently has `license: MIT`; verify whether it is intended as a third-party/adapted exception or should be normalized to `Apache-2.0`.
-- `README.md` appears mojibake/corrupted in terminal output; verify encoding before editing or publishing README changes.
-- Some user-facing status/error strings in `autoverse-cli.js` also appear mojibake/corrupted, though successful command parsing and catalog lookup still work.
+- README and CLI Chinese text should be read as UTF-8; PowerShell's default output encoding may display mojibake if `-Encoding UTF8` is omitted.

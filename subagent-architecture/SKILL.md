@@ -1,6 +1,6 @@
 ---
 name: subagent-architecture
-description: Subagent architecture and orchestration guidance for splitting complex work into focused agents, defining responsibilities, handoff contracts, context limits, and parallel or sequential execution. Use when designing or creating subagents, planning multi-agent workflows, or deciding whether a task should stay in one agent or be delegated.
+description: Subagent architecture and orchestration guide for splitting complex work into focused agents, defining responsibilities, handoff contracts, context limits, and parallel or sequential execution. Use when designing or creating subagents, planning multi-agent workflows, or deciding whether a task should stay in one agent or be delegated.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

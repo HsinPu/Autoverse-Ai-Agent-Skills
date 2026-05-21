@@ -1,6 +1,6 @@
 ---
 name: skill-gap-analyzer
-description: Compare local skills against external marketplace or GitHub skill candidates and generate search keywords to find gaps, overlaps, and upgrade opportunities. Use when deciding whether to improve an existing skill, add a new skill, adapt marketplace ideas, or keep the catalog unchanged.
+description: Skill catalog gap analysis workflow for generating search keywords, comparing local skills with external marketplace or GitHub candidates, and deciding whether to upgrade an existing skill, add a new one, adapt marketplace ideas, or keep the catalog unchanged. Use when evaluating coverage gaps, overlap, or upgrade opportunities in a skill catalog.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

@@ -15,10 +15,14 @@
   "bin": {
     "autoverse": "./autoverse-cli.js"
   },
+  "scripts": {
+    "validate": "node scripts/validate-catalog.js"
+  },
   "files": [
     "autoverse-cli.js",
     "skills.json",
     "README.md",
+    "scripts/validate-catalog.js",
     "LICENSE"
   ],
   "engines": {

@@ -1,6 +1,6 @@
 ---
 name: specification-authoring
-description: "Technical specification authoring guide for writing, restructuring, and reviewing Spec documents with required YAML front matter, fixed chapter structure, mirrored functional and technical numbering, Mermaid diagrams, and code-to-spec workflow support. Use when producing a Spec from requirements or reverse-engineering a codebase, or when checking completeness and version history."
+description: "Technical specification authoring guide for writing, restructuring, and reviewing Spec documents with required YAML front matter, fixed chapter structure, mirrored feature numbering, Mermaid diagrams, and code-to-spec workflow support. Use when producing a Spec from requirements or reverse-engineering a codebase, or when checking completeness and version history."
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

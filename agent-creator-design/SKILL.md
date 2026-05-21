@@ -1,6 +1,6 @@
 ---
 name: agent-creator-design
-description: System prompt and agent design guide for writing clear, maintainable instruction sets, metadata, structure, and output rules. Use when creating a new agent prompt, redesigning prompt structure, or refining existing system prompt content.
+description: System prompt design guide for writing maintainable agent instructions, YAML metadata, four-part body structure, templates, and output rules. Use when creating a new agent prompt, refining an existing system prompt, or deciding how to structure a focused role or workflow.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

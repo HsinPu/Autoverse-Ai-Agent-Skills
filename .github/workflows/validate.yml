@@ -1,0 +1,30 @@
+name: Validate
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  catalog:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Validate catalog
+        run: npm run validate
+
+      - name: Smoke test CLI
+        run: |
+          node autoverse-cli.js --help
+          node autoverse-cli.js list
+          node autoverse-cli.js search python
+          node autoverse-cli.js info python-development
