@@ -59,7 +59,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 
 ## 收錄 Skills
 
-目前共收錄 **161** 個 skills：**130** 個 Development、**16** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
+目前共收錄 **164** 個 skills：**133** 個 Development、**16** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
 
 ### 前端技能快速索引（按用途）
 
@@ -76,6 +76,9 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 - `react-perf`
 - `nextjs-development`
 - `react-native-expo`
+- `flutter-development`
+- `mobile-app-testing`
+- `app-store-release`
 - `frontend-testing`
 - `frontend-code-review`
 - `shadcn-ui`
@@ -165,6 +168,9 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 | **[vite](vite/)** | Vite build tool、vite.config.ts、plugins、SSR、migration |
 | **[nextjs-development](nextjs-development/)** | Next.js App Router、Server/Client Components、data fetching、cache、Server Actions、Route Handlers 與 deployment |
 | **[react-native-expo](react-native-expo/)** | React Native / Expo、Expo Router、EAS Build / Update / Submit、permissions、device testing 與 store readiness |
+| **[flutter-development](flutter-development/)** | Flutter / Dart、widgets、layout、state management、navigation、testing、performance、accessibility、build 與 release |
+| **[mobile-app-testing](mobile-app-testing/)** | iOS / Android device matrix、permissions、offline、deep links、push、crash reporting、accessibility 與 Maestro/Appium/Detox |
+| **[app-store-release](app-store-release/)** | App Store Connect、TestFlight、Google Play Console、privacy labels、Data Safety、review、rollout 與 rejection handling |
 | **[python-development](python-development/)** | Python 開發參考（專案架構、PEP 8、型別、Docstring、設計模式、現代工具鏈） |
 | **[python-data-engineering](python-data-engineering/)** | Python 資料工程 / 分析 / ETL（DataFrame、Jupyter、Parquet、Pipeline） |
 | **[python-web-scraping](python-web-scraping/)** | Python 網頁擷取 / Scraping（HTML 解析、分頁、去重、輸出） |

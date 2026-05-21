@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-05-21T03:00:00Z",
-  "total": 161,
+  "updated": "2026-05-21T04:00:00Z",
+  "total": 164,
   "skills": [
     {
       "name": "todo-first",
@@ -1007,6 +1007,57 @@
         "ios",
         "android",
         "app-store"
+      ]
+    },
+    {
+      "name": "flutter-development",
+      "description": "Flutter development workflow covering Dart, widgets, layout, state management, navigation, forms, networking, platform integration, testing, performance, accessibility, build, and release. Use when building, reviewing, or debugging Flutter apps for iOS, Android, web, or desktop.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "flutter",
+        "dart",
+        "mobile",
+        "widgets",
+        "state-management",
+        "testing",
+        "release"
+      ]
+    },
+    {
+      "name": "mobile-app-testing",
+      "description": "Mobile app testing workflow covering iOS and Android device matrices, simulators, permissions, offline behavior, deep links, push notifications, purchases, crash reporting, accessibility, performance, TestFlight, internal testing, and automation with Maestro, Appium, Detox, or native test tools.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "mobile",
+        "testing",
+        "ios",
+        "android",
+        "maestro",
+        "appium",
+        "detox"
+      ]
+    },
+    {
+      "name": "app-store-release",
+      "description": "Mobile app store release workflow covering App Store Connect, TestFlight, Google Play Console, internal and closed testing, versioning, signing, screenshots, metadata, privacy labels, data safety, review guidelines, rollout, rejection handling, and rollback planning.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "app-store",
+        "google-play",
+        "testflight",
+        "mobile",
+        "release",
+        "privacy",
+        "review"
       ]
     },
     {
