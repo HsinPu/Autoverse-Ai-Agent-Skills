@@ -59,7 +59,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 
 ## 收錄 Skills
 
-目前共收錄 **148** 個 skills：**117** 個 Development、**16** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
+目前共收錄 **153** 個 skills：**122** 個 Development、**16** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
 
 ### 前端技能快速索引（按用途）
 
@@ -74,6 +74,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 
 - `react-ui-patterns`
 - `react-perf`
+- `nextjs-development`
 - `frontend-testing`
 - `frontend-code-review`
 - `shadcn-ui`
@@ -137,6 +138,10 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 - `vite`
 - `vue-debug-guides`
 - `nuxt-development`
+- `supabase-development`
+- `stripe-payments`
+- `auth-integration`
+- `prisma-drizzle`
 - `jquery-development`
 - `jquery-version-migration`
 - `jquery-4-migration`
@@ -150,6 +155,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 | **[typescript-development](typescript-development/)** | TypeScript / JavaScript 開發參考（型別安全、設計模式、重構、TS patterns） |
 | **[javascript-development](javascript-development/)** | 現代 JavaScript 開發最佳實踐（Node.js 與瀏覽器） |
 | **[vite](vite/)** | Vite build tool、vite.config.ts、plugins、SSR、migration |
+| **[nextjs-development](nextjs-development/)** | Next.js App Router、Server/Client Components、data fetching、cache、Server Actions、Route Handlers 與 deployment |
 | **[python-development](python-development/)** | Python 開發參考（專案架構、PEP 8、型別、Docstring、設計模式、現代工具鏈） |
 | **[python-data-engineering](python-data-engineering/)** | Python 資料工程 / 分析 / ETL（DataFrame、Jupyter、Parquet、Pipeline） |
 | **[python-web-scraping](python-web-scraping/)** | Python 網頁擷取 / Scraping（HTML 解析、分頁、去重、輸出） |
@@ -230,6 +236,10 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 | **[frontend-stack-inference](frontend-stack-inference/)** | 前端技術棧盤點（jQuery、Bootstrap、React/Vue、build tools、legacy signals） |
 | **[database-design](database-design/)** | 資料庫 Schema 設計、索引優化、Migration 模式（PostgreSQL/MySQL/NoSQL） |
 | **[sql-best-practices](sql-best-practices/)** | SQL 撰寫風格、JOIN / subqueries、效能優化與安全性（防 SQL Injection） |
+| **[prisma-drizzle](prisma-drizzle/)** | Prisma / Drizzle ORM schema、migrations、relations、query patterns、transactions 與 TypeScript database access |
+| **[supabase-development](supabase-development/)** | Supabase Postgres、RLS、Auth、Storage、Edge Functions、migrations 與 production workflow |
+| **[stripe-payments](stripe-payments/)** | Stripe Checkout、PaymentIntents、subscriptions、webhooks、idempotency、billing 與 payments testing |
+| **[auth-integration](auth-integration/)** | Auth.js / NextAuth / Better Auth / Clerk / Auth0 / Supabase Auth 等登入、session、OAuth/OIDC 與 authorization boundaries |
 | **[git-operations](git-operations/)** | Git 工作流（clone、branch、stage、commit、push、pull、merge、rebase）與狀態檢查，Windows 環境 |
 | **[code-review](code-review/)** | 自動化程式碼審查（正確性、安全、效能、架構、測試）含嚴重度分級 |
 | **[security-code-review](security-code-review/)** | 高信心安全 code review（OWASP、XSS、Injection、SSRF、Auth、Secrets） |

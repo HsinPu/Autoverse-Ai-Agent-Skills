@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-05-21T00:00:00Z",
-  "total": 148,
+  "updated": "2026-05-21T01:00:00Z",
+  "total": 153,
   "skills": [
     {
       "name": "todo-first",
@@ -786,6 +786,91 @@
         "code-review",
         "verification",
         "workflow"
+      ]
+    },
+    {
+      "name": "nextjs-development",
+      "description": "Next.js development guide covering App Router, Server and Client Components, data fetching, caching, Server Actions, route handlers, metadata, performance, security, and deployment. Use when building, reviewing, or refactoring Next.js applications.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "nextjs",
+        "react",
+        "app-router",
+        "server-components",
+        "server-actions",
+        "caching",
+        "deployment"
+      ]
+    },
+    {
+      "name": "supabase-development",
+      "description": "Supabase development guide covering Postgres schema design, Row Level Security, Auth, Storage, Edge Functions, migrations, realtime, environment keys, and local-to-production workflows. Use when building, reviewing, or debugging Supabase-backed applications.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "supabase",
+        "postgres",
+        "rls",
+        "auth",
+        "storage",
+        "edge-functions",
+        "migrations"
+      ]
+    },
+    {
+      "name": "stripe-payments",
+      "description": "Stripe payments guide covering Checkout, PaymentIntents, subscriptions, webhooks, idempotency, customer records, Connect basics, testing, and secure server-side integration. Use when implementing, reviewing, or debugging payments, billing, or Stripe webhook flows.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "stripe",
+        "payments",
+        "checkout",
+        "billing",
+        "webhooks",
+        "subscriptions",
+        "idempotency"
+      ]
+    },
+    {
+      "name": "auth-integration",
+      "description": "Authentication integration guide covering sessions, OAuth/OIDC providers, credentials, magic links, passkeys, authorization boundaries, cookies, CSRF, callbacks, adapters, and framework integration. Use when adding, reviewing, or debugging app authentication flows.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "auth",
+        "oauth",
+        "oidc",
+        "sessions",
+        "cookies",
+        "authorization",
+        "security"
+      ]
+    },
+    {
+      "name": "prisma-drizzle",
+      "description": "Prisma and Drizzle ORM guide covering schema modeling, migrations, relations, query patterns, transactions, raw SQL boundaries, type safety, generated clients, deployment, and production troubleshooting. Use when implementing or reviewing TypeScript database access with Prisma ORM or Drizzle ORM.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "prisma",
+        "drizzle",
+        "orm",
+        "typescript",
+        "database",
+        "migrations",
+        "sql"
       ]
     },
     {
