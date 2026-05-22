@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-05-22T01:00:00Z",
-  "total": 168,
+  "updated": "2026-05-22T02:00:00Z",
+  "total": 169,
   "skills": [
     {
       "name": "todo-first",
@@ -85,6 +85,23 @@
         "refactoring",
         "code-quality",
         "clean-code"
+      ]
+    },
+    {
+      "name": "code-change-workflow",
+      "description": "Pre-change code workflow for understanding existing behavior before editing. Use when modifying code in an existing project to inspect entry points, call chains, data flow, tests, constraints, and verification paths before making the smallest safe change.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "code-change",
+        "workflow",
+        "implementation",
+        "analysis",
+        "call-chain",
+        "data-flow",
+        "verification"
       ]
     },
     {

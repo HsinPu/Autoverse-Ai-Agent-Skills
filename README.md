@@ -59,7 +59,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 
 ## 收錄 Skills
 
-目前共收錄 **168** 個 skills：**137** 個 Development、**16** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
+目前共收錄 **169** 個 skills：**138** 個 Development、**16** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
 
 ### 前端技能快速索引（按用途）
 
@@ -272,6 +272,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 | **[security-code-review](security-code-review/)** | 高信心安全 code review（OWASP、XSS、Injection、SSRF、Auth、Secrets） |
 | **[react-perf](react-perf/)** | React 效能診斷與優化（re-render、waterfall、bundle、slow UI） |
 | **[testing-strategy](testing-strategy/)** | 測試分層、fixtures、flakiness 與 coverage 取捨 |
+| **[code-change-workflow](code-change-workflow/)** | 修改既有 code 前先追入口、呼叫鏈、資料流、測試與驗證方式，再做最小安全修改 |
 | **[code-refactoring](code-refactoring/)** | 程式碼重構技巧（Code Smells、安全流程、語言無關原則） |
 | **[logging-patterns](logging-patterns/)** | 撰寫乾淨一致的 log 訊息模式（level、message shape、context fields、低噪音） |
 | **[api-doc-comments](api-doc-comments/)** | 公共 API docstring / Javadoc / TSDoc 內容撰寫（契約、參數、回傳、例外、範例） |

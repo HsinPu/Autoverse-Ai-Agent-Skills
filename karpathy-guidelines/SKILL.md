@@ -95,6 +95,7 @@ Do not ask merely to avoid ordinary implementation judgment. If the ambiguity is
 ## Handoff
 
 - Use `code-review` when the user asks for a review or PR findings.
+- Use `code-change-workflow` before editing existing code when the current entry point, call chain, or verification path is not yet clear.
 - Use `code-refactoring` when the main goal is behavior-preserving cleanup.
 - Use `testing-strategy` when verification scope is the main question.
 - Use language-specific skills such as `typescript-development`, `javascript-development`, `python-development`, or `java-development` for implementation details.

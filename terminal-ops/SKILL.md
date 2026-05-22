@@ -28,5 +28,6 @@ Use this skill when proof matters.
 
 ## Handoff
 
+- For code edits that require understanding current behavior before changing files, use `code-change-workflow`.
 - For git-specific work, use `git-operations`.
 - For command-oriented task delegation, use `coding-agent`.
