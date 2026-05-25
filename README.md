@@ -59,7 +59,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 
 ## 收錄 Skills
 
-目前共收錄 **169** 個 skills：**138** 個 Development、**16** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
+目前共收錄 **170** 個 skills：**139** 個 Development、**16** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
 
 ### 前端技能快速索引（按用途）
 
@@ -124,6 +124,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 - `ai-video-generation`
 - `ai-video-prompting`
 - `storyboard-creation`
+- `vlog-production`
 - `short-video-script`
 - `ugc-video-ads`
 - `avatar-video-generation`
@@ -223,6 +224,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 | **[ai-video-generation](ai-video-generation/)** | AI text-to-video / image-to-video、模型選擇、prompt iteration 與輸出檢查 |
 | **[ai-video-prompting](ai-video-prompting/)** | AI 影片 prompt 設計、鏡頭語言、motion、timing、continuity 與 negative prompts |
 | **[storyboard-creation](storyboard-creation/)** | 影片分鏡、shot list、timing、voiceover、visual prompt 與 production table |
+| **[vlog-production](vlog-production/)** | Vlog concept、story arc、talking-head beats、B-roll、shot list、editing rhythm、captions、title、thumbnail 與 platform packaging |
 | **[short-video-script](short-video-script/)** | TikTok / Reels / Shorts 短影音 hook、口播稿、CTA 與 retention scripts |
 | **[ugc-video-ads](ugc-video-ads/)** | UGC-style 影片廣告、creator persona、hook、product demo、B-roll 與平台素材 |
 | **[avatar-video-generation](avatar-video-generation/)** | AI avatar、digital human、talking-head、lipsync、consent 與 export QA |

@@ -28,6 +28,7 @@ Use this skill when the task is to write a short social video script.
 
 ## Handoff
 
+- For vlog story arcs, filming plans, and platform packaging, use `vlog-production`.
 - For UGC ad structure, use `ugc-video-ads`.
 - For shot-level planning, use `storyboard-creation`.
 - For voiceover generation, use `text-to-speech`.

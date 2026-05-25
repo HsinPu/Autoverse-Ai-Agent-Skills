@@ -35,6 +35,7 @@ Shot | Duration | Visual | Camera/Motion | Audio/Dialogue | Assets | Notes
 
 ## Handoff
 
+- For vlog story arcs, B-roll planning, and creator-style video packaging, use `vlog-production`.
 - For AI video prompt wording, use `ai-video-prompting`.
 - For short-form hooks and scripts, use `short-video-script`.
 - For code-generated execution, use `remotion-video-toolkit`.

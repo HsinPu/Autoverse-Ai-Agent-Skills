@@ -25,6 +25,7 @@ Use this skill when the task is to modify an existing video file.
 
 ## Handoff
 
+- For vlog edit structure, B-roll planning, titles, thumbnails, and platform packaging, use `vlog-production`.
 - For programmatic video generation, use `remotion-video-toolkit`.
 - For summarizing or transcribing video content, use `summary-ops`.
 - For command execution and evidence, use `terminal-ops`.
