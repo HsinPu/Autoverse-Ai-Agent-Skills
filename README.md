@@ -59,7 +59,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 
 ## 收錄 Skills
 
-目前共收錄 **171** 個 skills：**139** 個 Development、**17** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
+目前共收錄 **172** 個 skills：**139** 個 Development、**18** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
 
 ### 前端技能快速索引（按用途）
 
@@ -318,6 +318,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 | **[answer-writing](answer-writing/)** | 撰寫最終回應的指引（繁體中文預設、清晰可行動） |
 | **[file-organizer](file-organizer/)** | 智慧整理電腦檔案（找重複檔、建議架構、自動清理）Windows 環境 |
 | **[downloads-desktop-cleanup](downloads-desktop-cleanup/)** | Downloads / Desktop 快速盤點、分類、重複/大型/舊檔候選、dry-run 計畫與安全搬移 |
+| **[data-organization-system](data-organization-system/)** | 資料整理系統設計（taxonomy、metadata、lifecycle、retention、privacy 與批次 migration） |
 | **[skill-security-review](skill-security-review/)** | 第三方 skill 安全審核（來源、權限、可疑行為、風險分級） |
 | **[summary-ops](summary-ops/)** | 網址、影片、音訊與長文摘要 / transcript 擷取 |
 | **[web-research-ops](web-research-ops/)** | 網路研究、來源查核與事實交叉比對 |
