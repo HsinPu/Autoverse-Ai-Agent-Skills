@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "updated": "2026-05-29T01:00:00Z",
-  "total": 172,
+  "total": 173,
   "skills": [
     {
       "name": "todo-first",
@@ -218,7 +218,7 @@
     },
     {
       "name": "file-organizer",
-      "description": "File organization guide for restructuring folders, finding duplicates, recommending cleaner hierarchies, and automating cleanup workflows. Use when organizing Downloads, Desktop, Documents, project archives, media folders, or improving ongoing file management and disk hygiene habits.",
+      "description": "File organization guide for restructuring folders, finding duplicates, recommending cleaner hierarchies, and automating cleanup workflows. Use when organizing Downloads, Desktop, Documents, folder trees, project archives, media folders, or improving ongoing file management and disk hygiene habits.",
       "category": "productivity",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -226,6 +226,21 @@
       "tags": [
         "file-management",
         "organization",
+        "cleanup"
+      ]
+    },
+    {
+      "name": "folder-structure-cleanup",
+      "description": "Folder structure cleanup workflow for auditing, simplifying, merging, renaming, archiving, and documenting messy directory trees. Use when the user asks to organize folders rather than individual files, reduce nested folders, clean empty folders, separate active and archived project folders, standardize folder names, or design a safer folder hierarchy with a dry-run move plan.",
+      "category": "productivity",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "folders",
+        "directory-tree",
+        "organization",
+        "archive",
         "cleanup"
       ]
     },

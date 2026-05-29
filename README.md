@@ -59,7 +59,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 
 ## 收錄 Skills
 
-目前共收錄 **172** 個 skills：**139** 個 Development、**18** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
+目前共收錄 **173** 個 skills：**139** 個 Development、**19** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
 
 ### 前端技能快速索引（按用途）
 
@@ -317,6 +317,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 | **[ask-questions-if-underspecified](ask-questions-if-underspecified/)** | 需求不明時先問澄清問題（僅使用者明確要求時使用） |
 | **[answer-writing](answer-writing/)** | 撰寫最終回應的指引（繁體中文預設、清晰可行動） |
 | **[file-organizer](file-organizer/)** | 智慧整理電腦檔案（找重複檔、建議架構、自動清理）Windows 環境 |
+| **[folder-structure-cleanup](folder-structure-cleanup/)** | 資料夾結構整理（空資料夾、巢狀層級、合併、命名、active/archive 分離與 dry-run 搬移計畫） |
 | **[downloads-desktop-cleanup](downloads-desktop-cleanup/)** | Downloads / Desktop 快速盤點、分類、重複/大型/舊檔候選、dry-run 計畫與安全搬移 |
 | **[data-organization-system](data-organization-system/)** | 資料整理系統設計（taxonomy、metadata、lifecycle、retention、privacy 與批次 migration） |
 | **[skill-security-review](skill-security-review/)** | 第三方 skill 安全審核（來源、權限、可疑行為、風險分級） |

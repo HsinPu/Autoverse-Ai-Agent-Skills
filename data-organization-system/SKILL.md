@@ -210,6 +210,7 @@ Define a lightweight operating rhythm:
 ## Handoffs
 
 - Use `file-organizer` for physical file moves and duplicate cleanup.
+- Use `folder-structure-cleanup` for folder hierarchy audits, folder merges, flattening, empty-folder cleanup, and active/archive separation.
 - Use `downloads-desktop-cleanup` for Downloads/Desktop inbox triage.
 - Use `python-data-engineering` for cleaning tabular data or building reproducible ETL.
 - Use `spreadsheet-ops`, `pdf-operations`, `word-document-ops`, and `image-utils` when content extraction or format-specific processing is needed.

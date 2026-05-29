@@ -38,7 +38,7 @@ foreach ($Target in $Targets) {
 }
 ```
 
-Also check obvious subfolder piles only when the top-level inventory suggests they matter; do not recurse through active project folders by default.
+Also check obvious subfolder piles only when the top-level inventory suggests they matter; do not recurse through active project folders by default. If the main problem is nested folders, duplicate folder names, or folder-tree design, hand off to `folder-structure-cleanup`.
 
 ### 2. Classify into cleanup buckets
 
@@ -167,3 +167,9 @@ End with:
 ## Safety Baseline
 
 Default behavior is analysis plus dry-run. Moving requires approval. Deleting requires a second explicit approval for the exact delete list.
+
+## Handoffs
+
+- Use `folder-structure-cleanup` when the cleanup is mostly folder hierarchy, folder merges, empty folders, or archive structure.
+- Use `file-organizer` when the cleanup is general file sorting across multiple folders.
+- Use `data-organization-system` when the user needs a long-term taxonomy, metadata, lifecycle, and retention policy.

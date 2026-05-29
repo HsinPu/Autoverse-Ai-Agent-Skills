@@ -1,6 +1,6 @@
 ---
 name: file-organizer
-description: File organization guide for restructuring folders, finding duplicates, recommending cleaner hierarchies, and automating cleanup workflows. Use when organizing Downloads, Desktop, Documents, project archives, media folders, or improving ongoing file management and disk hygiene habits.
+description: File organization guide for restructuring folders, finding duplicates, recommending cleaner hierarchies, and automating cleanup workflows. Use when organizing Downloads, Desktop, Documents, folder trees, project archives, media folders, or improving ongoing file management and disk hygiene habits.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---
@@ -15,12 +15,12 @@ Organize local files with an evidence-first, plan-before-moving workflow. Defaul
 
 Clarify or infer:
 
-- Target paths: Downloads, Desktop, Documents, project folders, media folders, or a specific path.
+- Target paths: Downloads, Desktop, Documents, project folders, media folders, folder trees, or a specific path.
 - Goal: easier retrieval, duplicate cleanup, disk space recovery, archive preparation, or a new long-term structure.
 - Risk boundaries: active projects, synced cloud folders, legal/tax/medical files, credentials, private photos, or anything the user says not to touch.
 - Strength: report only, dry-run plan, conservative moves, or approved cleanup.
 
-If the task is specifically "Downloads and Desktop are messy", route to `downloads-desktop-cleanup` when available.
+If the task is specifically "Downloads and Desktop are messy", route to `downloads-desktop-cleanup` when available. If the task is about reorganizing folder trees, merging folders, flattening nesting, or cleaning empty folders, route to `folder-structure-cleanup`.
 
 ### 2. Inventory before changing anything
 
@@ -149,5 +149,6 @@ Finish with:
 ## Handoffs
 
 - Use `downloads-desktop-cleanup` for a focused Downloads/Desktop workflow.
+- Use `folder-structure-cleanup` for folder-tree audits, folder merges, flattening, empty folder cleanup, and active/archive folder separation.
 - Use `pdf-operations`, `word-document-ops`, `spreadsheet-ops`, or `image-utils` when file contents need extraction, conversion, OCR, resizing, or deterministic processing.
 - Use `terminal-ops` when the task is mostly command execution, verification, or git state.
