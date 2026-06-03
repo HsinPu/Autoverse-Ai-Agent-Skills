@@ -16,7 +16,41 @@ Skill 是擴充 AI Agent 能力的**模組化套件**：把專業知識、工作
 
 ## 快速開始
 
-### 方式一：使用 CLI 安裝（推薦）
+### 方式一：免 Node 一鍵安裝（推薦）
+
+Windows PowerShell：
+
+```powershell
+# 安裝所有 skills 到 Codex
+powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Agent codex'
+
+# 安裝單一 skill 到 Codex
+powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Agent codex -Skill python-development'
+```
+
+Linux / macOS：
+
+```bash
+# 安裝所有 skills 到 Codex
+curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --agent codex
+
+# 安裝單一 skill 到 Codex
+curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --agent codex --skill python-development
+```
+
+安全預覽：
+
+```powershell
+powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Agent codex -DryRun'
+```
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --agent codex --dry-run
+```
+
+> 必須指定 `Agent`；未指定 `Skill` 時會安裝全部 skills。若目標 skill 已存在，installer 會先移除舊資料夾再放入最新版。
+
+### 方式二：使用 Node CLI（進階）
 
 ```bash
 # 全域安裝 CLI
@@ -398,10 +432,29 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 | Portable | `.skills/` |
 
 > **備註**：OpenCode 也相容 `.claude/skills/` 與 `.agents/skills/` 路徑。詳見 [OpenCode Agent Skills 文件](https://opencode.ai/docs/skills/)。
+> `cursor`、`vscode`、`copilot`、`project`、`opencode-project` 是專案相對路徑，請先切到目標專案根目錄再執行 installer。
 
 ---
 
 ## CLI 指令參考
+
+### 免 Node Installer
+
+```powershell
+# Windows：安裝全部 skills
+powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Agent <agent-name>'
+
+# Windows：安裝單一 skill
+powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Agent <agent-name> -Skill <skill-name>'
+```
+
+```bash
+# Linux / macOS：安裝全部 skills
+curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --agent <agent-name>
+
+# Linux / macOS：安裝單一 skill
+curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --agent <agent-name> --skill <skill-name>
+```
 
 ### 安裝
 

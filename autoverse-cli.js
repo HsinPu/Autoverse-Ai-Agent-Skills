@@ -18,6 +18,7 @@ const AGENT_PATHS = {
   project: path.join(process.cwd(), '.skills'),
   goose: path.join(os.homedir(), '.config', 'goose', 'skills'),
   opencode: path.join(os.homedir(), '.config', 'opencode', 'skills'),
+  'opencode-project': path.join(process.cwd(), '.opencode', 'skills'),
   letta: path.join(os.homedir(), '.letta', 'skills'),
   gemini: path.join(os.homedir(), '.gemini', 'skills'),
 };
@@ -450,7 +451,7 @@ Autoverse AI Agent Skills - 技能管理工具
 
 支援的 Agent:
   claude, cursor, codex, amp, vscode, copilot,
-  project, goose, opencode, letta, gemini
+  project, goose, opencode, opencode-project, letta, gemini
 
 範例:
   autoverse list
