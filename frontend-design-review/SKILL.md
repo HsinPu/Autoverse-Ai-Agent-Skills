@@ -1,6 +1,6 @@
 ---
 name: frontend-design-review
-description: Frontend design review guide for evaluating implemented UI, PRs, components, and pages against design quality, accessibility, responsive behavior, design-system compliance, visual hierarchy, motion, and production-grade craft. Use for UI code review, design-system audits, accessibility checks, responsive design checks, theme reviews, and detecting generic or inconsistent visual design.
+description: Frontend design review guide for evaluating implemented UI, PRs, components, and pages against design quality, accessibility, responsive behavior, design-system compliance, visual hierarchy, motion, and production-grade craft. Use when performing a UI review, reviewing UI code, auditing design systems, checking accessibility or responsive behavior, reviewing themes, or detecting generic or inconsistent visual design.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

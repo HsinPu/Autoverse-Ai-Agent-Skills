@@ -248,7 +248,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 | **[shadcn-ui](shadcn-ui/)** | shadcn/ui 元件安裝、組合、表單、主題與 Tailwind/Radix 整合 |
 | **[lobe-ui-development](lobe-ui-development/)** | @lobehub/ui React / Next.js / AIGC UI 元件整合 |
 | **[lobe-icons-usage](lobe-icons-usage/)** | @lobehub/icons AI / LLM 品牌圖示選用與整合 |
-| **[coding-standards](coding-standards/)** | TS/JS/React/Node 通用程式規範與架構標準（lint、format、types、tests、a11y、security） |
+| **[coding-standards](coding-standards/)** | TS/JS/React/Node 通用程式規範與架構標準（lint、format、types、constants/config、避免 hardcoded values、tests、a11y、security） |
 | **[karpathy-guidelines](karpathy-guidelines/)** | 降低 LLM coding 常見錯誤的行為準則（釐清假設、避免過度設計、精準修改、可驗證目標） |
 | **[jquery-development](jquery-development/)** | jQuery 開發最佳實踐（Legacy 專案、AJAX、安全、遷移指南） |
 | **[jquery-version-migration](jquery-version-migration/)** | jQuery 1.x / 2.x / 3.x / 4.x 版本盤點、Migrate warnings 與分段升級路線 |
@@ -275,7 +275,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 | **[react-perf](react-perf/)** | React 效能診斷與優化（re-render、waterfall、bundle、slow UI） |
 | **[testing-strategy](testing-strategy/)** | 測試分層、fixtures、flakiness 與 coverage 取捨 |
 | **[code-change-workflow](code-change-workflow/)** | 修改既有 code 前先追入口、呼叫鏈、資料流、測試與驗證方式，再做最小安全修改 |
-| **[code-refactoring](code-refactoring/)** | 程式碼重構技巧（Code Smells、安全流程、語言無關原則） |
+| **[code-refactoring](code-refactoring/)** | 程式碼重構技巧（Code Smells、magic values 改常數、安全流程、語言無關原則） |
 | **[logging-patterns](logging-patterns/)** | 撰寫乾淨一致的 log 訊息模式（level、message shape、context fields、低噪音） |
 | **[api-doc-comments](api-doc-comments/)** | 公共 API docstring / Javadoc / TSDoc 內容撰寫（契約、參數、回傳、例外、範例） |
 | **[openapi-spec-generation](openapi-spec-generation/)** | OpenAPI 3.1 規格生成、更新、驗證與 contract sync |

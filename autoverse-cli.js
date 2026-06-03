@@ -329,13 +329,41 @@ function listSkills(category = null) {
 
 function searchSkills(query) {
   const data = loadSkillsJson();
-  const q = query.toLowerCase();
+  const q = query.trim().toLowerCase();
+  const terms = q.replace(/[^a-z0-9+#]+/g, ' ').split(/\s+/).filter(Boolean);
   
-  const matches = data.skills.filter(s =>
-    s.name.toLowerCase().includes(q) ||
-    s.description.toLowerCase().includes(q) ||
-    (s.tags && s.tags.some(t => t.toLowerCase().includes(q)))
-  );
+  const matches = data.skills.map((skill, index) => {
+    const name = skill.name.toLowerCase();
+    const description = skill.description.toLowerCase();
+    const tags = (skill.tags || []).map(tag => tag.toLowerCase());
+    const haystack = [name, description, ...tags].join(' ');
+    const nameTokens = new Set(
+      name.replace(/[^a-z0-9+#]+/g, ' ').split(/\s+/).filter(Boolean)
+    );
+    const tagTokens = new Set(
+      tags.join(' ').replace(/[^a-z0-9+#]+/g, ' ').split(/\s+/).filter(Boolean)
+    );
+    const normalizedTokens = new Set(
+      haystack.replace(/[^a-z0-9+#]+/g, ' ').split(/\s+/).filter(Boolean)
+    );
+    const nameAndTagTokens = new Set(
+      [name, ...tags].join(' ').replace(/[^a-z0-9+#]+/g, ' ').split(/\s+/).filter(Boolean)
+    );
+
+    let score = 0;
+    if (name === q || tags.includes(q)) score = 100;
+    else if (name.includes(q)) score = 90;
+    else if (tags.some(tag => tag.includes(q))) score = 80;
+    else if (description.includes(q)) score = 70;
+    else if (terms.length > 0 && terms.every(term => nameTokens.has(term))) score = 75;
+    else if (terms.length > 0 && terms.every(term => nameAndTagTokens.has(term))) score = 60;
+    else if (terms.length > 0 && terms.every(term => tagTokens.has(term))) score = 50;
+    else if (terms.length > 0 && terms.every(term => normalizedTokens.has(term))) score = 30;
+
+    return { skill, score, index };
+  }).filter(result => result.score > 0)
+    .sort((a, b) => b.score - a.score || a.index - b.index)
+    .map(result => result.skill);
   
   if (matches.length === 0) {
     console.log(`沒有找到符合 "${query}" 的技能`);

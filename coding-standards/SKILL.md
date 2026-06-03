@@ -1,6 +1,6 @@
 ---
 name: coding-standards
-description: Universal coding standards guide for TypeScript, JavaScript, React, and Node.js projects. Use when establishing or auditing code conventions, ESLint/Prettier/TypeScript strict settings, feature-based folder structure, layered services, React patterns, testing practices, performance, accessibility, or security hygiene.
+description: Universal coding standards guide for TypeScript, JavaScript, React, and Node.js projects. Use when establishing or auditing code conventions, ESLint/Prettier/TypeScript strict settings, feature-based folder structure, layered services, React patterns, testing practices, avoiding hardcoded values, constants/configuration usage, performance, accessibility, or security hygiene.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---
@@ -53,6 +53,14 @@ Before implementing new code or reviewing existing code, make the expected stand
 - Keep async error handling explicit.
 - Avoid hidden side effects in shared utilities.
 - Keep public APIs stable and predictable.
+- Avoid hardcoded values; use named constants, enums, configuration, or design tokens when values have business meaning, are reused, or vary by environment.
+
+## Constants And Configuration
+
+- Use named constants or enums for business rules, thresholds, statuses, and repeated literals.
+- Use configuration or environment variables for deployment-specific values such as URLs, timeouts, feature flags, and credentials references.
+- Use design tokens or CSS variables for colors, spacing, radii, shadows, and typography values when the project has a design system.
+- Never hardcode secrets or credentials in source code.
 
 ## Checkpoints
 

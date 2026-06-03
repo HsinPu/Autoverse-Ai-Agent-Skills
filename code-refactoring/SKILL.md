@@ -1,6 +1,6 @@
 ---
 name: code-refactoring
-description: Code refactoring guide for improving structure, readability, and maintainability without changing behavior. Use when cleaning up legacy code, reducing complexity, or simplifying code that has become hard to understand or extend.
+description: Code refactoring guide for improving structure, readability, and maintainability without changing behavior. Use when cleaning up legacy code, reducing complexity, replacing magic values such as magic numbers or magic strings with named constants, removing hardcoded values, or simplifying code that has become hard to understand or extend.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---

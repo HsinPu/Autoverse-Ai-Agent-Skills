@@ -76,7 +76,7 @@
     },
     {
       "name": "code-refactoring",
-      "description": "Code refactoring guide for improving structure, readability, and maintainability without changing behavior. Use when cleaning up legacy code, reducing complexity, or simplifying code that has become hard to understand or extend.",
+      "description": "Code refactoring guide for improving structure, readability, and maintainability without changing behavior. Use when cleaning up legacy code, reducing complexity, replacing magic values such as magic numbers or magic strings with named constants, removing hardcoded values, or simplifying code that has become hard to understand or extend.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -84,7 +84,11 @@
       "tags": [
         "refactoring",
         "code-quality",
-        "clean-code"
+        "clean-code",
+        "magic-values",
+        "magic-numbers",
+        "hardcoded-values",
+        "constants"
       ]
     },
     {
@@ -155,7 +159,7 @@
     },
     {
       "name": "frontend-design-review",
-      "description": "Frontend design review guide for evaluating implemented UI, PRs, components, and pages against design quality, accessibility, responsive behavior, design-system compliance, visual hierarchy, motion, and production-grade craft. Use for UI code review, design-system audits, accessibility checks, responsive design checks, theme reviews, and detecting generic or inconsistent visual design.",
+      "description": "Frontend design review guide for evaluating implemented UI, PRs, components, and pages against design quality, accessibility, responsive behavior, design-system compliance, visual hierarchy, motion, and production-grade craft. Use when performing a UI review, reviewing UI code, auditing design systems, checking accessibility or responsive behavior, reviewing themes, or detecting generic or inconsistent visual design.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -832,7 +836,7 @@
     },
     {
       "name": "coding-standards",
-      "description": "Universal coding standards guide for TypeScript, JavaScript, React, and Node.js projects. Use when establishing or auditing code conventions, ESLint/Prettier/TypeScript strict settings, feature-based folder structure, layered services, React patterns, testing practices, performance, accessibility, or security hygiene.",
+      "description": "Universal coding standards guide for TypeScript, JavaScript, React, and Node.js projects. Use when establishing or auditing code conventions, ESLint/Prettier/TypeScript strict settings, feature-based folder structure, layered services, React patterns, testing practices, avoiding hardcoded values, constants/configuration usage, performance, accessibility, or security hygiene.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -847,7 +851,10 @@
         "prettier",
         "testing",
         "accessibility",
-        "security"
+        "security",
+        "hardcoded-values",
+        "constants",
+        "configuration"
       ]
     },
     {
@@ -1175,7 +1182,7 @@
     },
     {
       "name": "mobile-app-testing",
-      "description": "Mobile app testing workflow covering iOS and Android device matrices, simulators, permissions, offline behavior, deep links, push notifications, purchases, crash reporting, accessibility, performance, TestFlight, internal testing, and automation with Maestro, Appium, Detox, or native test tools.",
+      "description": "Mobile app testing workflow covering iOS and Android device matrices, simulators, permissions, offline behavior, deep links, push notifications, purchases, crash reporting, accessibility, performance, TestFlight, internal testing, and automation with Maestro, Appium, Detox, or native test tools. Use when planning, writing, or reviewing tests for iOS, Android, React Native, Expo, Flutter, or native mobile apps.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -1192,7 +1199,7 @@
     },
     {
       "name": "app-store-release",
-      "description": "Mobile app store release workflow covering App Store Connect, TestFlight, Google Play Console, internal and closed testing, versioning, signing, screenshots, metadata, privacy labels, data safety, review guidelines, rollout, rejection handling, and rollback planning.",
+      "description": "Mobile app store release workflow covering App Store Connect, TestFlight, Google Play Console, signing, metadata, privacy labels, data safety, review guidelines, rollout, rejection handling, and rollback planning. Use when preparing, reviewing, or troubleshooting App Store, TestFlight, Google Play, internal testing, closed testing, or staged mobile releases.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
