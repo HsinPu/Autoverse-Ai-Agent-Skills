@@ -50,19 +50,6 @@ curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/ma
 
 > 必須指定 `Agent`；未指定 `Skill` 時會安裝全部 skills。若目標 skill 已存在，installer 會先移除舊資料夾再放入最新版。
 
-### 方式二：使用 Node CLI（進階）
-
-```bash
-# 全域安裝 CLI
-npm i -g github:HsinPu/Autoverse-Ai-Agent-Skills
-
-# 安裝單一 skill 到指定 Agent
-autoverse install python-development --agent cursor
-
-# 安裝所有 skills 到指定 Agent
-autoverse install --all --agent cursor
-```
-
 ### 方式二：手動複製
 
 將需要的 skill 資料夾複製到你的 Agent 對應目錄（詳見下方「放置位置」）。
@@ -436,7 +423,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 
 ---
 
-## CLI 指令參考
+## 安裝指令參考
 
 ### 免 Node Installer
 
@@ -456,43 +443,19 @@ curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/ma
 curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --agent <agent-name> --skill <skill-name>
 ```
 
-### 安裝
+### 本地查詢 CLI（可選）
 
-```bash
-# 安裝單一 skill
-autoverse install <skill-name> --agent <agent-name>
-
-# 安裝所有 skills
-autoverse install --all --agent <agent-name>
-
-# 安裝到所有支援的 Agent
-autoverse install <skill-name> --all
-```
-
-### 更新
-
-```bash
-# 更新單一 skill
-autoverse update <skill-name> --agent <agent-name>
-
-# 更新所有 skills
-autoverse update --all --agent <agent-name>
-```
-
-### 查詢
+`autoverse-cli.js` 只保留 catalog 查詢功能；安裝請使用上方免 Node installer。
 
 ```bash
 # 列出所有可用 skills
-autoverse list
+node autoverse-cli.js list
 
 # 搜尋 skill
-autoverse search <keyword>
-```
+node autoverse-cli.js search <keyword>
 
-### 移除 CLI
-
-```bash
-npm uninstall -g autoverse-ai-agent-skills
+# 顯示 skill 詳細資訊
+node autoverse-cli.js info <skill-name>
 ```
 
 ---

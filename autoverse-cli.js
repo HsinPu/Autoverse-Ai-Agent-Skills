@@ -3,10 +3,8 @@
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
-const { execFileSync } = require('child_process');
 
 const SKILLS_JSON = path.join(__dirname, 'skills.json');
-const META_FILE = '.skill-meta.json';
 
 const AGENT_PATHS = {
   claude: path.join(os.homedir(), '.claude', 'skills'),
@@ -32,268 +30,6 @@ function loadSkillsJson() {
     console.log(`警告: 無法讀取 skills.json: ${e.message}`);
   }
   return { skills: [] };
-}
-
-function writeSkillMeta(skillPath, meta) {
-  try {
-    const metaPath = path.join(skillPath, META_FILE);
-    const now = new Date().toISOString();
-    fs.writeFileSync(metaPath, JSON.stringify({
-      ...meta,
-      installedAt: meta.installedAt || now,
-      updatedAt: now
-    }, null, 2));
-  } catch {}
-}
-
-function readSkillMeta(skillPath) {
-  try {
-    const metaPath = path.join(skillPath, META_FILE);
-    if (fs.existsSync(metaPath)) {
-      return JSON.parse(fs.readFileSync(metaPath, 'utf8'));
-    }
-  } catch {}
-  return null;
-}
-
-function copyDir(src, dest) {
-  if (!fs.existsSync(dest)) {
-    fs.mkdirSync(dest, { recursive: true });
-  }
-  const entries = fs.readdirSync(src, { withFileTypes: true });
-  for (const entry of entries) {
-    const srcPath = path.join(src, entry.name);
-    const destPath = path.join(dest, entry.name);
-    if (entry.isDirectory()) {
-      copyDir(srcPath, destPath);
-    } else {
-      fs.copyFileSync(srcPath, destPath);
-    }
-  }
-}
-
-function getSkillInfo(skillName) {
-  const data = loadSkillsJson();
-  return data.skills.find(s => s.name === skillName);
-}
-
-function isSkillInstalled(skillName, agent) {
-  const destDir = AGENT_PATHS[agent];
-  if (!destDir) return false;
-  const destPath = path.join(destDir, skillName);
-  return fs.existsSync(destPath) && fs.existsSync(path.join(destPath, 'SKILL.md'));
-}
-
-function installFromGitHub(skillName, repo, agent) {
-  const destDir = AGENT_PATHS[agent];
-  if (!destDir) {
-    console.log(`錯誤: 不支援的 Agent "${agent}"`);
-    return false;
-  }
-
-  const tempDir = path.join(os.tmpdir(), `autoverse-skills-${Date.now()}`);
-
-  try {
-    console.log(`從 GitHub 下載: ${repo}...`);
-    const repoUrl = `https://github.com/${repo}.git`;
-    execFileSync('git', ['clone', '--depth', '1', repoUrl, tempDir], { stdio: 'pipe' });
-
-    let sourcePath = tempDir;
-    const skillsSubdir = path.join(tempDir, 'skills', skillName);
-    const directPath = path.join(tempDir, skillName);
-    
-    if (fs.existsSync(skillsSubdir) && fs.existsSync(path.join(skillsSubdir, 'SKILL.md'))) {
-      sourcePath = skillsSubdir;
-    } else if (fs.existsSync(directPath) && fs.existsSync(path.join(directPath, 'SKILL.md'))) {
-      sourcePath = directPath;
-    } else if (!fs.existsSync(path.join(tempDir, 'SKILL.md'))) {
-      console.log(`錯誤: 在 ${repo} 找不到技能 "${skillName}"`);
-      fs.rmSync(tempDir, { recursive: true, force: true });
-      return false;
-    }
-
-    const destPath = path.join(destDir, skillName);
-    if (!fs.existsSync(destDir)) {
-      fs.mkdirSync(destDir, { recursive: true });
-    }
-
-    copyDir(sourcePath, destPath);
-    writeSkillMeta(destPath, { source: 'github', repo: repo, name: skillName });
-    
-    fs.rmSync(tempDir, { recursive: true, force: true });
-    
-    console.log(`已安裝: ${skillName} -> ${agent} (來源: github:${repo})`);
-    return true;
-  } catch (e) {
-    console.log(`安裝失敗: ${e.message}`);
-    try { fs.rmSync(tempDir, { recursive: true, force: true }); } catch {}
-    return false;
-  }
-}
-
-function installSkill(skillName, agent) {
-  const destDir = AGENT_PATHS[agent];
-  if (!destDir) {
-    console.log(`錯誤: 不支援的 Agent "${agent}"`);
-    return 'failed';
-  }
-
-  if (isSkillInstalled(skillName, agent)) {
-    console.log(`已安裝，略過: ${skillName} -> ${agent}`);
-    return 'skipped';
-  }
-
-  const skillInfo = getSkillInfo(skillName);
-  
-  if (!skillInfo) {
-    console.log(`錯誤: 找不到技能 "${skillName}"`);
-    const data = loadSkillsJson();
-    const available = data.skills.map(s => s.name);
-    if (available.length > 0) {
-      console.log(`可用技能: ${available.slice(0, 5).join(', ')}${available.length > 5 ? '...' : ''}`);
-    }
-    return 'failed';
-  }
-
-  const repo = skillInfo.source;
-  if (!repo) {
-    console.log(`錯誤: 技能 "${skillName}" 沒有定義來源`);
-    return 'failed';
-  }
-
-  return installFromGitHub(skillName, repo, agent) ? 'installed' : 'failed';
-}
-
-function installAllSkills(agent, category = null) {
-  const destDir = AGENT_PATHS[agent];
-  if (!destDir) {
-    console.log(`錯誤: 不支援的 Agent "${agent}"`);
-    return;
-  }
-
-  const data = loadSkillsJson();
-  let skills = data.skills || [];
-
-  if (category) {
-    skills = skills.filter(s => s.category === category);
-  }
-
-  if (skills.length === 0) {
-    console.log(category ? `沒有找到任何技能 (類別: ${category})` : '沒有找到任何技能');
-    return;
-  }
-
-  console.log(`安裝 ${agent} 的 ${skills.length} 個技能...\n`);
-  let installed = 0;
-  let skipped = 0;
-  let failed = 0;
-  for (const s of skills) {
-    const result = installSkill(s.name, agent);
-    if (result === 'installed') installed++;
-    else if (result === 'skipped') skipped++;
-    else failed++;
-  }
-  console.log(`\n完成: ${installed} 安裝, ${skipped} 略過, ${failed} 失敗 (共 ${skills.length} 個) -> ${agent}`);
-}
-
-function uninstallSkill(skillName, agent) {
-  const destDir = AGENT_PATHS[agent];
-  if (!destDir) return false;
-
-  const destPath = path.join(destDir, skillName);
-
-  if (fs.existsSync(destPath)) {
-    try {
-      fs.rmSync(destPath, { recursive: true, force: true });
-      console.log(`已移除: ${skillName} (從 ${agent})`);
-      return true;
-    } catch (e) {
-      console.log(`移除失敗: ${e.message}`);
-      return false;
-    }
-  } else {
-    console.log(`技能 "${skillName}" 未安裝在 ${agent}`);
-    return false;
-  }
-}
-
-function getInstalledSkills(agent) {
-  const destDir = AGENT_PATHS[agent];
-  if (!destDir || !fs.existsSync(destDir)) return [];
-  return fs.readdirSync(destDir).filter(name => {
-    const skillPath = path.join(destDir, name);
-    return fs.statSync(skillPath).isDirectory() &&
-           fs.existsSync(path.join(skillPath, 'SKILL.md'));
-  });
-}
-
-function updateSkill(skillName, agent) {
-  const destDir = AGENT_PATHS[agent];
-  if (!destDir) return false;
-
-  const destPath = path.join(destDir, skillName);
-
-  if (!fs.existsSync(destPath)) {
-    console.log(`技能 "${skillName}" 未安裝在 ${agent}`);
-    return false;
-  }
-
-  const meta = readSkillMeta(destPath);
-  let repo = meta?.repo;
-
-  if (!repo) {
-    const skillInfo = getSkillInfo(skillName);
-    repo = skillInfo?.source;
-  }
-
-  if (!repo) {
-    console.log(`錯誤: 找不到技能 "${skillName}" 的來源`);
-    return false;
-  }
-
-  try {
-    fs.rmSync(destPath, { recursive: true, force: true });
-    
-    const tempDir = path.join(os.tmpdir(), `autoverse-skills-${Date.now()}`);
-    console.log(`從 GitHub 更新: ${repo}...`);
-    
-    const repoUrl = `https://github.com/${repo}.git`;
-    execFileSync('git', ['clone', '--depth', '1', repoUrl, tempDir], { stdio: 'pipe' });
-    
-    let sourcePath = tempDir;
-    const skillsSubdir = path.join(tempDir, 'skills', skillName);
-    const directPath = path.join(tempDir, skillName);
-    
-    if (fs.existsSync(skillsSubdir) && fs.existsSync(path.join(skillsSubdir, 'SKILL.md'))) {
-      sourcePath = skillsSubdir;
-    } else if (fs.existsSync(directPath) && fs.existsSync(path.join(directPath, 'SKILL.md'))) {
-      sourcePath = directPath;
-    }
-    
-    copyDir(sourcePath, destPath);
-    fs.rmSync(tempDir, { recursive: true, force: true });
-    
-    writeSkillMeta(destPath, { ...meta, source: 'github', repo: repo, name: skillName });
-    console.log(`已更新: ${skillName} -> ${agent} (來源: github:${repo})`);
-    return true;
-  } catch (e) {
-    console.log(`更新失敗: ${e.message}`);
-    return false;
-  }
-}
-
-function updateAllSkills(agent) {
-  const installed = getInstalledSkills(agent);
-  if (installed.length === 0) {
-    console.log(`${agent}: 沒有已安裝的技能`);
-    return;
-  }
-  console.log(`更新 ${agent} 的 ${installed.length} 個技能...\n`);
-  let updated = 0;
-  for (const name of installed) {
-    if (updateSkill(name, agent)) updated++;
-  }
-  console.log(`\n完成: ${updated}/${installed.length} 個技能已更新`);
 }
 
 function listSkills(category = null) {
@@ -418,9 +154,9 @@ ${skill.description}
 授權: ${skill.license}
 標籤: ${skill.tags ? skill.tags.join(', ') : '無'}
 
-安裝:
-  autoverse install ${skill.name} --agent cursor
-  (若未安裝 autoverse 指令，可用: node autoverse-cli.js install ${skill.name} --agent cursor)
+免 Node 安裝:
+  powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Agent codex -Skill ${skill.name}'
+  curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --agent codex --skill ${skill.name}
 `);
 }
 
@@ -437,16 +173,10 @@ Autoverse AI Agent Skills - 技能管理工具
   list --installed      列出已安裝的技能
   search <關鍵字>       搜尋技能
   info <技能名>         顯示技能詳細資訊
-  install <技能名>      安裝技能 (從 GitHub)
-  install --all         安裝全部技能到同一個 Agent
-  uninstall <技能名>    移除技能
-  update <技能名>       更新技能 (從 GitHub)
-  update --all          更新所有技能
 
 選項:
-  --agent <名稱>        指定目標 Agent (預設: claude)
-  --all                 install: 全部技能(無技能名) 或 同技能到所有 Agent(有技能名)
-                        uninstall/update: 到所有 Agent
+  --agent <名稱>        list --installed 的目標 Agent (預設: claude)
+  --all                 list --installed 時列出所有支援 Agent
   --category <類別>     依類別過濾
 
 支援的 Agent:
@@ -457,9 +187,10 @@ Autoverse AI Agent Skills - 技能管理工具
   autoverse list
   autoverse search python
   autoverse info python-development
-  autoverse install python-development --agent cursor
-  autoverse install --all --agent opencode
-  autoverse update --all --agent cursor
+  autoverse list --installed --agent codex
+
+安裝請使用免 Node installer:
+  powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Agent codex'
 `);
 }
 
@@ -502,42 +233,6 @@ if (!command || command === 'help' || command === '--help' || command === '-h') 
     console.log('請指定技能名稱');
   } else {
     showInfo(param);
-  }
-} else if (command === 'install') {
-  if (!param) {
-    if (allFlag) {
-      installAllSkills(agent, category);
-    } else {
-      console.log('請指定技能名稱或使用 --all');
-      console.log('用法: autoverse install <技能名> [--agent cursor] [--all]');
-      console.log('      autoverse install --all [--agent opencode] [--category <類別>]');
-    }
-  } else if (allFlag) {
-    Object.keys(AGENT_PATHS).forEach(a => installSkill(param, a));
-  } else {
-    installSkill(param, agent);
-  }
-} else if (command === 'uninstall' || command === 'rm') {
-  if (!param) {
-    console.log('請指定技能名稱');
-    console.log('用法: autoverse uninstall <技能名> [--agent cursor] [--all]');
-  } else if (allFlag) {
-    Object.keys(AGENT_PATHS).forEach(a => uninstallSkill(param, a));
-  } else {
-    uninstallSkill(param, agent);
-  }
-} else if (command === 'update') {
-  if (allFlag && !param) {
-    const agents = agentIndex !== -1 ? [agent] : Object.keys(AGENT_PATHS);
-    agents.forEach(a => updateAllSkills(a));
-  } else if (!param) {
-    console.log('請指定技能名稱或使用 --all');
-    console.log('用法: autoverse update <技能名> [--agent cursor]');
-    console.log('      autoverse update --all');
-  } else if (allFlag) {
-    Object.keys(AGENT_PATHS).forEach(a => updateSkill(param, a));
-  } else {
-    updateSkill(param, agent);
   }
 } else {
   console.log(`未知指令: ${command}`);

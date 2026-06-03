@@ -1,7 +1,7 @@
 {
   "name": "autoverse-ai-agent-skills",
   "version": "1.0.0",
-  "description": "Autoverse AI Agent Skills collection + CLI installer",
+  "description": "Autoverse AI Agent Skills collection with no-Node installers and a catalog query CLI",
   "license": "Apache-2.0",
   "author": "HsinPu",
   "repository": {
