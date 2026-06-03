@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const root = path.resolve(__dirname, '..');
+const skillsRoot = path.join(root, 'skills');
 const skillsJsonPath = path.join(root, 'skills.json');
 const readmePath = path.join(root, 'README.md');
 
@@ -72,10 +73,25 @@ for (const skill of skills) {
   if (!Array.isArray(skill.tags)) fail(`${skill.name || '(unknown)'} tags must be an array`);
 }
 
-const skillDirs = fs.readdirSync(root, { withFileTypes: true })
-  .filter((entry) => entry.isDirectory() && fs.existsSync(path.join(root, entry.name, 'SKILL.md')))
+if (!fs.existsSync(skillsRoot)) {
+  fail('skills/ directory is missing');
+}
+
+const rootSkillDirs = fs.readdirSync(root, { withFileTypes: true })
+  .filter((entry) => entry.isDirectory() && entry.name !== 'skills' && fs.existsSync(path.join(root, entry.name, 'SKILL.md')))
   .map((entry) => entry.name)
   .sort();
+
+for (const name of rootSkillDirs) {
+  fail(`Skill directory must live under skills/: ${name}`);
+}
+
+const skillDirs = fs.existsSync(skillsRoot)
+  ? fs.readdirSync(skillsRoot, { withFileTypes: true })
+  .filter((entry) => entry.isDirectory() && fs.existsSync(path.join(skillsRoot, entry.name, 'SKILL.md')))
+  .map((entry) => entry.name)
+  .sort()
+  : [];
 
 const catalogNames = [...names].sort();
 for (const name of catalogNames) {
@@ -87,7 +103,7 @@ for (const name of skillDirs) {
 
 const catalogByName = new Map(skills.map((skill) => [skill.name, skill]));
 for (const name of skillDirs) {
-  const skillFile = path.join(root, name, 'SKILL.md');
+  const skillFile = path.join(skillsRoot, name, 'SKILL.md');
   const frontmatter = parseFrontmatter(skillFile);
   const catalogEntry = catalogByName.get(name);
 

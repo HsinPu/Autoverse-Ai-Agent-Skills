@@ -124,15 +124,21 @@ function Get-SkillSources {
         [string]$SkillName
     )
 
+    $skillsRoot = Join-Path $RepoRoot "skills"
+
     if ($SkillName) {
-        $skillPath = Join-Path $RepoRoot $SkillName
+        $skillPath = Join-Path $skillsRoot $SkillName
+        if (-not (Test-Path (Join-Path $skillPath "SKILL.md"))) {
+            $skillPath = Join-Path $RepoRoot $SkillName
+        }
         if (-not (Test-Path (Join-Path $skillPath "SKILL.md"))) {
             throw "Skill not found in archive: $SkillName"
         }
         return @(Get-Item $skillPath)
     }
 
-    $skills = Get-ChildItem -Path $RepoRoot -Directory |
+    $scanRoot = if (Test-Path $skillsRoot) { $skillsRoot } else { $RepoRoot }
+    $skills = Get-ChildItem -Path $scanRoot -Directory |
         Where-Object { Test-Path (Join-Path $_.FullName "SKILL.md") } |
         Sort-Object Name
 

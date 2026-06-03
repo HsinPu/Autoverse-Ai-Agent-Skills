@@ -20,6 +20,7 @@
   },
   "files": [
     "autoverse-cli.js",
+    "skills",
     "skills.json",
     "README.md",
     "scripts/install.cmd",

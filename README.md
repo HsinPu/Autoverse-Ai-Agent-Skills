@@ -189,208 +189,208 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 
 | Skill | 說明 |
 |-------|------|
-| **[typescript-development](typescript-development/)** | TypeScript / JavaScript 開發參考（型別安全、設計模式、重構、TS patterns） |
-| **[javascript-development](javascript-development/)** | 現代 JavaScript 開發最佳實踐（Node.js 與瀏覽器） |
-| **[vite](vite/)** | Vite build tool、vite.config.ts、plugins、SSR、migration |
-| **[nextjs-development](nextjs-development/)** | Next.js App Router、Server/Client Components、data fetching、cache、Server Actions、Route Handlers 與 deployment |
-| **[react-native-expo](react-native-expo/)** | React Native / Expo、Expo Router、EAS Build / Update / Submit、permissions、device testing 與 store readiness |
-| **[flutter-development](flutter-development/)** | Flutter / Dart、widgets、layout、state management、navigation、testing、performance、accessibility、build 與 release |
-| **[mobile-app-testing](mobile-app-testing/)** | iOS / Android device matrix、permissions、offline、deep links、push、crash reporting、accessibility 與 Maestro/Appium/Detox |
-| **[app-store-release](app-store-release/)** | App Store Connect、TestFlight、Google Play Console、privacy labels、Data Safety、review、rollout 與 rejection handling |
-| **[python-development](python-development/)** | Python 開發參考（專案架構、PEP 8、型別、Docstring、設計模式、現代工具鏈） |
-| **[python-data-engineering](python-data-engineering/)** | Python 資料工程 / 分析 / ETL（DataFrame、Jupyter、Parquet、Pipeline） |
-| **[python-web-scraping](python-web-scraping/)** | Python 網頁擷取 / Scraping（HTML 解析、分頁、去重、輸出） |
-| **[python-automation-scripting](python-automation-scripting/)** | Python 自動化 / 腳本（CLI、檔案系統、subprocess、批次作業） |
-| **[python-backend-development](python-backend-development/)** | Python 後端 / Web App（Django、Flask、ASGI/WSGI、ORM、migrations） |
-| **[python-testing-engineering](python-testing-engineering/)** | Python 測試工程（pytest、fixtures、mocking、async tests） |
-| **[python-observability-debugging](python-observability-debugging/)** | Python 除錯 / 可觀測性（traceback、profiling、memory、診斷） |
-| **[python-packaging-release](python-packaging-release/)** | Python 打包 / 發佈（build backend、wheel/sdist、versioning、release） |
-| **[python-concurrency-patterns](python-concurrency-patterns/)** | Python 並行模式（asyncio、TaskGroup、cancellation、backpressure） |
-| **[python-security-hardening](python-security-hardening/)** | Python 安全硬化（secrets、unsafe deserialization、subprocess / path boundaries） |
-| **[python-api-client-development](python-api-client-development/)** | Python API client / SDK（OpenAPI、auth、pagination、retries、error mapping） |
-| **[java-development](java-development/)** | Java 開發參考（程式碼風格、Javadoc、SOLID、設計模式） |
-| **[java-architecture](java-architecture/)** | Java 架構設計（Clean Architecture、Hexagonal、DDD、microservice boundaries） |
-| **[java-testing](java-testing/)** | Java 測試工程（JUnit 5、Mockito、AssertJ、Spring test slices、Testcontainers） |
-| **[jvm-build-tooling](jvm-build-tooling/)** | JVM 建置工具（Maven、Gradle、dependency、multi-module、CI build） |
-| **[jpa-hibernate-development](jpa-hibernate-development/)** | JPA / Hibernate 資料層（entity、fetch、transaction、repository、效能） |
-| **[spring-development](spring-development/)** | Spring / Spring Boot 開發最佳實踐（DI、Web API、Security、Testing） |
-| **[spring-security](spring-security/)** | Spring Security（OAuth2/OIDC、JWT、method security、CSRF/CORS、headers） |
-| **[spring-webflux](spring-webflux/)** | Spring WebFlux / Reactor reactive APIs（WebClient、backpressure、R2DBC） |
-| **[spring-cloud-microservices](spring-cloud-microservices/)** | Spring Cloud microservices（gateway、Resilience4j、Kafka、tracing、service boundaries） |
-| **[mybatis-development](mybatis-development/)** | MyBatis 開發最佳實踐（Mapper、XML、Spring 整合、效能優化） |
-| **[vue-development](vue-development/)** | Vue 3 開發最佳實踐（Composition API、Pinia、Vue Router、TypeScript） |
-| **[vue-composition-api](vue-composition-api/)** | Vue 3 Composition API、`<script setup>`、SFC macros、reactivity、composables |
-| **[vue-testing](vue-testing/)** | Vue 測試工程（Vitest、Vue Test Utils、Pinia、Suspense、Teleport、Playwright） |
-| **[pinia-state-management](pinia-state-management/)** | Pinia state management（setup stores、storeToRefs、SSR、Nuxt、testing） |
-| **[vue-router-patterns](vue-router-patterns/)** | Vue Router 4 路由設計、navigation guards、params/query、route lifecycle |
-| **[vue-debug-guides](vue-debug-guides/)** | Vue runtime errors、warnings、SSR/hydration、reactivity 除錯 |
-| **[nuxt-development](nuxt-development/)** | Nuxt 3/4 開發最佳實踐（SSR、Nitro、SEO、資料抓取） |
-| **[css-development](css-development/)** | CSS 開發最佳實踐（Cascade、RWD、Flex/Grid、維護架構） |
-| **[tailwind-development](tailwind-development/)** | Tailwind CSS v4+ 開發最佳實踐（Utility-first、Design Tokens、Dark Mode） |
-| **[frontend-design](frontend-design/)** | 建立具辨識度的前端介面與視覺成品（網站、landing page、dashboard、React/HTML/CSS UI） |
-| **[color-font-skill](color-font-skill/)** | 配色與字體搭配（palette、font pairing、theme direction） |
-| **[animation-best-practices](animation-best-practices/)** | 前端動畫與互動回饋（hover、transition、button feedback、loading motion） |
-| **[interaction-patterns](interaction-patterns/)** | 導航互動模式（tab overflow、scroll 行為、view transitions、progressive disclosure） |
-| **[dashboard-design](dashboard-design/)** | Dashboard 版面與資訊層級（KPI、cards、analytics、widget arrangement） |
-| **[design-consultation](design-consultation/)** | 前端視覺方向規劃（配色、字體、spacing、layout、motion、buttons） |
-| **[ux-writing](ux-writing/)** | UI microcopy、空狀態、錯誤訊息、CTA、onboarding 文案優化 |
-| **[logo-design](logo-design/)** | Logo / brand mark / SVG 視覺識別設計流程 |
-| **[ai-image-prompt-design](ai-image-prompt-design/)** | Flux、Stable Diffusion、Midjourney 等影像生成 prompt 設計 |
-| **[ai-image-prompts-skill](ai-image-prompts-skill/)** | AI image prompt library、prompt inspiration、style variants |
-| **[baoyu-image-gen](baoyu-image-gen/)** | OpenAI / Google / DashScope 文字生圖、reference image、aspect ratio |
-| **[stable-diffusion-image-generation](stable-diffusion-image-generation/)** | Stable Diffusion / Diffusers text-to-image、inpainting、pipeline guidance |
-| **[image-utils](image-utils/)** | 圖片 resize、crop、format conversion、optimization 與 deterministic 後處理 |
-| **[remotion-video-toolkit](remotion-video-toolkit/)** | Remotion / React 程式化影片、動畫、字幕、音訊與 render workflow |
-| **[video-edit](video-edit/)** | 本地影片剪輯、合併、resize、壓縮、轉檔與音訊抽取 |
-| **[ai-video-generation](ai-video-generation/)** | AI text-to-video / image-to-video、模型選擇、prompt iteration 與輸出檢查 |
-| **[ai-video-prompting](ai-video-prompting/)** | AI 影片 prompt 設計、鏡頭語言、motion、timing、continuity 與 negative prompts |
-| **[storyboard-creation](storyboard-creation/)** | 影片分鏡、shot list、timing、voiceover、visual prompt 與 production table |
-| **[vlog-production](vlog-production/)** | Vlog concept、story arc、talking-head beats、B-roll、shot list、editing rhythm、captions、title、thumbnail 與 platform packaging |
-| **[short-video-script](short-video-script/)** | TikTok / Reels / Shorts 短影音 hook、口播稿、CTA 與 retention scripts |
-| **[ugc-video-ads](ugc-video-ads/)** | UGC-style 影片廣告、creator persona、hook、product demo、B-roll 與平台素材 |
-| **[avatar-video-generation](avatar-video-generation/)** | AI avatar、digital human、talking-head、lipsync、consent 與 export QA |
-| **[text-to-speech](text-to-speech/)** | TTS、voiceover、旁白、朗讀與批次語音生成 workflow |
-| **[audio-transcription](audio-transcription/)** | Speech-to-text、錄音/影片轉文字、speaker labels 與 transcript workflow |
-| **[subtitle-captions](subtitle-captions/)** | SRT/VTT/ASS 字幕產生、對齊、轉換、校對與燒錄 workflow |
-| **[audio-generation](audio-generation/)** | 音樂、音效、ambience、jingle 與 text-to-audio 生成 workflow |
-| **[hotkey](hotkey/)** | Web keyboard shortcuts 與 keybindings（hotkeys、command bindings） |
-| **[command-palette](command-palette/)** | 指令面板 / quick switcher / Spotlight 式快速執行（搜尋、排序、執行） |
-| **[responsive-design](responsive-design/)** | 響應式版面與自適應布局（breakpoints、container queries、fluid typography） |
-| **[agent-creator-design](agent-creator-design/)** | System Prompt 設計與寫法（metadata、四段結構、template） |
-| **[react-ui-patterns](react-ui-patterns/)** | React UI 狀態模式（loading、error、empty、optimistic、Suspense、transition） |
-| **[tailwind-patterns](tailwind-patterns/)** | Tailwind 版面與元件 pattern（layout、buttons、cards、navigation、forms、typography） |
-| **[design-system-patterns](design-system-patterns/)** | Design tokens、theming、component patterns、theme switching |
-| **[ui-styling](ui-styling/)** | shadcn/ui + Radix + Tailwind 的元件 styling 與視覺打磨 |
-| **[frontend-code-review](frontend-code-review/)** | 前端 `.tsx` / `.ts` / `.js` / CSS 變更的功能、狀態、a11y、效能 review |
-| **[frontend-design-review](frontend-design-review/)** | UI 實作品質、設計系統、a11y、RWD、視覺層級與互動狀態 review |
-| **[frontend-testing](frontend-testing/)** | React / TS 前端 unit、component、RTL tests |
-| **[github-operations](github-operations/)** | GitHub 端操作（PR、issue、CI、gh CLI、API 查詢） |
-| **[design-system](design-system/)** | 視覺系統生成與稽核（tokens、preview、visual audit、AI slop 檢測） |
-| **[shadcn-ui](shadcn-ui/)** | shadcn/ui 元件安裝、組合、表單、主題與 Tailwind/Radix 整合 |
-| **[lobe-ui-development](lobe-ui-development/)** | @lobehub/ui React / Next.js / AIGC UI 元件整合 |
-| **[lobe-icons-usage](lobe-icons-usage/)** | @lobehub/icons AI / LLM 品牌圖示選用與整合 |
-| **[coding-standards](coding-standards/)** | TS/JS/React/Node 通用程式規範與架構標準（lint、format、types、constants/config、避免 hardcoded values、tests、a11y、security） |
-| **[karpathy-guidelines](karpathy-guidelines/)** | 降低 LLM coding 常見錯誤的行為準則（釐清假設、避免過度設計、精準修改、可驗證目標） |
-| **[jquery-development](jquery-development/)** | jQuery 開發最佳實踐（Legacy 專案、AJAX、安全、遷移指南） |
-| **[jquery-version-migration](jquery-version-migration/)** | jQuery 1.x / 2.x / 3.x / 4.x 版本盤點、Migrate warnings 與分段升級路線 |
-| **[jquery-4-migration](jquery-4-migration/)** | jQuery 3.x -> 4.x 升級（removed APIs、Migrate、slim/full、WordPress 相容） |
-| **[legacy-frontend-modernization](legacy-frontend-modernization/)** | Legacy frontend 漸進式現代化（jQuery/Bootstrap/global scripts 到現代架構） |
-| **[frontend-stack-inference](frontend-stack-inference/)** | 前端技術棧盤點（jQuery、Bootstrap、React/Vue、build tools、legacy signals） |
-| **[database-design](database-design/)** | 資料庫 Schema 設計、索引優化、Migration 模式（PostgreSQL/MySQL/NoSQL） |
-| **[sql-best-practices](sql-best-practices/)** | SQL 撰寫風格、JOIN / subqueries、效能優化與安全性（防 SQL Injection） |
-| **[prisma-drizzle](prisma-drizzle/)** | Prisma / Drizzle ORM schema、migrations、relations、query patterns、transactions 與 TypeScript database access |
-| **[firebase-development](firebase-development/)** | Firebase Auth、Firestore、Realtime Database、Security Rules、Functions、Storage、FCM、Emulator Suite 與 deploys |
-| **[postgres-operations](postgres-operations/)** | PostgreSQL roles、permissions、migrations、indexes、EXPLAIN、VACUUM、backups、replication、pgvector 與 troubleshooting |
-| **[redis-upstash](redis-upstash/)** | Redis / Upstash cache、rate limiting、sessions、queues、pub/sub、serverless/edge patterns、TTLs 與 observability |
-| **[mongodb-development](mongodb-development/)** | MongoDB schema design、indexes、aggregation pipelines、transactions、change streams、Atlas、security 與 performance |
-| **[openai-api-development](openai-api-development/)** | OpenAI Responses API、model selection、structured outputs、function calling、tools、streaming 與 production integration |
-| **[agents-sdk-development](agents-sdk-development/)** | OpenAI Agents SDK agents、tools、handoffs、guardrails、tracing、多 agent workflow 與 production observability |
-| **[rag-vector-search](rag-vector-search/)** | RAG / vector search ingestion、chunking、embeddings、hybrid retrieval、reranking、citations 與 retrieval evaluation |
-| **[llm-evals](llm-evals/)** | LLM evals、golden datasets、graders、prompt regression、trace grading、RAG/agent metrics 與 release gates |
-| **[supabase-development](supabase-development/)** | Supabase Postgres、RLS、Auth、Storage、Edge Functions、migrations 與 production workflow |
-| **[stripe-payments](stripe-payments/)** | Stripe Checkout、PaymentIntents、subscriptions、webhooks、idempotency、billing 與 payments testing |
-| **[auth-integration](auth-integration/)** | Auth.js / NextAuth / Better Auth / Clerk / Auth0 / Supabase Auth 等登入、session、OAuth/OIDC 與 authorization boundaries |
-| **[git-operations](git-operations/)** | Git 工作流（clone、branch、stage、commit、push、pull、merge、rebase）與狀態檢查，Windows 環境 |
-| **[code-review](code-review/)** | 自動化程式碼審查（正確性、安全、效能、架構、測試）含嚴重度分級 |
-| **[security-code-review](security-code-review/)** | 高信心安全 code review（OWASP、XSS、Injection、SSRF、Auth、Secrets） |
-| **[react-perf](react-perf/)** | React 效能診斷與優化（re-render、waterfall、bundle、slow UI） |
-| **[testing-strategy](testing-strategy/)** | 測試分層、fixtures、flakiness 與 coverage 取捨 |
-| **[code-change-workflow](code-change-workflow/)** | 修改既有 code 前先追入口、呼叫鏈、資料流、測試與驗證方式，再做最小安全修改 |
-| **[code-refactoring](code-refactoring/)** | 程式碼重構技巧（Code Smells、magic values 改常數、安全流程、語言無關原則） |
-| **[logging-patterns](logging-patterns/)** | 撰寫乾淨一致的 log 訊息模式（level、message shape、context fields、低噪音） |
-| **[api-doc-comments](api-doc-comments/)** | 公共 API docstring / Javadoc / TSDoc 內容撰寫（契約、參數、回傳、例外、範例） |
-| **[openapi-spec-generation](openapi-spec-generation/)** | OpenAPI 3.1 規格生成、更新、驗證與 contract sync |
-| **[api-contract-design](api-contract-design/)** | API request/response 契約、錯誤模型、版本與相容性設計 |
-| **[i18n-localization](i18n-localization/)** | i18n / localization、locale files、pluralization、RTL 與翻譯一致性 |
-| **[mcp-creator-design](mcp-creator-design/)** | 建立高品質 MCP Server（Python FastMCP / Node/TypeScript MCP SDK）整合外部 API / services |
-| **[skill-creator-design](skill-creator-design/)** | 建立與優化 Skill 的完整指南（建立流程、SKILL.md 撰寫） |
-| **[skill-lint](skill-lint/)** | SKILL.md 結構驗證、frontmatter、連結與品質檢查 |
-| **[skillforge](skillforge/)** | Skill 打包、簽章、版本與評測的 quality gate |
-| **[skill-scan](skill-scan/)** | Skill package 第一輪掃描與風險 triage |
-| **[skill-explorer](skill-explorer/)** | Skill 搜尋、導覽與分類映射 |
-| **[skill-gap-analyzer](skill-gap-analyzer/)** | 比對本地 skills 與外部 marketplace / GitHub 候選，判斷要升級、補新 skill，或維持不變 |
-| **[git-advanced](git-advanced/)** | 進階 Git 工作流：worktree、bisect、rebase、recovery、hooks |
-| **[github-code-review](github-code-review/)** | GitHub PR / diff / check review，偏向找出具體問題與風險 |
-| **[github-inline-review](github-inline-review/)** | 使用 `gh api` 對 GitHub PR 批次送出 inline comments 與 suggestion blocks |
-| **[skill-audit](skill-audit/)** | SKILL.md 與 bundled content 的安全 / 品質稽核 |
-| **[git-readme-writer](git-readme-writer/)** | 依專案類型與 GitHub / Gerrit 平台差異選擇合適的 README 結構 |
-| **[repo-ready](repo-ready/)** | Repo 結構、CI/CD、文件、lint 與 release automation |
-| **[deployment-operations](deployment-operations/)** | 部署、rollout / rollback、smoke checks 與上線驗證 |
-| **[vercel-deployment](vercel-deployment/)** | Vercel projects、builds、env vars、preview/production deployments、domains、functions、rollback 與 release checks |
-| **[cloudflare-development](cloudflare-development/)** | Cloudflare Workers / Pages、Wrangler、bindings、D1、KV、R2、Durable Objects、Queues 與 edge runtime constraints |
-| **[aws-operations](aws-operations/)** | AWS IAM、Lambda、API Gateway、S3、CloudFront、ECS、RDS、VPC、CloudWatch、CDK、cost 與 incident response |
-| **[github-actions-ci](github-actions-ci/)** | GitHub Actions workflow、matrix、cache、artifacts、permissions 與 secrets |
-| **[docker-development](docker-development/)** | Dockerfile、multi-stage build、Compose、healthcheck 與 container workflow |
-| **[kubernetes-operations](kubernetes-operations/)** | Kubernetes manifests、kubectl 診斷、rollout、probes、logs 與 events |
-| **[terraform-infrastructure](terraform-infrastructure/)** | Terraform / OpenTofu IaC、modules、state、plan/apply、drift 與 backends |
-| **[observability-engineering](observability-engineering/)** | Metrics、logs、traces、SLI/SLO、alerts、Grafana / Prometheus / OpenTelemetry |
-| **[security-scanning](security-scanning/)** | SAST、dependency scan、secret scan、container / IaC scan、SBOM 與 CI gates |
-| **[incident-response-postmortems](incident-response-postmortems/)** | 事故 triage、timeline、root cause 與 postmortem |
-| **[spec-flow](spec-flow/)** | 需求拆解、spec、task、execution flow 的文件驅動流程 |
+| **[typescript-development](skills/typescript-development/)** | TypeScript / JavaScript 開發參考（型別安全、設計模式、重構、TS patterns） |
+| **[javascript-development](skills/javascript-development/)** | 現代 JavaScript 開發最佳實踐（Node.js 與瀏覽器） |
+| **[vite](skills/vite/)** | Vite build tool、vite.config.ts、plugins、SSR、migration |
+| **[nextjs-development](skills/nextjs-development/)** | Next.js App Router、Server/Client Components、data fetching、cache、Server Actions、Route Handlers 與 deployment |
+| **[react-native-expo](skills/react-native-expo/)** | React Native / Expo、Expo Router、EAS Build / Update / Submit、permissions、device testing 與 store readiness |
+| **[flutter-development](skills/flutter-development/)** | Flutter / Dart、widgets、layout、state management、navigation、testing、performance、accessibility、build 與 release |
+| **[mobile-app-testing](skills/mobile-app-testing/)** | iOS / Android device matrix、permissions、offline、deep links、push、crash reporting、accessibility 與 Maestro/Appium/Detox |
+| **[app-store-release](skills/app-store-release/)** | App Store Connect、TestFlight、Google Play Console、privacy labels、Data Safety、review、rollout 與 rejection handling |
+| **[python-development](skills/python-development/)** | Python 開發參考（專案架構、PEP 8、型別、Docstring、設計模式、現代工具鏈） |
+| **[python-data-engineering](skills/python-data-engineering/)** | Python 資料工程 / 分析 / ETL（DataFrame、Jupyter、Parquet、Pipeline） |
+| **[python-web-scraping](skills/python-web-scraping/)** | Python 網頁擷取 / Scraping（HTML 解析、分頁、去重、輸出） |
+| **[python-automation-scripting](skills/python-automation-scripting/)** | Python 自動化 / 腳本（CLI、檔案系統、subprocess、批次作業） |
+| **[python-backend-development](skills/python-backend-development/)** | Python 後端 / Web App（Django、Flask、ASGI/WSGI、ORM、migrations） |
+| **[python-testing-engineering](skills/python-testing-engineering/)** | Python 測試工程（pytest、fixtures、mocking、async tests） |
+| **[python-observability-debugging](skills/python-observability-debugging/)** | Python 除錯 / 可觀測性（traceback、profiling、memory、診斷） |
+| **[python-packaging-release](skills/python-packaging-release/)** | Python 打包 / 發佈（build backend、wheel/sdist、versioning、release） |
+| **[python-concurrency-patterns](skills/python-concurrency-patterns/)** | Python 並行模式（asyncio、TaskGroup、cancellation、backpressure） |
+| **[python-security-hardening](skills/python-security-hardening/)** | Python 安全硬化（secrets、unsafe deserialization、subprocess / path boundaries） |
+| **[python-api-client-development](skills/python-api-client-development/)** | Python API client / SDK（OpenAPI、auth、pagination、retries、error mapping） |
+| **[java-development](skills/java-development/)** | Java 開發參考（程式碼風格、Javadoc、SOLID、設計模式） |
+| **[java-architecture](skills/java-architecture/)** | Java 架構設計（Clean Architecture、Hexagonal、DDD、microservice boundaries） |
+| **[java-testing](skills/java-testing/)** | Java 測試工程（JUnit 5、Mockito、AssertJ、Spring test slices、Testcontainers） |
+| **[jvm-build-tooling](skills/jvm-build-tooling/)** | JVM 建置工具（Maven、Gradle、dependency、multi-module、CI build） |
+| **[jpa-hibernate-development](skills/jpa-hibernate-development/)** | JPA / Hibernate 資料層（entity、fetch、transaction、repository、效能） |
+| **[spring-development](skills/spring-development/)** | Spring / Spring Boot 開發最佳實踐（DI、Web API、Security、Testing） |
+| **[spring-security](skills/spring-security/)** | Spring Security（OAuth2/OIDC、JWT、method security、CSRF/CORS、headers） |
+| **[spring-webflux](skills/spring-webflux/)** | Spring WebFlux / Reactor reactive APIs（WebClient、backpressure、R2DBC） |
+| **[spring-cloud-microservices](skills/spring-cloud-microservices/)** | Spring Cloud microservices（gateway、Resilience4j、Kafka、tracing、service boundaries） |
+| **[mybatis-development](skills/mybatis-development/)** | MyBatis 開發最佳實踐（Mapper、XML、Spring 整合、效能優化） |
+| **[vue-development](skills/vue-development/)** | Vue 3 開發最佳實踐（Composition API、Pinia、Vue Router、TypeScript） |
+| **[vue-composition-api](skills/vue-composition-api/)** | Vue 3 Composition API、`<script setup>`、SFC macros、reactivity、composables |
+| **[vue-testing](skills/vue-testing/)** | Vue 測試工程（Vitest、Vue Test Utils、Pinia、Suspense、Teleport、Playwright） |
+| **[pinia-state-management](skills/pinia-state-management/)** | Pinia state management（setup stores、storeToRefs、SSR、Nuxt、testing） |
+| **[vue-router-patterns](skills/vue-router-patterns/)** | Vue Router 4 路由設計、navigation guards、params/query、route lifecycle |
+| **[vue-debug-guides](skills/vue-debug-guides/)** | Vue runtime errors、warnings、SSR/hydration、reactivity 除錯 |
+| **[nuxt-development](skills/nuxt-development/)** | Nuxt 3/4 開發最佳實踐（SSR、Nitro、SEO、資料抓取） |
+| **[css-development](skills/css-development/)** | CSS 開發最佳實踐（Cascade、RWD、Flex/Grid、維護架構） |
+| **[tailwind-development](skills/tailwind-development/)** | Tailwind CSS v4+ 開發最佳實踐（Utility-first、Design Tokens、Dark Mode） |
+| **[frontend-design](skills/frontend-design/)** | 建立具辨識度的前端介面與視覺成品（網站、landing page、dashboard、React/HTML/CSS UI） |
+| **[color-font-skill](skills/color-font-skill/)** | 配色與字體搭配（palette、font pairing、theme direction） |
+| **[animation-best-practices](skills/animation-best-practices/)** | 前端動畫與互動回饋（hover、transition、button feedback、loading motion） |
+| **[interaction-patterns](skills/interaction-patterns/)** | 導航互動模式（tab overflow、scroll 行為、view transitions、progressive disclosure） |
+| **[dashboard-design](skills/dashboard-design/)** | Dashboard 版面與資訊層級（KPI、cards、analytics、widget arrangement） |
+| **[design-consultation](skills/design-consultation/)** | 前端視覺方向規劃（配色、字體、spacing、layout、motion、buttons） |
+| **[ux-writing](skills/ux-writing/)** | UI microcopy、空狀態、錯誤訊息、CTA、onboarding 文案優化 |
+| **[logo-design](skills/logo-design/)** | Logo / brand mark / SVG 視覺識別設計流程 |
+| **[ai-image-prompt-design](skills/ai-image-prompt-design/)** | Flux、Stable Diffusion、Midjourney 等影像生成 prompt 設計 |
+| **[ai-image-prompts-skill](skills/ai-image-prompts-skill/)** | AI image prompt library、prompt inspiration、style variants |
+| **[baoyu-image-gen](skills/baoyu-image-gen/)** | OpenAI / Google / DashScope 文字生圖、reference image、aspect ratio |
+| **[stable-diffusion-image-generation](skills/stable-diffusion-image-generation/)** | Stable Diffusion / Diffusers text-to-image、inpainting、pipeline guidance |
+| **[image-utils](skills/image-utils/)** | 圖片 resize、crop、format conversion、optimization 與 deterministic 後處理 |
+| **[remotion-video-toolkit](skills/remotion-video-toolkit/)** | Remotion / React 程式化影片、動畫、字幕、音訊與 render workflow |
+| **[video-edit](skills/video-edit/)** | 本地影片剪輯、合併、resize、壓縮、轉檔與音訊抽取 |
+| **[ai-video-generation](skills/ai-video-generation/)** | AI text-to-video / image-to-video、模型選擇、prompt iteration 與輸出檢查 |
+| **[ai-video-prompting](skills/ai-video-prompting/)** | AI 影片 prompt 設計、鏡頭語言、motion、timing、continuity 與 negative prompts |
+| **[storyboard-creation](skills/storyboard-creation/)** | 影片分鏡、shot list、timing、voiceover、visual prompt 與 production table |
+| **[vlog-production](skills/vlog-production/)** | Vlog concept、story arc、talking-head beats、B-roll、shot list、editing rhythm、captions、title、thumbnail 與 platform packaging |
+| **[short-video-script](skills/short-video-script/)** | TikTok / Reels / Shorts 短影音 hook、口播稿、CTA 與 retention scripts |
+| **[ugc-video-ads](skills/ugc-video-ads/)** | UGC-style 影片廣告、creator persona、hook、product demo、B-roll 與平台素材 |
+| **[avatar-video-generation](skills/avatar-video-generation/)** | AI avatar、digital human、talking-head、lipsync、consent 與 export QA |
+| **[text-to-speech](skills/text-to-speech/)** | TTS、voiceover、旁白、朗讀與批次語音生成 workflow |
+| **[audio-transcription](skills/audio-transcription/)** | Speech-to-text、錄音/影片轉文字、speaker labels 與 transcript workflow |
+| **[subtitle-captions](skills/subtitle-captions/)** | SRT/VTT/ASS 字幕產生、對齊、轉換、校對與燒錄 workflow |
+| **[audio-generation](skills/audio-generation/)** | 音樂、音效、ambience、jingle 與 text-to-audio 生成 workflow |
+| **[hotkey](skills/hotkey/)** | Web keyboard shortcuts 與 keybindings（hotkeys、command bindings） |
+| **[command-palette](skills/command-palette/)** | 指令面板 / quick switcher / Spotlight 式快速執行（搜尋、排序、執行） |
+| **[responsive-design](skills/responsive-design/)** | 響應式版面與自適應布局（breakpoints、container queries、fluid typography） |
+| **[agent-creator-design](skills/agent-creator-design/)** | System Prompt 設計與寫法（metadata、四段結構、template） |
+| **[react-ui-patterns](skills/react-ui-patterns/)** | React UI 狀態模式（loading、error、empty、optimistic、Suspense、transition） |
+| **[tailwind-patterns](skills/tailwind-patterns/)** | Tailwind 版面與元件 pattern（layout、buttons、cards、navigation、forms、typography） |
+| **[design-system-patterns](skills/design-system-patterns/)** | Design tokens、theming、component patterns、theme switching |
+| **[ui-styling](skills/ui-styling/)** | shadcn/ui + Radix + Tailwind 的元件 styling 與視覺打磨 |
+| **[frontend-code-review](skills/frontend-code-review/)** | 前端 `.tsx` / `.ts` / `.js` / CSS 變更的功能、狀態、a11y、效能 review |
+| **[frontend-design-review](skills/frontend-design-review/)** | UI 實作品質、設計系統、a11y、RWD、視覺層級與互動狀態 review |
+| **[frontend-testing](skills/frontend-testing/)** | React / TS 前端 unit、component、RTL tests |
+| **[github-operations](skills/github-operations/)** | GitHub 端操作（PR、issue、CI、gh CLI、API 查詢） |
+| **[design-system](skills/design-system/)** | 視覺系統生成與稽核（tokens、preview、visual audit、AI slop 檢測） |
+| **[shadcn-ui](skills/shadcn-ui/)** | shadcn/ui 元件安裝、組合、表單、主題與 Tailwind/Radix 整合 |
+| **[lobe-ui-development](skills/lobe-ui-development/)** | @lobehub/ui React / Next.js / AIGC UI 元件整合 |
+| **[lobe-icons-usage](skills/lobe-icons-usage/)** | @lobehub/icons AI / LLM 品牌圖示選用與整合 |
+| **[coding-standards](skills/coding-standards/)** | TS/JS/React/Node 通用程式規範與架構標準（lint、format、types、constants/config、避免 hardcoded values、tests、a11y、security） |
+| **[karpathy-guidelines](skills/karpathy-guidelines/)** | 降低 LLM coding 常見錯誤的行為準則（釐清假設、避免過度設計、精準修改、可驗證目標） |
+| **[jquery-development](skills/jquery-development/)** | jQuery 開發最佳實踐（Legacy 專案、AJAX、安全、遷移指南） |
+| **[jquery-version-migration](skills/jquery-version-migration/)** | jQuery 1.x / 2.x / 3.x / 4.x 版本盤點、Migrate warnings 與分段升級路線 |
+| **[jquery-4-migration](skills/jquery-4-migration/)** | jQuery 3.x -> 4.x 升級（removed APIs、Migrate、slim/full、WordPress 相容） |
+| **[legacy-frontend-modernization](skills/legacy-frontend-modernization/)** | Legacy frontend 漸進式現代化（jQuery/Bootstrap/global scripts 到現代架構） |
+| **[frontend-stack-inference](skills/frontend-stack-inference/)** | 前端技術棧盤點（jQuery、Bootstrap、React/Vue、build tools、legacy signals） |
+| **[database-design](skills/database-design/)** | 資料庫 Schema 設計、索引優化、Migration 模式（PostgreSQL/MySQL/NoSQL） |
+| **[sql-best-practices](skills/sql-best-practices/)** | SQL 撰寫風格、JOIN / subqueries、效能優化與安全性（防 SQL Injection） |
+| **[prisma-drizzle](skills/prisma-drizzle/)** | Prisma / Drizzle ORM schema、migrations、relations、query patterns、transactions 與 TypeScript database access |
+| **[firebase-development](skills/firebase-development/)** | Firebase Auth、Firestore、Realtime Database、Security Rules、Functions、Storage、FCM、Emulator Suite 與 deploys |
+| **[postgres-operations](skills/postgres-operations/)** | PostgreSQL roles、permissions、migrations、indexes、EXPLAIN、VACUUM、backups、replication、pgvector 與 troubleshooting |
+| **[redis-upstash](skills/redis-upstash/)** | Redis / Upstash cache、rate limiting、sessions、queues、pub/sub、serverless/edge patterns、TTLs 與 observability |
+| **[mongodb-development](skills/mongodb-development/)** | MongoDB schema design、indexes、aggregation pipelines、transactions、change streams、Atlas、security 與 performance |
+| **[openai-api-development](skills/openai-api-development/)** | OpenAI Responses API、model selection、structured outputs、function calling、tools、streaming 與 production integration |
+| **[agents-sdk-development](skills/agents-sdk-development/)** | OpenAI Agents SDK agents、tools、handoffs、guardrails、tracing、多 agent workflow 與 production observability |
+| **[rag-vector-search](skills/rag-vector-search/)** | RAG / vector search ingestion、chunking、embeddings、hybrid retrieval、reranking、citations 與 retrieval evaluation |
+| **[llm-evals](skills/llm-evals/)** | LLM evals、golden datasets、graders、prompt regression、trace grading、RAG/agent metrics 與 release gates |
+| **[supabase-development](skills/supabase-development/)** | Supabase Postgres、RLS、Auth、Storage、Edge Functions、migrations 與 production workflow |
+| **[stripe-payments](skills/stripe-payments/)** | Stripe Checkout、PaymentIntents、subscriptions、webhooks、idempotency、billing 與 payments testing |
+| **[auth-integration](skills/auth-integration/)** | Auth.js / NextAuth / Better Auth / Clerk / Auth0 / Supabase Auth 等登入、session、OAuth/OIDC 與 authorization boundaries |
+| **[git-operations](skills/git-operations/)** | Git 工作流（clone、branch、stage、commit、push、pull、merge、rebase）與狀態檢查，Windows 環境 |
+| **[code-review](skills/code-review/)** | 自動化程式碼審查（正確性、安全、效能、架構、測試）含嚴重度分級 |
+| **[security-code-review](skills/security-code-review/)** | 高信心安全 code review（OWASP、XSS、Injection、SSRF、Auth、Secrets） |
+| **[react-perf](skills/react-perf/)** | React 效能診斷與優化（re-render、waterfall、bundle、slow UI） |
+| **[testing-strategy](skills/testing-strategy/)** | 測試分層、fixtures、flakiness 與 coverage 取捨 |
+| **[code-change-workflow](skills/code-change-workflow/)** | 修改既有 code 前先追入口、呼叫鏈、資料流、測試與驗證方式，再做最小安全修改 |
+| **[code-refactoring](skills/code-refactoring/)** | 程式碼重構技巧（Code Smells、magic values 改常數、安全流程、語言無關原則） |
+| **[logging-patterns](skills/logging-patterns/)** | 撰寫乾淨一致的 log 訊息模式（level、message shape、context fields、低噪音） |
+| **[api-doc-comments](skills/api-doc-comments/)** | 公共 API docstring / Javadoc / TSDoc 內容撰寫（契約、參數、回傳、例外、範例） |
+| **[openapi-spec-generation](skills/openapi-spec-generation/)** | OpenAPI 3.1 規格生成、更新、驗證與 contract sync |
+| **[api-contract-design](skills/api-contract-design/)** | API request/response 契約、錯誤模型、版本與相容性設計 |
+| **[i18n-localization](skills/i18n-localization/)** | i18n / localization、locale files、pluralization、RTL 與翻譯一致性 |
+| **[mcp-creator-design](skills/mcp-creator-design/)** | 建立高品質 MCP Server（Python FastMCP / Node/TypeScript MCP SDK）整合外部 API / services |
+| **[skill-creator-design](skills/skill-creator-design/)** | 建立與優化 Skill 的完整指南（建立流程、SKILL.md 撰寫） |
+| **[skill-lint](skills/skill-lint/)** | SKILL.md 結構驗證、frontmatter、連結與品質檢查 |
+| **[skillforge](skills/skillforge/)** | Skill 打包、簽章、版本與評測的 quality gate |
+| **[skill-scan](skills/skill-scan/)** | Skill package 第一輪掃描與風險 triage |
+| **[skill-explorer](skills/skill-explorer/)** | Skill 搜尋、導覽與分類映射 |
+| **[skill-gap-analyzer](skills/skill-gap-analyzer/)** | 比對本地 skills 與外部 marketplace / GitHub 候選，判斷要升級、補新 skill，或維持不變 |
+| **[git-advanced](skills/git-advanced/)** | 進階 Git 工作流：worktree、bisect、rebase、recovery、hooks |
+| **[github-code-review](skills/github-code-review/)** | GitHub PR / diff / check review，偏向找出具體問題與風險 |
+| **[github-inline-review](skills/github-inline-review/)** | 使用 `gh api` 對 GitHub PR 批次送出 inline comments 與 suggestion blocks |
+| **[skill-audit](skills/skill-audit/)** | SKILL.md 與 bundled content 的安全 / 品質稽核 |
+| **[git-readme-writer](skills/git-readme-writer/)** | 依專案類型與 GitHub / Gerrit 平台差異選擇合適的 README 結構 |
+| **[repo-ready](skills/repo-ready/)** | Repo 結構、CI/CD、文件、lint 與 release automation |
+| **[deployment-operations](skills/deployment-operations/)** | 部署、rollout / rollback、smoke checks 與上線驗證 |
+| **[vercel-deployment](skills/vercel-deployment/)** | Vercel projects、builds、env vars、preview/production deployments、domains、functions、rollback 與 release checks |
+| **[cloudflare-development](skills/cloudflare-development/)** | Cloudflare Workers / Pages、Wrangler、bindings、D1、KV、R2、Durable Objects、Queues 與 edge runtime constraints |
+| **[aws-operations](skills/aws-operations/)** | AWS IAM、Lambda、API Gateway、S3、CloudFront、ECS、RDS、VPC、CloudWatch、CDK、cost 與 incident response |
+| **[github-actions-ci](skills/github-actions-ci/)** | GitHub Actions workflow、matrix、cache、artifacts、permissions 與 secrets |
+| **[docker-development](skills/docker-development/)** | Dockerfile、multi-stage build、Compose、healthcheck 與 container workflow |
+| **[kubernetes-operations](skills/kubernetes-operations/)** | Kubernetes manifests、kubectl 診斷、rollout、probes、logs 與 events |
+| **[terraform-infrastructure](skills/terraform-infrastructure/)** | Terraform / OpenTofu IaC、modules、state、plan/apply、drift 與 backends |
+| **[observability-engineering](skills/observability-engineering/)** | Metrics、logs、traces、SLI/SLO、alerts、Grafana / Prometheus / OpenTelemetry |
+| **[security-scanning](skills/security-scanning/)** | SAST、dependency scan、secret scan、container / IaC scan、SBOM 與 CI gates |
+| **[incident-response-postmortems](skills/incident-response-postmortems/)** | 事故 triage、timeline、root cause 與 postmortem |
+| **[spec-flow](skills/spec-flow/)** | 需求拆解、spec、task、execution flow 的文件驅動流程 |
 
 ### 📋 Productivity（生產力）
 
 | Skill | 說明 |
 |-------|------|
-| **[markdown-writer](markdown-writer/)** | Markdown 撰寫指引（README、技術文件、格式化 docs、GFM 規範） |
-| **[specification-authoring](specification-authoring/)** | 技術規格說明書（Spec）撰寫、重整、審查與 code-to-spec 流程指引 |
-| **[todo-first](todo-first/)** | 多步驟或 non-trivial 任務前先建立 todo list（含狀態維護與驗證追蹤） |
-| **[ask-questions-if-underspecified](ask-questions-if-underspecified/)** | 需求不明時先問澄清問題（僅使用者明確要求時使用） |
-| **[answer-writing](answer-writing/)** | 撰寫最終回應的指引（繁體中文預設、清晰可行動） |
-| **[file-organizer](file-organizer/)** | 智慧整理電腦檔案（找重複檔、建議架構、自動清理）Windows 環境 |
-| **[folder-structure-cleanup](folder-structure-cleanup/)** | 資料夾結構整理（空資料夾、巢狀層級、合併、命名、active/archive 分離與 dry-run 搬移計畫） |
-| **[downloads-desktop-cleanup](downloads-desktop-cleanup/)** | Downloads / Desktop 快速盤點、分類、重複/大型/舊檔候選、dry-run 計畫與安全搬移 |
-| **[data-organization-system](data-organization-system/)** | 資料整理系統設計（taxonomy、metadata、lifecycle、retention、privacy 與批次 migration） |
-| **[skill-security-review](skill-security-review/)** | 第三方 skill 安全審核（來源、權限、可疑行為、風險分級） |
-| **[summary-ops](summary-ops/)** | 網址、影片、音訊與長文摘要 / transcript 擷取 |
-| **[web-research-ops](web-research-ops/)** | 網路研究、來源查核與事實交叉比對 |
-| **[mcp-ops](mcp-ops/)** | MCP 伺服器與工具操作（auth、list、call、codegen） |
-| **[workspace-google-ops](workspace-google-ops/)** | Gmail、Calendar、Drive、Sheets、Docs CLI 自動化 |
-| **[word-document-ops](word-document-ops/)** | Word / .docx 文件建立、編輯、轉換與 tracked changes |
-| **[spreadsheet-ops](spreadsheet-ops/)** | 試算表 / .xlsx / .csv / .tsv 清理、公式、格式化與產生 |
-| **[presentation-ops](presentation-ops/)** | PowerPoint / .pptx 簡報建立、編輯與版面保留 |
-| **[pdf-operations](pdf-operations/)** | PDF 讀取、合併、分割、旋轉、OCR、產生與版面保留處理 |
-| **[drawio-skill](drawio-skill/)** | draw.io 圖表生成與視覺輸出 |
+| **[markdown-writer](skills/markdown-writer/)** | Markdown 撰寫指引（README、技術文件、格式化 docs、GFM 規範） |
+| **[specification-authoring](skills/specification-authoring/)** | 技術規格說明書（Spec）撰寫、重整、審查與 code-to-spec 流程指引 |
+| **[todo-first](skills/todo-first/)** | 多步驟或 non-trivial 任務前先建立 todo list（含狀態維護與驗證追蹤） |
+| **[ask-questions-if-underspecified](skills/ask-questions-if-underspecified/)** | 需求不明時先問澄清問題（僅使用者明確要求時使用） |
+| **[answer-writing](skills/answer-writing/)** | 撰寫最終回應的指引（繁體中文預設、清晰可行動） |
+| **[file-organizer](skills/file-organizer/)** | 智慧整理電腦檔案（找重複檔、建議架構、自動清理）Windows 環境 |
+| **[folder-structure-cleanup](skills/folder-structure-cleanup/)** | 資料夾結構整理（空資料夾、巢狀層級、合併、命名、active/archive 分離與 dry-run 搬移計畫） |
+| **[downloads-desktop-cleanup](skills/downloads-desktop-cleanup/)** | Downloads / Desktop 快速盤點、分類、重複/大型/舊檔候選、dry-run 計畫與安全搬移 |
+| **[data-organization-system](skills/data-organization-system/)** | 資料整理系統設計（taxonomy、metadata、lifecycle、retention、privacy 與批次 migration） |
+| **[skill-security-review](skills/skill-security-review/)** | 第三方 skill 安全審核（來源、權限、可疑行為、風險分級） |
+| **[summary-ops](skills/summary-ops/)** | 網址、影片、音訊與長文摘要 / transcript 擷取 |
+| **[web-research-ops](skills/web-research-ops/)** | 網路研究、來源查核與事實交叉比對 |
+| **[mcp-ops](skills/mcp-ops/)** | MCP 伺服器與工具操作（auth、list、call、codegen） |
+| **[workspace-google-ops](skills/workspace-google-ops/)** | Gmail、Calendar、Drive、Sheets、Docs CLI 自動化 |
+| **[word-document-ops](skills/word-document-ops/)** | Word / .docx 文件建立、編輯、轉換與 tracked changes |
+| **[spreadsheet-ops](skills/spreadsheet-ops/)** | 試算表 / .xlsx / .csv / .tsv 清理、公式、格式化與產生 |
+| **[presentation-ops](skills/presentation-ops/)** | PowerPoint / .pptx 簡報建立、編輯與版面保留 |
+| **[pdf-operations](skills/pdf-operations/)** | PDF 讀取、合併、分割、旋轉、OCR、產生與版面保留處理 |
+| **[drawio-skill](skills/drawio-skill/)** | draw.io 圖表生成與視覺輸出 |
 
 ### 🌐 Coding Agents & IDEs（編碼代理與 IDE）
 
 | Skill | 說明 |
 |-------|------|
-| **[self-improvement](self-improvement/)** | 錯誤、學習與 feature request 記錄 / project memory |
-| **[context-governance](context-governance/)** | context budget、學習記錄與重複資訊治理 |
-| **[subagent-architecture](subagent-architecture/)** | subagent 切分、角色邊界、handoff 與平行協作 |
+| **[self-improvement](skills/self-improvement/)** | 錯誤、學習與 feature request 記錄 / project memory |
+| **[context-governance](skills/context-governance/)** | context budget、學習記錄與重複資訊治理 |
+| **[subagent-architecture](skills/subagent-architecture/)** | subagent 切分、角色邊界、handoff 與平行協作 |
 
 ### 🌐 Communication（溝通）
 
 | Skill | 說明 |
 |-------|------|
-| **[humanizer](humanizer/)** | 將 AI 風格文字改寫得更自然、有人味 |
+| **[humanizer](skills/humanizer/)** | 將 AI 風格文字改寫得更自然、有人味 |
 
 ### 🌐 CLI Utilities（CLI 工具）
 
 | Skill | 說明 |
 |-------|------|
-| **[terminal-ops](terminal-ops/)** | 終端機執行 / 驗證 / repo 狀態 / 窄修復證據流程 |
-| **[skill-executor](skill-executor/)** | Skill 的 sandbox 執行、輸出驗證與可重現性檢查 |
-| **[skillctl](skillctl/)** | 本地與外部 skill 搜尋 / 安裝 / 列表 / 更新 / 輕量驗證的 CLI 路由 |
+| **[terminal-ops](skills/terminal-ops/)** | 終端機執行 / 驗證 / repo 狀態 / 窄修復證據流程 |
+| **[skill-executor](skills/skill-executor/)** | Skill 的 sandbox 執行、輸出驗證與可重現性檢查 |
+| **[skillctl](skills/skillctl/)** | 本地與外部 skill 搜尋 / 安裝 / 列表 / 更新 / 輕量驗證的 CLI 路由 |
 
 ### 🌐 Search & Research（搜尋與研究）
 
 | Skill | 說明 |
 |-------|------|
-| **[agent-reach-ops](agent-reach-ops/)** | 跨平台研究（社群、影片、GitHub、RSS、轉錄） |
+| **[agent-reach-ops](skills/agent-reach-ops/)** | 跨平台研究（社群、影片、GitHub、RSS、轉錄） |
 
 ### 🌐 Browser Automation（瀏覽器自動化）
 
 | Skill | 說明 |
 |-------|------|
-| **[webapp-testing](webapp-testing/)** | Playwright 本地 web app 測試、除錯與截圖 |
-| **[browser-automation](browser-automation/)** | 真實瀏覽器操作、表單、截圖、JS-heavy extraction 與 web workflow 自動化 |
-| **[playwright-automation](playwright-automation/)** | Playwright locators、screenshots、traces、console/network inspection 與 CLI/MCP 操作 |
-| **[chrome-devtools-debugging](chrome-devtools-debugging/)** | Chrome DevTools / CDP console、network、performance、DOM 與 a11y 診斷 |
-| **[visual-regression-testing](visual-regression-testing/)** | Screenshot baseline、pixel diff、Percy / Chromatic / BackstopJS 視覺回歸 |
-| **[browser-compatibility-testing](browser-compatibility-testing/)** | Chrome / Firefox / Safari / Edge / mobile 跨瀏覽器相容性驗證 |
-| **[e2e-testing-patterns](e2e-testing-patterns/)** | Playwright / Cypress E2E 測試設計、flakiness、fixtures 與 CI patterns |
+| **[webapp-testing](skills/webapp-testing/)** | Playwright 本地 web app 測試、除錯與截圖 |
+| **[browser-automation](skills/browser-automation/)** | 真實瀏覽器操作、表單、截圖、JS-heavy extraction 與 web workflow 自動化 |
+| **[playwright-automation](skills/playwright-automation/)** | Playwright locators、screenshots、traces、console/network inspection 與 CLI/MCP 操作 |
+| **[chrome-devtools-debugging](skills/chrome-devtools-debugging/)** | Chrome DevTools / CDP console、network、performance、DOM 與 a11y 診斷 |
+| **[visual-regression-testing](skills/visual-regression-testing/)** | Screenshot baseline、pixel diff、Percy / Chromatic / BackstopJS 視覺回歸 |
+| **[browser-compatibility-testing](skills/browser-compatibility-testing/)** | Chrome / Firefox / Safari / Edge / mobile 跨瀏覽器相容性驗證 |
+| **[e2e-testing-patterns](skills/e2e-testing-patterns/)** | Playwright / Cypress E2E 測試設計、flakiness、fixtures 與 CI patterns |
 
 ---
 

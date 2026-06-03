@@ -191,16 +191,25 @@ if [[ -z "$REPO_ROOT" ]]; then
 fi
 
 SOURCES=()
+SKILLS_ROOT="$REPO_ROOT/skills"
 if [[ -n "$SKILL" ]]; then
-  if [[ ! -f "$REPO_ROOT/$SKILL/SKILL.md" ]]; then
+  SKILL_PATH="$SKILLS_ROOT/$SKILL"
+  if [[ ! -f "$SKILL_PATH/SKILL.md" ]]; then
+    SKILL_PATH="$REPO_ROOT/$SKILL"
+  fi
+  if [[ ! -f "$SKILL_PATH/SKILL.md" ]]; then
     log_error "Skill not found in archive: $SKILL"
     exit 1
   fi
-  SOURCES+=("$REPO_ROOT/$SKILL")
+  SOURCES+=("$SKILL_PATH")
 else
+  SCAN_ROOT="$REPO_ROOT"
+  if [[ -d "$SKILLS_ROOT" ]]; then
+    SCAN_ROOT="$SKILLS_ROOT"
+  fi
   while IFS= read -r dir; do
     SOURCES+=("$dir")
-  done < <(find "$REPO_ROOT" -mindepth 1 -maxdepth 1 -type d -exec test -f '{}/SKILL.md' ';' -print | sort)
+  done < <(find "$SCAN_ROOT" -mindepth 1 -maxdepth 1 -type d -exec test -f '{}/SKILL.md' ';' -print | sort)
 fi
 
 if [[ "${#SOURCES[@]}" -eq 0 ]]; then
