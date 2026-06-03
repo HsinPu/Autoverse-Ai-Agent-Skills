@@ -30,4 +30,4 @@ Use this skill when proof matters.
 
 - For code edits that require understanding current behavior before changing files, use `code-change-workflow`.
 - For git-specific work, use `git-operations`.
-- For command-oriented task delegation, use `coding-agent`.
+- For designing delegation boundaries or multi-agent command workflows, use `subagent-architecture`.

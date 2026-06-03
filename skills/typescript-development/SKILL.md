@@ -5,12 +5,31 @@ source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---
 
-# TypeScript 開發（TypeScript Development）
+# TypeScript Development
 
-**撰寫 TypeScript 或 JavaScript 時請讀取本 skill。**
+Use this skill for TypeScript-heavy implementation, review, type design, and refactoring.
 
-撰寫、重構或審查 TypeScript 程式碼時，依需要查閱下方參考資料，以符合強型別規範、設計模式與重構原則。
+## Workflow
 
-## 進階與參考（Bundled resources）
+1. Inspect `tsconfig`, package scripts, module boundaries, framework conventions, and test setup.
+2. Model domain shapes with precise types before adding runtime logic.
+3. Keep exported APIs stable, narrow, and easy to infer at call sites.
+4. Use generics, unions, overloads, and utility types only when they make usage clearer.
+5. Verify with `tsc`, framework build checks, unit tests, or the repo's existing validation command.
 
-- **重構與 Code Smells**：需查閱 TypeScript 重構技巧（Extract Method、多型、Parameter Object 等）與 Code Smells 改善範例時，見 [reference/refactoring.md](reference/refactoring.md)。
+## Rules
+
+- Prefer explicit boundary types for public APIs, hooks, services, and adapters.
+- Avoid `any`; if unavoidable, isolate it at the boundary and narrow quickly.
+- Keep type-level cleverness below the threshold where future maintainers can understand it.
+- Replace hardcoded literals with named constants or typed configuration when values carry domain meaning.
+
+## Reference Routing
+
+- Refactoring patterns, code smells, parameter objects, and extraction tactics: read [reference/refactoring.md](reference/refactoring.md).
+
+## Handoff
+
+- For plain JavaScript projects, use `javascript-development`.
+- For React UI state and behavior, use `react-ui-patterns`.
+- For Vue TypeScript and SFC work, use `vue-development` or `vue-composition-api`.

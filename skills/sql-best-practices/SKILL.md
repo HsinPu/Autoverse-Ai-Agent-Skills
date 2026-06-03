@@ -5,14 +5,33 @@ source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---
 
-# SQL 最佳實務（SQL Best Practices）
+# SQL Best Practices
 
-**撰寫或審查 SQL 時請讀取本 skill。**
+Use this skill when the task is about writing, reviewing, debugging, or optimizing SQL queries.
 
-撰寫、重構或審查 SQL 查詢時，依需要查閱下方參考資料，以符合撰寫風格、效能要求與安全規範。以**通用 SQL** 為主，語法差異處加註適用的資料庫（PostgreSQL / MySQL / SQL Server）。Schema 設計、索引建立與 migration 模式請見 `database-design` Skill。
+## Workflow
 
-## 進階與參考（Bundled resources）
+1. Identify the database dialect, query purpose, expected cardinality, and caller contract.
+2. Check table relationships, filters, join keys, ordering, pagination, and null semantics.
+3. Prefer readable SQL before clever SQL; make expensive operations obvious.
+4. Review execution plans, indexes, batching, and lock behavior when performance matters.
+5. Verify with representative data, query plans, tests, or a dry-run migration where available.
 
-- **撰寫風格**：需查閱命名慣例、格式排版、JOIN 寫法、子查詢與 CTE、條件式、DML 語法或資料庫差異時，見 [reference/code-style.md](reference/code-style.md)。
-- **效能優化**：需查閱 EXPLAIN 判讀、常見效能陷阱、N+1、分頁策略、大量資料操作、索引使用提示或鎖與並行時，見 [reference/performance.md](reference/performance.md)。
-- **安全性**：需查閱 SQL injection 防範、參數化查詢（各語言範例）、ORM 安全、權限控制、敏感資料處理或稽核監控時，見 [reference/security.md](reference/security.md)。
+## Reference Routing
+
+- Naming, formatting, joins, CTEs, and query style: read [reference/code-style.md](reference/code-style.md).
+- `EXPLAIN`, indexes, pagination, N+1 patterns, and batch operations: read [reference/performance.md](reference/performance.md).
+- SQL injection, parameter binding, ORM escape hatches, and permissions: read [reference/security.md](reference/security.md).
+
+## Rules
+
+- Use bound parameters for external input.
+- Be explicit about join type, ordering, and pagination stability.
+- Avoid schema or migration advice unless the task includes it; use `database-design` for that layer.
+- Do not optimize blindly without knowing the query goal and data shape.
+
+## Handoff
+
+- For schema modeling, indexing strategy, migrations, or data integrity, use `database-design`.
+- For ORM-specific implementation, use `prisma-drizzle`, `jpa-hibernate-development`, or `mybatis-development`.
+- For PostgreSQL operational work, use `postgres-operations`.

@@ -26,5 +26,5 @@ Use this skill when the work is about keyboard shortcuts.
 
 ## Handoff
 
-- For keyboard navigation and focus, use `accessibility`.
+- For keyboard navigation, focus order, and accessible UI states, use `frontend-design`.
 - For UI state behavior, use `react-ui-patterns`.

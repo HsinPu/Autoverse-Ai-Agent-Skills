@@ -5,14 +5,33 @@ source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---
 
-# Java 開發（Java Development）
+# Java Development
 
-**撰寫 Java 時請讀取本 skill。**
+Use this skill for general Java implementation, review, and refactoring decisions.
 
-撰寫或重構 Java 程式碼時，依需要查閱下方參考資料，以符合程式碼風格與設計原則。以 **Java 11+** 為基準版本，風格以 **Google Java Style Guide** 為主、補充 **Oracle Code Conventions** 實用部分。
+## Workflow
 
-## 進階與參考（Bundled resources）
+1. Inspect the project style: Java version, build tool, package layout, formatter, test framework, and framework conventions.
+2. Keep types, packages, and method boundaries aligned with the existing architecture.
+3. Use clear names, small methods, explicit error handling, and immutable values where practical.
+4. Apply object-oriented patterns only when they reduce real coupling or duplication.
+5. Verify with the narrowest relevant unit, integration, build, or static-analysis command.
 
-- **程式碼風格**：需查閱命名、格式、匯入、Javadoc、例外處理、慣例或工具時，見 [reference/code-style.md](reference/code-style.md)。
-- **設計模式**：需查閱 SOLID、組合優於繼承、依賴注入、不可變性時，見 [reference/design-patterns.md](reference/design-patterns.md)。
-- **重構與 Code Smells**：需查閱 Java 重構技巧（Extract Method、Optional、Stream、Record 等）與 Code Smells 改善範例時，見 [reference/refactoring.md](reference/refactoring.md)。
+## Reference Routing
+
+- Code style, naming, formatting, Javadoc, and exceptions: read [reference/code-style.md](reference/code-style.md).
+- SOLID, dependency injection, composition, immutability, and pattern choices: read [reference/design-patterns.md](reference/design-patterns.md).
+- Refactoring tactics and Java code smells: read [reference/refactoring.md](reference/refactoring.md).
+
+## Rules
+
+- Prefer composition and dependency injection over hidden global state.
+- Keep domain logic out of controllers, adapters, and persistence mapping code.
+- Do not introduce a framework abstraction when a local plain Java boundary already exists.
+- Preserve public APIs unless the user explicitly asked for a breaking change.
+
+## Handoff
+
+- For Spring or Spring Boot services, use `spring-development`.
+- For Java tests, use `java-testing`.
+- For persistence with JPA/Hibernate or MyBatis, use `jpa-hibernate-development` or `mybatis-development`.

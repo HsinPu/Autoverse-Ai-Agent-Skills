@@ -26,5 +26,5 @@ Use this skill to capture repeatable lessons and mistakes.
 
 ## Handoff
 
-- For general repo memory patterns, use `memory-setup` if the project has a memory system.
+- For general repo memory patterns, context pruning, or reusable lessons, use `context-governance`.
 - For code changes driven by the learning, use `code-refactoring` or the relevant stack skill.

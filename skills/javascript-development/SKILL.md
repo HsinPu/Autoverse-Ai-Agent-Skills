@@ -5,15 +5,34 @@ source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---
 
-# JavaScript 開發（JavaScript Development）
+# JavaScript Development
 
-**撰寫 JavaScript 時請讀取本 skill。**
+Use this skill for JavaScript implementation, review, refactoring, and debugging in Node.js or browser projects.
 
-撰寫、重構或審查 JavaScript 程式碼時，依需要查閱下方參考資料，以符合現代 JavaScript 的可讀性、可維護性與安全性最佳實踐。
+## Workflow
 
-## 進階與參考（Bundled resources）
+1. Inspect runtime targets, module format, package scripts, lint rules, and test setup.
+2. Follow the local style for modules, exports, async flow, and error boundaries.
+3. Keep side effects explicit and isolate I/O from pure transformation logic.
+4. Handle promises, cancellation, retries, and thrown errors deliberately.
+5. Verify with the repo's unit tests, targeted script, browser check, or Node smoke command.
 
-- **程式碼風格**：命名、檔案/模組結構、匯入/匯出、ESM/CJS、lint/format、JSDoc 與 `@ts-check`，見 [reference/code-style.md](reference/code-style.md)。
-- **非同步與錯誤處理**：async/await、Promise、取消/逾時、重試、可觀測性與錯誤訊息，見 [reference/async-and-errors.md](reference/async-and-errors.md)。
-- **安全**：輸入驗證、依賴風險、Secrets、SSRF/路徑穿越等常見坑，見 [reference/security.md](reference/security.md)。
-- **測試**：測試分層、mock 策略、可重現性、Vitest/Jest 建議，見 [reference/testing.md](reference/testing.md)。
+## Reference Routing
+
+- Style, modules, JSDoc, `@ts-check`, and formatting: read [reference/code-style.md](reference/code-style.md).
+- Async flow, promises, and error handling: read [reference/async-and-errors.md](reference/async-and-errors.md).
+- Browser, server, dependency, and input security: read [reference/security.md](reference/security.md).
+- Jest, Vitest, mocks, and test structure: read [reference/testing.md](reference/testing.md).
+
+## Rules
+
+- Prefer simple data flow over clever metaprogramming.
+- Avoid hidden mutation across modules unless the project already uses that pattern.
+- Validate and normalize external input at the boundary.
+- Do not add dependencies when native APIs or existing helpers are enough.
+
+## Handoff
+
+- For TypeScript-heavy code, use `typescript-development`.
+- For React UI behavior, use `react-ui-patterns` or `react-perf`.
+- For browser automation or UI verification, use `webapp-testing` or `playwright-automation`.

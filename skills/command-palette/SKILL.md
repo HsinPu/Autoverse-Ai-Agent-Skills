@@ -28,6 +28,6 @@ Use this skill when the work is about a command palette or quick launcher.
 ## Handoff
 
 - For shortcut design, use `hotkey`.
-- For focus and keyboard access, use `accessibility`.
+- For focus, keyboard access, and accessible interaction states, use `frontend-design`.
 - For async execution states, use `react-ui-patterns`.
 - For surrounding navigation or transitions, use `interaction-patterns`.

@@ -5,29 +5,35 @@ source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---
 
-# CSS 開發（CSS Development）
+# CSS Development
 
-**撰寫或重構 CSS 時請讀取本 skill。**
+Use this skill when the work directly changes CSS, style architecture, selectors, layout, responsive behavior, or design tokens.
 
-目標：寫出「可維護、可覆寫、可擴充」的 CSS，而不是只讓當下畫面能動。
+## Workflow
 
-## 進階與參考（Bundled resources）
+1. Inspect existing styling conventions before adding new selectors or tokens.
+2. Identify whether the problem is cascade, specificity, layout, responsiveness, theming, or component state.
+3. Prefer the project's current architecture: CSS modules, global CSS, Tailwind layers, CSS variables, styled components, or framework conventions.
+4. Make the smallest style change that fixes the visual or maintainability issue.
+5. Verify affected states across relevant breakpoints, themes, hover/focus/disabled states, and reduced-motion preferences.
 
-- **Cascade/Specificity**：如何避免 specificity 戰爭、何時用 `@layer`/`:where()`/`!important`，見 [reference/cascade-and-specificity.md](reference/cascade-and-specificity.md)。
-- **Selectors**：selector 策略、可讀性與效能、狀態命名，見 [reference/selectors-and-architecture.md](reference/selectors-and-architecture.md)。
-- **Responsive**：media queries vs container queries、breakpoints、reduced motion，見 [reference/responsive.md](reference/responsive.md)。
-- **Layout**：Flexbox/Grid 選用與常見陷阱，見 [reference/layout.md](reference/layout.md)。
-- **Tokens**：CSS variables（custom properties）、semantic tokens、可擴充主題，見 [reference/tokens.md](reference/tokens.md)。
+## Reference Routing
 
----
+- Cascade and specificity: read [reference/cascade-and-specificity.md](reference/cascade-and-specificity.md).
+- Selectors and architecture: read [reference/selectors-and-architecture.md](reference/selectors-and-architecture.md).
+- Responsive behavior: read [reference/responsive.md](reference/responsive.md).
+- Flexbox, Grid, and layout choice: read [reference/layout.md](reference/layout.md).
+- CSS variables and semantic tokens: read [reference/tokens.md](reference/tokens.md).
 
-## 外部參考（MDN）
+## Rules
 
-- CSS（總覽）：https://developer.mozilla.org/en-US/docs/Web/CSS
-- Specificity：https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Cascade/Specificity
-- Selectors：https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors
-- Using media queries：https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries
-- Flexbox basics：https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox
-- Grid layout：https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout
-- Container queries：https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Container_Queries
-- Custom properties：https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties
+- Avoid `!important` unless the repo already requires it or the override boundary is explicit.
+- Prefer semantic tokens over repeated literal colors, spacing, shadows, and radii.
+- Keep selectors stable, shallow, and scoped to the owning component or layer.
+- Do not fix a layout bug by relying on fragile magic pixel values when a structural layout rule is available.
+
+## Handoff
+
+- For visual direction and page composition, use `frontend-design`.
+- For Tailwind-specific work, use `tailwind-development` or `tailwind-patterns`.
+- For system-wide token extraction or audit, use `design-system`.
