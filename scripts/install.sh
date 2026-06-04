@@ -7,13 +7,14 @@ AGENT=""
 SKILL=""
 INSTALL_DIR=""
 DRY_RUN=0
+FORCE=0
 
 usage() {
   cat <<'EOF'
 Autoverse AI Agent Skills installer
 
 Usage:
-  scripts/install.sh --agent <agent> [--skill <skill>] [--branch main] [--repo owner/repo] [--dir path] [--dry-run]
+  scripts/install.sh --agent <agent> [--skill <skill>] [--branch main] [--repo owner/repo] [--dir path] [--dry-run] [--force]
 
 Agents:
   claude, cursor, codex, amp, vscode, copilot, project, goose, opencode, opencode-project, letta, gemini
@@ -22,6 +23,11 @@ Examples:
   scripts/install.sh --agent codex
   scripts/install.sh --agent codex --skill python-development
   scripts/install.sh --agent project --dry-run
+  scripts/install.sh --agent project --skill python-development --force
+
+Safety:
+  Existing skill folders are updated only when .skill-meta.json shows the same repo.
+  Unknown same-named folders are blocked unless --force is provided.
 EOF
 }
 
@@ -61,6 +67,10 @@ while [[ $# -gt 0 ]]; do
       ;;
     --dry-run)
       DRY_RUN=1
+      shift
+      ;;
+    --force)
+      FORCE=1
       shift
       ;;
     -h|--help)
@@ -108,6 +118,53 @@ require_command() {
   fi
 }
 
+json_string_value() {
+  local file="$1"
+  local key="$2"
+  sed -n "s/^[[:space:]]*\"$key\"[[:space:]]*:[[:space:]]*\"\\([^\"]*\\)\".*/\\1/p" "$file" | head -n 1
+}
+
+install_action() {
+  local target="$1"
+  local name="$2"
+
+  INSTALL_ACTION="install"
+  EXISTING_INSTALLED_AT=""
+
+  if [[ ! -e "$target" ]]; then
+    return
+  fi
+
+  local meta="$target/.skill-meta.json"
+  if [[ -f "$meta" ]]; then
+    local existing_repo
+    existing_repo="$(json_string_value "$meta" "repo")"
+    EXISTING_INSTALLED_AT="$(json_string_value "$meta" "installedAt")"
+    if [[ "$existing_repo" == "$REPO" ]]; then
+      INSTALL_ACTION="update"
+      return
+    fi
+    if [[ "$FORCE" -eq 1 ]]; then
+      INSTALL_ACTION="force-replace"
+      return
+    fi
+    if [[ -n "$existing_repo" ]]; then
+      log_error "Refusing to replace '$name' because it was installed from '$existing_repo', not '$REPO'. Use --force to overwrite intentionally."
+    else
+      log_error "Refusing to replace '$name' because the existing .skill-meta.json is missing repo. Use --force to overwrite intentionally."
+    fi
+    exit 1
+  fi
+
+  if [[ "$FORCE" -eq 1 ]]; then
+    INSTALL_ACTION="force-replace"
+    return
+  fi
+
+  log_error "Refusing to replace '$name' because the existing folder has no Autoverse .skill-meta.json. Use --force to overwrite intentionally."
+  exit 1
+}
+
 install_skill() {
   local src="$1"
   local name
@@ -122,12 +179,10 @@ install_skill() {
       ;;
   esac
 
+  install_action "$target" "$name"
+
   if [[ "$DRY_RUN" -eq 1 ]]; then
-    if [[ -e "$target" ]]; then
-      printf 'DRY-RUN replace %s -> %s\n' "$name" "$target"
-    else
-      printf 'DRY-RUN install %s -> %s\n' "$name" "$target"
-    fi
+    printf 'DRY-RUN %s %s -> %s\n' "$INSTALL_ACTION" "$name" "$target"
     return
   fi
 
@@ -136,7 +191,12 @@ install_skill() {
   cp -R "$src" "$target"
 
   local now
+  local installed_at
   now="$(date -u '+%Y-%m-%dT%H:%M:%SZ')"
+  installed_at="$now"
+  if [[ -n "$EXISTING_INSTALLED_AT" ]]; then
+    installed_at="$EXISTING_INSTALLED_AT"
+  fi
   cat > "$target/.skill-meta.json" <<EOF
 {
   "source": "github-archive",
@@ -144,12 +204,12 @@ install_skill() {
   "branch": "$BRANCH",
   "name": "$name",
   "agent": "$AGENT",
-  "installedAt": "$now",
+  "installedAt": "$installed_at",
   "updatedAt": "$now"
 }
 EOF
 
-  log_success "Installed $name -> $target"
+  log_success "$INSTALL_ACTION $name -> $target"
 }
 
 if [[ -z "$AGENT" ]]; then

@@ -4,6 +4,7 @@
 #   powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Agent codex'
 #   .\scripts\install.ps1 -Agent codex -Skill python-development
 #   .\scripts\install.ps1 -Agent project -DryRun
+#   .\scripts\install.ps1 -Agent project -Skill python-development -Force
 
 param(
     [string]$Agent,
@@ -11,7 +12,8 @@ param(
     [string]$Branch = "main",
     [string]$Repo = "HsinPu/Autoverse-Ai-Agent-Skills",
     [string]$InstallDir,
-    [switch]$DryRun
+    [switch]$DryRun,
+    [switch]$Force
 )
 
 $ErrorActionPreference = "Stop"
@@ -47,7 +49,7 @@ function Show-Usage {
 Autoverse AI Agent Skills installer
 
 Usage:
-  .\scripts\install.ps1 -Agent <agent> [-Skill <skill>] [-Branch main] [-Repo owner/repo] [-InstallDir path] [-DryRun]
+  .\scripts\install.ps1 -Agent <agent> [-Skill <skill>] [-Branch main] [-Repo owner/repo] [-InstallDir path] [-DryRun] [-Force]
 
 Agents:
   claude, cursor, codex, amp, vscode, copilot, project, goose, opencode, opencode-project, letta, gemini
@@ -56,6 +58,11 @@ Examples:
   .\scripts\install.ps1 -Agent codex
   .\scripts\install.ps1 -Agent codex -Skill python-development
   .\scripts\install.ps1 -Agent project -DryRun
+  .\scripts\install.ps1 -Agent project -Skill python-development -Force
+
+Safety:
+  Existing skill folders are updated only when .skill-meta.json shows the same repo.
+  Unknown same-named folders are blocked unless -Force is provided.
 "@
 }
 
@@ -159,6 +166,60 @@ function Test-TargetWithinRoot {
     return $fullTarget.StartsWith($fullRoot + [System.IO.Path]::DirectorySeparatorChar, [System.StringComparison]::OrdinalIgnoreCase)
 }
 
+function Get-ExistingSkillMeta {
+    param([string]$Target)
+
+    $metaPath = Join-Path $Target ".skill-meta.json"
+    if (-not (Test-Path $metaPath)) {
+        return $null
+    }
+
+    try {
+        return Get-Content -Raw -Path $metaPath | ConvertFrom-Json
+    } catch {
+        if ($Force) {
+            return $null
+        }
+        throw "Existing skill metadata is invalid: $metaPath"
+    }
+}
+
+function Get-InstallAction {
+    param(
+        [string]$Target,
+        [string]$SkillName,
+        [string]$RepoName
+    )
+
+    if (-not (Test-Path $Target)) {
+        return @{
+            Action = "install"
+            ExistingMeta = $null
+        }
+    }
+
+    $existingMeta = Get-ExistingSkillMeta -Target $Target
+    if ($existingMeta -and $existingMeta.repo -eq $RepoName) {
+        return @{
+            Action = "update"
+            ExistingMeta = $existingMeta
+        }
+    }
+
+    if ($Force) {
+        return @{
+            Action = "force-replace"
+            ExistingMeta = $existingMeta
+        }
+    }
+
+    if ($existingMeta -and $existingMeta.repo) {
+        throw "Refusing to replace '$SkillName' because it was installed from '$($existingMeta.repo)', not '$RepoName'. Use -Force to overwrite intentionally."
+    }
+
+    throw "Refusing to replace '$SkillName' because the existing folder has no Autoverse .skill-meta.json. Use -Force to overwrite intentionally."
+}
+
 function Install-Skill {
     param(
         [System.IO.DirectoryInfo]$Source,
@@ -173,9 +234,10 @@ function Install-Skill {
         throw "Refusing to write outside install directory: $target"
     }
 
+    $plan = Get-InstallAction -Target $target -SkillName $Source.Name -RepoName $RepoName
+
     if ($DryRun) {
-        $action = if (Test-Path $target) { "replace" } else { "install" }
-        Write-Host "DRY-RUN $action $($Source.Name) -> $target"
+        Write-Host "DRY-RUN $($plan.Action) $($Source.Name) -> $target"
         return
     }
 
@@ -187,17 +249,21 @@ function Install-Skill {
 
     $now = (Get-Date).ToUniversalTime().ToString("o")
     $metaPath = Join-Path $target ".skill-meta.json"
+    $installedAt = $now
+    if ($plan.ExistingMeta -and $plan.ExistingMeta.installedAt) {
+        $installedAt = $plan.ExistingMeta.installedAt
+    }
     @{
         source = "github-archive"
         repo = $RepoName
         branch = $BranchName
         name = $Source.Name
         agent = $AgentName
-        installedAt = $now
+        installedAt = $installedAt
         updatedAt = $now
     } | ConvertTo-Json -Depth 3 | Set-Content -Path $metaPath -Encoding UTF8
 
-    Write-Success "Installed $($Source.Name) -> $target"
+    Write-Success "$($plan.Action.Substring(0,1).ToUpperInvariant() + $plan.Action.Substring(1)) $($Source.Name) -> $target"
 }
 
 try {

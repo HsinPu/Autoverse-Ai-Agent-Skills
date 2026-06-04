@@ -48,7 +48,16 @@ powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.git
 curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --agent codex --dry-run
 ```
 
-> 必須指定 `Agent`；未指定 `Skill` 時會安裝全部 skills。若目標 skill 已存在，installer 會先移除舊資料夾再放入最新版。
+> 必須指定 `Agent`；未指定 `Skill` 時會安裝全部 skills。若目標 skill 已存在，installer 只會在 `.skill-meta.json` 顯示同一個 repo 時更新。沒有 metadata 或來源不同的同名資料夾會被停止保護；確認要覆蓋時才使用 `-Force` / `--force`。
+
+強制覆蓋未知同名資料夾：
+```powershell
+powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Agent codex -Skill python-development -Force'
+```
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --agent codex --skill python-development --force
+```
 
 ### 方式二：手動複製
 
@@ -441,6 +450,22 @@ curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/ma
 
 # Linux / macOS：安裝單一 skill
 curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --agent <agent-name> --skill <skill-name>
+```
+
+安全覆蓋規則：
+
+- 目標 skill 不存在：直接安裝。
+- 目標 skill 已存在且 `.skill-meta.json` 的 `repo` 相同：更新覆蓋，保留原本 `installedAt`，更新 `updatedAt`。
+- 目標 skill 已存在但沒有 `.skill-meta.json`：停止，不刪除。
+- 目標 skill 已存在但 metadata 來源不是目前 repo：停止，不刪除。
+- 確認要覆蓋未知來源時，Windows 加 `-Force`，Linux/macOS 加 `--force`。
+
+```powershell
+powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Agent <agent-name> -Skill <skill-name> -Force'
+```
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --agent <agent-name> --skill <skill-name> --force
 ```
 
 ### 本地查詢 CLI（可選）
