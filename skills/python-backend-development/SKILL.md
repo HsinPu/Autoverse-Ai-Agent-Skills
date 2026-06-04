@@ -19,7 +19,8 @@ Use this skill when the task is a Python web backend, service, or server-side ap
 ## Boundaries
 
 - Use `api-contract-design` for request/response shapes, pagination, idempotency, and versioning.
-- Use `python-development` for general Python architecture, packaging, typing, and style.
+- Use `project-architecture-review` for whole-project architecture diagnosis, target-shape comparison, or migration planning before backend implementation.
+- Use `python-development` for Python package layout, packaging, typing, and style.
 - Use `python-automation-scripting` for local CLI or filesystem automation.
 
 ## Workflow

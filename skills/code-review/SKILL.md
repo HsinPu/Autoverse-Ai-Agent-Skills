@@ -91,6 +91,7 @@ license: Apache-2.0
 - Use severity based on user impact, exploitability, data risk, and likelihood.
 - State assumptions and unknowns separately from confirmed findings.
 - Include positive observations only after findings and keep them brief.
+- Use `project-architecture-review` when the request is a whole-project architecture assessment rather than a diff, PR, or changed-file review.
 - Use `security-code-review` when the requested scope is a vulnerability audit or OWASP-style review.
 - Use `github-inline-review` when findings need to be posted as GitHub inline comments.
 

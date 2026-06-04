@@ -9,6 +9,8 @@ license: Apache-2.0
 
 在設計或重構 Java 後端架構時使用本 skill。它聚焦 architecture boundaries；實作細節依需要搭配 `java-development`、`spring-development`、`jpa-hibernate-development`、`mybatis-development`、`java-testing`。
 
+若需求是整個 repo 或跨語言系統的架構診斷、目標架構比較、遷移路線規劃，先使用 `project-architecture-review`；再回到本 skill 處理 Java / Spring 的 Clean Architecture、DDD 與 package boundary 細節。
+
 ## When To Use
 
 - 設計新 Java / Spring backend service 的 package、module、layer boundary。

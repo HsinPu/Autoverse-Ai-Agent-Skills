@@ -11,6 +11,8 @@ license: Apache-2.0
 
 設計 Python 專案架構、設定工具鏈、撰寫或重構 Python 程式碼時，依需要查閱下方參考資料，以符合架構、程式碼風格、設計原則與常見現代工作流。
 
+若使用者是在問整個 repo 的架構是否合理、要比較目標架構，或需要跨語言/跨框架的遷移計畫，先使用 `project-architecture-review`；再回到本 skill 處理 Python package layout、typing、tooling 與實作細節。
+
 ## 進階與參考（Bundled resources）
 
 - **專案架構**：新專案、整理資料夾、規劃 `src` layout、package/module 邊界、CLI 入口與測試結構時，見 [reference/architecture.md](reference/architecture.md)。

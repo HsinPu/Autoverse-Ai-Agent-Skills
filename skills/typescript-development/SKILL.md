@@ -30,6 +30,7 @@ Use this skill for TypeScript-heavy implementation, review, type design, and ref
 
 ## Handoff
 
+- For whole-project architecture diagnosis, target architecture comparison, or migration planning before TypeScript edits, use `project-architecture-review`.
 - For plain JavaScript projects, use `javascript-development`.
 - For React UI state and behavior, use `react-ui-patterns`.
 - For Vue TypeScript and SFC work, use `vue-development` or `vue-composition-api`.

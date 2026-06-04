@@ -79,11 +79,12 @@ curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/ma
 | 2 | 任務拆解 | 幾乎都需要 | `todo-first` |
 | 3 | 規格/設計 | 規模較大、多人協作時 | `specification-authoring` |
 | 4 | 資料設計 | 有資料庫或資料模型時 | `database-design`, `sql-best-practices` |
-| 5 | 程式實作 | 幾乎都需要 | `python-development`, `python-data-engineering`, `python-web-scraping`, `python-automation-scripting`, `python-backend-development`, `python-testing-engineering`, `python-observability-debugging`, `python-packaging-release`, `python-concurrency-patterns`, `python-security-hardening`, `python-api-client-development`, `java-development`, `java-architecture`, `java-testing`, `jvm-build-tooling`, `jpa-hibernate-development`, `javascript-development`, `desktop-development`, `typescript-development`, `spring-development`, `spring-security`, `spring-webflux`, `spring-cloud-microservices`, `vue-development`, `nuxt-development`, `css-development`, `tailwind-development`, `frontend-design`, `react-ui-patterns`, `mybatis-development`, `jquery-development`, `mcp-creator-design`, `api-doc-comments`, `openapi-spec-generation`, `i18n-localization` |
-| 6 | 驗證/修正 | 幾乎都需要 | `code-review`, `logging-patterns` |
-| 7 | 重構 | 視需要 | `code-refactoring` |
-| 8 | 文件交付 | 對外交付或交接時 | `markdown-writer`, `git-readme-writer` |
-| 9 | 版本控制 | 幾乎都需要 | `git-operations`, `github-operations` |
+| 5 | 架構診斷 | 專案架構不清、想比較調整方向時 | `project-architecture-review` |
+| 6 | 程式實作 | 幾乎都需要 | `python-development`, `python-data-engineering`, `python-web-scraping`, `python-automation-scripting`, `python-backend-development`, `python-testing-engineering`, `python-observability-debugging`, `python-packaging-release`, `python-concurrency-patterns`, `python-security-hardening`, `python-api-client-development`, `java-development`, `java-architecture`, `java-testing`, `jvm-build-tooling`, `jpa-hibernate-development`, `javascript-development`, `desktop-development`, `typescript-development`, `spring-development`, `spring-security`, `spring-webflux`, `spring-cloud-microservices`, `vue-development`, `nuxt-development`, `css-development`, `tailwind-development`, `frontend-design`, `react-ui-patterns`, `mybatis-development`, `jquery-development`, `mcp-creator-design`, `api-doc-comments`, `openapi-spec-generation`, `i18n-localization` |
+| 7 | 驗證/修正 | 幾乎都需要 | `code-review`, `logging-patterns` |
+| 8 | 重構 | 視需要 | `code-refactoring` |
+| 9 | 文件交付 | 對外交付或交接時 | `markdown-writer`, `git-readme-writer` |
+| 10 | 版本控制 | 幾乎都需要 | `git-operations`, `github-operations` |
 
 Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順序本身大致相同。
 
@@ -93,7 +94,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 
 ## 收錄 Skills
 
-目前共收錄 **173** 個 skills：**139** 個 Development、**19** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
+目前共收錄 **174** 個 skills：**140** 個 Development、**19** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
 
 ### 前端技能快速索引（按用途）
 
@@ -309,6 +310,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 | **[react-perf](skills/react-perf/)** | React 效能診斷與優化（re-render、waterfall、bundle、slow UI） |
 | **[testing-strategy](skills/testing-strategy/)** | 測試分層、fixtures、flakiness 與 coverage 取捨 |
 | **[code-change-workflow](skills/code-change-workflow/)** | 修改既有 code 前先追入口、呼叫鏈、資料流、測試與驗證方式，再做最小安全修改 |
+| **[project-architecture-review](skills/project-architecture-review/)** | 跨語言專案架構診斷（entry points、module boundaries、dependency direction、data flow、遷移計畫） |
 | **[code-refactoring](skills/code-refactoring/)** | 程式碼重構技巧（Code Smells、magic values 改常數、安全流程、語言無關原則） |
 | **[logging-patterns](skills/logging-patterns/)** | 撰寫乾淨一致的 log 訊息模式（level、message shape、context fields、低噪音） |
 | **[api-doc-comments](skills/api-doc-comments/)** | 公共 API docstring / Javadoc / TSDoc 內容撰寫（契約、參數、回傳、例外、範例） |
