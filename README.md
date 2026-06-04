@@ -20,21 +20,25 @@ Skill 是擴充 AI Agent 能力的**模組化套件**：把專業知識、工作
 
 Windows PowerShell：
 
+安裝所有 skills 到 Codex：
 ```powershell
-# 安裝所有 skills 到 Codex
 powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Agent codex'
+```
 
-# 安裝單一 skill 到 Codex
+安裝單一 skill 到 Codex：
+```powershell
 powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Agent codex -Skill python-development'
 ```
 
 Linux / macOS：
 
+安裝所有 skills 到 Codex：
 ```bash
-# 安裝所有 skills 到 Codex
 curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --agent codex
+```
 
-# 安裝單一 skill 到 Codex
+安裝單一 skill 到 Codex：
+```bash
 curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --agent codex --skill python-development
 ```
 
@@ -441,19 +445,23 @@ installer 會依 `-Agent` / `--agent` 自動選擇目標資料夾：
 
 ### 免 Node Installer
 
+Windows：安裝全部 skills
 ```powershell
-# Windows：安裝全部 skills
 powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Agent <agent-name>'
+```
 
-# Windows：安裝單一 skill
+Windows：安裝單一 skill
+```powershell
 powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Agent <agent-name> -Skill <skill-name>'
 ```
 
+Linux / macOS：安裝全部 skills
 ```bash
-# Linux / macOS：安裝全部 skills
 curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --agent <agent-name>
+```
 
-# Linux / macOS：安裝單一 skill
+Linux / macOS：安裝單一 skill
+```bash
 curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --agent <agent-name> --skill <skill-name>
 ```
 
