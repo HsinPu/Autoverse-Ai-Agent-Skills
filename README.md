@@ -413,22 +413,27 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 
 ## 放置位置（Install Location）
 
-| Agent | 放置路徑 |
-|-------|----------|
-| Claude Code | `~/.claude/skills/` |
-| Cursor | `.cursor/skills/` |
-| Codex | `~/.codex/skills/` |
-| Amp | `~/.amp/skills/` |
-| VS Code / Copilot | `.github/skills/` |
-| Gemini CLI | `~/.gemini/skills/` |
-| Goose | `~/.config/goose/skills/` |
-| OpenCode（專案） | `.opencode/skills/` |
-| OpenCode（全域） | `~/.config/opencode/skills/` |
-| Letta | `~/.letta/skills/` |
-| Portable | `.skills/` |
+installer 會依 `-Agent` / `--agent` 自動選擇目標資料夾：
 
-> **備註**：OpenCode 也相容 `.claude/skills/` 與 `.agents/skills/` 路徑。詳見 [OpenCode Agent Skills 文件](https://opencode.ai/docs/skills/)。
-> `cursor`、`vscode`、`copilot`、`project`、`opencode-project` 是專案相對路徑，請先切到目標專案根目錄再執行 installer。
+| Agent 參數 | 適用環境 | 安裝位置 | 範圍 | 執行位置 |
+|---|---|---|---|---|
+| `codex` | Codex | `~/.codex/skills/` | 全域 | 任意目錄 |
+| `claude` | Claude Code | `~/.claude/skills/` | 全域 | 任意目錄 |
+| `cursor` | Cursor 專案 | `.cursor/skills/` | 目前專案 | 目標專案根目錄 |
+| `project` | 通用專案 / portable agent | `.skills/` | 目前專案 | 目標專案根目錄 |
+| `vscode` | VS Code / GitHub Copilot 專案 | `.github/skills/` | 目前專案 | 目標專案根目錄 |
+| `copilot` | GitHub Copilot 專案 | `.github/skills/` | 目前專案 | 目標專案根目錄 |
+| `opencode` | OpenCode 全域 | `~/.config/opencode/skills/` | 全域 | 任意目錄 |
+| `opencode-project` | OpenCode 專案 | `.opencode/skills/` | 目前專案 | 目標專案根目錄 |
+| `goose` | Goose | `~/.config/goose/skills/` | 全域 | 任意目錄 |
+| `amp` | Amp | `~/.amp/skills/` | 全域 | 任意目錄 |
+| `letta` | Letta | `~/.letta/skills/` | 全域 | 任意目錄 |
+| `gemini` | Gemini CLI | `~/.gemini/skills/` | 全域 | 任意目錄 |
+
+> `~` 代表使用者 home 目錄，例如 Windows 通常是 `C:\Users\<你>`；Linux/macOS 通常是 `/home/<你>` 或 `/Users/<你>`。
+> `.cursor/skills/`、`.github/skills/`、`.skills/`、`.opencode/skills/` 都是「目前工作目錄」底下的相對路徑，所以要先切到你想安裝 skill 的專案根目錄再執行 installer。
+> 可以用 `-InstallDir <path>`（PowerShell）或 `--dir <path>`（Linux/macOS）覆蓋預設安裝位置。
+> OpenCode 也相容 `.claude/skills/` 與 `.agents/skills/` 路徑。詳見 [OpenCode Agent Skills 文件](https://opencode.ai/docs/skills/)。
 
 ---
 
