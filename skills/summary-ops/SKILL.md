@@ -39,4 +39,5 @@ Use this skill when the goal is to compress long content into usable notes.
 ## Handoff
 
 - For cross-source web research, use `web-research-ops`.
-- For document cleanup or markdown conversion, use `markdown-writer`.
+- For faithful document-to-Markdown conversion, use `document-to-markdown`.
+- For Markdown cleanup after extraction or summarization, use `markdown-writer`.

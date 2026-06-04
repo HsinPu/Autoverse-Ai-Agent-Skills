@@ -38,5 +38,6 @@ Use this skill when a .docx file is the source or the deliverable.
 
 ## Handoff
 
+- For `.docx` / `.doc` to Markdown conversion, use `document-to-markdown`.
 - For PDF output, use `pdf-operations`.
 - For plain-text or markdown cleanup, use `markdown-writer`.

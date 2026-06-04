@@ -83,10 +83,10 @@ curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/ma
 | 6 | 程式實作 | 幾乎都需要 | `python-development`, `python-data-engineering`, `python-web-scraping`, `python-automation-scripting`, `python-backend-development`, `python-testing-engineering`, `python-observability-debugging`, `python-packaging-release`, `python-concurrency-patterns`, `python-security-hardening`, `python-api-client-development`, `java-development`, `java-architecture`, `java-testing`, `jvm-build-tooling`, `jpa-hibernate-development`, `javascript-development`, `desktop-development`, `typescript-development`, `spring-development`, `spring-security`, `spring-webflux`, `spring-cloud-microservices`, `vue-development`, `nuxt-development`, `css-development`, `tailwind-development`, `frontend-design`, `react-ui-patterns`, `mybatis-development`, `jquery-development`, `mcp-creator-design`, `api-doc-comments`, `openapi-spec-generation`, `i18n-localization` |
 | 7 | 驗證/修正 | 幾乎都需要 | `code-review`, `logging-patterns` |
 | 8 | 重構 | 視需要 | `code-refactoring` |
-| 9 | 文件交付 | 對外交付或交接時 | `markdown-writer`, `git-readme-writer` |
+| 9 | 文件交付 | 對外交付或交接時 | `document-to-markdown`, `markdown-writer`, `git-readme-writer` |
 | 10 | 版本控制 | 幾乎都需要 | `git-operations`, `github-operations` |
 
-Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順序本身大致相同。
+Python、Java、前端的差別主要只在第 6 步的實作 skill，流程順序本身大致相同。
 
 如果有部署或維運需求，再接 `deployment-operations` 或對應技術棧 skill。
 
@@ -94,7 +94,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 
 ## 收錄 Skills
 
-目前共收錄 **174** 個 skills：**140** 個 Development、**19** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
+目前共收錄 **175** 個 skills：**140** 個 Development、**20** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
 
 ### 前端技能快速索引（按用途）
 
@@ -348,6 +348,7 @@ Python、Java、前端的差別主要只在第 5 步的實作 skill，流程順�
 | Skill | 說明 |
 |-------|------|
 | **[markdown-writer](skills/markdown-writer/)** | Markdown 撰寫指引（README、技術文件、格式化 docs、GFM 規範） |
+| **[document-to-markdown](skills/document-to-markdown/)** | 文件轉 Markdown（DOCX、PDF、PPTX、HTML、Google Docs export），轉換後整理 GFM、heading、表格與連結 |
 | **[specification-authoring](skills/specification-authoring/)** | 技術規格說明書（Spec）撰寫、重整、審查與 code-to-spec 流程指引 |
 | **[todo-first](skills/todo-first/)** | 多步驟或 non-trivial 任務前先建立 todo list（含狀態維護與驗證追蹤） |
 | **[ask-questions-if-underspecified](skills/ask-questions-if-underspecified/)** | 需求不明時先問澄清問題（僅使用者明確要求時使用） |

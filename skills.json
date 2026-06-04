@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "updated": "2026-06-04T00:00:00Z",
-  "total": 174,
+  "total": 175,
   "skills": [
     {
       "name": "todo-first",
@@ -1578,6 +1578,27 @@
         "markdown",
         "documentation",
         "readme"
+      ]
+    },
+    {
+      "name": "document-to-markdown",
+      "description": "Document-to-Markdown conversion workflow for turning DOCX, DOC, PDF, PPTX, HTML, RTF, Google Docs exports, and extracted document text into clean Markdown. Use when converting docs to markdown, docs 轉 Markdown, 文件轉 Markdown, docx to md, PDF to Markdown, marker pdf markdown, or when the final deliverable must be a reviewed .md file with preserved headings, lists, tables, links, images, and code blocks.",
+      "category": "productivity",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "markdown",
+        "documents",
+        "conversion",
+        "docx",
+        "pdf",
+        "pptx",
+        "html",
+        "google-docs",
+        "marker",
+        "ocr",
+        "gfm"
       ]
     },
     {

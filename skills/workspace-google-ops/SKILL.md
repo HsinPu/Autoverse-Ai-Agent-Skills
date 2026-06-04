@@ -23,7 +23,7 @@ Use this skill when the task needs Google Workspace automation from the terminal
 2. Identify the Workspace app involved.
 3. Use the simplest command that performs the action.
 4. Prefer non-interactive input for repeatable automation.
-5. If the task is just document formatting, hand off to `word-document-ops` or `spreadsheet-ops`.
+5. If the task is just document formatting, hand off to `word-document-ops` or `spreadsheet-ops`; if the target is Markdown, hand off to `document-to-markdown`.
 
 ## Rules
 
@@ -40,4 +40,5 @@ Use this skill when the task needs Google Workspace automation from the terminal
 ## Handoff
 
 - For document formatting, use `word-document-ops`.
+- For Google Docs export or content conversion to Markdown, use `document-to-markdown`.
 - For spreadsheet editing, use `spreadsheet-ops`.

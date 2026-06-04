@@ -11,6 +11,8 @@ license: Apache-2.0
 
 協助產出結構清晰、格式一致的 Markdown 文件，適用於 README、技術文件、筆記與說明。
 
+若來源是 `.docx`、PDF、PPTX、HTML、Google Docs export 或其他非 Markdown 文件，先使用 `document-to-markdown` 轉成初稿，再回到本 skill 做 GFM、heading、列表、表格、連結與整體可讀性整理。
+
 ## 撰寫原則（Principles）
 
 ### 語言與用語（Language）

@@ -67,25 +67,17 @@ function listSkills(category = null) {
 function searchSkills(query) {
   const data = loadSkillsJson();
   const q = query.trim().toLowerCase();
-  const terms = q.replace(/[^a-z0-9+#]+/g, ' ').split(/\s+/).filter(Boolean);
+  const terms = tokenizeSearchText(q);
   
   const matches = data.skills.map((skill, index) => {
     const name = skill.name.toLowerCase();
     const description = skill.description.toLowerCase();
     const tags = (skill.tags || []).map(tag => tag.toLowerCase());
     const haystack = [name, description, ...tags].join(' ');
-    const nameTokens = new Set(
-      name.replace(/[^a-z0-9+#]+/g, ' ').split(/\s+/).filter(Boolean)
-    );
-    const tagTokens = new Set(
-      tags.join(' ').replace(/[^a-z0-9+#]+/g, ' ').split(/\s+/).filter(Boolean)
-    );
-    const normalizedTokens = new Set(
-      haystack.replace(/[^a-z0-9+#]+/g, ' ').split(/\s+/).filter(Boolean)
-    );
-    const nameAndTagTokens = new Set(
-      [name, ...tags].join(' ').replace(/[^a-z0-9+#]+/g, ' ').split(/\s+/).filter(Boolean)
-    );
+    const nameTokens = new Set(tokenizeSearchText(name));
+    const tagTokens = new Set(tokenizeSearchText(tags.join(' ')));
+    const normalizedTokens = new Set(tokenizeSearchText(haystack));
+    const nameAndTagTokens = new Set(tokenizeSearchText([name, ...tags].join(' ')));
 
     let score = 0;
     if (name === q || tags.includes(q)) score = 100;
@@ -114,6 +106,13 @@ function searchSkills(query) {
     console.log(`    ${skill.description.slice(0, 70)}${skill.description.length > 70 ? '...' : ''}`);
     console.log('');
   });
+}
+
+function tokenizeSearchText(value) {
+  return value
+    .replace(/[^a-z0-9+#\u3400-\u9fff]+/gi, ' ')
+    .split(/\s+/)
+    .filter(Boolean);
 }
 
 function listInstalled(agent) {
@@ -204,10 +203,31 @@ const agent = agentIndex !== -1 ? args[agentIndex + 1] : 'claude';
 const categoryIndex = args.indexOf('--category');
 const category = categoryIndex !== -1 ? args[categoryIndex + 1] : null;
 
-const param = args.slice(1).find((a, i) => {
-  const actualIndex = i + 1;
-  return !a.startsWith('--') && actualIndex !== agentIndex + 1 && actualIndex !== categoryIndex + 1;
-});
+const positionalArgs = getPositionalArgs(args);
+const param = positionalArgs[0];
+const searchQuery = positionalArgs.join(' ');
+
+function getPositionalArgs(values) {
+  const optionsWithValue = new Set(['--agent', '--category']);
+  const positional = [];
+
+  for (let i = 1; i < values.length; i += 1) {
+    const value = values[i];
+
+    if (optionsWithValue.has(value)) {
+      i += 1;
+      continue;
+    }
+
+    if (value.startsWith('--')) {
+      continue;
+    }
+
+    positional.push(value);
+  }
+
+  return positional;
+}
 
 if (!command || command === 'help' || command === '--help' || command === '-h') {
   showHelp();
@@ -222,11 +242,11 @@ if (!command || command === 'help' || command === '--help' || command === '-h') 
     listSkills(category);
   }
 } else if (command === 'search' || command === 's') {
-  if (!param) {
+  if (!searchQuery) {
     console.log('請指定搜尋關鍵字');
     console.log('用法: autoverse search <關鍵字>');
   } else {
-    searchSkills(param);
+    searchSkills(searchQuery);
   }
 } else if (command === 'info') {
   if (!param) {

@@ -22,7 +22,7 @@ Use this skill when a .pdf file is the source or the deliverable.
 2. Preserve layout if the output must match the original page structure.
 3. Use OCR for scanned or image-only pages.
 4. Validate the result by checking page count, text extraction, and visible layout.
-5. If the target format is editable text, hand off to `markdown-writer`.
+5. If the target format is Markdown, hand off to `document-to-markdown`; if the text is already extracted, hand off to `markdown-writer` for cleanup.
 
 ## Rules
 
@@ -40,5 +40,6 @@ Use this skill when a .pdf file is the source or the deliverable.
 
 ## Handoff
 
+- For PDF to Markdown conversion, use `document-to-markdown`.
 - For text cleanup or notes, use `markdown-writer`.
 - For file organization around PDFs, use `file-organizer`.
