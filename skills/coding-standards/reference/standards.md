@@ -51,6 +51,34 @@
 - Keep module APIs small.
 - Avoid mixing styles inside the same repository unless there is a clear migration plan.
 
+## Constants, configuration, and hardcoded values
+
+| Value type | Preferred location | Review rule |
+|---|---|---|
+| Business statuses, roles, modes | constants, enums, or typed unions | Do not repeat string literals across files. |
+| Thresholds, limits, retry counts | named constants near the owning domain | Name the reason, not only the number. |
+| URLs, hosts, API keys, feature flags | config or environment boundary | Never hardcode secrets or deploy-specific values. |
+| Colors, spacing, typography, radii | design tokens or CSS variables | Use literal values only when the project has no token system. |
+| Test fixtures | test data builders or local constants | Keep fixture meaning obvious and isolated. |
+
+Hardcoded values are acceptable when the value is local, used once, self-evident, and not likely to vary by business rule, environment, locale, theme, or test setup.
+
+## Error and async conventions
+
+- Validate input at the boundary before it reaches domain logic.
+- Preserve cause/context when rethrowing errors, but do not leak secrets.
+- Prefer typed result objects or stable error shapes for public APIs.
+- Add retries only when the operation is idempotent or the failure mode is understood.
+- Keep cancellation, timeout, and cleanup behavior explicit in long-running async work.
+
+## AI agent coding expectations
+
+- Inspect local conventions before proposing new abstractions.
+- Keep edits scoped to the requested behavior.
+- Avoid broad rewrites during bug fixes unless the user asked for refactoring.
+- Verify with the narrowest meaningful command first, then broaden when risk requires it.
+- Report skipped verification and why it was skipped.
+
 ## Anti-patterns
 
 - One-off exceptions repeated everywhere
@@ -58,6 +86,8 @@
 - Components that do routing, fetching, formatting, and state management all at once
 - Lint rules that are impossible to follow consistently
 - Standards that are too large to review or remember
+- Constants files that become dumping grounds with no domain ownership
+- Helpers that hide network, filesystem, time, random, or global state side effects
 
 ## Deliverable shape
 

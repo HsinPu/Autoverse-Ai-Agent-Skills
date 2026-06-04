@@ -16,6 +16,14 @@
 - Accessibility checks applied where UI exists
 - Security-sensitive flows reviewed
 
+## Gate levels
+
+| Level | Use when | Required proof |
+|---|---|---|
+| Fast local gate | Small, isolated edits | Relevant lint/type/test command or focused smoke check |
+| Feature gate | User-facing workflow, API, or shared module changes | Unit or integration tests plus a manual or scripted workflow check |
+| Release gate | Deployment, auth, billing, data migration, security, or public contract changes | Full relevant suite, rollback/compatibility notes, and explicit risk review |
+
 ## Review gates
 
 | Gate | 問題 | 通過條件 |
@@ -34,6 +42,14 @@
 - `typecheck`
 - `test`
 - `test:integration` or `e2e` if the project uses them
+
+## PR review checklist
+
+- Does the change match an existing pattern in the repo?
+- Are new constants/configuration values named and located near their owner?
+- Are error states, loading states, and boundary validation covered where relevant?
+- Are tests focused on observable behavior?
+- Are unrelated formatting, generated files, and refactors kept out of the change?
 
 ## 常見失敗原因
 

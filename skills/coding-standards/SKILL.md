@@ -43,6 +43,16 @@ Before implementing new code or reviewing existing code, make the expected stand
 4. Write or revise conventions so they are easy to follow and easy to review.
 5. Validate the rules against real files and real code paths.
 
+## Code Writing Rules
+
+- Read nearby code before adding a new pattern.
+- Keep behavior changes separate from formatting-only or mechanical cleanup.
+- Prefer explicit names for domain concepts, business states, thresholds, and side effects.
+- Keep functions and components focused on one reason to change.
+- Push I/O, network calls, storage, and environment access to clear boundaries.
+- Make errors observable and recoverable; do not silently swallow failures.
+- Treat generated code, migrations, and public API changes as higher-risk edits that need stronger verification.
+
 ## Common Standards
 
 - Use functional React components and Hooks by default.
@@ -61,6 +71,15 @@ Before implementing new code or reviewing existing code, make the expected stand
 - Use configuration or environment variables for deployment-specific values such as URLs, timeouts, feature flags, and credentials references.
 - Use design tokens or CSS variables for colors, spacing, radii, shadows, and typography values when the project has a design system.
 - Never hardcode secrets or credentials in source code.
+- Small one-off literals are acceptable only when they are local, obvious, not reused, and have no business or environment meaning.
+
+## Review Signals
+
+- A reviewer can explain where each value comes from and why it is safe.
+- New modules fit an existing folder, feature, or layer boundary.
+- Error handling preserves useful context without leaking secrets.
+- Tests cover behavior and edge cases, not only the happy path.
+- Any exception to the standard is documented in the smallest useful place.
 
 ## Checkpoints
 
