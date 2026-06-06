@@ -76,7 +76,7 @@
     },
     {
       "name": "code-refactoring",
-      "description": "Code refactoring guide for improving structure, readability, and maintainability without changing behavior. Use when cleaning up legacy code, reducing complexity, replacing magic values such as magic numbers or magic strings with named constants, removing hardcoded values, or simplifying code that has become hard to understand or extend.",
+      "description": "Behavior-preserving code refactoring guide for improving structure, readability, and maintainability without changing outputs. Use when cleaning up legacy code, reducing complexity, replacing magic values or hardcoded values with named constants, or simplifying code after the current behavior and verification path are understood.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -93,7 +93,7 @@
     },
     {
       "name": "code-change-workflow",
-      "description": "Pre-change code workflow for understanding existing behavior before editing. Use when modifying code in an existing project to inspect entry points, call chains, data flow, tests, constraints, and verification paths before making the smallest safe change.",
+      "description": "Default pre-edit workflow for modifying existing code safely. Use before bug fixes, feature changes, refactors, behavior adjustments, or multi-file edits to inspect entry points, call chains, data flow, tests, constraints, and verification paths, then make the smallest safe change.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -110,7 +110,7 @@
     },
     {
       "name": "incremental-implementation",
-      "description": "Incremental implementation workflow for splitting large code changes, feature work, refactors, migrations, or multi-file edits into small verified slices. Use when a change may touch many files, take multiple steps, need repeated tests, benefit from intermediate commits, or should stay easy to review, debug, roll back, and inspect later.",
+      "description": "Large-change slicing workflow for code changes that should not land as one diff. Use after or with code-change-workflow when feature work, refactors, migrations, or multi-file edits need small verified slices, repeated tests, checkpoints, intermediate commits, reviewability, rollback, or later inspection.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",

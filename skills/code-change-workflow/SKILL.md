@@ -1,20 +1,29 @@
 ---
 name: code-change-workflow
-description: Pre-change code workflow for understanding existing behavior before editing. Use when modifying code in an existing project to inspect entry points, call chains, data flow, tests, constraints, and verification paths before making the smallest safe change.
+description: Default pre-edit workflow for modifying existing code safely. Use before bug fixes, feature changes, refactors, behavior adjustments, or multi-file edits to inspect entry points, call chains, data flow, tests, constraints, and verification paths, then make the smallest safe change.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---
 
 # Code Change Workflow
 
-Use this skill before changing code in an existing project when the correct edit depends on understanding current behavior, flow, ownership, or verification paths.
+Use this as the default first skill for existing-code changes. It answers: what code owns this behavior, what can break, and how will the edit be verified?
 
-## Core Scope
+## When To Use
 
+- Any request to modify code in an existing repository, unless the owner code path and verification are already obvious
 - Bug fixes, feature changes, refactors, and behavior adjustments in existing code
 - Tasks with unclear entry points, data flow, state flow, or side effects
 - Multi-file changes where a small edit can affect callers, tests, APIs, UI, or persistence
 - Codebases where local conventions matter more than generic implementation advice
+
+## Routing Rules
+
+- Start here for existing-code edits before choosing language, framework, refactoring, or testing details.
+- If the inspection shows the change is broad, risky, or multi-step, add `incremental-implementation` to split the work into verified slices.
+- If the requested change is behavior-preserving cleanup, use `code-refactoring` for the refactor rules after the current behavior and verification path are known.
+- Use stack-specific skills only after the owner code path is understood.
+- Use `code-review` or `security-code-review` instead when the task is only to review an existing diff.
 
 ## Workflow
 
@@ -66,6 +75,7 @@ Use this skill before changing code in an existing project when the correct edit
 
 - Use `karpathy-guidelines` for broader coding behavior, simplicity, and assumption handling.
 - Use `terminal-ops` for command-driven proof and repo state checks.
+- Use `incremental-implementation` when the change needs multiple safe slices, checkpoints, or commits.
 - Use `code-refactoring` when the goal is behavior-preserving cleanup.
 - Use `testing-strategy` when deciding how much verification is enough.
 - Use language or framework skills for implementation details after the current flow is understood.

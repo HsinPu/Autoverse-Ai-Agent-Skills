@@ -1,13 +1,13 @@
 ---
 name: incremental-implementation
-description: Incremental implementation workflow for splitting large code changes, feature work, refactors, migrations, or multi-file edits into small verified slices. Use when a change may touch many files, take multiple steps, need repeated tests, benefit from intermediate commits, or should stay easy to review, debug, roll back, and inspect later.
+description: Large-change slicing workflow for code changes that should not land as one diff. Use after or with code-change-workflow when feature work, refactors, migrations, or multi-file edits need small verified slices, repeated tests, checkpoints, intermediate commits, reviewability, rollback, or later inspection.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---
 
 # Incremental Implementation
 
-Use this skill when a requested code change is too large, risky, or broad to land safely in one pass.
+Use this skill when a requested code change is too large, risky, or broad to land safely in one pass. For existing-code edits, use it after or alongside `code-change-workflow` so the first slice is based on the real owner path and verification path.
 
 ## Goal
 
@@ -20,6 +20,7 @@ Use this skill when a requested code change is too large, risky, or broad to lan
 
 Use this skill when any condition applies:
 
+- The `code-change-workflow` inspection shows the task cannot stay as one small safe edit.
 - The change touches multiple files, modules, services, screens, commands, schemas, or tests.
 - The implementation could take more than one focused edit-and-verify cycle.
 - The user asks to reduce risk, make future inspection easier, or avoid one large code change.
@@ -28,6 +29,14 @@ Use this skill when any condition applies:
 - The work would be hard to review if completed as one monolithic diff.
 
 Do not use it for a single obvious edit where one targeted verification is enough.
+
+## Routing Rules
+
+- Do not use this as the first and only skill for an unknown existing code path; start with `code-change-workflow` to find ownership, callers, constraints, and verification.
+- Use this to plan slice order, checkpoints, and commit boundaries once the affected surface is known.
+- Pair with `code-refactoring` only for behavior-preserving cleanup slices.
+- Pair with stack-specific skills only inside a slice, not as a replacement for slice planning.
+- Keep slice tracking separate from implementation details; use `todo-first` when the slice list has meaningful status.
 
 ## Slice Planning
 

@@ -1,6 +1,6 @@
 ---
 name: code-refactoring
-description: Code refactoring guide for improving structure, readability, and maintainability without changing behavior. Use when cleaning up legacy code, reducing complexity, replacing magic values such as magic numbers or magic strings with named constants, removing hardcoded values, or simplifying code that has become hard to understand or extend.
+description: Behavior-preserving code refactoring guide for improving structure, readability, and maintainability without changing outputs. Use when cleaning up legacy code, reducing complexity, replacing magic values or hardcoded values with named constants, or simplifying code after the current behavior and verification path are understood.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---
@@ -25,8 +25,8 @@ Do not use this skill for feature work, bug fixes, or architecture selection unl
 
 ## Handoff
 
-- Use `code-change-workflow` first when the entry point, data flow, caller impact, or verification path is unclear.
-- Use `incremental-implementation` when the refactor spans many files and needs small verified slices or commits.
+- Use `code-change-workflow` first when the entry point, data flow, caller impact, current behavior, or verification path is unclear.
+- Use `incremental-implementation` when the refactor spans many files and needs small verified slices, checkpoints, or commits.
 - Use `project-architecture-review` when the task is to choose a target architecture or migration plan.
 - Use stack-specific skills for language or framework implementation details.
 
