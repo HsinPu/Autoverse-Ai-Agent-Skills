@@ -94,7 +94,7 @@ Python、Java、前端的差別主要只在第 6 步的實作 skill，流程順�
 
 ## 收錄 Skills
 
-目前共收錄 **176** 個 skills：**141** 個 Development、**20** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**3** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
+目前共收錄 **177** 個 skills：**141** 個 Development、**20** 個 Productivity、**7** 個 Browser Automation、**1** 個 Search & Research、**4** 個 Coding Agents & IDEs、**1** 個 Communication、**3** 個 CLI Utilities。
 
 ### 前端技能快速索引（按用途）
 
@@ -376,6 +376,7 @@ Python、Java、前端的差別主要只在第 6 步的實作 skill，流程順�
 | **[self-improvement](skills/self-improvement/)** | 錯誤、學習與 feature request 記錄 / project memory |
 | **[context-governance](skills/context-governance/)** | context budget、學習記錄與重複資訊治理 |
 | **[subagent-architecture](skills/subagent-architecture/)** | subagent 切分、角色邊界、handoff 與平行協作 |
+| **[agent-instructions-authoring](skills/agent-instructions-authoring/)** | 建立與維護 `AGENTS.md`、`CLAUDE.md`、`.cursorrules` 等 repo-level agent instructions |
 
 ### 🌐 Communication（溝通）
 

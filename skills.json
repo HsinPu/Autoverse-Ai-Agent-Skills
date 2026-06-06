@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "updated": "2026-06-06T00:00:00Z",
-  "total": 176,
+  "total": 177,
   "skills": [
     {
       "name": "todo-first",
@@ -2496,6 +2496,23 @@
         "agents",
         "orchestration",
         "delegation"
+      ]
+    },
+    {
+      "name": "agent-instructions-authoring",
+      "description": "Repo-level coding-agent instruction authoring workflow for creating, updating, or consolidating AGENTS.md, CLAUDE.md, .cursorrules, Cursor rules, Copilot instructions, and similar files. Use when turning real project commands, architecture rules, validation steps, tool conventions, or agent-specific guidance into maintainable instruction files for AI coding tools.",
+      "category": "coding-agents-ides",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "agent-instructions",
+        "agents",
+        "repo-guidance",
+        "codex",
+        "cursor",
+        "claude",
+        "copilot"
       ]
     },
     {
