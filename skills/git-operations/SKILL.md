@@ -9,6 +9,13 @@ license: Apache-2.0
 
 執行與規劃 Git 工作流。環境預設為 **Windows**（PowerShell 或 cmd）。操作須依下列規範嚴謹執行。
 
+## Handoff
+
+- Use `github-operations` when the task involves GitHub issues, pull requests, checks, releases, or `gh` API work.
+- Use `github-code-review` or `github-inline-review` for reviewing or posting feedback on GitHub pull requests.
+- Use `git-advanced` for bisect, interactive rebase, worktrees, recovery, hooks, or history repair.
+- Use `terminal-ops` when the task mainly needs command execution evidence and repo state reporting.
+
 ## Quick start（必守原則）
 
 1. **先確認再改動**：執行任何會改動歷史或工作區的指令前，**必須**先執行 `git status`；若涉及分支或提交，必要時再執行 `git log -1` 或 `git branch -a` 確認當前狀態。未確認前不得執行 `git commit`、`git merge`、`git rebase`、`git reset`、`git push` 等。

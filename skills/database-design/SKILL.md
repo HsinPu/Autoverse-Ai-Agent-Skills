@@ -9,6 +9,31 @@ license: Apache-2.0
 
 Schema design、索引、遷移與查詢優化。適用於 PostgreSQL、MySQL 及關聯式資料庫。
 
+## When To Use
+
+Use this skill when the task is about database structure rather than one-off query syntax.
+
+- Design or review schemas, tables, relationships, keys, constraints, indexes, and migrations.
+- Plan zero-downtime schema changes, backfills, compatibility windows, or data integrity rules.
+- Improve database structure or performance when the fix involves modeling, indexes, or constraints.
+- Decide between normalization, denormalization, relational, document, or hybrid data shapes.
+
+## Workflow
+
+1. Identify the database engine, existing schema, data volume, and read/write patterns.
+2. Model entities, relationships, ownership, lifecycle, and integrity constraints.
+3. Choose primary keys, foreign keys, uniqueness, checks, and nullable/default behavior.
+4. Add indexes based on query patterns, cardinality, sort order, and write cost.
+5. Plan migrations in expand/backfill/contract steps when compatibility matters.
+6. Validate with schema review, representative queries, migration rollback assumptions, and performance checks.
+
+## Handoff
+
+- Use `sql-best-practices` for writing, reviewing, or optimizing a specific SQL query.
+- Use `postgres-operations` for PostgreSQL roles, backups, VACUUM, replication, extensions, or production operations.
+- Use `prisma-drizzle` when the task is mostly ORM schema, migrations, relations, or TypeScript database access.
+- Use `jpa-hibernate-development` or `mybatis-development` for Java persistence-layer mapping details.
+
 ## Schema 設計原則
 
 ### 正規化（Normalization）

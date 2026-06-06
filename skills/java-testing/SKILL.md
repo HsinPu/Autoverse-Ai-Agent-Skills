@@ -9,6 +9,14 @@ license: Apache-2.0
 
 在撰寫、修正或審查 Java 測試時使用本 skill。若測試重點是 Spring Boot web/data/security slice，搭配 `spring-development`；若是在決定整體測試層級，搭配 `testing-strategy`。
 
+## When To Use
+
+Use this skill when the task is to write, repair, review, or improve Java tests.
+
+- Add unit, slice, integration, regression, architecture, or CI-focused Java tests.
+- Choose JUnit, AssertJ, Mockito, Spring test slices, Testcontainers, or ArchUnit patterns.
+- Stabilize flaky Java tests or improve test data, fixtures, assertions, and boundaries.
+
 ## Workflow
 
 1. 先確認要驗證的行為、失敗案例與邊界條件。
@@ -72,3 +80,10 @@ license: Apache-2.0
 - 在 unit test 啟動完整 Spring context。
 - 只 assert 不拋錯或只驗證 mock 被呼叫，沒有驗證可觀察結果。
 - 使用 production secrets、shared external services 或開發者本機狀態當測試依賴。
+
+## Handoff
+
+- Use `testing-strategy` when deciding which test level or coverage strategy is appropriate.
+- Use `spring-development` for Spring Boot slice tests and broader Spring testing context.
+- Use `spring-webflux` for `WebTestClient`, Reactor `StepVerifier`, and reactive pipeline tests.
+- Use `jpa-hibernate-development` or `mybatis-development` for persistence-specific integration tests.

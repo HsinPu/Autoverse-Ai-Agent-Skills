@@ -7,6 +7,14 @@ license: Apache-2.0
 
 # AI Image Prompt Design
 
+Use this skill when the task is to create, refine, or adapt prompts for text-to-image or image-generation models.
+
+## When To Use
+
+- Turn a rough visual idea into a detailed image prompt.
+- Improve composition, style, lighting, camera language, materials, color, or negative prompts.
+- Produce prompt variants for Flux, Stable Diffusion, Midjourney, DALL-E, GPT Image, or similar models.
+
 ## Workflow
 
 1. Identify the subject, action, setting, mood, style, composition, and output format.

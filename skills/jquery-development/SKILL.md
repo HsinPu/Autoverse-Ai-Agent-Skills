@@ -13,6 +13,23 @@ license: Apache-2.0
 
 本 skill 以「官方文件 + 安全最佳實踐」為優先依據；遇到行為差異或升版問題，請以 jQuery Upgrade Guide 與 jQuery Migrate 的警告為準。
 
+## When To Use
+
+Use this skill when the task is to maintain or improve code that currently uses jQuery.
+
+- Fix or refactor jQuery selectors, events, AJAX calls, DOM updates, plugins, or legacy widgets.
+- Reduce duplicate event binding, memory leaks, unsafe HTML insertion, or hard-to-test initialization code.
+- Make jQuery code coexist with modern browser APIs or a gradual migration path.
+- Keep old behavior stable while improving maintainability.
+
+## Workflow
+
+1. Identify the jQuery version, plugins, initialization entry points, and generated DOM shape.
+2. Trace event binding, selector usage, AJAX/data flow, and teardown behavior.
+3. Fix one behavior or code smell at a time while preserving existing UI behavior.
+4. Prefer event delegation, cached selectors, explicit teardown, and safe DOM APIs.
+5. Verify with the affected interaction, browser console, network behavior, and available tests.
+
 ## 進階與參考（Bundled resources）
 
 - **選擇器與效能**：DOM 查找、快取、批次更新、事件委派，見 [reference/selectors-and-performance.md](reference/selectors-and-performance.md)。
@@ -21,7 +38,7 @@ license: Apache-2.0
 - **安全**：XSS/HTML 注入、DOM-based XSS、URL 與 selector 注入等，見 [reference/security.md](reference/security.md)。
 - **遷移**：逐步減少 jQuery、與原生 DOM/現代框架共存、`noConflict`，見 [reference/migration.md](reference/migration.md)。
 
-## 相關技能（Related Skills）
+## Handoff
 
 - **jQuery 1/2/3/4 版本升級**：盤點混用版本、Migrate warnings、1.x/2.x/3.x 分段升級時，用 `jquery-version-migration`。
 - **jQuery 4 升級**：處理 removed APIs、jQuery Migrate、slim/full build、WordPress 相容性時，用 `jquery-4-migration`。

@@ -13,6 +13,29 @@ license: Apache-2.0
 
 若來源是 `.docx`、PDF、PPTX、HTML、Google Docs export 或其他非 Markdown 文件，先使用 `document-to-markdown` 轉成初稿，再回到本 skill 做 GFM、heading、列表、表格、連結與整體可讀性整理。
 
+## When To Use
+
+Use this skill when the output itself is Markdown or when an existing Markdown document needs structure, readability, or formatting cleanup.
+
+- Create or revise README files, technical docs, notes, guides, specs, changelogs, or handoff documents.
+- Normalize heading hierarchy, GFM tables, fenced code blocks, links, lists, and terminology.
+- Improve a Markdown draft without changing the underlying technical meaning.
+
+## Workflow
+
+1. Identify the document type, audience, language, and required sections.
+2. Preserve confirmed facts and mark gaps instead of inventing missing details.
+3. Build a clear heading hierarchy before filling details.
+4. Use consistent GFM formatting for lists, tables, links, images, and code blocks.
+5. Review for scanability, terminology consistency, and broken or unclear references.
+
+## Handoff
+
+- Use `document-to-markdown` first when converting from DOCX, PDF, PPTX, HTML, or Google Docs exports.
+- Use `git-readme-writer` when the task is specifically to design or rewrite a repository README after inspecting the repo.
+- Use `specification-authoring` when the target is a formal technical specification.
+- Use `summary-ops` when the task is to summarize source material before writing the Markdown.
+
 ## 撰寫原則（Principles）
 
 ### 語言與用語（Language）

@@ -13,6 +13,13 @@ license: Apache-2.0
 不要假設所有 GitHub README 都套用同一種模板；先判斷專案類型與主要讀者，再選擇合適的結構。
 適用於一般 Git repository，也適用於託管在 GitHub 或 Gerrit 的專案。
 
+## Handoff
+
+- Use `markdown-writer` for general Markdown formatting and structure after the README scope is clear.
+- Use `repo-ready` when README work is part of broader repository hygiene, CI, release, or packaging readiness.
+- Use `github-operations` when README links, issues, releases, or repository metadata need live GitHub checks.
+- Use `specification-authoring` when the target is a formal spec rather than a repository README.
+
 ## When to Use
 
 - 使用者要求為 Git / GitHub / Gerrit 專案建立、重寫或補強 README.md

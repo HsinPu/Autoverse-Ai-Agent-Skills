@@ -7,6 +7,14 @@ license: Apache-2.0
 
 # UX Writing
 
+Use this skill when the task is to write or improve user-facing interface copy.
+
+## When To Use
+
+- Buttons, labels, empty states, errors, warnings, onboarding, tooltips, forms, banners, modals, and settings copy.
+- UI copy that must guide action, reduce confusion, recover from failure, or match a product tone.
+- Multiple tone options are useful and the text must fit inside an interface.
+
 ## Workflow
 
 1. Identify the user state: goal, context, blocker, risk, and next action.
@@ -36,3 +44,10 @@ license: Apache-2.0
 - Provide 2-4 copy options when tone is subjective.
 - Label options by tone, such as `direct`, `friendly`, or `premium`.
 - Include a short rationale only when the choice affects behavior or trust.
+
+## Handoff
+
+- Use `frontend-design` when copy is part of a broader visual/UI redesign.
+- Use `interaction-patterns` when the issue is navigation or flow behavior, not just words.
+- Use `markdown-writer` when the output is documentation rather than interface microcopy.
+- Use `answer-writing` when the target is the final assistant response to the user.

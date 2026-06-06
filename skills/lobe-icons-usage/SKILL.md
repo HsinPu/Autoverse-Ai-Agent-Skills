@@ -7,6 +7,16 @@ license: Apache-2.0
 
 # Lobe Icons Usage
 
+Use this skill when a UI, document, dashboard, or product surface needs recognizable AI, model, provider, or application brand icons from the Lobe Icons ecosystem.
+
+## Workflow
+
+1. Identify the target surface: React UI, React Native app, static docs, exported asset, or design system.
+2. Choose the package and asset format that matches the runtime and rendering constraints.
+3. Select the icon variant, label pairing, size, theme behavior, and fallback behavior.
+4. Check accessibility labels, contrast, dark-mode handling, and brand implication.
+5. Provide the import or asset usage pattern only after confirming the package fits the surface.
+
 ## Use Cases
 
 - Model provider lists and AI settings pages.
@@ -35,3 +45,9 @@ license: Apache-2.0
 
 - Recommend the package and asset format for the target surface.
 - Include implementation notes for sizing, accessibility labels, dark mode, and fallback icons.
+
+## Handoff
+
+- Use `lobe-ui-development` when the task is mostly about @lobehub/ui components, layout, or AIGC UI composition.
+- Use `ui-styling` when the icons are only one part of a broader React/Tailwind visual polish task.
+- Use `logo-design` when the user needs a new brand mark rather than an existing provider or product icon.

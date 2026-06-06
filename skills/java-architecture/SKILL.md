@@ -19,6 +19,14 @@ license: Apache-2.0
 - 規劃 microservice boundary、bounded context、aggregate ownership。
 - 需要隔離 Spring、ORM、message broker、external SDK 對 domain logic 的影響。
 
+## Workflow
+
+1. Identify the bounded context, core use cases, current package structure, and framework dependencies.
+2. Map inbound adapters, application/use-case logic, domain rules, outbound ports, and infrastructure adapters.
+3. Choose the smallest boundary change that improves dependency direction without rewriting the system.
+4. Protect behavior with tests before moving orchestration or persistence details.
+5. Migrate one vertical slice at a time and verify package boundaries, tests, and external contracts.
+
 ## Core Rules
 
 - Dependency direction points inward: adapters depend on application/domain, not the reverse.
@@ -95,3 +103,11 @@ Feature-first packaging is usually better than global `controller/service/reposi
 - Anemic domain plus giant transaction scripts for complex business rules.
 - Splitting into microservices before bounded contexts, ownership, data consistency, and operational cost are clear.
 - Architecture ceremony for simple CRUD modules with low change pressure.
+
+## Handoff
+
+- Use `project-architecture-review` for repo-wide architecture diagnosis or cross-language migration planning.
+- Use `spring-development` for Spring Boot application structure, DI, REST, configuration, and testing implementation.
+- Use `jpa-hibernate-development` or `mybatis-development` for persistence mapping details.
+- Use `java-development` for general Java code style, APIs, and language-level refactoring.
+- Use `incremental-implementation` when the architecture migration needs small verified slices.

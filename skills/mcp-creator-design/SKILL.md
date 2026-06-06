@@ -11,6 +11,15 @@ license: Apache-2.0
 
 ---
 
+## When To Use
+
+Use this skill when the task is to design, build, review, or evaluate an MCP server or MCP tool surface.
+
+- Create a new MCP server in TypeScript, Python, or Java.
+- Design tool names, schemas, annotations, authentication, pagination, errors, or output formats.
+- Review whether an MCP server is useful for agents and safe to expose.
+- Build evals that prove an LLM can use the MCP tools for realistic tasks.
+
 ## 流程總覽（High-Level Workflow）
 
 高品質 MCP 伺服器分為四個階段：**研究與規劃 → 實作 → 審查與測試 → 建立評測**。
@@ -109,6 +118,13 @@ license: Apache-2.0
 4. **輸出格式**：XML，內含多組 `<qa_pair><question>...</question><answer>...</answer></qa_pair>`。
 
 ---
+
+## Handoff
+
+- Use `mcp-ops` when the task is listing, configuring, authenticating, or calling existing MCP servers/tools.
+- Use `api-contract-design` or `openapi-spec-generation` when the work is API contract design rather than MCP implementation.
+- Use `typescript-development`, `python-development`, or `java-development` for language-specific implementation details.
+- Use `skill-security-review` when adopting third-party MCP code, scripts, or templates.
 
 ## 進階與參考（Bundled resources）
 

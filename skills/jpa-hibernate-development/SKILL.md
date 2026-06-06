@@ -9,6 +9,14 @@ license: Apache-2.0
 
 在 Java 專案使用 JPA、Hibernate 或 Spring Data JPA 建立資料層時使用本 skill。若專案使用 MyBatis，改用 `mybatis-development`；若需要 schema / index / migration 設計，也搭配 `database-design`。
 
+## When To Use
+
+Use this skill when the task is about JPA, Hibernate, or Spring Data JPA persistence implementation.
+
+- Design, review, or refactor entities, repositories, associations, transactions, queries, projections, or fetch plans.
+- Diagnose N+1 queries, lazy loading, transaction boundaries, mapping problems, or persistence performance.
+- Write persistence tests that verify ORM behavior against the real database dialect.
+
 ## Workflow
 
 1. 先確認 domain model、table ownership、read/write paths 與 transaction boundary。
@@ -58,3 +66,10 @@ license: Apache-2.0
 - Repository / mapping 測試優先用 `@DataJpaTest` + Testcontainers。
 - 驗證 migration、constraint、transaction rollback、fetch strategy 與 query count。
 - 不要用 H2 測 PostgreSQL/MySQL-specific 行為。
+
+## Handoff
+
+- Use `database-design` for schema modeling, indexes, constraints, and migration strategy.
+- Use `sql-best-practices` for standalone SQL query review or optimization.
+- Use `spring-development` for broader Spring Boot service, controller, configuration, or testing work.
+- Use `mybatis-development` when the project uses MyBatis instead of JPA/Hibernate.

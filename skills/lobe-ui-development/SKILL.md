@@ -7,6 +7,16 @@ license: Apache-2.0
 
 # Lobe UI Development
 
+Use this skill when the task is to integrate or customize `@lobehub/ui` components in a React or Next.js AIGC application.
+
+## Workflow
+
+1. Confirm the host app uses compatible React, Ant Design, bundler, and SSR/client rendering assumptions.
+2. Identify the component, provider, theme, i18n, and motion needs before adding imports.
+3. Add the smallest integration surface: provider setup, component usage, theme tokens, or localized texts.
+4. Preserve the host product's existing design system unless the task explicitly adopts Lobe UI.
+5. Verify rendering, theme, dark mode, i18n, SSR, and bundle/build behavior in the target app.
+
 ## Core Notes
 
 - `@lobehub/ui` is an ESM-only React UI component library for AIGC web apps.
@@ -42,3 +52,9 @@ export default function App() {
 - Confirm React, Ant Design, and bundler compatibility before adding components.
 - Preserve the host product's existing design system unless the task explicitly adopts Lobe UI.
 - Verify theme, dark mode, i18n, and SSR behavior in the target app.
+
+## Handoff
+
+- Use `lobe-icons-usage` when the task is only selecting or rendering AI/model/provider icons.
+- Use `ui-styling` for broader shadcn/Radix/Tailwind styling and visual polish.
+- Use `nextjs-development` when the blocker is Next.js routing, SSR, build config, or server/client boundaries.

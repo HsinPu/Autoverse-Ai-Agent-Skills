@@ -16,6 +16,30 @@ license: Apache-2.0
 - 預設以現代版本為主：Spring Boot 3+ / Spring Framework 6+（或更高）
 - 以 **Spring Boot** 當作預設組態管理與建置入口；若是純 Spring Framework（無 Boot），本 skill 會明確標註差異與替代做法
 
+## When To Use
+
+Use this skill when the task is about Spring or Spring Boot application code and architecture.
+
+- Build, review, or refactor controllers, services, repositories, configuration, validation, transactions, or tests.
+- Diagnose dependency injection, profiles, properties, data access, REST APIs, or Actuator/observability behavior.
+- Choose Spring conventions and module boundaries for a Java backend.
+
+## Workflow
+
+1. Identify the Spring Boot version, build tool, entry point, package boundaries, and active profile/config.
+2. Locate the affected controller, service, repository, configuration, test slice, or actuator surface.
+3. Keep domain logic, transport DTOs, persistence, configuration, and security boundaries explicit.
+4. Use constructor injection, typed configuration properties, validation, and test slices where appropriate.
+5. Verify with focused unit/slice tests first, then broader integration or startup checks when shared behavior changes.
+
+## Handoff
+
+- Use `spring-security` for authentication, authorization, CSRF/CORS, JWT/OAuth2, or security filter-chain work.
+- Use `spring-webflux` for reactive handlers, WebClient, Reactor, or non-blocking persistence.
+- Use `spring-cloud-microservices` for gateway, service discovery, resilience, Kafka, tracing, or distributed-service concerns.
+- Use `jpa-hibernate-development` or `mybatis-development` for persistence-layer details.
+- Use `java-development` for general Java code style and language-level design outside Spring.
+
 ## 進階與參考（Bundled resources）
 
 - **專案結構與分層**：controller/service/repository、DTO、configuration 與 boundary，見 [reference/project-structure.md](reference/project-structure.md)。

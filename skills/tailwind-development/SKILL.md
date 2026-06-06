@@ -16,6 +16,29 @@ license: Apache-2.0
 - Tailwind CSS v4+（文件以 v4.2 為基準）
 - 有 build step（Vite / PostCSS / CLI），不是純 CDN demo
 
+## When To Use
+
+Use this skill when the task is about Tailwind CSS itself: configuration, theme tokens, class composition, generated CSS, dark mode, Preflight, or custom utilities.
+
+- Build or refactor Tailwind-based UI while preserving utility-first architecture.
+- Diagnose missing classes, dynamic class detection, CSS output size, Preflight conflicts, or dark-mode behavior.
+- Decide when to use theme variables, component extraction, `@apply`, custom CSS, or Tailwind variants.
+
+## Workflow
+
+1. Identify the Tailwind version, build setup, stylesheet entry point, theme tokens, and source scanning behavior.
+2. Map the affected UI to reusable tokens, utilities, variants, and component boundaries.
+3. Avoid dynamic class names that Tailwind cannot detect; use explicit class strings or safelists when needed.
+4. Keep custom CSS small and purposeful; prefer utilities unless a real abstraction or third-party integration requires CSS.
+5. Verify the rendered UI, generated CSS, responsive states, dark mode, and build output when relevant.
+
+## Handoff
+
+- Use `tailwind-patterns` for ready-to-apply layout/component composition patterns in Tailwind.
+- Use `ui-styling` when the task is broader React/shadcn/Radix visual polish.
+- Use `frontend-design`, `design-consultation`, or `color-font-skill` when visual direction, palette, typography, or brand feel is the main issue.
+- Use `css-development` when the project is not primarily Tailwind or needs cascade/layout architecture outside Tailwind.
+
 ## 進階與參考（Bundled resources）
 
 - **Architecture / 組件化**：utility-first 的重用策略、何時抽 component/partial、避免 conflicting utilities，見 [reference/architecture.md](reference/architecture.md)。

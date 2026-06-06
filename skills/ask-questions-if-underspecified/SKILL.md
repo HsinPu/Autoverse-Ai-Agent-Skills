@@ -13,6 +13,13 @@ license: Apache-2.0
 
 問最少必要的澄清問題，避免做錯方向；在必答問題有答案（或使用者明確同意以所述假設進行）之前，不要開始實作。
 
+## Handoff
+
+- Use `todo-first` after clarification when the confirmed task is multi-step or needs execution tracking.
+- Use `code-change-workflow` when clarification is enough and the next step is to inspect an existing code path.
+- Use `spec-flow` or `specification-authoring` when the missing information should become a structured spec.
+- Use `answer-writing` when the user only needs a concise response, recommendation, or explanation.
+
 ## Request Triage
 
 在問之前，先確認這個需求是否真的需要問：

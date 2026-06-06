@@ -13,6 +13,23 @@ license: Apache-2.0
 
 ---
 
+## When To Use
+
+Use this skill when the requested change is behavior-preserving cleanup of existing code.
+
+- Improve readability, naming, structure, duplication, or maintainability without changing outputs.
+- Address code smells such as long functions, deep conditionals, primitive obsession, feature envy, or magic values.
+- Make a future behavior change easier after the current behavior is understood and protected.
+
+Do not use this skill for feature work, bug fixes, or architecture selection unless the refactor is the current slice.
+
+## Handoff
+
+- Use `code-change-workflow` first when the entry point, data flow, caller impact, or verification path is unclear.
+- Use `incremental-implementation` when the refactor spans many files and needs small verified slices or commits.
+- Use `project-architecture-review` when the task is to choose a target architecture or migration plan.
+- Use stack-specific skills for language or framework implementation details.
+
 ## 核心原則
 
 - **不改變行為**：重構只改結構與可讀性，對外行為與結果不變。

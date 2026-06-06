@@ -16,6 +16,14 @@ Use this skill when the work is about React UI state behavior, not visual stylin
 - Add optimistic updates, skeletons, or subtle refresh indicators
 - Use `Suspense`, `useTransition`, or `useDeferredValue` to keep UI responsive
 
+## Workflow
+
+1. Identify the user-visible state machine: initial, loading, success, empty, error, retry, mutation, and refresh.
+2. Keep existing content visible during background refresh whenever possible.
+3. Place loading and error feedback near the control or content it affects.
+4. Add optimistic updates only when rollback is clear and visible.
+5. Verify states with component tests, story states, or browser interaction rather than only compile success.
+
 ## Core Principles
 
 - Never replace visible data with a spinner unless there is no data to show.

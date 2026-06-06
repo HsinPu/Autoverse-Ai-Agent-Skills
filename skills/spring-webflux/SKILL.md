@@ -15,6 +15,14 @@ license: Apache-2.0
 - 需要端到端 non-blocking stack：WebFlux + reactive drivers + non-blocking clients。
 - 不適合：CPU-heavy work、主要使用 blocking JDBC/JPA、團隊不熟 Reactor、低流量 CRUD。
 
+## Workflow
+
+1. Confirm the workload actually benefits from WebFlux and that the stack is non-blocking end to end.
+2. Identify controller, handler, WebClient, Reactor chain, scheduler, and data-access boundaries.
+3. Remove blocking calls from event-loop paths or isolate unavoidable legacy blocking calls explicitly.
+4. Add timeout, retry, fallback, backpressure, and bounded-concurrency behavior where the flow needs it.
+5. Verify with `WebTestClient`, `StepVerifier`, logs/metrics, cancellation/error cases, and blocking-call checks.
+
 ## Core Rules
 
 - 不在 event loop 上執行 blocking I/O：JDBC、JPA、file I/O、sleep、blocking SDK calls。
@@ -61,3 +69,10 @@ license: Apache-2.0
 - 用 `parallel()` 當一般效能優化。
 - 在 chain 外部 mutable shared state。
 - 忽略 `Mono<Void>` / empty completion 的錯誤處理。
+
+## Handoff
+
+- Use `spring-development` for traditional servlet/blocking Spring Boot applications.
+- Use `spring-cloud-microservices` for distributed-service communication, gateway, resilience, or tracing concerns.
+- Use `java-testing` for broader Java test design and Testcontainers outside reactive-specific testing.
+- Use `jpa-hibernate-development` when the persistence layer is blocking JPA/Hibernate and WebFlux may be the wrong fit.

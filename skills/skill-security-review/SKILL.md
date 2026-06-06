@@ -15,7 +15,7 @@ Use this skill to decide whether to trust an external skill package.
 - The package may run commands, download files, or read secrets
 - You need a quick, defensible install decision
 
-## Review Flow
+## Workflow
 
 1. Check provenance: author, stars, update recency, repo link, package size, and license.
 2. Inspect the manifest and any bundled scripts, references, or templates.

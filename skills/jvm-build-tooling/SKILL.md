@@ -9,6 +9,14 @@ license: Apache-2.0
 
 在處理 Maven / Gradle、Java version、dependency、plugin、wrapper、multi-module build 或 CI build failure 時使用本 skill。
 
+## Handoff
+
+- Use `java-development` for Java code style, APIs, language-level design, or implementation changes.
+- Use `java-testing` when the task is primarily test design or test failure repair.
+- Use `spring-development` for Spring Boot application configuration beyond build files.
+- Use `github-actions-ci` when the build problem is mostly CI workflow configuration.
+- Use `security-scanning` when dependency changes are driven by CVE or supply-chain scanning requirements.
+
 ## Workflow
 
 1. 先辨識 build system：`pom.xml`、`build.gradle`、`build.gradle.kts`、`mvnw`、`gradlew`。

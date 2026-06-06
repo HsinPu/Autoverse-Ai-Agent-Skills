@@ -7,6 +7,14 @@ license: Apache-2.0
 
 # Logo Design
 
+Use this skill when the task is to design, refine, or specify a brand logo, wordmark, symbol, or mark system.
+
+## When To Use
+
+- Create a new logo direction from brand context.
+- Compare or refine logo concepts for memorability, legibility, and fit.
+- Produce implementation-ready SVG or usage specifications for a simple mark.
+
 ## Workflow
 
 1. Collect brand name, audience, category, personality, competitors, usage surfaces, and required colors.
@@ -28,3 +36,10 @@ license: Apache-2.0
 - Present 2-3 directions with concept, shape language, color, and typography notes.
 - When asked for implementation, provide clean inline SVG or implementation-ready specs.
 - Include usage cautions for spacing, contrast, minimum size, and background treatment.
+
+## Handoff
+
+- Use `frontend-design` when the logo is part of a full website or product UI build.
+- Use `color-font-skill` when the main question is palette or typography rather than mark shape.
+- Use `lobe-icons-usage` when the user needs existing AI/provider/product icons rather than a new logo.
+- Use `ai-image-prompt-design` when the output should be an image-generation prompt for logo exploration.

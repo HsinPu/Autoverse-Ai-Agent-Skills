@@ -16,6 +16,29 @@ license: Apache-2.0
 - MyBatis 3.5+；若搭配 Spring，預設使用 MyBatis-Spring（或 Spring Boot Starter）
 - 預設以「Mapper interface + XML mapper」為主；簡單查詢可用 annotations，但複雜 mapping 仍以 XML 為優先
 
+## When To Use
+
+Use this skill when the task is about MyBatis mapper design, SQL mapping, dynamic SQL, or Spring/MyBatis persistence behavior.
+
+- Create, review, or refactor mapper interfaces, XML mapper files, ResultMap definitions, and SQL fragments.
+- Diagnose parameter binding, nested result mapping, lazy loading, batch execution, or transaction behavior.
+- Improve performance, safety, or maintainability in a MyBatis-backed data access layer.
+
+## Workflow
+
+1. Identify the mapper interface, XML mapper, domain object, SQL statement, and calling service.
+2. Check parameter binding, result mapping, dynamic SQL branches, and null/empty behavior.
+3. Validate transaction boundaries and Spring integration before changing persistence behavior.
+4. Prefer `#{}` binding, explicit ResultMap definitions for complex shapes, and safe dynamic identifiers.
+5. Verify with mapper tests, integration tests, generated SQL/log output, or the affected service flow.
+
+## Handoff
+
+- Use `database-design` when the task is schema modeling, indexes, constraints, or migration design.
+- Use `sql-best-practices` when the main task is a standalone SQL query or query optimization.
+- Use `spring-development` for broader Spring Boot application structure, DI, REST, or testing concerns.
+- Use `jpa-hibernate-development` when the persistence layer uses JPA/Hibernate rather than MyBatis.
+
 ## 進階與參考（Bundled resources）
 
 - **Mapper / XML 最佳實務**：命名、參數綁定、ResultMap、SQL fragments、Dynamic SQL，見 [reference/mapper-xml.md](reference/mapper-xml.md)。

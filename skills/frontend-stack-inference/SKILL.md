@@ -9,6 +9,13 @@ license: Apache-2.0
 
 Use this skill before changing an unfamiliar frontend. It helps decide whether to load `jquery-development`, `legacy-frontend-modernization`, `react-ui-patterns`, `vue-development`, `vite`, `tailwind-development`, or another focused skill.
 
+## Handoff
+
+- Use `jquery-development` or `legacy-frontend-modernization` when evidence shows jQuery or legacy global-script ownership.
+- Use `vue-development`, `nuxt-development`, `react-ui-patterns`, or another framework skill after the stack is identified.
+- Use `vite`, `tailwind-development`, or `css-development` when the main surface is tooling or styling architecture.
+- Use `frontend-design-review` when the task is to judge UI quality rather than infer the stack.
+
 ## Evidence Sources
 
 - Package files: `package.json`, lockfiles, `bower.json`, `yarn.lock`, `pnpm-lock.yaml`.

@@ -17,6 +17,29 @@ license: Apache-2.0
 - 以 `app/` 目錄（Nuxt 4 結構）為主
 - 以 Nitro server routes（`server/`）提供 API / middleware
 
+## When To Use
+
+Use this skill when the task is about a Nuxt application rather than a plain Vue app.
+
+- Build, review, or refactor Nuxt pages, layouts, plugins, composables, server routes, middleware, or runtime config.
+- Decide SSR/CSR/hybrid rendering, route rules, data fetching, caching, SEO/head, or deployment behavior.
+- Debug hydration, Nitro, runtime config, payload, or server/client boundary issues.
+
+## Workflow
+
+1. Identify whether the touched code runs in Vue client code, Nuxt app context, Nitro server code, or both.
+2. Check route structure, rendering mode, data-fetching keys/cache, runtime config, and deployment target.
+3. Keep public data separate from private server/runtime values.
+4. Verify SSR/hydration behavior, generated routes, API responses, SEO/head output, and build/deploy constraints.
+5. Use bundled references only for the relevant layer instead of loading every Nuxt topic.
+
+## Handoff
+
+- Use `vue-development` for framework-agnostic Vue 3 component, Composition API, Pinia, or Vue Router guidance.
+- Use `vue-debug-guides` for runtime Vue warnings, hydration mismatches, or reactivity debugging.
+- Use `vite` when the issue is Vite config, plugins, dev server behavior, or build tooling.
+- Use `deployment-operations`, `vercel-deployment`, or `cloudflare-development` for platform-specific release work.
+
 ## 進階與參考（Bundled resources）
 
 - **目錄結構與約定**：`app/`、`server/`、auto-imports、Nuxt context、生成輸出 `.nuxt/`，見 [reference/directory-and-conventions.md](reference/directory-and-conventions.md)。

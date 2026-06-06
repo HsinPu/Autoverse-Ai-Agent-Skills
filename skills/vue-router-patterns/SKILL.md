@@ -9,6 +9,14 @@ license: Apache-2.0
 
 Use this skill for Vue Router 4 route design, navigation behavior, and guard bugs. Pair with `vue-debug-guides` for runtime diagnosis, `pinia-state-management` for auth/session stores, and `nuxt-development` when routes are Nuxt file-based routes.
 
+## Workflow
+
+1. Identify route records, route names, params/query, guards, redirects, and owning components.
+2. Decide whether state belongs in params, query, route meta, store, or component-local state.
+3. Handle same-component navigation by watching params or using route update hooks.
+4. Keep guards small and return values explicitly; move auth/session logic into stores or services.
+5. Verify route names, URLs, redirects, rendered state, and guard loops with a real router when possible.
+
 ## Route Design
 
 - Keep route records explicit and named when links, redirects, or tests need stable references.

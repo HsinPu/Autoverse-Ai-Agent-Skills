@@ -9,6 +9,14 @@ license: Apache-2.0
 
 Clean `Downloads` and `Desktop` as inboxes, not as permanent storage. The goal is to preserve useful files, move obvious material to stable homes, surface uncertain items for review, and avoid risky deletion.
 
+## When To Use
+
+Use this skill when the user's Desktop or Downloads folder is messy and needs inbox-style triage.
+
+- Inventory loose files, screenshots, installers, archives, exports, receipts, and duplicate downloads.
+- Separate obvious move candidates from sensitive or uncertain review items.
+- Build a safe dry-run cleanup plan before moving or deleting anything.
+
 ## Workflow
 
 ### 1. Start with read-only inventory

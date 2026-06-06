@@ -9,6 +9,14 @@ license: Apache-2.0
 
 Use this skill when Vue behavior needs test coverage or a Vue test is failing. Pair with `testing-strategy` for test-level choices, `pinia-state-management` for store design, and `webapp-testing` for local browser verification.
 
+## Workflow
+
+1. Identify the behavior under test and the smallest useful level: composable, component, store, route, or browser flow.
+2. Mount through public inputs such as props, slots, plugins, router, Pinia, and user events.
+3. Assert visible DOM, emitted events, navigation, store effects, and API outcomes rather than private refs.
+4. Cover async states with `nextTick`, `flushPromises`, semantic waits, or Playwright waits instead of fixed sleeps.
+5. Run the narrowest relevant test first, then broaden when the touched behavior is shared.
+
 ## Test Level Choices
 
 - Use Vitest unit tests for pure composables, formatters, validators, stores, and component logic with limited DOM needs.

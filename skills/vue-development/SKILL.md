@@ -17,6 +17,31 @@ license: Apache-2.0
 - 使用 Vite / `create-vue` 建專案（或至少有 build step）
 - 路由採 Vue Router；全域狀態採 Pinia（Vuex 維護模式，不建議新專案使用）
 
+## When To Use
+
+Use this skill when the task is about Vue 3 application or component code rather than Nuxt-specific app behavior.
+
+- Build, review, or refactor Vue SFCs, Composition API logic, composables, props/emits/slots, Pinia stores, or Vue Router usage.
+- Improve Vue component structure, TypeScript usage, performance, security, or testability.
+- Diagnose Vue application behavior when the issue is not primarily Nuxt SSR/Nitro/runtime config.
+
+## Workflow
+
+1. Identify the component, composable, store, route, or test surface being changed.
+2. Trace props, emits, slots, v-model, reactivity, computed/watch effects, and store/router interactions.
+3. Keep state ownership explicit and move reusable logic into composables only when it removes real duplication.
+4. Validate TypeScript, Vue template behavior, accessibility states, and relevant unit/component/E2E tests.
+5. Use bundled references selectively based on whether the task is style, components, state/routing, performance, security, or testing.
+
+## Handoff
+
+- Use `nuxt-development` for Nuxt pages, layouts, server routes, runtime config, SSR/route rules, or Nitro.
+- Use `vue-composition-api` for detailed Composition API and `<script setup>` mechanics.
+- Use `pinia-state-management` for store architecture, SSR hydration, and Pinia testing.
+- Use `vue-router-patterns` for route records, guards, params/query, and navigation lifecycle.
+- Use `vue-testing` when the main task is writing or improving Vue tests.
+- Use `vue-debug-guides` for runtime warnings, hydration mismatches, and reactivity debugging.
+
 ## 進階與參考（Bundled resources）
 
 - **Code Style / SFC 結構**：命名、目錄結構、SFC 分層、Style Guide 取捨，見 [reference/code-style.md](reference/code-style.md)。

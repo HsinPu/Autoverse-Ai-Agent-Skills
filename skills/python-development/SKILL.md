@@ -13,6 +13,29 @@ license: Apache-2.0
 
 若使用者是在問整個 repo 的架構是否合理、要比較目標架構，或需要跨語言/跨框架的遷移計畫，先使用 `project-architecture-review`；再回到本 skill 處理 Python package layout、typing、tooling 與實作細節。
 
+## When To Use
+
+Use this skill when the task is general Python code design, implementation, review, or refactoring.
+
+- Choose Python package structure, `src` layout, module boundaries, CLI entry points, or test layout.
+- Write or improve typed Python code, docstrings, imports, configuration, dependency injection, and design patterns.
+- Set up or reason about modern Python tooling such as `pyproject.toml`, `uv`, `ruff`, pytest, mypy/pyright, Pydantic, or async I/O.
+
+## Workflow
+
+1. Identify whether the task is general Python or belongs to a more specific Python sub-skill.
+2. Inspect project layout, `pyproject.toml`, entry points, tests, and local conventions before editing.
+3. Keep code simple, typed where useful, and consistent with existing package boundaries.
+4. Prefer focused tests and repo-local tools such as pytest, ruff, mypy, or pyright when available.
+5. Use bundled references only for the relevant layer: architecture, style, tooling, or design patterns.
+
+## Handoff
+
+- Use the specialized Python skills below when the task is primarily data engineering, scraping, automation, backend frameworks, testing, debugging, packaging, concurrency, security, or API clients.
+- Use `project-architecture-review` for repo-wide architecture diagnosis or cross-language migration plans.
+- Use `code-refactoring` for behavior-preserving cleanup that is not Python-specific.
+- Use `testing-strategy` when the main question is test level or coverage strategy.
+
 ## 進階與參考（Bundled resources）
 
 - **專案架構**：新專案、整理資料夾、規劃 `src` layout、package/module 邊界、CLI 入口與測試結構時，見 [reference/architecture.md](reference/architecture.md)。

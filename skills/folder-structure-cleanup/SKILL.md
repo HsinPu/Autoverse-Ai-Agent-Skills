@@ -9,6 +9,14 @@ license: Apache-2.0
 
 Clean up directory trees as structures. Focus on folder purpose, nesting depth, duplicate categories, naming consistency, and safe moves. Do not start by moving files one by one unless the folder plan requires it.
 
+## When To Use
+
+Use this skill when the user wants to organize folders as a hierarchy rather than triage loose files.
+
+- Flatten over-nested directories, merge duplicate folder categories, rename folders, archive old folders, or remove empty folders.
+- Preserve project folders and protected boundaries while planning safe moves.
+- Produce a dry-run folder move plan before changing a live directory tree.
+
 ## Workflow
 
 ### 1. Identify the folder problem

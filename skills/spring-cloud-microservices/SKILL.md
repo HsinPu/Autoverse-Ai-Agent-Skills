@@ -9,6 +9,14 @@ license: Apache-2.0
 
 在設計或維護 Spring Boot microservices、Spring Cloud、service-to-service communication、event-driven flows、gateway、resilience 或 distributed tracing 時使用本 skill。服務內部架構搭配 `java-architecture`；單體 Spring app 優先用 `spring-development`。
 
+## When To Use
+
+Use this skill when the task is about distributed Spring systems rather than one Spring Boot service in isolation.
+
+- Design service boundaries, gateway behavior, service-to-service communication, events, resilience, tracing, or release strategy.
+- Diagnose distributed failure modes such as retry storms, consumer lag, circuit breaker behavior, or dependency outages.
+- Review whether a proposed microservice split is safe, observable, and operationally justified.
+
 ## Boundary Decisions
 
 - 先用 bounded context、team ownership、data ownership、change cadence 決定 service boundary。
@@ -63,3 +71,11 @@ license: Apache-2.0
 - 無 timeout 的 Feign/WebClient 呼叫。
 - 無上限 retry 疊加 gateway、client、message consumer。
 - 在 gateway 或 consumer 裡實作大量 domain logic。
+
+## Handoff
+
+- Use `spring-development` for a single Spring Boot application's controllers, services, repositories, config, and tests.
+- Use `java-architecture` for Clean Architecture, hexagonal boundaries, DDD, and package/module direction inside a service.
+- Use `spring-webflux` for reactive WebClient/Reactor/WebFlux implementation details.
+- Use `kubernetes-operations` or `deployment-operations` for cluster rollout, probes, manifests, and release operations.
+- Use `observability-engineering` for SLI/SLO, metrics, logs, traces, dashboards, and alerts.

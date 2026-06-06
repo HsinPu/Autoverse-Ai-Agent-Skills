@@ -9,6 +9,14 @@ license: Apache-2.0
 
 在 Spring / Spring Boot 專案處理 authentication、authorization、OAuth2/OIDC、JWT、CSRF、CORS、headers、method security 或安全審查時使用本 skill。一般 Spring 架構仍搭配 `spring-development`；依賴 CVE 升級搭配 `jvm-build-tooling`。
 
+## Handoff
+
+- Use `spring-development` for general Spring Boot application structure, controllers, services, config, and tests.
+- Use `spring-webflux` when security work is in a reactive WebFlux application.
+- Use `auth-integration` when comparing auth providers or integrating Auth0, Clerk, Supabase Auth, NextAuth/Auth.js, or similar products.
+- Use `security-code-review` when the task is a broad vulnerability review rather than Spring-specific implementation.
+- Use `jvm-build-tooling` when the task is dependency, plugin, or CVE upgrade work.
+
 ## Workflow
 
 1. 先界定應用類型：browser session、REST API、resource server、BFF、internal service、WebFlux。

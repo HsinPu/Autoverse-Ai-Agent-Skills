@@ -9,6 +9,14 @@ license: Apache-2.0
 
 Use this skill for Vue 3 component logic and composables. Pair with `vue-development` for broader application structure, `vue-debug-guides` for runtime failures, and `nuxt-development` for Nuxt-specific conventions.
 
+## Workflow
+
+1. Identify the component, composable, props/emits contract, lifecycle needs, and reactivity shape.
+2. Choose `ref`, `reactive`, `computed`, `watch`, or composable extraction based on ownership and side effects.
+3. Keep props immutable and expose state intentionally through typed returns or component contracts.
+4. Add cleanup for async effects, subscriptions, timers, and external library instances.
+5. Verify with component behavior, TypeScript, and focused Vue tests when logic changes.
+
 ## Defaults
 
 - Prefer `<script setup lang="ts">` for SFCs.
