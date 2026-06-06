@@ -376,7 +376,7 @@ Python、Java、前端的差別主要只在第 6 步的實作 skill，流程順�
 | **[self-improvement](skills/self-improvement/)** | 錯誤、學習與 feature request 記錄 / project memory |
 | **[context-governance](skills/context-governance/)** | context budget、學習記錄與重複資訊治理 |
 | **[subagent-architecture](skills/subagent-architecture/)** | subagent 切分、角色邊界、handoff 與平行協作 |
-| **[agent-instructions-authoring](skills/agent-instructions-authoring/)** | 建立與維護 `AGENTS.md`、`CLAUDE.md`、`.cursorrules` 等 repo-level agent instructions |
+| **[agent-instructions-authoring](skills/agent-instructions-authoring/)** | 建立與維護 `AGENTS.md`、`CLAUDE.md`、`GEMINI.md`、Copilot/Cursor rules 與 repo-level agent skills |
 
 ### 🌐 Communication（溝通）
 

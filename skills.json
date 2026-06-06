@@ -2500,7 +2500,7 @@
     },
     {
       "name": "agent-instructions-authoring",
-      "description": "Repo-level coding-agent instruction authoring workflow for creating, updating, or consolidating AGENTS.md, CLAUDE.md, .cursorrules, Cursor rules, Copilot instructions, and similar files. Use when turning real project commands, architecture rules, validation steps, tool conventions, or agent-specific guidance into maintainable instruction files for AI coding tools.",
+      "description": "Repo-level coding-agent instruction authoring workflow for creating, updating, or consolidating AGENTS.md, AGENTS.override.md, CLAUDE.md, GEMINI.md, Cursor rules, Copilot instructions, .agents/skills, and similar AI coding tool guidance. Use when turning real project commands, architecture rules, validation steps, tool conventions, or repeatable procedures into maintainable agent instructions or skills.",
       "category": "coding-agents-ides",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -2512,7 +2512,9 @@
         "codex",
         "cursor",
         "claude",
-        "copilot"
+        "copilot",
+        "gemini",
+        "skills"
       ]
     },
     {
