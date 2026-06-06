@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-06-04T00:00:00Z",
-  "total": 175,
+  "updated": "2026-06-06T00:00:00Z",
+  "total": 176,
   "skills": [
     {
       "name": "todo-first",
@@ -106,6 +106,23 @@
         "call-chain",
         "data-flow",
         "verification"
+      ]
+    },
+    {
+      "name": "incremental-implementation",
+      "description": "Incremental implementation workflow for splitting large code changes, feature work, refactors, migrations, or multi-file edits into small verified slices. Use when a change may touch many files, take multiple steps, need repeated tests, benefit from intermediate commits, or should stay easy to review, debug, roll back, and inspect later.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "incremental",
+        "implementation",
+        "refactoring",
+        "small-slices",
+        "verification",
+        "commits",
+        "rollback"
       ]
     },
     {
