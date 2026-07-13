@@ -2524,7 +2524,7 @@
     },
     {
       "name": "subagent-architecture",
-      "description": "Design reliable multi-agent workflows by deciding when to delegate, selecting team size and roles, defining file and decision ownership, sequencing dependencies, specifying message and handoff contracts, and arbitrating parallel results. Use when a task needs subagents, agent teams, parallel research or implementation, multi-reviewer work, competing debugging hypotheses, or coordinated fan-out and fan-in execution.",
+      "description": "Proactively design and route reliable multi-agent workflows by deciding when to delegate, discovering available roles, selecting the smallest useful team, defining file and decision ownership, sequencing dependencies, specifying handoff contracts, and arbitrating parallel results. Use whenever the runtime exposes subagents or custom agents and a task contains multiple bounded workstreams, even when the user did not explicitly request delegation; also use for agent teams, parallel research or implementation, multi-reviewer work, competing debugging hypotheses, and coordinated fan-out and fan-in execution.",
       "category": "coding-agents-ides",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",

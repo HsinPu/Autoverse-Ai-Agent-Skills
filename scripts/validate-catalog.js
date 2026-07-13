@@ -14,6 +14,7 @@ const readmePath = path.join(root, 'README.md');
 
 const errors = [];
 const canonicalSkillSource = 'HsinPu/Autoverse-Ai-Agent-Skills';
+const componentNamePattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const canonicalAgentMetadata = {
   author: 'HsinPu',
   source: 'HsinPu/Autoverse-Ai-Agent-Skills',
@@ -38,6 +39,8 @@ function parseScalar(value) {
   if (trimmed.startsWith('"') && trimmed.endsWith('"')) {
     try { return JSON.parse(trimmed); } catch { /* Use plain scalar fallback. */ }
   }
+  if (trimmed === 'true') return true;
+  if (trimmed === 'false') return false;
   return trimmed.replace(/^['"]|['"]$/g, '');
 }
 
@@ -65,6 +68,27 @@ function parseFrontmatter(filePath) {
   return fields;
 }
 
+function parseOpenCodeFrontmatter(filePath) {
+  const fields = parseFrontmatter(filePath);
+  const text = fs.readFileSync(filePath, 'utf8');
+  const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+  let parent = null;
+  if (match) {
+    for (const line of match[1].split(/\r?\n/)) {
+      const topLevel = line.match(/^([A-Za-z0-9_-]+):(?:\s*(.*))?$/);
+      if (topLevel) {
+        parent = topLevel[2] && topLevel[2].trim() !== '' ? null : topLevel[1];
+        continue;
+      }
+      const nested = line.match(/^\s{2}([A-Za-z0-9_-]+):\s*(.+?)\s*$/);
+      if (parent === 'permission' && nested) {
+        fields[`permission.${nested[1]}`] = parseScalar(nested[2]);
+      }
+    }
+  }
+  return fields;
+}
+
 function compare(name, field, expected, actual, expectedLabel, actualLabel) {
   if (JSON.stringify(expected) !== JSON.stringify(actual)) {
     fail(`${name}: ${field} mismatch. ${expectedLabel}=${JSON.stringify(expected)} ${actualLabel}=${JSON.stringify(actual)}`);
@@ -85,6 +109,7 @@ if (skillCatalog && skillCatalog.total !== skills.length) {
 const skillNames = new Set();
 for (const skill of skills) {
   if (!skill.name) fail('A catalog entry is missing name');
+  if (!componentNamePattern.test(skill.name || '')) fail(`${skill.name || '(unknown)'}: invalid skill name`);
   if (skillNames.has(skill.name)) fail(`Duplicate catalog skill name: ${skill.name}`);
   skillNames.add(skill.name);
   for (const field of ['description', 'category', 'author', 'source', 'license']) {
@@ -160,7 +185,7 @@ for (const agent of agents) {
   }
   if (agentIds.has(agent.id)) fail(`Duplicate catalog Agent: ${agent.id}`);
   agentIds.add(agent.id);
-  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(agent.role || '')) fail(`${label}: invalid role name`);
+  if (!componentNamePattern.test(agent.role || '')) fail(`${label}: invalid role name`);
   if (agent.id !== agent.role || agent.name !== agent.role) fail(`${label}: id and name must equal role`);
   if (agent.path !== `agents/${agent.role}.md`) fail(`${label}: path must equal agents/role.md`);
   for (const [field, expected] of Object.entries(canonicalAgentMetadata)) {
@@ -275,23 +300,93 @@ for (const agentFile of agentFiles) {
     compare(agentFile.role, 'Claude skills', catalogEntry.skills, claudeFrontmatter.skills, 'agents.json', 'adapter');
     compare(agentFile.role, 'Claude instructions', normalizeNewlines(canonicalBody), normalizeNewlines(claudeBody), 'canonical Agent', 'adapter');
   }
+
+  const cursorPath = path.join(adaptersRoot, 'cursor', `${agentFile.role}.md`);
+  if (!fs.existsSync(cursorPath)) {
+    fail(`${agentFile.role}: missing Cursor adapter`);
+  } else if (catalogEntry) {
+    const cursorText = fs.readFileSync(cursorPath, 'utf8');
+    const cursorFrontmatter = parseFrontmatter(cursorPath);
+    const cursorBody = cursorText.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n/, '').trim();
+    compare(agentFile.role, 'Cursor name', catalogEntry.name, cursorFrontmatter.name, 'agents.json', 'adapter');
+    compare(agentFile.role, 'Cursor description', catalogEntry.description, cursorFrontmatter.description, 'agents.json', 'adapter');
+    compare(agentFile.role, 'Cursor model', 'inherit', cursorFrontmatter.model, 'required adapter value', 'adapter');
+    compare(agentFile.role, 'Cursor readonly', catalogEntry.permission === 'read-only', cursorFrontmatter.readonly, 'agents.json mapping', 'adapter');
+    compare(agentFile.role, 'Cursor instructions', normalizeNewlines(canonicalBody), normalizeNewlines(cursorBody), 'canonical Agent', 'adapter');
+  }
+
+  const copilotPath = path.join(adaptersRoot, 'copilot', `${agentFile.role}.agent.md`);
+  if (!fs.existsSync(copilotPath)) {
+    fail(`${agentFile.role}: missing GitHub Copilot adapter`);
+  } else if (catalogEntry) {
+    const copilotText = fs.readFileSync(copilotPath, 'utf8');
+    const copilotFrontmatter = parseFrontmatter(copilotPath);
+    const copilotBody = copilotText.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n/, '').trim();
+    compare(agentFile.role, 'GitHub Copilot name', catalogEntry.name, copilotFrontmatter.name, 'agents.json', 'adapter');
+    compare(agentFile.role, 'GitHub Copilot description', catalogEntry.description, copilotFrontmatter.description, 'agents.json', 'adapter');
+    compare(
+      agentFile.role,
+      'GitHub Copilot tools',
+      catalogEntry.permission === 'read-only' ? ['read', 'search', 'web', 'agent'] : undefined,
+      copilotFrontmatter.tools,
+      'agents.json mapping',
+      'adapter'
+    );
+    compare(agentFile.role, 'GitHub Copilot instructions', normalizeNewlines(canonicalBody), normalizeNewlines(copilotBody), 'canonical Agent', 'adapter');
+  }
+
+  const openCodePath = path.join(adaptersRoot, 'opencode', `${agentFile.role}.md`);
+  if (!fs.existsSync(openCodePath)) {
+    fail(`${agentFile.role}: missing OpenCode adapter`);
+  } else if (catalogEntry) {
+    const openCodeText = fs.readFileSync(openCodePath, 'utf8');
+    const openCodeFrontmatter = parseOpenCodeFrontmatter(openCodePath);
+    const openCodeBody = openCodeText.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n/, '').trim();
+    compare(agentFile.role, 'OpenCode description', catalogEntry.description, openCodeFrontmatter.description, 'agents.json', 'adapter');
+    compare(agentFile.role, 'OpenCode mode', 'subagent', openCodeFrontmatter.mode, 'required adapter value', 'adapter');
+    compare(agentFile.role, 'OpenCode permission.edit', catalogEntry.permission === 'read-only' ? 'deny' : 'allow', openCodeFrontmatter['permission.edit'], 'agents.json mapping', 'adapter');
+    compare(agentFile.role, 'OpenCode permission.bash', catalogEntry.permission === 'read-only' ? 'deny' : undefined, openCodeFrontmatter['permission.bash'], 'agents.json mapping', 'adapter');
+    compare(agentFile.role, 'OpenCode instructions', normalizeNewlines(canonicalBody), normalizeNewlines(openCodeBody), 'canonical Agent', 'adapter');
+  }
 }
 
-for (const platform of ['codex', 'claude']) {
+const adapterExtensions = {
+  codex: '.toml',
+  claude: '.md',
+  cursor: '.md',
+  copilot: '.agent.md',
+  opencode: '.md'
+};
+if (!fs.existsSync(adaptersRoot)) {
+  fail('adapters/ directory is missing');
+} else {
+  const expectedPlatforms = new Set(Object.keys(adapterExtensions));
+  for (const entry of fs.readdirSync(adaptersRoot, { withFileTypes: true })) {
+    if (!entry.isDirectory() || !expectedPlatforms.has(entry.name)) {
+      fail(`Unexpected entry under adapters/: ${entry.name}`);
+    }
+  }
+}
+for (const platform of Object.keys(adapterExtensions)) {
   const platformRoot = path.join(adaptersRoot, platform);
   if (!fs.existsSync(platformRoot)) {
     fail(`adapters/${platform}/ directory is missing`);
     continue;
   }
-  const extension = platform === 'codex' ? '.toml' : '.md';
+  const extension = adapterExtensions[platform];
   const files = fs.readdirSync(platformRoot, { withFileTypes: true });
   const adapterRoles = [];
   for (const entry of files) {
-    if (!entry.isFile() || path.extname(entry.name) !== extension) {
+    if (!entry.isFile() || !entry.name.endsWith(extension)) {
       fail(`Adapters must be direct ${extension} files under adapters/${platform}/: ${entry.name}`);
       continue;
     }
-    adapterRoles.push(path.basename(entry.name, extension));
+    const role = entry.name.slice(0, -extension.length);
+    if (!componentNamePattern.test(role) || entry.name !== `${role}${extension}`) {
+      fail(`Invalid adapter filename under adapters/${platform}/: ${entry.name}`);
+      continue;
+    }
+    adapterRoles.push(role);
   }
   compare(`adapters/${platform}`, 'count', agents.length, adapterRoles.length, 'agents.json', 'filesystem');
   for (const role of adapterRoles) {

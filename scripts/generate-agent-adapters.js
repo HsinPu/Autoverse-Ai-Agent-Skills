@@ -12,6 +12,8 @@ function parseScalar(value) {
   if (trimmed.startsWith('"') && trimmed.endsWith('"')) {
     try { return JSON.parse(trimmed); } catch { /* Use plain scalar fallback. */ }
   }
+  if (trimmed === 'true') return true;
+  if (trimmed === 'false') return false;
   return trimmed.replace(/^['"]|['"]$/g, '');
 }
 
@@ -72,8 +74,48 @@ function renderClaude(fields, body) {
   return lines.join('\n');
 }
 
+function renderCursor(fields, body) {
+  return [
+    '---',
+    `name: ${fields.name}`,
+    `description: ${JSON.stringify(fields.description)}`,
+    'model: inherit',
+    `readonly: ${fields.permission === 'read-only'}`,
+    '---',
+    '',
+    body,
+    ''
+  ].join('\n');
+}
+
+function renderCopilot(fields, body) {
+  const lines = [
+    '---',
+    `name: ${fields.name}`,
+    `description: ${JSON.stringify(fields.description)}`
+  ];
+  if (fields.permission === 'read-only') {
+    lines.push('tools:', '  - read', '  - search', '  - web', '  - agent');
+  }
+  lines.push('---', '', body, '');
+  return lines.join('\n');
+}
+
+function renderOpenCode(fields, body) {
+  const lines = [
+    '---',
+    `description: ${JSON.stringify(fields.description)}`,
+    'mode: subagent',
+    'permission:',
+    `  edit: ${fields.permission === 'read-only' ? 'deny' : 'allow'}`
+  ];
+  if (fields.permission === 'read-only') lines.push('  bash: deny');
+  lines.push('---', '', body, '');
+  return lines.join('\n');
+}
+
 function resetGeneratedAdapters() {
-  for (const platform of ['codex', 'claude']) {
+  for (const platform of ['codex', 'claude', 'cursor', 'copilot', 'opencode']) {
     const platformRoot = path.join(adaptersRoot, platform);
     if (path.dirname(platformRoot) !== adaptersRoot) throw new Error(`Unsafe adapter output path: ${platformRoot}`);
     fs.rmSync(platformRoot, { recursive: true, force: true });
@@ -90,10 +132,16 @@ function main() {
     if (fields.id !== agent.role || fields.name !== agent.role || fields.role !== agent.role) {
       throw new Error(`${agent.role} has inconsistent canonical identity`);
     }
+    if (!['read-only', 'workspace-write'].includes(fields.permission)) {
+      throw new Error(`${agent.role} has unsupported permission: ${fields.permission}`);
+    }
     fs.writeFileSync(path.join(adaptersRoot, 'codex', `${agent.role}.toml`), renderCodex(fields, body), 'utf8');
     fs.writeFileSync(path.join(adaptersRoot, 'claude', `${agent.role}.md`), renderClaude(fields, body), 'utf8');
+    fs.writeFileSync(path.join(adaptersRoot, 'cursor', `${agent.role}.md`), renderCursor(fields, body), 'utf8');
+    fs.writeFileSync(path.join(adaptersRoot, 'copilot', `${agent.role}.agent.md`), renderCopilot(fields, body), 'utf8');
+    fs.writeFileSync(path.join(adaptersRoot, 'opencode', `${agent.role}.md`), renderOpenCode(fields, body), 'utf8');
   }
-  console.log(`Generated Codex and Claude adapters for ${agents.length} Agents`);
+  console.log(`Generated Codex, Claude, Cursor, GitHub Copilot, and OpenCode adapters for ${agents.length} Agents`);
 }
 
 main();

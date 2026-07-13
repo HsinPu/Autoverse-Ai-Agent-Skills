@@ -6,7 +6,7 @@
 ![Agents](https://img.shields.io/badge/Agents-134-2563eb)
 ![Node.js](https://img.shields.io/badge/Node.js-%3E%3D16-339933?logo=nodedotjs&logoColor=white)
 
-由 **HsinPu** 維護的開源 AI Agent 與 Skill catalog，提供可直接安裝的 Codex／Claude Code Agent、跨平台 Skills、安全更新機制，以及本機 catalog 查詢 CLI。
+由 **HsinPu** 維護的開源 AI Agent 與 Skill catalog，提供可直接安裝的 Codex、Claude Code、Cursor、VS Code／GitHub Copilot、OpenCode Agents 與 Skills，並包含安全更新機制及本機 catalog 查詢 CLI。
 
 這個專案不是另一套 Agent runtime 或 orchestration framework；它專注在可攜、可查詢、可驗證的角色與能力定義，讓現有 coding agent 能直接使用。
 
@@ -39,14 +39,16 @@
 Windows PowerShell：
 
 ```powershell
-powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; $installer = [scriptblock]::Create($s); & $installer -Target codex -Type skill; & $installer -Target codex -Type agent'
+powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; $installer = [scriptblock]::Create($s); & $installer -Target codex -Type skill; & $installer -Target codex -Type agent -EnableAutoDelegation'
 ```
 
 Linux／macOS：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type skill && curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type agent
+curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type skill && curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type agent --enable-auto-delegation
 ```
+
+這組命令會安裝全部 187 個 Skills、134 個 Agents，並啟用不依賴專案 `AGENTS.md` 的全域主動委派。
 
 ### 只安裝全部 Skills
 
@@ -76,16 +78,67 @@ Linux／macOS：
 curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type agent
 ```
 
+任何平台的全量 Agent 安裝都會自動帶入該平台可讀取的 `subagent-architecture` Skill；單一 Agent 安裝則不會，除非同時啟用下一節的全域主動委派。
+
+### 安裝全部 Agents 並啟用全域主動委派
+
+這是選用功能，不依賴每個專案的 `AGENTS.md`。Codex 會安全合併全域 `developer_instructions`；OpenCode 會把已安裝的 routing guidance 加入全域 `instructions`。
+
+Windows PowerShell（Codex）：
+
+```powershell
+powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target codex -Type agent -EnableAutoDelegation'
+```
+
+Linux／macOS（Codex）：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type agent --enable-auto-delegation
+```
+
+Windows PowerShell（OpenCode）：
+
+```powershell
+powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target opencode -Type agent -EnableAutoDelegation'
+```
+
+Linux／macOS（OpenCode）：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target opencode --type agent --enable-auto-delegation
+```
+
+> [!NOTE]
+> `-EnableAutoDelegation`／`--enable-auto-delegation` 只接受全域 `codex` 或 `opencode` Agent target。若偵測到使用者自行管理的衝突設定，安裝器會拒絕修改並提示手動合併，不會讓 Force 覆蓋它。
+
+### 安裝到目前專案的所有工具
+
+先切換到要安裝的專案／workspace 根目錄，再執行下列命令。`project` 不會尋找 Git root；它直接使用執行命令當下的工作目錄。
+
+Windows PowerShell：
+
+```powershell
+powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; $installer = [scriptblock]::Create($s); & $installer -Target project -Type skill; & $installer -Target project -Type agent'
+```
+
+Linux／macOS：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target project --type skill && curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target project --type agent
+```
+
+這會建立 `.agents/skills` 與 Claude 相容鏡像 `.claude/skills`，並把五種 Agent adapter 分別寫入 `.codex/agents`、`.claude/agents`、`.cursor/agents`、`.github/agents`、`.opencode/agents`。
+
 ### 執行需求
 
 | 功能 | 需求 |
 |---|---|
 | PowerShell 安裝器 | Windows PowerShell／PowerShell 與網路連線 |
-| Bash 安裝器 | Bash、`curl`、`tar`、`mktemp` 與網路連線 |
+| Bash 安裝器 | Bash、`curl`、`tar`、`mktemp`、`cksum` 與網路連線；安全合併既有 OpenCode JSON 時另需 Python 3 或 Node.js |
 | Catalog CLI | Node.js 16 或更新版本 |
 | 專案開發與驗證 | Node.js 16 或更新版本；CI 使用 Node.js 20 |
 
-安裝 Skills 或 Agents **不需要 Node.js**。如果不想直接執行遠端腳本，請先 clone repository、檢查 `scripts/install.ps1` 或 `scripts/install.sh`，再依照[本機安裝](#從本機-checkout-安裝)執行。
+一般安裝 Skills 或 Agents **不需要 Node.js**；只有 Bash 要安全合併既有、自訂的 OpenCode JSON 時，需有 Python 3 或 Node.js 其中之一。如果不想直接執行遠端腳本，請先 clone repository、檢查 `scripts/install.ps1` 或 `scripts/install.sh`，再依照[本機安裝](#從本機-checkout-安裝)執行。
 
 ## 專案內容
 
@@ -95,7 +148,12 @@ curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/ma
 | Agents | 134／24 類 | 可委派的專業角色，包含任務、限制、權限與輸出契約 | `agents/<role>.md` |
 | Codex adapters | 134 | Codex custom Agent 的 TOML 設定 | `adapters/codex/<role>.toml` |
 | Claude adapters | 134 | Claude Code subagent 的 Markdown 設定 | `adapters/claude/<role>.md` |
+| Cursor adapters | 134 | Cursor subagent 的 Markdown 設定 | `adapters/cursor/<role>.md` |
+| Copilot adapters | 134 | VS Code／GitHub Copilot custom Agent 設定 | `adapters/copilot/<role>.agent.md` |
+| OpenCode adapters | 134 | OpenCode `mode: subagent` 的 Markdown 設定 | `adapters/opencode/<role>.md` |
 | Reference ledger | 199 definitions | 保存上游 reference path 與合併追蹤資料 | `scripts/data/wshobson-agent-inventory.json` |
+
+各 adapter 會把 canonical `read-only`／`workspace-write` 權限轉成平台可理解的設定。例如 OpenCode 的唯讀角色會設定 `edit: deny` 與 `bash: deny`；Copilot 的唯讀角色只開放 `read`、`search`、`web`、`agent` tools。
 
 <!-- AGENT_COUNT_START -->
 目前共收錄 **134** 個不重複 Agents。
@@ -109,39 +167,45 @@ curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/ma
 |---|---|---|
 | 核心概念 | 一個可被委派任務的專業角色 | 一套可套用到任務的操作知識或工作流程 |
 | 典型例子 | `code-reviewer`、`debugger`、`security-auditor` | `code-review`、`python-development`、`threat-modeling` |
-| Codex 位置 | `~/.codex/agents/` 或 `.codex/agents/` | `~/.codex/skills/` |
+| 安裝位置 | 各工具的 `agents/` 目錄；格式依平台不同 | 各工具支援的 `skills/<name>/SKILL.md` 目錄 |
 | 安裝單位 | 單一 adapter 檔案與 ownership sidecar | 含 `SKILL.md`、references、scripts、assets 的資料夾 |
 
 Agent 可以引用一個或多個相關 Skills；Skill 也能由主 Agent 直接使用，不必先建立 subagent。
 
 ## 安裝目標
 
-### Agent targets
+安裝器只接受以下 targets；除了 `project` 之外都安裝到使用者層級。
 
-| Target | Scope | 格式 | 預設安裝位置 |
+| Target | Skill 預設位置 | Agent 預設位置 | Agent 格式 |
 |---|---|---|---|
-| `codex` | 使用者 | `.toml` | `~/.codex/agents/` |
-| `codex-project` | 目前專案 | `.toml` | `.codex/agents/` |
-| `claude` | 使用者 | `.md` | `~/.claude/agents/` |
-| `claude-project` | 目前專案 | `.md` | `.claude/agents/` |
+| `codex` | `$CODEX_HOME/skills/`（預設 `~/.codex/skills/`） | `$CODEX_HOME/agents/`（預設 `~/.codex/agents/`） | `<role>.toml` |
+| `claude` | `~/.claude/skills/` | `~/.claude/agents/` | `<role>.md` |
+| `cursor` | `~/.cursor/skills/` | `~/.cursor/agents/` | `<role>.md` |
+| `vscode` | `~/.copilot/skills/` | `~/.copilot/agents/` | `<role>.agent.md` |
+| `copilot` | `~/.copilot/skills/` | `~/.copilot/agents/` | `<role>.agent.md` |
+| `opencode` | `~/.config/opencode/skills/` | `~/.config/opencode/agents/` | `<role>.md` |
+| `project` | `<cwd>/.agents/skills/` + `<cwd>/.claude/skills/` | 五個平台各自的 project 目錄 | 依平台產生 |
 
-### Skill targets
+`vscode` 是 `copilot` 的等價 alias；兩者使用同一組路徑與 `copilot` ownership identity，所以可交替執行更新。OpenCode 會優先採用官方 [custom directory](https://opencode.ai/docs/config/#custom-directory) 環境變數 `OPENCODE_CONFIG_DIR`；未設定時依序使用 `XDG_CONFIG_HOME/opencode` 或 `~/.config/opencode`。全域 `codex` target 跟隨 Codex 內建 `$skill-installer`：config、Skills 與 Agents 都以 `CODEX_HOME` 為根目錄，新 Skill 安裝到 `$CODEX_HOME/skills`，未設定時即 `~/.codex/skills`。若同名元件已由 Autoverse 安全安裝在 `~/.agents/skills`，安裝器仍會原地更新，避免建立重複副本。
 
-| Target | Scope | 預設安裝位置 |
-|---|---|---|
-| `codex` | 使用者 | `~/.codex/skills/` |
-| `claude` | 使用者 | `~/.claude/skills/` |
-| `cursor` | 目前專案 | `.cursor/skills/` |
-| `vscode`, `copilot` | 目前專案 | `.github/skills/` |
-| `project` | 目前專案 | `.skills/` |
-| `opencode` | 使用者 | `~/.config/opencode/skills/` |
-| `opencode-project` | 目前專案 | `.opencode/skills/` |
-| `goose` | 使用者 | `~/.config/goose/skills/` |
-| `amp` | 使用者 | `~/.amp/skills/` |
-| `letta` | 使用者 | `~/.letta/skills/` |
-| `gemini` | 使用者 | `~/.gemini/skills/` |
+### `project` target 的實際位置
 
-在 Bash 環境中，`goose` 與 `opencode` 會優先使用 `XDG_CONFIG_HOME`。所有 project scope 路徑都以執行安裝器時的目前目錄為基準。
+`project` 是 Autoverse 提供的整合 scope，不是另一種 Agent 格式。預設 root 是安裝命令執行當下的工作目錄；請先 `cd` 到專案或 VS Code workspace 根目錄。若提供 `-InstallDir`／`--dir`，該值會被視為 project root，再附加以下目錄：
+
+```text
+<project-root>/
+├─ .agents/skills/       # Codex、Cursor、VS Code/Copilot、OpenCode
+├─ .claude/skills/       # Claude Code compatibility mirror
+├─ .codex/agents/        # Codex TOML
+├─ .claude/agents/       # Claude Markdown
+├─ .cursor/agents/       # Cursor Markdown
+├─ .github/agents/       # VS Code/Copilot .agent.md
+└─ .opencode/agents/     # OpenCode Markdown
+```
+
+Skills 有可共用的 Agent Skills package 結構，但 custom Agent 並沒有跨工具通用格式；因此 project Agent 安裝會從同一份 canonical source 產生五種 adapter。安裝器會先預檢所有目的地，任一重名或 ownership 衝突都會在開始寫入前停止。
+
+`project` 的 `.agents/skills` 依據 [Codex Skills](https://learn.chatgpt.com/docs/build-skills) 所列 repository discovery 位置；全域 `codex` target 則跟隨內建 `$skill-installer` 的 `$CODEX_HOME/skills` 安裝行為。其餘路徑與格式依據各平台官方文件：[Codex Subagents](https://learn.chatgpt.com/docs/agent-configuration/subagents)、[Claude Skills](https://code.claude.com/docs/en/skills)、[Claude Subagents](https://code.claude.com/docs/en/sub-agents)、[Cursor Skills](https://cursor.com/docs/skills.md)、[Cursor Subagents](https://cursor.com/docs/subagents.md)、[VS Code Agent Skills](https://code.visualstudio.com/docs/agent-customization/agent-skills)、[VS Code Custom Agents](https://code.visualstudio.com/docs/agent-customization/custom-agents)、[GitHub Copilot Custom Agents](https://docs.github.com/en/copilot/reference/custom-agents-configuration)、[OpenCode Skills](https://opencode.ai/docs/skills)、[OpenCode Agents](https://opencode.ai/docs/agents/)。
 
 ## 安裝單一元件
 
@@ -182,7 +246,7 @@ git clone https://github.com/HsinPu/Autoverse-Ai-Agent-Skills.git
 cd Autoverse-Ai-Agent-Skills
 
 .\scripts\install.ps1 -Target codex -Type skill -SourceDir .
-.\scripts\install.ps1 -Target codex -Type agent -SourceDir .
+.\scripts\install.ps1 -Target codex -Type agent -SourceDir . -EnableAutoDelegation
 ```
 
 ```bash
@@ -190,7 +254,7 @@ git clone https://github.com/HsinPu/Autoverse-Ai-Agent-Skills.git
 cd Autoverse-Ai-Agent-Skills
 
 bash scripts/install.sh --target codex --type skill --source-dir .
-bash scripts/install.sh --target codex --type agent --source-dir .
+bash scripts/install.sh --target codex --type agent --source-dir . --enable-auto-delegation
 ```
 
 ### 安裝器選項
@@ -202,8 +266,9 @@ bash scripts/install.sh --target codex --type agent --source-dir .
 | 單一元件 | `-Name` | `--name` | 省略即安裝該類型全部內容 |
 | Git branch | `-Branch` | `--branch` | 預設 `main` |
 | GitHub repository | `-Repo` | `--repo` | 預設本 repository |
-| 自訂安裝位置 | `-InstallDir` | `--dir` | 覆蓋 target 的預設路徑 |
+| 自訂安裝位置 | `-InstallDir` | `--dir` | 一般 target：直接目的地；`project`：project root |
 | 本機來源 | `-SourceDir` | `--source-dir` | 從 checkout 安裝，不下載 archive |
+| 全域主動委派 | `-EnableAutoDelegation` | `--enable-auto-delegation` | 僅全域 Codex／OpenCode Agent target；同時安裝 companion Skill |
 | 預演 | `-DryRun` | `--dry-run` | 只顯示計畫，不寫入 |
 | 強制覆蓋 | `-Force` | `--force` | 明確略過 ownership 保護 |
 
@@ -216,7 +281,8 @@ bash scripts/install.sh --target codex --type agent --source-dir .
 | 狀態 | 安裝器行為 |
 |---|---|
 | 目標不存在 | 正常安裝 |
-| metadata 與目前 repository、元件、名稱及 target 相符 | 原地更新 |
+| metadata 與目前 repository、元件、名稱及 target 相符 | 安全更新 |
+| Agent 檔缺失，但 sidecar identity 完整吻合 | 執行 `repair` |
 | 舊 Skill metadata 與新內容身份完整吻合 | 執行一次 `migrate-update` |
 | 同名內容沒有 metadata | 拒絕覆蓋 |
 | metadata 無效、來源不同或身份不符 | 拒絕覆蓋 |
@@ -226,8 +292,18 @@ Ownership metadata：
 
 - Skill：`<skill>/.skill-meta.json`，比對 `repo + component + name + target`。
 - Agent：`<agent-file>.autoverse.json`，除上述欄位外再比對 `id + adapter`。
+- Agent 與 sidecar 會先寫入同目錄暫存檔，再以 atomic replace 更新；不會沿著 symbolic link 或 hard link 改寫安裝目錄外的檔案。
+- 全量 Skill 安裝也會先預檢整批目標；只要一個 ownership 衝突，就不會先更新前面的 Skill 再中途失敗。
 - 全量 Agent 安裝會先預檢整批目標；只要一個衝突，就會在開始寫入前停止。
+- 所有平台的全量 Agent 安裝都會先預檢並安裝 `subagent-architecture`；一般 target 的 `InstallDir`／`--dir` 只覆蓋 Agent 位置，companion Skill 仍使用該 runtime 的標準 Skill 位置。`project` 則以同一 project root 建立完整多目的地計畫。
 - 舊版 Skill 只有在 repository、舊欄位，以及 `name`、`source/reference-source`、`license/previous-license` 都吻合時才會遷移。
+
+啟用全域主動委派時：
+
+- Codex 只管理 `~/.codex/config.toml` 內的 `AUTOVERSE_AUTO_DELEGATION` marker 區塊；若已有區塊外的 `developer_instructions` 就停止。
+- OpenCode 只對 strict UTF-8 JSON 的全域 `opencode.json` 合併一個 guidance 路徑；其根目錄依序採用 `OPENCODE_CONFIG_DIR`、`XDG_CONFIG_HOME/opencode` 或 `~/.config/opencode`。JSONC、無效型別、多份衝突 config 或重複 JSON key 會停止並要求手動合併。Bash 在既有自訂 config 上需要 Python 3 或 Node.js 做 strict validation；安裝器自己建立的最小 config 可在兩者皆無時安全重跑。
+- 修改既有全域 config 前會留下 `*.autoverse-backup-*` 備份；`Force` 不會繞過這些設定保護。
+- 安裝計畫完成後若全域 config 又被其他程式修改，安裝器會在 replace 前停止，避免用舊快照蓋掉新設定。
 
 先用 dry run 查看更新計畫：
 
@@ -244,22 +320,27 @@ bash scripts/install.sh --target codex --type agent --source-dir . --dry-run
 
 ## 如何使用 Agent
 
-安裝完成後，Codex 會從 `~/.codex/agents/` 或專案的 `.codex/agents/` 讀取 custom Agents；Claude Code 則讀取對應的 `.claude/agents/`。
+安裝完成後，各工具會從上方表格列出的使用者目錄讀取 Agents；`project` 則寫入各工具自己的 project discovery 目錄。Cursor 不會直接使用 Codex TOML，Copilot 也不會直接使用 OpenCode frontmatter；這正是 repository 保留 generated adapters 的原因。
 
 - 系統可依任務內容與 Agent 的 `description` 選擇是否委派。
 - 你也可以直接指定角色，例如：「請使用 `code-reviewer` 檢查目前變更」。
-- Repository 內的 `AGENTS.md` 可以補充自動選擇、委派範圍與驗證規則。
+- 安裝時使用全域主動委派選項後，AI 會在任務包含兩個以上可獨立處理的工作流時主動評估子代理，不需要每個專案另外提供 `AGENTS.md`。
+- 專案自己的 `AGENTS.md` 仍可選擇性補充該專案的限制，但不是 Autoverse Agents 的載入或委派前提。
 - 若安裝後目前工作階段尚未出現新 Agent，請開啟新的工作階段或重新啟動對應工具。
+
+啟用全域主動委派後，平常直接描述任務即可，例如：「請重新設計登入流程，同時檢查安全與測試覆蓋，完成後整合結果。」主 Agent 會依角色描述判斷是否值得拆成子代理。需要固定角色時也可以明確指定：Codex 可說「請委派 `code-reviewer` 檢查目前變更」；OpenCode 可輸入 `@code-reviewer 檢查目前變更`。
 
 從本機 checkout 確認 Autoverse 已安裝的 Codex Agents：
 
 ```bash
 node autoverse-cli.js list --installed --type agent --target codex
+node autoverse-cli.js list --installed --type agent --target opencode
+node autoverse-cli.js list --installed --type agent --target project
 ```
 
-CLI 只列出同時具有 adapter 與 Autoverse ownership sidecar 的檔案；它用來確認安裝結果，不等同於檢查目前已開啟的 Codex／Claude 工作階段是否重新載入。
+CLI 只列出同時具有 adapter 與有效 Autoverse ownership sidecar 的檔案；它用來確認安裝結果，不等同於檢查目前已開啟的工具是否重新載入。
 
-平台格式可參考 [OpenAI Codex Subagents](https://learn.chatgpt.com/docs/agent-configuration/subagents) 與 [Claude Code Subagents](https://code.claude.com/docs/en/sub-agents)。
+平台格式的官方連結集中在 [`project` target 的實際位置](#project-target-的實際位置)一節。
 
 ## Catalog CLI
 
@@ -279,7 +360,7 @@ CLI 只列出同時具有 adapter 與 Autoverse ownership sidecar 的檔案；�
 |---|---|
 | `--type skill\|agent` | 選擇 catalog 類型，預設 Skill |
 | `--category <category>` | 只顯示指定分類 |
-| `--installed` | 列出 target 安裝位置中的元件；Agent 另要求 ownership sidecar |
+| `--installed` | 列出 target 安裝位置中具有有效 Autoverse ownership sidecar 的元件 |
 | `--target <target>` | 指定安裝平台 |
 | `--all` | 搭配 `list --installed`，列出該類型所有支援 targets 的安裝結果 |
 | `--help` | 顯示說明 |
@@ -366,7 +447,10 @@ Autoverse-Ai-Agent-Skills/
 │  └─ <role>.md                     # Canonical Agent definitions
 ├─ adapters/
 │  ├─ codex/<role>.toml             # Generated Codex adapters
-│  └─ claude/<role>.md              # Generated Claude Code adapters
+│  ├─ claude/<role>.md              # Generated Claude Code adapters
+│  ├─ cursor/<role>.md              # Generated Cursor subagents
+│  ├─ copilot/<role>.agent.md       # Generated VS Code/Copilot agents
+│  └─ opencode/<role>.md            # Generated OpenCode subagents
 ├─ skills/
 │  └─ <name>/
 │     ├─ SKILL.md                   # Skill entrypoint
@@ -388,14 +472,14 @@ Autoverse-Ai-Agent-Skills/
 └─ .github/workflows/validate.yml   # CI validation and CLI smoke tests
 ```
 
-`agents/<role>.md` 是 Agent 的唯一人工維護來源。請勿直接修改 `adapters/`；兩套平台 adapter 與 `agents.json` 都由 scripts 產生。
+`agents/<role>.md` 是 Agent 的唯一人工維護來源。請勿直接修改 `adapters/`；五套平台 adapter 與 `agents.json` 都由 scripts 產生。
 
 ## 開發與驗證
 
 需要 Node.js 16 或更新版本。
 
 ```bash
-# 從 canonical Agents 重建 Codex／Claude adapters 與 agents.json
+# 從 canonical Agents 重建五平台 adapters 與 agents.json
 npm run generate:agents
 
 # 更新 wshobson/agents reference tree 與逐項 ledger
@@ -436,7 +520,7 @@ CI 會在 push 到 `main` 與每個 pull request 上使用 Node.js 20 執行 `np
 <details>
 <summary><strong>出現 Target is required</strong></summary>
 
-安裝器不使用隱性平台預設。請加入 `-Target codex` 或 `--target codex`；若要安裝 project scope Agent，改用 `codex-project` 或 `claude-project`。
+安裝器不使用隱性平台預設。請加入 `-Target codex` 或 `--target codex`；若要安裝到目前 workspace 的所有支援工具，使用 `project`。
 
 </details>
 
@@ -450,7 +534,7 @@ CI 會在 push 到 `main` 與每個 pull request 上使用 Node.js 20 執行 `np
 </details>
 
 <details>
-<summary><strong>安裝後 Codex／Claude Code 沒有顯示新 Agent</strong></summary>
+<summary><strong>安裝後工具沒有顯示新 Agent</strong></summary>
 
 確認 target 與實際使用的平台、scope 相符，再檢查 adapter 是否位於對應的 `agents/` 目錄。已開啟的工作階段可能尚未重新載入設定，請開新工作階段或重新啟動工具。
 
@@ -460,19 +544,28 @@ CI 會在 push 到 `main` 與每個 pull request 上使用 Node.js 20 執行 `np
 node autoverse-cli.js list --installed --type agent --target codex
 ```
 
+其他工具請換成對應 target。若安裝的是 `project`，請在相同專案目錄執行 CLI 並使用 `--target project`；CLI 會分平台顯示五個 Agent 目的地。
+
+</details>
+
+<details>
+<summary><strong>全域主動委派設定被拒絕</strong></summary>
+
+這表示安裝器偵測到不能安全自動合併的使用者設定，例如 Codex 已有自訂 `developer_instructions`，或 OpenCode 使用 JSONC／非陣列 `instructions`。Agent 與 companion Skill 會在寫入前停止；請依錯誤訊息手動合併 [global-auto-delegation.md](skills/subagent-architecture/references/global-auto-delegation.md)，不要用 Force 覆蓋原設定。
+
 </details>
 
 <details>
 <summary><strong>沒有 Node.js，還能安裝嗎？</strong></summary>
 
-可以。PowerShell 與 Bash 安裝器不需要 Node.js。只有 catalog CLI、產生 adapters、驗證與 package 預覽需要 Node.js 16 或更新版本。
+可以。一般安裝不需要 Node.js；只有 Bash 要合併既有、自訂的 OpenCode JSON 時，需要 Python 3 或 Node.js 其中之一。Catalog CLI、產生 adapters、驗證與 package 預覽則需要 Node.js 16 或更新版本。
 
 </details>
 
 <details>
 <summary><strong>Bash 安裝器回報缺少 command</strong></summary>
 
-確認系統已安裝 Bash、`curl`、`tar` 與 `mktemp`。如果只想從本機 checkout 安裝，仍需 Bash，但不需要下載 GitHub archive。
+確認系統已安裝 Bash、`curl`、`tar`、`mktemp` 與 `cksum`。如果只想從本機 checkout 安裝，仍需 Bash，但不需要下載 GitHub archive。若要把 guidance 合併進既有的 OpenCode `opencode.json`，還需要 Python 3 或 Node.js；兩者皆無時仍可建立並重跑安裝器自己的最小 config，但不會冒險改寫自訂 JSON。
 
 </details>
 

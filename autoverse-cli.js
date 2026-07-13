@@ -6,28 +6,74 @@ const os = require('os');
 
 const SKILLS_JSON = path.join(__dirname, 'skills.json');
 const AGENTS_JSON = path.join(__dirname, 'agents.json');
+const REPOSITORY_ID = 'HsinPu/Autoverse-Ai-Agent-Skills';
+const homeDir = os.homedir();
+const codexHome = process.env.CODEX_HOME || path.join(homeDir, '.codex');
+const projectRoot = process.cwd();
+const openCodeHome = process.env.OPENCODE_CONFIG_DIR ||
+  (process.env.XDG_CONFIG_HOME
+    ? path.join(process.env.XDG_CONFIG_HOME, 'opencode')
+    : path.join(homeDir, '.config', 'opencode'));
+const SUPPORTED_TARGETS = ['codex', 'claude', 'cursor', 'vscode', 'copilot', 'opencode', 'project'];
+const ALL_TARGETS = ['codex', 'claude', 'cursor', 'copilot', 'opencode', 'project'];
 
-const AGENT_PATHS = {
-  claude: path.join(os.homedir(), '.claude', 'skills'),
-  cursor: path.join(process.cwd(), '.cursor', 'skills'),
-  codex: path.join(os.homedir(), '.codex', 'skills'),
-  amp: path.join(os.homedir(), '.amp', 'skills'),
-  vscode: path.join(process.cwd(), '.github', 'skills'),
-  copilot: path.join(process.cwd(), '.github', 'skills'),
-  project: path.join(process.cwd(), '.skills'),
-  goose: path.join(os.homedir(), '.config', 'goose', 'skills'),
-  opencode: path.join(os.homedir(), '.config', 'opencode', 'skills'),
-  'opencode-project': path.join(process.cwd(), '.opencode', 'skills'),
-  letta: path.join(os.homedir(), '.letta', 'skills'),
-  gemini: path.join(os.homedir(), '.gemini', 'skills'),
+function resolveCodexSkillProfiles() {
+  const profiles = [
+    { label: 'codex/CODEX_HOME', dir: path.join(codexHome, 'skills'), target: 'codex' },
+    { label: 'codex/standard', dir: path.join(homeDir, '.agents', 'skills'), target: 'codex' },
+    { label: 'codex/legacy', dir: path.join(homeDir, '.codex', 'skills'), target: 'codex' },
+  ];
+  const seen = new Set();
+  return profiles.filter((profile) => {
+    const identity = path.resolve(profile.dir).toLowerCase();
+    if (seen.has(identity)) return false;
+    seen.add(identity);
+    return true;
+  });
+}
+
+const SKILL_PROFILE_PATHS = {
+  codex: resolveCodexSkillProfiles(),
+  claude: [{ label: 'claude', dir: path.join(homeDir, '.claude', 'skills'), target: 'claude' }],
+  cursor: [{ label: 'cursor', dir: path.join(homeDir, '.cursor', 'skills'), target: 'cursor' }],
+  copilot: [{ label: 'copilot', dir: path.join(homeDir, '.copilot', 'skills'), target: 'copilot' }],
+  opencode: [{ label: 'opencode', dir: path.join(openCodeHome, 'skills'), target: 'opencode' }],
+  project: [
+    {
+      label: 'project/shared (codex/cursor/copilot/opencode)',
+      dir: path.join(projectRoot, '.agents', 'skills'),
+      target: 'project',
+    },
+    { label: 'project/claude', dir: path.join(projectRoot, '.claude', 'skills'), target: 'project' },
+  ],
 };
 
 const AGENT_PROFILE_PATHS = {
-  codex: { dir: path.join(os.homedir(), '.codex', 'agents'), extension: '.toml' },
-  'codex-project': { dir: path.join(process.cwd(), '.codex', 'agents'), extension: '.toml' },
-  claude: { dir: path.join(os.homedir(), '.claude', 'agents'), extension: '.md' },
-  'claude-project': { dir: path.join(process.cwd(), '.claude', 'agents'), extension: '.md' },
+  codex: [{ label: 'codex', dir: path.join(codexHome, 'agents'), extension: '.toml', adapter: 'codex', target: 'codex' }],
+  claude: [{ label: 'claude', dir: path.join(homeDir, '.claude', 'agents'), extension: '.md', adapter: 'claude', target: 'claude' }],
+  cursor: [{ label: 'cursor', dir: path.join(homeDir, '.cursor', 'agents'), extension: '.md', adapter: 'cursor', target: 'cursor' }],
+  copilot: [{ label: 'copilot', dir: path.join(homeDir, '.copilot', 'agents'), extension: '.agent.md', adapter: 'copilot', target: 'copilot' }],
+  opencode: [{ label: 'opencode', dir: path.join(openCodeHome, 'agents'), extension: '.md', adapter: 'opencode', target: 'opencode' }],
+  project: [
+    { label: 'project/codex', dir: path.join(projectRoot, '.codex', 'agents'), extension: '.toml', adapter: 'codex', target: 'project' },
+    { label: 'project/claude', dir: path.join(projectRoot, '.claude', 'agents'), extension: '.md', adapter: 'claude', target: 'project' },
+    { label: 'project/cursor', dir: path.join(projectRoot, '.cursor', 'agents'), extension: '.md', adapter: 'cursor', target: 'project' },
+    { label: 'project/copilot', dir: path.join(projectRoot, '.github', 'agents'), extension: '.agent.md', adapter: 'copilot', target: 'project' },
+    { label: 'project/opencode', dir: path.join(projectRoot, '.opencode', 'agents'), extension: '.md', adapter: 'opencode', target: 'project' },
+  ],
 };
+
+function canonicalizeTarget(value) {
+  const normalized = String(value || '').trim().toLowerCase();
+  if (!SUPPORTED_TARGETS.includes(normalized)) return null;
+  return normalized === 'vscode' ? 'copilot' : normalized;
+}
+
+function reportUnknownTarget(value) {
+  console.error(`不支援的 target: ${value || '(空白)'}`);
+  console.error(`可用 targets: ${SUPPORTED_TARGETS.join(', ')}`);
+  process.exitCode = 1;
+}
 
 function loadSkillsJson() {
   try {
@@ -186,38 +232,96 @@ function tokenizeSearchText(value) {
     .filter(Boolean);
 }
 
-function listInstalled(agent) {
-  const destDir = AGENT_PATHS[agent];
-  if (!destDir || !fs.existsSync(destDir)) {
-    console.log(`${agent}: 尚未安裝任何技能`);
-    return;
-  }
-  const installed = fs.readdirSync(destDir).filter(name => {
-    const skillPath = path.join(destDir, name);
-    return fs.statSync(skillPath).isDirectory() &&
-           fs.existsSync(path.join(skillPath, 'SKILL.md'));
-  });
-  if (installed.length === 0) {
-    console.log(`${agent}: 尚未安裝任何技能`);
-  } else {
-    console.log(`${agent} 已安裝 (${installed.length} 個):`);
-    installed.forEach(name => console.log(`  ${name}`));
+function readJsonFile(filePath) {
+  try {
+    return JSON.parse(fs.readFileSync(filePath, 'utf8').replace(/^\uFEFF/, ''));
+  } catch {
+    return null;
   }
 }
 
-function listInstalledAgents(target) {
-  const config = AGENT_PROFILE_PATHS[target];
-  if (!config || !fs.existsSync(config.dir)) {
-    console.log(`${target}: 尚未安裝任何 Agent`);
+function findInstalledSkills(profile) {
+  if (!fs.existsSync(profile.dir)) return [];
+  try {
+    return fs.readdirSync(profile.dir).filter((name) => {
+      const skillPath = path.join(profile.dir, name);
+      const metadataPath = path.join(skillPath, '.skill-meta.json');
+      try {
+        if (!fs.statSync(skillPath).isDirectory() || !fs.existsSync(path.join(skillPath, 'SKILL.md'))) return false;
+      } catch {
+        return false;
+      }
+      const metadata = readJsonFile(metadataPath);
+      return metadata?.repo === REPOSITORY_ID && metadata.component === 'skill' &&
+        metadata.target === profile.target && metadata.name === name;
+    }).sort();
+  } catch {
+    return [];
+  }
+}
+
+function listInstalled(targetName) {
+  const canonicalTarget = canonicalizeTarget(targetName);
+  if (!canonicalTarget) {
+    reportUnknownTarget(targetName);
     return;
   }
-  const installed = fs.readdirSync(config.dir)
-    .filter(name => name.endsWith(config.extension) && fs.existsSync(path.join(config.dir, `${name}.autoverse.json`)))
-    .sort();
-  if (installed.length === 0) console.log(`${target}: 尚未安裝任何 Agent`);
-  else {
-    console.log(`${target} 已安裝 Agent (${installed.length} 個):`);
-    installed.forEach(name => console.log(`  ${path.basename(name, config.extension)}`));
+  const profiles = SKILL_PROFILE_PATHS[canonicalTarget];
+  if (canonicalTarget === 'codex') {
+    const installed = [...new Set(profiles.flatMap(findInstalledSkills))].sort();
+    const label = targetName.toLowerCase();
+    if (installed.length === 0) console.log(`${label}: 尚未安裝任何技能`);
+    else {
+      console.log(`${label} 已安裝 (${installed.length} 個):`);
+      installed.forEach(name => console.log(`  ${name}`));
+    }
+    return;
+  }
+  for (const profile of profiles) {
+    const label = canonicalTarget === 'project' ? profile.label : targetName.toLowerCase();
+    const installed = findInstalledSkills(profile);
+    if (installed.length === 0) console.log(`${label}: 尚未安裝任何技能`);
+    else {
+      console.log(`${label} 已安裝 (${installed.length} 個):`);
+      installed.forEach(name => console.log(`  ${name}`));
+    }
+  }
+}
+
+function findInstalledAgents(profile) {
+  if (!fs.existsSync(profile.dir)) return [];
+  try {
+    return fs.readdirSync(profile.dir)
+      .filter((name) => {
+        if (!name.endsWith(profile.extension)) return false;
+        const role = path.basename(name, profile.extension);
+        const metadata = readJsonFile(path.join(profile.dir, `${name}.autoverse.json`));
+        return metadata?.repo === REPOSITORY_ID && metadata.component === 'agent' &&
+          metadata.target === profile.target && metadata.adapter === profile.adapter &&
+          metadata.id === role && metadata.name === role;
+      })
+      .map(name => path.basename(name, profile.extension))
+      .sort();
+  } catch {
+    return [];
+  }
+}
+
+function listInstalledAgents(targetName) {
+  const canonicalTarget = canonicalizeTarget(targetName);
+  if (!canonicalTarget) {
+    reportUnknownTarget(targetName);
+    return;
+  }
+  const profiles = AGENT_PROFILE_PATHS[canonicalTarget];
+  for (const profile of profiles) {
+    const label = canonicalTarget === 'project' ? profile.label : targetName.toLowerCase();
+    const installed = findInstalledAgents(profile);
+    if (installed.length === 0) console.log(`${label}: 尚未安裝任何 Agent`);
+    else {
+      console.log(`${label} 已安裝 Agent (${installed.length} 個):`);
+      installed.forEach(name => console.log(`  ${name}`));
+    }
   }
 }
 
@@ -270,6 +374,9 @@ Codex 安裝:
 
 Claude Code 安裝:
   curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target claude --type agent --name ${agent.id}
+
+OpenCode 安裝:
+  curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target opencode --type agent --name ${agent.id}
 `);
 }
 
@@ -293,9 +400,11 @@ Autoverse AI Agent Skills - Catalog 工具
   --all                 list --installed 時列出該類型所有支援平台
   --category <類別>     依類別過濾
 
-支援的 Agent:
-  claude, cursor, codex, amp, vscode, copilot,
-  project, goose, opencode, opencode-project, letta, gemini
+Skill 與 Agent targets:
+  codex, claude, cursor, vscode, copilot, opencode, project
+
+  vscode 是 copilot 的別名，兩者共用 ~/.copilot 的安裝位置。
+  project 會檢查目前工作目錄中的各工具專案路徑。
 
 範例:
   autoverse list
@@ -318,7 +427,7 @@ const allFlag = args.includes('--all');
 const typeIndex = args.indexOf('--type');
 const catalogType = typeIndex !== -1 ? args[typeIndex + 1] : 'skill';
 const targetIndex = args.includes('--target') ? args.indexOf('--target') : args.indexOf('--agent');
-const target = targetIndex !== -1 ? args[targetIndex + 1] : 'claude';
+const target = targetIndex !== -1 ? args[targetIndex + 1] : 'codex';
 
 const categoryIndex = args.indexOf('--category');
 const category = categoryIndex !== -1 ? args[categoryIndex + 1] : null;
@@ -353,8 +462,8 @@ if (!command || command === 'help' || command === '--help' || command === '-h') 
 } else if (command === 'list' || command === 'ls') {
   if (args.includes('--installed')) {
     if (allFlag) {
-      if (catalogType === 'agent') Object.keys(AGENT_PROFILE_PATHS).forEach(name => listInstalledAgents(name));
-      else Object.keys(AGENT_PATHS).forEach(name => listInstalled(name));
+      if (catalogType === 'agent') ALL_TARGETS.forEach(name => listInstalledAgents(name));
+      else ALL_TARGETS.forEach(name => listInstalled(name));
     } else {
       if (catalogType === 'agent') listInstalledAgents(target);
       else listInstalled(target);

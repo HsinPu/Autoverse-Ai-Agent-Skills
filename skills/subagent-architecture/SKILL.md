@@ -1,16 +1,24 @@
 ---
 name: subagent-architecture
-description: Design reliable multi-agent workflows by deciding when to delegate, selecting team size and roles, defining file and decision ownership, sequencing dependencies, specifying message and handoff contracts, and arbitrating parallel results. Use when a task needs subagents, agent teams, parallel research or implementation, multi-reviewer work, competing debugging hypotheses, or coordinated fan-out and fan-in execution.
+description: Proactively design and route reliable multi-agent workflows by deciding when to delegate, discovering available roles, selecting the smallest useful team, defining file and decision ownership, sequencing dependencies, specifying handoff contracts, and arbitrating parallel results. Use whenever the runtime exposes subagents or custom agents and a task contains multiple bounded workstreams, even when the user did not explicitly request delegation; also use for agent teams, parallel research or implementation, multi-reviewer work, competing debugging hypotheses, and coordinated fan-out and fan-in execution.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---
 
 # Subagent Architecture
 
+## Activation
+
+- When the runtime exposes subagents or custom agents, proactively evaluate delegation even if the user did not ask for it.
+- Delegate when two or more concrete, bounded workstreams can proceed independently and the expected speed, isolation, or evidence gain exceeds coordination cost.
+- Keep tightly coupled work, tiny tasks, architecture ownership, destructive decisions, and the final completion judgment with the parent.
+- Respect an explicit request not to delegate. If no suitable role or subagent capability exists, continue locally without blocking.
+- Discover roles from the runtime and select them by description and required capability; never assume that a named role exists on every tool.
+
 ## Workflow
 
 1. Define the single parent objective, acceptance evidence, authority boundary, and shared mutable state.
-2. Keep work local unless a subtask is concrete, bounded, independently useful, and cheaper to delegate than to coordinate.
+2. Inspect the available subagent capabilities and role descriptions before choosing whether and where to delegate.
 3. Build a dependency graph and classify each work unit as parallel-safe, sequential, or parent-owned.
 4. Choose the smallest team that covers distinct responsibilities without duplicate context or shared-file races.
 5. Assign explicit inputs, allowed files or systems, decisions, stop conditions, and output evidence.
@@ -48,6 +56,7 @@ Stop conditions:
 ## References
 
 - Read [references/team-patterns.md](references/team-patterns.md) when choosing team composition, communication messages, parallel-debugging structure, multi-reviewer fan-in, or file-ownership policy.
+- Read [references/global-auto-delegation.md](references/global-auto-delegation.md) when installing concise global routing instructions for Codex or OpenCode without relying on a project `AGENTS.md`.
 
 ## Handoff
 

@@ -10,6 +10,7 @@ INSTALL_DIR=""
 SOURCE_DIR=""
 DRY_RUN=0
 FORCE=0
+ENABLE_AUTO_DELEGATION=0
 
 usage() {
   cat <<'EOF'
@@ -17,7 +18,7 @@ Autoverse AI Agent Skills installer
 
 Usage:
   scripts/install.sh --target <target> [--type skill] [--name <skill>] [--dir path] [--dry-run] [--force]
-  scripts/install.sh --target <target> --type agent [--name <role>] [--dir path] [--dry-run] [--force]
+  scripts/install.sh --target <target> --type agent [--name <role>] [--dir path] [--enable-auto-delegation] [--dry-run] [--force]
 
 Compatibility aliases:
   --agent is an alias for --target; --skill selects a Skill by name.
@@ -25,21 +26,25 @@ Compatibility aliases:
   Omit --name with --type agent to install every available Agent.
 
 Skill targets:
-  claude, cursor, codex, amp, vscode, copilot, project, goose, opencode,
-  opencode-project, letta, gemini
+  codex, claude, cursor, vscode, copilot, opencode, project
 
 Agent targets:
-  codex, codex-project, claude, claude-project
+  codex, claude, cursor, vscode, copilot, opencode, project
 
 Examples:
   scripts/install.sh --target codex --name python-development
   scripts/install.sh --agent codex --skill python-development
   scripts/install.sh --target codex --type agent --name code-reviewer
-  scripts/install.sh --target claude-project --agent-profile debugger --dry-run
+  scripts/install.sh --target codex --type agent --enable-auto-delegation
+  scripts/install.sh --target opencode --type agent
+  scripts/install.sh --target project --type agent --name debugger --dry-run
 
 Safety:
   Existing components are updated only when repo, component, name, and target metadata all match.
   Agent updates additionally require matching id and adapter metadata.
+  Full Agent installs also install the subagent-architecture Skill.
+  The project target uses the current directory as its project root; --dir overrides that root.
+  Global auto-delegation is opt-in and never overwrites conflicting user instructions.
   Unknown same-named content is blocked unless --force is provided.
 EOF
 }
@@ -47,6 +52,77 @@ EOF
 log_info() { printf '==> %s\n' "$1"; }
 log_success() { printf 'OK  %s\n' "$1"; }
 log_error() { printf 'Error: %s\n' "$1" >&2; }
+
+is_owned_codex_legacy_skill() {
+  local root="$1" skill_name="$2" meta existing_repo existing_component existing_name existing_target existing_agent
+  meta="${root%/}/$skill_name/.skill-meta.json"
+  [[ -f "$meta" && ! -L "$meta" ]] || return 1
+  validate_flat_metadata "$meta" || return 1
+  existing_repo="$(json_string_value "$meta" "repo")"
+  existing_component="$(json_string_value "$meta" "component")"
+  existing_name="$(json_string_value "$meta" "name")"
+  existing_target="$(json_string_value "$meta" "target")"
+  existing_agent="$(json_string_value "$meta" "agent")"
+  [[ "$existing_repo" == "$REPO" && "$existing_name" == "$skill_name" ]] || return 1
+  if [[ "$existing_component" == "skill" && "$existing_target" == "codex" ]]; then return 0; fi
+  [[ -z "$existing_component" && -z "$existing_target" && "$existing_agent" == "codex" ]]
+}
+
+codex_skill_path() {
+  local scope="$1" skill_name="${2:-}" canonical_root agents_alternate default_codex_alternate root target
+  local found_count=0 found_root="" found_owned=0
+  local -a candidate_roots=()
+  if [[ "$scope" != "user" ]]; then
+    printf '%s' "$PWD/.agents/skills"
+    return
+  fi
+
+  canonical_root="${CODEX_HOME:-$HOME/.codex}/skills"
+  [[ -n "$skill_name" ]] || { printf '%s' "$canonical_root"; return; }
+
+  agents_alternate="$HOME/.agents/skills"
+  default_codex_alternate="$HOME/.codex/skills"
+  candidate_roots+=("$canonical_root")
+  if [[ "$agents_alternate" != "$canonical_root" ]]; then candidate_roots+=("$agents_alternate"); fi
+  if [[ "$default_codex_alternate" != "$canonical_root" && "$default_codex_alternate" != "$agents_alternate" ]]; then
+    candidate_roots+=("$default_codex_alternate")
+  fi
+
+  for root in "${candidate_roots[@]}"; do
+    target="${root%/}/$skill_name"
+    [[ -e "$target" || -L "$target" ]] || continue
+    found_count=$((found_count + 1))
+    found_root="$root"
+    found_owned=0
+    if is_owned_codex_legacy_skill "$root" "$skill_name"; then found_owned=1; fi
+  done
+
+  if [[ "$found_count" -gt 1 ]]; then
+    log_error "Codex Skill '$skill_name' exists in more than one canonical or alternate root. Remove or reconcile the duplicates before installing."
+    return 2
+  fi
+  if [[ "$found_count" -eq 1 ]]; then
+    if [[ "$found_root" == "$canonical_root" ]]; then
+      printf '%s' "$canonical_root"
+      return
+    fi
+    if [[ "$found_owned" -eq 1 ]]; then
+      printf '%s' "$found_root"
+      return
+    fi
+    log_error "Codex Skill '$skill_name' exists in alternate root '$found_root' without matching Autoverse ownership metadata. Refusing to create a duplicate in '$canonical_root'."
+    return 2
+  fi
+  printf '%s' "$canonical_root"
+}
+
+opencode_config_root() {
+  if [[ -n "${OPENCODE_CONFIG_DIR:-}" ]]; then
+    printf '%s' "$OPENCODE_CONFIG_DIR"
+  else
+    printf '%s/opencode' "${XDG_CONFIG_HOME:-$HOME/.config}"
+  fi
+}
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -59,6 +135,7 @@ while [[ $# -gt 0 ]]; do
     --repo) REPO="${2:-}"; shift 2 ;;
     --dir) INSTALL_DIR="${2:-}"; shift 2 ;;
     --source-dir) SOURCE_DIR="${2:-}"; shift 2 ;;
+    --enable-auto-delegation) ENABLE_AUTO_DELEGATION=1; shift ;;
     --dry-run) DRY_RUN=1; shift ;;
     --force) FORCE=1; shift ;;
     -h|--help) usage; exit 0 ;;
@@ -71,10 +148,11 @@ install_path() {
   local type="$2"
   if [[ "$type" == "agent" ]]; then
     case "$target" in
-      codex) printf '%s/.codex/agents' "$HOME" ;;
-      codex-project) printf '%s/.codex/agents' "$PWD" ;;
+      codex) printf '%s/agents' "${CODEX_HOME:-$HOME/.codex}" ;;
       claude) printf '%s/.claude/agents' "$HOME" ;;
-      claude-project) printf '%s/.claude/agents' "$PWD" ;;
+      cursor) printf '%s/.cursor/agents' "$HOME" ;;
+      copilot) printf '%s/.copilot/agents' "$HOME" ;;
+      opencode) printf '%s/agents' "$(opencode_config_root)" ;;
       *) return 1 ;;
     esac
     return
@@ -82,17 +160,104 @@ install_path() {
 
   case "$target" in
     claude) printf '%s/.claude/skills' "$HOME" ;;
-    cursor) printf '%s/.cursor/skills' "$PWD" ;;
-    codex) printf '%s/.codex/skills' "$HOME" ;;
-    amp) printf '%s/.amp/skills' "$HOME" ;;
-    vscode|copilot) printf '%s/.github/skills' "$PWD" ;;
-    project) printf '%s/.skills' "$PWD" ;;
-    goose) printf '%s/goose/skills' "${XDG_CONFIG_HOME:-$HOME/.config}" ;;
-    opencode) printf '%s/opencode/skills' "${XDG_CONFIG_HOME:-$HOME/.config}" ;;
-    opencode-project) printf '%s/.opencode/skills' "$PWD" ;;
-    letta) printf '%s/.letta/skills' "$HOME" ;;
-    gemini) printf '%s/.gemini/skills' "$HOME" ;;
+    cursor) printf '%s/.cursor/skills' "$HOME" ;;
+    codex) codex_skill_path user ;;
+    copilot) printf '%s/.copilot/skills' "$HOME" ;;
+    opencode) printf '%s/skills' "$(opencode_config_root)" ;;
     *) return 1 ;;
+  esac
+}
+
+validate_target() {
+  local target="$1" type="$2"
+  case "$target" in
+    codex|claude|cursor|vscode|copilot|opencode|project) return ;;
+    *) log_error "Unsupported $type target: $target"; exit 1 ;;
+  esac
+}
+
+add_skill_profile() {
+  SKILL_DESTINATIONS+=("$1")
+  SKILL_OWNERSHIP_TARGETS+=("$2")
+  SKILL_LEGACY_TARGETS+=("${3:-}")
+  SKILL_CODEX_LEGACY_CHECKS+=("${4:-0}")
+}
+
+configure_skill_profiles() {
+  local use_install_override="$1" destination
+  SKILL_DESTINATIONS=()
+  SKILL_OWNERSHIP_TARGETS=()
+  SKILL_LEGACY_TARGETS=()
+  SKILL_CODEX_LEGACY_CHECKS=()
+  if [[ "$TARGET" == "project" ]]; then
+    add_skill_profile "$PROJECT_ROOT/.agents/skills" "project" "codex-project" 0
+    add_skill_profile "$PROJECT_ROOT/.claude/skills" "project" "claude-project" 0
+    return
+  fi
+  if [[ "$use_install_override" -eq 1 && -n "$INSTALL_DIR" ]]; then
+    destination="$INSTALL_DIR"
+  elif destination="$(install_path "$TARGET" skill)"; then
+    :
+  else
+    log_error "Unsupported skill target: $TARGET"
+    exit 1
+  fi
+  if [[ "$TARGET" == "codex" && ! ( "$use_install_override" -eq 1 && -n "$INSTALL_DIR" ) ]]; then
+    add_skill_profile "$destination" "$TARGET" "" 1
+  elif [[ "$TARGET" == "copilot" ]]; then
+    add_skill_profile "$destination" "$TARGET" "vscode" 0
+  else
+    add_skill_profile "$destination" "$TARGET" "" 0
+  fi
+}
+
+resolve_skill_profile_destination() {
+  local destination_root="$1" skill_name="$2" check_codex_legacy="$3"
+  if [[ "$check_codex_legacy" -eq 1 ]]; then
+    codex_skill_path user "$skill_name"
+  else
+    printf '%s' "$destination_root"
+  fi
+}
+
+add_agent_profile() {
+  AGENT_PLATFORMS+=("$1")
+  AGENT_SUFFIXES+=("$2")
+  AGENT_DESTINATIONS+=("$3")
+  AGENT_OWNERSHIP_TARGETS+=("$4")
+  AGENT_LEGACY_TARGETS+=("${5:-}")
+}
+
+configure_agent_profiles() {
+  local destination
+  AGENT_PLATFORMS=()
+  AGENT_SUFFIXES=()
+  AGENT_DESTINATIONS=()
+  AGENT_OWNERSHIP_TARGETS=()
+  AGENT_LEGACY_TARGETS=()
+  if [[ "$TARGET" == "project" ]]; then
+    add_agent_profile "codex" ".toml" "$PROJECT_ROOT/.codex/agents" "project" "codex-project"
+    add_agent_profile "claude" ".md" "$PROJECT_ROOT/.claude/agents" "project" "claude-project"
+    add_agent_profile "cursor" ".md" "$PROJECT_ROOT/.cursor/agents" "project" "cursor-project"
+    add_agent_profile "copilot" ".agent.md" "$PROJECT_ROOT/.github/agents" "project" "copilot-project,vscode-project,vscode"
+    add_agent_profile "opencode" ".md" "$PROJECT_ROOT/.opencode/agents" "project" "opencode-project"
+    return
+  fi
+  if [[ -n "$INSTALL_DIR" ]]; then
+    destination="$INSTALL_DIR"
+  elif destination="$(install_path "$TARGET" agent)"; then
+    :
+  else
+    log_error "Unsupported agent target: $TARGET"
+    exit 1
+  fi
+  case "$TARGET" in
+    codex) add_agent_profile "codex" ".toml" "$destination" "$TARGET" ;;
+    claude) add_agent_profile "claude" ".md" "$destination" "$TARGET" ;;
+    cursor) add_agent_profile "cursor" ".md" "$destination" "$TARGET" ;;
+    copilot) add_agent_profile "copilot" ".agent.md" "$destination" "$TARGET" "vscode" ;;
+    opencode) add_agent_profile "opencode" ".md" "$destination" "$TARGET" ;;
+    *) log_error "Unsupported agent target: $TARGET"; exit 1 ;;
   esac
 }
 
@@ -124,6 +289,79 @@ json_string_value() {
   sed -n "s/^[[:space:]]*\"$key\"[[:space:]]*:[[:space:]]*\"\\([^\"]*\\)\".*/\\1/p" "$file" | head -n 1
 }
 
+validate_flat_metadata() {
+  awk '
+    function fail() { invalid = 1; exit 1 }
+    function trim(value) {
+      sub(/^[[:space:]]+/, "", value)
+      sub(/[[:space:]]+$/, "", value)
+      return value
+    }
+    BEGIN { state = 0; count = 0 }
+    {
+      if (NR == 1) sub(/^\357\273\277/, "", $0)
+      sub(/\r$/, "", $0)
+      line = trim($0)
+      if (line == "") next
+      if (line ~ /[[:cntrl:]]/) fail()
+      if (state == 0) {
+        if (line != "{") fail()
+        state = 1
+        next
+      }
+      if (state != 1) fail()
+      if (line == "}") {
+        state = 2
+        next
+      }
+      if (substr(line, 1, 1) != "\"") fail()
+      rest = substr(line, 2)
+      quote = index(rest, "\"")
+      if (quote < 2) fail()
+      key = substr(rest, 1, quote - 1)
+      if (key !~ /^[A-Za-z][A-Za-z0-9]*$/ || seen[tolower(key)]++) fail()
+      position = quote + 2
+      while (position <= length(line) && substr(line, position, 1) ~ /[[:space:]]/) position++
+      if (substr(line, position, 1) != ":") fail()
+      position++
+      while (position <= length(line) && substr(line, position, 1) ~ /[[:space:]]/) position++
+      if (substr(line, position, 1) != "\"") fail()
+      position++
+      closed = 0
+      while (position <= length(line)) {
+        character = substr(line, position, 1)
+        if (character == "\\") {
+          position++
+          if (position > length(line)) fail()
+          escape = substr(line, position, 1)
+          if (escape == "u") {
+            hex = substr(line, position + 1, 4)
+            if (length(hex) != 4 || hex !~ /^[0-9A-Fa-f]{4}$/) fail()
+            position += 5
+            continue
+          }
+          if (escape != "\"" && escape != "\\" && escape != "/" && escape !~ /^[bfnrt]$/) fail()
+          position++
+          continue
+        }
+        if (character == "\"") { closed = 1; position++; break }
+        position++
+      }
+      if (!closed) fail()
+      suffix = trim(substr(line, position))
+      count++
+      if (suffix == ",") comma[count] = 1
+      else if (suffix == "") comma[count] = 0
+      else fail()
+    }
+    END {
+      if (invalid || state != 2 || count == 0) exit 1
+      for (i = 1; i < count; i++) if (!comma[i]) exit 1
+      if (comma[count]) exit 1
+    }
+  ' "$1"
+}
+
 yaml_frontmatter_value() {
   local file="$1" key="$2"
   [[ -f "$file" ]] || return 0
@@ -142,13 +380,27 @@ yaml_frontmatter_value() {
   ' "$file"
 }
 
+legacy_target_allowed() {
+  local candidate="$1" allowed_targets="$2"
+  [[ -n "$candidate" && -n "$allowed_targets" ]] || return 1
+  case ",$allowed_targets," in
+    *",$candidate,"*) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
 install_action() {
-  local target="$1" meta="$2" label="$3" expected_component="$4" expected_name="$5" expected_target="$6" legacy_identity="${7:-}" incoming_identity="${8:-}" expected_id="${9:-}" expected_adapter="${10:-}"
+  local target="$1" meta="$2" label="$3" expected_component="$4" expected_name="$5" expected_target="$6" legacy_identity="${7:-}" incoming_identity="${8:-}" expected_id="${9:-}" expected_adapter="${10:-}" legacy_targets="${11:-}"
   INSTALL_ACTION="install"
   EXISTING_INSTALLED_AT=""
-  [[ ! -e "$target" ]] && return
+  if [[ ! -e "$target" && ! -f "$meta" ]]; then return; fi
 
   if [[ -f "$meta" ]]; then
+    if ! validate_flat_metadata "$meta"; then
+      if [[ "$FORCE" -eq 1 ]]; then INSTALL_ACTION="force-replace"; return; fi
+      log_error "Refusing to replace '$label' because its Autoverse metadata is not a strict flat JSON object. Use --force to overwrite intentionally."
+      exit 1
+    fi
     local existing_repo existing_component existing_name existing_target existing_agent existing_id existing_adapter identity_matches
     existing_repo="$(json_string_value "$meta" "repo")"
     existing_component="$(json_string_value "$meta" "component")"
@@ -161,7 +413,11 @@ install_action() {
     identity_matches=1
     if [[ "$expected_component" == "agent" && ( -z "$expected_id" || "$existing_id" != "$expected_id" || -z "$expected_adapter" || "$existing_adapter" != "$expected_adapter" ) ]]; then identity_matches=0; fi
     if [[ "$existing_repo" == "$REPO" && "$existing_component" == "$expected_component" && "$existing_name" == "$expected_name" && "$existing_target" == "$expected_target" && "$identity_matches" -eq 1 ]]; then
-      INSTALL_ACTION="update"
+      if [[ -e "$target" ]]; then INSTALL_ACTION="update"; else INSTALL_ACTION="repair"; fi
+      return
+    fi
+    if [[ "$existing_repo" == "$REPO" && "$existing_component" == "$expected_component" && "$existing_name" == "$expected_name" && "$identity_matches" -eq 1 ]] && legacy_target_allowed "$existing_target" "$legacy_targets"; then
+      INSTALL_ACTION="migrate-update"
       return
     fi
     if [[ "$existing_repo" == "$REPO" && "$expected_component" == "skill" && -z "$existing_component" && -z "$existing_target" && "$existing_name" == "$expected_name" && "$existing_agent" == "$expected_target" ]]; then
@@ -202,22 +458,99 @@ install_action() {
 }
 
 assert_within_destination() {
+  local target="$1" root="${2%/}"
   case "$1" in
-    "$DEST_DIR"/*) ;;
-    *) log_error "Refusing to write outside install directory: $1"; exit 1 ;;
+    "$root"/*) ;;
+    *) log_error "Refusing to write outside install directory: $target"; exit 1 ;;
   esac
 }
 
+assert_regular_agent_leaf() {
+  local path="$1" label="$2"
+  if [[ -L "$path" || ( -e "$path" && ! -f "$path" ) ]]; then
+    log_error "Refusing to replace a non-regular or linked $label file: $path"
+    exit 1
+  fi
+}
+
+move_exact_no_clobber() {
+  local source="$1" destination="$2" checksum nested os_name
+  checksum="$(cksum < "$source")"
+  if mv --help 2>&1 | grep -q -- '--no-target-directory'; then
+    mv -nT "$source" "$destination" 2>/dev/null || true
+  else
+    os_name="$(uname -s 2>/dev/null || true)"
+    case "$os_name" in
+      Darwin|FreeBSD|NetBSD|OpenBSD) mv -n -h "$source" "$destination" 2>/dev/null || true ;;
+      *) mv -n "$source" "$destination" 2>/dev/null || true ;;
+    esac
+  fi
+  if [[ ! -e "$source" && ! -L "$source" && -f "$destination" && ! -L "$destination" ]] &&
+    [[ "$(cksum < "$destination")" == "$checksum" ]]; then
+    return 0
+  fi
+  if [[ -d "$destination" && ! -L "$destination" ]]; then
+    nested="$destination/${source##*/}"
+    if [[ -f "$nested" && ! -L "$nested" ]] && [[ "$(cksum < "$nested")" == "$checksum" ]]; then
+      rm -f "$nested"
+    fi
+  fi
+  return 1
+}
+
+move_exact_replace() {
+  local source="$1" destination="$2" checksum nested os_name
+  checksum="$(cksum < "$source")"
+  if mv --help 2>&1 | grep -q -- '--no-target-directory'; then
+    mv -fT "$source" "$destination" 2>/dev/null || true
+  else
+    os_name="$(uname -s 2>/dev/null || true)"
+    case "$os_name" in
+      Darwin|FreeBSD|NetBSD|OpenBSD) mv -f -h "$source" "$destination" 2>/dev/null || true ;;
+      *) mv -f "$source" "$destination" 2>/dev/null || true ;;
+    esac
+  fi
+  if [[ ! -e "$source" && ! -L "$source" && -f "$destination" && ! -L "$destination" ]] &&
+    [[ "$(cksum < "$destination")" == "$checksum" ]]; then
+    return 0
+  fi
+  if [[ -d "$destination" && ! -L "$destination" ]]; then
+    nested="$destination/${source##*/}"
+    if [[ -f "$nested" && ! -L "$nested" ]] && [[ "$(cksum < "$nested")" == "$checksum" ]]; then
+      rm -f "$nested"
+    fi
+  fi
+  return 1
+}
+
+install_staged_exact() {
+  local staged="$1" destination="$2" label="$3" destination_existed="$4"
+  assert_regular_agent_leaf "$destination" "$label"
+  if [[ "$destination_existed" -eq 1 ]]; then
+    if [[ ! -f "$destination" || -L "$destination" ]]; then
+      log_error "Refusing to replace $label because its existing destination changed: $destination"
+      return 1
+    fi
+    if ! move_exact_replace "$staged" "$destination"; then
+      log_error "Could not atomically replace and verify the exact $label destination: $destination"
+      return 1
+    fi
+  elif ! move_exact_no_clobber "$staged" "$destination"; then
+    log_error "Refusing to install $label because the exact destination was occupied or changed: $destination"
+    return 1
+  fi
+}
+
 install_skill() {
-  local src="$1" name target meta now installed_at
+  local src="$1" destination_root="$2" ownership_target="$3" legacy_targets="${4:-}" name target meta now installed_at
   name="$(basename "$src")"
-  target="$DEST_DIR/$name"
+  target="${destination_root%/}/$name"
   meta="$target/.skill-meta.json"
-  assert_within_destination "$target"
-  install_action "$target" "$meta" "$name" "skill" "$name" "$TARGET" "$target/SKILL.md" "$src/SKILL.md"
+  assert_within_destination "$target" "$destination_root"
+  install_action "$target" "$meta" "$name" "skill" "$name" "$ownership_target" "$target/SKILL.md" "$src/SKILL.md" "" "" "$legacy_targets"
   if [[ "$DRY_RUN" -eq 1 ]]; then printf 'DRY-RUN %s Skill %s -> %s\n' "$INSTALL_ACTION" "$name" "$target"; return; fi
 
-  mkdir -p "$DEST_DIR"
+  mkdir -p "$destination_root"
   rm -rf "$target"
   cp -R "$src" "$target"
   now="$(date -u '+%Y-%m-%dT%H:%M:%SZ')"
@@ -229,7 +562,7 @@ install_skill() {
   "branch": "$BRANCH",
   "component": "skill",
   "name": "$name",
-  "target": "$TARGET",
+  "target": "$ownership_target",
   "installedAt": "$installed_at",
   "updatedAt": "$now"
 }
@@ -237,20 +570,40 @@ EOF
   log_success "$INSTALL_ACTION Skill $name -> $target"
 }
 
+preflight_skill() {
+  local src="$1" destination_root="$2" ownership_target="$3" legacy_targets="${4:-}" name target meta
+  name="$(basename "$src")"
+  target="${destination_root%/}/$name"
+  meta="$target/.skill-meta.json"
+  assert_within_destination "$target" "$destination_root"
+  install_action "$target" "$meta" "$name" "skill" "$name" "$ownership_target" "$target/SKILL.md" "$src/SKILL.md" "" "" "$legacy_targets"
+}
+
 install_agent_profile() {
-  local src="$1" runtime_name="$2" agent_id="$3" platform="$4" extension target meta now installed_at
-  extension=".${src##*.}"
-  target="$DEST_DIR/$runtime_name$extension"
+  local src="$1" runtime_name="$2" agent_id="$3" platform="$4" destination_root="$5" ownership_target="$6" suffix="$7" legacy_targets="${8:-}" target meta now installed_at staged_agent staged_meta target_existed meta_existed
+  target="${destination_root%/}/$runtime_name$suffix"
   meta="$target.autoverse.json"
-  assert_within_destination "$target"
-  install_action "$target" "$meta" "$agent_id" "agent" "$runtime_name" "$TARGET" "" "" "$agent_id" "$platform"
+  assert_within_destination "$target" "$destination_root"
+  assert_regular_agent_leaf "$target" "Agent"
+  assert_regular_agent_leaf "$meta" "Agent metadata"
+  install_action "$target" "$meta" "$agent_id" "agent" "$runtime_name" "$ownership_target" "" "" "$agent_id" "$platform" "$legacy_targets"
+  target_existed=0
+  meta_existed=0
+  if [[ -f "$target" ]]; then target_existed=1; fi
+  if [[ -f "$meta" ]]; then meta_existed=1; fi
   if [[ "$DRY_RUN" -eq 1 ]]; then printf 'DRY-RUN %s Agent %s -> %s\n' "$INSTALL_ACTION" "$agent_id" "$target"; return; fi
 
-  mkdir -p "$DEST_DIR"
-  cp "$src" "$target"
+  mkdir -p "$destination_root"
   now="$(date -u '+%Y-%m-%dT%H:%M:%SZ')"
   installed_at="${EXISTING_INSTALLED_AT:-$now}"
-  cat > "$meta" <<EOF
+  staged_agent="$(mktemp "$destination_root/.autoverse-agent.XXXXXXXX")"
+  staged_meta="$(mktemp "$destination_root/.autoverse-agent-meta.XXXXXXXX")"
+  if ! cp "$src" "$staged_agent"; then
+    rm -f "$staged_agent" "$staged_meta"
+    log_error "Could not stage Agent $agent_id."
+    exit 1
+  fi
+  if ! cat > "$staged_meta" <<EOF
 {
   "source": "$SOURCE_KIND",
   "repo": "$REPO",
@@ -259,37 +612,767 @@ install_agent_profile() {
   "id": "$agent_id",
   "name": "$runtime_name",
   "adapter": "$platform",
-  "target": "$TARGET",
+  "target": "$ownership_target",
   "installedAt": "$installed_at",
   "updatedAt": "$now"
 }
 EOF
+  then
+    rm -f "$staged_agent" "$staged_meta"
+    log_error "Could not stage Agent metadata for $agent_id."
+    exit 1
+  fi
+  assert_regular_agent_leaf "$target" "Agent"
+  assert_regular_agent_leaf "$meta" "Agent metadata"
+  if [[ "$target_existed" -eq 1 ]]; then
+    if ! install_staged_exact "$staged_agent" "$target" "Agent" "$target_existed"; then
+      rm -f "$staged_agent" "$staged_meta"
+      log_error "Could not install Agent $agent_id."
+      exit 1
+    fi
+    staged_agent=""
+    if ! install_staged_exact "$staged_meta" "$meta" "Agent metadata" "$meta_existed"; then
+      rm -f "$staged_meta"
+      log_error "Agent $agent_id was updated, but its ownership metadata could not be refreshed."
+      exit 1
+    fi
+  else
+    if ! install_staged_exact "$staged_meta" "$meta" "Agent metadata" "$meta_existed"; then
+      rm -f "$staged_agent" "$staged_meta"
+      log_error "Could not install Agent metadata for $agent_id."
+      exit 1
+    fi
+    staged_meta=""
+    if ! install_staged_exact "$staged_agent" "$target" "Agent" "$target_existed"; then
+      rm -f "$staged_agent"
+      log_error "Could not install Agent $agent_id; its owned sidecar remains available for a safe repair run."
+      exit 1
+    fi
+  fi
   log_success "$INSTALL_ACTION Agent $agent_id -> $target"
 }
 
 preflight_agent_profile() {
-  local src="$1" runtime_name="$2" agent_id="$3" platform="$4" extension target meta
-  extension=".${src##*.}"
-  target="$DEST_DIR/$runtime_name$extension"
+  local src="$1" runtime_name="$2" agent_id="$3" platform="$4" destination_root="$5" ownership_target="$6" suffix="$7" legacy_targets="${8:-}" target meta
+  target="${destination_root%/}/$runtime_name$suffix"
   meta="$target.autoverse.json"
-  assert_within_destination "$target"
-  install_action "$target" "$meta" "$agent_id" "agent" "$runtime_name" "$TARGET" "" "" "$agent_id" "$platform"
+  assert_within_destination "$target" "$destination_root"
+  assert_regular_agent_leaf "$target" "Agent"
+  assert_regular_agent_leaf "$meta" "Agent metadata"
+  install_action "$target" "$meta" "$agent_id" "agent" "$runtime_name" "$ownership_target" "" "" "$agent_id" "$platform" "$legacy_targets"
+}
+
+has_codex_developer_instructions_conflict() {
+  local file="$1" key
+  key="(developer_instructions|\"developer_instructions\"|'developer_instructions')"
+  if grep -Eq "^[[:space:]]*${key}([[:space:]]*=|[[:space:]]*\.)" "$file" ||
+    grep -Eq "^[[:space:]]*\[{1,2}[[:space:]]*${key}([[:space:]]*\.|[[:space:]]*\])" "$file"; then
+    return 0
+  fi
+  awk '
+    function trim(value) {
+      sub(/^[ \t]+/, "", value)
+      sub(/[ \t]+$/, "", value)
+      return value
+    }
+    function hex_to_decimal(hex, result, i, position) {
+      result = 0
+      hex = tolower(hex)
+      for (i = 1; i <= length(hex); i++) {
+        position = index("0123456789abcdef", substr(hex, i, 1)) - 1
+        if (position < 0) return -1
+        result = result * 16 + position
+      }
+      return result
+    }
+    function decode_basic_key(body, output, i, character, escape, width, hex, code) {
+      output = ""
+      for (i = 1; i <= length(body); i++) {
+        character = substr(body, i, 1)
+        if (character != "\\") { output = output character; continue }
+        i++
+        if (i > length(body)) return "__invalid__"
+        escape = substr(body, i, 1)
+        if (escape == "u" || escape == "U") {
+          width = escape == "u" ? 4 : 8
+          hex = substr(body, i + 1, width)
+          if (length(hex) != width) return "__invalid__"
+          code = hex_to_decimal(hex)
+          if (code < 0 || code > 127) return "__non_ascii__"
+          output = output sprintf("%c", code)
+          i += width
+        } else if (escape == "\"" || escape == "\\") {
+          output = output escape
+        } else {
+          return "__invalid__"
+        }
+      }
+      return output
+    }
+    {
+      line = $0
+      sub(/\r$/, "", line)
+      line = trim(line)
+      if (substr(line, 1, 2) == "[[") line = trim(substr(line, 3))
+      else if (substr(line, 1, 1) == "[") line = trim(substr(line, 2))
+      if (substr(line, 1, 1) != "\"") next
+      escaped = 0
+      closing = 0
+      for (i = 2; i <= length(line); i++) {
+        character = substr(line, i, 1)
+        if (escaped) { escaped = 0; continue }
+        if (character == "\\") { escaped = 1; continue }
+        if (character == "\"") { closing = i; break }
+      }
+      if (!closing) next
+      suffix = trim(substr(line, closing + 1))
+      if (substr(suffix, 1, 1) != "=" && substr(suffix, 1, 1) != "." && substr(suffix, 1, 1) != "]") next
+      body = substr(line, 2, closing - 2)
+      if (decode_basic_key(body) == "developer_instructions") { found = 1; exit }
+    }
+    END { exit(found ? 0 : 1) }
+  ' "$file"
+}
+
+plan_codex_auto_delegation() {
+  local guidance_file="$1" config_path start_count end_count end_line block_file remainder_file second_line closing_line literal_close_count bom
+  config_path="${CODEX_HOME:-$HOME/.codex}/config.toml"
+  AUTO_SIBLING_PATH=""
+  if [[ -e "$config_path" || -L "$config_path" ]]; then
+    if [[ -L "$config_path" || ! -f "$config_path" ]]; then
+      log_error "Refusing to replace a non-regular or linked Codex config: $config_path"
+      exit 1
+    fi
+  fi
+  block_file="$AUTO_PLAN_DIR/codex-block.toml"
+  {
+    printf '# AUTOVERSE_AUTO_DELEGATION_START\n'
+    printf "developer_instructions = '''\n"
+    cat "$guidance_file"
+    printf "\n'''\n"
+    printf '# AUTOVERSE_AUTO_DELEGATION_END\n'
+  } > "$block_file"
+
+  AUTO_RUNTIME="Codex"
+  AUTO_CONFIG_PATH="$config_path"
+  AUTO_NEW_TEXT="$AUTO_PLAN_DIR/codex-config.toml"
+  AUTO_ORIGINAL_FILE=""
+  AUTO_EXISTING=0
+  if [[ ! -f "$config_path" ]]; then
+    cp "$block_file" "$AUTO_NEW_TEXT"
+    AUTO_ACTION="install"
+    return
+  fi
+
+  AUTO_EXISTING=1
+  AUTO_ORIGINAL_FILE="$AUTO_PLAN_DIR/codex-original.toml"
+  cp -p "$config_path" "$AUTO_ORIGINAL_FILE"
+  bom="$(LC_ALL=C head -c 3 "$AUTO_ORIGINAL_FILE" | od -An -t x1 | tr -d '[:space:]')"
+  if [[ "$bom" == "efbbbf" ]]; then
+    log_error "Refusing to rewrite BOM-prefixed Codex config $config_path. Remove the BOM or merge the guidance manually."
+    exit 1
+  fi
+  start_count="$(grep -c '^# AUTOVERSE_AUTO_DELEGATION_START[[:space:]]*$' "$AUTO_ORIGINAL_FILE" || true)"
+  end_count="$(grep -c '^# AUTOVERSE_AUTO_DELEGATION_END[[:space:]]*$' "$AUTO_ORIGINAL_FILE" || true)"
+  if [[ "$start_count" -ne "$end_count" || "$start_count" -gt 1 ]]; then
+    log_error "Refusing to edit $config_path because its Autoverse auto-delegation markers are incomplete or duplicated."
+    exit 1
+  fi
+  if [[ "$start_count" -eq 1 && "$(head -n 1 "$AUTO_ORIGINAL_FILE" | tr -d '\r')" != "# AUTOVERSE_AUTO_DELEGATION_START" ]]; then
+    log_error "Refusing to edit $config_path because the Autoverse marker is not a managed block at the start of the file."
+    exit 1
+  fi
+
+  if [[ "$start_count" -eq 1 ]]; then
+    end_line="$(grep -n '^# AUTOVERSE_AUTO_DELEGATION_END[[:space:]]*$' "$AUTO_ORIGINAL_FILE" | cut -d: -f1)"
+    second_line="$(sed -n '2p' "$AUTO_ORIGINAL_FILE" | tr -d '\r')"
+    closing_line=""
+    if [[ "$end_line" -gt 1 ]]; then closing_line="$(sed -n "$((end_line - 1))p" "$AUTO_ORIGINAL_FILE" | tr -d '\r')"; fi
+    literal_close_count=0
+    if [[ "$end_line" -gt 2 ]]; then
+      literal_close_count="$(sed -n "3,$((end_line - 1))p" "$AUTO_ORIGINAL_FILE" | tr -d '\r' | grep -c "^'''[[:space:]]*$" || true)"
+    fi
+    if [[ "$end_line" -lt 4 || "$second_line" != "developer_instructions = '''" || "$closing_line" != "'''" || "$literal_close_count" -ne 1 ]]; then
+      log_error "Refusing to edit $config_path because its Autoverse managed block has an unexpected structure."
+      exit 1
+    fi
+    remainder_file="$AUTO_PLAN_DIR/codex-remainder.toml"
+    tail -n "+$((end_line + 1))" "$AUTO_ORIGINAL_FILE" > "$remainder_file"
+    if has_codex_developer_instructions_conflict "$remainder_file"; then
+      log_error "Refusing to edit $config_path because it also defines developer_instructions outside the Autoverse managed block. Merge the guidance manually."
+      exit 1
+    fi
+    {
+      cat "$block_file"
+      cat "$remainder_file"
+    } > "$AUTO_NEW_TEXT"
+  else
+    if has_codex_developer_instructions_conflict "$AUTO_ORIGINAL_FILE"; then
+      log_error "Refusing to edit $config_path because it already defines developer_instructions outside the Autoverse managed block. Merge the guidance manually."
+      exit 1
+    fi
+    {
+      cat "$block_file"
+      printf '\n'
+      cat "$AUTO_ORIGINAL_FILE"
+    } > "$AUTO_NEW_TEXT"
+  fi
+  if cmp -s "$AUTO_ORIGINAL_FILE" "$AUTO_NEW_TEXT"; then AUTO_ACTION="unchanged"; else AUTO_ACTION="update"; fi
+}
+
+merge_opencode_config_with_python() {
+  local python_command="$1" config_path="$2" instruction_path="$3" output_path="$4"
+  local -a python_runner
+  if [[ "$python_command" == "py" ]]; then
+    python_runner=("$python_command" -3)
+  else
+    python_runner=("$python_command")
+  fi
+  "${python_runner[@]}" - "$config_path" "$instruction_path" "$output_path" <<'PY'
+import codecs
+import json
+import shutil
+import sys
+from decimal import Decimal
+
+config_path, instruction_path, output_path = sys.argv[1:]
+
+def reject_constant(value):
+    raise ValueError(f"non-standard JSON constant: {value}")
+
+def unique_object(pairs):
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError(f"duplicate JSON key: {key}")
+        result[key] = value
+    return result
+
+try:
+    with open(config_path, "rb") as handle:
+        raw = handle.read()
+    has_bom = raw.startswith(codecs.BOM_UTF8)
+    text = raw.decode("utf-8-sig")
+    decoder = json.JSONDecoder(
+        parse_float=Decimal,
+        parse_constant=reject_constant,
+        object_pairs_hook=unique_object,
+    )
+    config = decoder.decode(text)
+except Exception as exc:
+    print(f"OpenCode config is not strict JSON: {exc}", file=sys.stderr)
+    raise SystemExit(4)
+
+if not isinstance(config, dict):
+    print("OpenCode config must contain a JSON object.", file=sys.stderr)
+    raise SystemExit(4)
+for key in config:
+    if key.casefold() == "instructions" and key != "instructions":
+        print("OpenCode config contains a case-conflicting Instructions key.", file=sys.stderr)
+        raise SystemExit(4)
+instructions = config.get("instructions", [])
+if not isinstance(instructions, list) or any(not isinstance(item, str) for item in instructions):
+    print("OpenCode instructions must be an array of strings.", file=sys.stderr)
+    raise SystemExit(4)
+
+normalize = lambda value: value.replace("\\", "/")
+if any(normalize(item) == normalize(instruction_path) for item in instructions):
+    shutil.copyfile(config_path, output_path)
+    raise SystemExit(3)
+
+def skip_whitespace(index):
+    while index < len(text) and text[index] in " \t\r\n":
+        index += 1
+    return index
+
+try:
+    index = skip_whitespace(0)
+    if index >= len(text) or text[index] != "{":
+        raise ValueError("root is not an object")
+    root_open = index
+    index = skip_whitespace(index + 1)
+    has_properties = False
+    last_value_end = None
+    instructions_array_end = None
+    if index < len(text) and text[index] != "}":
+        while True:
+            key, key_end = decoder.raw_decode(text, index)
+            if not isinstance(key, str):
+                raise ValueError("object key is not a string")
+            index = skip_whitespace(key_end)
+            if index >= len(text) or text[index] != ":":
+                raise ValueError("missing colon after object key")
+            value_start = skip_whitespace(index + 1)
+            _, value_end = decoder.raw_decode(text, value_start)
+            if key == "instructions":
+                if text[value_start] != "[" or text[value_end - 1] != "]":
+                    raise ValueError("instructions is not an array")
+                instructions_array_end = value_end - 1
+            has_properties = True
+            last_value_end = value_end
+            index = skip_whitespace(value_end)
+            if index < len(text) and text[index] == ",":
+                index = skip_whitespace(index + 1)
+                continue
+            break
+    if index >= len(text) or text[index] != "}":
+        raise ValueError("missing root object terminator")
+    root_close = index
+    if skip_whitespace(root_close + 1) != len(text):
+        raise ValueError("unexpected content after root object")
+except Exception as exc:
+    print(f"Could not locate the OpenCode config layout: {exc}", file=sys.stderr)
+    raise SystemExit(4)
+
+newline = "\r\n" if "\r\n" in text else "\n"
+encoded_path = json.dumps(instruction_path, ensure_ascii=False)
+if instructions_array_end is not None:
+    separator = "," if instructions else ""
+    insertion = separator + newline + "    " + encoded_path + newline + "  "
+    new_text = text[:instructions_array_end] + insertion + text[instructions_array_end:]
+else:
+    insertion_index = last_value_end if has_properties else root_open + 1
+    separator = "," if has_properties else ""
+    insertion = separator + newline + '  "instructions": [' + newline + "    " + encoded_path + newline + "  ]"
+    new_text = text[:insertion_index] + insertion + text[insertion_index:]
+
+with open(output_path, "wb") as handle:
+    if has_bom:
+        handle.write(codecs.BOM_UTF8)
+    handle.write(new_text.encode("utf-8"))
+PY
+}
+
+merge_opencode_config_with_node() {
+  local node_command="$1" config_path="$2" instruction_path="$3" output_path="$4"
+  "$node_command" - "$config_path" "$instruction_path" "$output_path" <<'JS'
+const fs = require("fs");
+const { TextDecoder } = require("util");
+
+const [configPath, instructionPath, outputPath] = process.argv.slice(2);
+const raw = fs.readFileSync(configPath);
+const hasBom = raw.length >= 3 && raw[0] === 0xef && raw[1] === 0xbb && raw[2] === 0xbf;
+let text;
+try {
+  text = new TextDecoder("utf-8", { fatal: true, ignoreBOM: true }).decode(hasBom ? raw.subarray(3) : raw);
+} catch (error) {
+  console.error(`OpenCode config is not valid UTF-8: ${error.message}`);
+  process.exit(4);
+}
+
+let index = 0;
+const layout = {
+  rootOpen: -1,
+  rootClose: -1,
+  hasProperties: false,
+  lastValueEnd: -1,
+  instructionsArrayEnd: -1,
+};
+
+function fail(message) {
+  throw new Error(message);
+}
+
+function skipWhitespace() {
+  while (index < text.length && /[ \t\r\n]/.test(text[index])) index += 1;
+}
+
+function parseString() {
+  if (text[index] !== '"') fail("expected a JSON string");
+  const start = index++;
+  while (index < text.length) {
+    const code = text.charCodeAt(index);
+    const character = text[index++];
+    if (character === '"') {
+      const source = text.slice(start, index);
+      return { value: JSON.parse(source), start, end: index, type: "string" };
+    }
+    if (code < 0x20) fail("unescaped control character in JSON string");
+    if (character !== "\\") continue;
+    if (index >= text.length) fail("unfinished JSON escape");
+    const escape = text[index++];
+    if ('"\\/bfnrt'.includes(escape)) continue;
+    if (escape !== "u" || !/^[0-9a-fA-F]{4}$/.test(text.slice(index, index + 4))) {
+      fail("invalid JSON escape");
+    }
+    index += 4;
+  }
+  fail("unterminated JSON string");
+}
+
+function parseNumber() {
+  const start = index;
+  const match = /^-?(?:0|[1-9][0-9]*)(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?/.exec(text.slice(index));
+  if (!match) fail("invalid JSON number");
+  index += match[0].length;
+  if (index < text.length && !/[ \t\r\n,\]}]/.test(text[index])) fail("invalid JSON number terminator");
+  return { start, end: index, type: "number" };
+}
+
+function parseLiteral(literal, type) {
+  const start = index;
+  if (text.slice(index, index + literal.length) !== literal) fail(`invalid JSON ${type}`);
+  index += literal.length;
+  return { start, end: index, type };
+}
+
+function parseArray(depth) {
+  const start = index++;
+  let count = 0;
+  skipWhitespace();
+  if (text[index] === "]") return { start, end: ++index, type: "array", count };
+  while (true) {
+    parseValue(depth + 1);
+    count += 1;
+    skipWhitespace();
+    if (text[index] === "]") return { start, end: ++index, type: "array", count };
+    if (text[index] !== ",") fail("expected a comma in JSON array");
+    index += 1;
+    skipWhitespace();
+  }
+}
+
+function parseObject(depth) {
+  const start = index++;
+  const keys = new Set();
+  skipWhitespace();
+  if (text[index] === "}") {
+    index += 1;
+    if (depth === 0) {
+      layout.rootOpen = start;
+      layout.rootClose = index - 1;
+    }
+    return { start, end: index, type: "object" };
+  }
+  while (true) {
+    const key = parseString();
+    if (keys.has(key.value)) fail(`duplicate JSON key: ${key.value}`);
+    keys.add(key.value);
+    if (depth === 0 && key.value.toLowerCase() === "instructions" && key.value !== "instructions") {
+      fail("case-conflicting Instructions key");
+    }
+    skipWhitespace();
+    if (text[index] !== ":") fail("expected a colon after JSON object key");
+    index += 1;
+    skipWhitespace();
+    const value = parseValue(depth + 1);
+    if (depth === 0) {
+      layout.rootOpen = start;
+      layout.hasProperties = true;
+      layout.lastValueEnd = value.end;
+      if (key.value === "instructions") {
+        if (value.type !== "array") fail("instructions is not an array");
+        layout.instructionsArrayEnd = value.end - 1;
+      }
+    }
+    skipWhitespace();
+    if (text[index] === "}") {
+      index += 1;
+      if (depth === 0) layout.rootClose = index - 1;
+      return { start, end: index, type: "object" };
+    }
+    if (text[index] !== ",") fail("expected a comma in JSON object");
+    index += 1;
+    skipWhitespace();
+  }
+}
+
+function parseValue(depth) {
+  if (index >= text.length) fail("unexpected end of JSON input");
+  if (text[index] === "{") return parseObject(depth);
+  if (text[index] === "[") return parseArray(depth);
+  if (text[index] === '"') return parseString();
+  if (text[index] === "t") return parseLiteral("true", "boolean");
+  if (text[index] === "f") return parseLiteral("false", "boolean");
+  if (text[index] === "n") return parseLiteral("null", "null");
+  if (text[index] === "-" || /[0-9]/.test(text[index])) return parseNumber();
+  fail("invalid JSON value");
+}
+
+let config;
+try {
+  skipWhitespace();
+  const root = parseValue(0);
+  skipWhitespace();
+  if (index !== text.length) fail("unexpected content after root JSON value");
+  if (root.type !== "object") fail("OpenCode config root is not an object");
+  config = JSON.parse(text);
+} catch (error) {
+  console.error(`OpenCode config is not strict JSON: ${error.message}`);
+  process.exit(4);
+}
+
+const instructions = config.instructions ?? [];
+if (!Array.isArray(instructions) || instructions.some((item) => typeof item !== "string")) {
+  console.error("OpenCode instructions must be an array of strings.");
+  process.exit(4);
+}
+const normalize = (value) => value.replaceAll("\\", "/");
+if (instructions.some((item) => normalize(item) === normalize(instructionPath))) {
+  fs.copyFileSync(configPath, outputPath);
+  process.exit(3);
+}
+
+const newline = text.includes("\r\n") ? "\r\n" : "\n";
+const encodedPath = JSON.stringify(instructionPath);
+let newText;
+if (layout.instructionsArrayEnd >= 0) {
+  const separator = instructions.length > 0 ? "," : "";
+  const insertion = separator + newline + "    " + encodedPath + newline + "  ";
+  newText = text.slice(0, layout.instructionsArrayEnd) + insertion + text.slice(layout.instructionsArrayEnd);
+} else {
+  const insertionIndex = layout.hasProperties ? layout.lastValueEnd : layout.rootOpen + 1;
+  const separator = layout.hasProperties ? "," : "";
+  const insertion = separator + newline + '  "instructions": [' + newline + "    " + encodedPath + newline + "  ]";
+  newText = text.slice(0, insertionIndex) + insertion + text.slice(insertionIndex);
+}
+const output = Buffer.from(newText, "utf8");
+fs.writeFileSync(outputPath, hasBom ? Buffer.concat([Buffer.from([0xef, 0xbb, 0xbf]), output]) : output);
+JS
+}
+
+plan_opencode_auto_delegation() {
+  local instruction_path="$1" config_root json_path jsonc_path escaped_path minimal_path parser_command parser_kind status
+  config_root="$(opencode_config_root)"
+  if LC_ALL=C printf '%s' "$instruction_path" | grep -q '[[:cntrl:]]'; then
+    log_error "Refusing to write an OpenCode instruction path containing control characters."
+    exit 1
+  fi
+  json_path="$config_root/opencode.json"
+  jsonc_path="$config_root/opencode.jsonc"
+  AUTO_SIBLING_PATH="$jsonc_path"
+  for candidate in "$json_path" "$jsonc_path"; do
+    if [[ -e "$candidate" || -L "$candidate" ]]; then
+      if [[ -L "$candidate" || ! -f "$candidate" ]]; then
+        log_error "Refusing to replace a non-regular or linked OpenCode config: $candidate"
+        exit 1
+      fi
+    fi
+  done
+  if [[ -f "$json_path" && -f "$jsonc_path" ]]; then
+    log_error "Refusing to edit OpenCode config because both opencode.json and opencode.jsonc exist in $config_root. Add the instruction path manually."
+    exit 1
+  fi
+  if [[ -f "$jsonc_path" ]]; then
+    log_error "Refusing to rewrite JSONC config $jsonc_path. Add '$instruction_path' to its instructions array manually."
+    exit 1
+  fi
+
+  AUTO_RUNTIME="OpenCode"
+  AUTO_CONFIG_PATH="$json_path"
+  AUTO_NEW_TEXT="$AUTO_PLAN_DIR/opencode.json"
+  AUTO_ORIGINAL_FILE=""
+  AUTO_EXISTING=0
+  if [[ ! -f "$json_path" ]]; then
+    escaped_path="$(printf '%s' "$instruction_path" | sed 's/\\/\\\\/g; s/"/\\"/g')"
+    printf '{\n  "$schema": "https://opencode.ai/config.json",\n  "instructions": [\n    "%s"\n  ]\n}\n' "$escaped_path" > "$AUTO_NEW_TEXT"
+    AUTO_ACTION="install"
+    return
+  fi
+
+  AUTO_EXISTING=1
+  AUTO_ORIGINAL_FILE="$AUTO_PLAN_DIR/opencode-original.json"
+  cp -p "$json_path" "$AUTO_ORIGINAL_FILE"
+  escaped_path="$(printf '%s' "$instruction_path" | sed 's/\\/\\\\/g; s/"/\\"/g')"
+  minimal_path="$AUTO_PLAN_DIR/opencode-minimal.json"
+  printf '{\n  "$schema": "https://opencode.ai/config.json",\n  "instructions": [\n    "%s"\n  ]\n}\n' "$escaped_path" > "$minimal_path"
+  if cmp -s "$AUTO_ORIGINAL_FILE" "$minimal_path"; then
+    cp "$AUTO_ORIGINAL_FILE" "$AUTO_NEW_TEXT"
+    AUTO_ACTION="unchanged"
+    return
+  fi
+  parser_command=""
+  parser_kind=""
+  if command -v python3 >/dev/null 2>&1 && python3 -c 'import sys; raise SystemExit(0 if sys.version_info.major == 3 else 1)' >/dev/null 2>&1; then
+    parser_command="python3"; parser_kind="python"
+  elif command -v python >/dev/null 2>&1 && python -c 'import sys; raise SystemExit(0 if sys.version_info.major == 3 else 1)' >/dev/null 2>&1; then
+    parser_command="python"; parser_kind="python"
+  elif command -v py >/dev/null 2>&1 && py -3 -c 'import sys; raise SystemExit(0 if sys.version_info.major == 3 else 1)' >/dev/null 2>&1; then
+    parser_command="py"; parser_kind="python"
+  elif command -v node >/dev/null 2>&1; then
+    parser_command="node"; parser_kind="node"
+  fi
+  if [[ -z "$parser_command" ]]; then
+    log_error "Refusing to rewrite existing OpenCode config $json_path without Python 3 or Node.js for strict JSON validation. Add '$instruction_path' to its instructions array manually."
+    exit 1
+  fi
+
+  set +e
+  if [[ "$parser_kind" == "python" ]]; then
+    merge_opencode_config_with_python "$parser_command" "$AUTO_ORIGINAL_FILE" "$instruction_path" "$AUTO_NEW_TEXT"
+  else
+    merge_opencode_config_with_node "$parser_command" "$AUTO_ORIGINAL_FILE" "$instruction_path" "$AUTO_NEW_TEXT"
+  fi
+  status=$?
+  set -e
+  case "$status" in
+    0) AUTO_ACTION="update" ;;
+    3) AUTO_ACTION="unchanged" ;;
+    *) log_error "Refusing to rewrite OpenCode config $json_path. Add '$instruction_path' to its instructions array manually."; exit 1 ;;
+  esac
+}
+
+restore_captured_config() {
+  local backup="${AUTO_CAPTURED_BACKUP:-}" destination="${AUTO_CAPTURED_PATH:-}" staged_checksum="${AUTO_STAGED_CHECKSUM:-}" current_checksum
+  if [[ -z "$backup" || -z "$destination" ]]; then return 0; fi
+  if [[ ! -f "$backup" || -L "$backup" ]]; then
+    log_error "Could not restore $destination because its captured backup is missing or no longer a regular file: $backup"
+    return 1
+  fi
+
+  if [[ ! -e "$destination" && ! -L "$destination" ]]; then
+    if move_exact_no_clobber "$backup" "$destination"; then
+      AUTO_CAPTURED_BACKUP="" AUTO_CAPTURED_PATH="" AUTO_STAGED_CHECKSUM=""
+      log_info "Restored config after incomplete installation: $destination"
+      return 0
+    fi
+  elif [[ -f "$destination" && ! -L "$destination" && -n "$staged_checksum" ]]; then
+    current_checksum="$(cksum < "$destination" 2>/dev/null || true)"
+    if [[ "$current_checksum" == "$staged_checksum" ]] && move_exact_replace "$backup" "$destination"; then
+      AUTO_CAPTURED_BACKUP="" AUTO_CAPTURED_PATH="" AUTO_STAGED_CHECKSUM=""
+      log_info "Restored config after incomplete installation: $destination"
+      return 0
+    fi
+  fi
+
+  log_error "Could not safely restore $destination because the destination is occupied or changed. The captured config remains at $backup."
+  return 1
+}
+
+apply_auto_delegation_plan() {
+  local parent staged backup
+  if [[ -n "$AUTO_SIBLING_PATH" && ( -e "$AUTO_SIBLING_PATH" || -L "$AUTO_SIBLING_PATH" ) ]]; then
+    log_error "Refusing to apply OpenCode auto-delegation because a sibling config appeared: $AUTO_SIBLING_PATH"
+    exit 1
+  fi
+  if [[ "$AUTO_ACTION" == "unchanged" ]]; then
+    if [[ "$AUTO_EXISTING" -eq 1 ]]; then
+      if [[ -L "$AUTO_CONFIG_PATH" || ! -f "$AUTO_CONFIG_PATH" || ! -f "$AUTO_ORIGINAL_FILE" ]] || ! cmp -s "$AUTO_CONFIG_PATH" "$AUTO_ORIGINAL_FILE"; then
+        log_error "Refusing to confirm $AUTO_CONFIG_PATH because it changed after installation planning. Run the installer again."
+        exit 1
+      fi
+    elif [[ -e "$AUTO_CONFIG_PATH" || -L "$AUTO_CONFIG_PATH" ]]; then
+      log_error "Refusing to confirm $AUTO_CONFIG_PATH because it appeared after installation planning. Run the installer again."
+      exit 1
+    fi
+    log_success "Auto-delegation already enabled for $AUTO_RUNTIME: $AUTO_CONFIG_PATH"
+    return
+  fi
+  if [[ "$DRY_RUN" -eq 1 ]]; then
+    printf 'DRY-RUN %s %s auto-delegation -> %s\n' "$AUTO_ACTION" "$AUTO_RUNTIME" "$AUTO_CONFIG_PATH"
+    return
+  fi
+
+  if [[ "$AUTO_EXISTING" -eq 1 ]]; then
+    if [[ -L "$AUTO_CONFIG_PATH" || ! -f "$AUTO_CONFIG_PATH" || ! -f "$AUTO_ORIGINAL_FILE" ]] || ! cmp -s "$AUTO_CONFIG_PATH" "$AUTO_ORIGINAL_FILE"; then
+      log_error "Refusing to replace $AUTO_CONFIG_PATH because it changed after installation planning. Run the installer again."
+      exit 1
+    fi
+  elif [[ -e "$AUTO_CONFIG_PATH" || -L "$AUTO_CONFIG_PATH" ]]; then
+    log_error "Refusing to create $AUTO_CONFIG_PATH because it appeared after installation planning. Run the installer again."
+    exit 1
+  fi
+
+  parent="$(dirname "$AUTO_CONFIG_PATH")"
+  mkdir -p "$parent"
+  staged="$(mktemp "$parent/.autoverse-config.XXXXXXXX")"
+  AUTO_STAGED="$staged"
+  cat "$AUTO_NEW_TEXT" > "$staged"
+  AUTO_STAGED_CHECKSUM="$(cksum < "$staged")"
+  if [[ "$AUTO_EXISTING" -eq 1 ]]; then
+    if [[ -L "$AUTO_CONFIG_PATH" || ! -f "$AUTO_CONFIG_PATH" ]] || ! cmp -s "$AUTO_CONFIG_PATH" "$AUTO_ORIGINAL_FILE"; then
+      log_error "Refusing to replace $AUTO_CONFIG_PATH because it changed after installation planning. Run the installer again."
+      exit 1
+    fi
+    backup="$(mktemp "$AUTO_CONFIG_PATH.autoverse-backup-XXXXXXXX")"
+    rm -f "$backup"
+    if ! move_exact_no_clobber "$AUTO_CONFIG_PATH" "$backup"; then
+      log_error "Could not capture the current config before atomic replacement: $AUTO_CONFIG_PATH"
+      exit 1
+    fi
+    AUTO_CAPTURED_BACKUP="$backup"
+    AUTO_CAPTURED_PATH="$AUTO_CONFIG_PATH"
+    if ! cmp -s "$backup" "$AUTO_ORIGINAL_FILE"; then
+      log_error "Refusing to replace $AUTO_CONFIG_PATH because it changed during atomic replacement."
+      exit 1
+    fi
+    log_info "Backup: $backup"
+  fi
+
+  if [[ -n "$AUTO_SIBLING_PATH" && ( -e "$AUTO_SIBLING_PATH" || -L "$AUTO_SIBLING_PATH" ) ]]; then
+    log_error "Refusing to apply OpenCode auto-delegation because a sibling config appeared: $AUTO_SIBLING_PATH"
+    exit 1
+  fi
+  if ! move_exact_no_clobber "$staged" "$AUTO_CONFIG_PATH"; then
+    log_error "Could not atomically install and verify the exact config destination: $AUTO_CONFIG_PATH"
+    exit 1
+  fi
+  AUTO_STAGED="" AUTO_CAPTURED_BACKUP="" AUTO_CAPTURED_PATH="" AUTO_STAGED_CHECKSUM=""
+  log_success "$AUTO_ACTION $AUTO_RUNTIME auto-delegation -> $AUTO_CONFIG_PATH"
 }
 
 if [[ -z "$TARGET" ]]; then usage; log_error "Target is required."; exit 1; fi
 if [[ "$TYPE" != "skill" && "$TYPE" != "agent" ]]; then log_error "Type must be skill or agent."; exit 1; fi
+if [[ ! "$REPO" =~ ^[A-Za-z0-9._-]+/[A-Za-z0-9._-]+$ ]]; then
+  log_error "Invalid GitHub repository '$REPO'. Expected owner/name using letters, numbers, dot, underscore, or hyphen."
+  exit 1
+fi
+if [[ ! "$BRANCH" =~ ^[A-Za-z0-9._/+_-]+$ ]]; then
+  log_error "Invalid branch '$BRANCH'. Use a GitHub branch name without whitespace, control characters, quotes, or backslashes."
+  exit 1
+fi
+validate_target "$TARGET" "$TYPE"
+REQUESTED_TARGET="$TARGET"
+if [[ "$TARGET" == "vscode" ]]; then TARGET="copilot"; fi
+if [[ "$ENABLE_AUTO_DELEGATION" -eq 1 && "$TYPE" != "agent" ]]; then
+  log_error "--enable-auto-delegation is only supported with --type agent."
+  exit 1
+fi
+if [[ "$ENABLE_AUTO_DELEGATION" -eq 1 && "$TARGET" != "codex" && "$TARGET" != "opencode" ]]; then
+  log_error "--enable-auto-delegation only supports the global Agent targets 'codex' and 'opencode'."
+  exit 1
+fi
 validate_name
 
-if [[ -n "$INSTALL_DIR" ]]; then
-  DEST_DIR="$INSTALL_DIR"
-elif ! DEST_DIR="$(install_path "$TARGET" "$TYPE")"; then
-  log_error "Unsupported $TYPE target: $TARGET"
-  usage
-  exit 1
+PROJECT_ROOT="$PWD"
+if [[ "$TARGET" == "project" && -n "$INSTALL_DIR" ]]; then
+  case "$INSTALL_DIR" in
+    /*|[A-Za-z]:[\\/]*) PROJECT_ROOT="${INSTALL_DIR%/}" ;;
+    *) PROJECT_ROOT="${INSTALL_DIR%/}" ;;
+  esac
+fi
+if [[ "$TYPE" == "agent" ]]; then
+  configure_agent_profiles
+else
+  configure_skill_profiles 1
+fi
+if [[ "$REQUESTED_TARGET" == "vscode" ]]; then
+  log_info "Target alias: vscode -> copilot"
+fi
+if [[ "$TYPE" == "agent" ]]; then
+  for destination in "${AGENT_DESTINATIONS[@]}"; do
+    log_info "Destination: $destination"
+  done
+else
+  for destination in "${SKILL_DESTINATIONS[@]}"; do
+    log_info "Destination: $destination"
+  done
 fi
 
 TMP_DIR=""
-cleanup() { [[ -z "$TMP_DIR" ]] || rm -rf "$TMP_DIR"; }
+AUTO_PLAN_DIR=""
+AUTO_ORIGINAL_FILE=""
+AUTO_STAGED=""
+AUTO_STAGED_CHECKSUM=""
+AUTO_CAPTURED_BACKUP=""
+AUTO_CAPTURED_PATH=""
+AUTO_SIBLING_PATH=""
+cleanup() {
+  restore_captured_config || true
+  [[ -z "$AUTO_STAGED" ]] || rm -f "$AUTO_STAGED"
+  [[ -z "$TMP_DIR" ]] || rm -rf "$TMP_DIR"
+  [[ -z "$AUTO_PLAN_DIR" ]] || rm -rf "$AUTO_PLAN_DIR"
+}
 trap cleanup EXIT
 if [[ -n "$SOURCE_DIR" ]]; then
   REPO_ROOT="$(cd "$SOURCE_DIR" && pwd)"
@@ -309,32 +1392,121 @@ else
   if [[ -z "$REPO_ROOT" ]]; then log_error "Could not find extracted repository root."; exit 1; fi
   SOURCE_KIND="github-archive"
 fi
-log_info "Destination: $DEST_DIR"
 
 if [[ "$TYPE" == "agent" ]]; then
-  if [[ "$TARGET" == codex* ]]; then PLATFORM="codex"; EXTENSION="toml"; else PLATFORM="claude"; EXTENSION="md"; fi
-  AGENT_SOURCES=()
-  if [[ -n "$NAME" ]]; then
-    SOURCE="$REPO_ROOT/adapters/$PLATFORM/$NAME.$EXTENSION"
-    if [[ ! -f "$SOURCE" ]]; then log_error "Agent adapter not found in archive: $NAME ($PLATFORM)"; exit 1; fi
-    AGENT_SOURCES+=("$SOURCE")
-  else
-    for source in "$REPO_ROOT/adapters/$PLATFORM"/*."$EXTENSION"; do
-      [[ -f "$source" ]] && AGENT_SOURCES+=("$source")
+  if [[ "$DRY_RUN" -eq 0 ]]; then
+    require_command mktemp
+    require_command cksum
+  fi
+  AGENT_JOB_SOURCES=()
+  AGENT_JOB_ROLES=()
+  AGENT_JOB_PLATFORMS=()
+  AGENT_JOB_DESTINATIONS=()
+  AGENT_JOB_OWNERSHIP_TARGETS=()
+  AGENT_JOB_SUFFIXES=()
+  AGENT_JOB_LEGACY_TARGETS=()
+  for ((profile_index = 0; profile_index < ${#AGENT_PLATFORMS[@]}; profile_index++)); do
+    PLATFORM="${AGENT_PLATFORMS[$profile_index]}"
+    SUFFIX="${AGENT_SUFFIXES[$profile_index]}"
+    DESTINATION="${AGENT_DESTINATIONS[$profile_index]}"
+    OWNERSHIP_TARGET="${AGENT_OWNERSHIP_TARGETS[$profile_index]}"
+    LEGACY_TARGETS="${AGENT_LEGACY_TARGETS[$profile_index]}"
+    ADAPTER_ROOT="$REPO_ROOT/adapters/$PLATFORM"
+    PROFILE_SOURCE_COUNT=0
+    if [[ -n "$NAME" ]]; then
+      SOURCE="$ADAPTER_ROOT/$NAME$SUFFIX"
+      if [[ ! -f "$SOURCE" ]]; then log_error "Agent adapter not found in archive: $NAME ($PLATFORM)"; exit 1; fi
+      ROLE="$NAME"
+      AGENT_JOB_SOURCES+=("$SOURCE")
+      AGENT_JOB_ROLES+=("$ROLE")
+      AGENT_JOB_PLATFORMS+=("$PLATFORM")
+      AGENT_JOB_DESTINATIONS+=("$DESTINATION")
+      AGENT_JOB_OWNERSHIP_TARGETS+=("$OWNERSHIP_TARGET")
+      AGENT_JOB_SUFFIXES+=("$SUFFIX")
+      AGENT_JOB_LEGACY_TARGETS+=("$LEGACY_TARGETS")
+      PROFILE_SOURCE_COUNT=1
+    else
+      for source in "$ADAPTER_ROOT"/*"$SUFFIX"; do
+        [[ -f "$source" ]] || continue
+        ROLE_FILE="${source##*/}"
+        ROLE="${ROLE_FILE%"$SUFFIX"}"
+        AGENT_JOB_SOURCES+=("$source")
+        AGENT_JOB_ROLES+=("$ROLE")
+        AGENT_JOB_PLATFORMS+=("$PLATFORM")
+        AGENT_JOB_DESTINATIONS+=("$DESTINATION")
+        AGENT_JOB_OWNERSHIP_TARGETS+=("$OWNERSHIP_TARGET")
+        AGENT_JOB_SUFFIXES+=("$SUFFIX")
+        AGENT_JOB_LEGACY_TARGETS+=("$LEGACY_TARGETS")
+        PROFILE_SOURCE_COUNT=$((PROFILE_SOURCE_COUNT + 1))
+      done
+    fi
+    if [[ "$PROFILE_SOURCE_COUNT" -eq 0 ]]; then log_error "No Agent adapters were found for $PLATFORM."; exit 1; fi
+  done
+  for ((job_index = 0; job_index < ${#AGENT_JOB_SOURCES[@]}; job_index++)); do
+    preflight_agent_profile \
+      "${AGENT_JOB_SOURCES[$job_index]}" \
+      "${AGENT_JOB_ROLES[$job_index]}" \
+      "${AGENT_JOB_ROLES[$job_index]}" \
+      "${AGENT_JOB_PLATFORMS[$job_index]}" \
+      "${AGENT_JOB_DESTINATIONS[$job_index]}" \
+      "${AGENT_JOB_OWNERSHIP_TARGETS[$job_index]}" \
+      "${AGENT_JOB_SUFFIXES[$job_index]}" \
+      "${AGENT_JOB_LEGACY_TARGETS[$job_index]}"
+  done
+
+  INSTALL_COMPANION_SKILL=0
+  COMPANION_DESTINATIONS=()
+  COMPANION_OWNERSHIP_TARGETS=()
+  COMPANION_LEGACY_TARGETS=()
+  COMPANION_SOURCE=""
+  if [[ -z "$NAME" || "$ENABLE_AUTO_DELEGATION" -eq 1 ]]; then
+    INSTALL_COMPANION_SKILL=1
+    COMPANION_SOURCE="$REPO_ROOT/skills/subagent-architecture"
+    if [[ ! -f "$COMPANION_SOURCE/SKILL.md" ]]; then log_error "Companion Skill not found in archive: subagent-architecture"; exit 1; fi
+    configure_skill_profiles 0
+    for ((profile_index = 0; profile_index < ${#SKILL_DESTINATIONS[@]}; profile_index++)); do
+      COMPANION_DESTINATION="$(resolve_skill_profile_destination "${SKILL_DESTINATIONS[$profile_index]}" "subagent-architecture" "${SKILL_CODEX_LEGACY_CHECKS[$profile_index]}")"
+      COMPANION_DESTINATIONS+=("$COMPANION_DESTINATION")
+      COMPANION_OWNERSHIP_TARGETS+=("${SKILL_OWNERSHIP_TARGETS[$profile_index]}")
+      COMPANION_LEGACY_TARGETS+=("${SKILL_LEGACY_TARGETS[$profile_index]}")
+      preflight_skill "$COMPANION_SOURCE" "$COMPANION_DESTINATION" "${SKILL_OWNERSHIP_TARGETS[$profile_index]}" "${SKILL_LEGACY_TARGETS[$profile_index]}"
+      log_info "Companion Skill destination: $COMPANION_DESTINATION"
     done
   fi
-  if [[ "${#AGENT_SOURCES[@]}" -eq 0 ]]; then log_error "No Agent adapters were found for $PLATFORM."; exit 1; fi
-  for source in "${AGENT_SOURCES[@]}"; do
-    ROLE_FILE="${source##*/}"
-    ROLE="${ROLE_FILE%.$EXTENSION}"
-    preflight_agent_profile "$source" "$ROLE" "$ROLE" "$PLATFORM"
+
+  if [[ "$ENABLE_AUTO_DELEGATION" -eq 1 ]]; then
+    require_command mktemp
+    AUTO_PLAN_DIR="$(mktemp -d "${TMPDIR:-/tmp}/autoverse-auto-delegation.XXXXXX")"
+    GUIDANCE_FILE="$REPO_ROOT/skills/subagent-architecture/references/global-auto-delegation.md"
+    if [[ ! -s "$GUIDANCE_FILE" ]]; then log_error "Auto-delegation guidance is missing or empty: $GUIDANCE_FILE"; exit 1; fi
+    if grep -Fq "'''" "$GUIDANCE_FILE"; then log_error "Auto-delegation guidance cannot contain a TOML multiline literal delimiter."; exit 1; fi
+    if [[ "$TARGET" == "codex" ]]; then
+      plan_codex_auto_delegation "$GUIDANCE_FILE"
+    else
+      INSTRUCTION_PATH="${COMPANION_DESTINATIONS[0]}/subagent-architecture/references/global-auto-delegation.md"
+      if [[ "$INSTRUCTION_PATH" != /* ]]; then INSTRUCTION_PATH="$PWD/${INSTRUCTION_PATH#./}"; fi
+      plan_opencode_auto_delegation "$INSTRUCTION_PATH"
+    fi
+  fi
+
+  if [[ "$INSTALL_COMPANION_SKILL" -eq 1 ]]; then
+    for ((profile_index = 0; profile_index < ${#COMPANION_DESTINATIONS[@]}; profile_index++)); do
+      install_skill "$COMPANION_SOURCE" "${COMPANION_DESTINATIONS[$profile_index]}" "${COMPANION_OWNERSHIP_TARGETS[$profile_index]}" "${COMPANION_LEGACY_TARGETS[$profile_index]}"
+    done
+  fi
+  log_info "$(if [[ "$DRY_RUN" -eq 1 ]]; then printf Planning; else printf Installing; fi) ${#AGENT_JOB_SOURCES[@]} Agent profile file(s) across ${#AGENT_PLATFORMS[@]} destination(s) for $TARGET"
+  for ((job_index = 0; job_index < ${#AGENT_JOB_SOURCES[@]}; job_index++)); do
+    install_agent_profile \
+      "${AGENT_JOB_SOURCES[$job_index]}" \
+      "${AGENT_JOB_ROLES[$job_index]}" \
+      "${AGENT_JOB_ROLES[$job_index]}" \
+      "${AGENT_JOB_PLATFORMS[$job_index]}" \
+      "${AGENT_JOB_DESTINATIONS[$job_index]}" \
+      "${AGENT_JOB_OWNERSHIP_TARGETS[$job_index]}" \
+      "${AGENT_JOB_SUFFIXES[$job_index]}" \
+      "${AGENT_JOB_LEGACY_TARGETS[$job_index]}"
   done
-  log_info "$(if [[ "$DRY_RUN" -eq 1 ]]; then printf Planning; else printf Installing; fi) ${#AGENT_SOURCES[@]} Agent(s) for $TARGET"
-  for source in "${AGENT_SOURCES[@]}"; do
-    ROLE_FILE="${source##*/}"
-    ROLE="${ROLE_FILE%.$EXTENSION}"
-    install_agent_profile "$source" "$ROLE" "$ROLE" "$PLATFORM"
-  done
+  if [[ "$ENABLE_AUTO_DELEGATION" -eq 1 ]]; then apply_auto_delegation_plan; fi
 else
   SOURCES=()
   SKILLS_ROOT="$REPO_ROOT/skills"
@@ -349,8 +1521,21 @@ else
     while IFS= read -r dir; do SOURCES+=("$dir"); done < <(find "$SCAN_ROOT" -mindepth 1 -maxdepth 1 -type d -exec test -f '{}/SKILL.md' ';' -print | sort)
   fi
   if [[ "${#SOURCES[@]}" -eq 0 ]]; then log_error "No Skill folders with SKILL.md were found in archive."; exit 1; fi
-  log_info "$(if [[ "$DRY_RUN" -eq 1 ]]; then printf Planning; else printf Installing; fi) ${#SOURCES[@]} Skill(s) for $TARGET"
-  for src in "${SOURCES[@]}"; do install_skill "$src"; done
+  for ((profile_index = 0; profile_index < ${#SKILL_DESTINATIONS[@]}; profile_index++)); do
+    for src in "${SOURCES[@]}"; do
+      SKILL_NAME="$(basename "$src")"
+      SKILL_DESTINATION="$(resolve_skill_profile_destination "${SKILL_DESTINATIONS[$profile_index]}" "$SKILL_NAME" "${SKILL_CODEX_LEGACY_CHECKS[$profile_index]}")"
+      preflight_skill "$src" "$SKILL_DESTINATION" "${SKILL_OWNERSHIP_TARGETS[$profile_index]}" "${SKILL_LEGACY_TARGETS[$profile_index]}"
+    done
+  done
+  log_info "$(if [[ "$DRY_RUN" -eq 1 ]]; then printf Planning; else printf Installing; fi) ${#SOURCES[@]} Skill(s) across ${#SKILL_DESTINATIONS[@]} destination(s) for $TARGET"
+  for ((profile_index = 0; profile_index < ${#SKILL_DESTINATIONS[@]}; profile_index++)); do
+    for src in "${SOURCES[@]}"; do
+      SKILL_NAME="$(basename "$src")"
+      SKILL_DESTINATION="$(resolve_skill_profile_destination "${SKILL_DESTINATIONS[$profile_index]}" "$SKILL_NAME" "${SKILL_CODEX_LEGACY_CHECKS[$profile_index]}")"
+      install_skill "$src" "$SKILL_DESTINATION" "${SKILL_OWNERSHIP_TARGETS[$profile_index]}" "${SKILL_LEGACY_TARGETS[$profile_index]}"
+    done
+  done
 fi
 
 if [[ "$DRY_RUN" -eq 1 ]]; then log_success "Dry run complete."; else log_success "Autoverse $TYPE install complete."; fi
