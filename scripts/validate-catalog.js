@@ -70,6 +70,10 @@ function compare(name, field, expected, actual, expectedLabel, actualLabel) {
   }
 }
 
+function normalizeNewlines(value) {
+  return typeof value === 'string' ? value.replace(/\r\n/g, '\n') : value;
+}
+
 const catalog = readJson(skillsJsonPath);
 if (!catalog) {
   process.exit(1);
@@ -315,7 +319,14 @@ for (const agentFile of agentFiles) {
     } catch (error) {
       fail(`${agentFile.id}: invalid Codex adapter scalar (${error.message})`);
     }
-    compare(agentFile.id, 'Codex instructions', canonicalBody, instructionsMatch ? instructionsMatch[1].trim() : null, 'canonical Agent', 'adapter');
+    compare(
+      agentFile.id,
+      'Codex instructions',
+      normalizeNewlines(canonicalBody),
+      instructionsMatch ? normalizeNewlines(instructionsMatch[1].trim()) : null,
+      'canonical Agent',
+      'adapter'
+    );
   }
 
   if (!fs.existsSync(claudePath)) {
@@ -329,7 +340,14 @@ for (const agentFile of agentFiles) {
     compare(agentFile.id, 'Claude model', 'inherit', claudeFrontmatter.model, 'required adapter value', 'adapter');
     compare(agentFile.id, 'Claude permissionMode', catalogEntry.permission === 'read-only' ? 'plan' : 'default', claudeFrontmatter.permissionMode, 'agents.json mapping', 'adapter');
     compare(agentFile.id, 'Claude skills', catalogEntry.skills, claudeFrontmatter.skills, 'agents.json', 'adapter');
-    compare(agentFile.id, 'Claude instructions', canonicalBody, claudeBody, 'canonical Agent', 'adapter');
+    compare(
+      agentFile.id,
+      'Claude instructions',
+      normalizeNewlines(canonicalBody),
+      normalizeNewlines(claudeBody),
+      'canonical Agent',
+      'adapter'
+    );
   }
 }
 
