@@ -208,7 +208,8 @@ function Get-SkillFrontmatterValue {
 function Test-LegacySkillOwnership {
     param(
         [object]$ExistingMeta,
-        [string]$SkillFile,
+        [string]$ExistingSkillFile,
+        [string]$IncomingSkillFile,
         [string]$RepoName,
         [string]$ExpectedName,
         [string]$ExpectedTarget
@@ -216,9 +217,18 @@ function Test-LegacySkillOwnership {
     if (-not $ExistingMeta -or $ExistingMeta.repo -ne $RepoName) { return $false }
     if ($ExistingMeta.PSObject.Properties['component'] -or $ExistingMeta.PSObject.Properties['target']) { return $false }
     if ($ExistingMeta.name -ne $ExpectedName -or $ExistingMeta.agent -ne $ExpectedTarget) { return $false }
-    $skillName = Get-SkillFrontmatterValue -SkillFile $SkillFile -FieldName 'name'
-    $skillSource = Get-SkillFrontmatterValue -SkillFile $SkillFile -FieldName 'source'
-    return $skillName -eq $ExpectedName -and $skillSource -eq $RepoName
+    $existingName = Get-SkillFrontmatterValue -SkillFile $ExistingSkillFile -FieldName 'name'
+    $existingSource = Get-SkillFrontmatterValue -SkillFile $ExistingSkillFile -FieldName 'source'
+    $existingLicense = Get-SkillFrontmatterValue -SkillFile $ExistingSkillFile -FieldName 'license'
+    $incomingName = Get-SkillFrontmatterValue -SkillFile $IncomingSkillFile -FieldName 'name'
+    $incomingSource = Get-SkillFrontmatterValue -SkillFile $IncomingSkillFile -FieldName 'source'
+    $incomingLicense = Get-SkillFrontmatterValue -SkillFile $IncomingSkillFile -FieldName 'license'
+    return $existingName -eq $ExpectedName `
+        -and $incomingName -eq $ExpectedName `
+        -and $existingSource `
+        -and $existingSource -eq $incomingSource `
+        -and $existingLicense `
+        -and $existingLicense -eq $incomingLicense
 }
 
 function Get-InstallAction {
@@ -230,7 +240,8 @@ function Get-InstallAction {
         [string]$ExpectedComponent,
         [string]$ExpectedName,
         [string]$ExpectedTarget,
-        [string]$LegacyIdentityPath
+        [string]$LegacyIdentityPath,
+        [string]$IncomingIdentityPath
     )
     if (-not (Test-Path -LiteralPath $TargetPath)) { return @{ Action = "install"; ExistingMeta = $null } }
     $existingMeta = Get-ExistingMeta -MetaPath $MetaPath
@@ -242,7 +253,7 @@ function Get-InstallAction {
     if ($ownershipMatches) {
         return @{ Action = "update"; ExistingMeta = $existingMeta }
     }
-    if ($ExpectedComponent -eq 'skill' -and (Test-LegacySkillOwnership -ExistingMeta $existingMeta -SkillFile $LegacyIdentityPath -RepoName $RepoName -ExpectedName $ExpectedName -ExpectedTarget $ExpectedTarget)) {
+    if ($ExpectedComponent -eq 'skill' -and (Test-LegacySkillOwnership -ExistingMeta $existingMeta -ExistingSkillFile $LegacyIdentityPath -IncomingSkillFile $IncomingIdentityPath -RepoName $RepoName -ExpectedName $ExpectedName -ExpectedTarget $ExpectedTarget)) {
         return @{ Action = "migrate-update"; ExistingMeta = $existingMeta }
     }
     if ($Force) { return @{ Action = "force-replace"; ExistingMeta = $existingMeta } }
@@ -260,7 +271,7 @@ function Install-Skill {
     $targetPath = Join-Path $DestinationRoot $Source.Name
     if (-not (Test-TargetWithinRoot -TargetPath $targetPath -RootPath $DestinationRoot)) { throw "Refusing to write outside install directory: $targetPath" }
     $metaPath = Join-Path $targetPath ".skill-meta.json"
-    $plan = Get-InstallAction -TargetPath $targetPath -MetaPath $metaPath -Label $Source.Name -RepoName $RepoName -ExpectedComponent "skill" -ExpectedName $Source.Name -ExpectedTarget $TargetName -LegacyIdentityPath (Join-Path $targetPath "SKILL.md")
+    $plan = Get-InstallAction -TargetPath $targetPath -MetaPath $metaPath -Label $Source.Name -RepoName $RepoName -ExpectedComponent "skill" -ExpectedName $Source.Name -ExpectedTarget $TargetName -LegacyIdentityPath (Join-Path $targetPath "SKILL.md") -IncomingIdentityPath (Join-Path $Source.FullName "SKILL.md")
     if ($DryRun) { Write-Host "DRY-RUN $($plan.Action) Skill $($Source.Name) -> $targetPath"; return }
 
     New-Item -ItemType Directory -Force -Path $DestinationRoot | Out-Null

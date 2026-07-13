@@ -144,7 +144,7 @@ yaml_frontmatter_value() {
 }
 
 install_action() {
-  local target="$1" meta="$2" label="$3" expected_component="$4" expected_name="$5" expected_target="$6" legacy_identity="${7:-}"
+  local target="$1" meta="$2" label="$3" expected_component="$4" expected_name="$5" expected_target="$6" legacy_identity="${7:-}" incoming_identity="${8:-}"
   INSTALL_ACTION="install"
   EXISTING_INSTALLED_AT=""
   [[ ! -e "$target" ]] && return
@@ -162,10 +162,14 @@ install_action() {
       return
     fi
     if [[ "$existing_repo" == "$REPO" && "$expected_component" == "skill" && -z "$existing_component" && -z "$existing_target" && "$existing_name" == "$expected_name" && "$existing_agent" == "$expected_target" ]]; then
-      local legacy_skill_name legacy_skill_source
+      local legacy_skill_name legacy_skill_source legacy_skill_license incoming_skill_name incoming_skill_source incoming_skill_license
       legacy_skill_name="$(yaml_frontmatter_value "$legacy_identity" "name")"
       legacy_skill_source="$(yaml_frontmatter_value "$legacy_identity" "source")"
-      if [[ "$legacy_skill_name" == "$expected_name" && "$legacy_skill_source" == "$REPO" ]]; then
+      legacy_skill_license="$(yaml_frontmatter_value "$legacy_identity" "license")"
+      incoming_skill_name="$(yaml_frontmatter_value "$incoming_identity" "name")"
+      incoming_skill_source="$(yaml_frontmatter_value "$incoming_identity" "source")"
+      incoming_skill_license="$(yaml_frontmatter_value "$incoming_identity" "license")"
+      if [[ "$legacy_skill_name" == "$expected_name" && "$incoming_skill_name" == "$expected_name" && -n "$legacy_skill_source" && "$legacy_skill_source" == "$incoming_skill_source" && -n "$legacy_skill_license" && "$legacy_skill_license" == "$incoming_skill_license" ]]; then
         INSTALL_ACTION="migrate-update"
         return
       fi
@@ -199,7 +203,7 @@ install_skill() {
   target="$DEST_DIR/$name"
   meta="$target/.skill-meta.json"
   assert_within_destination "$target"
-  install_action "$target" "$meta" "$name" "skill" "$name" "$TARGET" "$target/SKILL.md"
+  install_action "$target" "$meta" "$name" "skill" "$name" "$TARGET" "$target/SKILL.md" "$src/SKILL.md"
   if [[ "$DRY_RUN" -eq 1 ]]; then printf 'DRY-RUN %s Skill %s -> %s\n' "$INSTALL_ACTION" "$name" "$target"; return; fi
 
   mkdir -p "$DEST_DIR"
