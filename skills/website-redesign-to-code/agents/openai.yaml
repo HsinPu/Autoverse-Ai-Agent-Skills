@@ -1,0 +1,4 @@
+interface:
+  display_name: "Website Redesign to Code"
+  short_description: "Redesign whole sites through approved visual systems"
+  default_prompt: "Use $website-redesign-to-code to audit this site, approve the sitemap and visual system, then implement the redesign in verified stages."

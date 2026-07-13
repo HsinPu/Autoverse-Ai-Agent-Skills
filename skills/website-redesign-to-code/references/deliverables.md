@@ -1,0 +1,108 @@
+# Website Redesign-to-Code Deliverables
+
+Use these templates when a full-site redesign needs a durable handoff, multiple implementation slices, or auditable approval. Adapt them to repository conventions rather than creating duplicate documentation systems.
+
+## Site Audit and Page-Family Matrix
+
+```markdown
+# Site redesign audit
+
+- Redesign mode: visual | product
+- Framework/build/styling:
+- Routing and layouts:
+- CMS/data/API:
+- Auth/roles/permissions:
+- Analytics/consent/third parties:
+- Supported viewports/browsers/locales/themes:
+- Current design-system owner:
+- Runtime crawl coverage:
+- Canonical route/URL count:
+- Reconciliation sources and result:
+- Known access gaps:
+
+| Concrete URL or route pattern | Page family | Layout | Data source | Auth/role | Critical states | SEO contract | Risk | Representative route |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+
+- Manifest completeness: complete | blocked | accepted exclusions
+- Original denominator:
+- Accounted-for entries:
+```
+
+## Preservation and Migration Contract
+
+```markdown
+# Preservation contract
+
+## Invariants
+- URLs, slugs, query parameters, and deep links:
+- Navigation hierarchy, labels, ordering, taxonomy, breadcrumbs, and footer links:
+- Metadata, canonicals, robots, structured data, and sitemap:
+- Content identity and headings:
+- API, form, auth, role, and permission behavior:
+- Analytics events and payloads:
+- Consent, cookies, local storage, and third parties:
+- Critical journeys and failure behavior:
+- Commerce and external side-effect controls:
+
+## Approved migrations
+| Current contract | New contract | Redirect/event/data mapping | Validation | Rollback |
+| --- | --- | --- | --- | --- |
+
+## Scope approval
+- Status:
+- Approval evidence:
+- Representative routes/states:
+- Out of scope:
+- Blocking gaps or accepted exclusions:
+```
+
+## Design-System and Page-Family Contract
+
+```markdown
+# Approved site design contract
+
+## Foundations
+- Base and semantic colors:
+- Typography:
+- Spacing/grid:
+- Radius/shadow:
+- Breakpoints:
+- Motion/reduced motion:
+
+## Components
+| Component | Owner | Variants | Required states | Migration source |
+| --- | --- | --- | --- | --- |
+
+## Page families
+| Family | Representative artifacts and type | Shared shell | Unique components | Responsive rules | Critical states |
+| --- | --- | --- | --- | --- | --- |
+
+## Approval
+- Selected direction:
+- Approved artifacts:
+- Intentional deviations:
+- Implementation slice order:
+- Pass/fail thresholds:
+- Readiness decision:
+```
+
+## Rollout and Validation Matrix
+
+```markdown
+# Redesign rollout
+
+| Slice | File/component owner | Page families | Preconditions | Exit criteria/checks | Rollback point | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+
+# Cross-site validation
+
+| Route/family | Viewport | State/journey | Functional | Visual | Accessibility | SEO | Runtime/performance | Evidence |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+
+- Unverified routes/integrations:
+- Accepted deviations:
+- Legacy paths safe to remove:
+- Canonical route/URL manifest result:
+- Pilot acceptance evidence:
+- Release decision: pass | pass with accepted deviations | blocked
+```

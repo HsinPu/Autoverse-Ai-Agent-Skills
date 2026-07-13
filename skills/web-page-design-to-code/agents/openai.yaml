@@ -1,0 +1,4 @@
+interface:
+  display_name: "Web Page Design to Code"
+  short_description: "Design page mockups, then implement approved UI"
+  default_prompt: "Use $web-page-design-to-code to redesign this page from references, present desktop and mobile mockups for approval, then implement it."

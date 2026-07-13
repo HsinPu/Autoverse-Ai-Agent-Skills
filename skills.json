@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-07-12T00:00:00Z",
-  "total": 185,
+  "updated": "2026-07-13T00:00:00Z",
+  "total": 187,
   "skills": [
     {
       "name": "todo-first",
@@ -325,6 +325,40 @@
         "react",
         "css",
         "ui"
+      ]
+    },
+    {
+      "name": "web-page-design-to-code",
+      "description": "Approval-gated workflow for turning a single web page brief, screenshot, or visual reference into desktop and mobile mockups, an implementation contract, production frontend code in the existing stack, and browser-verified visual evidence. Use when creating or materially redesigning one page and the design must be reviewed before coding; use website-redesign-to-code for multiple routes or a full-site redesign.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "frontend",
+        "web-design",
+        "mockup",
+        "imagegen",
+        "design-to-code",
+        "responsive",
+        "visual-validation"
+      ]
+    },
+    {
+      "name": "website-redesign-to-code",
+      "description": "Approval-gated workflow for redesigning an entire website through route and page-family audit, preservation contracts, shared design systems, representative desktop and mobile mockups, staged frontend implementation, and cross-site verification. Use when a redesign spans multiple routes, templates, navigation, or global UI; use web-page-design-to-code for one isolated page.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "website-redesign",
+        "design-system",
+        "page-families",
+        "mockup",
+        "design-to-code",
+        "frontend",
+        "visual-validation"
       ]
     },
     {

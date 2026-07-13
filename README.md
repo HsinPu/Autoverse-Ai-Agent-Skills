@@ -2,7 +2,7 @@
 
 [![Validate](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/actions/workflows/validate.yml/badge.svg)](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/actions/workflows/validate.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
-![Skills](https://img.shields.io/badge/Skills-185-7c3aed)
+![Skills](https://img.shields.io/badge/Skills-187-7c3aed)
 ![Agents](https://img.shields.io/badge/Agents-134-2563eb)
 ![Node.js](https://img.shields.io/badge/Node.js-%3E%3D16-339933?logo=nodedotjs&logoColor=white)
 
@@ -91,7 +91,7 @@ curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/ma
 
 | 類型 | 數量 | 用途 | Canonical source |
 |---|---:|---|---|
-| Skills | **185 Skills**／7 類 | 可重複使用的工作流程、規範、工具指引與領域知識 | `skills/<name>/SKILL.md` |
+| Skills | **187 Skills**／7 類 | 可重複使用的工作流程、規範、工具指引與領域知識 | `skills/<name>/SKILL.md` |
 | Agents | 134／24 類 | 可委派的專業角色，包含任務、限制、權限與輸出契約 | `agents/<role>.md` |
 | Codex adapters | 134 | Codex custom Agent 的 TOML 設定 | `adapters/codex/<role>.toml` |
 | Claude adapters | 134 | Claude Code subagent 的 Markdown 設定 | `adapters/claude/<role>.md` |
@@ -343,11 +343,11 @@ Catalog 來源分別是 [skills.json](skills.json) 與 [agents.json](agents.json
 
 ## Skills
 
-185 個 Skills 分成 7 類。每個 package 以 `SKILL.md` 為入口，相關 references、scripts 與 assets 保留在同一資料夾中。
+187 個 Skills 分成 7 類。每個 package 以 `SKILL.md` 為入口，相關 references、scripts 與 assets 保留在同一資料夾中。
 
 | Category | Count | 說明 |
 |---|---:|---|
-| `development` | 148 | 軟體開發、架構、框架、測試、安全、資料與平台工程 |
+| `development` | 150 | 軟體開發、架構、框架、測試、安全、資料與平台工程 |
 | `productivity` | 20 | 規劃、檔案整理、文件與日常工作流程 |
 | `browser-automation` | 7 | Browser automation、DevTools、Playwright 與 webapp testing |
 | `coding-agents-ides` | 5 | Agent、Skill、MCP 與 coding-agent 工作流程 |
@@ -429,7 +429,7 @@ CI 會在 push 到 `main` 與每個 pull request 上使用 Node.js 20 執行 `np
 - 外部專案只作為研究、coverage 與設計參考，使用 `reference` 或 `reference-source` 欄位獨立記錄，不取代本專案的正式來源。
 - Agent catalog 參考 [wshobson/agents](https://github.com/wshobson/agents) 的角色名稱、plugin 路徑與高層責任；prompt 內容經過重新設計與加強，不是原文完整複製。
 - 同名上游定義會合併為一份較完整的 canonical Agent；199 個 reference paths、tree SHA 與合併結果保存在 [wshobson-agent-inventory.json](scripts/data/wshobson-agent-inventory.json)。
-- Repository 與全部 134 個 Agents 採 Apache-2.0。Skills 的個別授權以各自 `SKILL.md` 與 `skills.json` 為準；目前 184 個為 Apache-2.0，`karpathy-guidelines` 保留 MIT 授權與外部 reference metadata。
+- Repository 與全部 134 個 Agents 採 Apache-2.0。Skills 的個別授權以各自 `SKILL.md` 與 `skills.json` 為準；目前 186 個為 Apache-2.0，`karpathy-guidelines` 保留 MIT 授權與外部 reference metadata。
 
 ## 疑難排解
 
