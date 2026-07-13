@@ -15,7 +15,7 @@
 
 ## 一鍵安裝全部 Skills 與 Agents
 
-以下指令會直接從 GitHub `main` 下載安裝器，並安裝到目前使用者的 Codex。Skill 與 Agent 是兩個獨立指令，可直接分別複製執行；Agent 未指定 target 時預設安裝到 Codex。
+以下指令會直接從 GitHub `main` 下載安裝器，並安裝到目前使用者的 Codex。Skill 與 Agent 是兩個獨立指令，可直接分別複製執行；兩個指令都明確預填 Codex target，需要其他平台時再替換 `Target`。
 
 ### Windows PowerShell
 
@@ -25,10 +25,10 @@
 powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target codex -Type skill'
 ```
 
-安裝全部 134 個 Agent（預設 Codex）：
+安裝全部 134 個 Agent（已預填 Codex target）：
 
 ```powershell
-powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Type agent'
+powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target codex -Type agent'
 ```
 
 ### Linux／macOS
@@ -39,10 +39,10 @@ powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.git
 curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type skill
 ```
 
-安裝全部 134 個 Agent（預設 Codex）：
+安裝全部 134 個 Agent（已預填 Codex target）：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --type agent
+curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type agent
 ```
 
 ## 專案結構

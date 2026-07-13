@@ -17,13 +17,12 @@ Autoverse AI Agent Skills installer
 
 Usage:
   scripts/install.sh --target <target> [--type skill] [--name <skill>] [--dir path] [--dry-run] [--force]
-  scripts/install.sh [--target <target>] --type agent [--name <role>] [--dir path] [--dry-run] [--force]
+  scripts/install.sh --target <target> --type agent [--name <role>] [--dir path] [--dry-run] [--force]
 
 Compatibility aliases:
   --agent is an alias for --target; --skill selects a Skill by name.
   --source-dir installs from a local checkout; otherwise the requested GitHub repo and branch are downloaded.
   Omit --name with --type agent to install every available Agent.
-  Omit --target with --type agent to install into the current user's Codex.
 
 Skill targets:
   claude, cursor, codex, amp, vscode, copilot, project, goose, opencode,
@@ -35,11 +34,12 @@ Agent targets:
 Examples:
   scripts/install.sh --target codex --name python-development
   scripts/install.sh --agent codex --skill python-development
-  scripts/install.sh --type agent --name code-reviewer
+  scripts/install.sh --target codex --type agent --name code-reviewer
   scripts/install.sh --target claude-project --agent-profile debugger --dry-run
 
 Safety:
   Existing components are updated only when repo, component, name, and target metadata all match.
+  Agent updates additionally require matching id and adapter metadata.
   Unknown same-named content is blocked unless --force is provided.
 EOF
 }
@@ -65,8 +65,6 @@ while [[ $# -gt 0 ]]; do
     *) log_error "Unknown argument: $1"; usage; exit 1 ;;
   esac
 done
-
-if [[ -z "$TARGET" && "$TYPE" == "agent" ]]; then TARGET="codex"; fi
 
 install_path() {
   local target="$1"

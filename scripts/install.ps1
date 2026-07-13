@@ -30,13 +30,12 @@ Autoverse AI Agent Skills installer
 
 Usage:
   .\scripts\install.ps1 -Target <target> [-Type skill] [-Name <skill>] [-InstallDir path] [-DryRun] [-Force]
-  .\scripts\install.ps1 [-Target <target>] -Type agent [-Name <role>] [-InstallDir path] [-DryRun] [-Force]
+  .\scripts\install.ps1 -Target <target> -Type agent [-Name <role>] [-InstallDir path] [-DryRun] [-Force]
 
 Compatibility aliases:
   -Agent is an alias for -Target; -Skill is an alias for -Name.
   -SourceDir installs from a local checkout; otherwise the requested GitHub repo and branch are downloaded.
   Omit -Name with -Type agent to install every available Agent.
-  Omit -Target with -Type agent to install into the current user's Codex.
 
 Skill targets:
   claude, cursor, codex, amp, vscode, copilot, project, goose, opencode,
@@ -48,11 +47,12 @@ Agent targets:
 Examples:
   .\scripts\install.ps1 -Target codex -Name python-development
   .\scripts\install.ps1 -Agent codex -Skill python-development
-  .\scripts\install.ps1 -Type agent -Name code-reviewer
+  .\scripts\install.ps1 -Target codex -Type agent -Name code-reviewer
   .\scripts\install.ps1 -Target claude-project -Type agent -Name debugger -DryRun
 
 Safety:
   Existing components are updated only when repo, component, name, and target metadata all match.
+  Agent updates additionally require matching id and adapter metadata.
   Unknown same-named content is blocked unless -Force is provided.
 "@
 }
@@ -329,7 +329,6 @@ function Test-AgentProfileInstall {
 }
 
 try {
-    if (-not $Target -and $Type -eq "agent") { $Target = "codex" }
     if (-not $Target) { Show-Usage; throw "Target is required." }
     Test-ComponentName -ComponentType $Type -ComponentName $Name
     $destinationRoot = if ($InstallDir) { $InstallDir } else { Resolve-InstallPath -TargetName $Target -ComponentType $Type }
