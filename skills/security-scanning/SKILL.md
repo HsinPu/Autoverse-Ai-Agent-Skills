@@ -1,32 +1,37 @@
 ---
 name: security-scanning
-description: Security scanning workflow for SAST, dependency vulnerability checks, secret scanning, container image scans, IaC scans, SBOM generation, CI security gates, and vulnerability triage. Use when running or configuring automated security tools rather than doing manual secure code review.
+description: Configure, run, and govern automated security scanning across source code, dependencies, secrets, containers, infrastructure as code, APIs, SBOMs, and CI gates. Use when selecting or tuning SAST, SCA, secret, image, IaC, or DAST tools; establishing baselines and SARIF reporting; triaging findings; or designing reliable security quality gates.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---
 
 # Security Scanning
 
-Use this skill when the task is to run, configure, or interpret automated security scans.
-
 ## Workflow
 
-1. Identify the asset type: source code, dependencies, containers, IaC, secrets, APIs, or deployed services.
-2. Choose the smallest appropriate scanner class: SAST, SCA, secret scan, image scan, IaC scan, DAST, or compliance check.
-3. Run scans with reproducible inputs and capture tool version, ruleset, scope, and exclusions.
-4. Triage findings by exploitability, reachability, environment, data sensitivity, and compensating controls.
-5. Fix, suppress with justification, or track findings with owner, deadline, and verification steps.
+1. Define assets, languages, build paths, trust boundaries, environments, compliance needs, and merge or release decisions.
+2. Select the smallest scanner set covering source, dependencies, secrets, images, IaC, APIs, or deployed surfaces.
+3. Pin tool and ruleset versions; record scope, exclusions, generated code, baselines, and expected artifacts.
+4. Run scans on reproducible inputs and emit machine-readable results such as SARIF, SBOM, or signed reports.
+5. Triage by reachability, exploitability, privilege, data sensitivity, exposure, and compensating controls.
+6. Fix, quarantine, or suppress narrowly with owner, justification, expiry, and verification.
+7. Gate CI only after measuring signal quality and defining emergency override and audit behavior.
 
-## Rules
+## Governance Rules
 
-- Do not treat scanner output as proof without validating context and reachability.
-- Keep suppressions narrow, documented, and time-bound.
-- Never print real secrets; rotate exposed credentials instead of only removing them from code.
-- Prioritize high-confidence, exploitable findings over noisy generic warnings.
-- Integrate critical scans into CI only when the signal is stable enough to gate merges.
+- Never treat a scanner finding as proven without validating the reachable code or configuration path.
+- Rotate exposed secrets; removing a committed value is not sufficient remediation.
+- Keep baselines temporary and prevent new debt while old findings are reduced.
+- Separate generated, vendored, test, and production paths explicitly.
+- Review ruleset changes like dependency changes because they alter policy behavior.
+
+## References
+
+- Read [references/sast-ci-governance.md](references/sast-ci-governance.md) for Semgrep, CodeQL, SARIF, baseline adoption, suppression records, CI thresholds, and scanner health checks.
 
 ## Handoff
 
-- For manual vulnerability review, use `security-code-review`.
-- For Python implementation hardening, use `python-security-hardening`.
-- For GitHub Actions security gates, use `github-actions-ci`.
+- Use `threat-modeling` to derive security requirements from architecture and abuse cases.
+- Use `security-code-review` for manual vulnerability analysis.
+- Use `github-actions-ci` for workflow implementation.
+- Use `skill-security-review` when evaluating third-party Skill packages.

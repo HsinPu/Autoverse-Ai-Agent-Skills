@@ -5,6 +5,7 @@ const path = require('path');
 const os = require('os');
 
 const SKILLS_JSON = path.join(__dirname, 'skills.json');
+const AGENTS_JSON = path.join(__dirname, 'agents.json');
 
 const AGENT_PATHS = {
   claude: path.join(os.homedir(), '.claude', 'skills'),
@@ -21,6 +22,13 @@ const AGENT_PATHS = {
   gemini: path.join(os.homedir(), '.gemini', 'skills'),
 };
 
+const AGENT_PROFILE_PATHS = {
+  codex: { dir: path.join(os.homedir(), '.codex', 'agents'), extension: '.toml' },
+  'codex-project': { dir: path.join(process.cwd(), '.codex', 'agents'), extension: '.toml' },
+  claude: { dir: path.join(os.homedir(), '.claude', 'agents'), extension: '.md' },
+  'claude-project': { dir: path.join(process.cwd(), '.claude', 'agents'), extension: '.md' },
+};
+
 function loadSkillsJson() {
   try {
     if (fs.existsSync(SKILLS_JSON)) {
@@ -30,6 +38,69 @@ function loadSkillsJson() {
     console.log(`警告: 無法讀取 skills.json: ${e.message}`);
   }
   return { skills: [] };
+}
+
+function loadAgentsJson() {
+  try {
+    if (fs.existsSync(AGENTS_JSON)) return JSON.parse(fs.readFileSync(AGENTS_JSON, 'utf8'));
+  } catch (e) {
+    console.log(`警告: 無法讀取 agents.json: ${e.message}`);
+  }
+  return { agents: [] };
+}
+
+function listAgents(plugin = null) {
+  let agents = loadAgentsJson().agents || [];
+  if (plugin) agents = agents.filter(agent => agent.plugin === plugin);
+  if (agents.length === 0) {
+    console.log('沒有找到任何 Agent');
+    return;
+  }
+  console.log(`可用 Agent (${agents.length} 個):\n`);
+  const byPlugin = {};
+  for (const agent of agents) (byPlugin[agent.plugin] ||= []).push(agent);
+  for (const pluginName of Object.keys(byPlugin).sort()) {
+    console.log(`[${pluginName}]`);
+    for (const agent of byPlugin[pluginName]) {
+      console.log(`  ${agent.id}`);
+      console.log(`    ${agent.description.slice(0, 80)}${agent.description.length > 80 ? '...' : ''}`);
+    }
+    console.log('');
+  }
+}
+
+function rankMatches(items, query, fieldsFor) {
+  const q = query.trim().toLowerCase();
+  const terms = tokenizeSearchText(q);
+  return items.map((item, index) => {
+    const fields = fieldsFor(item).map(value => String(value).toLowerCase());
+    const exact = fields.slice(0, 2);
+    const haystack = fields.join(' ');
+    const tokens = new Set(tokenizeSearchText(haystack));
+    let score = 0;
+    if (exact.includes(q)) score = 100;
+    else if (exact.some(value => value.includes(q))) score = 90;
+    else if (fields.some(value => value.includes(q))) score = 70;
+    else if (terms.length > 0 && terms.every(term => tokens.has(term))) score = 30;
+    return { item, score, index };
+  }).filter(result => result.score > 0)
+    .sort((left, right) => right.score - left.score || left.index - right.index)
+    .map(result => result.item);
+}
+
+function searchAgents(query) {
+  const matches = rankMatches(loadAgentsJson().agents || [], query, agent => [
+    agent.id, agent.name, agent.role, agent.plugin, agent.description, ...(agent.tags || [])
+  ]);
+  if (matches.length === 0) {
+    console.log(`沒有找到符合 "${query}" 的 Agent`);
+    return;
+  }
+  console.log(`Agent 搜尋結果 (${matches.length} 個):\n`);
+  for (const agent of matches) {
+    console.log(`  ${agent.id} (${agent.permission})`);
+    console.log(`    ${agent.description.slice(0, 90)}${agent.description.length > 90 ? '...' : ''}\n`);
+  }
 }
 
 function listSkills(category = null) {
@@ -134,6 +205,22 @@ function listInstalled(agent) {
   }
 }
 
+function listInstalledAgents(target) {
+  const config = AGENT_PROFILE_PATHS[target];
+  if (!config || !fs.existsSync(config.dir)) {
+    console.log(`${target}: 尚未安裝任何 Agent`);
+    return;
+  }
+  const installed = fs.readdirSync(config.dir)
+    .filter(name => name.endsWith(config.extension) && fs.existsSync(path.join(config.dir, `${name}.autoverse.json`)))
+    .sort();
+  if (installed.length === 0) console.log(`${target}: 尚未安裝任何 Agent`);
+  else {
+    console.log(`${target} 已安裝 Agent (${installed.length} 個):`);
+    installed.forEach(name => console.log(`  ${path.basename(name, config.extension)}`));
+  }
+}
+
 function showInfo(skillName) {
   const data = loadSkillsJson();
   const skill = data.skills.find(s => s.name === skillName);
@@ -159,23 +246,52 @@ ${skill.description}
 `);
 }
 
+function showAgentInfo(agentId) {
+  const agent = (loadAgentsJson().agents || []).find(item => item.id === agentId || item.name === agentId);
+  if (!agent) {
+    console.log(`找不到 Agent "${agentId}"；請使用 plugin/role。`);
+    return;
+  }
+  console.log(`
+${agent.id}
+${agent.description}
+
+執行名稱: ${agent.name}
+Plugin: ${agent.plugin}
+角色: ${agent.role}
+權限: ${agent.permission}
+作者: ${agent.author}
+來源: ${agent.source}
+授權: ${agent.license}
+相關 Skills: ${agent.skills.join(', ')}
+
+Codex 安裝:
+  powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target codex -Type agent -Name ${agent.id}'
+
+Claude Code 安裝:
+  curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target claude --type agent --name ${agent.id}
+`);
+}
+
 function showHelp() {
   console.log(`
-Autoverse AI Agent Skills - 技能管理工具
+Autoverse AI Agent Skills - Catalog 工具
 
 用法:
   autoverse <指令> [選項]
   (或: node autoverse-cli.js <指令> [選項])
 
 指令:
-  list                  列出所有可用技能
-  list --installed      列出已安裝的技能
-  search <關鍵字>       搜尋技能
-  info <技能名>         顯示技能詳細資訊
+  list                  列出可用 Skills（加 --type agent 列出 Agents）
+  list --installed      列出已安裝的元件
+  search <關鍵字>       搜尋 catalog
+  info <名稱>           顯示詳細資訊
 
 選項:
-  --agent <名稱>        list --installed 的目標 Agent (預設: claude)
-  --all                 list --installed 時列出所有支援 Agent
+  --type skill|agent    Catalog 類型（預設: skill）
+  --target <名稱>       list --installed 的平台（--agent 為相容別名）
+  --plugin <名稱>       Agent list 的 plugin 篩選
+  --all                 list --installed 時列出該類型所有支援平台
   --category <類別>     依類別過濾
 
 支援的 Agent:
@@ -186,7 +302,10 @@ Autoverse AI Agent Skills - 技能管理工具
   autoverse list
   autoverse search python
   autoverse info python-development
-  autoverse list --installed --agent codex
+  autoverse list --type agent --plugin comprehensive-review
+  autoverse search reviewer --type agent
+  autoverse info comprehensive-review/code-reviewer --type agent
+  autoverse list --installed --type agent --target codex
 
 安裝請使用免 Node installer:
   powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Agent codex'
@@ -197,18 +316,22 @@ const args = process.argv.slice(2);
 const command = args[0];
 
 const allFlag = args.includes('--all');
-const agentIndex = args.indexOf('--agent');
-const agent = agentIndex !== -1 ? args[agentIndex + 1] : 'claude';
+const typeIndex = args.indexOf('--type');
+const catalogType = typeIndex !== -1 ? args[typeIndex + 1] : 'skill';
+const targetIndex = args.includes('--target') ? args.indexOf('--target') : args.indexOf('--agent');
+const target = targetIndex !== -1 ? args[targetIndex + 1] : 'claude';
 
 const categoryIndex = args.indexOf('--category');
 const category = categoryIndex !== -1 ? args[categoryIndex + 1] : null;
+const pluginIndex = args.indexOf('--plugin');
+const plugin = pluginIndex !== -1 ? args[pluginIndex + 1] : null;
 
 const positionalArgs = getPositionalArgs(args);
 const param = positionalArgs[0];
 const searchQuery = positionalArgs.join(' ');
 
 function getPositionalArgs(values) {
-  const optionsWithValue = new Set(['--agent', '--category']);
+  const optionsWithValue = new Set(['--agent', '--target', '--type', '--category', '--plugin']);
   const positional = [];
 
   for (let i = 1; i < values.length; i += 1) {
@@ -234,25 +357,30 @@ if (!command || command === 'help' || command === '--help' || command === '-h') 
 } else if (command === 'list' || command === 'ls') {
   if (args.includes('--installed')) {
     if (allFlag) {
-      Object.keys(AGENT_PATHS).forEach(a => listInstalled(a));
+      if (catalogType === 'agent') Object.keys(AGENT_PROFILE_PATHS).forEach(name => listInstalledAgents(name));
+      else Object.keys(AGENT_PATHS).forEach(name => listInstalled(name));
     } else {
-      listInstalled(agent);
+      if (catalogType === 'agent') listInstalledAgents(target);
+      else listInstalled(target);
     }
   } else {
-    listSkills(category);
+    if (catalogType === 'agent') listAgents(plugin);
+    else listSkills(category);
   }
 } else if (command === 'search' || command === 's') {
   if (!searchQuery) {
     console.log('請指定搜尋關鍵字');
     console.log('用法: autoverse search <關鍵字>');
   } else {
-    searchSkills(searchQuery);
+    if (catalogType === 'agent') searchAgents(searchQuery);
+    else searchSkills(searchQuery);
   }
 } else if (command === 'info') {
   if (!param) {
-    console.log('請指定技能名稱');
+    console.log('請指定名稱');
   } else {
-    showInfo(param);
+    if (catalogType === 'agent') showAgentInfo(param);
+    else showInfo(param);
   }
 } else {
   console.log(`未知指令: ${command}`);

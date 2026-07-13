@@ -1,30 +1,44 @@
 ---
 name: repo-ready
-description: Repository setup and hygiene workflow for adding professional structure, documentation, CI/CD, quality tooling, and platform configuration. Use when starting a repo, hardening an existing one, or adding README, templates, linting, badges, or release automation.
+description: Prepare and harden repositories through stack-aware structure, contributor instructions, AGENTS.md guidance, documentation, quality commands, CI, security automation, templates, release metadata, and pre-commit safeguards. Use when starting a repository, making an existing project contributor-ready, or auditing repository hygiene and automation without adding generic boilerplate.
 source: HsinPu/Autoverse-Ai-Agent-Skills
-license: MIT
+license: Apache-2.0
 ---
 
 # Repo Ready
 
-Use this skill when the task is repo setup or repo hygiene.
-
 ## Workflow
 
-1. Inspect the stack and current repo state.
-2. Add only the files that fit the project stage and platform.
-3. Make every generated file actionable, not placeholder-based.
-4. Prefer minimal, stack-specific defaults over generic boilerplate.
-5. Verify the repo still builds, tests, or lint checks if the task changes code.
+1. Inspect stack, entry points, package and build files, tests, deployment, ownership, current docs, and repository status.
+2. Identify the minimum contributor journey from clean checkout through verified change and release.
+3. Add only stack-specific instructions, commands, templates, automation, and metadata that can be maintained.
+4. Make local and CI checks consistent, actionable, and resistant to silent bypass.
+5. Validate setup, build, test, lint, security, packaging, and release paths that were changed.
+6. Remove placeholder text and document intentional omissions.
+
+## Baseline Areas
+
+- README purpose, supported setup, commands, configuration, architecture entry points, and troubleshooting
+- AGENTS.md or equivalent coding-agent scope, verification, and safety rules
+- issue and pull-request templates with reproducible evidence fields
+- formatter, linter, tests, pre-commit hooks, CI, dependency and secret scanning
+- ownership, license, contribution, security reporting, release, and package metadata
 
 ## Rules
 
-- Include only what the repo actually needs.
-- Avoid empty templates and TODO stubs.
-- Keep docs aligned with the repo's real commands and paths.
-- Treat CI, branching, and release config as first-class repo hygiene.
+- Never overwrite meaningful project conventions with a generic template.
+- Do not create empty governance files, fake badges, untested commands, or unsupported platform promises.
+- Avoid scripts that mutate global developer state silently.
+- Preserve user changes and inspect the diff for generated churn.
+- Treat bypass flags, unpinned actions, broad workflow tokens, and secret exposure as repository risks.
+
+## References
+
+- Read [references/scan-and-guardrails.md](references/scan-and-guardrails.md) for repository inventory, AGENTS.md bootstrap, CI baseline, pre-commit bypass protection, and readiness evidence.
 
 ## Handoff
 
-- For README-specific work, use `git-readme-writer`.
-- For general docs formatting, use `markdown-writer`.
+- Use `git-readme-writer` for README design.
+- Use `agent-instructions-authoring` for AGENTS.md.
+- Use `github-actions-ci` for workflow implementation.
+- Use `security-scanning` for automated security gates.

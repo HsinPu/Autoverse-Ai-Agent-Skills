@@ -1,32 +1,44 @@
 ---
 name: kubernetes-operations
-description: Kubernetes operations workflow for manifests, kubectl diagnosis, Deployments, Services, Ingress, ConfigMaps, Secrets, probes, resources, rollouts, logs, events, and troubleshooting cluster workloads. Use when deploying, inspecting, or debugging applications running on Kubernetes.
+description: Operate and deliver Kubernetes workloads through manifests, Helm, GitOps, kubectl diagnosis, rollout control, probes, resources, networking, RBAC, Pod Security, and policy validation. Use when creating, deploying, inspecting, securing, or debugging Kubernetes applications, Helm charts, Argo CD or Flux delivery, or cluster workload configuration.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---
 
 # Kubernetes Operations
 
-Use this skill when the task involves Kubernetes workloads or cluster behavior.
-
 ## Workflow
 
-1. Identify namespace, context, workload type, image, config, service exposure, and desired state.
-2. Inspect resources with `kubectl get`, `describe`, logs, events, rollout status, and endpoints.
-3. Check probes, resource requests/limits, environment variables, mounts, secrets, and service selectors.
-4. Apply manifest changes through the repo's deployment path instead of ad hoc cluster edits when possible.
-5. Verify rollout health, pod readiness, service routing, ingress behavior, and rollback plan.
+1. Confirm cluster context, namespace, environment, workload owner, delivery source, and change authority.
+2. Inspect desired state in Git before comparing live resources, events, logs, endpoints, and rollout history.
+3. Validate images, configuration, secrets references, probes, resources, scheduling, storage, service selectors, and ingress paths.
+4. Change the declarative source through plain manifests, Helm, Kustomize, or the repository's GitOps path.
+5. Run client and server-side validation, policy checks, diff or plan review, then deploy in a bounded stage.
+6. Verify readiness, routing, saturation, disruption behavior, security policy, and rollback.
 
-## Rules
+## Operational Rules
 
-- Confirm kube context and namespace before reading or changing cluster resources.
-- Do not print Secret values; reference names and keys only.
-- Prefer declarative manifests or GitOps paths over manual `kubectl edit` changes.
-- Treat readiness/liveness/startup probes and resource limits as production behavior, not optional YAML.
-- Investigate `CrashLoopBackOff`, `ImagePullBackOff`, pending pods, and failed probes from events outward.
+- Never print Secret values or commit rendered credentials.
+- Treat readiness, liveness, startup, termination, and disruption as independent contracts.
+- Set requests from measured steady-state use and limits from failure containment needs.
+- Prefer immutable image digests or release-specific tags.
+- Investigate events and ownership chains before restarting or scaling a failing workload.
+- Preserve Git as the source of truth when GitOps owns the resource.
+
+## Delivery Choice
+
+- Use plain manifests for a small, stable deployment surface.
+- Use Kustomize for environment overlays without templating logic.
+- Use Helm for reusable packages with a documented values contract.
+- Use Argo CD or Flux when reconciliation, drift detection, and promotion are required.
+
+## References
+
+- Read [references/helm-gitops-security.md](references/helm-gitops-security.md) for chart structure, values design, GitOps promotion, NetworkPolicy, RBAC, Pod Security, and policy-as-code checks.
 
 ## Handoff
 
-- For building container images, use `docker-development`.
-- For release rollout and smoke checks, use `deployment-operations`.
-- For Spring service boundaries and cloud-native design, use `spring-cloud-microservices`.
+- Use `docker-development` for image construction.
+- Use `terraform-infrastructure` for cluster and cloud resources.
+- Use `deployment-operations` for release sequencing and smoke checks.
+- Use `observability-engineering` for SLOs, dashboards, and alerts.

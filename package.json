@@ -1,7 +1,7 @@
 {
   "name": "autoverse-ai-agent-skills",
   "version": "1.0.0",
-  "description": "Autoverse AI Agent Skills collection with no-Node installers and a catalog query CLI",
+  "description": "Autoverse AI agent and skill collection with no-Node installers and a catalog query CLI",
   "license": "Apache-2.0",
   "author": "HsinPu",
   "repository": {
@@ -16,16 +16,25 @@
     "autoverse": "./autoverse-cli.js"
   },
   "scripts": {
+    "generate:agents": "node scripts/generate-agent-adapters.js && node scripts/generate-agent-catalog.js",
+    "sync:agent-reference": "node scripts/sync-agent-reference.js",
     "validate": "node scripts/validate-catalog.js"
   },
   "files": [
     "autoverse-cli.js",
+    "adapters",
+    "agents",
+    "agents.json",
     "skills",
     "skills.json",
     "README.md",
     "scripts/install.cmd",
     "scripts/install.ps1",
     "scripts/install.sh",
+    "scripts/data/wshobson-agent-inventory.json",
+    "scripts/generate-agent-adapters.js",
+    "scripts/generate-agent-catalog.js",
+    "scripts/sync-agent-reference.js",
     "scripts/validate-catalog.js",
     "LICENSE"
   ],

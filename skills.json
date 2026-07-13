@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-06-06T00:00:00Z",
-  "total": 177,
+  "updated": "2026-07-12T00:00:00Z",
+  "total": 185,
   "skills": [
     {
       "name": "todo-first",
@@ -361,7 +361,7 @@
     },
     {
       "name": "dashboard-design",
-      "description": "Dashboard design guidance for planning layout, information hierarchy, widget arrangement, and card structure in analytics or product dashboards. Use when a task is about designing or restyling dashboards, KPI panels, monitoring views, or card-based overview screens so the layout is readable and decision-focused.",
+      "description": "Design decision-focused product, analytics, executive, and operational dashboards through metric ownership, KPI hierarchy, comparison baselines, freshness, visual encoding, drill-down, anomaly context, and responsive layout. Use when planning or reviewing dashboard information architecture, KPI panels, monitoring views, reporting surfaces, or card-based overview screens.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -1901,7 +1901,7 @@
     },
     {
       "name": "skillforge",
-      "description": "Skill quality-gate workflow for linting, signing, versioning, and evaluating SKILL.md packages before release or reuse. Use when a skill needs a stronger verification layer than linting or audit alone.",
+      "description": "Certify Skill packages through deterministic linting, provenance, versioning, representative golden cases, rubric-based semantic evaluation, regression thresholds, signing, and reproducible release evidence. Use when a SKILL.md package needs a stronger quality gate before publishing, installing, or reusing it across agent environments.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -2269,7 +2269,7 @@
     },
     {
       "name": "skill-audit",
-      "description": "Skill audit workflow for checking SKILL.md files and bundled content for quality, safety, and policy issues before adoption. Use when a skill needs a deeper structural or security review beyond a simple lint pass.",
+      "description": "Audit Skill packages for trigger quality, instruction coverage, progressive disclosure, provenance, licensing, bundled scripts, external actions, secret access, prompt injection, exfiltration, and maintenance risk. Use before adopting, publishing, upgrading, or trusting a SKILL.md package when linting alone cannot establish quality and safety.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -2311,11 +2311,11 @@
     },
     {
       "name": "repo-ready",
-      "description": "Repository setup and hygiene workflow for adding professional structure, documentation, CI/CD, quality tooling, and platform configuration. Use when starting a repo, hardening an existing one, or adding README, templates, linting, badges, or release automation.",
+      "description": "Prepare and harden repositories through stack-aware structure, contributor instructions, AGENTS.md guidance, documentation, quality commands, CI, security automation, templates, release metadata, and pre-commit safeguards. Use when starting a repository, making an existing project contributor-ready, or auditing repository hygiene and automation without adding generic boilerplate.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
-      "license": "MIT",
+      "license": "Apache-2.0",
       "tags": [
         "repo",
         "hygiene",
@@ -2370,7 +2370,7 @@
     },
     {
       "name": "kubernetes-operations",
-      "description": "Kubernetes operations workflow for manifests, kubectl diagnosis, Deployments, Services, Ingress, ConfigMaps, Secrets, probes, resources, rollouts, logs, events, and troubleshooting cluster workloads. Use when deploying, inspecting, or debugging applications running on Kubernetes.",
+      "description": "Operate and deliver Kubernetes workloads through manifests, Helm, GitOps, kubectl diagnosis, rollout control, probes, resources, networking, RBAC, Pod Security, and policy validation. Use when creating, deploying, inspecting, securing, or debugging Kubernetes applications, Helm charts, Argo CD or Flux delivery, or cluster workload configuration.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -2400,7 +2400,7 @@
     },
     {
       "name": "observability-engineering",
-      "description": "Production observability workflow for metrics, logs, traces, dashboards, alerts, SLI/SLO design, OpenTelemetry, Prometheus, Grafana, and incident-ready monitoring. Use when designing or improving system visibility, diagnosing reliability gaps, or setting up operational dashboards and alerts.",
+      "description": "Engineer production observability with service objectives, OpenTelemetry, metrics, logs, traces, Prometheus, Grafana, dashboards, burn-rate alerts, cardinality budgets, and failure validation. Use when instrumenting services, defining SLIs or SLOs, creating operational dashboards and alerts, diagnosing visibility gaps, or controlling telemetry reliability and cost.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -2415,7 +2415,7 @@
     },
     {
       "name": "security-scanning",
-      "description": "Security scanning workflow for SAST, dependency vulnerability checks, secret scanning, container image scans, IaC scans, SBOM generation, CI security gates, and vulnerability triage. Use when running or configuring automated security tools rather than doing manual secure code review.",
+      "description": "Configure, run, and govern automated security scanning across source code, dependencies, secrets, containers, infrastructure as code, APIs, SBOMs, and CI gates. Use when selecting or tuning SAST, SCA, secret, image, IaC, or DAST tools; establishing baselines and SARIF reporting; triaging findings; or designing reliable security quality gates.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -2430,7 +2430,7 @@
     },
     {
       "name": "incident-response-postmortems",
-      "description": "Incident response and postmortem workflow for triaging live issues, reconstructing timelines, capturing root cause, and tracking corrective actions. Use when a production incident or major failure needs structured follow-up and learning.",
+      "description": "Coordinate production incidents from severity assessment and stabilization through command roles, evidence preservation, communications, recovery validation, on-call handoff, blameless postmortems, and corrective-action closure. Use during active reliability or security incidents, operational handoffs, recovery decisions, and structured post-incident learning.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -2486,7 +2486,7 @@
     },
     {
       "name": "subagent-architecture",
-      "description": "Subagent architecture and orchestration guide for splitting complex work into focused agents, defining responsibilities, handoff contracts, context limits, and parallel or sequential execution. Use when designing or creating subagents, planning multi-agent workflows, or deciding whether a task should stay in one agent or be delegated.",
+      "description": "Design reliable multi-agent workflows by deciding when to delegate, selecting team size and roles, defining file and decision ownership, sequencing dependencies, specifying message and handoff contracts, and arbitrating parallel results. Use when a task needs subagents, agent teams, parallel research or implementation, multi-reviewer work, competing debugging hypotheses, or coordinated fan-out and fan-in execution.",
       "category": "coding-agents-ides",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -2864,6 +2864,126 @@
         "transitions",
         "overflow",
         "ui"
+      ]
+    },
+    {
+      "name": "accessibility-testing",
+      "description": "Test web and mobile interfaces for accessibility through WCAG-oriented audits, keyboard navigation, focus behavior, semantic structure, zoom and reflow, contrast, reduced motion, and hands-on screen-reader workflows for VoiceOver, NVDA, JAWS, TalkBack, and platform accessibility APIs. Use when validating an implemented interface, reproducing an accessibility defect, preparing a release, or defining verifiable remediation criteria.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "accessibility",
+        "wcag",
+        "screen-reader",
+        "keyboard",
+        "testing"
+      ]
+    },
+    {
+      "name": "event-sourcing-cqrs",
+      "description": "Design and implement event-sourced domains, event stores, aggregates, commands, immutable event contracts, CQRS read models, projections, snapshots, idempotency, consistency boundaries, replay, correction, and schema evolution. Use when a system needs auditable state transitions, temporal reconstruction, separate read models, or migration and recovery for existing event-driven data.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "event-sourcing",
+        "cqrs",
+        "event-store",
+        "projections",
+        "replay"
+      ]
+    },
+    {
+      "name": "temporal-workflow-engineering",
+      "description": "Engineer durable Temporal workflows and activities with deterministic replay, explicit state, signals, queries, updates, retries, timeouts, heartbeats, cancellation, compensation, child workflows, continue-as-new, versioning, worker deployment, and time-skipping tests. Use when building or reviewing long-running distributed business processes in Python, TypeScript, Java, Go, or another Temporal SDK.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "temporal",
+        "workflows",
+        "durability",
+        "retries",
+        "testing"
+      ]
+    },
+    {
+      "name": "service-mesh-engineering",
+      "description": "Evaluate, design, deploy, secure, and operate service meshes using Istio, Linkerd, sidecar or ambient data planes, workload identity, mTLS, authorization policy, traffic routing, retries, timeouts, circuit breaking, canaries, telemetry, upgrades, and rollback. Use when a Kubernetes platform needs uniform service-to-service security, traffic policy, or observability and the operational tradeoffs must be proven.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "service-mesh",
+        "istio",
+        "linkerd",
+        "mtls",
+        "traffic-management"
+      ]
+    },
+    {
+      "name": "data-pipeline-orchestration",
+      "description": "Design and operate production data pipelines across Airflow, dbt, Spark, batch and event-driven orchestration, data contracts, partitioning, backfills, idempotency, lineage, quality gates, retries, recovery, and observability. Use when building or debugging scheduled ETL or ELT workflows, analytics transformations, distributed data processing, or governed dataset delivery.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "data-engineering",
+        "airflow",
+        "dbt",
+        "spark",
+        "data-quality"
+      ]
+    },
+    {
+      "name": "threat-modeling",
+      "description": "Build actionable threat models from assets, actors, architecture, data flows, trust boundaries, STRIDE analysis, abuse cases, attack trees, existing controls, security requirements, mitigation mapping, and residual-risk ownership. Use before sensitive design or release decisions, after major architecture changes, or when security findings need to be translated into prioritized requirements and tests.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "security",
+        "threat-modeling",
+        "stride",
+        "attack-trees",
+        "risk"
+      ]
+    },
+    {
+      "name": "reverse-engineering",
+      "description": "Perform authorized static and controlled dynamic analysis of binaries, firmware, memory images, and network protocols through artifact provenance, hashing, format identification, disassembly, decompilation, control-flow and data-flow analysis, memory forensics, protocol inference, and behavioral specification. Use for compatibility, migration, incident investigation, malware triage, documentation, or clean-room interoperability without bypassing access controls or weaponizing findings.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "reverse-engineering",
+        "binary-analysis",
+        "memory-forensics",
+        "protocol-analysis",
+        "firmware"
+      ]
+    },
+    {
+      "name": "agent-action-governance",
+      "description": "Govern consequential AI-agent tool actions through explicit policy, least authority, human approval windows, dry-run evaluation, command and path controls, MCP policy enforcement, tamper-evident signed receipts, verification, break-glass procedures, and audit retention. Use when coding agents can review, merge, publish, deploy, delete, access secrets, call external tools, or bypass repository safeguards and those actions need attributable authorization.",
+      "category": "coding-agents-ides",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "tags": [
+        "agents",
+        "governance",
+        "policy",
+        "approvals",
+        "signed-receipts"
       ]
     }
   ],

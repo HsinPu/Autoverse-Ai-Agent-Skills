@@ -1,32 +1,37 @@
 ---
 name: observability-engineering
-description: Production observability workflow for metrics, logs, traces, dashboards, alerts, SLI/SLO design, OpenTelemetry, Prometheus, Grafana, and incident-ready monitoring. Use when designing or improving system visibility, diagnosing reliability gaps, or setting up operational dashboards and alerts.
+description: Engineer production observability with service objectives, OpenTelemetry, metrics, logs, traces, Prometheus, Grafana, dashboards, burn-rate alerts, cardinality budgets, and failure validation. Use when instrumenting services, defining SLIs or SLOs, creating operational dashboards and alerts, diagnosing visibility gaps, or controlling telemetry reliability and cost.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---
 
 # Observability Engineering
 
-Use this skill when a system needs production-grade visibility.
-
 ## Workflow
 
-1. Identify the service, user journeys, failure modes, dependencies, and operational owners.
-2. Define signals: metrics, logs, traces, events, health checks, and business indicators.
-3. Choose SLIs, SLOs, alert thresholds, dashboards, and runbooks tied to real user impact.
-4. Instrument with consistent names, low-cardinality labels, trace context, and structured logs.
-5. Validate alerts and dashboards during deploys, incidents, and controlled failure tests.
+1. Define critical user journeys, owners, dependencies, failure modes, and decisions telemetry must support.
+2. Select service-level indicators for availability, latency, correctness, freshness, throughput, and saturation.
+3. Set objectives and error budgets from user expectations and operational capability.
+4. Instrument stable metrics, structured events, trace propagation, and exemplars with bounded cardinality.
+5. Build task-oriented dashboards and multi-window burn-rate alerts with runbook ownership.
+6. Validate signals during normal traffic, dependency failure, overload, partial degradation, deploy, and recovery.
+7. Review sampling, retention, volume, label growth, privacy, and telemetry cost.
 
-## Rules
+## Signal Rules
 
-- Alert on user-impacting symptoms before low-level causes.
-- Keep dashboards action-oriented; avoid vanity panels that do not support decisions.
-- Control metric cardinality and log volume before costs become operational noise.
-- Correlate logs, metrics, and traces with stable request, user, tenant, or job identifiers.
-- Treat observability as part of release readiness, not as a post-incident add-on.
+- Alert on actionable user impact or rapidly consumed error budget, not raw event volume alone.
+- Keep identifiers out of metric labels; put high-cardinality context in traces or structured logs.
+- Propagate trace and correlation context across HTTP, messaging, jobs, and retries.
+- Record telemetry schema and unit conventions as public operational contracts.
+- Include missing-data and telemetry-pipeline failure behavior.
+
+## References
+
+- Read [references/prometheus-grafana-slo.md](references/prometheus-grafana-slo.md) for PromQL patterns, dashboard layout, OpenTelemetry sampling, SLO calculations, burn-rate alerts, and failure drills.
 
 ## Handoff
 
-- For application log message design, use `logging-patterns`.
-- For deploy verification, use `deployment-operations`.
-- For incident timeline and follow-up, use `incident-response-postmortems`.
+- Use `logging-patterns` for log event design.
+- Use `deployment-operations` for release verification.
+- Use `incident-response-postmortems` for incident coordination and learning.
+- Use `dashboard-design` for product or executive dashboard information design.
