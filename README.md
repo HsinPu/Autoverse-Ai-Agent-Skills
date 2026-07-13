@@ -42,30 +42,36 @@ Agent 目前提供 Codex 與 Claude Code 的 user scope 與 project scope。Code
 
 ### Windows PowerShell
 
-安裝到使用者的 Codex：
+一鍵安裝全部 199 個 Agent 到使用者的 Codex：
 
 ```powershell
-powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target codex -Type agent -Name comprehensive-review/code-reviewer'
+powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target codex -Type agent'
 ```
 
-安裝到目前專案的 Claude Code：
+一鍵安裝全部 Agent 到目前專案的 Claude Code：
 
 ```powershell
-powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target claude-project -Type agent -Name incident-response/debugger'
+powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target claude-project -Type agent'
+```
+
+只安裝單一 Agent 時才加上 `-Name plugin/role`：
+
+```powershell
+.\scripts\install.ps1 -Target codex -Type agent -Name comprehensive-review/code-reviewer -SourceDir .
 ```
 
 ### Linux／macOS
 
-安裝到使用者的 Claude Code：
+一鍵安裝全部 Agent 到使用者的 Claude Code：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target claude --type agent --name comprehensive-review/code-reviewer
+curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target claude --type agent
 ```
 
-安裝到目前專案的 Codex：
+一鍵安裝全部 Agent 到目前專案的 Codex：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex-project --type agent --name incident-response/debugger
+curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex-project --type agent
 ```
 
 ### Agent 安裝位置
@@ -77,11 +83,11 @@ curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/ma
 | `claude` | 使用者 | `~/.claude/agents/` |
 | `claude-project` | 目前專案 | `.claude/agents/` |
 
-每次 Agent 安裝會建立 `<agent-file>.autoverse.json`。只有 metadata 顯示來自同一 repo 時才會自動更新；既有同名內容沒有 metadata、metadata 無效或來自其他 repo 時，安裝器會拒絕覆蓋。確認要取代時才使用 `-Force`／`--force`。
+省略 `Name`／`--name` 會安裝全部 Agent；指定 `plugin/role` 則只安裝一個。大量安裝會先完成全部目標的覆蓋安全預檢，確認無衝突後才開始寫入。每次 Agent 安裝會建立 `<agent-file>.autoverse.json`。只有 metadata 顯示來自同一 repo 時才會自動更新；既有同名內容沒有 metadata、metadata 無效或來自其他 repo 時，安裝器會拒絕覆蓋。確認要取代時才使用 `-Force`／`--force`。
 
 ## 安裝 Skills
 
-新參數使用 `Target + Type + Name`；舊版的 `-Agent ... -Skill ...` 與 `--agent ... --skill ...` 仍可繼續使用。
+新參數使用 `Target + Type + 選填 Name`；舊版的 `-Agent ... -Skill ...` 與 `--agent ... --skill ...` 仍可繼續使用。
 
 Windows 安裝單一 Skill：
 

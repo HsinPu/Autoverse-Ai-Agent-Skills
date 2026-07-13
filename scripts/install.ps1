@@ -30,11 +30,12 @@ Autoverse AI Agent Skills installer
 
 Usage:
   .\scripts\install.ps1 -Target <target> [-Type skill] [-Name <skill>] [-InstallDir path] [-DryRun] [-Force]
-  .\scripts\install.ps1 -Target <target> -Type agent -Name <plugin/role> [-InstallDir path] [-DryRun] [-Force]
+  .\scripts\install.ps1 -Target <target> -Type agent [-Name <plugin/role>] [-InstallDir path] [-DryRun] [-Force]
 
 Compatibility aliases:
   -Agent is an alias for -Target; -Skill is an alias for -Name.
   -SourceDir installs from a local checkout; otherwise the requested GitHub repo and branch are downloaded.
+  Omit -Name with -Type agent to install every available Agent.
 
 Skill targets:
   claude, cursor, codex, amp, vscode, copilot, project, goose, opencode,
@@ -95,7 +96,7 @@ function Resolve-InstallPath {
 function Test-ComponentName {
     param([string]$ComponentType, [string]$ComponentName)
     if ($ComponentType -eq "agent") {
-        if (-not $ComponentName) { throw "Agent Name is required and must use plugin/role." }
+        if (-not $ComponentName) { return }
         if ($ComponentName -notmatch '^[a-z0-9]+(?:-[a-z0-9]+)*/[a-z0-9]+(?:-[a-z0-9]+)*$') {
             throw "Invalid Agent Name '$ComponentName'. Expected plugin/role in lowercase hyphen-case."
         }
@@ -137,22 +138,51 @@ function Get-SkillSources {
     return $skills
 }
 
-function Get-AgentSource {
+function Get-AgentSources {
     param([string]$RepoRoot, [string]$TargetName, [string]$AgentId)
-    $parts = $AgentId.Split('/')
-    $plugin = $parts[0]
-    $role = $parts[1]
     $platform = if ($TargetName.ToLowerInvariant().StartsWith("codex")) { "codex" } else { "claude" }
     $extension = if ($platform -eq "codex") { ".toml" } else { ".md" }
-    $sourcePath = Join-Path $RepoRoot "adapters\$platform\$plugin\$role$extension"
-    if (-not (Test-Path -LiteralPath $sourcePath -PathType Leaf)) {
-        throw "Agent adapter not found in archive: $AgentId ($platform)"
+    $adapterRoot = Join-Path $RepoRoot "adapters\$platform"
+
+    if ($AgentId) {
+        $parts = $AgentId.Split('/')
+        $plugin = $parts[0]
+        $role = $parts[1]
+        $sourcePath = Join-Path $adapterRoot "$plugin\$role$extension"
+        if (-not (Test-Path -LiteralPath $sourcePath -PathType Leaf)) {
+            throw "Agent adapter not found in archive: $AgentId ($platform)"
+        }
+        return ,@{
+            Source = Get-Item -LiteralPath $sourcePath
+            Id = $AgentId
+            RuntimeName = "$plugin-$role"
+            Platform = $platform
+        }
     }
-    return @{
-        Source = Get-Item -LiteralPath $sourcePath
-        RuntimeName = "$plugin-$role"
-        Platform = $platform
+
+    if (-not (Test-Path -LiteralPath $adapterRoot -PathType Container)) {
+        throw "Agent adapter directory not found in archive: adapters/$platform"
     }
+    $sources = @(
+        Get-ChildItem -LiteralPath $adapterRoot -Directory |
+            Sort-Object Name |
+            ForEach-Object {
+                $plugin = $_.Name
+                Get-ChildItem -LiteralPath $_.FullName -File -Filter "*$extension" |
+                    Sort-Object Name |
+                    ForEach-Object {
+                        $role = $_.BaseName
+                        @{
+                            Source = $_
+                            Id = "$plugin/$role"
+                            RuntimeName = "$plugin-$role"
+                            Platform = $platform
+                        }
+                    }
+            }
+    )
+    if ($sources.Count -eq 0) { throw "No Agent adapters were found for $platform." }
+    return $sources
 }
 
 function Test-TargetWithinRoot {
@@ -225,6 +255,14 @@ function Install-AgentProfile {
     Write-Success "$($plan.Action) Agent $AgentId -> $targetPath"
 }
 
+function Test-AgentProfileInstall {
+    param([System.IO.FileInfo]$Source, [string]$RuntimeName, [string]$AgentId, [string]$DestinationRoot, [string]$RepoName)
+    $targetPath = Join-Path $DestinationRoot ($RuntimeName + $Source.Extension)
+    if (-not (Test-TargetWithinRoot -TargetPath $targetPath -RootPath $DestinationRoot)) { throw "Refusing to write outside install directory: $targetPath" }
+    $metaPath = "$targetPath.autoverse.json"
+    Get-InstallAction -TargetPath $targetPath -MetaPath $metaPath -Label $AgentId -RepoName $RepoName | Out-Null
+}
+
 try {
     if (-not $Target) { Show-Usage; throw "Target is required." }
     Test-ComponentName -ComponentType $Type -ComponentName $Name
@@ -247,8 +285,14 @@ try {
         Write-Info "Destination: $destinationRoot"
 
         if ($Type -eq "agent") {
-            $agentSource = Get-AgentSource -RepoRoot $repoRoot -TargetName $Target -AgentId $Name
-            Install-AgentProfile -Source $agentSource.Source -RuntimeName $agentSource.RuntimeName -AgentId $Name -Platform $agentSource.Platform -DestinationRoot $destinationRoot -TargetName $Target -RepoName $Repo -BranchName $Branch
+            $agentSources = @(Get-AgentSources -RepoRoot $repoRoot -TargetName $Target -AgentId $Name)
+            foreach ($agentSource in $agentSources) {
+                Test-AgentProfileInstall -Source $agentSource.Source -RuntimeName $agentSource.RuntimeName -AgentId $agentSource.Id -DestinationRoot $destinationRoot -RepoName $Repo
+            }
+            Write-Info "$(if ($DryRun) { 'Planning' } else { 'Installing' }) $($agentSources.Count) Agent(s) for $Target"
+            foreach ($agentSource in $agentSources) {
+                Install-AgentProfile -Source $agentSource.Source -RuntimeName $agentSource.RuntimeName -AgentId $agentSource.Id -Platform $agentSource.Platform -DestinationRoot $destinationRoot -TargetName $Target -RepoName $Repo -BranchName $Branch
+            }
         } else {
             $sources = Get-SkillSources -RepoRoot $repoRoot -SkillName $Name
             Write-Info "$(if ($DryRun) { 'Planning' } else { 'Installing' }) $($sources.Count) Skill(s) for $Target"

@@ -17,11 +17,12 @@ Autoverse AI Agent Skills installer
 
 Usage:
   scripts/install.sh --target <target> [--type skill] [--name <skill>] [--dir path] [--dry-run] [--force]
-  scripts/install.sh --target <target> --type agent --name <plugin/role> [--dir path] [--dry-run] [--force]
+  scripts/install.sh --target <target> --type agent [--name <plugin/role>] [--dir path] [--dry-run] [--force]
 
 Compatibility aliases:
   --agent is an alias for --target; --skill selects a Skill by name.
   --source-dir installs from a local checkout; otherwise the requested GitHub repo and branch are downloaded.
+  Omit --name with --type agent to install every available Agent.
 
 Skill targets:
   claude, cursor, codex, amp, vscode, copilot, project, goose, opencode,
@@ -96,6 +97,7 @@ install_path() {
 
 validate_name() {
   if [[ "$TYPE" == "agent" ]]; then
+    [[ -z "$NAME" ]] && return
     if [[ ! "$NAME" =~ ^[a-z0-9]+(-[a-z0-9]+)*/[a-z0-9]+(-[a-z0-9]+)*$ ]]; then
       log_error "Invalid Agent Name '$NAME'. Expected plugin/role in lowercase hyphen-case."
       exit 1
@@ -212,6 +214,15 @@ EOF
   log_success "$INSTALL_ACTION Agent $agent_id -> $target"
 }
 
+preflight_agent_profile() {
+  local src="$1" runtime_name="$2" agent_id="$3" extension target meta
+  extension=".${src##*.}"
+  target="$DEST_DIR/$runtime_name$extension"
+  meta="$target.autoverse.json"
+  assert_within_destination "$target"
+  install_action "$target" "$meta" "$agent_id"
+}
+
 if [[ -z "$TARGET" ]]; then usage; log_error "Target is required."; exit 1; fi
 if [[ "$TYPE" != "skill" && "$TYPE" != "agent" ]]; then log_error "Type must be skill or agent."; exit 1; fi
 validate_name
@@ -248,13 +259,35 @@ fi
 log_info "Destination: $DEST_DIR"
 
 if [[ "$TYPE" == "agent" ]]; then
-  PLUGIN="${NAME%%/*}"
-  ROLE="${NAME#*/}"
-  RUNTIME_NAME="$PLUGIN-$ROLE"
   if [[ "$TARGET" == codex* ]]; then PLATFORM="codex"; EXTENSION="toml"; else PLATFORM="claude"; EXTENSION="md"; fi
-  SOURCE="$REPO_ROOT/adapters/$PLATFORM/$PLUGIN/$ROLE.$EXTENSION"
-  if [[ ! -f "$SOURCE" ]]; then log_error "Agent adapter not found in archive: $NAME ($PLATFORM)"; exit 1; fi
-  install_agent_profile "$SOURCE" "$RUNTIME_NAME" "$NAME" "$PLATFORM"
+  AGENT_SOURCES=()
+  if [[ -n "$NAME" ]]; then
+    PLUGIN="${NAME%%/*}"
+    ROLE="${NAME#*/}"
+    SOURCE="$REPO_ROOT/adapters/$PLATFORM/$PLUGIN/$ROLE.$EXTENSION"
+    if [[ ! -f "$SOURCE" ]]; then log_error "Agent adapter not found in archive: $NAME ($PLATFORM)"; exit 1; fi
+    AGENT_SOURCES+=("$SOURCE")
+  else
+    for source in "$REPO_ROOT/adapters/$PLATFORM"/*/*."$EXTENSION"; do
+      [[ -f "$source" ]] && AGENT_SOURCES+=("$source")
+    done
+  fi
+  if [[ "${#AGENT_SOURCES[@]}" -eq 0 ]]; then log_error "No Agent adapters were found for $PLATFORM."; exit 1; fi
+  for source in "${AGENT_SOURCES[@]}"; do
+    RELATIVE_SOURCE="${source#"$REPO_ROOT/adapters/$PLATFORM/"}"
+    PLUGIN="${RELATIVE_SOURCE%%/*}"
+    ROLE_FILE="${RELATIVE_SOURCE#*/}"
+    ROLE="${ROLE_FILE%.$EXTENSION}"
+    preflight_agent_profile "$source" "$PLUGIN-$ROLE" "$PLUGIN/$ROLE"
+  done
+  log_info "$(if [[ "$DRY_RUN" -eq 1 ]]; then printf Planning; else printf Installing; fi) ${#AGENT_SOURCES[@]} Agent(s) for $TARGET"
+  for source in "${AGENT_SOURCES[@]}"; do
+    RELATIVE_SOURCE="${source#"$REPO_ROOT/adapters/$PLATFORM/"}"
+    PLUGIN="${RELATIVE_SOURCE%%/*}"
+    ROLE_FILE="${RELATIVE_SOURCE#*/}"
+    ROLE="${ROLE_FILE%.$EXTENSION}"
+    install_agent_profile "$source" "$PLUGIN-$ROLE" "$PLUGIN/$ROLE" "$PLATFORM"
+  done
 else
   SOURCES=()
   SKILLS_ROOT="$REPO_ROOT/skills"
