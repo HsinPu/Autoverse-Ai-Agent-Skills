@@ -1,9 +1,9 @@
 {
   "version": "3.0.0",
-  "updated": "2026-07-13T08:17:30.540Z",
-  "total": 134,
-  "categories": 24,
-  "uniqueRoles": 134,
+  "updated": "2026-07-13T12:03:11.255Z",
+  "total": 158,
+  "categories": 29,
+  "uniqueRoles": 158,
   "agents": [
     {
       "id": "accessibility-expert",
@@ -35,6 +35,69 @@
           "plugins/ui-design/agents/accessibility-expert.md"
         ],
         "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+      }
+    },
+    {
+      "id": "accounting-controller",
+      "name": "accounting-controller",
+      "role": "accounting-controller",
+      "description": "Reviews close readiness, reconciliations, proposed adjustments, supporting evidence, and internal controls without posting entries or moving funds. Use for accounting operations that require traceability and human approval.",
+      "category": "finance",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "spreadsheet-ops",
+        "data-organization-system",
+        "specification-authoring"
+      ],
+      "tags": [
+        "accounting",
+        "reconciliation",
+        "close-management",
+        "internal-controls"
+      ],
+      "path": "agents/accounting-controller.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "finance/finance-bookkeeper-controller.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
+      }
+    },
+    {
+      "id": "agent-harness-optimizer",
+      "name": "agent-harness-optimizer",
+      "role": "agent-harness-optimizer",
+      "description": "Diagnoses and improves how Agents, Skills, instructions, adapters, and configuration are discovered and loaded across Codex, Claude, Cursor, VS Code Copilot, and OpenCode. Use for cross-harness compatibility, collisions, installation, or routing failures.",
+      "category": "developer-experience",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "agent-creator-design",
+        "subagent-architecture",
+        "context-governance",
+        "skill-audit"
+      ],
+      "tags": [
+        "agent-harness",
+        "adapters",
+        "compatibility",
+        "routing"
+      ],
+      "path": "agents/agent-harness-optimizer.md",
+      "references": {
+        "repo": "affaan-m/ECC",
+        "paths": [
+          "agents/harness-optimizer.md"
+        ],
+        "tree": "106f376c7c8c5c096156e1f06493ad1c3dc2a465"
       }
     },
     {
@@ -519,6 +582,70 @@
       }
     },
     {
+      "id": "change-management-consultant",
+      "name": "change-management-consultant",
+      "role": "change-management-consultant",
+      "description": "Plans responsible organizational adoption for process, policy, technology, and operating-model changes. Use when a transformation needs stakeholder impact analysis, readiness assessment, communication, training, reinforcement, and measurable adoption.",
+      "category": "business-operations",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "specification-authoring",
+        "data-organization-system",
+        "presentation-ops",
+        "humanizer"
+      ],
+      "tags": [
+        "change-management",
+        "adoption",
+        "stakeholder-impact",
+        "enablement"
+      ],
+      "path": "agents/change-management-consultant.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "specialized/change-management-consultant.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
+      }
+    },
+    {
+      "id": "clinical-evidence-reviewer",
+      "name": "clinical-evidence-reviewer",
+      "role": "clinical-evidence-reviewer",
+      "description": "Reviews clinical claims against current literature, study quality, effect estimates, harms, applicability, and regulatory framing. Use for evidence synthesis and claim auditing, never diagnosis or treatment.",
+      "category": "healthcare",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "web-research-ops",
+        "summary-ops",
+        "spreadsheet-ops",
+        "specification-authoring"
+      ],
+      "tags": [
+        "clinical-evidence",
+        "healthcare",
+        "literature-review",
+        "claim-audit"
+      ],
+      "path": "agents/clinical-evidence-reviewer.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "healthcare/healthcare-clinical-evidence-agent.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
+      }
+    },
+    {
       "id": "cloud-architect",
       "name": "cloud-architect",
       "role": "cloud-architect",
@@ -551,6 +678,38 @@
           "plugins/deployment-validation/agents/cloud-architect.md"
         ],
         "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+      }
+    },
+    {
+      "id": "cms-platform-engineer",
+      "name": "cms-platform-engineer",
+      "role": "cms-platform-engineer",
+      "description": "Builds and maintains WordPress, Drupal, and headless-CMS extensions, themes, content models, migrations, and integrations with editor, security, and deployment safety. Use for code-first CMS platform work.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "security-code-review",
+        "database-design",
+        "frontend-testing",
+        "deployment-operations"
+      ],
+      "tags": [
+        "cms",
+        "wordpress",
+        "drupal",
+        "content-modeling"
+      ],
+      "path": "agents/cms-platform-engineer.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "engineering/engineering-cms-developer.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
       }
     },
     {
@@ -620,6 +779,38 @@
           "plugins/tdd-workflows/agents/code-reviewer.md"
         ],
         "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+      }
+    },
+    {
+      "id": "compliance-auditor",
+      "name": "compliance-auditor",
+      "role": "compliance-auditor",
+      "description": "Performs evidence-based readiness reviews by mapping current requirements to controls, testing samples, documenting gaps, and separating remediation from independent certification. Use for audit preparation, not attestation.",
+      "category": "governance",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "web-research-ops",
+        "specification-authoring",
+        "security-code-review",
+        "data-organization-system"
+      ],
+      "tags": [
+        "compliance",
+        "controls",
+        "audit-readiness",
+        "evidence"
+      ],
+      "path": "agents/compliance-auditor.md",
+      "references": {
+        "repo": "VoltAgent/awesome-claude-code-subagents",
+        "paths": [
+          "categories/04-quality-security/compliance-auditor.md"
+        ],
+        "tree": "9c98eac2f7463c79ebb7b914432ace7dbd3bfeaa"
       }
     },
     {
@@ -779,6 +970,38 @@
           "plugins/jvm-languages/agents/csharp-pro.md"
         ],
         "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+      }
+    },
+    {
+      "id": "customer-success-manager",
+      "name": "customer-success-manager",
+      "role": "customer-success-manager",
+      "description": "Builds evidence-based customer success plans across onboarding, adoption, value realization, risk, renewal readiness, and expansion fit. Use when a customer relationship needs measurable outcomes and coordinated follow-through rather than reactive support alone.",
+      "category": "customer-operations",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "data-organization-system",
+        "spreadsheet-ops",
+        "summary-ops",
+        "presentation-ops"
+      ],
+      "tags": [
+        "customer-success",
+        "onboarding",
+        "adoption",
+        "retention"
+      ],
+      "path": "agents/customer-success-manager.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "specialized/customer-success-manager.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
       }
     },
     {
@@ -1531,6 +1754,38 @@
       }
     },
     {
+      "id": "fpa-analyst",
+      "name": "fpa-analyst",
+      "role": "fpa-analyst",
+      "description": "Builds driver-based budgets, rolling forecasts, variance explanations, and decision scenarios from traceable operating and financial inputs. Use for planning and management analysis, not accounting attestation or investment advice.",
+      "category": "finance",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "spreadsheet-ops",
+        "data-organization-system",
+        "specification-authoring",
+        "web-research-ops"
+      ],
+      "tags": [
+        "financial-planning",
+        "forecasting",
+        "budgeting",
+        "variance-analysis"
+      ],
+      "path": "agents/fpa-analyst.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "finance/finance-fpa-analyst.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
+      }
+    },
+    {
       "id": "frontend-developer",
       "name": "frontend-developer",
       "role": "frontend-developer",
@@ -1631,6 +1886,38 @@
       }
     },
     {
+      "id": "gis-analyst",
+      "name": "gis-analyst",
+      "role": "gis-analyst",
+      "description": "Produces reproducible geospatial analysis, maps, layer transformations, and data-quality checks with explicit coordinate, scale, time, and uncertainty assumptions. Use for GIS work where spatial correctness matters.",
+      "category": "data",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "python-data-engineering",
+        "database-design",
+        "data-organization-system",
+        "testing-strategy"
+      ],
+      "tags": [
+        "gis",
+        "geospatial",
+        "cartography",
+        "spatial-data"
+      ],
+      "path": "agents/gis-analyst.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "gis/gis-analyst.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
+      }
+    },
+    {
       "id": "golang-pro",
       "name": "golang-pro",
       "role": "golang-pro",
@@ -1660,6 +1947,38 @@
           "plugins/systems-programming/agents/golang-pro.md"
         ],
         "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+      }
+    },
+    {
+      "id": "grant-strategist",
+      "name": "grant-strategist",
+      "role": "grant-strategist",
+      "description": "Evaluates funding opportunities and builds compliant, evidence-backed grant strategies across fit, outcomes, partnerships, budgets, work plans, and review gates. Use before committing to a grant application or when a proposal needs a defensible funding case.",
+      "category": "strategy",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "web-research-ops",
+        "specification-authoring",
+        "spreadsheet-ops",
+        "word-document-ops"
+      ],
+      "tags": [
+        "grants",
+        "funding-strategy",
+        "proposal-planning",
+        "compliance"
+      ],
+      "path": "agents/grant-strategist.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "specialized/grant-writer.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
       }
     },
     {
@@ -1881,6 +2200,38 @@
           "plugins/incident-response/agents/incident-responder.md"
         ],
         "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+      }
+    },
+    {
+      "id": "internationalization-engineer",
+      "name": "internationalization-engineer",
+      "role": "internationalization-engineer",
+      "description": "Audits and implements locale-ready software across messages, plurals, formatting, Unicode, bidirectional layout, resource loading, and regression tests. Use when an application must support additional languages or fix internationalization defects safely.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "i18n-localization",
+        "frontend-testing",
+        "browser-compatibility-testing",
+        "accessibility-testing"
+      ],
+      "tags": [
+        "internationalization",
+        "localization",
+        "unicode",
+        "rtl"
+      ],
+      "path": "agents/internationalization-engineer.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "engineering/engineering-i18n-engineer.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
       }
     },
     {
@@ -2141,6 +2492,70 @@
           "plugins/reverse-engineering/agents/malware-analyst.md"
         ],
         "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+      }
+    },
+    {
+      "id": "marketing-measurement-specialist",
+      "name": "marketing-measurement-specialist",
+      "role": "marketing-measurement-specialist",
+      "description": "Designs and verifies privacy-aware event, conversion, tag, and attribution implementations across application code and marketing platforms. Use when analytics must be reproducible, deduplicated, and tied to decisions.",
+      "category": "marketing",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "browser-automation",
+        "webapp-testing",
+        "javascript-development",
+        "data-organization-system"
+      ],
+      "tags": [
+        "analytics",
+        "conversion-tracking",
+        "attribution",
+        "privacy"
+      ],
+      "path": "agents/marketing-measurement-specialist.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "paid-media/paid-media-tracking-specialist.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
+      }
+    },
+    {
+      "id": "mcp-developer",
+      "name": "mcp-developer",
+      "role": "mcp-developer",
+      "description": "Builds and reviews Model Context Protocol servers and clients with explicit schemas, capability negotiation, authorization, testing, and operational controls. Use for MCP tools, resources, prompts, transports, or host integrations.",
+      "category": "artificial-intelligence",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "mcp-creator-design",
+        "mcp-ops",
+        "api-contract-design",
+        "security-code-review"
+      ],
+      "tags": [
+        "mcp",
+        "protocol",
+        "tools",
+        "integration"
+      ],
+      "path": "agents/mcp-developer.md",
+      "references": {
+        "repo": "VoltAgent/awesome-claude-code-subagents",
+        "paths": [
+          "categories/06-developer-experience/mcp-developer.md"
+        ],
+        "tree": "9c98eac2f7463c79ebb7b914432ace7dbd3bfeaa"
       }
     },
     {
@@ -2498,6 +2913,38 @@
       }
     },
     {
+      "id": "paid-media-auditor",
+      "name": "paid-media-auditor",
+      "role": "paid-media-auditor",
+      "description": "Audits paid-search and paid-social account structure, measurement, budget controls, targeting, creative coverage, and landing-page alignment using dated evidence. Use before changing campaigns or accepting performance claims.",
+      "category": "marketing",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "web-research-ops",
+        "spreadsheet-ops",
+        "data-organization-system",
+        "browser-automation"
+      ],
+      "tags": [
+        "paid-media",
+        "advertising",
+        "measurement",
+        "audit"
+      ],
+      "path": "agents/paid-media-auditor.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "paid-media/paid-media-auditor.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
+      }
+    },
+    {
       "id": "payment-integration",
       "name": "payment-integration",
       "role": "payment-integration",
@@ -2598,6 +3045,38 @@
       }
     },
     {
+      "id": "platform-engineer",
+      "name": "platform-engineer",
+      "role": "platform-engineer",
+      "description": "Designs and implements internal developer platforms, paved-road templates, service catalogs, and self-service workflows with measurable adoption and operability. Use when teams repeatedly assemble the same delivery infrastructure or platform friction limits delivery.",
+      "category": "developer-experience",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "project-architecture-review",
+        "deployment-operations",
+        "kubernetes-operations",
+        "terraform-infrastructure"
+      ],
+      "tags": [
+        "platform-engineering",
+        "developer-platform",
+        "self-service",
+        "gitops"
+      ],
+      "path": "agents/platform-engineer.md",
+      "references": {
+        "repo": "VoltAgent/awesome-claude-code-subagents",
+        "paths": [
+          "categories/03-infrastructure/platform-engineer.md"
+        ],
+        "tree": "9c98eac2f7463c79ebb7b914432ace7dbd3bfeaa"
+      }
+    },
+    {
       "id": "playwright",
       "name": "playwright",
       "role": "playwright",
@@ -2693,6 +3172,39 @@
       }
     },
     {
+      "id": "powershell-pro",
+      "name": "powershell-pro",
+      "role": "powershell-pro",
+      "description": "Designs and implements safe PowerShell automation across Windows PowerShell 5.1 and PowerShell 7+, with explicit edition compatibility, object-pipeline contracts, testing, and rollback. Use for scripts, modules, CI, and Windows administration tooling.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "terminal-ops",
+        "coding-standards",
+        "security-scanning",
+        "testing-strategy"
+      ],
+      "tags": [
+        "powershell",
+        "windows",
+        "automation",
+        "scripting"
+      ],
+      "path": "agents/powershell-pro.md",
+      "references": {
+        "repo": "VoltAgent/awesome-claude-code-subagents",
+        "paths": [
+          "categories/02-language-specialists/powershell-5.1-expert.md",
+          "categories/02-language-specialists/powershell-7-expert.md"
+        ],
+        "tree": "9c98eac2f7463c79ebb7b914432ace7dbd3bfeaa"
+      }
+    },
+    {
       "id": "prod-logs-health-check",
       "name": "prod-logs-health-check",
       "role": "prod-logs-health-check",
@@ -2721,6 +3233,70 @@
           "plugins/operating-kit/agents/prod-logs-health-check.md"
         ],
         "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+      }
+    },
+    {
+      "id": "product-manager",
+      "name": "product-manager",
+      "role": "product-manager",
+      "description": "Turns product opportunities into evidence-backed priorities, requirements, launch decisions, and measurable outcomes. Use when a team must decide what to build, why it matters, what not to build, or how to evaluate impact after release.",
+      "category": "product-management",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "specification-authoring",
+        "web-research-ops",
+        "data-organization-system",
+        "spreadsheet-ops"
+      ],
+      "tags": [
+        "product-management",
+        "discovery",
+        "prioritization",
+        "outcomes"
+      ],
+      "path": "agents/product-manager.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "product/product-manager.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
+      }
+    },
+    {
+      "id": "project-manager",
+      "name": "project-manager",
+      "role": "project-manager",
+      "description": "Builds evidence-based delivery plans across scope, owners, dependencies, milestones, risks, decisions, and stakeholder communication. Use when a defined initiative needs coordinated execution without losing accountability or change control.",
+      "category": "project-management",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "todo-first",
+        "specification-authoring",
+        "data-organization-system",
+        "spreadsheet-ops"
+      ],
+      "tags": [
+        "project-management",
+        "planning",
+        "dependencies",
+        "risk"
+      ],
+      "path": "agents/project-manager.md",
+      "references": {
+        "repo": "VoltAgent/awesome-claude-code-subagents",
+        "paths": [
+          "categories/08-business-product/project-manager.md"
+        ],
+        "tree": "9c98eac2f7463c79ebb7b914432ace7dbd3bfeaa"
       }
     },
     {
@@ -3137,6 +3713,38 @@
       }
     },
     {
+      "id": "saas-platform-architect",
+      "name": "saas-platform-architect",
+      "role": "saas-platform-architect",
+      "description": "Designs cloud-neutral SaaS platforms around tenant isolation, lifecycle, identity, data partitioning, metering, reliability, and regional obligations. Use before building or restructuring a multi-tenant B2B, B2C, or hybrid product.",
+      "category": "architecture",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "project-architecture-review",
+        "api-contract-design",
+        "database-design",
+        "deployment-operations"
+      ],
+      "tags": [
+        "saas",
+        "multi-tenancy",
+        "architecture",
+        "tenant-lifecycle"
+      ],
+      "path": "agents/saas-platform-architect.md",
+      "references": {
+        "repo": "github/awesome-copilot",
+        "paths": [
+          "agents/azure-saas-architect.agent.md"
+        ],
+        "tree": "b36521f664a175a1ab32b4e5c8d75f0435d32ccc"
+      }
+    },
+    {
       "id": "sales-automator",
       "name": "sales-automator",
       "role": "sales-automator",
@@ -3166,6 +3774,38 @@
           "plugins/customer-sales-automation/agents/sales-automator.md"
         ],
         "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+      }
+    },
+    {
+      "id": "sales-engineer",
+      "name": "sales-engineer",
+      "role": "sales-engineer",
+      "description": "Translates buyer requirements into honest technical fit, discovery, demonstrations, proof-of-concept plans, risk responses, and implementation handoffs. Use for complex pre-sales work where product capability and customer architecture must be verified.",
+      "category": "sales",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "project-architecture-review",
+        "api-contract-design",
+        "presentation-ops",
+        "web-research-ops"
+      ],
+      "tags": [
+        "sales-engineering",
+        "technical-discovery",
+        "proof-of-concept",
+        "solution-fit"
+      ],
+      "path": "agents/sales-engineer.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "sales/sales-engineer.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
       }
     },
     {
@@ -3715,6 +4355,38 @@
       }
     },
     {
+      "id": "software-license-compliance-engineer",
+      "name": "software-license-compliance-engineer",
+      "role": "software-license-compliance-engineer",
+      "description": "Audits software and model dependency licenses, provenance, compatibility, notices, and distribution obligations as an engineering control. Use before release, redistribution, relicensing, or dependency-policy changes.",
+      "category": "governance",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "web-research-ops",
+        "security-scanning",
+        "repo-ready",
+        "specification-authoring"
+      ],
+      "tags": [
+        "licensing",
+        "open-source",
+        "compliance",
+        "provenance"
+      ],
+      "path": "agents/software-license-compliance-engineer.md",
+      "references": {
+        "repo": "VoltAgent/awesome-claude-code-subagents",
+        "paths": [
+          "categories/08-business-product/license-engineer.md"
+        ],
+        "tree": "9c98eac2f7463c79ebb7b914432ace7dbd3bfeaa"
+      }
+    },
+    {
       "id": "sql-pro",
       "name": "sql-pro",
       "role": "sql-pro",
@@ -3744,6 +4416,38 @@
           "plugins/database-design/agents/sql-pro.md"
         ],
         "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+      }
+    },
+    {
+      "id": "sre-engineer",
+      "name": "sre-engineer",
+      "role": "sre-engineer",
+      "description": "Establishes service-level objectives, error-budget policy, capacity signals, toil reduction, and sustainable reliability practices. Use when reliability decisions need measurable targets beyond dashboards or incident response.",
+      "category": "operations",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "observability-engineering",
+        "incident-response-postmortems",
+        "deployment-operations",
+        "testing-strategy"
+      ],
+      "tags": [
+        "sre",
+        "reliability",
+        "slo",
+        "error-budget"
+      ],
+      "path": "agents/sre-engineer.md",
+      "references": {
+        "repo": "VoltAgent/awesome-claude-code-subagents",
+        "paths": [
+          "categories/03-infrastructure/sre-engineer.md"
+        ],
+        "tree": "9c98eac2f7463c79ebb7b914432ace7dbd3bfeaa"
       }
     },
     {
@@ -4298,6 +5002,38 @@
       }
     },
     {
+      "id": "ux-researcher",
+      "name": "ux-researcher",
+      "role": "ux-researcher",
+      "description": "Designs ethical user research and synthesizes behavioral evidence into product and design decisions. Use when a team needs to understand user needs, validate a workflow, investigate usability problems, or reduce uncertainty before implementation.",
+      "category": "user-experience",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "design-consultation",
+        "web-research-ops",
+        "accessibility-testing",
+        "spreadsheet-ops"
+      ],
+      "tags": [
+        "ux-research",
+        "user-evidence",
+        "usability",
+        "research-ethics"
+      ],
+      "path": "agents/ux-researcher.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "design/design-ux-researcher.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
+      }
+    },
+    {
       "id": "vector-database-engineer",
       "name": "vector-database-engineer",
       "role": "vector-database-engineer",
@@ -4327,6 +5063,38 @@
           "plugins/llm-application-dev/agents/vector-database-engineer.md"
         ],
         "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+      }
+    },
+    {
+      "id": "windows-infrastructure-admin",
+      "name": "windows-infrastructure-admin",
+      "role": "windows-infrastructure-admin",
+      "description": "Assesses and plans safe Windows Server, Active Directory, DNS, DHCP, Group Policy, certificate, and core service administration. Use for enterprise Windows infrastructure diagnosis, change design, migration, or recovery planning.",
+      "category": "cloud-infrastructure",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "terminal-ops",
+        "security-scanning",
+        "observability-engineering",
+        "deployment-operations"
+      ],
+      "tags": [
+        "windows-server",
+        "active-directory",
+        "group-policy",
+        "infrastructure"
+      ],
+      "path": "agents/windows-infrastructure-admin.md",
+      "references": {
+        "repo": "VoltAgent/awesome-claude-code-subagents",
+        "paths": [
+          "categories/03-infrastructure/windows-infra-admin.md"
+        ],
+        "tree": "9c98eac2f7463c79ebb7b914432ace7dbd3bfeaa"
       }
     }
   ]

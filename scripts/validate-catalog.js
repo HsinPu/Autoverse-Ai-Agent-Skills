@@ -20,6 +20,13 @@ const canonicalAgentMetadata = {
   source: 'HsinPu/Autoverse-Ai-Agent-Skills',
   license: 'Apache-2.0'
 };
+const allowedAgentReferenceRepos = new Set([
+  'wshobson/agents',
+  'msitarzewski/agency-agents',
+  'VoltAgent/awesome-claude-code-subagents',
+  'github/awesome-copilot',
+  'affaan-m/ECC'
+]);
 
 function fail(message) {
   errors.push(message);
@@ -178,6 +185,7 @@ if (agentCatalog && agentCatalog.uniqueRoles !== agents.length) {
 const allowedPermissions = new Set(['read-only', 'workspace-write']);
 const agentIds = new Set();
 const referencePaths = new Set();
+const wshobsonReferencePaths = new Set();
 for (const agent of agents) {
   const label = agent.id || agent.name || '(unknown)';
   for (const field of ['id', 'name', 'role', 'path', 'description', 'category', 'author', 'source', 'license', 'model', 'permission']) {
@@ -201,17 +209,35 @@ for (const agent of agents) {
   if (!agent.references || typeof agent.references !== 'object') {
     fail(`${label}: references must be an object`);
   } else {
-    if (agent.references.repo !== 'wshobson/agents') fail(`${label}: references.repo must be wshobson/agents`);
-    if (!agent.references.tree) fail(`${label}: references.tree is required`);
+    if (!allowedAgentReferenceRepos.has(agent.references.repo)) {
+      fail(`${label}: unsupported references.repo ${agent.references.repo}`);
+    }
+    if (!/^[0-9a-f]{40}$/.test(agent.references.tree || '')) {
+      fail(`${label}: references.tree must be a 40-character lowercase Git SHA`);
+    }
     if (!Array.isArray(agent.references.paths) || agent.references.paths.length === 0) {
       fail(`${label}: references.paths must be a non-empty array`);
     } else {
       for (const referencePath of agent.references.paths) {
-        if (!new RegExp(`^plugins/[^/]+/agents/${agent.role}\\.md$`).test(referencePath)) {
-          fail(`${label}: invalid reference path ${referencePath}`);
+        const normalizedPath = path.posix.normalize(referencePath);
+        const referenceSegments = referencePath.split('/');
+        if (
+          !/^[A-Za-z0-9._-]+(?:\/[A-Za-z0-9._-]+)*$/.test(referencePath)
+          || normalizedPath !== referencePath
+          || referenceSegments.some((segment) => segment === '.' || segment === '..')
+        ) {
+          fail(`${label}: reference path must be a normalized repository-relative path: ${referencePath}`);
         }
-        if (referencePaths.has(referencePath)) fail(`Duplicate upstream reference path: ${referencePath}`);
-        referencePaths.add(referencePath);
+        if (
+          agent.references.repo === 'wshobson/agents'
+          && !new RegExp(`^plugins/[^/]+/agents/${agent.role}\\.md$`).test(referencePath)
+        ) {
+          fail(`${label}: invalid wshobson reference path ${referencePath}`);
+        }
+        const referenceKey = `${agent.references.repo}:${referencePath}`;
+        if (referencePaths.has(referenceKey)) fail(`Duplicate upstream reference path: ${referenceKey}`);
+        referencePaths.add(referenceKey);
+        if (agent.references.repo === 'wshobson/agents') wshobsonReferencePaths.add(referencePath);
       }
     }
   }
@@ -413,7 +439,11 @@ if (inventory) {
 
   const definitionIds = new Set();
   const sourcePaths = new Set();
-  const agentsByReferencePath = new Map(agents.flatMap((agent) => agent.references.paths.map((referencePath) => [referencePath, agent])));
+  const agentsByReferencePath = new Map(
+    agents
+      .filter((agent) => agent.references.repo === inventory.sourceRepo)
+      .flatMap((agent) => agent.references.paths.map((referencePath) => [referencePath, agent]))
+  );
   for (const definition of definitions) {
     for (const field of ['id', 'plugin', 'sourceName', 'runtimeName', 'status', 'sourcePath', 'sourceBlobSha', 'targetPath']) {
       if (!definition[field]) fail(`Agent reference definition is missing ${field}`);
@@ -433,7 +463,7 @@ if (inventory) {
       compare(definition.id, 'sourceTree', inventory.sourceTreeSha, catalogEntry.references.tree, 'inventory', 'agents.json');
     }
   }
-  for (const referencePath of referencePaths) {
+  for (const referencePath of wshobsonReferencePaths) {
     if (!sourcePaths.has(referencePath)) fail(`${referencePath}: canonical Agent reference is missing from inventory`);
   }
 }

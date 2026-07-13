@@ -125,7 +125,11 @@ function resetGeneratedAdapters() {
 
 function main() {
   const agents = listAgents();
-  if (agents.length !== 134) throw new Error(`Expected 134 canonical Agents, found ${agents.length}`);
+  if (agents.length === 0) throw new Error('No canonical Agents found');
+  const uniqueRoles = new Set(agents.map((agent) => agent.role));
+  if (uniqueRoles.size !== agents.length) {
+    throw new Error(`Canonical Agent roles must be unique (${uniqueRoles.size}/${agents.length})`);
+  }
   resetGeneratedAdapters();
   for (const agent of agents) {
     const { fields, body } = parseAgent(agent.filePath);

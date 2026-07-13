@@ -3,7 +3,7 @@
 [![Validate](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/actions/workflows/validate.yml/badge.svg)](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/actions/workflows/validate.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 ![Skills](https://img.shields.io/badge/Skills-187-7c3aed)
-![Agents](https://img.shields.io/badge/Agents-134-2563eb)
+![Agents](https://img.shields.io/badge/Agents-158-2563eb)
 ![Node.js](https://img.shields.io/badge/Node.js-%3E%3D16-339933?logo=nodedotjs&logoColor=white)
 
 由 **HsinPu** 維護的開源 AI Agent 與 Skill catalog，提供可直接安裝的 Codex、Claude Code、Cursor、VS Code／GitHub Copilot、OpenCode Agents 與 Skills，並包含安全更新機制及本機 catalog 查詢 CLI。
@@ -48,7 +48,7 @@ Linux／macOS：
 curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type skill && curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type agent --enable-auto-delegation
 ```
 
-這組命令會安裝全部 187 個 Skills、134 個 Agents，並啟用不依賴專案 `AGENTS.md` 的全域主動委派。
+這組命令會安裝全部 187 個 Skills、158 個 Agents，並啟用不依賴專案 `AGENTS.md` 的全域主動委派。
 
 ### 只安裝全部 Skills
 
@@ -145,21 +145,22 @@ curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/ma
 | 類型 | 數量 | 用途 | Canonical source |
 |---|---:|---|---|
 | Skills | **187 Skills**／7 類 | 可重複使用的工作流程、規範、工具指引與領域知識 | `skills/<name>/SKILL.md` |
-| Agents | 134／24 類 | 可委派的專業角色，包含任務、限制、權限與輸出契約 | `agents/<role>.md` |
-| Codex adapters | 134 | Codex custom Agent 的 TOML 設定 | `adapters/codex/<role>.toml` |
-| Claude adapters | 134 | Claude Code subagent 的 Markdown 設定 | `adapters/claude/<role>.md` |
-| Cursor adapters | 134 | Cursor subagent 的 Markdown 設定 | `adapters/cursor/<role>.md` |
-| Copilot adapters | 134 | VS Code／GitHub Copilot custom Agent 設定 | `adapters/copilot/<role>.agent.md` |
-| OpenCode adapters | 134 | OpenCode `mode: subagent` 的 Markdown 設定 | `adapters/opencode/<role>.md` |
-| Reference ledger | 199 definitions | 保存上游 reference path 與合併追蹤資料 | `scripts/data/wshobson-agent-inventory.json` |
+| Agents | 158／29 類 | 可委派的專業角色，包含任務、限制、權限與輸出契約 | `agents/<role>.md` |
+| Codex adapters | 158 | Codex custom Agent 的 TOML 設定 | `adapters/codex/<role>.toml` |
+| Claude adapters | 158 | Claude Code subagent 的 Markdown 設定 | `adapters/claude/<role>.md` |
+| Cursor adapters | 158 | Cursor subagent 的 Markdown 設定 | `adapters/cursor/<role>.md` |
+| Copilot adapters | 158 | VS Code／GitHub Copilot custom Agent 設定 | `adapters/copilot/<role>.agent.md` |
+| OpenCode adapters | 158 | OpenCode `mode: subagent` 的 Markdown 設定 | `adapters/opencode/<role>.md` |
+| wshobson reference ledger | 199 definitions | 保存原始角色集合的 reference path 與合併追蹤資料 | `scripts/data/wshobson-agent-inventory.json` |
+| Additional Agent references | 25 paths／4 repositories | 保存在各 canonical Agent 的 `reference-*` metadata | `agents/<role>.md` |
 
 各 adapter 會把 canonical `read-only`／`workspace-write` 權限轉成平台可理解的設定。例如 OpenCode 的唯讀角色會設定 `edit: deny` 與 `bash: deny`；Copilot 的唯讀角色只開放 `read`、`search`、`web`、`agent` tools。
 
 <!-- AGENT_COUNT_START -->
-目前共收錄 **134** 個不重複 Agents。
+目前共收錄 **158** 個不重複 Agents。
 <!-- AGENT_COUNT_END -->
 
-上游 ledger 的 199 份 definitions 內含 65 份同名角色變體。本專案依 role 合併為 134 個唯一 Agents，因此不會建立或安裝重複角色。
+`wshobson/agents` ledger 的 199 份 definitions 內含 65 份同名角色變體，已依 role 合併為原始 134 個唯一 Agents；另外 24 個新角色來自四個新 reference repositories，加入前同樣會先做名稱與職責去重。
 
 ### Agent 與 Skill 的差別
 
@@ -389,35 +390,40 @@ Catalog 來源分別是 [skills.json](skills.json) 與 [agents.json](agents.json
 每個 Agent 都有唯一 role、清楚的使用時機、權限模式、相關 Skills，以及固定的 `Role → Task → Constraints → Output` prompt 結構。完整 metadata 以 [agents.json](agents.json) 為準。
 
 <details>
-<summary><strong>展開 24 類、134 個 Agents 的完整索引</strong></summary>
+<summary><strong>展開 29 類、158 個 Agents 的完整索引</strong></summary>
 
 <!-- AGENT_SUMMARY_START -->
 | Category | Count | Agents |
 |---|---:|---|
 | `analysis` | 4 | [`business-analyst`](agents/business-analyst.md), [`quant-analyst`](agents/quant-analyst.md), [`reverse-engineer`](agents/reverse-engineer.md), [`startup-analyst`](agents/startup-analyst.md) |
-| `architecture` | 10 | [`architect`](agents/architect.md), [`architect-review`](agents/architect-review.md), [`backend-architect`](agents/backend-architect.md), [`database-architect`](agents/database-architect.md), [`dotnet-architect`](agents/dotnet-architect.md), [`event-sourcing-architect`](agents/event-sourcing-architect.md), [`graphql-architect`](agents/graphql-architect.md), [`legacy-modernizer`](agents/legacy-modernizer.md), [`monorepo-architect`](agents/monorepo-architect.md), [`seo-structure-architect`](agents/seo-structure-architect.md) |
-| `artificial-intelligence` | 6 | [`ai-engineer`](agents/ai-engineer.md), [`eval-judge`](agents/eval-judge.md), [`eval-orchestrator`](agents/eval-orchestrator.md), [`model-advisor`](agents/model-advisor.md), [`prompt-crafter`](agents/prompt-crafter.md), [`prompt-engineer`](agents/prompt-engineer.md) |
-| `business-operations` | 1 | [`hr-pro`](agents/hr-pro.md) |
-| `cloud-infrastructure` | 6 | [`cloud-architect`](agents/cloud-architect.md), [`hybrid-cloud-architect`](agents/hybrid-cloud-architect.md), [`kubernetes-architect`](agents/kubernetes-architect.md), [`network-engineer`](agents/network-engineer.md), [`service-mesh-expert`](agents/service-mesh-expert.md), [`terraform-specialist`](agents/terraform-specialist.md) |
+| `architecture` | 11 | [`architect`](agents/architect.md), [`architect-review`](agents/architect-review.md), [`backend-architect`](agents/backend-architect.md), [`database-architect`](agents/database-architect.md), [`dotnet-architect`](agents/dotnet-architect.md), [`event-sourcing-architect`](agents/event-sourcing-architect.md), [`graphql-architect`](agents/graphql-architect.md), [`legacy-modernizer`](agents/legacy-modernizer.md), [`monorepo-architect`](agents/monorepo-architect.md), [`saas-platform-architect`](agents/saas-platform-architect.md), [`seo-structure-architect`](agents/seo-structure-architect.md) |
+| `artificial-intelligence` | 7 | [`ai-engineer`](agents/ai-engineer.md), [`eval-judge`](agents/eval-judge.md), [`eval-orchestrator`](agents/eval-orchestrator.md), [`mcp-developer`](agents/mcp-developer.md), [`model-advisor`](agents/model-advisor.md), [`prompt-crafter`](agents/prompt-crafter.md), [`prompt-engineer`](agents/prompt-engineer.md) |
+| `business-operations` | 2 | [`change-management-consultant`](agents/change-management-consultant.md), [`hr-pro`](agents/hr-pro.md) |
+| `cloud-infrastructure` | 7 | [`cloud-architect`](agents/cloud-architect.md), [`hybrid-cloud-architect`](agents/hybrid-cloud-architect.md), [`kubernetes-architect`](agents/kubernetes-architect.md), [`network-engineer`](agents/network-engineer.md), [`service-mesh-expert`](agents/service-mesh-expert.md), [`terraform-specialist`](agents/terraform-specialist.md), [`windows-infrastructure-admin`](agents/windows-infrastructure-admin.md) |
 | `commerce` | 1 | [`payment-integration`](agents/payment-integration.md) |
 | `creative` | 2 | [`gallery-researcher`](agents/gallery-researcher.md), [`image-generator`](agents/image-generator.md) |
-| `customer-operations` | 1 | [`customer-support`](agents/customer-support.md) |
-| `data` | 5 | [`data-engineer`](agents/data-engineer.md), [`data-scientist`](agents/data-scientist.md), [`database-admin`](agents/database-admin.md), [`sql-pro`](agents/sql-pro.md), [`vector-database-engineer`](agents/vector-database-engineer.md) |
-| `developer-experience` | 1 | [`dx-optimizer`](agents/dx-optimizer.md) |
-| `development` | 28 | [`bash-pro`](agents/bash-pro.md), [`blockchain-developer`](agents/blockchain-developer.md), [`c-pro`](agents/c-pro.md), [`cpp-pro`](agents/cpp-pro.md), [`csharp-pro`](agents/csharp-pro.md), [`debugger`](agents/debugger.md), [`django-pro`](agents/django-pro.md), [`elixir-pro`](agents/elixir-pro.md), [`fastapi-pro`](agents/fastapi-pro.md), [`flutter-expert`](agents/flutter-expert.md), [`frontend-developer`](agents/frontend-developer.md), [`golang-pro`](agents/golang-pro.md), [`haskell-pro`](agents/haskell-pro.md), [`ios-developer`](agents/ios-developer.md), [`java-pro`](agents/java-pro.md), [`javascript-pro`](agents/javascript-pro.md), [`julia-pro`](agents/julia-pro.md), [`minecraft-bukkit-pro`](agents/minecraft-bukkit-pro.md), [`mobile-developer`](agents/mobile-developer.md), [`php-pro`](agents/php-pro.md), [`posix-shell-pro`](agents/posix-shell-pro.md), [`python-pro`](agents/python-pro.md), [`ruby-pro`](agents/ruby-pro.md), [`rust-pro`](agents/rust-pro.md), [`scala-pro`](agents/scala-pro.md), [`temporal-python-pro`](agents/temporal-python-pro.md), [`typescript-pro`](agents/typescript-pro.md), [`unity-developer`](agents/unity-developer.md) |
+| `customer-operations` | 2 | [`customer-success-manager`](agents/customer-success-manager.md), [`customer-support`](agents/customer-support.md) |
+| `data` | 6 | [`data-engineer`](agents/data-engineer.md), [`data-scientist`](agents/data-scientist.md), [`database-admin`](agents/database-admin.md), [`gis-analyst`](agents/gis-analyst.md), [`sql-pro`](agents/sql-pro.md), [`vector-database-engineer`](agents/vector-database-engineer.md) |
+| `developer-experience` | 3 | [`agent-harness-optimizer`](agents/agent-harness-optimizer.md), [`dx-optimizer`](agents/dx-optimizer.md), [`platform-engineer`](agents/platform-engineer.md) |
+| `development` | 31 | [`bash-pro`](agents/bash-pro.md), [`blockchain-developer`](agents/blockchain-developer.md), [`c-pro`](agents/c-pro.md), [`cms-platform-engineer`](agents/cms-platform-engineer.md), [`cpp-pro`](agents/cpp-pro.md), [`csharp-pro`](agents/csharp-pro.md), [`debugger`](agents/debugger.md), [`django-pro`](agents/django-pro.md), [`elixir-pro`](agents/elixir-pro.md), [`fastapi-pro`](agents/fastapi-pro.md), [`flutter-expert`](agents/flutter-expert.md), [`frontend-developer`](agents/frontend-developer.md), [`golang-pro`](agents/golang-pro.md), [`haskell-pro`](agents/haskell-pro.md), [`internationalization-engineer`](agents/internationalization-engineer.md), [`ios-developer`](agents/ios-developer.md), [`java-pro`](agents/java-pro.md), [`javascript-pro`](agents/javascript-pro.md), [`julia-pro`](agents/julia-pro.md), [`minecraft-bukkit-pro`](agents/minecraft-bukkit-pro.md), [`mobile-developer`](agents/mobile-developer.md), [`php-pro`](agents/php-pro.md), [`posix-shell-pro`](agents/posix-shell-pro.md), [`powershell-pro`](agents/powershell-pro.md), [`python-pro`](agents/python-pro.md), [`ruby-pro`](agents/ruby-pro.md), [`rust-pro`](agents/rust-pro.md), [`scala-pro`](agents/scala-pro.md), [`temporal-python-pro`](agents/temporal-python-pro.md), [`typescript-pro`](agents/typescript-pro.md), [`unity-developer`](agents/unity-developer.md) |
 | `documentation` | 9 | [`api-documenter`](agents/api-documenter.md), [`c4-code`](agents/c4-code.md), [`c4-component`](agents/c4-component.md), [`c4-container`](agents/c4-container.md), [`c4-context`](agents/c4-context.md), [`docs-architect`](agents/docs-architect.md), [`mermaid-expert`](agents/mermaid-expert.md), [`reference-builder`](agents/reference-builder.md), [`tutorial-engineer`](agents/tutorial-engineer.md) |
 | `embedded-systems` | 2 | [`arm-cortex-expert`](agents/arm-cortex-expert.md), [`firmware-analyst`](agents/firmware-analyst.md) |
-| `governance` | 4 | [`legal-advisor`](agents/legal-advisor.md), [`policy-enforcer`](agents/policy-enforcer.md), [`review-policy-author`](agents/review-policy-author.md), [`risk-manager`](agents/risk-manager.md) |
+| `finance` | 2 | [`accounting-controller`](agents/accounting-controller.md), [`fpa-analyst`](agents/fpa-analyst.md) |
+| `governance` | 6 | [`compliance-auditor`](agents/compliance-auditor.md), [`legal-advisor`](agents/legal-advisor.md), [`policy-enforcer`](agents/policy-enforcer.md), [`review-policy-author`](agents/review-policy-author.md), [`risk-manager`](agents/risk-manager.md), [`software-license-compliance-engineer`](agents/software-license-compliance-engineer.md) |
+| `healthcare` | 1 | [`clinical-evidence-reviewer`](agents/clinical-evidence-reviewer.md) |
 | `machine-learning` | 2 | [`ml-engineer`](agents/ml-engineer.md), [`mlops-engineer`](agents/mlops-engineer.md) |
-| `marketing` | 11 | [`content-marketer`](agents/content-marketer.md), [`seo-authority-builder`](agents/seo-authority-builder.md), [`seo-cannibalization-detector`](agents/seo-cannibalization-detector.md), [`seo-content-auditor`](agents/seo-content-auditor.md), [`seo-content-planner`](agents/seo-content-planner.md), [`seo-content-refresher`](agents/seo-content-refresher.md), [`seo-content-writer`](agents/seo-content-writer.md), [`seo-keyword-strategist`](agents/seo-keyword-strategist.md), [`seo-meta-optimizer`](agents/seo-meta-optimizer.md), [`seo-snippet-hunter`](agents/seo-snippet-hunter.md), [`social-publishing-publisher`](agents/social-publishing-publisher.md) |
-| `operations` | 7 | [`deploy-with-verification`](agents/deploy-with-verification.md), [`deployment-engineer`](agents/deployment-engineer.md), [`devops-troubleshooter`](agents/devops-troubleshooter.md), [`error-detective`](agents/error-detective.md), [`incident-responder`](agents/incident-responder.md), [`observability-engineer`](agents/observability-engineer.md), [`prod-logs-health-check`](agents/prod-logs-health-check.md) |
+| `marketing` | 13 | [`content-marketer`](agents/content-marketer.md), [`marketing-measurement-specialist`](agents/marketing-measurement-specialist.md), [`paid-media-auditor`](agents/paid-media-auditor.md), [`seo-authority-builder`](agents/seo-authority-builder.md), [`seo-cannibalization-detector`](agents/seo-cannibalization-detector.md), [`seo-content-auditor`](agents/seo-content-auditor.md), [`seo-content-planner`](agents/seo-content-planner.md), [`seo-content-refresher`](agents/seo-content-refresher.md), [`seo-content-writer`](agents/seo-content-writer.md), [`seo-keyword-strategist`](agents/seo-keyword-strategist.md), [`seo-meta-optimizer`](agents/seo-meta-optimizer.md), [`seo-snippet-hunter`](agents/seo-snippet-hunter.md), [`social-publishing-publisher`](agents/social-publishing-publisher.md) |
+| `operations` | 8 | [`deploy-with-verification`](agents/deploy-with-verification.md), [`deployment-engineer`](agents/deployment-engineer.md), [`devops-troubleshooter`](agents/devops-troubleshooter.md), [`error-detective`](agents/error-detective.md), [`incident-responder`](agents/incident-responder.md), [`observability-engineer`](agents/observability-engineer.md), [`prod-logs-health-check`](agents/prod-logs-health-check.md), [`sre-engineer`](agents/sre-engineer.md) |
 | `orchestration` | 10 | [`conductor-validator`](agents/conductor-validator.md), [`context-manager`](agents/context-manager.md), [`implement`](agents/implement.md), [`orchestrate`](agents/orchestrate.md), [`session-end`](agents/session-end.md), [`session-start`](agents/session-start.md), [`task-executor`](agents/task-executor.md), [`team-debugger`](agents/team-debugger.md), [`team-implementer`](agents/team-implementer.md), [`team-lead`](agents/team-lead.md) |
 | `performance` | 2 | [`database-optimizer`](agents/database-optimizer.md), [`performance-engineer`](agents/performance-engineer.md) |
+| `product-management` | 1 | [`product-manager`](agents/product-manager.md) |
+| `project-management` | 1 | [`project-manager`](agents/project-manager.md) |
 | `quality-assurance` | 10 | [`code-review-preshipment`](agents/code-review-preshipment.md), [`code-reviewer`](agents/code-reviewer.md), [`playwright`](agents/playwright.md), [`qa`](agents/qa.md), [`receipt-verifier`](agents/receipt-verifier.md), [`review`](agents/review.md), [`tdd-orchestrator`](agents/tdd-orchestrator.md), [`team-reviewer`](agents/team-reviewer.md), [`test-automator`](agents/test-automator.md), [`ui-visual-validator`](agents/ui-visual-validator.md) |
 | `research` | 1 | [`search-specialist`](agents/search-specialist.md) |
-| `sales` | 1 | [`sales-automator`](agents/sales-automator.md) |
+| `sales` | 2 | [`sales-automator`](agents/sales-automator.md), [`sales-engineer`](agents/sales-engineer.md) |
 | `security` | 6 | [`backend-security-coder`](agents/backend-security-coder.md), [`frontend-security-coder`](agents/frontend-security-coder.md), [`malware-analyst`](agents/malware-analyst.md), [`mobile-security-coder`](agents/mobile-security-coder.md), [`security-auditor`](agents/security-auditor.md), [`threat-modeling-expert`](agents/threat-modeling-expert.md) |
-| `user-experience` | 4 | [`accessibility-expert`](agents/accessibility-expert.md), [`design-system-architect`](agents/design-system-architect.md), [`ui-designer`](agents/ui-designer.md), [`ui-ux-designer`](agents/ui-ux-designer.md) |
+| `strategy` | 1 | [`grant-strategist`](agents/grant-strategist.md) |
+| `user-experience` | 5 | [`accessibility-expert`](agents/accessibility-expert.md), [`design-system-architect`](agents/design-system-architect.md), [`ui-designer`](agents/ui-designer.md), [`ui-ux-designer`](agents/ui-ux-designer.md), [`ux-researcher`](agents/ux-researcher.md) |
 <!-- AGENT_SUMMARY_END -->
 
 </details>
@@ -510,10 +516,10 @@ CI 會在 push 到 `main` 與每個 pull request 上使用 Node.js 20 執行 `np
 ## 來源、改寫與授權政策
 
 - 所有 Agents 與 Skills 的正式 `source` 都是 `HsinPu/Autoverse-Ai-Agent-Skills`，作者為 HsinPu。
-- 外部專案只作為研究、coverage 與設計參考，使用 `reference` 或 `reference-source` 欄位獨立記錄，不取代本專案的正式來源。
-- Agent catalog 參考 [wshobson/agents](https://github.com/wshobson/agents) 的角色名稱、plugin 路徑與高層責任；prompt 內容經過重新設計與加強，不是原文完整複製。
-- 同名上游定義會合併為一份較完整的 canonical Agent；199 個 reference paths、tree SHA 與合併結果保存在 [wshobson-agent-inventory.json](scripts/data/wshobson-agent-inventory.json)。
-- Repository 與全部 134 個 Agents 採 Apache-2.0。Skills 的個別授權以各自 `SKILL.md` 與 `skills.json` 為準；目前 186 個為 Apache-2.0，`karpathy-guidelines` 保留 MIT 授權與外部 reference metadata。
+- 外部專案只作為研究、coverage 與設計參考；Agents 使用 `reference-repo`、`reference-paths`、`reference-tree`，Skills 使用 `reference-source`、`reference-license` 獨立記錄，不取代本專案的正式來源。
+- Agent catalog 參考 [wshobson/agents](https://github.com/wshobson/agents)、[msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents)、[VoltAgent/awesome-claude-code-subagents](https://github.com/VoltAgent/awesome-claude-code-subagents)、[github/awesome-copilot](https://github.com/github/awesome-copilot) 與 [affaan-m/ECC](https://github.com/affaan-m/ECC) 的角色定位、路徑與高層責任；prompt 內容均由本專案重新設計與加強，不是原文完整複製。
+- 同名或職責相近的上游定義會先合併或排除。`wshobson/agents` 的 199 個 reference paths、tree SHA 與合併結果保存在 [wshobson-agent-inventory.json](scripts/data/wshobson-agent-inventory.json)；其他來源的 repository、path 與 tree SHA 則保存在各 canonical Agent frontmatter。
+- Repository 與全部 158 個 Agents 採 Apache-2.0。Skills 的個別授權以各自 `SKILL.md` 與 `skills.json` 為準；目前 186 個為 Apache-2.0，`karpathy-guidelines` 保留 MIT 授權與外部 reference metadata。
 
 ## 疑難排解
 
