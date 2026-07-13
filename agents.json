@@ -1,9 +1,9 @@
 {
   "version": "3.0.0",
-  "updated": "2026-07-13T13:13:48.995Z",
-  "total": 178,
+  "updated": "2026-07-13T14:23:59.067Z",
+  "total": 194,
   "categories": 29,
-  "uniqueRoles": 178,
+  "uniqueRoles": 194,
   "agents": [
     {
       "id": "accessibility-expert",
@@ -133,6 +133,71 @@
       }
     },
     {
+      "id": "ai-safety-evaluator",
+      "name": "ai-safety-evaluator",
+      "role": "ai-safety-evaluator",
+      "description": "Designs and performs evidence-based evaluations of AI-specific harms, misuse, bias, privacy, autonomy, oversight, and control failures. Use before high-impact AI releases or when safety claims need independent testing.",
+      "category": "artificial-intelligence",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "llm-evals",
+        "threat-modeling",
+        "agent-action-governance",
+        "specification-authoring"
+      ],
+      "tags": [
+        "ai-safety",
+        "responsible-ai",
+        "harm-evaluation",
+        "human-oversight"
+      ],
+      "path": "agents/ai-safety-evaluator.md",
+      "references": {
+        "repo": "devsforge/marketplace",
+        "paths": [
+          "plugins/agents/ai-ethics-officer/agents/ai-ethics-governance-specialist.md"
+        ],
+        "tree": "a9e6d715f983174840f8cfd472f09dfab4776865"
+      }
+    },
+    {
+      "id": "analytics-engineer",
+      "name": "analytics-engineer",
+      "role": "analytics-engineer",
+      "description": "Builds tested warehouse and lakehouse transformation models, dimensional marts, semantic layers, and governed metric contracts. Use after ingestion when analytics-ready data must become consistent, explainable, and reusable.",
+      "category": "data",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "sql-best-practices",
+        "data-pipeline-orchestration",
+        "database-design",
+        "testing-strategy"
+      ],
+      "tags": [
+        "analytics-engineering",
+        "dimensional-modeling",
+        "semantic-layer",
+        "metric-contracts"
+      ],
+      "path": "agents/analytics-engineer.md",
+      "references": {
+        "repo": "github/awesome-copilot",
+        "paths": [
+          "agents/power-bi-data-modeling-expert.agent.md",
+          "skills/fabric-lakehouse/SKILL.md"
+        ],
+        "tree": "b36521f664a175a1ab32b4e5c8d75f0435d32ccc"
+      }
+    },
+    {
       "id": "api-documenter",
       "name": "api-documenter",
       "role": "api-documenter",
@@ -163,6 +228,38 @@
           "plugins/documentation-generation/agents/api-documenter.md"
         ],
         "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
+      }
+    },
+    {
+      "id": "application-security-engineer",
+      "name": "application-security-engineer",
+      "role": "application-security-engineer",
+      "description": "Builds secure software delivery controls through threat modeling, reusable security defaults, CI scanning, triage policy, regression tests, and developer enablement. Use when AppSec must become an operable engineering system.",
+      "category": "security",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "threat-modeling",
+        "security-code-review",
+        "security-scanning",
+        "github-actions-ci"
+      ],
+      "tags": [
+        "appsec",
+        "secure-sdlc",
+        "security-gates",
+        "vulnerability-triage"
+      ],
+      "path": "agents/application-security-engineer.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "security/security-appsec-engineer.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
       }
     },
     {
@@ -263,6 +360,38 @@
       }
     },
     {
+      "id": "aws-solutions-architect",
+      "name": "aws-solutions-architect",
+      "role": "aws-solutions-architect",
+      "description": "Designs AWS-specific architectures using the Well-Architected six pillars, verified service constraints, explicit cost models, and tested recovery objectives. Use for AWS service selection, workload migration, architecture review, or scaling decisions.",
+      "category": "cloud-infrastructure",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "aws-operations",
+        "terraform-infrastructure",
+        "deployment-operations",
+        "observability-engineering"
+      ],
+      "tags": [
+        "aws",
+        "well-architected",
+        "cloud-architecture",
+        "cost-optimization"
+      ],
+      "path": "agents/aws-solutions-architect.md",
+      "references": {
+        "repo": "aws-samples/sample-claude-code-agent-team",
+        "paths": [
+          "agents/sa-agent.md"
+        ],
+        "tree": "de7434a16487833c82f4a078a1b0c237e4cfdd90"
+      }
+    },
+    {
       "id": "backend-architect",
       "name": "backend-architect",
       "role": "backend-architect",
@@ -297,6 +426,39 @@
           "plugins/multi-platform-apps/agents/backend-architect.md"
         ],
         "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
+      }
+    },
+    {
+      "id": "backend-developer",
+      "name": "backend-developer",
+      "role": "backend-developer",
+      "description": "Implements scoped server-side endpoints, services, jobs, persistence behavior, and integrations within an established backend architecture. Use when backend requirements are known and the change needs production-ready code and focused verification.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "code-change-workflow",
+        "api-contract-design",
+        "auth-integration",
+        "database-design",
+        "observability-engineering"
+      ],
+      "tags": [
+        "backend",
+        "api",
+        "persistence",
+        "services"
+      ],
+      "path": "agents/backend-developer.md",
+      "references": {
+        "repo": "VoltAgent/awesome-claude-code-subagents",
+        "paths": [
+          "categories/01-core-development/backend-developer.md"
+        ],
+        "tree": "9c98eac2f7463c79ebb7b914432ace7dbd3bfeaa"
       }
     },
     {
@@ -456,6 +618,38 @@
           "plugins/business-analytics/agents/business-analyst.md"
         ],
         "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
+      }
+    },
+    {
+      "id": "business-intelligence-analyst",
+      "name": "business-intelligence-analyst",
+      "role": "business-intelligence-analyst",
+      "description": "Produces reproducible descriptive analysis, KPI definitions, dashboards, drill-downs, and decision narratives from governed data. Use when stakeholders need evidence about what happened and where to investigate next.",
+      "category": "analysis",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "sql-best-practices",
+        "spreadsheet-ops",
+        "dashboard-design",
+        "data-organization-system"
+      ],
+      "tags": [
+        "business-intelligence",
+        "dashboards",
+        "kpi-analysis",
+        "data-storytelling"
+      ],
+      "path": "agents/business-intelligence-analyst.md",
+      "references": {
+        "repo": "VoltAgent/awesome-claude-code-subagents",
+        "paths": [
+          "categories/05-data-ai/data-analyst.md"
+        ],
+        "tree": "9c98eac2f7463c79ebb7b914432ace7dbd3bfeaa"
       }
     },
     {
@@ -678,6 +872,38 @@
       }
     },
     {
+      "id": "chaos-engineer",
+      "name": "chaos-engineer",
+      "role": "chaos-engineer",
+      "description": "Designs controlled failure experiments and game days with explicit steady state, blast radius, abort controls, recovery evidence, and learning goals. Use to validate resilience before incidents expose untested assumptions.",
+      "category": "operations",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "testing-strategy",
+        "observability-engineering",
+        "incident-response-postmortems",
+        "deployment-operations"
+      ],
+      "tags": [
+        "chaos-engineering",
+        "resilience-testing",
+        "game-days",
+        "failure-injection"
+      ],
+      "path": "agents/chaos-engineer.md",
+      "references": {
+        "repo": "VoltAgent/awesome-claude-code-subagents",
+        "paths": [
+          "categories/04-quality-security/chaos-engineer.md"
+        ],
+        "tree": "9c98eac2f7463c79ebb7b914432ace7dbd3bfeaa"
+      }
+    },
+    {
       "id": "clinical-data-manager",
       "name": "clinical-data-manager",
       "role": "clinical-data-manager",
@@ -778,6 +1004,38 @@
       }
     },
     {
+      "id": "cloud-security-engineer",
+      "name": "cloud-security-engineer",
+      "role": "cloud-security-engineer",
+      "description": "Designs and reviews cloud control-plane security across account boundaries, IAM guardrails, networks, encryption, secrets, posture, detection, and policy as code. Use for cloud foundation security and high-risk infrastructure changes.",
+      "category": "security",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "threat-modeling",
+        "terraform-infrastructure",
+        "kubernetes-operations",
+        "aws-operations"
+      ],
+      "tags": [
+        "cloud-security",
+        "policy-as-code",
+        "workload-identity",
+        "security-posture"
+      ],
+      "path": "agents/cloud-security-engineer.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "security/security-cloud-security-architect.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
+      }
+    },
+    {
       "id": "cms-platform-engineer",
       "name": "cms-platform-engineer",
       "role": "cms-platform-engineer",
@@ -855,7 +1113,8 @@
       "skills": [
         "code-review",
         "security-code-review",
-        "testing-strategy"
+        "testing-strategy",
+        "git-operations"
       ],
       "tags": [
         "review",
@@ -873,6 +1132,7 @@
           "plugins/comprehensive-review/agents/code-reviewer.md",
           "plugins/git-pr-workflows/agents/code-reviewer.md",
           "plugins/incident-response/agents/code-reviewer.md",
+          "plugins/ship-mate/agents/review.md",
           "plugins/tdd-workflows/agents/code-reviewer.md"
         ],
         "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
@@ -1395,6 +1655,38 @@
       }
     },
     {
+      "id": "dependency-manager",
+      "name": "dependency-manager",
+      "role": "dependency-manager",
+      "description": "Plans and performs controlled dependency upgrades with reproducible resolution, compatibility evidence, security triage, lockfile integrity, and rollback paths. Use for package updates, version conflicts, vulnerable dependencies, or dependency-policy maintenance.",
+      "category": "developer-experience",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "code-change-workflow",
+        "security-scanning",
+        "testing-strategy",
+        "repo-ready"
+      ],
+      "tags": [
+        "dependencies",
+        "upgrades",
+        "compatibility",
+        "supply-chain"
+      ],
+      "path": "agents/dependency-manager.md",
+      "references": {
+        "repo": "VoltAgent/awesome-claude-code-subagents",
+        "paths": [
+          "categories/06-developer-experience/dependency-manager.md"
+        ],
+        "tree": "9c98eac2f7463c79ebb7b914432ace7dbd3bfeaa"
+      }
+    },
+    {
       "id": "deploy-with-verification",
       "name": "deploy-with-verification",
       "role": "deploy-with-verification",
@@ -1724,6 +2016,39 @@
       }
     },
     {
+      "id": "electron-pro",
+      "name": "electron-pro",
+      "role": "electron-pro",
+      "description": "Builds and hardens Electron desktop applications across main and renderer processes, preload bridges, IPC, packaging, signing configuration, and operating-system integration. Use for Electron-specific features, failures, security boundaries, or release artifacts.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "desktop-development",
+        "typescript-development",
+        "security-code-review",
+        "deployment-operations",
+        "testing-strategy"
+      ],
+      "tags": [
+        "electron",
+        "desktop",
+        "ipc",
+        "packaging"
+      ],
+      "path": "agents/electron-pro.md",
+      "references": {
+        "repo": "VoltAgent/awesome-claude-code-subagents",
+        "paths": [
+          "categories/01-core-development/electron-pro.md"
+        ],
+        "tree": "9c98eac2f7463c79ebb7b914432ace7dbd3bfeaa"
+      }
+    },
+    {
       "id": "elixir-pro",
       "name": "elixir-pro",
       "role": "elixir-pro",
@@ -1753,6 +2078,38 @@
           "plugins/functional-programming/agents/elixir-pro.md"
         ],
         "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
+      }
+    },
+    {
+      "id": "emergency-preparedness-coordinator",
+      "name": "emergency-preparedness-coordinator",
+      "role": "emergency-preparedness-coordinator",
+      "description": "Coordinates healthcare all-hazards preparedness through risk assessment, emergency plans, surge and evacuation planning, downtime continuity, exercises, and improvement tracking. Use before disruptive events affect clinical operations.",
+      "category": "healthcare",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "incident-response-postmortems",
+        "testing-strategy",
+        "specification-authoring",
+        "agent-action-governance"
+      ],
+      "tags": [
+        "emergency-preparedness",
+        "healthcare-continuity",
+        "evacuation",
+        "exercises"
+      ],
+      "path": "agents/emergency-preparedness-coordinator.md",
+      "references": {
+        "repo": "ajhcs/healthcare-agents",
+        "paths": [
+          "agents/emergency-preparedness-coordinator.md"
+        ],
+        "tree": "bd6779b40f257c44700383f2ad806b07b6e2d3c0"
       }
     },
     {
@@ -1914,6 +2271,38 @@
           "plugins/python-development/agents/fastapi-pro.md"
         ],
         "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
+      }
+    },
+    {
+      "id": "finops-engineer",
+      "name": "finops-engineer",
+      "role": "finops-engineer",
+      "description": "Analyzes cloud spending, allocation, unit economics, anomalies, commitments, and optimization opportunities without changing live resources. Use when teams need evidence-backed cloud cost accountability or a prioritized savings plan.",
+      "category": "cloud-infrastructure",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "aws-operations",
+        "observability-engineering",
+        "terraform-infrastructure",
+        "spreadsheet-ops"
+      ],
+      "tags": [
+        "finops",
+        "cloud-cost",
+        "cost-allocation",
+        "unit-economics"
+      ],
+      "path": "agents/finops-engineer.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "engineering/engineering-finops-engineer.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
       }
     },
     {
@@ -2399,6 +2788,38 @@
       }
     },
     {
+      "id": "identity-access-engineer",
+      "name": "identity-access-engineer",
+      "role": "identity-access-engineer",
+      "description": "Implements identity lifecycle, federation, SSO, provisioning, strong authentication, authorization models, tenant isolation, and access review controls. Use for workforce, customer, or workload identity systems spanning multiple applications.",
+      "category": "security",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "auth-integration",
+        "agent-action-governance",
+        "threat-modeling",
+        "security-code-review"
+      ],
+      "tags": [
+        "identity",
+        "federation",
+        "access-control",
+        "provisioning"
+      ],
+      "path": "agents/identity-access-engineer.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "engineering/engineering-identity-access-engineer.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
+      }
+    },
+    {
       "id": "image-generator",
       "name": "image-generator",
       "role": "image-generator",
@@ -2445,7 +2866,8 @@
         "code-change-workflow",
         "incremental-implementation",
         "testing-strategy",
-        "coding-standards"
+        "coding-standards",
+        "terminal-ops"
       ],
       "tags": [
         "implementation",
@@ -2457,6 +2879,7 @@
       "references": {
         "repo": "wshobson/agents",
         "paths": [
+          "plugins/runapi-mcp/agents/task-executor.md",
           "plugins/ship-mate/agents/implement.md"
         ],
         "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
@@ -2785,6 +3208,38 @@
       }
     },
     {
+      "id": "llm-platform-engineer",
+      "name": "llm-platform-engineer",
+      "role": "llm-platform-engineer",
+      "description": "Builds shared LLM runtime platforms with provider abstraction, model routing, quotas, caching, observability, evaluation gates, and controlled fallback. Use when multiple AI applications need a reliable and governed inference plane.",
+      "category": "artificial-intelligence",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "openai-api-development",
+        "llm-evals",
+        "observability-engineering",
+        "deployment-operations"
+      ],
+      "tags": [
+        "llm-platform",
+        "model-routing",
+        "inference-gateway",
+        "cost-controls"
+      ],
+      "path": "agents/llm-platform-engineer.md",
+      "references": {
+        "repo": "supatest-ai/awesome-claude-code-sub-agents",
+        "paths": [
+          "llm-engineering/llmops-engineer.md"
+        ],
+        "tree": "85a5e871e7e9a0c8273698d5b2f8504505d0e1f9"
+      }
+    },
+    {
       "id": "malware-analyst",
       "name": "malware-analyst",
       "role": "malware-analyst",
@@ -3073,6 +3528,38 @@
       }
     },
     {
+      "id": "mobile-release-engineer",
+      "name": "mobile-release-engineer",
+      "role": "mobile-release-engineer",
+      "description": "Builds repository-scoped Android and iOS release workflows covering versioning, signing boundaries, store compliance, CI artifacts, staged rollout, and rollback readiness. Use when a mobile build must become submission-ready without publishing it.",
+      "category": "operations",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "app-store-release",
+        "mobile-app-testing",
+        "github-actions-ci",
+        "deployment-operations"
+      ],
+      "tags": [
+        "mobile-release",
+        "app-store",
+        "play-store",
+        "release-automation"
+      ],
+      "path": "agents/mobile-release-engineer.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "engineering/engineering-mobile-release-engineer.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
+      }
+    },
+    {
       "id": "mobile-security-coder",
       "name": "mobile-security-coder",
       "role": "mobile-security-coder",
@@ -3293,6 +3780,7 @@
       "references": {
         "repo": "wshobson/agents",
         "paths": [
+          "plugins/agent-teams/agents/team-implementer.md",
           "plugins/ship-mate/agents/orchestrate.md"
         ],
         "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
@@ -3424,6 +3912,37 @@
           "plugins/payment-processing/agents/payment-integration.md"
         ],
         "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
+      }
+    },
+    {
+      "id": "penetration-tester",
+      "name": "penetration-tester",
+      "role": "penetration-tester",
+      "description": "Conducts explicitly authorized, non-destructive penetration tests that validate exploitable attack paths under written rules of engagement and stop conditions. Use when an owner requests active security testing beyond a read-only audit.",
+      "category": "security",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "threat-modeling",
+        "security-scanning",
+        "security-code-review"
+      ],
+      "tags": [
+        "penetration-testing",
+        "rules-of-engagement",
+        "attack-validation",
+        "security"
+      ],
+      "path": "agents/penetration-tester.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "security/security-penetration-tester.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
       }
     },
     {
@@ -4004,6 +4523,38 @@
       }
     },
     {
+      "id": "realtime-systems-engineer",
+      "name": "realtime-systems-engineer",
+      "role": "realtime-systems-engineer",
+      "description": "Designs and implements reliable real-time state propagation for streaming updates, presence, and collaborative editing across unstable networks. Use for WebSocket or SSE delivery, reconnect behavior, CRDT or OT convergence, offline synchronization, and backpressure control.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "api-contract-design",
+        "event-sourcing-cqrs",
+        "redis-upstash",
+        "testing-strategy"
+      ],
+      "tags": [
+        "realtime-systems",
+        "websocket",
+        "collaborative-editing",
+        "offline-sync"
+      ],
+      "path": "agents/realtime-systems-engineer.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "engineering/engineering-realtime-collaboration-engineer.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
+      }
+    },
+    {
       "id": "receipt-verifier",
       "name": "receipt-verifier",
       "role": "receipt-verifier",
@@ -4158,38 +4709,6 @@
         "repo": "wshobson/agents",
         "paths": [
           "plugins/reverse-engineering/agents/reverse-engineer.md"
-        ],
-        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
-      }
-    },
-    {
-      "id": "review",
-      "name": "review",
-      "role": "review",
-      "description": "Reviews a completed change against its requirements, repository behavior, security, compatibility, and tests, prioritizing actionable defects. Use after implementation and before integration.",
-      "category": "quality-assurance",
-      "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
-      "license": "Apache-2.0",
-      "model": "inherit",
-      "permission": "read-only",
-      "skills": [
-        "code-review",
-        "security-code-review",
-        "testing-strategy",
-        "git-operations"
-      ],
-      "tags": [
-        "review",
-        "correctness",
-        "compatibility",
-        "findings"
-      ],
-      "path": "agents/review.md",
-      "references": {
-        "repo": "wshobson/agents",
-        "paths": [
-          "plugins/ship-mate/agents/review.md"
         ],
         "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
@@ -4448,6 +4967,38 @@
           "plugins/jvm-languages/agents/scala-pro.md"
         ],
         "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
+      }
+    },
+    {
+      "id": "search-relevance-engineer",
+      "name": "search-relevance-engineer",
+      "role": "search-relevance-engineer",
+      "description": "Improves application search quality through query analysis, judged evaluation sets, retrieval, ranking, reranking, and controlled experiments. Use when users cannot find the right results or a search change needs measurable relevance validation.",
+      "category": "data",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "rag-vector-search",
+        "llm-evals",
+        "sql-best-practices",
+        "observability-engineering"
+      ],
+      "tags": [
+        "search-relevance",
+        "information-retrieval",
+        "ranking",
+        "relevance-evaluation"
+      ],
+      "path": "agents/search-relevance-engineer.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "engineering/engineering-search-relevance-engineer.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
       }
     },
     {
@@ -5093,38 +5644,6 @@
       }
     },
     {
-      "id": "task-executor",
-      "name": "task-executor",
-      "role": "task-executor",
-      "description": "Executes a well-scoped repository task from stated acceptance criteria through minimal implementation and proportional verification. Use when requirements are already clear and ownership is bounded.",
-      "category": "orchestration",
-      "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
-      "license": "Apache-2.0",
-      "model": "inherit",
-      "permission": "workspace-write",
-      "skills": [
-        "code-change-workflow",
-        "incremental-implementation",
-        "testing-strategy",
-        "terminal-ops"
-      ],
-      "tags": [
-        "execution",
-        "implementation",
-        "verification",
-        "scope"
-      ],
-      "path": "agents/task-executor.md",
-      "references": {
-        "repo": "wshobson/agents",
-        "paths": [
-          "plugins/runapi-mcp/agents/task-executor.md"
-        ],
-        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
-      }
-    },
-    {
       "id": "tdd-orchestrator",
       "name": "tdd-orchestrator",
       "role": "tdd-orchestrator",
@@ -5185,38 +5704,6 @@
         "repo": "wshobson/agents",
         "paths": [
           "plugins/agent-teams/agents/team-debugger.md"
-        ],
-        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
-      }
-    },
-    {
-      "id": "team-implementer",
-      "name": "team-implementer",
-      "role": "team-implementer",
-      "description": "Coordinates multiple independent implementation workstreams with explicit file ownership, contracts, integration order, and verification. Use for large changes that can be safely decomposed across agents.",
-      "category": "orchestration",
-      "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
-      "license": "Apache-2.0",
-      "model": "inherit",
-      "permission": "workspace-write",
-      "skills": [
-        "subagent-architecture",
-        "incremental-implementation",
-        "code-change-workflow",
-        "testing-strategy"
-      ],
-      "tags": [
-        "team-implementation",
-        "delegation",
-        "integration",
-        "ownership"
-      ],
-      "path": "agents/team-implementer.md",
-      "references": {
-        "repo": "wshobson/agents",
-        "paths": [
-          "plugins/agent-teams/agents/team-implementer.md"
         ],
         "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
@@ -5418,6 +5905,38 @@
           "plugins/unit-testing/agents/test-automator.md"
         ],
         "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
+      }
+    },
+    {
+      "id": "threat-detection-engineer",
+      "name": "threat-detection-engineer",
+      "role": "threat-detection-engineer",
+      "description": "Engineers versioned detection-as-code, SIEM analytics, ATT&CK coverage, tuning policy, and repeatable validation from real telemetry. Use when security detections must be created, improved, tested, or prepared for controlled deployment.",
+      "category": "security",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "observability-engineering",
+        "logging-patterns",
+        "security-scanning",
+        "testing-strategy"
+      ],
+      "tags": [
+        "detection-engineering",
+        "detection-as-code",
+        "siem",
+        "mitre-attack"
+      ],
+      "path": "agents/threat-detection-engineer.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "security/security-threat-detection-engineer.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
       }
     },
     {

@@ -57,6 +57,13 @@
       "tree": "bd6779b40f257c44700383f2ad806b07b6e2d3c0",
       "license": "Apache-2.0",
       "licensePath": "LICENSE"
+    },
+    {
+      "repo": "aws-samples/sample-claude-code-agent-team",
+      "commit": "523649bc5f1593ba6a509c6d32925994fe25ce20",
+      "tree": "de7434a16487833c82f4a078a1b0c237e4cfdd90",
+      "license": "MIT-0",
+      "licensePath": "LICENSE"
     }
   ]
 }

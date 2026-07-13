@@ -61,11 +61,11 @@ async function main() {
     const [, plugin, sourceNameWithExtension] = entry.path.match(/^plugins\/([^/]+)\/agents\/([^/]+\.md)$/);
     const sourceName = path.basename(sourceNameWithExtension, '.md');
     const id = `${plugin}/${sourceName}`;
-    const targetPath = `agents/${sourceName}.md`;
-    const runtimeName = sourceName;
     const catalogEntry = byReferencePath.get(entry.path);
+    const targetPath = catalogEntry ? catalogEntry.path : `agents/${sourceName}.md`;
+    const runtimeName = catalogEntry ? catalogEntry.name : sourceName;
     const consolidated = catalogEntry
-      && catalogEntry.id === sourceName
+      && catalogEntry.id === runtimeName
       && catalogEntry.name === runtimeName
       && catalogEntry.path === targetPath;
     return {
@@ -91,7 +91,7 @@ async function main() {
     sourceCommitSha: commit.sha,
     sourceTreeSha: tree.sha,
     generatedAt: new Date().toISOString(),
-    policy: 'Upstream paths, role names, and high-level responsibilities are reference inputs only. Duplicate upstream definitions are consolidated by role into independently rewritten, strengthened, first-party HsinPu Apache-2.0 Agents.',
+    policy: 'Upstream paths, role names, and high-level responsibilities are reference inputs only. Duplicate or semantically overlapping upstream definitions may map to one independently rewritten, strengthened, first-party HsinPu Apache-2.0 Agent.',
     totals: {
       definitions: definitions.length,
       uniqueRoleNames: roleCounts.size,

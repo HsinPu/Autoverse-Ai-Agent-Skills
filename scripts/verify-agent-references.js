@@ -10,7 +10,7 @@ const manifestPath = path.join(__dirname, 'data', 'agent-reference-sources.json'
 const shaPattern = /^[0-9a-f]{40}$/;
 const repoPattern = /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/;
 const relativePathPattern = /^[A-Za-z0-9._-]+(?:\/[A-Za-z0-9._-]+)*$/;
-const supportedLicenses = new Set(['MIT', 'Apache-2.0']);
+const supportedLicenses = new Set(['MIT', 'MIT-0', 'Apache-2.0']);
 
 function usage() {
   console.log(`Usage: node scripts/verify-agent-references.js [--remote]
@@ -152,6 +152,9 @@ function githubJson(apiPath) {
 function licenseMatches(identifier, text) {
   if (identifier === 'MIT') {
     return /MIT License/i.test(text) && /Permission is hereby granted/i.test(text);
+  }
+  if (identifier === 'MIT-0') {
+    return /MIT No Attribution/i.test(text) && /Permission is hereby granted/i.test(text);
   }
   if (identifier === 'Apache-2.0') {
     return /Apache License/i.test(text) && /Version 2\.0/i.test(text);

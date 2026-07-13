@@ -3,8 +3,8 @@
   "sourceBranch": "main",
   "sourceCommitSha": "2de74ac1c8f6669821dcef13153332c3168033c1",
   "sourceTreeSha": "deadb68423a57db5a1ab2afd50102be27df1744c",
-  "generatedAt": "2026-07-13T03:06:04.775Z",
-  "policy": "Upstream paths, role names, and high-level responsibilities are reference inputs only. Duplicate upstream definitions are consolidated by role into independently rewritten, strengthened, first-party HsinPu Apache-2.0 Agents.",
+  "generatedAt": "2026-07-13T14:30:58.155Z",
+  "policy": "Upstream paths, role names, and high-level responsibilities are reference inputs only. Duplicate or semantically overlapping upstream definitions may map to one independently rewritten, strengthened, first-party HsinPu Apache-2.0 Agent.",
   "totals": {
     "definitions": 199,
     "uniqueRoleNames": 134,
@@ -49,11 +49,11 @@
       "id": "agent-teams/team-implementer",
       "plugin": "agent-teams",
       "sourceName": "team-implementer",
-      "runtimeName": "team-implementer",
+      "runtimeName": "orchestrate",
       "status": "consolidated",
       "sourcePath": "plugins/agent-teams/agents/team-implementer.md",
       "sourceBlobSha": "ee75eaada7d63aac123e750022daa2802da167da",
-      "targetPath": "agents/team-implementer.md"
+      "targetPath": "agents/orchestrate.md"
     },
     {
       "id": "agent-teams/team-lead",
@@ -1629,11 +1629,11 @@
       "id": "runapi-mcp/task-executor",
       "plugin": "runapi-mcp",
       "sourceName": "task-executor",
-      "runtimeName": "task-executor",
+      "runtimeName": "implement",
       "status": "consolidated",
       "sourcePath": "plugins/runapi-mcp/agents/task-executor.md",
       "sourceBlobSha": "204c090227cee1bcafec172443b179421f086471",
-      "targetPath": "agents/task-executor.md"
+      "targetPath": "agents/implement.md"
     },
     {
       "id": "security-compliance/security-auditor",
@@ -1839,11 +1839,11 @@
       "id": "ship-mate/review",
       "plugin": "ship-mate",
       "sourceName": "review",
-      "runtimeName": "review",
+      "runtimeName": "code-reviewer",
       "status": "consolidated",
       "sourcePath": "plugins/ship-mate/agents/review.md",
       "sourceBlobSha": "b422261bebca4dd9e38f6312f0d3b372d15e8b21",
-      "targetPath": "agents/review.md"
+      "targetPath": "agents/code-reviewer.md"
     },
     {
       "id": "social-publishing/social-publishing-publisher",

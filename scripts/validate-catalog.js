@@ -234,7 +234,7 @@ for (const agent of agents) {
         }
         if (
           agent.references.repo === 'wshobson/agents'
-          && !new RegExp(`^plugins/[^/]+/agents/${agent.role}\\.md$`).test(referencePath)
+          && !/^plugins\/[^/]+\/agents\/[^/]+\.md$/.test(referencePath)
         ) {
           fail(`${label}: invalid wshobson reference path ${referencePath}`);
         }
@@ -463,7 +463,14 @@ if (inventory) {
     if (catalogEntry) {
       compare(definition.id, 'runtimeName', definition.runtimeName, catalogEntry.name, 'inventory', 'agents.json');
       compare(definition.id, 'targetPath', definition.targetPath, catalogEntry.path, 'inventory', 'agents.json');
-      compare(definition.id, 'sourceName', definition.sourceName, catalogEntry.role, 'inventory', 'agents.json');
+      compare(
+        definition.id,
+        'sourceName',
+        definition.sourceName,
+        path.basename(definition.sourcePath, '.md'),
+        'inventory',
+        'source path'
+      );
       compare(definition.id, 'sourceTree', inventory.sourceTreeSha, catalogEntry.references.tree, 'inventory', 'agents.json');
     }
   }
