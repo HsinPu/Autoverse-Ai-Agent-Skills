@@ -163,7 +163,7 @@ install_action() {
       return
     fi
     if [[ "$existing_repo" == "$REPO" && "$expected_component" == "skill" && -z "$existing_component" && -z "$existing_target" && "$existing_name" == "$expected_name" && "$existing_agent" == "$expected_target" ]]; then
-      local legacy_skill_name legacy_skill_source legacy_skill_license incoming_skill_name incoming_skill_source incoming_skill_reference_source incoming_skill_license source_matches
+      local legacy_skill_name legacy_skill_source legacy_skill_license incoming_skill_name incoming_skill_source incoming_skill_reference_source incoming_skill_license incoming_skill_previous_license source_matches license_matches
       legacy_skill_name="$(yaml_frontmatter_value "$legacy_identity" "name")"
       legacy_skill_source="$(yaml_frontmatter_value "$legacy_identity" "source")"
       legacy_skill_license="$(yaml_frontmatter_value "$legacy_identity" "license")"
@@ -171,9 +171,12 @@ install_action() {
       incoming_skill_source="$(yaml_frontmatter_value "$incoming_identity" "source")"
       incoming_skill_reference_source="$(yaml_frontmatter_value "$incoming_identity" "reference-source")"
       incoming_skill_license="$(yaml_frontmatter_value "$incoming_identity" "license")"
+      incoming_skill_previous_license="$(yaml_frontmatter_value "$incoming_identity" "previous-license")"
       source_matches=0
+      license_matches=0
       if [[ "$legacy_skill_source" == "$incoming_skill_source" || ( -n "$incoming_skill_reference_source" && "$legacy_skill_source" == "$incoming_skill_reference_source" ) ]]; then source_matches=1; fi
-      if [[ "$legacy_skill_name" == "$expected_name" && "$incoming_skill_name" == "$expected_name" && -n "$legacy_skill_source" && "$source_matches" -eq 1 && -n "$legacy_skill_license" && "$legacy_skill_license" == "$incoming_skill_license" ]]; then
+      if [[ "$legacy_skill_license" == "$incoming_skill_license" || ( -n "$incoming_skill_previous_license" && "$legacy_skill_license" == "$incoming_skill_previous_license" ) ]]; then license_matches=1; fi
+      if [[ "$legacy_skill_name" == "$expected_name" && "$incoming_skill_name" == "$expected_name" && -n "$legacy_skill_source" && "$source_matches" -eq 1 && -n "$legacy_skill_license" && "$license_matches" -eq 1 ]]; then
         INSTALL_ACTION="migrate-update"
         return
       fi

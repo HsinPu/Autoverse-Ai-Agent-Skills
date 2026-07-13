@@ -3,6 +3,7 @@ name: repo-ready
 description: Prepare and harden repositories through stack-aware structure, contributor instructions, AGENTS.md guidance, documentation, quality commands, CI, security automation, templates, release metadata, and pre-commit safeguards. Use when starting a repository, making an existing project contributor-ready, or auditing repository hygiene and automation without adding generic boilerplate.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+previous-license: MIT
 ---
 
 # Repo Ready

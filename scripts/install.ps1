@@ -224,13 +224,15 @@ function Test-LegacySkillOwnership {
     $incomingSource = Get-SkillFrontmatterValue -SkillFile $IncomingSkillFile -FieldName 'source'
     $incomingReferenceSource = Get-SkillFrontmatterValue -SkillFile $IncomingSkillFile -FieldName 'reference-source'
     $incomingLicense = Get-SkillFrontmatterValue -SkillFile $IncomingSkillFile -FieldName 'license'
+    $incomingPreviousLicense = Get-SkillFrontmatterValue -SkillFile $IncomingSkillFile -FieldName 'previous-license'
     $sourceMatches = $existingSource -eq $incomingSource -or ($incomingReferenceSource -and $existingSource -eq $incomingReferenceSource)
+    $licenseMatches = $existingLicense -eq $incomingLicense -or ($incomingPreviousLicense -and $existingLicense -eq $incomingPreviousLicense)
     return $existingName -eq $ExpectedName `
         -and $incomingName -eq $ExpectedName `
         -and $existingSource `
         -and $sourceMatches `
         -and $existingLicense `
-        -and $existingLicense -eq $incomingLicense
+        -and $licenseMatches
 }
 
 function Get-InstallAction {

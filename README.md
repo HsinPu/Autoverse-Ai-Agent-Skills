@@ -143,7 +143,7 @@ curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/ma
 | `letta` | `~/.letta/skills/` |
 | `gemini` | `~/.gemini/skills/` |
 
-每個 Skill 安裝後會在其目錄內建立 `.skill-meta.json`。只有 metadata 的 `repo`、`component`、`name` 與 `target` 全部相符時，安裝器才會刪除舊目錄並更新；沒有 metadata、欄位不符或屬於其他 repo 的同名 Skill 都會保留原狀並拒絕安裝，除非明確使用 `-Force`／`--force`。舊版 metadata 使用 `name + agent`；安裝器只有在 repo、舊欄位，以及既有與新版 `SKILL.md` 的 `name`、`source`／`reference-source`、`license` 全部互相吻合時，才會執行一次 `migrate-update` 並升級 metadata。
+每個 Skill 安裝後會在其目錄內建立 `.skill-meta.json`。只有 metadata 的 `repo`、`component`、`name` 與 `target` 全部相符時，安裝器才會刪除舊目錄並更新；沒有 metadata、欄位不符或屬於其他 repo 的同名 Skill 都會保留原狀並拒絕安裝，除非明確使用 `-Force`／`--force`。舊版 metadata 使用 `name + agent`；安裝器只有在 repo、舊欄位，以及既有與新版 `SKILL.md` 的 `name`、`source`／`reference-source`、`license`／明確列出的 `previous-license` 全部互相吻合時，才會執行一次 `migrate-update` 並升級 metadata。
 
 兩套安裝器都支援自訂 `-InstallDir`／`--dir`、預演 `-DryRun`／`--dry-run`，以及本機開發測試用的 `-SourceDir`／`--source-dir`。
 
