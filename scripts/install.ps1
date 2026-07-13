@@ -244,6 +244,8 @@ function Get-InstallAction {
         [string]$ExpectedComponent,
         [string]$ExpectedName,
         [string]$ExpectedTarget,
+        [string]$ExpectedId,
+        [string]$ExpectedAdapter,
         [string]$LegacyIdentityPath,
         [string]$IncomingIdentityPath
     )
@@ -254,6 +256,13 @@ function Get-InstallAction {
         -and $existingMeta.component -eq $ExpectedComponent `
         -and $existingMeta.name -eq $ExpectedName `
         -and $existingMeta.target -eq $ExpectedTarget
+    if ($ExpectedComponent -eq 'agent') {
+        $ownershipMatches = $ownershipMatches `
+            -and $ExpectedId `
+            -and $existingMeta.id -eq $ExpectedId `
+            -and $ExpectedAdapter `
+            -and $existingMeta.adapter -eq $ExpectedAdapter
+    }
     if ($ownershipMatches) {
         return @{ Action = "update"; ExistingMeta = $existingMeta }
     }
@@ -265,7 +274,8 @@ function Get-InstallAction {
         throw "Refusing to replace '$Label' because it was installed from '$($existingMeta.repo)', not '$RepoName'. Use -Force to overwrite intentionally."
     }
     if ($existingMeta -and $existingMeta.repo -eq $RepoName) {
-        throw "Refusing to replace '$Label' because its ownership metadata does not match component='$ExpectedComponent', name='$ExpectedName', and target='$ExpectedTarget'. Use -Force to overwrite intentionally."
+        $agentIdentity = if ($ExpectedComponent -eq 'agent') { ", id='$ExpectedId', and adapter='$ExpectedAdapter'" } else { "" }
+        throw "Refusing to replace '$Label' because its ownership metadata does not match component='$ExpectedComponent', name='$ExpectedName', target='$ExpectedTarget'$agentIdentity. Use -Force to overwrite intentionally."
     }
     throw "Refusing to replace '$Label' because it has no matching Autoverse metadata. Use -Force to overwrite intentionally."
 }
@@ -295,7 +305,7 @@ function Install-AgentProfile {
     $targetPath = Join-Path $DestinationRoot ($RuntimeName + $Source.Extension)
     if (-not (Test-TargetWithinRoot -TargetPath $targetPath -RootPath $DestinationRoot)) { throw "Refusing to write outside install directory: $targetPath" }
     $metaPath = "$targetPath.autoverse.json"
-    $plan = Get-InstallAction -TargetPath $targetPath -MetaPath $metaPath -Label $AgentId -RepoName $RepoName -ExpectedComponent "agent" -ExpectedName $RuntimeName -ExpectedTarget $TargetName
+    $plan = Get-InstallAction -TargetPath $targetPath -MetaPath $metaPath -Label $AgentId -RepoName $RepoName -ExpectedComponent "agent" -ExpectedName $RuntimeName -ExpectedTarget $TargetName -ExpectedId $AgentId -ExpectedAdapter $Platform
     if ($DryRun) { Write-Host "DRY-RUN $($plan.Action) Agent $AgentId -> $targetPath"; return }
 
     New-Item -ItemType Directory -Force -Path $DestinationRoot | Out-Null
@@ -311,11 +321,11 @@ function Install-AgentProfile {
 }
 
 function Test-AgentProfileInstall {
-    param([System.IO.FileInfo]$Source, [string]$RuntimeName, [string]$AgentId, [string]$DestinationRoot, [string]$TargetName, [string]$RepoName)
+    param([System.IO.FileInfo]$Source, [string]$RuntimeName, [string]$AgentId, [string]$Platform, [string]$DestinationRoot, [string]$TargetName, [string]$RepoName)
     $targetPath = Join-Path $DestinationRoot ($RuntimeName + $Source.Extension)
     if (-not (Test-TargetWithinRoot -TargetPath $targetPath -RootPath $DestinationRoot)) { throw "Refusing to write outside install directory: $targetPath" }
     $metaPath = "$targetPath.autoverse.json"
-    Get-InstallAction -TargetPath $targetPath -MetaPath $metaPath -Label $AgentId -RepoName $RepoName -ExpectedComponent "agent" -ExpectedName $RuntimeName -ExpectedTarget $TargetName | Out-Null
+    Get-InstallAction -TargetPath $targetPath -MetaPath $metaPath -Label $AgentId -RepoName $RepoName -ExpectedComponent "agent" -ExpectedName $RuntimeName -ExpectedTarget $TargetName -ExpectedId $AgentId -ExpectedAdapter $Platform | Out-Null
 }
 
 try {
@@ -343,7 +353,7 @@ try {
         if ($Type -eq "agent") {
             $agentSources = @(Get-AgentSources -RepoRoot $repoRoot -TargetName $Target -AgentId $Name)
             foreach ($agentSource in $agentSources) {
-                Test-AgentProfileInstall -Source $agentSource.Source -RuntimeName $agentSource.RuntimeName -AgentId $agentSource.Id -DestinationRoot $destinationRoot -TargetName $Target -RepoName $Repo
+                Test-AgentProfileInstall -Source $agentSource.Source -RuntimeName $agentSource.RuntimeName -AgentId $agentSource.Id -Platform $agentSource.Platform -DestinationRoot $destinationRoot -TargetName $Target -RepoName $Repo
             }
             Write-Info "$(if ($DryRun) { 'Planning' } else { 'Installing' }) $($agentSources.Count) Agent(s) for $Target"
             foreach ($agentSource in $agentSources) {

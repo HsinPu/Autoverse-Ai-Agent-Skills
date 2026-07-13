@@ -145,20 +145,24 @@ yaml_frontmatter_value() {
 }
 
 install_action() {
-  local target="$1" meta="$2" label="$3" expected_component="$4" expected_name="$5" expected_target="$6" legacy_identity="${7:-}" incoming_identity="${8:-}"
+  local target="$1" meta="$2" label="$3" expected_component="$4" expected_name="$5" expected_target="$6" legacy_identity="${7:-}" incoming_identity="${8:-}" expected_id="${9:-}" expected_adapter="${10:-}"
   INSTALL_ACTION="install"
   EXISTING_INSTALLED_AT=""
   [[ ! -e "$target" ]] && return
 
   if [[ -f "$meta" ]]; then
-    local existing_repo existing_component existing_name existing_target existing_agent
+    local existing_repo existing_component existing_name existing_target existing_agent existing_id existing_adapter identity_matches
     existing_repo="$(json_string_value "$meta" "repo")"
     existing_component="$(json_string_value "$meta" "component")"
     existing_name="$(json_string_value "$meta" "name")"
     existing_target="$(json_string_value "$meta" "target")"
     existing_agent="$(json_string_value "$meta" "agent")"
+    existing_id="$(json_string_value "$meta" "id")"
+    existing_adapter="$(json_string_value "$meta" "adapter")"
     EXISTING_INSTALLED_AT="$(json_string_value "$meta" "installedAt")"
-    if [[ "$existing_repo" == "$REPO" && "$existing_component" == "$expected_component" && "$existing_name" == "$expected_name" && "$existing_target" == "$expected_target" ]]; then
+    identity_matches=1
+    if [[ "$expected_component" == "agent" && ( -z "$expected_id" || "$existing_id" != "$expected_id" || -z "$expected_adapter" || "$existing_adapter" != "$expected_adapter" ) ]]; then identity_matches=0; fi
+    if [[ "$existing_repo" == "$REPO" && "$existing_component" == "$expected_component" && "$existing_name" == "$expected_name" && "$existing_target" == "$expected_target" && "$identity_matches" -eq 1 ]]; then
       INSTALL_ACTION="update"
       return
     fi
@@ -185,7 +189,9 @@ install_action() {
     if [[ -n "$existing_repo" && "$existing_repo" != "$REPO" ]]; then
       log_error "Refusing to replace '$label' because it was installed from '$existing_repo', not '$REPO'. Use --force to overwrite intentionally."
     elif [[ "$existing_repo" == "$REPO" ]]; then
-      log_error "Refusing to replace '$label' because its ownership metadata does not match component='$expected_component', name='$expected_name', and target='$expected_target'. Use --force to overwrite intentionally."
+      local agent_identity=""
+      if [[ "$expected_component" == "agent" ]]; then agent_identity=", id='$expected_id', and adapter='$expected_adapter'"; fi
+      log_error "Refusing to replace '$label' because its ownership metadata does not match component='$expected_component', name='$expected_name', target='$expected_target'$agent_identity. Use --force to overwrite intentionally."
     else
       log_error "Refusing to replace '$label' because its Autoverse metadata is invalid. Use --force to overwrite intentionally."
     fi
@@ -239,7 +245,7 @@ install_agent_profile() {
   target="$DEST_DIR/$runtime_name$extension"
   meta="$target.autoverse.json"
   assert_within_destination "$target"
-  install_action "$target" "$meta" "$agent_id" "agent" "$runtime_name" "$TARGET"
+  install_action "$target" "$meta" "$agent_id" "agent" "$runtime_name" "$TARGET" "" "" "$agent_id" "$platform"
   if [[ "$DRY_RUN" -eq 1 ]]; then printf 'DRY-RUN %s Agent %s -> %s\n' "$INSTALL_ACTION" "$agent_id" "$target"; return; fi
 
   mkdir -p "$DEST_DIR"
@@ -264,12 +270,12 @@ EOF
 }
 
 preflight_agent_profile() {
-  local src="$1" runtime_name="$2" agent_id="$3" extension target meta
+  local src="$1" runtime_name="$2" agent_id="$3" platform="$4" extension target meta
   extension=".${src##*.}"
   target="$DEST_DIR/$runtime_name$extension"
   meta="$target.autoverse.json"
   assert_within_destination "$target"
-  install_action "$target" "$meta" "$agent_id" "agent" "$runtime_name" "$TARGET"
+  install_action "$target" "$meta" "$agent_id" "agent" "$runtime_name" "$TARGET" "" "" "$agent_id" "$platform"
 }
 
 if [[ -z "$TARGET" ]]; then usage; log_error "Target is required."; exit 1; fi
@@ -323,7 +329,7 @@ if [[ "$TYPE" == "agent" ]]; then
   for source in "${AGENT_SOURCES[@]}"; do
     ROLE_FILE="${source##*/}"
     ROLE="${ROLE_FILE%.$EXTENSION}"
-    preflight_agent_profile "$source" "$ROLE" "$ROLE"
+    preflight_agent_profile "$source" "$ROLE" "$ROLE" "$PLATFORM"
   done
   log_info "$(if [[ "$DRY_RUN" -eq 1 ]]; then printf Planning; else printf Installing; fi) ${#AGENT_SOURCES[@]} Agent(s) for $TARGET"
   for source in "${AGENT_SOURCES[@]}"; do

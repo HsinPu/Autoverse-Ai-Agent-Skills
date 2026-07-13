@@ -109,7 +109,7 @@ curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/ma
 | `claude` | 使用者 | `~/.claude/agents/` |
 | `claude-project` | 目前專案 | `.claude/agents/` |
 
-省略 `Name`／`--name` 會安裝全部 Agent；指定 role（例如 `code-reviewer`）則只安裝一個。大量安裝會先完成全部目標的覆蓋安全預檢，確認無衝突後才開始寫入。每次 Agent 安裝會建立 `<agent-file>.autoverse.json`。只有 metadata 的 `repo`、`component`、`name` 與 `target` 全部相符時才會自動更新；既有同名內容沒有 metadata、metadata 無效、欄位不符或來自其他 repo 時，安裝器會拒絕覆蓋。確認要取代時才使用 `-Force`／`--force`。
+省略 `Name`／`--name` 會安裝全部 Agent；指定 role（例如 `code-reviewer`）則只安裝一個。大量安裝會先完成全部目標的覆蓋安全預檢，確認無衝突後才開始寫入。每次 Agent 安裝會建立 `<agent-file>.autoverse.json`。只有 metadata 的 `repo`、`component`、`name`、`target`、`id` 與 `adapter` 全部相符時才會自動更新；既有同名內容沒有 metadata、metadata 無效、欄位不符或來自其他 repo 時，安裝器會拒絕覆蓋。確認要取代時才使用 `-Force`／`--force`。
 
 ## 安裝 Skills
 
