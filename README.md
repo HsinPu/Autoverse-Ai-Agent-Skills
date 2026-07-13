@@ -470,6 +470,8 @@ Autoverse-Ai-Agent-Skills/
 │  ├─ install.cmd                   # Windows CMD wrapper
 │  ├─ install.ps1                   # Windows installer
 │  ├─ install.sh                    # Linux／macOS installer
+│  ├─ smoke-install.ps1             # Isolated Windows installer smoke test
+│  ├─ smoke-install.sh              # Isolated Linux／macOS installer smoke test
 │  ├─ generate-agent-adapters.js
 │  ├─ generate-agent-catalog.js
 │  ├─ sync-agent-reference.js
@@ -479,7 +481,8 @@ Autoverse-Ai-Agent-Skills/
 │  └─ data/
 │     ├─ agent-reference-sources.json
 │     └─ wshobson-agent-inventory.json
-└─ .github/workflows/validate.yml   # CI validation and CLI smoke tests
+├─ tests/cli.test.js                # Zero-dependency CLI argument tests
+└─ .github/workflows/validate.yml   # Catalog, CLI and installer CI
 ```
 
 `agents/<role>.md` 是 Agent 的唯一人工維護來源。請勿直接修改 `adapters/`；五套平台 adapter 與 `agents.json` 都由 scripts 產生。
@@ -498,6 +501,16 @@ npm run sync:agent-reference
 # 驗證 catalogs、frontmatter、來源、授權、adapters、ledger 與 README counts
 npm run validate
 
+# 驗證 CLI 單值參數、未知選項與正常 Skill／Agent 查詢
+npm run test:cli
+
+# 在隔離暫存目錄實測安裝、更新、修復、metadata 與同名保護
+npm run smoke:install:powershell   # Windows
+npm run smoke:install:bash         # Linux／macOS 或 Git Bash
+
+# Git Bash 本機快速模式；CI 仍會執行完整 catalog
+AUTOVERSE_SMOKE_MODE=quick npm run smoke:install:bash
+
 # 連線 GitHub，驗證每個 pinned commit、tree、reference path 與 license
 npm run verify:agent-references:remote
 
@@ -508,7 +521,7 @@ npm run audit:agent-originality
 npm pack --dry-run
 ```
 
-`npm run validate` 是不需網路的本機結構檢查；另外兩個來源品質命令需要連線 GitHub。CI 會在 push 到 `main` 與每個 pull request 上使用 Node.js 20 執行三層檢查，並 smoke-test CLI 的 help、list、search 與 info。GitHub Actions 只授予 `contents: read`。
+`npm run validate`、CLI tests 與 installer smoke tests 都不需要網路；兩個 installer smoke scripts 會建立獨立暫存 HOME，驗證 project／全域 targets、ownership metadata 與防覆寫行為，完成後自動清除，不會修改真正的使用者安裝。來源遠端驗證與 originality audit 需要連線 GitHub。CI 會在 push 到 `main` 與每個 pull request 上使用 Node.js 20 執行 catalog／來源檢查、CLI argument tests，以及 Windows PowerShell、Ubuntu Bash 兩套安裝煙霧測試。GitHub Actions 只授予 `contents: read`。
 
 ### 新增或修改 Agent
 

@@ -14,8 +14,18 @@ const openCodeHome = process.env.OPENCODE_CONFIG_DIR ||
   (process.env.XDG_CONFIG_HOME
     ? path.join(process.env.XDG_CONFIG_HOME, 'opencode')
     : path.join(homeDir, '.config', 'opencode'));
+const SUPPORTED_CATALOG_TYPES = ['skill', 'agent'];
 const SUPPORTED_TARGETS = ['codex', 'claude', 'cursor', 'vscode', 'copilot', 'opencode', 'project'];
 const ALL_TARGETS = ['codex', 'claude', 'cursor', 'copilot', 'opencode', 'project'];
+const KNOWN_LONG_OPTIONS = new Set([
+  '--agent',
+  '--all',
+  '--category',
+  '--help',
+  '--installed',
+  '--target',
+  '--type',
+]);
 
 function resolveCodexSkillProfiles() {
   const profiles = [
@@ -73,6 +83,63 @@ function reportUnknownTarget(value) {
   console.error(`不支援的 target: ${value || '(空白)'}`);
   console.error(`可用 targets: ${SUPPORTED_TARGETS.join(', ')}`);
   process.exitCode = 1;
+}
+
+function parseSingleValueOption(values, optionNames, label, defaultValue) {
+  const matches = [];
+  values.forEach((value, index) => {
+    if (optionNames.includes(value)) matches.push(index);
+  });
+
+  if (matches.length === 0) return { ok: true, value: defaultValue };
+
+  if (matches.length > 1) {
+    console.error(`不可重複使用 ${label}。請只指定一個值。`);
+    process.exitCode = 1;
+    return { ok: false, value: null };
+  }
+
+  const value = values[matches[0] + 1];
+  if (!value || value.startsWith('-')) {
+    console.error(`缺少 ${label} 的值。`);
+    process.exitCode = 1;
+    return { ok: false, value: null };
+  }
+
+  return { ok: true, value };
+}
+
+function parseCliOptions(values) {
+  const typeOption = parseSingleValueOption(values, ['--type'], '--type', 'skill');
+  if (!typeOption.ok) return null;
+
+  const targetOption = parseSingleValueOption(values, ['--target', '--agent'], '--target/--agent', 'codex');
+  if (!targetOption.ok) return null;
+
+  const categoryOption = parseSingleValueOption(values, ['--category'], '--category', null);
+  if (!categoryOption.ok) return null;
+
+  for (let index = 1; index < values.length; index += 1) {
+    const value = values[index];
+    if (value.startsWith('--') && !KNOWN_LONG_OPTIONS.has(value)) {
+      console.error(`未知選項: ${value}`);
+      process.exitCode = 1;
+      return null;
+    }
+  }
+
+  if (!SUPPORTED_CATALOG_TYPES.includes(typeOption.value)) {
+    console.error(`無效的 --type 值: ${typeOption.value}`);
+    console.error(`允許的值: ${SUPPORTED_CATALOG_TYPES.join(', ')}`);
+    process.exitCode = 1;
+    return null;
+  }
+
+  return {
+    catalogType: typeOption.value,
+    target: targetOption.value,
+    category: categoryOption.value,
+  };
 }
 
 function loadSkillsJson() {
@@ -424,13 +491,10 @@ const args = process.argv.slice(2);
 const command = args[0];
 
 const allFlag = args.includes('--all');
-const typeIndex = args.indexOf('--type');
-const catalogType = typeIndex !== -1 ? args[typeIndex + 1] : 'skill';
-const targetIndex = args.includes('--target') ? args.indexOf('--target') : args.indexOf('--agent');
-const target = targetIndex !== -1 ? args[targetIndex + 1] : 'codex';
-
-const categoryIndex = args.indexOf('--category');
-const category = categoryIndex !== -1 ? args[categoryIndex + 1] : null;
+const cliOptions = parseCliOptions(args);
+const catalogType = cliOptions ? cliOptions.catalogType : null;
+const target = cliOptions ? cliOptions.target : null;
+const category = cliOptions ? cliOptions.category : null;
 const positionalArgs = getPositionalArgs(args);
 const param = positionalArgs[0];
 const searchQuery = positionalArgs.join(' ');
@@ -457,7 +521,9 @@ function getPositionalArgs(values) {
   return positional;
 }
 
-if (!command || command === 'help' || command === '--help' || command === '-h') {
+if (catalogType === null) {
+  // parseCliOptions already reported the user-facing error.
+} else if (!command || command === 'help' || command === '--help' || command === '-h') {
   showHelp();
 } else if (command === 'list' || command === 'ls') {
   if (args.includes('--installed')) {

@@ -53,6 +53,14 @@ log_info() { printf '==> %s\n' "$1"; }
 log_success() { printf 'OK  %s\n' "$1"; }
 log_error() { printf 'Error: %s\n' "$1" >&2; }
 
+require_option_value() {
+  local option="$1" value="${2:-}"
+  if [[ -z "$value" || "$value" == -* ]]; then
+    log_error "Missing value for $option."
+    exit 1
+  fi
+}
+
 is_owned_codex_legacy_skill() {
   local root="$1" skill_name="$2" meta existing_repo existing_component existing_name existing_target existing_agent
   meta="${root%/}/$skill_name/.skill-meta.json"
@@ -126,15 +134,15 @@ opencode_config_root() {
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --target|--agent) TARGET="${2:-}"; shift 2 ;;
-    --type) TYPE="${2:-}"; shift 2 ;;
-    --name) NAME="${2:-}"; shift 2 ;;
-    --skill) TYPE="skill"; NAME="${2:-}"; shift 2 ;;
-    --agent-profile) TYPE="agent"; NAME="${2:-}"; shift 2 ;;
-    --branch) BRANCH="${2:-}"; shift 2 ;;
-    --repo) REPO="${2:-}"; shift 2 ;;
-    --dir) INSTALL_DIR="${2:-}"; shift 2 ;;
-    --source-dir) SOURCE_DIR="${2:-}"; shift 2 ;;
+    --target|--agent) require_option_value "$1" "${2:-}"; TARGET="$2"; shift 2 ;;
+    --type) require_option_value "$1" "${2:-}"; TYPE="$2"; shift 2 ;;
+    --name) require_option_value "$1" "${2:-}"; NAME="$2"; shift 2 ;;
+    --skill) require_option_value "$1" "${2:-}"; TYPE="skill"; NAME="$2"; shift 2 ;;
+    --agent-profile) require_option_value "$1" "${2:-}"; TYPE="agent"; NAME="$2"; shift 2 ;;
+    --branch) require_option_value "$1" "${2:-}"; BRANCH="$2"; shift 2 ;;
+    --repo) require_option_value "$1" "${2:-}"; REPO="$2"; shift 2 ;;
+    --dir) require_option_value "$1" "${2:-}"; INSTALL_DIR="$2"; shift 2 ;;
+    --source-dir) require_option_value "$1" "${2:-}"; SOURCE_DIR="$2"; shift 2 ;;
     --enable-auto-delegation) ENABLE_AUTO_DELEGATION=1; shift ;;
     --dry-run) DRY_RUN=1; shift ;;
     --force) FORCE=1; shift ;;
@@ -271,8 +279,8 @@ validate_name() {
     return
   fi
   [[ -z "$NAME" ]] && return
-  if [[ "$NAME" == "." || "$NAME" == ".." || "$NAME" == *"/"* || "$NAME" == *"\\"* ]]; then
-    log_error "Invalid Skill Name: $NAME"
+  if [[ ! "$NAME" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]]; then
+    log_error "Invalid Skill Name '$NAME'. Expected a lowercase hyphen-case catalog name."
     exit 1
   fi
 }

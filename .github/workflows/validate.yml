@@ -40,3 +40,40 @@ jobs:
           node autoverse-cli.js list
           node autoverse-cli.js search python
           node autoverse-cli.js info python-development
+
+      - name: Test CLI argument validation
+        run: npm run test:cli
+
+  installer-powershell:
+    name: Installer smoke (PowerShell)
+    runs-on: windows-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run isolated PowerShell installer smoke test
+        run: npm run smoke:install:powershell
+
+  installer-bash:
+    name: Installer smoke (Bash)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run isolated Bash installer smoke test
+        run: npm run smoke:install:bash
