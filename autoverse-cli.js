@@ -49,19 +49,19 @@ function loadAgentsJson() {
   return { agents: [] };
 }
 
-function listAgents(plugin = null) {
+function listAgents(category = null) {
   let agents = loadAgentsJson().agents || [];
-  if (plugin) agents = agents.filter(agent => agent.plugin === plugin);
+  if (category) agents = agents.filter(agent => agent.category === category);
   if (agents.length === 0) {
     console.log('沒有找到任何 Agent');
     return;
   }
   console.log(`可用 Agent (${agents.length} 個):\n`);
-  const byPlugin = {};
-  for (const agent of agents) (byPlugin[agent.plugin] ||= []).push(agent);
-  for (const pluginName of Object.keys(byPlugin).sort()) {
-    console.log(`[${pluginName}]`);
-    for (const agent of byPlugin[pluginName]) {
+  const byCategory = {};
+  for (const agent of agents) (byCategory[agent.category] ||= []).push(agent);
+  for (const categoryName of Object.keys(byCategory).sort()) {
+    console.log(`[${categoryName}]`);
+    for (const agent of byCategory[categoryName]) {
       console.log(`  ${agent.id}`);
       console.log(`    ${agent.description.slice(0, 80)}${agent.description.length > 80 ? '...' : ''}`);
     }
@@ -90,7 +90,7 @@ function rankMatches(items, query, fieldsFor) {
 
 function searchAgents(query) {
   const matches = rankMatches(loadAgentsJson().agents || [], query, agent => [
-    agent.id, agent.name, agent.role, agent.plugin, agent.description, ...(agent.tags || [])
+    agent.id, agent.name, agent.role, agent.category, agent.description, ...(agent.tags || [])
   ]);
   if (matches.length === 0) {
     console.log(`沒有找到符合 "${query}" 的 Agent`);
@@ -249,7 +249,7 @@ ${skill.description}
 function showAgentInfo(agentId) {
   const agent = (loadAgentsJson().agents || []).find(item => item.id === agentId || item.name === agentId);
   if (!agent) {
-    console.log(`找不到 Agent "${agentId}"；請使用 plugin/role。`);
+    console.log(`找不到 Agent "${agentId}"；請使用角色名稱。`);
     return;
   }
   console.log(`
@@ -257,7 +257,7 @@ ${agent.id}
 ${agent.description}
 
 執行名稱: ${agent.name}
-Plugin: ${agent.plugin}
+分類: ${agent.category}
 角色: ${agent.role}
 權限: ${agent.permission}
 作者: ${agent.author}
@@ -290,7 +290,6 @@ Autoverse AI Agent Skills - Catalog 工具
 選項:
   --type skill|agent    Catalog 類型（預設: skill）
   --target <名稱>       list --installed 的平台（--agent 為相容別名）
-  --plugin <名稱>       Agent list 的 plugin 篩選
   --all                 list --installed 時列出該類型所有支援平台
   --category <類別>     依類別過濾
 
@@ -302,9 +301,9 @@ Autoverse AI Agent Skills - Catalog 工具
   autoverse list
   autoverse search python
   autoverse info python-development
-  autoverse list --type agent --plugin comprehensive-review
+  autoverse list --type agent --category quality-assurance
   autoverse search reviewer --type agent
-  autoverse info comprehensive-review/code-reviewer --type agent
+  autoverse info code-reviewer --type agent
   autoverse list --installed --type agent --target codex
 
 安裝請使用免 Node installer:
@@ -323,15 +322,12 @@ const target = targetIndex !== -1 ? args[targetIndex + 1] : 'claude';
 
 const categoryIndex = args.indexOf('--category');
 const category = categoryIndex !== -1 ? args[categoryIndex + 1] : null;
-const pluginIndex = args.indexOf('--plugin');
-const plugin = pluginIndex !== -1 ? args[pluginIndex + 1] : null;
-
 const positionalArgs = getPositionalArgs(args);
 const param = positionalArgs[0];
 const searchQuery = positionalArgs.join(' ');
 
 function getPositionalArgs(values) {
-  const optionsWithValue = new Set(['--agent', '--target', '--type', '--category', '--plugin']);
+  const optionsWithValue = new Set(['--agent', '--target', '--type', '--category']);
   const positional = [];
 
   for (let i = 1; i < values.length; i += 1) {
@@ -364,7 +360,7 @@ if (!command || command === 'help' || command === '--help' || command === '-h') 
       else listInstalled(target);
     }
   } else {
-    if (catalogType === 'agent') listAgents(plugin);
+    if (catalogType === 'agent') listAgents(category);
     else listSkills(category);
   }
 } else if (command === 'search' || command === 's') {

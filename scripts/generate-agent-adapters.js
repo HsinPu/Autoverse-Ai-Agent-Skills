@@ -36,15 +36,12 @@ function parseAgent(filePath) {
 
 function listAgents() {
   return fs.readdirSync(agentsRoot, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory())
-    .flatMap((pluginEntry) => fs.readdirSync(path.join(agentsRoot, pluginEntry.name), { withFileTypes: true })
-      .filter((entry) => entry.isFile() && entry.name.endsWith('.md'))
-      .map((entry) => ({
-        plugin: pluginEntry.name,
-        role: path.basename(entry.name, '.md'),
-        filePath: path.join(agentsRoot, pluginEntry.name, entry.name)
-      })))
-    .sort((left, right) => `${left.plugin}/${left.role}`.localeCompare(`${right.plugin}/${right.role}`));
+    .filter((entry) => entry.isFile() && entry.name.endsWith('.md'))
+    .map((entry) => ({
+      role: path.basename(entry.name, '.md'),
+      filePath: path.join(agentsRoot, entry.name)
+    }))
+    .sort((left, right) => left.role.localeCompare(right.role));
 }
 
 function renderCodex(fields, body) {
@@ -78,35 +75,23 @@ function renderClaude(fields, body) {
 function resetGeneratedAdapters() {
   for (const platform of ['codex', 'claude']) {
     const platformRoot = path.join(adaptersRoot, platform);
-    if (!fs.existsSync(platformRoot)) continue;
-    for (const pluginEntry of fs.readdirSync(platformRoot, { withFileTypes: true })) {
-      if (!pluginEntry.isDirectory()) throw new Error(`Unexpected generated adapter entry: ${pluginEntry.name}`);
-      const pluginRoot = path.join(platformRoot, pluginEntry.name);
-      for (const entry of fs.readdirSync(pluginRoot, { withFileTypes: true })) {
-        if (!entry.isFile()) throw new Error(`Unexpected generated adapter entry: ${platform}/${pluginEntry.name}/${entry.name}`);
-        fs.unlinkSync(path.join(pluginRoot, entry.name));
-      }
-      fs.rmdirSync(pluginRoot);
-    }
+    if (path.dirname(platformRoot) !== adaptersRoot) throw new Error(`Unsafe adapter output path: ${platformRoot}`);
+    fs.rmSync(platformRoot, { recursive: true, force: true });
+    fs.mkdirSync(platformRoot, { recursive: true });
   }
 }
 
 function main() {
   const agents = listAgents();
-  if (agents.length !== 199) throw new Error(`Expected 199 canonical Agents, found ${agents.length}`);
+  if (agents.length !== 134) throw new Error(`Expected 134 canonical Agents, found ${agents.length}`);
   resetGeneratedAdapters();
   for (const agent of agents) {
     const { fields, body } = parseAgent(agent.filePath);
-    const id = `${agent.plugin}/${agent.role}`;
-    if (fields.id !== id || fields.name !== `${agent.plugin}-${agent.role}`) {
-      throw new Error(`${id} has inconsistent canonical identity`);
+    if (fields.id !== agent.role || fields.name !== agent.role || fields.role !== agent.role) {
+      throw new Error(`${agent.role} has inconsistent canonical identity`);
     }
-    const codexRoot = path.join(adaptersRoot, 'codex', agent.plugin);
-    const claudeRoot = path.join(adaptersRoot, 'claude', agent.plugin);
-    fs.mkdirSync(codexRoot, { recursive: true });
-    fs.mkdirSync(claudeRoot, { recursive: true });
-    fs.writeFileSync(path.join(codexRoot, `${agent.role}.toml`), renderCodex(fields, body), 'utf8');
-    fs.writeFileSync(path.join(claudeRoot, `${agent.role}.md`), renderClaude(fields, body), 'utf8');
+    fs.writeFileSync(path.join(adaptersRoot, 'codex', `${agent.role}.toml`), renderCodex(fields, body), 'utf8');
+    fs.writeFileSync(path.join(adaptersRoot, 'claude', `${agent.role}.md`), renderClaude(fields, body), 'utf8');
   }
   console.log(`Generated Codex and Claude adapters for ${agents.length} Agents`);
 }

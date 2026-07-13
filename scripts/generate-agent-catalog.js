@@ -12,7 +12,6 @@ const requiredFields = [
   'id',
   'name',
   'role',
-  'plugin',
   'description',
   'category',
   'author',
@@ -23,18 +22,14 @@ const requiredFields = [
   'skills',
   'tags',
   'reference-repo',
-  'reference-path',
+  'reference-paths',
   'reference-tree'
 ];
 
 function parseScalar(value) {
   const trimmed = value.trim();
   if (trimmed.startsWith('"') && trimmed.endsWith('"')) {
-    try {
-      return JSON.parse(trimmed);
-    } catch {
-      // Fall back to a plain YAML-style quoted scalar.
-    }
+    try { return JSON.parse(trimmed); } catch { /* Use plain scalar fallback. */ }
   }
   return trimmed.replace(/^['"]|['"]$/g, '');
 }
@@ -62,13 +57,8 @@ function parseFrontmatter(filePath) {
 function listAgentFiles() {
   if (!fs.existsSync(agentsRoot)) throw new Error('agents/ directory is missing');
   return fs.readdirSync(agentsRoot, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory())
-    .flatMap((pluginEntry) => {
-      const pluginRoot = path.join(agentsRoot, pluginEntry.name);
-      return fs.readdirSync(pluginRoot, { withFileTypes: true })
-        .filter((entry) => entry.isFile() && entry.name.endsWith('.md'))
-        .map((entry) => path.join(pluginRoot, entry.name));
-    })
+    .filter((entry) => entry.isFile() && entry.name.endsWith('.md'))
+    .map((entry) => path.join(agentsRoot, entry.name))
     .sort();
 }
 
@@ -82,19 +72,15 @@ function readAgents() {
       }
     }
 
-    const plugin = path.basename(path.dirname(filePath));
     const role = path.basename(filePath, '.md');
-    const id = `${plugin}/${role}`;
-    const name = `${plugin}-${role}`;
-    if (fields.plugin !== plugin || fields.role !== role || fields.id !== id || fields.name !== name) {
-      throw new Error(`${relativePath} does not match its plugin-qualified identity (${id}, ${name})`);
+    if (fields.role !== role || fields.id !== role || fields.name !== role) {
+      throw new Error(`${relativePath} does not match its flat role identity (${role})`);
     }
 
     return {
       id: fields.id,
       name: fields.name,
       role: fields.role,
-      plugin: fields.plugin,
       description: fields.description,
       category: fields.category,
       author: fields.author,
@@ -105,30 +91,30 @@ function readAgents() {
       skills: fields.skills,
       tags: fields.tags,
       path: relativePath,
-      reference: {
+      references: {
         repo: fields['reference-repo'],
-        path: fields['reference-path'],
+        paths: fields['reference-paths'],
         tree: fields['reference-tree']
       }
     };
   }).sort((left, right) => left.id.localeCompare(right.id));
 }
 
-function renderPluginSummary(agents) {
+function renderCategorySummary(agents) {
   const groups = new Map();
   for (const agent of agents) {
-    const group = groups.get(agent.plugin) || [];
+    const group = groups.get(agent.category) || [];
     group.push(agent);
-    groups.set(agent.plugin, group);
+    groups.set(agent.category, group);
   }
-  const rows = [...groups.entries()].sort(([left], [right]) => left.localeCompare(right)).map(([plugin, entries]) => {
+  const rows = [...groups.entries()].sort(([left], [right]) => left.localeCompare(right)).map(([category, entries]) => {
     const links = entries.sort((left, right) => left.role.localeCompare(right.role))
       .map((agent) => `[\`${agent.role}\`](${agent.path})`).join(', ');
-    return `| \`${plugin}\` | ${entries.length} | ${links} |`;
+    return `| \`${category}\` | ${entries.length} | ${links} |`;
   });
   return [
     '<!-- AGENT_SUMMARY_START -->',
-    '| Plugin | Count | Agents |',
+    '| Category | Count | Agents |',
     '|---|---:|---|',
     ...rows,
     '<!-- AGENT_SUMMARY_END -->'
@@ -143,24 +129,23 @@ function updateReadme(agents) {
   if (countBlock.test(readme)) {
     readme = readme.replace(
       countBlock,
-      `<!-- AGENT_COUNT_START -->\n目前共收錄 **${agents.length}** 個 plugin-scoped Agents。\n<!-- AGENT_COUNT_END -->`
+      `<!-- AGENT_COUNT_START -->\n目前共收錄 **${agents.length}** 個不重複 Agents。\n<!-- AGENT_COUNT_END -->`
     );
   }
-  if (summaryBlock.test(readme)) readme = readme.replace(summaryBlock, renderPluginSummary(agents));
+  if (summaryBlock.test(readme)) readme = readme.replace(summaryBlock, renderCategorySummary(agents));
   fs.writeFileSync(readmePath, readme, 'utf8');
 }
 
 const agents = readAgents();
-const previous = fs.existsSync(catalogPath) ? JSON.parse(fs.readFileSync(catalogPath, 'utf8')) : {};
 const catalog = {
-  version: previous.version === '2.0.0' ? previous.version : '2.0.0',
+  version: '3.0.0',
   updated: new Date().toISOString(),
   total: agents.length,
-  plugins: new Set(agents.map((agent) => agent.plugin)).size,
+  categories: new Set(agents.map((agent) => agent.category)).size,
   uniqueRoles: new Set(agents.map((agent) => agent.role)).size,
   agents
 };
 
 fs.writeFileSync(catalogPath, `${JSON.stringify(catalog, null, 2)}\n`, 'utf8');
 updateReadme(agents);
-console.log(`Generated agents.json for ${agents.length} Agents across ${catalog.plugins} plugins`);
+console.log(`Generated agents.json for ${agents.length} unique Agents across ${catalog.categories} categories`);

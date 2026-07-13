@@ -2,15 +2,15 @@
   "sourceRepo": "wshobson/agents",
   "sourceBranch": "main",
   "sourceTreeSha": "2de74ac1c8f6669821dcef13153332c3168033c1",
-  "generatedAt": "2026-07-13T02:17:32.085Z",
-  "policy": "Upstream file paths, role names, and high-level responsibilities are reference inputs only. Every Autoverse prompt is independently rewritten, strengthened, and published as first-party HsinPu Apache-2.0 content.",
+  "generatedAt": "2026-07-13T03:06:04.775Z",
+  "policy": "Upstream paths, role names, and high-level responsibilities are reference inputs only. Duplicate upstream definitions are consolidated by role into independently rewritten, strengthened, first-party HsinPu Apache-2.0 Agents.",
   "totals": {
     "definitions": 199,
     "uniqueRoleNames": 134,
     "repeatedRoleNames": 30,
     "repeatedDefinitions": 65,
     "uniqueSourceBlobs": 199,
-    "rewritten": 199,
+    "consolidated": 199,
     "remaining": 0
   },
   "definitions": [
@@ -18,1991 +18,1991 @@
       "id": "accessibility-compliance/ui-visual-validator",
       "plugin": "accessibility-compliance",
       "sourceName": "ui-visual-validator",
-      "runtimeName": "accessibility-compliance-ui-visual-validator",
-      "status": "rewritten",
+      "runtimeName": "ui-visual-validator",
+      "status": "consolidated",
       "sourcePath": "plugins/accessibility-compliance/agents/ui-visual-validator.md",
       "sourceBlobSha": "05b1404acdcc4623c1d1fe18a63c539eda8c7e57",
-      "targetPath": "agents/accessibility-compliance/ui-visual-validator.md"
+      "targetPath": "agents/ui-visual-validator.md"
     },
     {
       "id": "agent-orchestration/context-manager",
       "plugin": "agent-orchestration",
       "sourceName": "context-manager",
-      "runtimeName": "agent-orchestration-context-manager",
-      "status": "rewritten",
+      "runtimeName": "context-manager",
+      "status": "consolidated",
       "sourcePath": "plugins/agent-orchestration/agents/context-manager.md",
       "sourceBlobSha": "a2c6d973bdc4061f674450700e065aba1e75b48a",
-      "targetPath": "agents/agent-orchestration/context-manager.md"
+      "targetPath": "agents/context-manager.md"
     },
     {
       "id": "agent-teams/team-debugger",
       "plugin": "agent-teams",
       "sourceName": "team-debugger",
-      "runtimeName": "agent-teams-team-debugger",
-      "status": "rewritten",
+      "runtimeName": "team-debugger",
+      "status": "consolidated",
       "sourcePath": "plugins/agent-teams/agents/team-debugger.md",
       "sourceBlobSha": "07dbeb8128cf50f1c85fbc6c1630f42bed4bbfe0",
-      "targetPath": "agents/agent-teams/team-debugger.md"
+      "targetPath": "agents/team-debugger.md"
     },
     {
       "id": "agent-teams/team-implementer",
       "plugin": "agent-teams",
       "sourceName": "team-implementer",
-      "runtimeName": "agent-teams-team-implementer",
-      "status": "rewritten",
+      "runtimeName": "team-implementer",
+      "status": "consolidated",
       "sourcePath": "plugins/agent-teams/agents/team-implementer.md",
       "sourceBlobSha": "ee75eaada7d63aac123e750022daa2802da167da",
-      "targetPath": "agents/agent-teams/team-implementer.md"
+      "targetPath": "agents/team-implementer.md"
     },
     {
       "id": "agent-teams/team-lead",
       "plugin": "agent-teams",
       "sourceName": "team-lead",
-      "runtimeName": "agent-teams-team-lead",
-      "status": "rewritten",
+      "runtimeName": "team-lead",
+      "status": "consolidated",
       "sourcePath": "plugins/agent-teams/agents/team-lead.md",
       "sourceBlobSha": "d0b0e0fc3b8f60c62d8c46af34d8703e6d5b8771",
-      "targetPath": "agents/agent-teams/team-lead.md"
+      "targetPath": "agents/team-lead.md"
     },
     {
       "id": "agent-teams/team-reviewer",
       "plugin": "agent-teams",
       "sourceName": "team-reviewer",
-      "runtimeName": "agent-teams-team-reviewer",
-      "status": "rewritten",
+      "runtimeName": "team-reviewer",
+      "status": "consolidated",
       "sourcePath": "plugins/agent-teams/agents/team-reviewer.md",
       "sourceBlobSha": "3b555e7634bf4cb5c6debedf882e31185b95dbf8",
-      "targetPath": "agents/agent-teams/team-reviewer.md"
+      "targetPath": "agents/team-reviewer.md"
     },
     {
       "id": "api-scaffolding/backend-architect",
       "plugin": "api-scaffolding",
       "sourceName": "backend-architect",
-      "runtimeName": "api-scaffolding-backend-architect",
-      "status": "rewritten",
+      "runtimeName": "backend-architect",
+      "status": "consolidated",
       "sourcePath": "plugins/api-scaffolding/agents/backend-architect.md",
       "sourceBlobSha": "7936315029d76b9a28f6b55ab7b74e0d22f55813",
-      "targetPath": "agents/api-scaffolding/backend-architect.md"
+      "targetPath": "agents/backend-architect.md"
     },
     {
       "id": "api-scaffolding/django-pro",
       "plugin": "api-scaffolding",
       "sourceName": "django-pro",
-      "runtimeName": "api-scaffolding-django-pro",
-      "status": "rewritten",
+      "runtimeName": "django-pro",
+      "status": "consolidated",
       "sourcePath": "plugins/api-scaffolding/agents/django-pro.md",
       "sourceBlobSha": "5dd49c5897f0bcf5eea2e11cf5f51996423b073e",
-      "targetPath": "agents/api-scaffolding/django-pro.md"
+      "targetPath": "agents/django-pro.md"
     },
     {
       "id": "api-scaffolding/fastapi-pro",
       "plugin": "api-scaffolding",
       "sourceName": "fastapi-pro",
-      "runtimeName": "api-scaffolding-fastapi-pro",
-      "status": "rewritten",
+      "runtimeName": "fastapi-pro",
+      "status": "consolidated",
       "sourcePath": "plugins/api-scaffolding/agents/fastapi-pro.md",
       "sourceBlobSha": "4fdf86ec37fd11390ac157512f3a1142cea7b79a",
-      "targetPath": "agents/api-scaffolding/fastapi-pro.md"
+      "targetPath": "agents/fastapi-pro.md"
     },
     {
       "id": "api-scaffolding/graphql-architect",
       "plugin": "api-scaffolding",
       "sourceName": "graphql-architect",
-      "runtimeName": "api-scaffolding-graphql-architect",
-      "status": "rewritten",
+      "runtimeName": "graphql-architect",
+      "status": "consolidated",
       "sourcePath": "plugins/api-scaffolding/agents/graphql-architect.md",
       "sourceBlobSha": "084e1bab3b214e38ae51781b9d199310d0f0e699",
-      "targetPath": "agents/api-scaffolding/graphql-architect.md"
+      "targetPath": "agents/graphql-architect.md"
     },
     {
       "id": "api-testing-observability/api-documenter",
       "plugin": "api-testing-observability",
       "sourceName": "api-documenter",
-      "runtimeName": "api-testing-observability-api-documenter",
-      "status": "rewritten",
+      "runtimeName": "api-documenter",
+      "status": "consolidated",
       "sourcePath": "plugins/api-testing-observability/agents/api-documenter.md",
       "sourceBlobSha": "c86bf0d0e8c1bd068c830d860f5c23fbe7f064d6",
-      "targetPath": "agents/api-testing-observability/api-documenter.md"
+      "targetPath": "agents/api-documenter.md"
     },
     {
       "id": "application-performance/frontend-developer",
       "plugin": "application-performance",
       "sourceName": "frontend-developer",
-      "runtimeName": "application-performance-frontend-developer",
-      "status": "rewritten",
+      "runtimeName": "frontend-developer",
+      "status": "consolidated",
       "sourcePath": "plugins/application-performance/agents/frontend-developer.md",
       "sourceBlobSha": "4fe5e046d56771e88e8ae33afd195298cccdbb21",
-      "targetPath": "agents/application-performance/frontend-developer.md"
+      "targetPath": "agents/frontend-developer.md"
     },
     {
       "id": "application-performance/observability-engineer",
       "plugin": "application-performance",
       "sourceName": "observability-engineer",
-      "runtimeName": "application-performance-observability-engineer",
-      "status": "rewritten",
+      "runtimeName": "observability-engineer",
+      "status": "consolidated",
       "sourcePath": "plugins/application-performance/agents/observability-engineer.md",
       "sourceBlobSha": "a454fcb91ae1d87e7e10819d4312503e609867c6",
-      "targetPath": "agents/application-performance/observability-engineer.md"
+      "targetPath": "agents/observability-engineer.md"
     },
     {
       "id": "application-performance/performance-engineer",
       "plugin": "application-performance",
       "sourceName": "performance-engineer",
-      "runtimeName": "application-performance-performance-engineer",
-      "status": "rewritten",
+      "runtimeName": "performance-engineer",
+      "status": "consolidated",
       "sourcePath": "plugins/application-performance/agents/performance-engineer.md",
       "sourceBlobSha": "18d056d909d41a96d8d1628a4463c1b048cf11c7",
-      "targetPath": "agents/application-performance/performance-engineer.md"
+      "targetPath": "agents/performance-engineer.md"
     },
     {
       "id": "arm-cortex-microcontrollers/arm-cortex-expert",
       "plugin": "arm-cortex-microcontrollers",
       "sourceName": "arm-cortex-expert",
-      "runtimeName": "arm-cortex-microcontrollers-arm-cortex-expert",
-      "status": "rewritten",
+      "runtimeName": "arm-cortex-expert",
+      "status": "consolidated",
       "sourcePath": "plugins/arm-cortex-microcontrollers/agents/arm-cortex-expert.md",
       "sourceBlobSha": "edc85e1a0842029f74860db65186170f77fedc18",
-      "targetPath": "agents/arm-cortex-microcontrollers/arm-cortex-expert.md"
+      "targetPath": "agents/arm-cortex-expert.md"
     },
     {
       "id": "backend-api-security/backend-architect",
       "plugin": "backend-api-security",
       "sourceName": "backend-architect",
-      "runtimeName": "backend-api-security-backend-architect",
-      "status": "rewritten",
+      "runtimeName": "backend-architect",
+      "status": "consolidated",
       "sourcePath": "plugins/backend-api-security/agents/backend-architect.md",
       "sourceBlobSha": "f1b48cf66e8a925434c68e2e7809b352b66f66ee",
-      "targetPath": "agents/backend-api-security/backend-architect.md"
+      "targetPath": "agents/backend-architect.md"
     },
     {
       "id": "backend-api-security/backend-security-coder",
       "plugin": "backend-api-security",
       "sourceName": "backend-security-coder",
-      "runtimeName": "backend-api-security-backend-security-coder",
-      "status": "rewritten",
+      "runtimeName": "backend-security-coder",
+      "status": "consolidated",
       "sourcePath": "plugins/backend-api-security/agents/backend-security-coder.md",
       "sourceBlobSha": "92d6860d66e5faa0add75e417a9083d7367ec21d",
-      "targetPath": "agents/backend-api-security/backend-security-coder.md"
+      "targetPath": "agents/backend-security-coder.md"
     },
     {
       "id": "backend-development/backend-architect",
       "plugin": "backend-development",
       "sourceName": "backend-architect",
-      "runtimeName": "backend-development-backend-architect",
-      "status": "rewritten",
+      "runtimeName": "backend-architect",
+      "status": "consolidated",
       "sourcePath": "plugins/backend-development/agents/backend-architect.md",
       "sourceBlobSha": "9458d181e01418a29804994877a52d735075c03d",
-      "targetPath": "agents/backend-development/backend-architect.md"
+      "targetPath": "agents/backend-architect.md"
     },
     {
       "id": "backend-development/event-sourcing-architect",
       "plugin": "backend-development",
       "sourceName": "event-sourcing-architect",
-      "runtimeName": "backend-development-event-sourcing-architect",
-      "status": "rewritten",
+      "runtimeName": "event-sourcing-architect",
+      "status": "consolidated",
       "sourcePath": "plugins/backend-development/agents/event-sourcing-architect.md",
       "sourceBlobSha": "556c6e7acd89131780e7887eb4ac375d579f7976",
-      "targetPath": "agents/backend-development/event-sourcing-architect.md"
+      "targetPath": "agents/event-sourcing-architect.md"
     },
     {
       "id": "backend-development/graphql-architect",
       "plugin": "backend-development",
       "sourceName": "graphql-architect",
-      "runtimeName": "backend-development-graphql-architect",
-      "status": "rewritten",
+      "runtimeName": "graphql-architect",
+      "status": "consolidated",
       "sourcePath": "plugins/backend-development/agents/graphql-architect.md",
       "sourceBlobSha": "1343a9f25580eb144a74efd863042d295769cb7e",
-      "targetPath": "agents/backend-development/graphql-architect.md"
+      "targetPath": "agents/graphql-architect.md"
     },
     {
       "id": "backend-development/performance-engineer",
       "plugin": "backend-development",
       "sourceName": "performance-engineer",
-      "runtimeName": "backend-development-performance-engineer",
-      "status": "rewritten",
+      "runtimeName": "performance-engineer",
+      "status": "consolidated",
       "sourcePath": "plugins/backend-development/agents/performance-engineer.md",
       "sourceBlobSha": "be915564e51985994cbcb81442e1a6fa43c03209",
-      "targetPath": "agents/backend-development/performance-engineer.md"
+      "targetPath": "agents/performance-engineer.md"
     },
     {
       "id": "backend-development/security-auditor",
       "plugin": "backend-development",
       "sourceName": "security-auditor",
-      "runtimeName": "backend-development-security-auditor",
-      "status": "rewritten",
+      "runtimeName": "security-auditor",
+      "status": "consolidated",
       "sourcePath": "plugins/backend-development/agents/security-auditor.md",
       "sourceBlobSha": "c8ff11472a000b0fed2181986f43da3cdc1d3feb",
-      "targetPath": "agents/backend-development/security-auditor.md"
+      "targetPath": "agents/security-auditor.md"
     },
     {
       "id": "backend-development/tdd-orchestrator",
       "plugin": "backend-development",
       "sourceName": "tdd-orchestrator",
-      "runtimeName": "backend-development-tdd-orchestrator",
-      "status": "rewritten",
+      "runtimeName": "tdd-orchestrator",
+      "status": "consolidated",
       "sourcePath": "plugins/backend-development/agents/tdd-orchestrator.md",
       "sourceBlobSha": "d4f333e8450cf9a87bfc91774482c4ea3f9583d5",
-      "targetPath": "agents/backend-development/tdd-orchestrator.md"
+      "targetPath": "agents/tdd-orchestrator.md"
     },
     {
       "id": "backend-development/temporal-python-pro",
       "plugin": "backend-development",
       "sourceName": "temporal-python-pro",
-      "runtimeName": "backend-development-temporal-python-pro",
-      "status": "rewritten",
+      "runtimeName": "temporal-python-pro",
+      "status": "consolidated",
       "sourcePath": "plugins/backend-development/agents/temporal-python-pro.md",
       "sourceBlobSha": "4e5173b42722c33c8d22ff57330e091d3d4b564d",
-      "targetPath": "agents/backend-development/temporal-python-pro.md"
+      "targetPath": "agents/temporal-python-pro.md"
     },
     {
       "id": "backend-development/test-automator",
       "plugin": "backend-development",
       "sourceName": "test-automator",
-      "runtimeName": "backend-development-test-automator",
-      "status": "rewritten",
+      "runtimeName": "test-automator",
+      "status": "consolidated",
       "sourcePath": "plugins/backend-development/agents/test-automator.md",
       "sourceBlobSha": "e8d094e36f1c4da55ef8225d2c8c21ff7a6eb1df",
-      "targetPath": "agents/backend-development/test-automator.md"
+      "targetPath": "agents/test-automator.md"
     },
     {
       "id": "blockchain-web3/blockchain-developer",
       "plugin": "blockchain-web3",
       "sourceName": "blockchain-developer",
-      "runtimeName": "blockchain-web3-blockchain-developer",
-      "status": "rewritten",
+      "runtimeName": "blockchain-developer",
+      "status": "consolidated",
       "sourcePath": "plugins/blockchain-web3/agents/blockchain-developer.md",
       "sourceBlobSha": "bcc2ae005fabd11481c7fc3ed6d8a75bd43306cb",
-      "targetPath": "agents/blockchain-web3/blockchain-developer.md"
+      "targetPath": "agents/blockchain-developer.md"
     },
     {
       "id": "business-analytics/business-analyst",
       "plugin": "business-analytics",
       "sourceName": "business-analyst",
-      "runtimeName": "business-analytics-business-analyst",
-      "status": "rewritten",
+      "runtimeName": "business-analyst",
+      "status": "consolidated",
       "sourcePath": "plugins/business-analytics/agents/business-analyst.md",
       "sourceBlobSha": "23f3398c904ed7f2c534482393bcb5e990fdee9a",
-      "targetPath": "agents/business-analytics/business-analyst.md"
+      "targetPath": "agents/business-analyst.md"
     },
     {
       "id": "c4-architecture/c4-code",
       "plugin": "c4-architecture",
       "sourceName": "c4-code",
-      "runtimeName": "c4-architecture-c4-code",
-      "status": "rewritten",
+      "runtimeName": "c4-code",
+      "status": "consolidated",
       "sourcePath": "plugins/c4-architecture/agents/c4-code.md",
       "sourceBlobSha": "1176c620f571edc4b0f6ff977a077ad2d85860be",
-      "targetPath": "agents/c4-architecture/c4-code.md"
+      "targetPath": "agents/c4-code.md"
     },
     {
       "id": "c4-architecture/c4-component",
       "plugin": "c4-architecture",
       "sourceName": "c4-component",
-      "runtimeName": "c4-architecture-c4-component",
-      "status": "rewritten",
+      "runtimeName": "c4-component",
+      "status": "consolidated",
       "sourcePath": "plugins/c4-architecture/agents/c4-component.md",
       "sourceBlobSha": "1787215c5a7282c3cccc5f0def5e2e1e40e48ea5",
-      "targetPath": "agents/c4-architecture/c4-component.md"
+      "targetPath": "agents/c4-component.md"
     },
     {
       "id": "c4-architecture/c4-container",
       "plugin": "c4-architecture",
       "sourceName": "c4-container",
-      "runtimeName": "c4-architecture-c4-container",
-      "status": "rewritten",
+      "runtimeName": "c4-container",
+      "status": "consolidated",
       "sourcePath": "plugins/c4-architecture/agents/c4-container.md",
       "sourceBlobSha": "8f8a7b05b5f94005be6def55c5823deb7170341f",
-      "targetPath": "agents/c4-architecture/c4-container.md"
+      "targetPath": "agents/c4-container.md"
     },
     {
       "id": "c4-architecture/c4-context",
       "plugin": "c4-architecture",
       "sourceName": "c4-context",
-      "runtimeName": "c4-architecture-c4-context",
-      "status": "rewritten",
+      "runtimeName": "c4-context",
+      "status": "consolidated",
       "sourcePath": "plugins/c4-architecture/agents/c4-context.md",
       "sourceBlobSha": "f373e44c9e6ddd877c4e6f84a26a1df34b986922",
-      "targetPath": "agents/c4-architecture/c4-context.md"
+      "targetPath": "agents/c4-context.md"
     },
     {
       "id": "cicd-automation/cloud-architect",
       "plugin": "cicd-automation",
       "sourceName": "cloud-architect",
-      "runtimeName": "cicd-automation-cloud-architect",
-      "status": "rewritten",
+      "runtimeName": "cloud-architect",
+      "status": "consolidated",
       "sourcePath": "plugins/cicd-automation/agents/cloud-architect.md",
       "sourceBlobSha": "68235b57d830858f63a4362070f013c86287d55a",
-      "targetPath": "agents/cicd-automation/cloud-architect.md"
+      "targetPath": "agents/cloud-architect.md"
     },
     {
       "id": "cicd-automation/deployment-engineer",
       "plugin": "cicd-automation",
       "sourceName": "deployment-engineer",
-      "runtimeName": "cicd-automation-deployment-engineer",
-      "status": "rewritten",
+      "runtimeName": "deployment-engineer",
+      "status": "consolidated",
       "sourcePath": "plugins/cicd-automation/agents/deployment-engineer.md",
       "sourceBlobSha": "01c550bf9eac7a66c812e39232a9160b6d916aad",
-      "targetPath": "agents/cicd-automation/deployment-engineer.md"
+      "targetPath": "agents/deployment-engineer.md"
     },
     {
       "id": "cicd-automation/devops-troubleshooter",
       "plugin": "cicd-automation",
       "sourceName": "devops-troubleshooter",
-      "runtimeName": "cicd-automation-devops-troubleshooter",
-      "status": "rewritten",
+      "runtimeName": "devops-troubleshooter",
+      "status": "consolidated",
       "sourcePath": "plugins/cicd-automation/agents/devops-troubleshooter.md",
       "sourceBlobSha": "3c65e1752dc977e694a6f908bc4bf524cca8161a",
-      "targetPath": "agents/cicd-automation/devops-troubleshooter.md"
+      "targetPath": "agents/devops-troubleshooter.md"
     },
     {
       "id": "cicd-automation/kubernetes-architect",
       "plugin": "cicd-automation",
       "sourceName": "kubernetes-architect",
-      "runtimeName": "cicd-automation-kubernetes-architect",
-      "status": "rewritten",
+      "runtimeName": "kubernetes-architect",
+      "status": "consolidated",
       "sourcePath": "plugins/cicd-automation/agents/kubernetes-architect.md",
       "sourceBlobSha": "66a46df37e5681fc29accaf1392e5f089e46467e",
-      "targetPath": "agents/cicd-automation/kubernetes-architect.md"
+      "targetPath": "agents/kubernetes-architect.md"
     },
     {
       "id": "cicd-automation/terraform-specialist",
       "plugin": "cicd-automation",
       "sourceName": "terraform-specialist",
-      "runtimeName": "cicd-automation-terraform-specialist",
-      "status": "rewritten",
+      "runtimeName": "terraform-specialist",
+      "status": "consolidated",
       "sourcePath": "plugins/cicd-automation/agents/terraform-specialist.md",
       "sourceBlobSha": "025cf96beb2c210f8be9cc540e7df8f7bd5a9d1a",
-      "targetPath": "agents/cicd-automation/terraform-specialist.md"
+      "targetPath": "agents/terraform-specialist.md"
     },
     {
       "id": "cloud-infrastructure/cloud-architect",
       "plugin": "cloud-infrastructure",
       "sourceName": "cloud-architect",
-      "runtimeName": "cloud-infrastructure-cloud-architect",
-      "status": "rewritten",
+      "runtimeName": "cloud-architect",
+      "status": "consolidated",
       "sourcePath": "plugins/cloud-infrastructure/agents/cloud-architect.md",
       "sourceBlobSha": "4505772ae550f40d570e9d9b0aaa4f2c2abbc94e",
-      "targetPath": "agents/cloud-infrastructure/cloud-architect.md"
+      "targetPath": "agents/cloud-architect.md"
     },
     {
       "id": "cloud-infrastructure/deployment-engineer",
       "plugin": "cloud-infrastructure",
       "sourceName": "deployment-engineer",
-      "runtimeName": "cloud-infrastructure-deployment-engineer",
-      "status": "rewritten",
+      "runtimeName": "deployment-engineer",
+      "status": "consolidated",
       "sourcePath": "plugins/cloud-infrastructure/agents/deployment-engineer.md",
       "sourceBlobSha": "6f597495970a8ad060d0a401b1703c0758b86fc7",
-      "targetPath": "agents/cloud-infrastructure/deployment-engineer.md"
+      "targetPath": "agents/deployment-engineer.md"
     },
     {
       "id": "cloud-infrastructure/hybrid-cloud-architect",
       "plugin": "cloud-infrastructure",
       "sourceName": "hybrid-cloud-architect",
-      "runtimeName": "cloud-infrastructure-hybrid-cloud-architect",
-      "status": "rewritten",
+      "runtimeName": "hybrid-cloud-architect",
+      "status": "consolidated",
       "sourcePath": "plugins/cloud-infrastructure/agents/hybrid-cloud-architect.md",
       "sourceBlobSha": "63abe804eaa1e22842b22959270181ddb1637775",
-      "targetPath": "agents/cloud-infrastructure/hybrid-cloud-architect.md"
+      "targetPath": "agents/hybrid-cloud-architect.md"
     },
     {
       "id": "cloud-infrastructure/kubernetes-architect",
       "plugin": "cloud-infrastructure",
       "sourceName": "kubernetes-architect",
-      "runtimeName": "cloud-infrastructure-kubernetes-architect",
-      "status": "rewritten",
+      "runtimeName": "kubernetes-architect",
+      "status": "consolidated",
       "sourcePath": "plugins/cloud-infrastructure/agents/kubernetes-architect.md",
       "sourceBlobSha": "45f47d4386059b05cc034473288639d6ab2cfe96",
-      "targetPath": "agents/cloud-infrastructure/kubernetes-architect.md"
+      "targetPath": "agents/kubernetes-architect.md"
     },
     {
       "id": "cloud-infrastructure/network-engineer",
       "plugin": "cloud-infrastructure",
       "sourceName": "network-engineer",
-      "runtimeName": "cloud-infrastructure-network-engineer",
-      "status": "rewritten",
+      "runtimeName": "network-engineer",
+      "status": "consolidated",
       "sourcePath": "plugins/cloud-infrastructure/agents/network-engineer.md",
       "sourceBlobSha": "e6baec7226b159da9fb004ef04b0ec759720efb9",
-      "targetPath": "agents/cloud-infrastructure/network-engineer.md"
+      "targetPath": "agents/network-engineer.md"
     },
     {
       "id": "cloud-infrastructure/service-mesh-expert",
       "plugin": "cloud-infrastructure",
       "sourceName": "service-mesh-expert",
-      "runtimeName": "cloud-infrastructure-service-mesh-expert",
-      "status": "rewritten",
+      "runtimeName": "service-mesh-expert",
+      "status": "consolidated",
       "sourcePath": "plugins/cloud-infrastructure/agents/service-mesh-expert.md",
       "sourceBlobSha": "5a0716f3fd966d6431430b8f3c5da36a41b2a933",
-      "targetPath": "agents/cloud-infrastructure/service-mesh-expert.md"
+      "targetPath": "agents/service-mesh-expert.md"
     },
     {
       "id": "cloud-infrastructure/terraform-specialist",
       "plugin": "cloud-infrastructure",
       "sourceName": "terraform-specialist",
-      "runtimeName": "cloud-infrastructure-terraform-specialist",
-      "status": "rewritten",
+      "runtimeName": "terraform-specialist",
+      "status": "consolidated",
       "sourcePath": "plugins/cloud-infrastructure/agents/terraform-specialist.md",
       "sourceBlobSha": "25ce1c125be9e0c16fac9697167ee49f0bc90aed",
-      "targetPath": "agents/cloud-infrastructure/terraform-specialist.md"
+      "targetPath": "agents/terraform-specialist.md"
     },
     {
       "id": "code-documentation/code-reviewer",
       "plugin": "code-documentation",
       "sourceName": "code-reviewer",
-      "runtimeName": "code-documentation-code-reviewer",
-      "status": "rewritten",
+      "runtimeName": "code-reviewer",
+      "status": "consolidated",
       "sourcePath": "plugins/code-documentation/agents/code-reviewer.md",
       "sourceBlobSha": "7972beb0d273d258c463ab30a78601701f76fb5a",
-      "targetPath": "agents/code-documentation/code-reviewer.md"
+      "targetPath": "agents/code-reviewer.md"
     },
     {
       "id": "code-documentation/docs-architect",
       "plugin": "code-documentation",
       "sourceName": "docs-architect",
-      "runtimeName": "code-documentation-docs-architect",
-      "status": "rewritten",
+      "runtimeName": "docs-architect",
+      "status": "consolidated",
       "sourcePath": "plugins/code-documentation/agents/docs-architect.md",
       "sourceBlobSha": "f00cb829cdc3f3121adc28f10622ade6ff4c3cf1",
-      "targetPath": "agents/code-documentation/docs-architect.md"
+      "targetPath": "agents/docs-architect.md"
     },
     {
       "id": "code-documentation/tutorial-engineer",
       "plugin": "code-documentation",
       "sourceName": "tutorial-engineer",
-      "runtimeName": "code-documentation-tutorial-engineer",
-      "status": "rewritten",
+      "runtimeName": "tutorial-engineer",
+      "status": "consolidated",
       "sourcePath": "plugins/code-documentation/agents/tutorial-engineer.md",
       "sourceBlobSha": "a7d47c7724fa2730cb51ad353506297f8622c6f0",
-      "targetPath": "agents/code-documentation/tutorial-engineer.md"
+      "targetPath": "agents/tutorial-engineer.md"
     },
     {
       "id": "code-refactoring/code-reviewer",
       "plugin": "code-refactoring",
       "sourceName": "code-reviewer",
-      "runtimeName": "code-refactoring-code-reviewer",
-      "status": "rewritten",
+      "runtimeName": "code-reviewer",
+      "status": "consolidated",
       "sourcePath": "plugins/code-refactoring/agents/code-reviewer.md",
       "sourceBlobSha": "a8977c0448eea85222e0921b8a1b789d23928d81",
-      "targetPath": "agents/code-refactoring/code-reviewer.md"
+      "targetPath": "agents/code-reviewer.md"
     },
     {
       "id": "code-refactoring/legacy-modernizer",
       "plugin": "code-refactoring",
       "sourceName": "legacy-modernizer",
-      "runtimeName": "code-refactoring-legacy-modernizer",
-      "status": "rewritten",
+      "runtimeName": "legacy-modernizer",
+      "status": "consolidated",
       "sourcePath": "plugins/code-refactoring/agents/legacy-modernizer.md",
       "sourceBlobSha": "206b20a2ed72f25c530dc0dcbd980a61eb679993",
-      "targetPath": "agents/code-refactoring/legacy-modernizer.md"
+      "targetPath": "agents/legacy-modernizer.md"
     },
     {
       "id": "codebase-cleanup/code-reviewer",
       "plugin": "codebase-cleanup",
       "sourceName": "code-reviewer",
-      "runtimeName": "codebase-cleanup-code-reviewer",
-      "status": "rewritten",
+      "runtimeName": "code-reviewer",
+      "status": "consolidated",
       "sourcePath": "plugins/codebase-cleanup/agents/code-reviewer.md",
       "sourceBlobSha": "577c2cfa58d8b9187de425d706183236732b45e5",
-      "targetPath": "agents/codebase-cleanup/code-reviewer.md"
+      "targetPath": "agents/code-reviewer.md"
     },
     {
       "id": "codebase-cleanup/test-automator",
       "plugin": "codebase-cleanup",
       "sourceName": "test-automator",
-      "runtimeName": "codebase-cleanup-test-automator",
-      "status": "rewritten",
+      "runtimeName": "test-automator",
+      "status": "consolidated",
       "sourcePath": "plugins/codebase-cleanup/agents/test-automator.md",
       "sourceBlobSha": "9115918863ea45c3066b002441893339e7103eea",
-      "targetPath": "agents/codebase-cleanup/test-automator.md"
+      "targetPath": "agents/test-automator.md"
     },
     {
       "id": "comprehensive-review/architect-review",
       "plugin": "comprehensive-review",
       "sourceName": "architect-review",
-      "runtimeName": "comprehensive-review-architect-review",
-      "status": "rewritten",
+      "runtimeName": "architect-review",
+      "status": "consolidated",
       "sourcePath": "plugins/comprehensive-review/agents/architect-review.md",
       "sourceBlobSha": "fad7a966fa6141d441cb1b37235d08d4033e8e70",
-      "targetPath": "agents/comprehensive-review/architect-review.md"
+      "targetPath": "agents/architect-review.md"
     },
     {
       "id": "comprehensive-review/code-reviewer",
       "plugin": "comprehensive-review",
       "sourceName": "code-reviewer",
-      "runtimeName": "comprehensive-review-code-reviewer",
-      "status": "rewritten",
+      "runtimeName": "code-reviewer",
+      "status": "consolidated",
       "sourcePath": "plugins/comprehensive-review/agents/code-reviewer.md",
       "sourceBlobSha": "96198d04a6d10be9d8d5f77fdbd39db1f896dad3",
-      "targetPath": "agents/comprehensive-review/code-reviewer.md"
+      "targetPath": "agents/code-reviewer.md"
     },
     {
       "id": "comprehensive-review/security-auditor",
       "plugin": "comprehensive-review",
       "sourceName": "security-auditor",
-      "runtimeName": "comprehensive-review-security-auditor",
-      "status": "rewritten",
+      "runtimeName": "security-auditor",
+      "status": "consolidated",
       "sourcePath": "plugins/comprehensive-review/agents/security-auditor.md",
       "sourceBlobSha": "5fb27114dc5db414c47e4c2f33f83ee32ce4ac3b",
-      "targetPath": "agents/comprehensive-review/security-auditor.md"
+      "targetPath": "agents/security-auditor.md"
     },
     {
       "id": "conductor/conductor-validator",
       "plugin": "conductor",
       "sourceName": "conductor-validator",
-      "runtimeName": "conductor-conductor-validator",
-      "status": "rewritten",
+      "runtimeName": "conductor-validator",
+      "status": "consolidated",
       "sourcePath": "plugins/conductor/agents/conductor-validator.md",
       "sourceBlobSha": "f314781b513fe93a1fee8a590ea25fdba3c255bd",
-      "targetPath": "agents/conductor/conductor-validator.md"
+      "targetPath": "agents/conductor-validator.md"
     },
     {
       "id": "content-marketing/content-marketer",
       "plugin": "content-marketing",
       "sourceName": "content-marketer",
-      "runtimeName": "content-marketing-content-marketer",
-      "status": "rewritten",
+      "runtimeName": "content-marketer",
+      "status": "consolidated",
       "sourcePath": "plugins/content-marketing/agents/content-marketer.md",
       "sourceBlobSha": "60af65e1d74303b965587f7d43ed7beb53e84d84",
-      "targetPath": "agents/content-marketing/content-marketer.md"
+      "targetPath": "agents/content-marketer.md"
     },
     {
       "id": "content-marketing/search-specialist",
       "plugin": "content-marketing",
       "sourceName": "search-specialist",
-      "runtimeName": "content-marketing-search-specialist",
-      "status": "rewritten",
+      "runtimeName": "search-specialist",
+      "status": "consolidated",
       "sourcePath": "plugins/content-marketing/agents/search-specialist.md",
       "sourceBlobSha": "91fc6a121cefa0426a57bf72561f788932a3e444",
-      "targetPath": "agents/content-marketing/search-specialist.md"
+      "targetPath": "agents/search-specialist.md"
     },
     {
       "id": "context-management/context-manager",
       "plugin": "context-management",
       "sourceName": "context-manager",
-      "runtimeName": "context-management-context-manager",
-      "status": "rewritten",
+      "runtimeName": "context-manager",
+      "status": "consolidated",
       "sourcePath": "plugins/context-management/agents/context-manager.md",
       "sourceBlobSha": "c9ef5d5cc2d45c06802045725724a4f33dd8dac2",
-      "targetPath": "agents/context-management/context-manager.md"
+      "targetPath": "agents/context-manager.md"
     },
     {
       "id": "customer-sales-automation/customer-support",
       "plugin": "customer-sales-automation",
       "sourceName": "customer-support",
-      "runtimeName": "customer-sales-automation-customer-support",
-      "status": "rewritten",
+      "runtimeName": "customer-support",
+      "status": "consolidated",
       "sourcePath": "plugins/customer-sales-automation/agents/customer-support.md",
       "sourceBlobSha": "f2a7ac6689f5e3857e297f9f57ff570a2fe910ba",
-      "targetPath": "agents/customer-sales-automation/customer-support.md"
+      "targetPath": "agents/customer-support.md"
     },
     {
       "id": "customer-sales-automation/sales-automator",
       "plugin": "customer-sales-automation",
       "sourceName": "sales-automator",
-      "runtimeName": "customer-sales-automation-sales-automator",
-      "status": "rewritten",
+      "runtimeName": "sales-automator",
+      "status": "consolidated",
       "sourcePath": "plugins/customer-sales-automation/agents/sales-automator.md",
       "sourceBlobSha": "f308cd5011c1b5a676a50c69de883b114014ad28",
-      "targetPath": "agents/customer-sales-automation/sales-automator.md"
+      "targetPath": "agents/sales-automator.md"
     },
     {
       "id": "data-engineering/backend-architect",
       "plugin": "data-engineering",
       "sourceName": "backend-architect",
-      "runtimeName": "data-engineering-backend-architect",
-      "status": "rewritten",
+      "runtimeName": "backend-architect",
+      "status": "consolidated",
       "sourcePath": "plugins/data-engineering/agents/backend-architect.md",
       "sourceBlobSha": "eca8e76c42f412de0ca0a093ef2ac828acafed1b",
-      "targetPath": "agents/data-engineering/backend-architect.md"
+      "targetPath": "agents/backend-architect.md"
     },
     {
       "id": "data-engineering/data-engineer",
       "plugin": "data-engineering",
       "sourceName": "data-engineer",
-      "runtimeName": "data-engineering-data-engineer",
-      "status": "rewritten",
+      "runtimeName": "data-engineer",
+      "status": "consolidated",
       "sourcePath": "plugins/data-engineering/agents/data-engineer.md",
       "sourceBlobSha": "d38ac20b997d46bb981175b444fc5f5f4115df6a",
-      "targetPath": "agents/data-engineering/data-engineer.md"
+      "targetPath": "agents/data-engineer.md"
     },
     {
       "id": "data-validation-suite/backend-security-coder",
       "plugin": "data-validation-suite",
       "sourceName": "backend-security-coder",
-      "runtimeName": "data-validation-suite-backend-security-coder",
-      "status": "rewritten",
+      "runtimeName": "backend-security-coder",
+      "status": "consolidated",
       "sourcePath": "plugins/data-validation-suite/agents/backend-security-coder.md",
       "sourceBlobSha": "e7ef83d978a7a41df53661546533595ce8206ad9",
-      "targetPath": "agents/data-validation-suite/backend-security-coder.md"
+      "targetPath": "agents/backend-security-coder.md"
     },
     {
       "id": "database-cloud-optimization/backend-architect",
       "plugin": "database-cloud-optimization",
       "sourceName": "backend-architect",
-      "runtimeName": "database-cloud-optimization-backend-architect",
-      "status": "rewritten",
+      "runtimeName": "backend-architect",
+      "status": "consolidated",
       "sourcePath": "plugins/database-cloud-optimization/agents/backend-architect.md",
       "sourceBlobSha": "2b543d4d2fd76be1ae17c139cbcf4213094830f3",
-      "targetPath": "agents/database-cloud-optimization/backend-architect.md"
+      "targetPath": "agents/backend-architect.md"
     },
     {
       "id": "database-cloud-optimization/cloud-architect",
       "plugin": "database-cloud-optimization",
       "sourceName": "cloud-architect",
-      "runtimeName": "database-cloud-optimization-cloud-architect",
-      "status": "rewritten",
+      "runtimeName": "cloud-architect",
+      "status": "consolidated",
       "sourcePath": "plugins/database-cloud-optimization/agents/cloud-architect.md",
       "sourceBlobSha": "fbff5551fd2ee2632f256af78de67b929d9a0c32",
-      "targetPath": "agents/database-cloud-optimization/cloud-architect.md"
+      "targetPath": "agents/cloud-architect.md"
     },
     {
       "id": "database-cloud-optimization/database-architect",
       "plugin": "database-cloud-optimization",
       "sourceName": "database-architect",
-      "runtimeName": "database-cloud-optimization-database-architect",
-      "status": "rewritten",
+      "runtimeName": "database-architect",
+      "status": "consolidated",
       "sourcePath": "plugins/database-cloud-optimization/agents/database-architect.md",
       "sourceBlobSha": "d8971062db1326b321beb068149f701de8436784",
-      "targetPath": "agents/database-cloud-optimization/database-architect.md"
+      "targetPath": "agents/database-architect.md"
     },
     {
       "id": "database-cloud-optimization/database-optimizer",
       "plugin": "database-cloud-optimization",
       "sourceName": "database-optimizer",
-      "runtimeName": "database-cloud-optimization-database-optimizer",
-      "status": "rewritten",
+      "runtimeName": "database-optimizer",
+      "status": "consolidated",
       "sourcePath": "plugins/database-cloud-optimization/agents/database-optimizer.md",
       "sourceBlobSha": "3785e05d27796caa609a0e79b4157ba5779fbe0c",
-      "targetPath": "agents/database-cloud-optimization/database-optimizer.md"
+      "targetPath": "agents/database-optimizer.md"
     },
     {
       "id": "database-design/database-architect",
       "plugin": "database-design",
       "sourceName": "database-architect",
-      "runtimeName": "database-design-database-architect",
-      "status": "rewritten",
+      "runtimeName": "database-architect",
+      "status": "consolidated",
       "sourcePath": "plugins/database-design/agents/database-architect.md",
       "sourceBlobSha": "021342c90e7cee85d76167b1d33b45e96540bcd2",
-      "targetPath": "agents/database-design/database-architect.md"
+      "targetPath": "agents/database-architect.md"
     },
     {
       "id": "database-design/sql-pro",
       "plugin": "database-design",
       "sourceName": "sql-pro",
-      "runtimeName": "database-design-sql-pro",
-      "status": "rewritten",
+      "runtimeName": "sql-pro",
+      "status": "consolidated",
       "sourcePath": "plugins/database-design/agents/sql-pro.md",
       "sourceBlobSha": "8aa6329247fec487a75d74e8d890a46e206794ef",
-      "targetPath": "agents/database-design/sql-pro.md"
+      "targetPath": "agents/sql-pro.md"
     },
     {
       "id": "database-migrations/database-admin",
       "plugin": "database-migrations",
       "sourceName": "database-admin",
-      "runtimeName": "database-migrations-database-admin",
-      "status": "rewritten",
+      "runtimeName": "database-admin",
+      "status": "consolidated",
       "sourcePath": "plugins/database-migrations/agents/database-admin.md",
       "sourceBlobSha": "45268b7b81c02b141c7b6b9e955b31367b716dd2",
-      "targetPath": "agents/database-migrations/database-admin.md"
+      "targetPath": "agents/database-admin.md"
     },
     {
       "id": "database-migrations/database-optimizer",
       "plugin": "database-migrations",
       "sourceName": "database-optimizer",
-      "runtimeName": "database-migrations-database-optimizer",
-      "status": "rewritten",
+      "runtimeName": "database-optimizer",
+      "status": "consolidated",
       "sourcePath": "plugins/database-migrations/agents/database-optimizer.md",
       "sourceBlobSha": "c894d46037a1eb436285c21f02ae1cd93b47ec71",
-      "targetPath": "agents/database-migrations/database-optimizer.md"
+      "targetPath": "agents/database-optimizer.md"
     },
     {
       "id": "debugging-toolkit/debugger",
       "plugin": "debugging-toolkit",
       "sourceName": "debugger",
-      "runtimeName": "debugging-toolkit-debugger",
-      "status": "rewritten",
+      "runtimeName": "debugger",
+      "status": "consolidated",
       "sourcePath": "plugins/debugging-toolkit/agents/debugger.md",
       "sourceBlobSha": "621f8d246a8ca1abc9b6e6c19a41f901a806bc41",
-      "targetPath": "agents/debugging-toolkit/debugger.md"
+      "targetPath": "agents/debugger.md"
     },
     {
       "id": "debugging-toolkit/dx-optimizer",
       "plugin": "debugging-toolkit",
       "sourceName": "dx-optimizer",
-      "runtimeName": "debugging-toolkit-dx-optimizer",
-      "status": "rewritten",
+      "runtimeName": "dx-optimizer",
+      "status": "consolidated",
       "sourcePath": "plugins/debugging-toolkit/agents/dx-optimizer.md",
       "sourceBlobSha": "0cb53d788020fefc97056a867b073b410429f25d",
-      "targetPath": "agents/debugging-toolkit/dx-optimizer.md"
+      "targetPath": "agents/dx-optimizer.md"
     },
     {
       "id": "dependency-management/legacy-modernizer",
       "plugin": "dependency-management",
       "sourceName": "legacy-modernizer",
-      "runtimeName": "dependency-management-legacy-modernizer",
-      "status": "rewritten",
+      "runtimeName": "legacy-modernizer",
+      "status": "consolidated",
       "sourcePath": "plugins/dependency-management/agents/legacy-modernizer.md",
       "sourceBlobSha": "2ed5c9863c5a1361221de8f9e392cd8d88f29603",
-      "targetPath": "agents/dependency-management/legacy-modernizer.md"
+      "targetPath": "agents/legacy-modernizer.md"
     },
     {
       "id": "deployment-strategies/deployment-engineer",
       "plugin": "deployment-strategies",
       "sourceName": "deployment-engineer",
-      "runtimeName": "deployment-strategies-deployment-engineer",
-      "status": "rewritten",
+      "runtimeName": "deployment-engineer",
+      "status": "consolidated",
       "sourcePath": "plugins/deployment-strategies/agents/deployment-engineer.md",
       "sourceBlobSha": "b8a06c565843b51088d03c751301669924030c7d",
-      "targetPath": "agents/deployment-strategies/deployment-engineer.md"
+      "targetPath": "agents/deployment-engineer.md"
     },
     {
       "id": "deployment-strategies/terraform-specialist",
       "plugin": "deployment-strategies",
       "sourceName": "terraform-specialist",
-      "runtimeName": "deployment-strategies-terraform-specialist",
-      "status": "rewritten",
+      "runtimeName": "terraform-specialist",
+      "status": "consolidated",
       "sourcePath": "plugins/deployment-strategies/agents/terraform-specialist.md",
       "sourceBlobSha": "36e39f4208904c7cfb49cea308b7b0f27ddccc22",
-      "targetPath": "agents/deployment-strategies/terraform-specialist.md"
+      "targetPath": "agents/terraform-specialist.md"
     },
     {
       "id": "deployment-validation/cloud-architect",
       "plugin": "deployment-validation",
       "sourceName": "cloud-architect",
-      "runtimeName": "deployment-validation-cloud-architect",
-      "status": "rewritten",
+      "runtimeName": "cloud-architect",
+      "status": "consolidated",
       "sourcePath": "plugins/deployment-validation/agents/cloud-architect.md",
       "sourceBlobSha": "8917d3ba0b62fb138956c3f20f33825c29f63e7c",
-      "targetPath": "agents/deployment-validation/cloud-architect.md"
+      "targetPath": "agents/cloud-architect.md"
     },
     {
       "id": "developer-essentials/monorepo-architect",
       "plugin": "developer-essentials",
       "sourceName": "monorepo-architect",
-      "runtimeName": "developer-essentials-monorepo-architect",
-      "status": "rewritten",
+      "runtimeName": "monorepo-architect",
+      "status": "consolidated",
       "sourcePath": "plugins/developer-essentials/agents/monorepo-architect.md",
       "sourceBlobSha": "b384ffbfd9a3ddbbb8fbb596d489aa54a27f20d0",
-      "targetPath": "agents/developer-essentials/monorepo-architect.md"
+      "targetPath": "agents/monorepo-architect.md"
     },
     {
       "id": "distributed-debugging/devops-troubleshooter",
       "plugin": "distributed-debugging",
       "sourceName": "devops-troubleshooter",
-      "runtimeName": "distributed-debugging-devops-troubleshooter",
-      "status": "rewritten",
+      "runtimeName": "devops-troubleshooter",
+      "status": "consolidated",
       "sourcePath": "plugins/distributed-debugging/agents/devops-troubleshooter.md",
       "sourceBlobSha": "de6a921bd5cb037c1669f6456f9152962edc9bf6",
-      "targetPath": "agents/distributed-debugging/devops-troubleshooter.md"
+      "targetPath": "agents/devops-troubleshooter.md"
     },
     {
       "id": "distributed-debugging/error-detective",
       "plugin": "distributed-debugging",
       "sourceName": "error-detective",
-      "runtimeName": "distributed-debugging-error-detective",
-      "status": "rewritten",
+      "runtimeName": "error-detective",
+      "status": "consolidated",
       "sourcePath": "plugins/distributed-debugging/agents/error-detective.md",
       "sourceBlobSha": "39f5dc91e0fd3e8568422cedd7ac66791cb948ec",
-      "targetPath": "agents/distributed-debugging/error-detective.md"
+      "targetPath": "agents/error-detective.md"
     },
     {
       "id": "documentation-generation/api-documenter",
       "plugin": "documentation-generation",
       "sourceName": "api-documenter",
-      "runtimeName": "documentation-generation-api-documenter",
-      "status": "rewritten",
+      "runtimeName": "api-documenter",
+      "status": "consolidated",
       "sourcePath": "plugins/documentation-generation/agents/api-documenter.md",
       "sourceBlobSha": "5791aa1fa07b0a5e97be991e650b92597257732e",
-      "targetPath": "agents/documentation-generation/api-documenter.md"
+      "targetPath": "agents/api-documenter.md"
     },
     {
       "id": "documentation-generation/docs-architect",
       "plugin": "documentation-generation",
       "sourceName": "docs-architect",
-      "runtimeName": "documentation-generation-docs-architect",
-      "status": "rewritten",
+      "runtimeName": "docs-architect",
+      "status": "consolidated",
       "sourcePath": "plugins/documentation-generation/agents/docs-architect.md",
       "sourceBlobSha": "2148658140b88c4a3b6d4eaeed056074a43c4984",
-      "targetPath": "agents/documentation-generation/docs-architect.md"
+      "targetPath": "agents/docs-architect.md"
     },
     {
       "id": "documentation-generation/mermaid-expert",
       "plugin": "documentation-generation",
       "sourceName": "mermaid-expert",
-      "runtimeName": "documentation-generation-mermaid-expert",
-      "status": "rewritten",
+      "runtimeName": "mermaid-expert",
+      "status": "consolidated",
       "sourcePath": "plugins/documentation-generation/agents/mermaid-expert.md",
       "sourceBlobSha": "6c91070240aadc747d21ad823917b4d0a897f8d4",
-      "targetPath": "agents/documentation-generation/mermaid-expert.md"
+      "targetPath": "agents/mermaid-expert.md"
     },
     {
       "id": "documentation-generation/reference-builder",
       "plugin": "documentation-generation",
       "sourceName": "reference-builder",
-      "runtimeName": "documentation-generation-reference-builder",
-      "status": "rewritten",
+      "runtimeName": "reference-builder",
+      "status": "consolidated",
       "sourcePath": "plugins/documentation-generation/agents/reference-builder.md",
       "sourceBlobSha": "162f158a3d5f5cb840111ddc86c0a95fdf5c1067",
-      "targetPath": "agents/documentation-generation/reference-builder.md"
+      "targetPath": "agents/reference-builder.md"
     },
     {
       "id": "documentation-generation/tutorial-engineer",
       "plugin": "documentation-generation",
       "sourceName": "tutorial-engineer",
-      "runtimeName": "documentation-generation-tutorial-engineer",
-      "status": "rewritten",
+      "runtimeName": "tutorial-engineer",
+      "status": "consolidated",
       "sourcePath": "plugins/documentation-generation/agents/tutorial-engineer.md",
       "sourceBlobSha": "d134ffeeb85365be4a9250de3350dca030a91a8b",
-      "targetPath": "agents/documentation-generation/tutorial-engineer.md"
+      "targetPath": "agents/tutorial-engineer.md"
     },
     {
       "id": "dotnet-contribution/dotnet-architect",
       "plugin": "dotnet-contribution",
       "sourceName": "dotnet-architect",
-      "runtimeName": "dotnet-contribution-dotnet-architect",
-      "status": "rewritten",
+      "runtimeName": "dotnet-architect",
+      "status": "consolidated",
       "sourcePath": "plugins/dotnet-contribution/agents/dotnet-architect.md",
       "sourceBlobSha": "4879b099baee85eab2e030a86f2f9d226b136c17",
-      "targetPath": "agents/dotnet-contribution/dotnet-architect.md"
+      "targetPath": "agents/dotnet-architect.md"
     },
     {
       "id": "error-debugging/debugger",
       "plugin": "error-debugging",
       "sourceName": "debugger",
-      "runtimeName": "error-debugging-debugger",
-      "status": "rewritten",
+      "runtimeName": "debugger",
+      "status": "consolidated",
       "sourcePath": "plugins/error-debugging/agents/debugger.md",
       "sourceBlobSha": "f47e5d28a7d339b6d242050201624882433189e6",
-      "targetPath": "agents/error-debugging/debugger.md"
+      "targetPath": "agents/debugger.md"
     },
     {
       "id": "error-debugging/error-detective",
       "plugin": "error-debugging",
       "sourceName": "error-detective",
-      "runtimeName": "error-debugging-error-detective",
-      "status": "rewritten",
+      "runtimeName": "error-detective",
+      "status": "consolidated",
       "sourcePath": "plugins/error-debugging/agents/error-detective.md",
       "sourceBlobSha": "252a7e6e835a66f6db9196581815fbc15d2e5e10",
-      "targetPath": "agents/error-debugging/error-detective.md"
+      "targetPath": "agents/error-detective.md"
     },
     {
       "id": "error-diagnostics/debugger",
       "plugin": "error-diagnostics",
       "sourceName": "debugger",
-      "runtimeName": "error-diagnostics-debugger",
-      "status": "rewritten",
+      "runtimeName": "debugger",
+      "status": "consolidated",
       "sourcePath": "plugins/error-diagnostics/agents/debugger.md",
       "sourceBlobSha": "b5399c40c15f4d9444c221cf766929e109a1a455",
-      "targetPath": "agents/error-diagnostics/debugger.md"
+      "targetPath": "agents/debugger.md"
     },
     {
       "id": "error-diagnostics/error-detective",
       "plugin": "error-diagnostics",
       "sourceName": "error-detective",
-      "runtimeName": "error-diagnostics-error-detective",
-      "status": "rewritten",
+      "runtimeName": "error-detective",
+      "status": "consolidated",
       "sourcePath": "plugins/error-diagnostics/agents/error-detective.md",
       "sourceBlobSha": "d3d6f6a87bd23e7f6960a9acdee055b7273bdaf0",
-      "targetPath": "agents/error-diagnostics/error-detective.md"
+      "targetPath": "agents/error-detective.md"
     },
     {
       "id": "framework-migration/architect-review",
       "plugin": "framework-migration",
       "sourceName": "architect-review",
-      "runtimeName": "framework-migration-architect-review",
-      "status": "rewritten",
+      "runtimeName": "architect-review",
+      "status": "consolidated",
       "sourcePath": "plugins/framework-migration/agents/architect-review.md",
       "sourceBlobSha": "475ea402c4868159cf4b74299f8e9f90e1e53c2d",
-      "targetPath": "agents/framework-migration/architect-review.md"
+      "targetPath": "agents/architect-review.md"
     },
     {
       "id": "framework-migration/legacy-modernizer",
       "plugin": "framework-migration",
       "sourceName": "legacy-modernizer",
-      "runtimeName": "framework-migration-legacy-modernizer",
-      "status": "rewritten",
+      "runtimeName": "legacy-modernizer",
+      "status": "consolidated",
       "sourcePath": "plugins/framework-migration/agents/legacy-modernizer.md",
       "sourceBlobSha": "f6c953b72c1ff0efb2502ac496c61664f06444eb",
-      "targetPath": "agents/framework-migration/legacy-modernizer.md"
+      "targetPath": "agents/legacy-modernizer.md"
     },
     {
       "id": "frontend-mobile-development/frontend-developer",
       "plugin": "frontend-mobile-development",
       "sourceName": "frontend-developer",
-      "runtimeName": "frontend-mobile-development-frontend-developer",
-      "status": "rewritten",
+      "runtimeName": "frontend-developer",
+      "status": "consolidated",
       "sourcePath": "plugins/frontend-mobile-development/agents/frontend-developer.md",
       "sourceBlobSha": "01b212677f075d1cc1fed742272fbefd6e02b4c1",
-      "targetPath": "agents/frontend-mobile-development/frontend-developer.md"
+      "targetPath": "agents/frontend-developer.md"
     },
     {
       "id": "frontend-mobile-development/mobile-developer",
       "plugin": "frontend-mobile-development",
       "sourceName": "mobile-developer",
-      "runtimeName": "frontend-mobile-development-mobile-developer",
-      "status": "rewritten",
+      "runtimeName": "mobile-developer",
+      "status": "consolidated",
       "sourcePath": "plugins/frontend-mobile-development/agents/mobile-developer.md",
       "sourceBlobSha": "937e4c382b907f71d2d83e31683cd68ffd25282f",
-      "targetPath": "agents/frontend-mobile-development/mobile-developer.md"
+      "targetPath": "agents/mobile-developer.md"
     },
     {
       "id": "frontend-mobile-security/frontend-developer",
       "plugin": "frontend-mobile-security",
       "sourceName": "frontend-developer",
-      "runtimeName": "frontend-mobile-security-frontend-developer",
-      "status": "rewritten",
+      "runtimeName": "frontend-developer",
+      "status": "consolidated",
       "sourcePath": "plugins/frontend-mobile-security/agents/frontend-developer.md",
       "sourceBlobSha": "0f344bc6952a64a025ed6667db12b4c479ba887a",
-      "targetPath": "agents/frontend-mobile-security/frontend-developer.md"
+      "targetPath": "agents/frontend-developer.md"
     },
     {
       "id": "frontend-mobile-security/frontend-security-coder",
       "plugin": "frontend-mobile-security",
       "sourceName": "frontend-security-coder",
-      "runtimeName": "frontend-mobile-security-frontend-security-coder",
-      "status": "rewritten",
+      "runtimeName": "frontend-security-coder",
+      "status": "consolidated",
       "sourcePath": "plugins/frontend-mobile-security/agents/frontend-security-coder.md",
       "sourceBlobSha": "846c2085ef500e4d837dad9460e52b8d6f68eccc",
-      "targetPath": "agents/frontend-mobile-security/frontend-security-coder.md"
+      "targetPath": "agents/frontend-security-coder.md"
     },
     {
       "id": "frontend-mobile-security/mobile-security-coder",
       "plugin": "frontend-mobile-security",
       "sourceName": "mobile-security-coder",
-      "runtimeName": "frontend-mobile-security-mobile-security-coder",
-      "status": "rewritten",
+      "runtimeName": "mobile-security-coder",
+      "status": "consolidated",
       "sourcePath": "plugins/frontend-mobile-security/agents/mobile-security-coder.md",
       "sourceBlobSha": "e137ab598c9cce2cefe8d321faba60c5880d7749",
-      "targetPath": "agents/frontend-mobile-security/mobile-security-coder.md"
+      "targetPath": "agents/mobile-security-coder.md"
     },
     {
       "id": "full-stack-orchestration/deployment-engineer",
       "plugin": "full-stack-orchestration",
       "sourceName": "deployment-engineer",
-      "runtimeName": "full-stack-orchestration-deployment-engineer",
-      "status": "rewritten",
+      "runtimeName": "deployment-engineer",
+      "status": "consolidated",
       "sourcePath": "plugins/full-stack-orchestration/agents/deployment-engineer.md",
       "sourceBlobSha": "d5fbc929f07b1af97a140d456a1c34dc2c0cb144",
-      "targetPath": "agents/full-stack-orchestration/deployment-engineer.md"
+      "targetPath": "agents/deployment-engineer.md"
     },
     {
       "id": "full-stack-orchestration/performance-engineer",
       "plugin": "full-stack-orchestration",
       "sourceName": "performance-engineer",
-      "runtimeName": "full-stack-orchestration-performance-engineer",
-      "status": "rewritten",
+      "runtimeName": "performance-engineer",
+      "status": "consolidated",
       "sourcePath": "plugins/full-stack-orchestration/agents/performance-engineer.md",
       "sourceBlobSha": "ba0193181e1e3096e90a83b22f3504cbf58010ac",
-      "targetPath": "agents/full-stack-orchestration/performance-engineer.md"
+      "targetPath": "agents/performance-engineer.md"
     },
     {
       "id": "full-stack-orchestration/security-auditor",
       "plugin": "full-stack-orchestration",
       "sourceName": "security-auditor",
-      "runtimeName": "full-stack-orchestration-security-auditor",
-      "status": "rewritten",
+      "runtimeName": "security-auditor",
+      "status": "consolidated",
       "sourcePath": "plugins/full-stack-orchestration/agents/security-auditor.md",
       "sourceBlobSha": "82fbb13d97516ba1eb3fdccb2732fc4a2ff423ed",
-      "targetPath": "agents/full-stack-orchestration/security-auditor.md"
+      "targetPath": "agents/security-auditor.md"
     },
     {
       "id": "full-stack-orchestration/test-automator",
       "plugin": "full-stack-orchestration",
       "sourceName": "test-automator",
-      "runtimeName": "full-stack-orchestration-test-automator",
-      "status": "rewritten",
+      "runtimeName": "test-automator",
+      "status": "consolidated",
       "sourcePath": "plugins/full-stack-orchestration/agents/test-automator.md",
       "sourceBlobSha": "6c27ef72e32b61b1b012e186602ff5f5e9824018",
-      "targetPath": "agents/full-stack-orchestration/test-automator.md"
+      "targetPath": "agents/test-automator.md"
     },
     {
       "id": "functional-programming/elixir-pro",
       "plugin": "functional-programming",
       "sourceName": "elixir-pro",
-      "runtimeName": "functional-programming-elixir-pro",
-      "status": "rewritten",
+      "runtimeName": "elixir-pro",
+      "status": "consolidated",
       "sourcePath": "plugins/functional-programming/agents/elixir-pro.md",
       "sourceBlobSha": "c01beffd876c2a8395dc1a4ece939f733e11ebd9",
-      "targetPath": "agents/functional-programming/elixir-pro.md"
+      "targetPath": "agents/elixir-pro.md"
     },
     {
       "id": "functional-programming/haskell-pro",
       "plugin": "functional-programming",
       "sourceName": "haskell-pro",
-      "runtimeName": "functional-programming-haskell-pro",
-      "status": "rewritten",
+      "runtimeName": "haskell-pro",
+      "status": "consolidated",
       "sourcePath": "plugins/functional-programming/agents/haskell-pro.md",
       "sourceBlobSha": "95163053c03e7153f24913b85c61cec51eec5b3f",
-      "targetPath": "agents/functional-programming/haskell-pro.md"
+      "targetPath": "agents/haskell-pro.md"
     },
     {
       "id": "game-development/minecraft-bukkit-pro",
       "plugin": "game-development",
       "sourceName": "minecraft-bukkit-pro",
-      "runtimeName": "game-development-minecraft-bukkit-pro",
-      "status": "rewritten",
+      "runtimeName": "minecraft-bukkit-pro",
+      "status": "consolidated",
       "sourcePath": "plugins/game-development/agents/minecraft-bukkit-pro.md",
       "sourceBlobSha": "2aba2836d358ba2695750a8eedb5b75fe94a228a",
-      "targetPath": "agents/game-development/minecraft-bukkit-pro.md"
+      "targetPath": "agents/minecraft-bukkit-pro.md"
     },
     {
       "id": "game-development/unity-developer",
       "plugin": "game-development",
       "sourceName": "unity-developer",
-      "runtimeName": "game-development-unity-developer",
-      "status": "rewritten",
+      "runtimeName": "unity-developer",
+      "status": "consolidated",
       "sourcePath": "plugins/game-development/agents/unity-developer.md",
       "sourceBlobSha": "d2399eafd9bcb54a7e0d67dd33e05f6c0ef4c2d7",
-      "targetPath": "agents/game-development/unity-developer.md"
+      "targetPath": "agents/unity-developer.md"
     },
     {
       "id": "git-pr-workflows/code-reviewer",
       "plugin": "git-pr-workflows",
       "sourceName": "code-reviewer",
-      "runtimeName": "git-pr-workflows-code-reviewer",
-      "status": "rewritten",
+      "runtimeName": "code-reviewer",
+      "status": "consolidated",
       "sourcePath": "plugins/git-pr-workflows/agents/code-reviewer.md",
       "sourceBlobSha": "108bc26e8b3ac799b91cf7af7c099103ff276a98",
-      "targetPath": "agents/git-pr-workflows/code-reviewer.md"
+      "targetPath": "agents/code-reviewer.md"
     },
     {
       "id": "hr-legal-compliance/hr-pro",
       "plugin": "hr-legal-compliance",
       "sourceName": "hr-pro",
-      "runtimeName": "hr-legal-compliance-hr-pro",
-      "status": "rewritten",
+      "runtimeName": "hr-pro",
+      "status": "consolidated",
       "sourcePath": "plugins/hr-legal-compliance/agents/hr-pro.md",
       "sourceBlobSha": "9822b55fd42b0ee233743612e0a5b5ff6da28edb",
-      "targetPath": "agents/hr-legal-compliance/hr-pro.md"
+      "targetPath": "agents/hr-pro.md"
     },
     {
       "id": "hr-legal-compliance/legal-advisor",
       "plugin": "hr-legal-compliance",
       "sourceName": "legal-advisor",
-      "runtimeName": "hr-legal-compliance-legal-advisor",
-      "status": "rewritten",
+      "runtimeName": "legal-advisor",
+      "status": "consolidated",
       "sourcePath": "plugins/hr-legal-compliance/agents/legal-advisor.md",
       "sourceBlobSha": "37fe9b2848f7bc8797244898fa20950e63f71dd6",
-      "targetPath": "agents/hr-legal-compliance/legal-advisor.md"
+      "targetPath": "agents/legal-advisor.md"
     },
     {
       "id": "incident-response/code-reviewer",
       "plugin": "incident-response",
       "sourceName": "code-reviewer",
-      "runtimeName": "incident-response-code-reviewer",
-      "status": "rewritten",
+      "runtimeName": "code-reviewer",
+      "status": "consolidated",
       "sourcePath": "plugins/incident-response/agents/code-reviewer.md",
       "sourceBlobSha": "edf3c276e949f35dadc120d57e194894d6b21a95",
-      "targetPath": "agents/incident-response/code-reviewer.md"
+      "targetPath": "agents/code-reviewer.md"
     },
     {
       "id": "incident-response/debugger",
       "plugin": "incident-response",
       "sourceName": "debugger",
-      "runtimeName": "incident-response-debugger",
-      "status": "rewritten",
+      "runtimeName": "debugger",
+      "status": "consolidated",
       "sourcePath": "plugins/incident-response/agents/debugger.md",
       "sourceBlobSha": "f6a432922d9897fbbb97a39314582e39021876b3",
-      "targetPath": "agents/incident-response/debugger.md"
+      "targetPath": "agents/debugger.md"
     },
     {
       "id": "incident-response/devops-troubleshooter",
       "plugin": "incident-response",
       "sourceName": "devops-troubleshooter",
-      "runtimeName": "incident-response-devops-troubleshooter",
-      "status": "rewritten",
+      "runtimeName": "devops-troubleshooter",
+      "status": "consolidated",
       "sourcePath": "plugins/incident-response/agents/devops-troubleshooter.md",
       "sourceBlobSha": "14dafee94e4bc1e7e9fdfa01ccd8263240bf5035",
-      "targetPath": "agents/incident-response/devops-troubleshooter.md"
+      "targetPath": "agents/devops-troubleshooter.md"
     },
     {
       "id": "incident-response/error-detective",
       "plugin": "incident-response",
       "sourceName": "error-detective",
-      "runtimeName": "incident-response-error-detective",
-      "status": "rewritten",
+      "runtimeName": "error-detective",
+      "status": "consolidated",
       "sourcePath": "plugins/incident-response/agents/error-detective.md",
       "sourceBlobSha": "96276c3275d514d6473b1ec10744ed95d469bf08",
-      "targetPath": "agents/incident-response/error-detective.md"
+      "targetPath": "agents/error-detective.md"
     },
     {
       "id": "incident-response/incident-responder",
       "plugin": "incident-response",
       "sourceName": "incident-responder",
-      "runtimeName": "incident-response-incident-responder",
-      "status": "rewritten",
+      "runtimeName": "incident-responder",
+      "status": "consolidated",
       "sourcePath": "plugins/incident-response/agents/incident-responder.md",
       "sourceBlobSha": "0cae96d50a3ca24134d73b522bc70cc5ae4f50b4",
-      "targetPath": "agents/incident-response/incident-responder.md"
+      "targetPath": "agents/incident-responder.md"
     },
     {
       "id": "incident-response/test-automator",
       "plugin": "incident-response",
       "sourceName": "test-automator",
-      "runtimeName": "incident-response-test-automator",
-      "status": "rewritten",
+      "runtimeName": "test-automator",
+      "status": "consolidated",
       "sourcePath": "plugins/incident-response/agents/test-automator.md",
       "sourceBlobSha": "e2ca7361f2d22843c3326998226ccd128cfc8358",
-      "targetPath": "agents/incident-response/test-automator.md"
+      "targetPath": "agents/test-automator.md"
     },
     {
       "id": "javascript-typescript/javascript-pro",
       "plugin": "javascript-typescript",
       "sourceName": "javascript-pro",
-      "runtimeName": "javascript-typescript-javascript-pro",
-      "status": "rewritten",
+      "runtimeName": "javascript-pro",
+      "status": "consolidated",
       "sourcePath": "plugins/javascript-typescript/agents/javascript-pro.md",
       "sourceBlobSha": "908ec2515dd93beda3b9a686d724e947f5901fd2",
-      "targetPath": "agents/javascript-typescript/javascript-pro.md"
+      "targetPath": "agents/javascript-pro.md"
     },
     {
       "id": "javascript-typescript/typescript-pro",
       "plugin": "javascript-typescript",
       "sourceName": "typescript-pro",
-      "runtimeName": "javascript-typescript-typescript-pro",
-      "status": "rewritten",
+      "runtimeName": "typescript-pro",
+      "status": "consolidated",
       "sourcePath": "plugins/javascript-typescript/agents/typescript-pro.md",
       "sourceBlobSha": "3cc2a5a53fc7c3aff8773c19a6492e68e70a8ed1",
-      "targetPath": "agents/javascript-typescript/typescript-pro.md"
+      "targetPath": "agents/typescript-pro.md"
     },
     {
       "id": "julia-development/julia-pro",
       "plugin": "julia-development",
       "sourceName": "julia-pro",
-      "runtimeName": "julia-development-julia-pro",
-      "status": "rewritten",
+      "runtimeName": "julia-pro",
+      "status": "consolidated",
       "sourcePath": "plugins/julia-development/agents/julia-pro.md",
       "sourceBlobSha": "67c98835d369f7d442ba34bf1af2c5ad7e2b3261",
-      "targetPath": "agents/julia-development/julia-pro.md"
+      "targetPath": "agents/julia-pro.md"
     },
     {
       "id": "jvm-languages/csharp-pro",
       "plugin": "jvm-languages",
       "sourceName": "csharp-pro",
-      "runtimeName": "jvm-languages-csharp-pro",
-      "status": "rewritten",
+      "runtimeName": "csharp-pro",
+      "status": "consolidated",
       "sourcePath": "plugins/jvm-languages/agents/csharp-pro.md",
       "sourceBlobSha": "e74a546be939449831ba556396312f2418c3156b",
-      "targetPath": "agents/jvm-languages/csharp-pro.md"
+      "targetPath": "agents/csharp-pro.md"
     },
     {
       "id": "jvm-languages/java-pro",
       "plugin": "jvm-languages",
       "sourceName": "java-pro",
-      "runtimeName": "jvm-languages-java-pro",
-      "status": "rewritten",
+      "runtimeName": "java-pro",
+      "status": "consolidated",
       "sourcePath": "plugins/jvm-languages/agents/java-pro.md",
       "sourceBlobSha": "3737c89c7c071de848e746717654a64431489562",
-      "targetPath": "agents/jvm-languages/java-pro.md"
+      "targetPath": "agents/java-pro.md"
     },
     {
       "id": "jvm-languages/scala-pro",
       "plugin": "jvm-languages",
       "sourceName": "scala-pro",
-      "runtimeName": "jvm-languages-scala-pro",
-      "status": "rewritten",
+      "runtimeName": "scala-pro",
+      "status": "consolidated",
       "sourcePath": "plugins/jvm-languages/agents/scala-pro.md",
       "sourceBlobSha": "7ec496cf96b45959de706995ce161d7cd15bbd87",
-      "targetPath": "agents/jvm-languages/scala-pro.md"
+      "targetPath": "agents/scala-pro.md"
     },
     {
       "id": "kubernetes-operations/kubernetes-architect",
       "plugin": "kubernetes-operations",
       "sourceName": "kubernetes-architect",
-      "runtimeName": "kubernetes-operations-kubernetes-architect",
-      "status": "rewritten",
+      "runtimeName": "kubernetes-architect",
+      "status": "consolidated",
       "sourcePath": "plugins/kubernetes-operations/agents/kubernetes-architect.md",
       "sourceBlobSha": "54e43f6f123d38b838f70239da43662b40a8150f",
-      "targetPath": "agents/kubernetes-operations/kubernetes-architect.md"
+      "targetPath": "agents/kubernetes-architect.md"
     },
     {
       "id": "llm-application-dev/ai-engineer",
       "plugin": "llm-application-dev",
       "sourceName": "ai-engineer",
-      "runtimeName": "llm-application-dev-ai-engineer",
-      "status": "rewritten",
+      "runtimeName": "ai-engineer",
+      "status": "consolidated",
       "sourcePath": "plugins/llm-application-dev/agents/ai-engineer.md",
       "sourceBlobSha": "ba323d923d82ebb4da5408d5e93f54c3de84324d",
-      "targetPath": "agents/llm-application-dev/ai-engineer.md"
+      "targetPath": "agents/ai-engineer.md"
     },
     {
       "id": "llm-application-dev/prompt-engineer",
       "plugin": "llm-application-dev",
       "sourceName": "prompt-engineer",
-      "runtimeName": "llm-application-dev-prompt-engineer",
-      "status": "rewritten",
+      "runtimeName": "prompt-engineer",
+      "status": "consolidated",
       "sourcePath": "plugins/llm-application-dev/agents/prompt-engineer.md",
       "sourceBlobSha": "557f948f55b8449644aabe74c5bc7c9473eeb96a",
-      "targetPath": "agents/llm-application-dev/prompt-engineer.md"
+      "targetPath": "agents/prompt-engineer.md"
     },
     {
       "id": "llm-application-dev/vector-database-engineer",
       "plugin": "llm-application-dev",
       "sourceName": "vector-database-engineer",
-      "runtimeName": "llm-application-dev-vector-database-engineer",
-      "status": "rewritten",
+      "runtimeName": "vector-database-engineer",
+      "status": "consolidated",
       "sourcePath": "plugins/llm-application-dev/agents/vector-database-engineer.md",
       "sourceBlobSha": "65319a9209387753cda60a06e106303db47832e2",
-      "targetPath": "agents/llm-application-dev/vector-database-engineer.md"
+      "targetPath": "agents/vector-database-engineer.md"
     },
     {
       "id": "machine-learning-ops/data-scientist",
       "plugin": "machine-learning-ops",
       "sourceName": "data-scientist",
-      "runtimeName": "machine-learning-ops-data-scientist",
-      "status": "rewritten",
+      "runtimeName": "data-scientist",
+      "status": "consolidated",
       "sourcePath": "plugins/machine-learning-ops/agents/data-scientist.md",
       "sourceBlobSha": "afa7c912c207df2c59e02266164b5c1dd729bc1a",
-      "targetPath": "agents/machine-learning-ops/data-scientist.md"
+      "targetPath": "agents/data-scientist.md"
     },
     {
       "id": "machine-learning-ops/ml-engineer",
       "plugin": "machine-learning-ops",
       "sourceName": "ml-engineer",
-      "runtimeName": "machine-learning-ops-ml-engineer",
-      "status": "rewritten",
+      "runtimeName": "ml-engineer",
+      "status": "consolidated",
       "sourcePath": "plugins/machine-learning-ops/agents/ml-engineer.md",
       "sourceBlobSha": "9bc0521f7852c75a72c58f80d200fafefc82e9b1",
-      "targetPath": "agents/machine-learning-ops/ml-engineer.md"
+      "targetPath": "agents/ml-engineer.md"
     },
     {
       "id": "machine-learning-ops/mlops-engineer",
       "plugin": "machine-learning-ops",
       "sourceName": "mlops-engineer",
-      "runtimeName": "machine-learning-ops-mlops-engineer",
-      "status": "rewritten",
+      "runtimeName": "mlops-engineer",
+      "status": "consolidated",
       "sourcePath": "plugins/machine-learning-ops/agents/mlops-engineer.md",
       "sourceBlobSha": "7bfc4f9435ea6b21384ff91f7ae58c477b6e4d6c",
-      "targetPath": "agents/machine-learning-ops/mlops-engineer.md"
+      "targetPath": "agents/mlops-engineer.md"
     },
     {
       "id": "meigen-ai-design/gallery-researcher",
       "plugin": "meigen-ai-design",
       "sourceName": "gallery-researcher",
-      "runtimeName": "meigen-ai-design-gallery-researcher",
-      "status": "rewritten",
+      "runtimeName": "gallery-researcher",
+      "status": "consolidated",
       "sourcePath": "plugins/meigen-ai-design/agents/gallery-researcher.md",
       "sourceBlobSha": "ae3341a3c09e1b71e5450130627c48dd690ae225",
-      "targetPath": "agents/meigen-ai-design/gallery-researcher.md"
+      "targetPath": "agents/gallery-researcher.md"
     },
     {
       "id": "meigen-ai-design/image-generator",
       "plugin": "meigen-ai-design",
       "sourceName": "image-generator",
-      "runtimeName": "meigen-ai-design-image-generator",
-      "status": "rewritten",
+      "runtimeName": "image-generator",
+      "status": "consolidated",
       "sourcePath": "plugins/meigen-ai-design/agents/image-generator.md",
       "sourceBlobSha": "5657991323d431552b8a12f2b17dfbf13be2697a",
-      "targetPath": "agents/meigen-ai-design/image-generator.md"
+      "targetPath": "agents/image-generator.md"
     },
     {
       "id": "meigen-ai-design/prompt-crafter",
       "plugin": "meigen-ai-design",
       "sourceName": "prompt-crafter",
-      "runtimeName": "meigen-ai-design-prompt-crafter",
-      "status": "rewritten",
+      "runtimeName": "prompt-crafter",
+      "status": "consolidated",
       "sourcePath": "plugins/meigen-ai-design/agents/prompt-crafter.md",
       "sourceBlobSha": "742024a962f0124027ea70dbd5f6d91dacda0962",
-      "targetPath": "agents/meigen-ai-design/prompt-crafter.md"
+      "targetPath": "agents/prompt-crafter.md"
     },
     {
       "id": "multi-platform-apps/backend-architect",
       "plugin": "multi-platform-apps",
       "sourceName": "backend-architect",
-      "runtimeName": "multi-platform-apps-backend-architect",
-      "status": "rewritten",
+      "runtimeName": "backend-architect",
+      "status": "consolidated",
       "sourcePath": "plugins/multi-platform-apps/agents/backend-architect.md",
       "sourceBlobSha": "63641436f01cadc32585f7b9331a34d680c8dc16",
-      "targetPath": "agents/multi-platform-apps/backend-architect.md"
+      "targetPath": "agents/backend-architect.md"
     },
     {
       "id": "multi-platform-apps/flutter-expert",
       "plugin": "multi-platform-apps",
       "sourceName": "flutter-expert",
-      "runtimeName": "multi-platform-apps-flutter-expert",
-      "status": "rewritten",
+      "runtimeName": "flutter-expert",
+      "status": "consolidated",
       "sourcePath": "plugins/multi-platform-apps/agents/flutter-expert.md",
       "sourceBlobSha": "27f35b6facc9397e53e9a383b5afc759e7eea03f",
-      "targetPath": "agents/multi-platform-apps/flutter-expert.md"
+      "targetPath": "agents/flutter-expert.md"
     },
     {
       "id": "multi-platform-apps/frontend-developer",
       "plugin": "multi-platform-apps",
       "sourceName": "frontend-developer",
-      "runtimeName": "multi-platform-apps-frontend-developer",
-      "status": "rewritten",
+      "runtimeName": "frontend-developer",
+      "status": "consolidated",
       "sourcePath": "plugins/multi-platform-apps/agents/frontend-developer.md",
       "sourceBlobSha": "0a5fcf0d138660ecd929cba38e0f490c7860f7e8",
-      "targetPath": "agents/multi-platform-apps/frontend-developer.md"
+      "targetPath": "agents/frontend-developer.md"
     },
     {
       "id": "multi-platform-apps/ios-developer",
       "plugin": "multi-platform-apps",
       "sourceName": "ios-developer",
-      "runtimeName": "multi-platform-apps-ios-developer",
-      "status": "rewritten",
+      "runtimeName": "ios-developer",
+      "status": "consolidated",
       "sourcePath": "plugins/multi-platform-apps/agents/ios-developer.md",
       "sourceBlobSha": "b0726e2886c9fb663fa84c48966c666809e30a1e",
-      "targetPath": "agents/multi-platform-apps/ios-developer.md"
+      "targetPath": "agents/ios-developer.md"
     },
     {
       "id": "multi-platform-apps/mobile-developer",
       "plugin": "multi-platform-apps",
       "sourceName": "mobile-developer",
-      "runtimeName": "multi-platform-apps-mobile-developer",
-      "status": "rewritten",
+      "runtimeName": "mobile-developer",
+      "status": "consolidated",
       "sourcePath": "plugins/multi-platform-apps/agents/mobile-developer.md",
       "sourceBlobSha": "515b090c6fe9af024341584e5b2ff452fbd5af9d",
-      "targetPath": "agents/multi-platform-apps/mobile-developer.md"
+      "targetPath": "agents/mobile-developer.md"
     },
     {
       "id": "multi-platform-apps/ui-ux-designer",
       "plugin": "multi-platform-apps",
       "sourceName": "ui-ux-designer",
-      "runtimeName": "multi-platform-apps-ui-ux-designer",
-      "status": "rewritten",
+      "runtimeName": "ui-ux-designer",
+      "status": "consolidated",
       "sourcePath": "plugins/multi-platform-apps/agents/ui-ux-designer.md",
       "sourceBlobSha": "982bf48896592a55b2378930d919d72cb5aa9b54",
-      "targetPath": "agents/multi-platform-apps/ui-ux-designer.md"
+      "targetPath": "agents/ui-ux-designer.md"
     },
     {
       "id": "observability-monitoring/database-optimizer",
       "plugin": "observability-monitoring",
       "sourceName": "database-optimizer",
-      "runtimeName": "observability-monitoring-database-optimizer",
-      "status": "rewritten",
+      "runtimeName": "database-optimizer",
+      "status": "consolidated",
       "sourcePath": "plugins/observability-monitoring/agents/database-optimizer.md",
       "sourceBlobSha": "692d463abbcb21e460c5da602693b8cbd7a3a1f2",
-      "targetPath": "agents/observability-monitoring/database-optimizer.md"
+      "targetPath": "agents/database-optimizer.md"
     },
     {
       "id": "observability-monitoring/network-engineer",
       "plugin": "observability-monitoring",
       "sourceName": "network-engineer",
-      "runtimeName": "observability-monitoring-network-engineer",
-      "status": "rewritten",
+      "runtimeName": "network-engineer",
+      "status": "consolidated",
       "sourcePath": "plugins/observability-monitoring/agents/network-engineer.md",
       "sourceBlobSha": "86c9b1a1059bc26144f35bc0e38e7e0db6cba21f",
-      "targetPath": "agents/observability-monitoring/network-engineer.md"
+      "targetPath": "agents/network-engineer.md"
     },
     {
       "id": "observability-monitoring/observability-engineer",
       "plugin": "observability-monitoring",
       "sourceName": "observability-engineer",
-      "runtimeName": "observability-monitoring-observability-engineer",
-      "status": "rewritten",
+      "runtimeName": "observability-engineer",
+      "status": "consolidated",
       "sourcePath": "plugins/observability-monitoring/agents/observability-engineer.md",
       "sourceBlobSha": "409ecc86abed4d4d08cd242d3445bd19fac3bfc3",
-      "targetPath": "agents/observability-monitoring/observability-engineer.md"
+      "targetPath": "agents/observability-engineer.md"
     },
     {
       "id": "observability-monitoring/performance-engineer",
       "plugin": "observability-monitoring",
       "sourceName": "performance-engineer",
-      "runtimeName": "observability-monitoring-performance-engineer",
-      "status": "rewritten",
+      "runtimeName": "performance-engineer",
+      "status": "consolidated",
       "sourcePath": "plugins/observability-monitoring/agents/performance-engineer.md",
       "sourceBlobSha": "daa7ab9f9d0f115b1e46c048e12618586a84e22c",
-      "targetPath": "agents/observability-monitoring/performance-engineer.md"
+      "targetPath": "agents/performance-engineer.md"
     },
     {
       "id": "operating-kit/code-review-preshipment",
       "plugin": "operating-kit",
       "sourceName": "code-review-preshipment",
-      "runtimeName": "operating-kit-code-review-preshipment",
-      "status": "rewritten",
+      "runtimeName": "code-review-preshipment",
+      "status": "consolidated",
       "sourcePath": "plugins/operating-kit/agents/code-review-preshipment.md",
       "sourceBlobSha": "223ef023e0237f7ed1f775346a1ddf2884db25eb",
-      "targetPath": "agents/operating-kit/code-review-preshipment.md"
+      "targetPath": "agents/code-review-preshipment.md"
     },
     {
       "id": "operating-kit/deploy-with-verification",
       "plugin": "operating-kit",
       "sourceName": "deploy-with-verification",
-      "runtimeName": "operating-kit-deploy-with-verification",
-      "status": "rewritten",
+      "runtimeName": "deploy-with-verification",
+      "status": "consolidated",
       "sourcePath": "plugins/operating-kit/agents/deploy-with-verification.md",
       "sourceBlobSha": "7d1904c75153c9e387947a638279b9f5a21c1baa",
-      "targetPath": "agents/operating-kit/deploy-with-verification.md"
+      "targetPath": "agents/deploy-with-verification.md"
     },
     {
       "id": "operating-kit/prod-logs-health-check",
       "plugin": "operating-kit",
       "sourceName": "prod-logs-health-check",
-      "runtimeName": "operating-kit-prod-logs-health-check",
-      "status": "rewritten",
+      "runtimeName": "prod-logs-health-check",
+      "status": "consolidated",
       "sourcePath": "plugins/operating-kit/agents/prod-logs-health-check.md",
       "sourceBlobSha": "cc8b458689f64424e971770ead80bb1ddfeb4fc6",
-      "targetPath": "agents/operating-kit/prod-logs-health-check.md"
+      "targetPath": "agents/prod-logs-health-check.md"
     },
     {
       "id": "operating-kit/session-end",
       "plugin": "operating-kit",
       "sourceName": "session-end",
-      "runtimeName": "operating-kit-session-end",
-      "status": "rewritten",
+      "runtimeName": "session-end",
+      "status": "consolidated",
       "sourcePath": "plugins/operating-kit/agents/session-end.md",
       "sourceBlobSha": "c93f7311666fc76a593bd91b861f4a37ce79734e",
-      "targetPath": "agents/operating-kit/session-end.md"
+      "targetPath": "agents/session-end.md"
     },
     {
       "id": "operating-kit/session-start",
       "plugin": "operating-kit",
       "sourceName": "session-start",
-      "runtimeName": "operating-kit-session-start",
-      "status": "rewritten",
+      "runtimeName": "session-start",
+      "status": "consolidated",
       "sourcePath": "plugins/operating-kit/agents/session-start.md",
       "sourceBlobSha": "6d6e85b20b0d9e93c70c055c3c538ae7d5c9e7df",
-      "targetPath": "agents/operating-kit/session-start.md"
+      "targetPath": "agents/session-start.md"
     },
     {
       "id": "payment-processing/payment-integration",
       "plugin": "payment-processing",
       "sourceName": "payment-integration",
-      "runtimeName": "payment-processing-payment-integration",
-      "status": "rewritten",
+      "runtimeName": "payment-integration",
+      "status": "consolidated",
       "sourcePath": "plugins/payment-processing/agents/payment-integration.md",
       "sourceBlobSha": "0d89c08b785f88be0f7fc4e528f48394c423e256",
-      "targetPath": "agents/payment-processing/payment-integration.md"
+      "targetPath": "agents/payment-integration.md"
     },
     {
       "id": "performance-testing-review/performance-engineer",
       "plugin": "performance-testing-review",
       "sourceName": "performance-engineer",
-      "runtimeName": "performance-testing-review-performance-engineer",
-      "status": "rewritten",
+      "runtimeName": "performance-engineer",
+      "status": "consolidated",
       "sourcePath": "plugins/performance-testing-review/agents/performance-engineer.md",
       "sourceBlobSha": "7cb7f3134b971653e23f964217c137918e6f0866",
-      "targetPath": "agents/performance-testing-review/performance-engineer.md"
+      "targetPath": "agents/performance-engineer.md"
     },
     {
       "id": "performance-testing-review/test-automator",
       "plugin": "performance-testing-review",
       "sourceName": "test-automator",
-      "runtimeName": "performance-testing-review-test-automator",
-      "status": "rewritten",
+      "runtimeName": "test-automator",
+      "status": "consolidated",
       "sourcePath": "plugins/performance-testing-review/agents/test-automator.md",
       "sourceBlobSha": "fede4373aa3945068bd85a55e20ab667d6d4a980",
-      "targetPath": "agents/performance-testing-review/test-automator.md"
+      "targetPath": "agents/test-automator.md"
     },
     {
       "id": "plugin-eval/eval-judge",
       "plugin": "plugin-eval",
       "sourceName": "eval-judge",
-      "runtimeName": "plugin-eval-eval-judge",
-      "status": "rewritten",
+      "runtimeName": "eval-judge",
+      "status": "consolidated",
       "sourcePath": "plugins/plugin-eval/agents/eval-judge.md",
       "sourceBlobSha": "1f488ac4b280c1773a2d28bb22d2a1b8a72c4999",
-      "targetPath": "agents/plugin-eval/eval-judge.md"
+      "targetPath": "agents/eval-judge.md"
     },
     {
       "id": "plugin-eval/eval-orchestrator",
       "plugin": "plugin-eval",
       "sourceName": "eval-orchestrator",
-      "runtimeName": "plugin-eval-eval-orchestrator",
-      "status": "rewritten",
+      "runtimeName": "eval-orchestrator",
+      "status": "consolidated",
       "sourcePath": "plugins/plugin-eval/agents/eval-orchestrator.md",
       "sourceBlobSha": "afdc8a06ef24a69f774f0fc065e91558f3edd57f",
-      "targetPath": "agents/plugin-eval/eval-orchestrator.md"
+      "targetPath": "agents/eval-orchestrator.md"
     },
     {
       "id": "protect-mcp/policy-enforcer",
       "plugin": "protect-mcp",
       "sourceName": "policy-enforcer",
-      "runtimeName": "protect-mcp-policy-enforcer",
-      "status": "rewritten",
+      "runtimeName": "policy-enforcer",
+      "status": "consolidated",
       "sourcePath": "plugins/protect-mcp/agents/policy-enforcer.md",
       "sourceBlobSha": "b29115e29e535969b40edf4c8aa7f8a64d31c1b0",
-      "targetPath": "agents/protect-mcp/policy-enforcer.md"
+      "targetPath": "agents/policy-enforcer.md"
     },
     {
       "id": "protect-mcp/receipt-verifier",
       "plugin": "protect-mcp",
       "sourceName": "receipt-verifier",
-      "runtimeName": "protect-mcp-receipt-verifier",
-      "status": "rewritten",
+      "runtimeName": "receipt-verifier",
+      "status": "consolidated",
       "sourcePath": "plugins/protect-mcp/agents/receipt-verifier.md",
       "sourceBlobSha": "4c41aa2e1814708fbe0606f1620f53778d0e5172",
-      "targetPath": "agents/protect-mcp/receipt-verifier.md"
+      "targetPath": "agents/receipt-verifier.md"
     },
     {
       "id": "python-development/django-pro",
       "plugin": "python-development",
       "sourceName": "django-pro",
-      "runtimeName": "python-development-django-pro",
-      "status": "rewritten",
+      "runtimeName": "django-pro",
+      "status": "consolidated",
       "sourcePath": "plugins/python-development/agents/django-pro.md",
       "sourceBlobSha": "8af90115901b4412f1fde7c0e520bff4caca1c06",
-      "targetPath": "agents/python-development/django-pro.md"
+      "targetPath": "agents/django-pro.md"
     },
     {
       "id": "python-development/fastapi-pro",
       "plugin": "python-development",
       "sourceName": "fastapi-pro",
-      "runtimeName": "python-development-fastapi-pro",
-      "status": "rewritten",
+      "runtimeName": "fastapi-pro",
+      "status": "consolidated",
       "sourcePath": "plugins/python-development/agents/fastapi-pro.md",
       "sourceBlobSha": "6e21de070483dcea8416ec111e135332bf085dc9",
-      "targetPath": "agents/python-development/fastapi-pro.md"
+      "targetPath": "agents/fastapi-pro.md"
     },
     {
       "id": "python-development/python-pro",
       "plugin": "python-development",
       "sourceName": "python-pro",
-      "runtimeName": "python-development-python-pro",
-      "status": "rewritten",
+      "runtimeName": "python-pro",
+      "status": "consolidated",
       "sourcePath": "plugins/python-development/agents/python-pro.md",
       "sourceBlobSha": "e03c788f034f57e85d19e061ca66443b8908edd7",
-      "targetPath": "agents/python-development/python-pro.md"
+      "targetPath": "agents/python-pro.md"
     },
     {
       "id": "quantitative-trading/quant-analyst",
       "plugin": "quantitative-trading",
       "sourceName": "quant-analyst",
-      "runtimeName": "quantitative-trading-quant-analyst",
-      "status": "rewritten",
+      "runtimeName": "quant-analyst",
+      "status": "consolidated",
       "sourcePath": "plugins/quantitative-trading/agents/quant-analyst.md",
       "sourceBlobSha": "de9e36b9aba1c5799fa28558e25cad2dbf3a9b5d",
-      "targetPath": "agents/quantitative-trading/quant-analyst.md"
+      "targetPath": "agents/quant-analyst.md"
     },
     {
       "id": "quantitative-trading/risk-manager",
       "plugin": "quantitative-trading",
       "sourceName": "risk-manager",
-      "runtimeName": "quantitative-trading-risk-manager",
-      "status": "rewritten",
+      "runtimeName": "risk-manager",
+      "status": "consolidated",
       "sourcePath": "plugins/quantitative-trading/agents/risk-manager.md",
       "sourceBlobSha": "c7a35cd478bf2aef6f39c570af004cac4d69e301",
-      "targetPath": "agents/quantitative-trading/risk-manager.md"
+      "targetPath": "agents/risk-manager.md"
     },
     {
       "id": "reverse-engineering/firmware-analyst",
       "plugin": "reverse-engineering",
       "sourceName": "firmware-analyst",
-      "runtimeName": "reverse-engineering-firmware-analyst",
-      "status": "rewritten",
+      "runtimeName": "firmware-analyst",
+      "status": "consolidated",
       "sourcePath": "plugins/reverse-engineering/agents/firmware-analyst.md",
       "sourceBlobSha": "5e6cc20e756415a35e98472c2f339ba6633c8e66",
-      "targetPath": "agents/reverse-engineering/firmware-analyst.md"
+      "targetPath": "agents/firmware-analyst.md"
     },
     {
       "id": "reverse-engineering/malware-analyst",
       "plugin": "reverse-engineering",
       "sourceName": "malware-analyst",
-      "runtimeName": "reverse-engineering-malware-analyst",
-      "status": "rewritten",
+      "runtimeName": "malware-analyst",
+      "status": "consolidated",
       "sourcePath": "plugins/reverse-engineering/agents/malware-analyst.md",
       "sourceBlobSha": "6ab4be4a7a6d0a50c4791f2c677480656833d1b9",
-      "targetPath": "agents/reverse-engineering/malware-analyst.md"
+      "targetPath": "agents/malware-analyst.md"
     },
     {
       "id": "reverse-engineering/reverse-engineer",
       "plugin": "reverse-engineering",
       "sourceName": "reverse-engineer",
-      "runtimeName": "reverse-engineering-reverse-engineer",
-      "status": "rewritten",
+      "runtimeName": "reverse-engineer",
+      "status": "consolidated",
       "sourcePath": "plugins/reverse-engineering/agents/reverse-engineer.md",
       "sourceBlobSha": "05af64795528d3da5f5480db943c6614df738847",
-      "targetPath": "agents/reverse-engineering/reverse-engineer.md"
+      "targetPath": "agents/reverse-engineer.md"
     },
     {
       "id": "review-agent-governance/review-policy-author",
       "plugin": "review-agent-governance",
       "sourceName": "review-policy-author",
-      "runtimeName": "review-agent-governance-review-policy-author",
-      "status": "rewritten",
+      "runtimeName": "review-policy-author",
+      "status": "consolidated",
       "sourcePath": "plugins/review-agent-governance/agents/review-policy-author.md",
       "sourceBlobSha": "d841f124cfb3c007bc78fd5db911db627cc10add",
-      "targetPath": "agents/review-agent-governance/review-policy-author.md"
+      "targetPath": "agents/review-policy-author.md"
     },
     {
       "id": "runapi-mcp/model-advisor",
       "plugin": "runapi-mcp",
       "sourceName": "model-advisor",
-      "runtimeName": "runapi-mcp-model-advisor",
-      "status": "rewritten",
+      "runtimeName": "model-advisor",
+      "status": "consolidated",
       "sourcePath": "plugins/runapi-mcp/agents/model-advisor.md",
       "sourceBlobSha": "16d1d2b621d2a71eadfd86463d04b9ec4271964d",
-      "targetPath": "agents/runapi-mcp/model-advisor.md"
+      "targetPath": "agents/model-advisor.md"
     },
     {
       "id": "runapi-mcp/task-executor",
       "plugin": "runapi-mcp",
       "sourceName": "task-executor",
-      "runtimeName": "runapi-mcp-task-executor",
-      "status": "rewritten",
+      "runtimeName": "task-executor",
+      "status": "consolidated",
       "sourcePath": "plugins/runapi-mcp/agents/task-executor.md",
       "sourceBlobSha": "204c090227cee1bcafec172443b179421f086471",
-      "targetPath": "agents/runapi-mcp/task-executor.md"
+      "targetPath": "agents/task-executor.md"
     },
     {
       "id": "security-compliance/security-auditor",
       "plugin": "security-compliance",
       "sourceName": "security-auditor",
-      "runtimeName": "security-compliance-security-auditor",
-      "status": "rewritten",
+      "runtimeName": "security-auditor",
+      "status": "consolidated",
       "sourcePath": "plugins/security-compliance/agents/security-auditor.md",
       "sourceBlobSha": "093e5ccb065a15d8d018cd929c7af2a2ca768a4d",
-      "targetPath": "agents/security-compliance/security-auditor.md"
+      "targetPath": "agents/security-auditor.md"
     },
     {
       "id": "security-scanning/security-auditor",
       "plugin": "security-scanning",
       "sourceName": "security-auditor",
-      "runtimeName": "security-scanning-security-auditor",
-      "status": "rewritten",
+      "runtimeName": "security-auditor",
+      "status": "consolidated",
       "sourcePath": "plugins/security-scanning/agents/security-auditor.md",
       "sourceBlobSha": "f65d3d71404ef68aa2028e70e61f3926acdf9e60",
-      "targetPath": "agents/security-scanning/security-auditor.md"
+      "targetPath": "agents/security-auditor.md"
     },
     {
       "id": "security-scanning/threat-modeling-expert",
       "plugin": "security-scanning",
       "sourceName": "threat-modeling-expert",
-      "runtimeName": "security-scanning-threat-modeling-expert",
-      "status": "rewritten",
+      "runtimeName": "threat-modeling-expert",
+      "status": "consolidated",
       "sourcePath": "plugins/security-scanning/agents/threat-modeling-expert.md",
       "sourceBlobSha": "507edc9907cde5686bb1f2c232df48cdd8f51506",
-      "targetPath": "agents/security-scanning/threat-modeling-expert.md"
+      "targetPath": "agents/threat-modeling-expert.md"
     },
     {
       "id": "seo-analysis-monitoring/seo-authority-builder",
       "plugin": "seo-analysis-monitoring",
       "sourceName": "seo-authority-builder",
-      "runtimeName": "seo-analysis-monitoring-seo-authority-builder",
-      "status": "rewritten",
+      "runtimeName": "seo-authority-builder",
+      "status": "consolidated",
       "sourcePath": "plugins/seo-analysis-monitoring/agents/seo-authority-builder.md",
       "sourceBlobSha": "ace4d9beed2dc3febf1f60b6257ec0b046ec920a",
-      "targetPath": "agents/seo-analysis-monitoring/seo-authority-builder.md"
+      "targetPath": "agents/seo-authority-builder.md"
     },
     {
       "id": "seo-analysis-monitoring/seo-cannibalization-detector",
       "plugin": "seo-analysis-monitoring",
       "sourceName": "seo-cannibalization-detector",
-      "runtimeName": "seo-analysis-monitoring-seo-cannibalization-detector",
-      "status": "rewritten",
+      "runtimeName": "seo-cannibalization-detector",
+      "status": "consolidated",
       "sourcePath": "plugins/seo-analysis-monitoring/agents/seo-cannibalization-detector.md",
       "sourceBlobSha": "9929788b3d33599d4f721784d801982031c847eb",
-      "targetPath": "agents/seo-analysis-monitoring/seo-cannibalization-detector.md"
+      "targetPath": "agents/seo-cannibalization-detector.md"
     },
     {
       "id": "seo-analysis-monitoring/seo-content-refresher",
       "plugin": "seo-analysis-monitoring",
       "sourceName": "seo-content-refresher",
-      "runtimeName": "seo-analysis-monitoring-seo-content-refresher",
-      "status": "rewritten",
+      "runtimeName": "seo-content-refresher",
+      "status": "consolidated",
       "sourcePath": "plugins/seo-analysis-monitoring/agents/seo-content-refresher.md",
       "sourceBlobSha": "364c2046f3c8999e0da3709292bcd6ba1e6793d5",
-      "targetPath": "agents/seo-analysis-monitoring/seo-content-refresher.md"
+      "targetPath": "agents/seo-content-refresher.md"
     },
     {
       "id": "seo-content-creation/seo-content-auditor",
       "plugin": "seo-content-creation",
       "sourceName": "seo-content-auditor",
-      "runtimeName": "seo-content-creation-seo-content-auditor",
-      "status": "rewritten",
+      "runtimeName": "seo-content-auditor",
+      "status": "consolidated",
       "sourcePath": "plugins/seo-content-creation/agents/seo-content-auditor.md",
       "sourceBlobSha": "38a090834af6c5011b92ca63a8087ff1498b2f18",
-      "targetPath": "agents/seo-content-creation/seo-content-auditor.md"
+      "targetPath": "agents/seo-content-auditor.md"
     },
     {
       "id": "seo-content-creation/seo-content-planner",
       "plugin": "seo-content-creation",
       "sourceName": "seo-content-planner",
-      "runtimeName": "seo-content-creation-seo-content-planner",
-      "status": "rewritten",
+      "runtimeName": "seo-content-planner",
+      "status": "consolidated",
       "sourcePath": "plugins/seo-content-creation/agents/seo-content-planner.md",
       "sourceBlobSha": "a1dd8224784fb4c42c4b346fa18fd299e5489a07",
-      "targetPath": "agents/seo-content-creation/seo-content-planner.md"
+      "targetPath": "agents/seo-content-planner.md"
     },
     {
       "id": "seo-content-creation/seo-content-writer",
       "plugin": "seo-content-creation",
       "sourceName": "seo-content-writer",
-      "runtimeName": "seo-content-creation-seo-content-writer",
-      "status": "rewritten",
+      "runtimeName": "seo-content-writer",
+      "status": "consolidated",
       "sourcePath": "plugins/seo-content-creation/agents/seo-content-writer.md",
       "sourceBlobSha": "3e56d4114eb8f210dde205aad2fe0c58fd53b260",
-      "targetPath": "agents/seo-content-creation/seo-content-writer.md"
+      "targetPath": "agents/seo-content-writer.md"
     },
     {
       "id": "seo-technical-optimization/seo-keyword-strategist",
       "plugin": "seo-technical-optimization",
       "sourceName": "seo-keyword-strategist",
-      "runtimeName": "seo-technical-optimization-seo-keyword-strategist",
-      "status": "rewritten",
+      "runtimeName": "seo-keyword-strategist",
+      "status": "consolidated",
       "sourcePath": "plugins/seo-technical-optimization/agents/seo-keyword-strategist.md",
       "sourceBlobSha": "cef7bb178b93586f306a3e508ea808c8951d4f03",
-      "targetPath": "agents/seo-technical-optimization/seo-keyword-strategist.md"
+      "targetPath": "agents/seo-keyword-strategist.md"
     },
     {
       "id": "seo-technical-optimization/seo-meta-optimizer",
       "plugin": "seo-technical-optimization",
       "sourceName": "seo-meta-optimizer",
-      "runtimeName": "seo-technical-optimization-seo-meta-optimizer",
-      "status": "rewritten",
+      "runtimeName": "seo-meta-optimizer",
+      "status": "consolidated",
       "sourcePath": "plugins/seo-technical-optimization/agents/seo-meta-optimizer.md",
       "sourceBlobSha": "7f38e06df7c0d95ecb7bded1e870c4877798b5fa",
-      "targetPath": "agents/seo-technical-optimization/seo-meta-optimizer.md"
+      "targetPath": "agents/seo-meta-optimizer.md"
     },
     {
       "id": "seo-technical-optimization/seo-snippet-hunter",
       "plugin": "seo-technical-optimization",
       "sourceName": "seo-snippet-hunter",
-      "runtimeName": "seo-technical-optimization-seo-snippet-hunter",
-      "status": "rewritten",
+      "runtimeName": "seo-snippet-hunter",
+      "status": "consolidated",
       "sourcePath": "plugins/seo-technical-optimization/agents/seo-snippet-hunter.md",
       "sourceBlobSha": "b7ef595e8344f18a7257cbed7dc7932511ad15d6",
-      "targetPath": "agents/seo-technical-optimization/seo-snippet-hunter.md"
+      "targetPath": "agents/seo-snippet-hunter.md"
     },
     {
       "id": "seo-technical-optimization/seo-structure-architect",
       "plugin": "seo-technical-optimization",
       "sourceName": "seo-structure-architect",
-      "runtimeName": "seo-technical-optimization-seo-structure-architect",
-      "status": "rewritten",
+      "runtimeName": "seo-structure-architect",
+      "status": "consolidated",
       "sourcePath": "plugins/seo-technical-optimization/agents/seo-structure-architect.md",
       "sourceBlobSha": "b1a2944bb8ce67b47914edd8e7b8e7e5214aa38f",
-      "targetPath": "agents/seo-technical-optimization/seo-structure-architect.md"
+      "targetPath": "agents/seo-structure-architect.md"
     },
     {
       "id": "shell-scripting/bash-pro",
       "plugin": "shell-scripting",
       "sourceName": "bash-pro",
-      "runtimeName": "shell-scripting-bash-pro",
-      "status": "rewritten",
+      "runtimeName": "bash-pro",
+      "status": "consolidated",
       "sourcePath": "plugins/shell-scripting/agents/bash-pro.md",
       "sourceBlobSha": "568ce34e24c852b4bf0543f03c4c3706288a4f87",
-      "targetPath": "agents/shell-scripting/bash-pro.md"
+      "targetPath": "agents/bash-pro.md"
     },
     {
       "id": "shell-scripting/posix-shell-pro",
       "plugin": "shell-scripting",
       "sourceName": "posix-shell-pro",
-      "runtimeName": "shell-scripting-posix-shell-pro",
-      "status": "rewritten",
+      "runtimeName": "posix-shell-pro",
+      "status": "consolidated",
       "sourcePath": "plugins/shell-scripting/agents/posix-shell-pro.md",
       "sourceBlobSha": "7f12e9c86922517a9053cc27759e0fd1d53e6b5d",
-      "targetPath": "agents/shell-scripting/posix-shell-pro.md"
+      "targetPath": "agents/posix-shell-pro.md"
     },
     {
       "id": "ship-mate/architect",
       "plugin": "ship-mate",
       "sourceName": "architect",
-      "runtimeName": "ship-mate-architect",
-      "status": "rewritten",
+      "runtimeName": "architect",
+      "status": "consolidated",
       "sourcePath": "plugins/ship-mate/agents/architect.md",
       "sourceBlobSha": "6ede8864d69b72fdf59ac4663b5b71dda2879ce0",
-      "targetPath": "agents/ship-mate/architect.md"
+      "targetPath": "agents/architect.md"
     },
     {
       "id": "ship-mate/implement",
       "plugin": "ship-mate",
       "sourceName": "implement",
-      "runtimeName": "ship-mate-implement",
-      "status": "rewritten",
+      "runtimeName": "implement",
+      "status": "consolidated",
       "sourcePath": "plugins/ship-mate/agents/implement.md",
       "sourceBlobSha": "4f096c711c9f48b207f40ec0bcc13a19c89d2400",
-      "targetPath": "agents/ship-mate/implement.md"
+      "targetPath": "agents/implement.md"
     },
     {
       "id": "ship-mate/orchestrate",
       "plugin": "ship-mate",
       "sourceName": "orchestrate",
-      "runtimeName": "ship-mate-orchestrate",
-      "status": "rewritten",
+      "runtimeName": "orchestrate",
+      "status": "consolidated",
       "sourcePath": "plugins/ship-mate/agents/orchestrate.md",
       "sourceBlobSha": "27c1ef16854e4ca5bc2368060bb5fa2ee497115e",
-      "targetPath": "agents/ship-mate/orchestrate.md"
+      "targetPath": "agents/orchestrate.md"
     },
     {
       "id": "ship-mate/playwright",
       "plugin": "ship-mate",
       "sourceName": "playwright",
-      "runtimeName": "ship-mate-playwright",
-      "status": "rewritten",
+      "runtimeName": "playwright",
+      "status": "consolidated",
       "sourcePath": "plugins/ship-mate/agents/playwright.md",
       "sourceBlobSha": "6ed4bb5bb59709867b687614869fd213ffeaf1d8",
-      "targetPath": "agents/ship-mate/playwright.md"
+      "targetPath": "agents/playwright.md"
     },
     {
       "id": "ship-mate/qa",
       "plugin": "ship-mate",
       "sourceName": "qa",
-      "runtimeName": "ship-mate-qa",
-      "status": "rewritten",
+      "runtimeName": "qa",
+      "status": "consolidated",
       "sourcePath": "plugins/ship-mate/agents/qa.md",
       "sourceBlobSha": "f3a29bfbd2f64553ce05c87f475311db1289b6c2",
-      "targetPath": "agents/ship-mate/qa.md"
+      "targetPath": "agents/qa.md"
     },
     {
       "id": "ship-mate/review",
       "plugin": "ship-mate",
       "sourceName": "review",
-      "runtimeName": "ship-mate-review",
-      "status": "rewritten",
+      "runtimeName": "review",
+      "status": "consolidated",
       "sourcePath": "plugins/ship-mate/agents/review.md",
       "sourceBlobSha": "b422261bebca4dd9e38f6312f0d3b372d15e8b21",
-      "targetPath": "agents/ship-mate/review.md"
+      "targetPath": "agents/review.md"
     },
     {
       "id": "social-publishing/social-publishing-publisher",
       "plugin": "social-publishing",
       "sourceName": "social-publishing-publisher",
-      "runtimeName": "social-publishing-social-publishing-publisher",
-      "status": "rewritten",
+      "runtimeName": "social-publishing-publisher",
+      "status": "consolidated",
       "sourcePath": "plugins/social-publishing/agents/social-publishing-publisher.md",
       "sourceBlobSha": "b64fe88fd9bd9a63d2df4b69be14e2148cd3e7db",
-      "targetPath": "agents/social-publishing/social-publishing-publisher.md"
+      "targetPath": "agents/social-publishing-publisher.md"
     },
     {
       "id": "startup-business-analyst/startup-analyst",
       "plugin": "startup-business-analyst",
       "sourceName": "startup-analyst",
-      "runtimeName": "startup-business-analyst-startup-analyst",
-      "status": "rewritten",
+      "runtimeName": "startup-analyst",
+      "status": "consolidated",
       "sourcePath": "plugins/startup-business-analyst/agents/startup-analyst.md",
       "sourceBlobSha": "3bc65a7e70181784b4ea53346c279a0a3ff5ee2a",
-      "targetPath": "agents/startup-business-analyst/startup-analyst.md"
+      "targetPath": "agents/startup-analyst.md"
     },
     {
       "id": "systems-programming/c-pro",
       "plugin": "systems-programming",
       "sourceName": "c-pro",
-      "runtimeName": "systems-programming-c-pro",
-      "status": "rewritten",
+      "runtimeName": "c-pro",
+      "status": "consolidated",
       "sourcePath": "plugins/systems-programming/agents/c-pro.md",
       "sourceBlobSha": "10bbe0c1b4b37f98d0cb7bc106d89591e3d4270d",
-      "targetPath": "agents/systems-programming/c-pro.md"
+      "targetPath": "agents/c-pro.md"
     },
     {
       "id": "systems-programming/cpp-pro",
       "plugin": "systems-programming",
       "sourceName": "cpp-pro",
-      "runtimeName": "systems-programming-cpp-pro",
-      "status": "rewritten",
+      "runtimeName": "cpp-pro",
+      "status": "consolidated",
       "sourcePath": "plugins/systems-programming/agents/cpp-pro.md",
       "sourceBlobSha": "4b6834d73ac15e05378e9b5d36278b8e8ec363f7",
-      "targetPath": "agents/systems-programming/cpp-pro.md"
+      "targetPath": "agents/cpp-pro.md"
     },
     {
       "id": "systems-programming/golang-pro",
       "plugin": "systems-programming",
       "sourceName": "golang-pro",
-      "runtimeName": "systems-programming-golang-pro",
-      "status": "rewritten",
+      "runtimeName": "golang-pro",
+      "status": "consolidated",
       "sourcePath": "plugins/systems-programming/agents/golang-pro.md",
       "sourceBlobSha": "071a29c86ceffa5881402a90ab3489a5590c2913",
-      "targetPath": "agents/systems-programming/golang-pro.md"
+      "targetPath": "agents/golang-pro.md"
     },
     {
       "id": "systems-programming/rust-pro",
       "plugin": "systems-programming",
       "sourceName": "rust-pro",
-      "runtimeName": "systems-programming-rust-pro",
-      "status": "rewritten",
+      "runtimeName": "rust-pro",
+      "status": "consolidated",
       "sourcePath": "plugins/systems-programming/agents/rust-pro.md",
       "sourceBlobSha": "78dd8db88ec8c09d017d7e9040f394d1e4ba7215",
-      "targetPath": "agents/systems-programming/rust-pro.md"
+      "targetPath": "agents/rust-pro.md"
     },
     {
       "id": "tdd-workflows/code-reviewer",
       "plugin": "tdd-workflows",
       "sourceName": "code-reviewer",
-      "runtimeName": "tdd-workflows-code-reviewer",
-      "status": "rewritten",
+      "runtimeName": "code-reviewer",
+      "status": "consolidated",
       "sourcePath": "plugins/tdd-workflows/agents/code-reviewer.md",
       "sourceBlobSha": "9cebbdbfe2553076dcc90bdc2dac5102dc94a5f2",
-      "targetPath": "agents/tdd-workflows/code-reviewer.md"
+      "targetPath": "agents/code-reviewer.md"
     },
     {
       "id": "tdd-workflows/tdd-orchestrator",
       "plugin": "tdd-workflows",
       "sourceName": "tdd-orchestrator",
-      "runtimeName": "tdd-workflows-tdd-orchestrator",
-      "status": "rewritten",
+      "runtimeName": "tdd-orchestrator",
+      "status": "consolidated",
       "sourcePath": "plugins/tdd-workflows/agents/tdd-orchestrator.md",
       "sourceBlobSha": "89e9318fc38c5da9e5a03089518477a753f93e63",
-      "targetPath": "agents/tdd-workflows/tdd-orchestrator.md"
+      "targetPath": "agents/tdd-orchestrator.md"
     },
     {
       "id": "team-collaboration/dx-optimizer",
       "plugin": "team-collaboration",
       "sourceName": "dx-optimizer",
-      "runtimeName": "team-collaboration-dx-optimizer",
-      "status": "rewritten",
+      "runtimeName": "dx-optimizer",
+      "status": "consolidated",
       "sourcePath": "plugins/team-collaboration/agents/dx-optimizer.md",
       "sourceBlobSha": "2bf137c694623c7df9e219f495b0d84e2acdcc36",
-      "targetPath": "agents/team-collaboration/dx-optimizer.md"
+      "targetPath": "agents/dx-optimizer.md"
     },
     {
       "id": "ui-design/accessibility-expert",
       "plugin": "ui-design",
       "sourceName": "accessibility-expert",
-      "runtimeName": "ui-design-accessibility-expert",
-      "status": "rewritten",
+      "runtimeName": "accessibility-expert",
+      "status": "consolidated",
       "sourcePath": "plugins/ui-design/agents/accessibility-expert.md",
       "sourceBlobSha": "9c2952c891160e8653f7fd341f227298ca90236e",
-      "targetPath": "agents/ui-design/accessibility-expert.md"
+      "targetPath": "agents/accessibility-expert.md"
     },
     {
       "id": "ui-design/design-system-architect",
       "plugin": "ui-design",
       "sourceName": "design-system-architect",
-      "runtimeName": "ui-design-design-system-architect",
-      "status": "rewritten",
+      "runtimeName": "design-system-architect",
+      "status": "consolidated",
       "sourcePath": "plugins/ui-design/agents/design-system-architect.md",
       "sourceBlobSha": "78e28f13a85a6154caf612358b234c1377c6aba8",
-      "targetPath": "agents/ui-design/design-system-architect.md"
+      "targetPath": "agents/design-system-architect.md"
     },
     {
       "id": "ui-design/ui-designer",
       "plugin": "ui-design",
       "sourceName": "ui-designer",
-      "runtimeName": "ui-design-ui-designer",
-      "status": "rewritten",
+      "runtimeName": "ui-designer",
+      "status": "consolidated",
       "sourcePath": "plugins/ui-design/agents/ui-designer.md",
       "sourceBlobSha": "ac9acd0f20552ad3470ae8c7e9094f8a8528ac70",
-      "targetPath": "agents/ui-design/ui-designer.md"
+      "targetPath": "agents/ui-designer.md"
     },
     {
       "id": "unit-testing/debugger",
       "plugin": "unit-testing",
       "sourceName": "debugger",
-      "runtimeName": "unit-testing-debugger",
-      "status": "rewritten",
+      "runtimeName": "debugger",
+      "status": "consolidated",
       "sourcePath": "plugins/unit-testing/agents/debugger.md",
       "sourceBlobSha": "bc261a5d4efc021c90fcf3f161833c7c403b1cae",
-      "targetPath": "agents/unit-testing/debugger.md"
+      "targetPath": "agents/debugger.md"
     },
     {
       "id": "unit-testing/test-automator",
       "plugin": "unit-testing",
       "sourceName": "test-automator",
-      "runtimeName": "unit-testing-test-automator",
-      "status": "rewritten",
+      "runtimeName": "test-automator",
+      "status": "consolidated",
       "sourcePath": "plugins/unit-testing/agents/test-automator.md",
       "sourceBlobSha": "a4a78a78e316f88b1a44bd3e1d525762e8090505",
-      "targetPath": "agents/unit-testing/test-automator.md"
+      "targetPath": "agents/test-automator.md"
     },
     {
       "id": "web-scripting/php-pro",
       "plugin": "web-scripting",
       "sourceName": "php-pro",
-      "runtimeName": "web-scripting-php-pro",
-      "status": "rewritten",
+      "runtimeName": "php-pro",
+      "status": "consolidated",
       "sourcePath": "plugins/web-scripting/agents/php-pro.md",
       "sourceBlobSha": "3dd8ac137429d2532cbdbcde0c59ee768643116c",
-      "targetPath": "agents/web-scripting/php-pro.md"
+      "targetPath": "agents/php-pro.md"
     },
     {
       "id": "web-scripting/ruby-pro",
       "plugin": "web-scripting",
       "sourceName": "ruby-pro",
-      "runtimeName": "web-scripting-ruby-pro",
-      "status": "rewritten",
+      "runtimeName": "ruby-pro",
+      "status": "consolidated",
       "sourcePath": "plugins/web-scripting/agents/ruby-pro.md",
       "sourceBlobSha": "f122f293a4e5cd65d22acd557daaefa7c8eb5fa2",
-      "targetPath": "agents/web-scripting/ruby-pro.md"
+      "targetPath": "agents/ruby-pro.md"
     }
   ]
 }

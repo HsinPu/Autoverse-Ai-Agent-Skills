@@ -47,17 +47,18 @@ async function main() {
     .filter((entry) => entry.type === 'blob' && /^plugins\/[^/]+\/agents\/[^/]+\.md$/.test(entry.path))
     .sort((left, right) => left.path.localeCompare(right.path));
   const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
-  const byReferencePath = new Map(catalog.agents.map((agent) => [agent.reference.path, agent]));
+  const byReferencePath = new Map(catalog.agents.flatMap((agent) =>
+    (agent.references.paths || []).map((referencePath) => [referencePath, agent])));
 
   const definitions = sourceFiles.map((entry) => {
     const [, plugin, sourceNameWithExtension] = entry.path.match(/^plugins\/([^/]+)\/agents\/([^/]+\.md)$/);
     const sourceName = path.basename(sourceNameWithExtension, '.md');
     const id = `${plugin}/${sourceName}`;
-    const targetPath = `agents/${plugin}/${sourceName}.md`;
-    const runtimeName = `${plugin}-${sourceName}`;
+    const targetPath = `agents/${sourceName}.md`;
+    const runtimeName = sourceName;
     const catalogEntry = byReferencePath.get(entry.path);
-    const rewritten = catalogEntry
-      && catalogEntry.id === id
+    const consolidated = catalogEntry
+      && catalogEntry.id === sourceName
       && catalogEntry.name === runtimeName
       && catalogEntry.path === targetPath;
     return {
@@ -65,7 +66,7 @@ async function main() {
       plugin,
       sourceName,
       runtimeName,
-      status: rewritten ? 'rewritten' : 'pending',
+      status: consolidated ? 'consolidated' : 'pending',
       sourcePath: entry.path,
       sourceBlobSha: entry.sha,
       targetPath
@@ -76,28 +77,28 @@ async function main() {
   for (const definition of definitions) {
     roleCounts.set(definition.sourceName, (roleCounts.get(definition.sourceName) || 0) + 1);
   }
-  const rewritten = definitions.filter((definition) => definition.status === 'rewritten').length;
+  const consolidated = definitions.filter((definition) => definition.status === 'consolidated').length;
   const inventory = {
     sourceRepo,
     sourceBranch,
     sourceTreeSha: tree.sha,
     generatedAt: new Date().toISOString(),
-    policy: 'Upstream file paths, role names, and high-level responsibilities are reference inputs only. Every Autoverse prompt is independently rewritten, strengthened, and published as first-party HsinPu Apache-2.0 content.',
+    policy: 'Upstream paths, role names, and high-level responsibilities are reference inputs only. Duplicate upstream definitions are consolidated by role into independently rewritten, strengthened, first-party HsinPu Apache-2.0 Agents.',
     totals: {
       definitions: definitions.length,
       uniqueRoleNames: roleCounts.size,
       repeatedRoleNames: [...roleCounts.values()].filter((count) => count > 1).length,
       repeatedDefinitions: definitions.length - roleCounts.size,
       uniqueSourceBlobs: new Set(definitions.map((definition) => definition.sourceBlobSha)).size,
-      rewritten,
-      remaining: definitions.length - rewritten
+      consolidated,
+      remaining: definitions.length - consolidated
     },
     definitions
   };
 
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
   fs.writeFileSync(outputPath, `${JSON.stringify(inventory, null, 2)}\n`, 'utf8');
-  console.log(`Agent reference synced: ${definitions.length} definitions, ${roleCounts.size} role names, ${rewritten} rewritten, ${definitions.length - rewritten} remaining`);
+  console.log(`Agent reference synced: ${definitions.length} definitions, ${roleCounts.size} unique roles, ${consolidated} consolidated, ${definitions.length - consolidated} remaining`);
 }
 
 main().catch((error) => {

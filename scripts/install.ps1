@@ -30,7 +30,7 @@ Autoverse AI Agent Skills installer
 
 Usage:
   .\scripts\install.ps1 -Target <target> [-Type skill] [-Name <skill>] [-InstallDir path] [-DryRun] [-Force]
-  .\scripts\install.ps1 -Target <target> -Type agent [-Name <plugin/role>] [-InstallDir path] [-DryRun] [-Force]
+  .\scripts\install.ps1 -Target <target> -Type agent [-Name <role>] [-InstallDir path] [-DryRun] [-Force]
 
 Compatibility aliases:
   -Agent is an alias for -Target; -Skill is an alias for -Name.
@@ -47,11 +47,11 @@ Agent targets:
 Examples:
   .\scripts\install.ps1 -Target codex -Name python-development
   .\scripts\install.ps1 -Agent codex -Skill python-development
-  .\scripts\install.ps1 -Target codex -Type agent -Name comprehensive-review/code-reviewer
-  .\scripts\install.ps1 -Target claude-project -Type agent -Name incident-response/debugger -DryRun
+  .\scripts\install.ps1 -Target codex -Type agent -Name code-reviewer
+  .\scripts\install.ps1 -Target claude-project -Type agent -Name debugger -DryRun
 
 Safety:
-  Existing components are updated only when Autoverse metadata identifies the same repo.
+  Existing components are updated only when repo, component, name, and target metadata all match.
   Unknown same-named content is blocked unless -Force is provided.
 "@
 }
@@ -97,8 +97,8 @@ function Test-ComponentName {
     param([string]$ComponentType, [string]$ComponentName)
     if ($ComponentType -eq "agent") {
         if (-not $ComponentName) { return }
-        if ($ComponentName -notmatch '^[a-z0-9]+(?:-[a-z0-9]+)*/[a-z0-9]+(?:-[a-z0-9]+)*$') {
-            throw "Invalid Agent Name '$ComponentName'. Expected plugin/role in lowercase hyphen-case."
+        if ($ComponentName -notmatch '^[a-z0-9]+(?:-[a-z0-9]+)*$') {
+            throw "Invalid Agent Name '$ComponentName'. Expected a lowercase hyphen-case role."
         }
         return
     }
@@ -145,17 +145,14 @@ function Get-AgentSources {
     $adapterRoot = Join-Path $RepoRoot "adapters\$platform"
 
     if ($AgentId) {
-        $parts = $AgentId.Split('/')
-        $plugin = $parts[0]
-        $role = $parts[1]
-        $sourcePath = Join-Path $adapterRoot "$plugin\$role$extension"
+        $sourcePath = Join-Path $adapterRoot "$AgentId$extension"
         if (-not (Test-Path -LiteralPath $sourcePath -PathType Leaf)) {
             throw "Agent adapter not found in archive: $AgentId ($platform)"
         }
         return ,@{
             Source = Get-Item -LiteralPath $sourcePath
             Id = $AgentId
-            RuntimeName = "$plugin-$role"
+            RuntimeName = $AgentId
             Platform = $platform
         }
     }
@@ -164,21 +161,16 @@ function Get-AgentSources {
         throw "Agent adapter directory not found in archive: adapters/$platform"
     }
     $sources = @(
-        Get-ChildItem -LiteralPath $adapterRoot -Directory |
+        Get-ChildItem -LiteralPath $adapterRoot -File -Filter "*$extension" |
             Sort-Object Name |
             ForEach-Object {
-                $plugin = $_.Name
-                Get-ChildItem -LiteralPath $_.FullName -File -Filter "*$extension" |
-                    Sort-Object Name |
-                    ForEach-Object {
-                        $role = $_.BaseName
-                        @{
-                            Source = $_
-                            Id = "$plugin/$role"
-                            RuntimeName = "$plugin-$role"
-                            Platform = $platform
-                        }
-                    }
+                $role = $_.BaseName
+                @{
+                    Source = $_
+                    Id = $role
+                    RuntimeName = $role
+                    Platform = $platform
+                }
             }
     )
     if ($sources.Count -eq 0) { throw "No Agent adapters were found for $platform." }
@@ -202,15 +194,31 @@ function Get-ExistingMeta {
 }
 
 function Get-InstallAction {
-    param([string]$TargetPath, [string]$MetaPath, [string]$Label, [string]$RepoName)
+    param(
+        [string]$TargetPath,
+        [string]$MetaPath,
+        [string]$Label,
+        [string]$RepoName,
+        [string]$ExpectedComponent,
+        [string]$ExpectedName,
+        [string]$ExpectedTarget
+    )
     if (-not (Test-Path -LiteralPath $TargetPath)) { return @{ Action = "install"; ExistingMeta = $null } }
     $existingMeta = Get-ExistingMeta -MetaPath $MetaPath
-    if ($existingMeta -and $existingMeta.repo -eq $RepoName) {
+    $ownershipMatches = $existingMeta `
+        -and $existingMeta.repo -eq $RepoName `
+        -and $existingMeta.component -eq $ExpectedComponent `
+        -and $existingMeta.name -eq $ExpectedName `
+        -and $existingMeta.target -eq $ExpectedTarget
+    if ($ownershipMatches) {
         return @{ Action = "update"; ExistingMeta = $existingMeta }
     }
     if ($Force) { return @{ Action = "force-replace"; ExistingMeta = $existingMeta } }
-    if ($existingMeta -and $existingMeta.repo) {
+    if ($existingMeta -and $existingMeta.repo -and $existingMeta.repo -ne $RepoName) {
         throw "Refusing to replace '$Label' because it was installed from '$($existingMeta.repo)', not '$RepoName'. Use -Force to overwrite intentionally."
+    }
+    if ($existingMeta -and $existingMeta.repo -eq $RepoName) {
+        throw "Refusing to replace '$Label' because its ownership metadata does not match component='$ExpectedComponent', name='$ExpectedName', and target='$ExpectedTarget'. Use -Force to overwrite intentionally."
     }
     throw "Refusing to replace '$Label' because it has no matching Autoverse metadata. Use -Force to overwrite intentionally."
 }
@@ -220,7 +228,7 @@ function Install-Skill {
     $targetPath = Join-Path $DestinationRoot $Source.Name
     if (-not (Test-TargetWithinRoot -TargetPath $targetPath -RootPath $DestinationRoot)) { throw "Refusing to write outside install directory: $targetPath" }
     $metaPath = Join-Path $targetPath ".skill-meta.json"
-    $plan = Get-InstallAction -TargetPath $targetPath -MetaPath $metaPath -Label $Source.Name -RepoName $RepoName
+    $plan = Get-InstallAction -TargetPath $targetPath -MetaPath $metaPath -Label $Source.Name -RepoName $RepoName -ExpectedComponent "skill" -ExpectedName $Source.Name -ExpectedTarget $TargetName
     if ($DryRun) { Write-Host "DRY-RUN $($plan.Action) Skill $($Source.Name) -> $targetPath"; return }
 
     New-Item -ItemType Directory -Force -Path $DestinationRoot | Out-Null
@@ -240,7 +248,7 @@ function Install-AgentProfile {
     $targetPath = Join-Path $DestinationRoot ($RuntimeName + $Source.Extension)
     if (-not (Test-TargetWithinRoot -TargetPath $targetPath -RootPath $DestinationRoot)) { throw "Refusing to write outside install directory: $targetPath" }
     $metaPath = "$targetPath.autoverse.json"
-    $plan = Get-InstallAction -TargetPath $targetPath -MetaPath $metaPath -Label $AgentId -RepoName $RepoName
+    $plan = Get-InstallAction -TargetPath $targetPath -MetaPath $metaPath -Label $AgentId -RepoName $RepoName -ExpectedComponent "agent" -ExpectedName $RuntimeName -ExpectedTarget $TargetName
     if ($DryRun) { Write-Host "DRY-RUN $($plan.Action) Agent $AgentId -> $targetPath"; return }
 
     New-Item -ItemType Directory -Force -Path $DestinationRoot | Out-Null
@@ -256,11 +264,11 @@ function Install-AgentProfile {
 }
 
 function Test-AgentProfileInstall {
-    param([System.IO.FileInfo]$Source, [string]$RuntimeName, [string]$AgentId, [string]$DestinationRoot, [string]$RepoName)
+    param([System.IO.FileInfo]$Source, [string]$RuntimeName, [string]$AgentId, [string]$DestinationRoot, [string]$TargetName, [string]$RepoName)
     $targetPath = Join-Path $DestinationRoot ($RuntimeName + $Source.Extension)
     if (-not (Test-TargetWithinRoot -TargetPath $targetPath -RootPath $DestinationRoot)) { throw "Refusing to write outside install directory: $targetPath" }
     $metaPath = "$targetPath.autoverse.json"
-    Get-InstallAction -TargetPath $targetPath -MetaPath $metaPath -Label $AgentId -RepoName $RepoName | Out-Null
+    Get-InstallAction -TargetPath $targetPath -MetaPath $metaPath -Label $AgentId -RepoName $RepoName -ExpectedComponent "agent" -ExpectedName $RuntimeName -ExpectedTarget $TargetName | Out-Null
 }
 
 try {
@@ -287,7 +295,7 @@ try {
         if ($Type -eq "agent") {
             $agentSources = @(Get-AgentSources -RepoRoot $repoRoot -TargetName $Target -AgentId $Name)
             foreach ($agentSource in $agentSources) {
-                Test-AgentProfileInstall -Source $agentSource.Source -RuntimeName $agentSource.RuntimeName -AgentId $agentSource.Id -DestinationRoot $destinationRoot -RepoName $Repo
+                Test-AgentProfileInstall -Source $agentSource.Source -RuntimeName $agentSource.RuntimeName -AgentId $agentSource.Id -DestinationRoot $destinationRoot -TargetName $Target -RepoName $Repo
             }
             Write-Info "$(if ($DryRun) { 'Planning' } else { 'Installing' }) $($agentSources.Count) Agent(s) for $Target"
             foreach ($agentSource in $agentSources) {

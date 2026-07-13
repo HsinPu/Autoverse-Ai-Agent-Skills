@@ -17,7 +17,7 @@ Autoverse AI Agent Skills installer
 
 Usage:
   scripts/install.sh --target <target> [--type skill] [--name <skill>] [--dir path] [--dry-run] [--force]
-  scripts/install.sh --target <target> --type agent [--name <plugin/role>] [--dir path] [--dry-run] [--force]
+  scripts/install.sh --target <target> --type agent [--name <role>] [--dir path] [--dry-run] [--force]
 
 Compatibility aliases:
   --agent is an alias for --target; --skill selects a Skill by name.
@@ -34,11 +34,11 @@ Agent targets:
 Examples:
   scripts/install.sh --target codex --name python-development
   scripts/install.sh --agent codex --skill python-development
-  scripts/install.sh --target codex --type agent --name comprehensive-review/code-reviewer
-  scripts/install.sh --target claude-project --agent-profile incident-response/debugger --dry-run
+  scripts/install.sh --target codex --type agent --name code-reviewer
+  scripts/install.sh --target claude-project --agent-profile debugger --dry-run
 
 Safety:
-  Existing components are updated only when Autoverse metadata identifies the same repo.
+  Existing components are updated only when repo, component, name, and target metadata all match.
   Unknown same-named content is blocked unless --force is provided.
 EOF
 }
@@ -98,8 +98,8 @@ install_path() {
 validate_name() {
   if [[ "$TYPE" == "agent" ]]; then
     [[ -z "$NAME" ]] && return
-    if [[ ! "$NAME" =~ ^[a-z0-9]+(-[a-z0-9]+)*/[a-z0-9]+(-[a-z0-9]+)*$ ]]; then
-      log_error "Invalid Agent Name '$NAME'. Expected plugin/role in lowercase hyphen-case."
+    if [[ ! "$NAME" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]]; then
+      log_error "Invalid Agent Name '$NAME'. Expected a lowercase hyphen-case role."
       exit 1
     fi
     return
@@ -124,19 +124,27 @@ json_string_value() {
 }
 
 install_action() {
-  local target="$1" meta="$2" label="$3"
+  local target="$1" meta="$2" label="$3" expected_component="$4" expected_name="$5" expected_target="$6"
   INSTALL_ACTION="install"
   EXISTING_INSTALLED_AT=""
   [[ ! -e "$target" ]] && return
 
   if [[ -f "$meta" ]]; then
-    local existing_repo
+    local existing_repo existing_component existing_name existing_target
     existing_repo="$(json_string_value "$meta" "repo")"
+    existing_component="$(json_string_value "$meta" "component")"
+    existing_name="$(json_string_value "$meta" "name")"
+    existing_target="$(json_string_value "$meta" "target")"
     EXISTING_INSTALLED_AT="$(json_string_value "$meta" "installedAt")"
-    if [[ "$existing_repo" == "$REPO" ]]; then INSTALL_ACTION="update"; return; fi
+    if [[ "$existing_repo" == "$REPO" && "$existing_component" == "$expected_component" && "$existing_name" == "$expected_name" && "$existing_target" == "$expected_target" ]]; then
+      INSTALL_ACTION="update"
+      return
+    fi
     if [[ "$FORCE" -eq 1 ]]; then INSTALL_ACTION="force-replace"; return; fi
-    if [[ -n "$existing_repo" ]]; then
+    if [[ -n "$existing_repo" && "$existing_repo" != "$REPO" ]]; then
       log_error "Refusing to replace '$label' because it was installed from '$existing_repo', not '$REPO'. Use --force to overwrite intentionally."
+    elif [[ "$existing_repo" == "$REPO" ]]; then
+      log_error "Refusing to replace '$label' because its ownership metadata does not match component='$expected_component', name='$expected_name', and target='$expected_target'. Use --force to overwrite intentionally."
     else
       log_error "Refusing to replace '$label' because its Autoverse metadata is invalid. Use --force to overwrite intentionally."
     fi
@@ -161,7 +169,7 @@ install_skill() {
   target="$DEST_DIR/$name"
   meta="$target/.skill-meta.json"
   assert_within_destination "$target"
-  install_action "$target" "$meta" "$name"
+  install_action "$target" "$meta" "$name" "skill" "$name" "$TARGET"
   if [[ "$DRY_RUN" -eq 1 ]]; then printf 'DRY-RUN %s Skill %s -> %s\n' "$INSTALL_ACTION" "$name" "$target"; return; fi
 
   mkdir -p "$DEST_DIR"
@@ -190,7 +198,7 @@ install_agent_profile() {
   target="$DEST_DIR/$runtime_name$extension"
   meta="$target.autoverse.json"
   assert_within_destination "$target"
-  install_action "$target" "$meta" "$agent_id"
+  install_action "$target" "$meta" "$agent_id" "agent" "$runtime_name" "$TARGET"
   if [[ "$DRY_RUN" -eq 1 ]]; then printf 'DRY-RUN %s Agent %s -> %s\n' "$INSTALL_ACTION" "$agent_id" "$target"; return; fi
 
   mkdir -p "$DEST_DIR"
@@ -220,7 +228,7 @@ preflight_agent_profile() {
   target="$DEST_DIR/$runtime_name$extension"
   meta="$target.autoverse.json"
   assert_within_destination "$target"
-  install_action "$target" "$meta" "$agent_id"
+  install_action "$target" "$meta" "$agent_id" "agent" "$runtime_name" "$TARGET"
 }
 
 if [[ -z "$TARGET" ]]; then usage; log_error "Target is required."; exit 1; fi
@@ -262,31 +270,25 @@ if [[ "$TYPE" == "agent" ]]; then
   if [[ "$TARGET" == codex* ]]; then PLATFORM="codex"; EXTENSION="toml"; else PLATFORM="claude"; EXTENSION="md"; fi
   AGENT_SOURCES=()
   if [[ -n "$NAME" ]]; then
-    PLUGIN="${NAME%%/*}"
-    ROLE="${NAME#*/}"
-    SOURCE="$REPO_ROOT/adapters/$PLATFORM/$PLUGIN/$ROLE.$EXTENSION"
+    SOURCE="$REPO_ROOT/adapters/$PLATFORM/$NAME.$EXTENSION"
     if [[ ! -f "$SOURCE" ]]; then log_error "Agent adapter not found in archive: $NAME ($PLATFORM)"; exit 1; fi
     AGENT_SOURCES+=("$SOURCE")
   else
-    for source in "$REPO_ROOT/adapters/$PLATFORM"/*/*."$EXTENSION"; do
+    for source in "$REPO_ROOT/adapters/$PLATFORM"/*."$EXTENSION"; do
       [[ -f "$source" ]] && AGENT_SOURCES+=("$source")
     done
   fi
   if [[ "${#AGENT_SOURCES[@]}" -eq 0 ]]; then log_error "No Agent adapters were found for $PLATFORM."; exit 1; fi
   for source in "${AGENT_SOURCES[@]}"; do
-    RELATIVE_SOURCE="${source#"$REPO_ROOT/adapters/$PLATFORM/"}"
-    PLUGIN="${RELATIVE_SOURCE%%/*}"
-    ROLE_FILE="${RELATIVE_SOURCE#*/}"
+    ROLE_FILE="${source##*/}"
     ROLE="${ROLE_FILE%.$EXTENSION}"
-    preflight_agent_profile "$source" "$PLUGIN-$ROLE" "$PLUGIN/$ROLE"
+    preflight_agent_profile "$source" "$ROLE" "$ROLE"
   done
   log_info "$(if [[ "$DRY_RUN" -eq 1 ]]; then printf Planning; else printf Installing; fi) ${#AGENT_SOURCES[@]} Agent(s) for $TARGET"
   for source in "${AGENT_SOURCES[@]}"; do
-    RELATIVE_SOURCE="${source#"$REPO_ROOT/adapters/$PLATFORM/"}"
-    PLUGIN="${RELATIVE_SOURCE%%/*}"
-    ROLE_FILE="${RELATIVE_SOURCE#*/}"
+    ROLE_FILE="${source##*/}"
     ROLE="${ROLE_FILE%.$EXTENSION}"
-    install_agent_profile "$source" "$PLUGIN-$ROLE" "$PLUGIN/$ROLE" "$PLATFORM"
+    install_agent_profile "$source" "$ROLE" "$ROLE" "$PLATFORM"
   done
 else
   SOURCES=()
