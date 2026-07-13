@@ -222,11 +222,13 @@ function Test-LegacySkillOwnership {
     $existingLicense = Get-SkillFrontmatterValue -SkillFile $ExistingSkillFile -FieldName 'license'
     $incomingName = Get-SkillFrontmatterValue -SkillFile $IncomingSkillFile -FieldName 'name'
     $incomingSource = Get-SkillFrontmatterValue -SkillFile $IncomingSkillFile -FieldName 'source'
+    $incomingReferenceSource = Get-SkillFrontmatterValue -SkillFile $IncomingSkillFile -FieldName 'reference-source'
     $incomingLicense = Get-SkillFrontmatterValue -SkillFile $IncomingSkillFile -FieldName 'license'
+    $sourceMatches = $existingSource -eq $incomingSource -or ($incomingReferenceSource -and $existingSource -eq $incomingReferenceSource)
     return $existingName -eq $ExpectedName `
         -and $incomingName -eq $ExpectedName `
         -and $existingSource `
-        -and $existingSource -eq $incomingSource `
+        -and $sourceMatches `
         -and $existingLicense `
         -and $existingLicense -eq $incomingLicense
 }

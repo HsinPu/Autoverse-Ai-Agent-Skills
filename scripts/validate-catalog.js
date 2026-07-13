@@ -13,6 +13,7 @@ const agentReferencePath = path.join(root, 'scripts', 'data', 'wshobson-agent-in
 const readmePath = path.join(root, 'README.md');
 
 const errors = [];
+const canonicalSkillSource = 'HsinPu/Autoverse-Ai-Agent-Skills';
 const canonicalAgentMetadata = {
   author: 'HsinPu',
   source: 'HsinPu/Autoverse-Ai-Agent-Skills',
@@ -89,6 +90,13 @@ for (const skill of skills) {
   for (const field of ['description', 'category', 'author', 'source', 'license']) {
     if (!skill[field]) fail(`${skill.name || '(unknown)'} is missing catalog field: ${field}`);
   }
+  if (skill.source !== canonicalSkillSource) {
+    fail(`${skill.name || '(unknown)'} source must be ${canonicalSkillSource}`);
+  }
+  if (skill.reference) {
+    if (!skill.reference.source) fail(`${skill.name || '(unknown)'} reference.source is required`);
+    if (!skill.reference.license) fail(`${skill.name || '(unknown)'} reference.license is required`);
+  }
   if (!Array.isArray(skill.tags)) fail(`${skill.name || '(unknown)'} tags must be an array`);
 }
 
@@ -123,6 +131,10 @@ for (const name of skillDirs) {
   if (catalogEntry) {
     for (const field of ['description', 'source', 'license']) {
       compare(name, field, catalogEntry[field], frontmatter[field], 'skills.json', 'SKILL.md');
+    }
+    if (catalogEntry.reference) {
+      compare(name, 'reference.source', catalogEntry.reference.source, frontmatter['reference-source'], 'skills.json', 'SKILL.md');
+      compare(name, 'reference.license', catalogEntry.reference.license, frontmatter['reference-license'], 'skills.json', 'SKILL.md');
     }
   }
 }

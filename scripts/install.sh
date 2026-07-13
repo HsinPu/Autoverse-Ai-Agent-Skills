@@ -130,6 +130,7 @@ yaml_frontmatter_value() {
   local file="$1" key="$2"
   [[ -f "$file" ]] || return 0
   awk -v key="$key" '
+    NR == 1 { sub(/^\357\273\277/, "", $0) }
     NR == 1 && $0 == "---" { inside = 1; next }
     inside && $0 == "---" { exit }
     inside && index($0, key ":") == 1 {
@@ -162,14 +163,17 @@ install_action() {
       return
     fi
     if [[ "$existing_repo" == "$REPO" && "$expected_component" == "skill" && -z "$existing_component" && -z "$existing_target" && "$existing_name" == "$expected_name" && "$existing_agent" == "$expected_target" ]]; then
-      local legacy_skill_name legacy_skill_source legacy_skill_license incoming_skill_name incoming_skill_source incoming_skill_license
+      local legacy_skill_name legacy_skill_source legacy_skill_license incoming_skill_name incoming_skill_source incoming_skill_reference_source incoming_skill_license source_matches
       legacy_skill_name="$(yaml_frontmatter_value "$legacy_identity" "name")"
       legacy_skill_source="$(yaml_frontmatter_value "$legacy_identity" "source")"
       legacy_skill_license="$(yaml_frontmatter_value "$legacy_identity" "license")"
       incoming_skill_name="$(yaml_frontmatter_value "$incoming_identity" "name")"
       incoming_skill_source="$(yaml_frontmatter_value "$incoming_identity" "source")"
+      incoming_skill_reference_source="$(yaml_frontmatter_value "$incoming_identity" "reference-source")"
       incoming_skill_license="$(yaml_frontmatter_value "$incoming_identity" "license")"
-      if [[ "$legacy_skill_name" == "$expected_name" && "$incoming_skill_name" == "$expected_name" && -n "$legacy_skill_source" && "$legacy_skill_source" == "$incoming_skill_source" && -n "$legacy_skill_license" && "$legacy_skill_license" == "$incoming_skill_license" ]]; then
+      source_matches=0
+      if [[ "$legacy_skill_source" == "$incoming_skill_source" || ( -n "$incoming_skill_reference_source" && "$legacy_skill_source" == "$incoming_skill_reference_source" ) ]]; then source_matches=1; fi
+      if [[ "$legacy_skill_name" == "$expected_name" && "$incoming_skill_name" == "$expected_name" && -n "$legacy_skill_source" && "$source_matches" -eq 1 && -n "$legacy_skill_license" && "$legacy_skill_license" == "$incoming_skill_license" ]]; then
         INSTALL_ACTION="migrate-update"
         return
       fi

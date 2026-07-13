@@ -1,8 +1,10 @@
 ---
 name: karpathy-guidelines
 description: Behavioral coding guidelines for reducing common LLM implementation mistakes. Use when writing, reviewing, or refactoring code to surface assumptions, avoid overengineering, keep changes surgical, and define verifiable success criteria before execution.
-source: multica-ai/andrej-karpathy-skills
+source: HsinPu/Autoverse-Ai-Agent-Skills
 license: MIT
+reference-source: multica-ai/andrej-karpathy-skills
+reference-license: MIT
 ---
 
 # Karpathy Guidelines
