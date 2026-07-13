@@ -13,6 +13,38 @@
 目前共收錄 **134** 個不重複 Agents。
 <!-- AGENT_COUNT_END -->
 
+## 一鍵安裝全部 Skills 與 Agents
+
+以下指令會直接從 GitHub `main` 下載安裝器，並安裝到目前使用者的 Codex。Skill 與 Agent 是兩個獨立指令，可直接分別複製執行；Agent 未指定 target 時預設安裝到 Codex。
+
+### Windows PowerShell
+
+安裝全部 185 個 Skill：
+
+```powershell
+powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target codex -Type skill'
+```
+
+安裝全部 134 個 Agent（預設 Codex）：
+
+```powershell
+powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Type agent'
+```
+
+### Linux／macOS
+
+安裝全部 185 個 Skill：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type skill
+```
+
+安裝全部 134 個 Agent（預設 Codex）：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --type agent
+```
+
 ## 專案結構
 
 ```text
@@ -35,38 +67,6 @@ Autoverse-Ai-Agent-Skills/
 ```
 
 Agent 的 ID、執行名稱與檔名都使用 role，例如 `code-reviewer` 對應 `agents/code-reviewer.md`。Canonical 定義、平台 adapters 與實際安裝目錄都是單層結構。
-
-## 一鍵安裝全部到 Codex
-
-以下指令會直接從 GitHub `main` 下載安裝器，並安裝到目前使用者的 Codex。Agent 與 Skill 是兩個獨立指令，可依需要分別複製執行。
-
-### Windows PowerShell
-
-安裝全部 134 個 Agent：
-
-```powershell
-powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target codex -Type agent'
-```
-
-安裝全部 185 個 Skill：
-
-```powershell
-powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target codex -Type skill'
-```
-
-### Linux／macOS
-
-安裝全部 134 個 Agent：
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type agent
-```
-
-安裝全部 185 個 Skill：
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type skill
-```
 
 ## 安裝 Agent
 
@@ -143,7 +143,7 @@ curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/ma
 | `letta` | `~/.letta/skills/` |
 | `gemini` | `~/.gemini/skills/` |
 
-每個 Skill 安裝後會在其目錄內建立 `.skill-meta.json`。只有 metadata 的 `repo`、`component`、`name` 與 `target` 全部相符時，安裝器才會刪除舊目錄並更新；沒有 metadata、欄位不符或屬於其他 repo 的同名 Skill 都會保留原狀並拒絕安裝，除非明確使用 `-Force`／`--force`。
+每個 Skill 安裝後會在其目錄內建立 `.skill-meta.json`。只有 metadata 的 `repo`、`component`、`name` 與 `target` 全部相符時，安裝器才會刪除舊目錄並更新；沒有 metadata、欄位不符或屬於其他 repo 的同名 Skill 都會保留原狀並拒絕安裝，除非明確使用 `-Force`／`--force`。舊版 metadata 使用 `name + agent`；安裝器只有在 repo、舊欄位，以及既有 `SKILL.md` 的 `name`、`source` 全部吻合時，才會執行一次 `migrate-update` 並升級 metadata。
 
 兩套安裝器都支援自訂 `-InstallDir`／`--dir`、預演 `-DryRun`／`--dry-run`，以及本機開發測試用的 `-SourceDir`／`--source-dir`。
 

@@ -17,12 +17,13 @@ Autoverse AI Agent Skills installer
 
 Usage:
   scripts/install.sh --target <target> [--type skill] [--name <skill>] [--dir path] [--dry-run] [--force]
-  scripts/install.sh --target <target> --type agent [--name <role>] [--dir path] [--dry-run] [--force]
+  scripts/install.sh [--target <target>] --type agent [--name <role>] [--dir path] [--dry-run] [--force]
 
 Compatibility aliases:
   --agent is an alias for --target; --skill selects a Skill by name.
   --source-dir installs from a local checkout; otherwise the requested GitHub repo and branch are downloaded.
   Omit --name with --type agent to install every available Agent.
+  Omit --target with --type agent to install into the current user's Codex.
 
 Skill targets:
   claude, cursor, codex, amp, vscode, copilot, project, goose, opencode,
@@ -34,7 +35,7 @@ Agent targets:
 Examples:
   scripts/install.sh --target codex --name python-development
   scripts/install.sh --agent codex --skill python-development
-  scripts/install.sh --target codex --type agent --name code-reviewer
+  scripts/install.sh --type agent --name code-reviewer
   scripts/install.sh --target claude-project --agent-profile debugger --dry-run
 
 Safety:
@@ -64,6 +65,8 @@ while [[ $# -gt 0 ]]; do
     *) log_error "Unknown argument: $1"; usage; exit 1 ;;
   esac
 done
+
+if [[ -z "$TARGET" && "$TYPE" == "agent" ]]; then TARGET="codex"; fi
 
 install_path() {
   local target="$1"
@@ -123,22 +126,49 @@ json_string_value() {
   sed -n "s/^[[:space:]]*\"$key\"[[:space:]]*:[[:space:]]*\"\\([^\"]*\\)\".*/\\1/p" "$file" | head -n 1
 }
 
+yaml_frontmatter_value() {
+  local file="$1" key="$2"
+  [[ -f "$file" ]] || return 0
+  awk -v key="$key" '
+    NR == 1 && $0 == "---" { inside = 1; next }
+    inside && $0 == "---" { exit }
+    inside && index($0, key ":") == 1 {
+      value = substr($0, length(key) + 2)
+      sub(/^[[:space:]]+/, "", value)
+      sub(/[[:space:]]+$/, "", value)
+      gsub(/^['\''"]|['\''"]$/, "", value)
+      print value
+      exit
+    }
+  ' "$file"
+}
+
 install_action() {
-  local target="$1" meta="$2" label="$3" expected_component="$4" expected_name="$5" expected_target="$6"
+  local target="$1" meta="$2" label="$3" expected_component="$4" expected_name="$5" expected_target="$6" legacy_identity="${7:-}"
   INSTALL_ACTION="install"
   EXISTING_INSTALLED_AT=""
   [[ ! -e "$target" ]] && return
 
   if [[ -f "$meta" ]]; then
-    local existing_repo existing_component existing_name existing_target
+    local existing_repo existing_component existing_name existing_target existing_agent
     existing_repo="$(json_string_value "$meta" "repo")"
     existing_component="$(json_string_value "$meta" "component")"
     existing_name="$(json_string_value "$meta" "name")"
     existing_target="$(json_string_value "$meta" "target")"
+    existing_agent="$(json_string_value "$meta" "agent")"
     EXISTING_INSTALLED_AT="$(json_string_value "$meta" "installedAt")"
     if [[ "$existing_repo" == "$REPO" && "$existing_component" == "$expected_component" && "$existing_name" == "$expected_name" && "$existing_target" == "$expected_target" ]]; then
       INSTALL_ACTION="update"
       return
+    fi
+    if [[ "$existing_repo" == "$REPO" && "$expected_component" == "skill" && -z "$existing_component" && -z "$existing_target" && "$existing_name" == "$expected_name" && "$existing_agent" == "$expected_target" ]]; then
+      local legacy_skill_name legacy_skill_source
+      legacy_skill_name="$(yaml_frontmatter_value "$legacy_identity" "name")"
+      legacy_skill_source="$(yaml_frontmatter_value "$legacy_identity" "source")"
+      if [[ "$legacy_skill_name" == "$expected_name" && "$legacy_skill_source" == "$REPO" ]]; then
+        INSTALL_ACTION="migrate-update"
+        return
+      fi
     fi
     if [[ "$FORCE" -eq 1 ]]; then INSTALL_ACTION="force-replace"; return; fi
     if [[ -n "$existing_repo" && "$existing_repo" != "$REPO" ]]; then
@@ -169,7 +199,7 @@ install_skill() {
   target="$DEST_DIR/$name"
   meta="$target/.skill-meta.json"
   assert_within_destination "$target"
-  install_action "$target" "$meta" "$name" "skill" "$name" "$TARGET"
+  install_action "$target" "$meta" "$name" "skill" "$name" "$TARGET" "$target/SKILL.md"
   if [[ "$DRY_RUN" -eq 1 ]]; then printf 'DRY-RUN %s Skill %s -> %s\n' "$INSTALL_ACTION" "$name" "$target"; return; fi
 
   mkdir -p "$DEST_DIR"

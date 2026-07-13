@@ -30,12 +30,13 @@ Autoverse AI Agent Skills installer
 
 Usage:
   .\scripts\install.ps1 -Target <target> [-Type skill] [-Name <skill>] [-InstallDir path] [-DryRun] [-Force]
-  .\scripts\install.ps1 -Target <target> -Type agent [-Name <role>] [-InstallDir path] [-DryRun] [-Force]
+  .\scripts\install.ps1 [-Target <target>] -Type agent [-Name <role>] [-InstallDir path] [-DryRun] [-Force]
 
 Compatibility aliases:
   -Agent is an alias for -Target; -Skill is an alias for -Name.
   -SourceDir installs from a local checkout; otherwise the requested GitHub repo and branch are downloaded.
   Omit -Name with -Type agent to install every available Agent.
+  Omit -Target with -Type agent to install into the current user's Codex.
 
 Skill targets:
   claude, cursor, codex, amp, vscode, copilot, project, goose, opencode,
@@ -47,7 +48,7 @@ Agent targets:
 Examples:
   .\scripts\install.ps1 -Target codex -Name python-development
   .\scripts\install.ps1 -Agent codex -Skill python-development
-  .\scripts\install.ps1 -Target codex -Type agent -Name code-reviewer
+  .\scripts\install.ps1 -Type agent -Name code-reviewer
   .\scripts\install.ps1 -Target claude-project -Type agent -Name debugger -DryRun
 
 Safety:
@@ -193,6 +194,33 @@ function Get-ExistingMeta {
     }
 }
 
+function Get-SkillFrontmatterValue {
+    param([string]$SkillFile, [string]$FieldName)
+    if (-not (Test-Path -LiteralPath $SkillFile -PathType Leaf)) { return $null }
+    $text = Get-Content -Raw -LiteralPath $SkillFile
+    $frontmatter = [regex]::Match($text, '\A---\r?\n(?<body>[\s\S]*?)\r?\n---')
+    if (-not $frontmatter.Success) { return $null }
+    $field = [regex]::Match($frontmatter.Groups['body'].Value, '(?m)^' + [regex]::Escape($FieldName) + ':\s*(?<value>.+?)\s*$')
+    if (-not $field.Success) { return $null }
+    return $field.Groups['value'].Value.Trim().Trim('"').Trim("'")
+}
+
+function Test-LegacySkillOwnership {
+    param(
+        [object]$ExistingMeta,
+        [string]$SkillFile,
+        [string]$RepoName,
+        [string]$ExpectedName,
+        [string]$ExpectedTarget
+    )
+    if (-not $ExistingMeta -or $ExistingMeta.repo -ne $RepoName) { return $false }
+    if ($ExistingMeta.PSObject.Properties['component'] -or $ExistingMeta.PSObject.Properties['target']) { return $false }
+    if ($ExistingMeta.name -ne $ExpectedName -or $ExistingMeta.agent -ne $ExpectedTarget) { return $false }
+    $skillName = Get-SkillFrontmatterValue -SkillFile $SkillFile -FieldName 'name'
+    $skillSource = Get-SkillFrontmatterValue -SkillFile $SkillFile -FieldName 'source'
+    return $skillName -eq $ExpectedName -and $skillSource -eq $RepoName
+}
+
 function Get-InstallAction {
     param(
         [string]$TargetPath,
@@ -201,7 +229,8 @@ function Get-InstallAction {
         [string]$RepoName,
         [string]$ExpectedComponent,
         [string]$ExpectedName,
-        [string]$ExpectedTarget
+        [string]$ExpectedTarget,
+        [string]$LegacyIdentityPath
     )
     if (-not (Test-Path -LiteralPath $TargetPath)) { return @{ Action = "install"; ExistingMeta = $null } }
     $existingMeta = Get-ExistingMeta -MetaPath $MetaPath
@@ -212,6 +241,9 @@ function Get-InstallAction {
         -and $existingMeta.target -eq $ExpectedTarget
     if ($ownershipMatches) {
         return @{ Action = "update"; ExistingMeta = $existingMeta }
+    }
+    if ($ExpectedComponent -eq 'skill' -and (Test-LegacySkillOwnership -ExistingMeta $existingMeta -SkillFile $LegacyIdentityPath -RepoName $RepoName -ExpectedName $ExpectedName -ExpectedTarget $ExpectedTarget)) {
+        return @{ Action = "migrate-update"; ExistingMeta = $existingMeta }
     }
     if ($Force) { return @{ Action = "force-replace"; ExistingMeta = $existingMeta } }
     if ($existingMeta -and $existingMeta.repo -and $existingMeta.repo -ne $RepoName) {
@@ -228,7 +260,7 @@ function Install-Skill {
     $targetPath = Join-Path $DestinationRoot $Source.Name
     if (-not (Test-TargetWithinRoot -TargetPath $targetPath -RootPath $DestinationRoot)) { throw "Refusing to write outside install directory: $targetPath" }
     $metaPath = Join-Path $targetPath ".skill-meta.json"
-    $plan = Get-InstallAction -TargetPath $targetPath -MetaPath $metaPath -Label $Source.Name -RepoName $RepoName -ExpectedComponent "skill" -ExpectedName $Source.Name -ExpectedTarget $TargetName
+    $plan = Get-InstallAction -TargetPath $targetPath -MetaPath $metaPath -Label $Source.Name -RepoName $RepoName -ExpectedComponent "skill" -ExpectedName $Source.Name -ExpectedTarget $TargetName -LegacyIdentityPath (Join-Path $targetPath "SKILL.md")
     if ($DryRun) { Write-Host "DRY-RUN $($plan.Action) Skill $($Source.Name) -> $targetPath"; return }
 
     New-Item -ItemType Directory -Force -Path $DestinationRoot | Out-Null
@@ -272,6 +304,7 @@ function Test-AgentProfileInstall {
 }
 
 try {
+    if (-not $Target -and $Type -eq "agent") { $Target = "codex" }
     if (-not $Target) { Show-Usage; throw "Target is required." }
     Test-ComponentName -ComponentType $Type -ComponentName $Name
     $destinationRoot = if ($InstallDir) { $InstallDir } else { Resolve-InstallPath -TargetName $Target -ComponentType $Type }
