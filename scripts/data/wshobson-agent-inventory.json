@@ -1,7 +1,8 @@
 {
   "sourceRepo": "wshobson/agents",
   "sourceBranch": "main",
-  "sourceTreeSha": "2de74ac1c8f6669821dcef13153332c3168033c1",
+  "sourceCommitSha": "2de74ac1c8f6669821dcef13153332c3168033c1",
+  "sourceTreeSha": "deadb68423a57db5a1ab2afd50102be27df1744c",
   "generatedAt": "2026-07-13T03:06:04.775Z",
   "policy": "Upstream paths, role names, and high-level responsibilities are reference inputs only. Duplicate upstream definitions are consolidated by role into independently rewritten, strengthened, first-party HsinPu Apache-2.0 Agents.",
   "totals": {

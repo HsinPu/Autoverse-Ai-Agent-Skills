@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "repositories": [
+    {
+      "repo": "wshobson/agents",
+      "commit": "2de74ac1c8f6669821dcef13153332c3168033c1",
+      "tree": "deadb68423a57db5a1ab2afd50102be27df1744c",
+      "license": "MIT",
+      "licensePath": "LICENSE",
+      "pathInventory": "scripts/data/wshobson-agent-inventory.json"
+    },
+    {
+      "repo": "msitarzewski/agency-agents",
+      "commit": "00fb28a4cf60a719363dce0de67fafc6301857ce",
+      "tree": "33b57872e33785b1d225606c513945ca5c52c8c0",
+      "license": "MIT",
+      "licensePath": "LICENSE"
+    },
+    {
+      "repo": "VoltAgent/awesome-claude-code-subagents",
+      "commit": "947b44ca0c58d606b084e9cb1a2389335b49278b",
+      "tree": "9c98eac2f7463c79ebb7b914432ace7dbd3bfeaa",
+      "license": "MIT",
+      "licensePath": "LICENSE"
+    },
+    {
+      "repo": "github/awesome-copilot",
+      "commit": "0aaced533251f5b86c69dfbc5e55db74c4b4d1af",
+      "tree": "b36521f664a175a1ab32b4e5c8d75f0435d32ccc",
+      "license": "MIT",
+      "licensePath": "LICENSE"
+    },
+    {
+      "repo": "affaan-m/ECC",
+      "commit": "40927950c49f6e742d341e20ff7b9b7e1e7bfff5",
+      "tree": "106f376c7c8c5c096156e1f06493ad1c3dc2a465",
+      "license": "MIT",
+      "licensePath": "LICENSE"
+    },
+    {
+      "repo": "supatest-ai/awesome-claude-code-sub-agents",
+      "commit": "85d8ceac2fdfee5f27a3d3f38d83e925b4c6bd6d",
+      "tree": "85a5e871e7e9a0c8273698d5b2f8504505d0e1f9",
+      "license": "MIT",
+      "licensePath": "LICENSE"
+    },
+    {
+      "repo": "devsforge/marketplace",
+      "commit": "910a0a47f902bed757e6d7fff668f2809e7ea418",
+      "tree": "a9e6d715f983174840f8cfd472f09dfab4776865",
+      "license": "MIT",
+      "licensePath": "LICENSE"
+    },
+    {
+      "repo": "ajhcs/healthcare-agents",
+      "commit": "bfa827cfff275ff5a3dcd61610b882978146ab5f",
+      "tree": "bd6779b40f257c44700383f2ad806b07b6e2d3c0",
+      "license": "Apache-2.0",
+      "licensePath": "LICENSE"
+    }
+  ]
+}

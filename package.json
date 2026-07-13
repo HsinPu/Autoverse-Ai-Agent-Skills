@@ -18,7 +18,10 @@
   "scripts": {
     "generate:agents": "node scripts/generate-agent-adapters.js && node scripts/generate-agent-catalog.js",
     "sync:agent-reference": "node scripts/sync-agent-reference.js",
-    "validate": "node scripts/validate-catalog.js"
+    "verify:agent-references": "node scripts/verify-agent-references.js",
+    "verify:agent-references:remote": "node scripts/verify-agent-references.js --remote",
+    "audit:agent-originality": "node scripts/audit-agent-originality.js",
+    "validate": "node scripts/validate-catalog.js && node scripts/verify-agent-references.js"
   },
   "files": [
     "autoverse-cli.js",
@@ -31,11 +34,14 @@
     "scripts/install.cmd",
     "scripts/install.ps1",
     "scripts/install.sh",
+    "scripts/data/agent-reference-sources.json",
     "scripts/data/wshobson-agent-inventory.json",
+    "scripts/audit-agent-originality.js",
     "scripts/generate-agent-adapters.js",
     "scripts/generate-agent-catalog.js",
     "scripts/sync-agent-reference.js",
     "scripts/validate-catalog.js",
+    "scripts/verify-agent-references.js",
     "LICENSE"
   ],
   "engines": {

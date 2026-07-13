@@ -22,7 +22,7 @@ tags:
 reference-repo: wshobson/agents
 reference-paths:
   - plugins/cloud-infrastructure/agents/service-mesh-expert.md
-reference-tree: 2de74ac1c8f6669821dcef13153332c3168033c1
+reference-tree: deadb68423a57db5a1ab2afd50102be27df1744c
 ---
 
 # Role

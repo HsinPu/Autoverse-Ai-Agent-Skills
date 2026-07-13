@@ -6,9 +6,13 @@ on:
       - main
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   catalog:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - name: Checkout
@@ -21,6 +25,14 @@ jobs:
 
       - name: Validate catalog
         run: npm run validate
+
+      - name: Verify pinned Agent references
+        run: npm run verify:agent-references:remote
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Audit Agent originality
+        run: npm run audit:agent-originality
 
       - name: Smoke test CLI
         run: |

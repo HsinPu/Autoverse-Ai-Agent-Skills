@@ -13,7 +13,8 @@ const sourceBranch = 'main';
 function getJson(url) {
   return new Promise((resolve, reject) => {
     const headers = { Accept: 'application/vnd.github+json', 'User-Agent': 'Autoverse-Agent-Inventory' };
-    if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+    const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
+    if (token) headers.Authorization = `Bearer ${token}`;
     https.get(url, { headers }, (response) => {
       if (response.statusCode >= 300 && response.statusCode < 400 && response.headers.location) {
         response.resume();
@@ -39,7 +40,13 @@ function getJson(url) {
 }
 
 async function main() {
-  const treeUrl = `https://api.github.com/repos/${sourceRepo}/git/trees/${sourceBranch}?recursive=1`;
+  const commitUrl = `https://api.github.com/repos/${sourceRepo}/commits/${sourceBranch}`;
+  const commit = await getJson(commitUrl);
+  const treeSha = commit && commit.commit && commit.commit.tree && commit.commit.tree.sha;
+  if (!/^[0-9a-f]{40}$/.test(commit.sha || '') || !/^[0-9a-f]{40}$/.test(treeSha || '')) {
+    throw new Error('GitHub commit response did not include valid commit and tree SHAs');
+  }
+  const treeUrl = `https://api.github.com/repos/${sourceRepo}/git/trees/${treeSha}?recursive=1`;
   const tree = await getJson(treeUrl);
   if (tree.truncated) throw new Error('GitHub returned a truncated tree; refusing to write an incomplete inventory');
 
@@ -81,6 +88,7 @@ async function main() {
   const inventory = {
     sourceRepo,
     sourceBranch,
+    sourceCommitSha: commit.sha,
     sourceTreeSha: tree.sha,
     generatedAt: new Date().toISOString(),
     policy: 'Upstream paths, role names, and high-level responsibilities are reference inputs only. Duplicate upstream definitions are consolidated by role into independently rewritten, strengthened, first-party HsinPu Apache-2.0 Agents.',

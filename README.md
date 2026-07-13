@@ -473,8 +473,12 @@ Autoverse-Ai-Agent-Skills/
 │  ├─ generate-agent-adapters.js
 │  ├─ generate-agent-catalog.js
 │  ├─ sync-agent-reference.js
+│  ├─ verify-agent-references.js
+│  ├─ audit-agent-originality.js
 │  ├─ validate-catalog.js
-│  └─ data/wshobson-agent-inventory.json
+│  └─ data/
+│     ├─ agent-reference-sources.json
+│     └─ wshobson-agent-inventory.json
 └─ .github/workflows/validate.yml   # CI validation and CLI smoke tests
 ```
 
@@ -494,11 +498,17 @@ npm run sync:agent-reference
 # 驗證 catalogs、frontmatter、來源、授權、adapters、ledger 與 README counts
 npm run validate
 
+# 連線 GitHub，驗證每個 pinned commit、tree、reference path 與 license
+npm run verify:agent-references:remote
+
+# 下載 pinned upstream revisions，檢查長行與 12-word verbatim overlap
+npm run audit:agent-originality
+
 # 預覽 npm package 會包含的檔案
 npm pack --dry-run
 ```
 
-CI 會在 push 到 `main` 與每個 pull request 上使用 Node.js 20 執行 `npm run validate`，並 smoke-test CLI 的 help、list、search 與 info。
+`npm run validate` 是不需網路的本機結構檢查；另外兩個來源品質命令需要連線 GitHub。CI 會在 push 到 `main` 與每個 pull request 上使用 Node.js 20 執行三層檢查，並 smoke-test CLI 的 help、list、search 與 info。GitHub Actions 只授予 `contents: read`。
 
 ### 新增或修改 Agent
 
@@ -517,8 +527,10 @@ CI 會在 push 到 `main` 與每個 pull request 上使用 Node.js 20 執行 `np
 
 - 所有 Agents 與 Skills 的正式 `source` 都是 `HsinPu/Autoverse-Ai-Agent-Skills`，作者為 HsinPu。
 - 外部專案只作為研究、coverage 與設計參考；Agents 使用 `reference-repo`、`reference-paths`、`reference-tree`，Skills 使用 `reference-source`、`reference-license` 獨立記錄，不取代本專案的正式來源。
+- Agent reference repository 的 pinned commit、實際 Git tree、license identifier 與 license path 集中保存在 [agent-reference-sources.json](scripts/data/agent-reference-sources.json)。CI 會向 GitHub 重新驗證 commit → tree 關係、每個 reference path，以及授權檔內容。
 - Agent catalog 參考 [wshobson/agents](https://github.com/wshobson/agents)、[msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents)、[VoltAgent/awesome-claude-code-subagents](https://github.com/VoltAgent/awesome-claude-code-subagents)、[github/awesome-copilot](https://github.com/github/awesome-copilot)、[affaan-m/ECC](https://github.com/affaan-m/ECC)、[supatest-ai/awesome-claude-code-sub-agents](https://github.com/supatest-ai/awesome-claude-code-sub-agents)、[devsforge/marketplace](https://github.com/devsforge/marketplace) 與 [ajhcs/healthcare-agents](https://github.com/ajhcs/healthcare-agents) 的角色定位、路徑與高層責任；prompt 內容均由本專案重新設計與加強，不是原文完整複製。
-- 同名或職責相近的上游定義會先合併或排除。`wshobson/agents` 的 199 個 reference paths、tree SHA 與合併結果保存在 [wshobson-agent-inventory.json](scripts/data/wshobson-agent-inventory.json)；其他來源的 repository、path 與 tree SHA 則保存在各 canonical Agent frontmatter。
+- 同名或職責相近的上游定義會先合併或排除。`wshobson/agents` 的 199 個 reference paths、commit SHA、tree SHA 與合併結果保存在 [wshobson-agent-inventory.json](scripts/data/wshobson-agent-inventory.json)；其他來源的 repository、path 與 tree SHA 則保存在各 canonical Agent frontmatter。
+- `npm run audit:agent-originality` 會逐一比對 178 個 canonical Agent prompt 與 247 個 pinned upstream definitions；若出現至少 60 個字元的相同行，或 12 個單字的逐字片段，CI 會拒絕通過。這是保護改寫原創性的保守靜態閘門，不等同法律上的相似性判定。
 - Repository 與全部 178 個 Agents 採 Apache-2.0。Skills 的個別授權以各自 `SKILL.md` 與 `skills.json` 為準；目前 186 個為 Apache-2.0，`karpathy-guidelines` 保留 MIT 授權與外部 reference metadata。
 
 ## 疑難排解

@@ -24,7 +24,7 @@ reference-paths:
   - plugins/error-debugging/agents/error-detective.md
   - plugins/error-diagnostics/agents/error-detective.md
   - plugins/incident-response/agents/error-detective.md
-reference-tree: 2de74ac1c8f6669821dcef13153332c3168033c1
+reference-tree: deadb68423a57db5a1ab2afd50102be27df1744c
 ---
 
 # Role

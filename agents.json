@@ -1,6 +1,6 @@
 {
   "version": "3.0.0",
-  "updated": "2026-07-13T12:53:17.147Z",
+  "updated": "2026-07-13T13:13:48.995Z",
   "total": 178,
   "categories": 29,
   "uniqueRoles": 178,
@@ -34,7 +34,7 @@
         "paths": [
           "plugins/ui-design/agents/accessibility-expert.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -129,7 +129,7 @@
         "paths": [
           "plugins/llm-application-dev/agents/ai-engineer.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -162,7 +162,7 @@
           "plugins/api-testing-observability/agents/api-documenter.md",
           "plugins/documentation-generation/agents/api-documenter.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -194,7 +194,7 @@
         "paths": [
           "plugins/ship-mate/agents/architect.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -227,7 +227,7 @@
           "plugins/comprehensive-review/agents/architect-review.md",
           "plugins/framework-migration/agents/architect-review.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -259,7 +259,7 @@
         "paths": [
           "plugins/arm-cortex-microcontrollers/agents/arm-cortex-expert.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -296,7 +296,7 @@
           "plugins/database-cloud-optimization/agents/backend-architect.md",
           "plugins/multi-platform-apps/agents/backend-architect.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -329,7 +329,7 @@
           "plugins/backend-api-security/agents/backend-security-coder.md",
           "plugins/data-validation-suite/agents/backend-security-coder.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -360,7 +360,7 @@
         "paths": [
           "plugins/shell-scripting/agents/bash-pro.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -392,7 +392,7 @@
         "paths": [
           "plugins/blockchain-web3/agents/blockchain-developer.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -455,7 +455,7 @@
         "paths": [
           "plugins/business-analytics/agents/business-analyst.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -518,7 +518,7 @@
         "paths": [
           "plugins/systems-programming/agents/c-pro.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -549,7 +549,7 @@
         "paths": [
           "plugins/c4-architecture/agents/c4-code.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -580,7 +580,7 @@
         "paths": [
           "plugins/c4-architecture/agents/c4-component.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -611,7 +611,7 @@
         "paths": [
           "plugins/c4-architecture/agents/c4-container.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -642,7 +642,7 @@
         "paths": [
           "plugins/c4-architecture/agents/c4-context.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -774,7 +774,7 @@
           "plugins/database-cloud-optimization/agents/cloud-architect.md",
           "plugins/deployment-validation/agents/cloud-architect.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -838,7 +838,7 @@
         "paths": [
           "plugins/operating-kit/agents/code-review-preshipment.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -875,7 +875,7 @@
           "plugins/incident-response/agents/code-reviewer.md",
           "plugins/tdd-workflows/agents/code-reviewer.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -971,7 +971,7 @@
         "paths": [
           "plugins/conductor/agents/conductor-validator.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -1002,7 +1002,7 @@
         "paths": [
           "plugins/content-marketing/agents/content-marketer.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -1035,7 +1035,7 @@
           "plugins/agent-orchestration/agents/context-manager.md",
           "plugins/context-management/agents/context-manager.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -1066,7 +1066,7 @@
         "paths": [
           "plugins/systems-programming/agents/cpp-pro.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -1098,7 +1098,7 @@
         "paths": [
           "plugins/jvm-languages/agents/csharp-pro.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -1162,7 +1162,7 @@
         "paths": [
           "plugins/customer-sales-automation/agents/customer-support.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -1193,7 +1193,7 @@
         "paths": [
           "plugins/data-engineering/agents/data-engineer.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -1257,7 +1257,7 @@
         "paths": [
           "plugins/machine-learning-ops/agents/data-scientist.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -1289,7 +1289,7 @@
         "paths": [
           "plugins/database-migrations/agents/database-admin.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -1322,7 +1322,7 @@
           "plugins/database-cloud-optimization/agents/database-architect.md",
           "plugins/database-design/agents/database-architect.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -1356,7 +1356,7 @@
           "plugins/database-migrations/agents/database-optimizer.md",
           "plugins/observability-monitoring/agents/database-optimizer.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -1391,7 +1391,7 @@
           "plugins/incident-response/agents/debugger.md",
           "plugins/unit-testing/agents/debugger.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -1423,7 +1423,7 @@
         "paths": [
           "plugins/operating-kit/agents/deploy-with-verification.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -1458,7 +1458,7 @@
           "plugins/deployment-strategies/agents/deployment-engineer.md",
           "plugins/full-stack-orchestration/agents/deployment-engineer.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -1490,7 +1490,7 @@
         "paths": [
           "plugins/ui-design/agents/design-system-architect.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -1556,7 +1556,7 @@
           "plugins/distributed-debugging/agents/devops-troubleshooter.md",
           "plugins/incident-response/agents/devops-troubleshooter.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -1589,7 +1589,7 @@
           "plugins/api-scaffolding/agents/django-pro.md",
           "plugins/python-development/agents/django-pro.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -1622,7 +1622,7 @@
           "plugins/code-documentation/agents/docs-architect.md",
           "plugins/documentation-generation/agents/docs-architect.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -1654,7 +1654,7 @@
         "paths": [
           "plugins/dotnet-contribution/agents/dotnet-architect.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -1687,7 +1687,7 @@
           "plugins/debugging-toolkit/agents/dx-optimizer.md",
           "plugins/team-collaboration/agents/dx-optimizer.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -1752,7 +1752,7 @@
         "paths": [
           "plugins/functional-programming/agents/elixir-pro.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -1786,7 +1786,7 @@
           "plugins/error-diagnostics/agents/error-detective.md",
           "plugins/incident-response/agents/error-detective.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -1817,7 +1817,7 @@
         "paths": [
           "plugins/plugin-eval/agents/eval-judge.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -1849,7 +1849,7 @@
         "paths": [
           "plugins/plugin-eval/agents/eval-orchestrator.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -1880,7 +1880,7 @@
         "paths": [
           "plugins/backend-development/agents/event-sourcing-architect.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -1913,7 +1913,7 @@
           "plugins/api-scaffolding/agents/fastapi-pro.md",
           "plugins/python-development/agents/fastapi-pro.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -1944,7 +1944,7 @@
         "paths": [
           "plugins/reverse-engineering/agents/firmware-analyst.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -1976,7 +1976,7 @@
         "paths": [
           "plugins/multi-platform-apps/agents/flutter-expert.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -2044,7 +2044,7 @@
           "plugins/frontend-mobile-security/agents/frontend-developer.md",
           "plugins/multi-platform-apps/agents/frontend-developer.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -2076,7 +2076,7 @@
         "paths": [
           "plugins/frontend-mobile-security/agents/frontend-security-coder.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -2108,7 +2108,7 @@
         "paths": [
           "plugins/meigen-ai-design/agents/gallery-researcher.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -2172,7 +2172,7 @@
         "paths": [
           "plugins/systems-programming/agents/golang-pro.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -2236,7 +2236,7 @@
           "plugins/api-scaffolding/agents/graphql-architect.md",
           "plugins/backend-development/agents/graphql-architect.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -2267,7 +2267,7 @@
         "paths": [
           "plugins/functional-programming/agents/haskell-pro.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -2363,7 +2363,7 @@
         "paths": [
           "plugins/hr-legal-compliance/agents/hr-pro.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -2395,7 +2395,7 @@
         "paths": [
           "plugins/cloud-infrastructure/agents/hybrid-cloud-architect.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -2427,7 +2427,7 @@
         "paths": [
           "plugins/meigen-ai-design/agents/image-generator.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -2459,7 +2459,7 @@
         "paths": [
           "plugins/ship-mate/agents/implement.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -2489,7 +2489,7 @@
         "paths": [
           "plugins/incident-response/agents/incident-responder.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -2553,7 +2553,7 @@
         "paths": [
           "plugins/multi-platform-apps/agents/ios-developer.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -2585,7 +2585,7 @@
         "paths": [
           "plugins/jvm-languages/agents/java-pro.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -2617,7 +2617,7 @@
         "paths": [
           "plugins/javascript-typescript/agents/javascript-pro.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -2649,7 +2649,7 @@
         "paths": [
           "plugins/julia-development/agents/julia-pro.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -2683,7 +2683,7 @@
           "plugins/cloud-infrastructure/agents/kubernetes-architect.md",
           "plugins/kubernetes-operations/agents/kubernetes-architect.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -2749,7 +2749,7 @@
           "plugins/dependency-management/agents/legacy-modernizer.md",
           "plugins/framework-migration/agents/legacy-modernizer.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -2781,7 +2781,7 @@
         "paths": [
           "plugins/hr-legal-compliance/agents/legal-advisor.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -2813,7 +2813,7 @@
         "paths": [
           "plugins/reverse-engineering/agents/malware-analyst.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -2940,7 +2940,7 @@
         "paths": [
           "plugins/documentation-generation/agents/mermaid-expert.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -2972,7 +2972,7 @@
         "paths": [
           "plugins/game-development/agents/minecraft-bukkit-pro.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -3004,7 +3004,7 @@
         "paths": [
           "plugins/machine-learning-ops/agents/ml-engineer.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -3036,7 +3036,7 @@
         "paths": [
           "plugins/machine-learning-ops/agents/mlops-engineer.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -3069,7 +3069,7 @@
           "plugins/frontend-mobile-development/agents/mobile-developer.md",
           "plugins/multi-platform-apps/agents/mobile-developer.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -3101,7 +3101,7 @@
         "paths": [
           "plugins/frontend-mobile-security/agents/mobile-security-coder.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -3133,7 +3133,7 @@
         "paths": [
           "plugins/runapi-mcp/agents/model-advisor.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -3165,7 +3165,7 @@
         "paths": [
           "plugins/developer-essentials/agents/monorepo-architect.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -3198,7 +3198,7 @@
           "plugins/cloud-infrastructure/agents/network-engineer.md",
           "plugins/observability-monitoring/agents/network-engineer.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -3231,7 +3231,7 @@
           "plugins/application-performance/agents/observability-engineer.md",
           "plugins/observability-monitoring/agents/observability-engineer.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -3295,7 +3295,7 @@
         "paths": [
           "plugins/ship-mate/agents/orchestrate.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -3423,7 +3423,7 @@
         "paths": [
           "plugins/payment-processing/agents/payment-integration.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -3459,7 +3459,7 @@
           "plugins/observability-monitoring/agents/performance-engineer.md",
           "plugins/performance-testing-review/agents/performance-engineer.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -3491,7 +3491,7 @@
         "paths": [
           "plugins/web-scripting/agents/php-pro.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -3555,7 +3555,7 @@
         "paths": [
           "plugins/ship-mate/agents/playwright.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -3587,7 +3587,7 @@
         "paths": [
           "plugins/protect-mcp/agents/policy-enforcer.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -3618,7 +3618,7 @@
         "paths": [
           "plugins/shell-scripting/agents/posix-shell-pro.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -3778,7 +3778,7 @@
         "paths": [
           "plugins/operating-kit/agents/prod-logs-health-check.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -3873,7 +3873,7 @@
         "paths": [
           "plugins/meigen-ai-design/agents/prompt-crafter.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -3905,7 +3905,7 @@
         "paths": [
           "plugins/llm-application-dev/agents/prompt-engineer.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -3937,7 +3937,7 @@
         "paths": [
           "plugins/python-development/agents/python-pro.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -3969,7 +3969,7 @@
         "paths": [
           "plugins/ship-mate/agents/qa.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -4000,7 +4000,7 @@
         "paths": [
           "plugins/quantitative-trading/agents/quant-analyst.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -4032,7 +4032,7 @@
         "paths": [
           "plugins/protect-mcp/agents/receipt-verifier.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -4064,7 +4064,7 @@
         "paths": [
           "plugins/documentation-generation/agents/reference-builder.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -4159,7 +4159,7 @@
         "paths": [
           "plugins/reverse-engineering/agents/reverse-engineer.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -4191,7 +4191,7 @@
         "paths": [
           "plugins/ship-mate/agents/review.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -4223,7 +4223,7 @@
         "paths": [
           "plugins/review-agent-governance/agents/review-policy-author.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -4255,7 +4255,7 @@
         "paths": [
           "plugins/quantitative-trading/agents/risk-manager.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -4287,7 +4287,7 @@
         "paths": [
           "plugins/web-scripting/agents/ruby-pro.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -4319,7 +4319,7 @@
         "paths": [
           "plugins/systems-programming/agents/rust-pro.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -4383,7 +4383,7 @@
         "paths": [
           "plugins/customer-sales-automation/agents/sales-automator.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -4447,7 +4447,7 @@
         "paths": [
           "plugins/jvm-languages/agents/scala-pro.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -4478,7 +4478,7 @@
         "paths": [
           "plugins/content-marketing/agents/search-specialist.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -4513,7 +4513,7 @@
           "plugins/security-compliance/agents/security-auditor.md",
           "plugins/security-scanning/agents/security-auditor.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -4545,7 +4545,7 @@
         "paths": [
           "plugins/seo-analysis-monitoring/agents/seo-authority-builder.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -4577,7 +4577,7 @@
         "paths": [
           "plugins/seo-analysis-monitoring/agents/seo-cannibalization-detector.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -4609,7 +4609,7 @@
         "paths": [
           "plugins/seo-content-creation/agents/seo-content-auditor.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -4641,7 +4641,7 @@
         "paths": [
           "plugins/seo-content-creation/agents/seo-content-planner.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -4673,7 +4673,7 @@
         "paths": [
           "plugins/seo-analysis-monitoring/agents/seo-content-refresher.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -4705,7 +4705,7 @@
         "paths": [
           "plugins/seo-content-creation/agents/seo-content-writer.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -4737,7 +4737,7 @@
         "paths": [
           "plugins/seo-technical-optimization/agents/seo-keyword-strategist.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -4769,7 +4769,7 @@
         "paths": [
           "plugins/seo-technical-optimization/agents/seo-meta-optimizer.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -4801,7 +4801,7 @@
         "paths": [
           "plugins/seo-technical-optimization/agents/seo-snippet-hunter.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -4833,7 +4833,7 @@
         "paths": [
           "plugins/seo-technical-optimization/agents/seo-structure-architect.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -4865,7 +4865,7 @@
         "paths": [
           "plugins/cloud-infrastructure/agents/service-mesh-expert.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -4897,7 +4897,7 @@
         "paths": [
           "plugins/operating-kit/agents/session-end.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -4929,7 +4929,7 @@
         "paths": [
           "plugins/operating-kit/agents/session-start.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -4961,7 +4961,7 @@
         "paths": [
           "plugins/social-publishing/agents/social-publishing-publisher.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -5025,7 +5025,7 @@
         "paths": [
           "plugins/database-design/agents/sql-pro.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -5089,7 +5089,7 @@
         "paths": [
           "plugins/startup-business-analyst/agents/startup-analyst.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -5121,7 +5121,7 @@
         "paths": [
           "plugins/runapi-mcp/agents/task-executor.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -5154,7 +5154,7 @@
           "plugins/backend-development/agents/tdd-orchestrator.md",
           "plugins/tdd-workflows/agents/tdd-orchestrator.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -5186,7 +5186,7 @@
         "paths": [
           "plugins/agent-teams/agents/team-debugger.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -5218,7 +5218,7 @@
         "paths": [
           "plugins/agent-teams/agents/team-implementer.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -5250,7 +5250,7 @@
         "paths": [
           "plugins/agent-teams/agents/team-lead.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -5282,7 +5282,7 @@
         "paths": [
           "plugins/agent-teams/agents/team-reviewer.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -5347,7 +5347,7 @@
         "paths": [
           "plugins/backend-development/agents/temporal-python-pro.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -5381,7 +5381,7 @@
           "plugins/cloud-infrastructure/agents/terraform-specialist.md",
           "plugins/deployment-strategies/agents/terraform-specialist.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -5417,7 +5417,7 @@
           "plugins/performance-testing-review/agents/test-automator.md",
           "plugins/unit-testing/agents/test-automator.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -5449,7 +5449,7 @@
         "paths": [
           "plugins/security-scanning/agents/threat-modeling-expert.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -5482,7 +5482,7 @@
           "plugins/code-documentation/agents/tutorial-engineer.md",
           "plugins/documentation-generation/agents/tutorial-engineer.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -5514,7 +5514,7 @@
         "paths": [
           "plugins/javascript-typescript/agents/typescript-pro.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -5545,7 +5545,7 @@
         "paths": [
           "plugins/ui-design/agents/ui-designer.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -5577,7 +5577,7 @@
         "paths": [
           "plugins/multi-platform-apps/agents/ui-ux-designer.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -5609,7 +5609,7 @@
         "paths": [
           "plugins/accessibility-compliance/agents/ui-visual-validator.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -5641,7 +5641,7 @@
         "paths": [
           "plugins/game-development/agents/unity-developer.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {
@@ -5705,7 +5705,7 @@
         "paths": [
           "plugins/llm-application-dev/agents/vector-database-engineer.md"
         ],
-        "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
       }
     },
     {

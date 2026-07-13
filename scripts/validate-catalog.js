@@ -10,6 +10,7 @@ const agentsRoot = path.join(root, 'agents');
 const adaptersRoot = path.join(root, 'adapters');
 const agentsJsonPath = path.join(root, 'agents.json');
 const agentReferencePath = path.join(root, 'scripts', 'data', 'wshobson-agent-inventory.json');
+const agentReferenceSourcesPath = path.join(root, 'scripts', 'data', 'agent-reference-sources.json');
 const readmePath = path.join(root, 'README.md');
 
 const errors = [];
@@ -20,16 +21,6 @@ const canonicalAgentMetadata = {
   source: 'HsinPu/Autoverse-Ai-Agent-Skills',
   license: 'Apache-2.0'
 };
-const allowedAgentReferenceTrees = new Map([
-  ['wshobson/agents', '2de74ac1c8f6669821dcef13153332c3168033c1'],
-  ['msitarzewski/agency-agents', '33b57872e33785b1d225606c513945ca5c52c8c0'],
-  ['VoltAgent/awesome-claude-code-subagents', '9c98eac2f7463c79ebb7b914432ace7dbd3bfeaa'],
-  ['github/awesome-copilot', 'b36521f664a175a1ab32b4e5c8d75f0435d32ccc'],
-  ['affaan-m/ECC', '106f376c7c8c5c096156e1f06493ad1c3dc2a465'],
-  ['supatest-ai/awesome-claude-code-sub-agents', '85a5e871e7e9a0c8273698d5b2f8504505d0e1f9'],
-  ['devsforge/marketplace', 'a9e6d715f983174840f8cfd472f09dfab4776865'],
-  ['ajhcs/healthcare-agents', 'bd6779b40f257c44700383f2ad806b07b6e2d3c0']
-]);
 
 function fail(message) {
   errors.push(message);
@@ -43,6 +34,13 @@ function readJson(filePath) {
     return null;
   }
 }
+
+const agentReferenceSources = readJson(agentReferenceSourcesPath);
+const allowedAgentReferenceTrees = new Map(
+  agentReferenceSources && Array.isArray(agentReferenceSources.repositories)
+    ? agentReferenceSources.repositories.map((entry) => [entry.repo, entry.tree])
+    : []
+);
 
 function parseScalar(value) {
   const trimmed = value.trim();

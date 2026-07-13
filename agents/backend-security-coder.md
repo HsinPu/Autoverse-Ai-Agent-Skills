@@ -23,7 +23,7 @@ reference-repo: wshobson/agents
 reference-paths:
   - plugins/backend-api-security/agents/backend-security-coder.md
   - plugins/data-validation-suite/agents/backend-security-coder.md
-reference-tree: 2de74ac1c8f6669821dcef13153332c3168033c1
+reference-tree: deadb68423a57db5a1ab2afd50102be27df1744c
 ---
 
 # Role
