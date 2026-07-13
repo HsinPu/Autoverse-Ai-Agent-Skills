@@ -20,12 +20,15 @@ const canonicalAgentMetadata = {
   source: 'HsinPu/Autoverse-Ai-Agent-Skills',
   license: 'Apache-2.0'
 };
-const allowedAgentReferenceRepos = new Set([
-  'wshobson/agents',
-  'msitarzewski/agency-agents',
-  'VoltAgent/awesome-claude-code-subagents',
-  'github/awesome-copilot',
-  'affaan-m/ECC'
+const allowedAgentReferenceTrees = new Map([
+  ['wshobson/agents', '2de74ac1c8f6669821dcef13153332c3168033c1'],
+  ['msitarzewski/agency-agents', '33b57872e33785b1d225606c513945ca5c52c8c0'],
+  ['VoltAgent/awesome-claude-code-subagents', '9c98eac2f7463c79ebb7b914432ace7dbd3bfeaa'],
+  ['github/awesome-copilot', 'b36521f664a175a1ab32b4e5c8d75f0435d32ccc'],
+  ['affaan-m/ECC', '106f376c7c8c5c096156e1f06493ad1c3dc2a465'],
+  ['supatest-ai/awesome-claude-code-sub-agents', '85a5e871e7e9a0c8273698d5b2f8504505d0e1f9'],
+  ['devsforge/marketplace', 'a9e6d715f983174840f8cfd472f09dfab4776865'],
+  ['ajhcs/healthcare-agents', 'bd6779b40f257c44700383f2ad806b07b6e2d3c0']
 ]);
 
 function fail(message) {
@@ -209,11 +212,14 @@ for (const agent of agents) {
   if (!agent.references || typeof agent.references !== 'object') {
     fail(`${label}: references must be an object`);
   } else {
-    if (!allowedAgentReferenceRepos.has(agent.references.repo)) {
+    const expectedReferenceTree = allowedAgentReferenceTrees.get(agent.references.repo);
+    if (!expectedReferenceTree) {
       fail(`${label}: unsupported references.repo ${agent.references.repo}`);
     }
     if (!/^[0-9a-f]{40}$/.test(agent.references.tree || '')) {
       fail(`${label}: references.tree must be a 40-character lowercase Git SHA`);
+    } else if (expectedReferenceTree && agent.references.tree !== expectedReferenceTree) {
+      fail(`${label}: references.tree must match the verified tree for ${agent.references.repo}`);
     }
     if (!Array.isArray(agent.references.paths) || agent.references.paths.length === 0) {
       fail(`${label}: references.paths must be a non-empty array`);

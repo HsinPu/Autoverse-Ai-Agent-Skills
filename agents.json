@@ -1,9 +1,9 @@
 {
   "version": "3.0.0",
-  "updated": "2026-07-13T12:03:11.255Z",
-  "total": 158,
+  "updated": "2026-07-13T12:53:17.147Z",
+  "total": 178,
   "categories": 29,
-  "uniqueRoles": 158,
+  "uniqueRoles": 178,
   "agents": [
     {
       "id": "accessibility-expert",
@@ -396,6 +396,38 @@
       }
     },
     {
+      "id": "brand-strategist",
+      "name": "brand-strategist",
+      "role": "brand-strategist",
+      "description": "Develops evidence-backed brand positioning, architecture, messaging, expression principles, and governance. Use when a product or organization needs strategic brand direction before design or campaign execution.",
+      "category": "strategy",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "web-research-ops",
+        "design-consultation",
+        "ux-writing",
+        "color-font-skill"
+      ],
+      "tags": [
+        "brand-strategy",
+        "positioning",
+        "messaging",
+        "brand-governance"
+      ],
+      "path": "agents/brand-strategist.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "design/design-brand-guardian.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
+      }
+    },
+    {
       "id": "business-analyst",
       "name": "business-analyst",
       "role": "business-analyst",
@@ -424,6 +456,38 @@
           "plugins/business-analytics/agents/business-analyst.md"
         ],
         "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+      }
+    },
+    {
+      "id": "business-strategy-consultant",
+      "name": "business-strategy-consultant",
+      "role": "business-strategy-consultant",
+      "description": "Frames consequential business choices with evidence, scenarios, explicit trade-offs, and an executable decision path. Use for market entry, growth, portfolio, operating-model, or business-model decisions that require more than a generic recommendation.",
+      "category": "strategy",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "web-research-ops",
+        "spreadsheet-ops",
+        "specification-authoring",
+        "data-organization-system"
+      ],
+      "tags": [
+        "business-strategy",
+        "scenarios",
+        "trade-offs",
+        "decision-support"
+      ],
+      "path": "agents/business-strategy-consultant.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "specialized/business-strategist.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
       }
     },
     {
@@ -614,6 +678,39 @@
       }
     },
     {
+      "id": "clinical-data-manager",
+      "name": "clinical-data-manager",
+      "role": "clinical-data-manager",
+      "description": "Reviews clinical research data management from protocol and data plan through collection, cleaning, reconciliation, transfer, freeze, and lock. Use for data integrity and readiness, never clinical or statistical conclusions.",
+      "category": "healthcare",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "web-research-ops",
+        "spreadsheet-ops",
+        "data-organization-system",
+        "specification-authoring"
+      ],
+      "tags": [
+        "clinical-data-management",
+        "clinical-research",
+        "data-integrity",
+        "database-lock"
+      ],
+      "path": "agents/clinical-data-manager.md",
+      "references": {
+        "repo": "ajhcs/healthcare-agents",
+        "paths": [
+          "agents/healthit-clinical-data-analyst.md",
+          "agents/clinical-research-coordinator.md"
+        ],
+        "tree": "bd6779b40f257c44700383f2ad806b07b6e2d3c0"
+      }
+    },
+    {
       "id": "clinical-evidence-reviewer",
       "name": "clinical-evidence-reviewer",
       "role": "clinical-evidence-reviewer",
@@ -779,6 +876,38 @@
           "plugins/tdd-workflows/agents/code-reviewer.md"
         ],
         "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+      }
+    },
+    {
+      "id": "competitive-intelligence-analyst",
+      "name": "competitive-intelligence-analyst",
+      "role": "competitive-intelligence-analyst",
+      "description": "Builds ethical, source-backed competitive intelligence on rivals, substitutes, positioning, capabilities, and strategic signals. Use for competitor monitoring and response decisions, not general market sizing.",
+      "category": "analysis",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "web-research-ops",
+        "data-organization-system",
+        "spreadsheet-ops",
+        "summary-ops"
+      ],
+      "tags": [
+        "competitive-intelligence",
+        "competitor-monitoring",
+        "positioning",
+        "strategic-analysis"
+      ],
+      "path": "agents/competitive-intelligence-analyst.md",
+      "references": {
+        "repo": "VoltAgent/awesome-claude-code-subagents",
+        "paths": [
+          "categories/10-research-analysis/competitive-analyst.md"
+        ],
+        "tree": "9c98eac2f7463c79ebb7b914432ace7dbd3bfeaa"
       }
     },
     {
@@ -1068,6 +1197,38 @@
       }
     },
     {
+      "id": "data-governance-engineer",
+      "name": "data-governance-engineer",
+      "role": "data-governance-engineer",
+      "description": "Designs evidence-based data ownership, metadata, quality, lineage, access, retention, and exception controls across data products. Use when data governance must become an operable and measurable system.",
+      "category": "data",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "data-organization-system",
+        "data-pipeline-orchestration",
+        "database-design",
+        "specification-authoring"
+      ],
+      "tags": [
+        "data-governance",
+        "data-stewardship",
+        "metadata-lineage",
+        "data-quality"
+      ],
+      "path": "agents/data-governance-engineer.md",
+      "references": {
+        "repo": "ajhcs/healthcare-agents",
+        "paths": [
+          "agents/healthit-informatics-manager.md"
+        ],
+        "tree": "bd6779b40f257c44700383f2ad806b07b6e2d3c0"
+      }
+    },
+    {
       "id": "data-scientist",
       "name": "data-scientist",
       "role": "data-scientist",
@@ -1333,6 +1494,38 @@
       }
     },
     {
+      "id": "developer-advocate",
+      "name": "developer-advocate",
+      "role": "developer-advocate",
+      "description": "Builds evidence-backed developer education, community insight, samples, and product feedback loops without making unapproved public commitments. Use when a platform needs trustworthy developer adoption support beyond internal DX work.",
+      "category": "developer-experience",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "web-research-ops",
+        "markdown-writer",
+        "presentation-ops",
+        "agent-action-governance"
+      ],
+      "tags": [
+        "developer-relations",
+        "developer-education",
+        "community-insight",
+        "product-feedback"
+      ],
+      "path": "agents/developer-advocate.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "specialized/specialized-developer-advocate.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
+      }
+    },
+    {
       "id": "devops-troubleshooter",
       "name": "devops-troubleshooter",
       "role": "devops-troubleshooter",
@@ -1495,6 +1688,39 @@
           "plugins/team-collaboration/agents/dx-optimizer.md"
         ],
         "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+      }
+    },
+    {
+      "id": "ecommerce-operations-manager",
+      "name": "ecommerce-operations-manager",
+      "role": "ecommerce-operations-manager",
+      "description": "Diagnoses ecommerce catalog, channel, inventory, order, fulfillment, returns, promotion, and contribution economics. Use when store operations need coordinated, evidence-based improvement without direct account changes.",
+      "category": "commerce",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "spreadsheet-ops",
+        "data-organization-system",
+        "web-research-ops",
+        "dashboard-design"
+      ],
+      "tags": [
+        "ecommerce",
+        "store-operations",
+        "fulfillment",
+        "channel-economics"
+      ],
+      "path": "agents/ecommerce-operations-manager.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "marketing/marketing-cross-border-ecommerce.md",
+          "marketing/marketing-china-ecommerce-operator.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
       }
     },
     {
@@ -2045,6 +2271,70 @@
       }
     },
     {
+      "id": "health-information-manager",
+      "name": "health-information-manager",
+      "role": "health-information-manager",
+      "description": "Reviews health-record identity, integrity, disclosure, amendment, retention, legal-hold, archival, and destruction controls. Use for health information lifecycle readiness without releasing or altering records.",
+      "category": "healthcare",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "web-research-ops",
+        "data-organization-system",
+        "agent-action-governance",
+        "specification-authoring"
+      ],
+      "tags": [
+        "health-information",
+        "record-integrity",
+        "disclosure-control",
+        "records-lifecycle"
+      ],
+      "path": "agents/health-information-manager.md",
+      "references": {
+        "repo": "ajhcs/healthcare-agents",
+        "paths": [
+          "agents/healthit-information-manager.md"
+        ],
+        "tree": "bd6779b40f257c44700383f2ad806b07b6e2d3c0"
+      }
+    },
+    {
+      "id": "healthcare-compliance-specialist",
+      "name": "healthcare-compliance-specialist",
+      "role": "healthcare-compliance-specialist",
+      "description": "Reviews healthcare compliance readiness by tracing dated requirements to policies, controls, evidence, owners, and corrective actions. Use for regulated healthcare operations, never legal opinions, certification, or patient-care decisions.",
+      "category": "healthcare",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "web-research-ops",
+        "security-code-review",
+        "spreadsheet-ops",
+        "specification-authoring"
+      ],
+      "tags": [
+        "healthcare-compliance",
+        "control-readiness",
+        "regulatory-evidence",
+        "corrective-action"
+      ],
+      "path": "agents/healthcare-compliance-specialist.md",
+      "references": {
+        "repo": "ajhcs/healthcare-agents",
+        "paths": [
+          "agents/quality-compliance-officer.md"
+        ],
+        "tree": "bd6779b40f257c44700383f2ad806b07b6e2d3c0"
+      }
+    },
+    {
       "id": "hr-pro",
       "name": "hr-pro",
       "role": "hr-pro",
@@ -2397,6 +2687,38 @@
       }
     },
     {
+      "id": "learning-development-specialist",
+      "name": "learning-development-specialist",
+      "role": "learning-development-specialist",
+      "description": "Designs measurable workplace learning systems from verified capability gaps, learner context, practice needs, and transfer conditions. Use for curricula, learning paths, enablement programs, and evaluation planning.",
+      "category": "business-operations",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "specification-authoring",
+        "presentation-ops",
+        "spreadsheet-ops",
+        "data-organization-system"
+      ],
+      "tags": [
+        "learning-development",
+        "instructional-design",
+        "capability-building",
+        "learning-evaluation"
+      ],
+      "path": "agents/learning-development-specialist.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "specialized/corporate-training-designer.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
+      }
+    },
+    {
       "id": "legacy-modernizer",
       "name": "legacy-modernizer",
       "role": "legacy-modernizer",
@@ -2492,6 +2814,38 @@
           "plugins/reverse-engineering/agents/malware-analyst.md"
         ],
         "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+      }
+    },
+    {
+      "id": "market-researcher",
+      "name": "market-researcher",
+      "role": "market-researcher",
+      "description": "Researches market structure, customers, demand signals, segments, trends, and opportunity size using dated, attributable evidence. Use when a business decision needs more than general web search or startup speculation.",
+      "category": "research",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "web-research-ops",
+        "spreadsheet-ops",
+        "data-organization-system",
+        "summary-ops"
+      ],
+      "tags": [
+        "market-research",
+        "segmentation",
+        "market-sizing",
+        "demand-analysis"
+      ],
+      "path": "agents/market-researcher.md",
+      "references": {
+        "repo": "VoltAgent/awesome-claude-code-subagents",
+        "paths": [
+          "categories/10-research-analysis/market-researcher.md"
+        ],
+        "tree": "9c98eac2f7463c79ebb7b914432ace7dbd3bfeaa"
       }
     },
     {
@@ -2881,6 +3235,38 @@
       }
     },
     {
+      "id": "operations-manager",
+      "name": "operations-manager",
+      "role": "operations-manager",
+      "description": "Diagnoses and improves recurring business operations across demand, capacity, handoffs, controls, service levels, and exception handling. Use when a team needs a measurable operating rhythm or a safer process improvement plan.",
+      "category": "business-operations",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "data-organization-system",
+        "spreadsheet-ops",
+        "specification-authoring",
+        "agent-action-governance"
+      ],
+      "tags": [
+        "operations-management",
+        "process-improvement",
+        "capacity",
+        "service-levels"
+      ],
+      "path": "agents/operations-manager.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "specialized/operations-manager.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
+      }
+    },
+    {
       "id": "orchestrate",
       "name": "orchestrate",
       "role": "orchestrate",
@@ -2942,6 +3328,70 @@
           "paid-media/paid-media-auditor.md"
         ],
         "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
+      }
+    },
+    {
+      "id": "partnership-manager",
+      "name": "partnership-manager",
+      "role": "partnership-manager",
+      "description": "Designs evidence-backed partner strategies, value exchanges, pilots, governance, and exit criteria. Use when an ecosystem relationship must create measurable value without unapproved commitments.",
+      "category": "business-operations",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "web-research-ops",
+        "data-organization-system",
+        "spreadsheet-ops",
+        "specification-authoring"
+      ],
+      "tags": [
+        "partnerships",
+        "ecosystem-strategy",
+        "partner-governance",
+        "joint-value"
+      ],
+      "path": "agents/partnership-manager.md",
+      "references": {
+        "repo": "github/awesome-copilot",
+        "paths": [
+          "skills/gtm-partnership-architecture/SKILL.md"
+        ],
+        "tree": "b36521f664a175a1ab32b4e5c8d75f0435d32ccc"
+      }
+    },
+    {
+      "id": "patient-safety-officer",
+      "name": "patient-safety-officer",
+      "role": "patient-safety-officer",
+      "description": "Structures evidence-preserving review of patient-safety events, contributing systems, failed barriers, corrective actions, and learning measures. Use after immediate clinical needs are under authorized care.",
+      "category": "healthcare",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "web-research-ops",
+        "incident-response-postmortems",
+        "spreadsheet-ops",
+        "specification-authoring"
+      ],
+      "tags": [
+        "patient-safety",
+        "event-review",
+        "root-cause-analysis",
+        "corrective-action"
+      ],
+      "path": "agents/patient-safety-officer.md",
+      "references": {
+        "repo": "ajhcs/healthcare-agents",
+        "paths": [
+          "agents/quality-patient-safety-officer.md"
+        ],
+        "tree": "bd6779b40f257c44700383f2ad806b07b6e2d3c0"
       }
     },
     {
@@ -3202,6 +3652,102 @@
           "categories/02-language-specialists/powershell-7-expert.md"
         ],
         "tree": "9c98eac2f7463c79ebb7b914432ace7dbd3bfeaa"
+      }
+    },
+    {
+      "id": "pricing-strategist",
+      "name": "pricing-strategist",
+      "role": "pricing-strategist",
+      "description": "Evaluates pricing, packaging, value metrics, discounts, and change scenarios from customer, market, cost, and unit-economic evidence. Use when pricing needs a governed decision rather than an unsupported number.",
+      "category": "business-operations",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "spreadsheet-ops",
+        "web-research-ops",
+        "data-organization-system",
+        "specification-authoring"
+      ],
+      "tags": [
+        "pricing",
+        "packaging",
+        "unit-economics",
+        "monetization"
+      ],
+      "path": "agents/pricing-strategist.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "specialized/specialized-pricing-analyst.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
+      }
+    },
+    {
+      "id": "privacy-engineer",
+      "name": "privacy-engineer",
+      "role": "privacy-engineer",
+      "description": "Designs and reviews verifiable privacy controls across data collection, use, sharing, retention, deletion, and subject-right workflows. Use when approved privacy requirements must become technical safeguards, not legal conclusions.",
+      "category": "security",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "web-research-ops",
+        "threat-modeling",
+        "security-code-review",
+        "specification-authoring"
+      ],
+      "tags": [
+        "privacy-engineering",
+        "privacy-by-design",
+        "data-protection",
+        "data-lifecycle"
+      ],
+      "path": "agents/privacy-engineer.md",
+      "references": {
+        "repo": "devsforge/marketplace",
+        "paths": [
+          "plugins/agents/data-privacy-engineer/agents/data-privacy-engineer.md"
+        ],
+        "tree": "a9e6d715f983174840f8cfd472f09dfab4776865"
+      }
+    },
+    {
+      "id": "procurement-specialist",
+      "name": "procurement-specialist",
+      "role": "procurement-specialist",
+      "description": "Structures ethical supplier discovery, sourcing, evaluation, total-cost analysis, and approval-ready procurement decisions. Use when a purchase or vendor selection requires evidence, controls, and traceability.",
+      "category": "business-operations",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "web-research-ops",
+        "spreadsheet-ops",
+        "data-organization-system",
+        "agent-action-governance"
+      ],
+      "tags": [
+        "procurement",
+        "strategic-sourcing",
+        "supplier-risk",
+        "total-cost"
+      ],
+      "path": "agents/procurement-specialist.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "specialized/supply-chain-strategist.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
       }
     },
     {
@@ -3519,6 +4065,70 @@
           "plugins/documentation-generation/agents/reference-builder.md"
         ],
         "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+      }
+    },
+    {
+      "id": "release-manager",
+      "name": "release-manager",
+      "role": "release-manager",
+      "description": "Coordinates release scope, readiness evidence, version decisions, communication, approvals, and recovery planning without performing the deployment. Use when multiple changes must become one controlled release.",
+      "category": "project-management",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "git-operations",
+        "github-operations",
+        "deployment-operations",
+        "testing-strategy"
+      ],
+      "tags": [
+        "release-management",
+        "readiness",
+        "changelog",
+        "rollback"
+      ],
+      "path": "agents/release-manager.md",
+      "references": {
+        "repo": "supatest-ai/awesome-claude-code-sub-agents",
+        "paths": [
+          "development-workflows/release-manager.md"
+        ],
+        "tree": "85a5e871e7e9a0c8273698d5b2f8504505d0e1f9"
+      }
+    },
+    {
+      "id": "revenue-operations-analyst",
+      "name": "revenue-operations-analyst",
+      "role": "revenue-operations-analyst",
+      "description": "Analyzes funnel definitions, CRM quality, pipeline health, conversion, velocity, and forecast uncertainty without changing revenue systems. Use for evidence-based RevOps diagnosis and decision support.",
+      "category": "sales",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "spreadsheet-ops",
+        "sql-best-practices",
+        "data-organization-system",
+        "dashboard-design"
+      ],
+      "tags": [
+        "revenue-operations",
+        "pipeline-analysis",
+        "forecasting",
+        "crm-quality"
+      ],
+      "path": "agents/revenue-operations-analyst.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "sales/sales-pipeline-analyst.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
       }
     },
     {
@@ -4673,6 +5283,39 @@
           "plugins/agent-teams/agents/team-reviewer.md"
         ],
         "tree": "2de74ac1c8f6669821dcef13153332c3168033c1"
+      }
+    },
+    {
+      "id": "technical-product-manager",
+      "name": "technical-product-manager",
+      "role": "technical-product-manager",
+      "description": "Defines evidence-backed product direction for APIs, platforms, SDKs, developer tools, and internal infrastructure. Use when product decisions must account for technical contracts, adoption, compatibility, and lifecycle risk.",
+      "category": "product-management",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "api-contract-design",
+        "project-architecture-review",
+        "specification-authoring",
+        "web-research-ops"
+      ],
+      "tags": [
+        "technical-product-management",
+        "platform-products",
+        "developer-experience",
+        "lifecycle"
+      ],
+      "path": "agents/technical-product-manager.md",
+      "references": {
+        "repo": "github/awesome-copilot",
+        "paths": [
+          "agents/se-product-manager-advisor.agent.md",
+          "skills/gtm-technical-product-pricing/SKILL.md"
+        ],
+        "tree": "b36521f664a175a1ab32b4e5c8d75f0435d32ccc"
       }
     },
     {
