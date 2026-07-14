@@ -127,6 +127,48 @@
       "tree": "aa83ac11de689b5d8535dc3cec7d78c1a1e95326",
       "license": "MIT",
       "licensePath": "LICENSE"
+    },
+    {
+      "repo": "taylordrew4u2/Role-Call",
+      "commit": "921e9d94d18dbfee7a7a2580c8f05918daad9c3a",
+      "tree": "14f36218fb2d7da6fe7aa104c3aa0e6775b2aa3d",
+      "license": "MIT",
+      "licensePath": "LICENSE"
+    },
+    {
+      "repo": "ImaniGomez/Scripty",
+      "commit": "b33896cdd4a83bbe8d22a5b65a4a0b0c49bb6857",
+      "tree": "c1443d954102f752542a6b667df61ee8a2f7e485",
+      "license": "MIT",
+      "licensePath": "LICENSE"
+    },
+    {
+      "repo": "travisoberlander/film-production-manager",
+      "commit": "4e61f533b700d12b85e0a95bb8fd5ec85929121c",
+      "tree": "50cd4afa184dd6ece2f25190482a955c5a44617c",
+      "license": "MIT",
+      "licensePath": "LICENSE"
+    },
+    {
+      "repo": "FusinX/DIT_Offload",
+      "commit": "e93cbbfcbb636829e82ae7dcaa2dfb7580fdb028",
+      "tree": "09ca7916c026e3786fb23f22d9839c13bbd97670",
+      "license": "MIT",
+      "licensePath": "LICENSE"
+    },
+    {
+      "repo": "HKUDS/VideoAgent",
+      "commit": "44611659e43628c5eb7f77158b3b94a32bcbb5c5",
+      "tree": "9efe75589ae1fcb3e2c3cc79f11767f599111fae",
+      "license": "MIT",
+      "licensePath": "LICENSE"
+    },
+    {
+      "repo": "video-db/Director",
+      "commit": "70e0b3dfdf59c679a25f4bea511e3cc4c5f2457f",
+      "tree": "795aaa9862440d4a0f2df213116e523feea0d731",
+      "license": "MIT",
+      "licensePath": "LICENSE"
     }
   ]
 }

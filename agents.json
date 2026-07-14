@@ -1,9 +1,9 @@
 {
   "version": "3.0.0",
-  "updated": "2026-07-14T07:14:39.387Z",
-  "total": 228,
+  "updated": "2026-07-14T09:05:30.429Z",
+  "total": 237,
   "categories": 31,
-  "uniqueRoles": 228,
+  "uniqueRoles": 237,
   "agents": [
     {
       "id": "accessibility-expert",
@@ -454,6 +454,41 @@
           "marketing/marketing-linkedin-content-creator.md"
         ],
         "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
+      }
+    },
+    {
+      "id": "audiovisual-localization-producer",
+      "name": "audiovisual-localization-producer",
+      "role": "audiovisual-localization-producer",
+      "description": "Plans and governs language-specific audiovisual versions across translation and adaptation, subtitles, dubbing or voiceover, on-screen graphics, metadata, timing, rights, and qualified review. Use when an approved video needs one or more target-locale versions beyond same-language captions or software-interface localization.",
+      "category": "media-production",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "video-production-workflow",
+        "data-organization-system",
+        "subtitle-captions",
+        "audio-transcription",
+        "text-to-speech"
+      ],
+      "tags": [
+        "audiovisual-localization",
+        "language-versioning",
+        "subtitle-localization",
+        "dubbing-coordination",
+        "linguistic-quality"
+      ],
+      "path": "agents/audiovisual-localization-producer.md",
+      "references": {
+        "repo": "video-db/Director",
+        "paths": [
+          "backend/director/agents/dubbing.py",
+          "backend/director/agents/voice_replacement.py"
+        ],
+        "tree": "795aaa9862440d4a0f2df213116e523feea0d731"
       }
     },
     {
@@ -966,6 +1001,40 @@
           "plugins/c4-architecture/agents/c4-context.md"
         ],
         "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
+      }
+    },
+    {
+      "id": "casting-director",
+      "name": "casting-director",
+      "role": "casting-director",
+      "description": "Turns approved character and performance requirements plus authorized submissions into a traceable, human-reviewed casting shortlist with availability, consent, and rights status. Use when live-action, voice, avatar, or performance-led production needs structured casting evidence without delegating final employment, contract, or likeness decisions to AI.",
+      "category": "media-production",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "video-production-workflow",
+        "web-research-ops",
+        "audio-transcription",
+        "spreadsheet-ops",
+        "agent-action-governance"
+      ],
+      "tags": [
+        "casting",
+        "audition-evaluation",
+        "talent-shortlisting",
+        "performer-consent",
+        "likeness-rights"
+      ],
+      "path": "agents/casting-director.md",
+      "references": {
+        "repo": "taylordrew4u2/Role-Call",
+        "paths": [
+          "components/CastBoard.tsx"
+        ],
+        "tree": "14f36218fb2d7da6fe7aa104c3aa0e6775b2aa3d"
       }
     },
     {
@@ -2765,6 +2834,41 @@
       }
     },
     {
+      "id": "first-assistant-director",
+      "name": "first-assistant-director",
+      "role": "first-assistant-director",
+      "description": "Converts approved script, shot, location, cast, department, budget, labor, and safety inputs into an executable shooting schedule, daily call package, and evidence-backed progress record. Use for live-action or coordinated capture where one operational owner must sequence production without taking creative, financial, or specialist-safety authority.",
+      "category": "media-production",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "video-production-workflow",
+        "spreadsheet-ops",
+        "data-organization-system",
+        "context-governance",
+        "agent-action-governance"
+      ],
+      "tags": [
+        "assistant-direction",
+        "shooting-schedule",
+        "call-sheets",
+        "set-coordination",
+        "production-reporting"
+      ],
+      "path": "agents/first-assistant-director.md",
+      "references": {
+        "repo": "taylordrew4u2/Role-Call",
+        "paths": [
+          "lib/guides.ts",
+          "components/ScheduleBoard.tsx"
+        ],
+        "tree": "14f36218fb2d7da6fe7aa104c3aa0e6775b2aa3d"
+      }
+    },
+    {
       "id": "flutter-expert",
       "name": "flutter-expert",
       "role": "flutter-expert",
@@ -3734,6 +3838,40 @@
       }
     },
     {
+      "id": "location-manager",
+      "name": "location-manager",
+      "role": "location-manager",
+      "description": "Researches and verifies real-world filming locations against approved creative, camera, sound, access, budget, permit, rights, safety, and restoration requirements. Use for live-action or hybrid shoots that need an accountable location dossier and operational handoff rather than generated-environment design.",
+      "category": "media-production",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "video-production-workflow",
+        "web-research-ops",
+        "spreadsheet-ops",
+        "data-organization-system",
+        "agent-action-governance"
+      ],
+      "tags": [
+        "location-management",
+        "location-scouting",
+        "filming-permits",
+        "site-logistics",
+        "location-restoration"
+      ],
+      "path": "agents/location-manager.md",
+      "references": {
+        "repo": "taylordrew4u2/Role-Call",
+        "paths": [
+          "components/LocationsBoard.tsx"
+        ],
+        "tree": "14f36218fb2d7da6fe7aa104c3aa0e6775b2aa3d"
+      }
+    },
+    {
       "id": "malware-analyst",
       "name": "malware-analyst",
       "role": "malware-analyst",
@@ -3859,6 +3997,111 @@
           "categories/06-developer-experience/mcp-developer.md"
         ],
         "tree": "9c98eac2f7463c79ebb7b914432ace7dbd3bfeaa"
+      }
+    },
+    {
+      "id": "media-accessibility-producer",
+      "name": "media-accessibility-producer",
+      "role": "media-accessibility-producer",
+      "description": "Plans and verifies accessible audiovisual alternatives across captions, descriptive transcripts, audio description, sign-language versions, sensory-safe presentation, and accessible playback requirements. Use from brief or script stage when a video needs an end-to-end accessibility plan beyond interface auditing or caption-file creation.",
+      "category": "media-production",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "video-production-workflow",
+        "subtitle-captions",
+        "audio-transcription",
+        "text-to-speech",
+        "accessibility-testing"
+      ],
+      "tags": [
+        "media-accessibility",
+        "captions",
+        "audio-description",
+        "descriptive-transcripts",
+        "accessible-playback"
+      ],
+      "path": "agents/media-accessibility-producer.md",
+      "references": {
+        "repo": "video-db/Director",
+        "paths": [
+          "backend/director/agents/subtitle.py",
+          "backend/director/agents/transcription.py"
+        ],
+        "tree": "795aaa9862440d4a0f2df213116e523feea0d731"
+      }
+    },
+    {
+      "id": "media-ingest-manager",
+      "name": "media-ingest-manager",
+      "role": "media-ingest-manager",
+      "description": "Ingests and verifies camera, audio, graphics, generated clips, and sidecar metadata into a checksum-backed, non-destructive media inventory with controlled copies, proxies, and handoff receipts. Use when production media needs dedicated custody between capture or generation and editorial without assigning edit, color, rights, or final-mastering decisions.",
+      "category": "media-production",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "video-production-workflow",
+        "terminal-ops",
+        "video-edit",
+        "data-organization-system",
+        "file-organizer"
+      ],
+      "tags": [
+        "media-ingest",
+        "checksum-verification",
+        "media-provenance",
+        "proxy-workflow",
+        "editorial-handoff"
+      ],
+      "path": "agents/media-ingest-manager.md",
+      "references": {
+        "repo": "FusinX/DIT_Offload",
+        "paths": [
+          "README.md",
+          "dit_offload.py"
+        ],
+        "tree": "09ca7916c026e3786fb23f22d9839c13bbd97670"
+      }
+    },
+    {
+      "id": "media-library-researcher",
+      "name": "media-library-researcher",
+      "role": "media-library-researcher",
+      "description": "Researches production-ready footage, images, audio, archive, stock, and reference assets against an approved media brief, producing an attributable shortlist with current rights, cost, availability, technical, and creative-fit evidence. Use before acquisition when a production needs real asset candidates rather than general web facts or visual inspiration.",
+      "category": "media-production",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "video-production-workflow",
+        "web-research-ops",
+        "agent-reach-ops",
+        "data-organization-system",
+        "agent-action-governance"
+      ],
+      "tags": [
+        "media-research",
+        "stock-and-archive",
+        "asset-provenance",
+        "licensing-evidence",
+        "production-sourcing"
+      ],
+      "path": "agents/media-library-researcher.md",
+      "references": {
+        "repo": "HKUDS/VideoAgent",
+        "paths": [
+          "environment/roles/vid_searcher.py",
+          "environment/roles/vid_preloader.py"
+        ],
+        "tree": "9efe75589ae1fcb3e2c3cc79f11767f599111fae"
       }
     },
     {
@@ -4996,6 +5239,40 @@
       }
     },
     {
+      "id": "production-sound-mixer",
+      "name": "production-sound-mixer",
+      "role": "production-sound-mixer",
+      "description": "Plans and verifies the acquisition of synchronized production dialogue, room tone, ambience, and wild sound with take-level metadata and quality evidence. Use for live-action or hybrid capture that needs a dedicated production-audio owner before post-production sound design and mixing.",
+      "category": "media-production",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "video-production-workflow",
+        "audio-transcription",
+        "video-edit",
+        "terminal-ops",
+        "data-organization-system"
+      ],
+      "tags": [
+        "production-sound",
+        "sync-audio",
+        "dialogue-capture",
+        "audio-metadata",
+        "sound-reports"
+      ],
+      "path": "agents/production-sound-mixer.md",
+      "references": {
+        "repo": "travisoberlander/film-production-manager",
+        "paths": [
+          "references/production.md"
+        ],
+        "tree": "50cd4afa184dd6ece2f25190482a955c5a44617c"
+      }
+    },
+    {
       "id": "project-manager",
       "name": "project-manager",
       "role": "project-manager",
@@ -5728,6 +6005,42 @@
           "agents/screenwriter.py"
         ],
         "tree": "9a1516e9d53758b75e9a48a40cb91e4a18554241"
+      }
+    },
+    {
+      "id": "script-supervisor",
+      "name": "script-supervisor",
+      "role": "script-supervisor",
+      "description": "Tracks take-level script, dialogue, action, timing, coverage, slate, and approved deviations during production, producing editor-ready records without replacing the screenplay, visual continuity baseline, or edit. Use when filmed or generated shot execution needs a dedicated owner for what was actually captured and whether planned coverage remains complete.",
+      "category": "media-production",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "video-production-workflow",
+        "storyboard-creation",
+        "audio-transcription",
+        "video-edit",
+        "data-organization-system"
+      ],
+      "tags": [
+        "script-supervision",
+        "take-logging",
+        "coverage-tracking",
+        "dialogue-continuity",
+        "editorial-handoff"
+      ],
+      "path": "agents/script-supervisor.md",
+      "references": {
+        "repo": "ImaniGomez/Scripty",
+        "paths": [
+          "README.md",
+          "db.mjs",
+          "views/day.hbs"
+        ],
+        "tree": "c1443d954102f752542a6b667df61ee8a2f7e485"
       }
     },
     {

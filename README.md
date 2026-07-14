@@ -3,7 +3,7 @@
 [![Validate](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/actions/workflows/validate.yml/badge.svg)](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/actions/workflows/validate.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 ![Skills](https://img.shields.io/badge/Skills-189-7c3aed)
-![Agents](https://img.shields.io/badge/Agents-228-2563eb)
+![Agents](https://img.shields.io/badge/Agents-237-2563eb)
 ![Node.js](https://img.shields.io/badge/Node.js-%3E%3D16-339933?logo=nodedotjs&logoColor=white)
 
 由 **HsinPu** 維護的開源 AI Agent 與 Skill catalog，提供可直接安裝的 Codex、Claude Code、Cursor、VS Code／GitHub Copilot、OpenCode Agents 與 Skills，並包含安全更新機制及本機 catalog 查詢 CLI。
@@ -49,7 +49,7 @@ Linux／macOS：
 curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type skill && curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type agent --enable-auto-delegation
 ```
 
-這組命令會安裝全部 189 個 Skills、228 個 Agents，並啟用不依賴專案 `AGENTS.md` 的全域主動委派。
+這組命令會安裝全部 189 個 Skills、237 個 Agents，並啟用不依賴專案 `AGENTS.md` 的全域主動委派。
 
 ### 只安裝全部 Skills
 
@@ -146,22 +146,26 @@ curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/ma
 | 類型 | 數量 | 用途 | Canonical source |
 |---|---:|---|---|
 | Skills | **189 Skills**／7 類 | 可重複使用的工作流程、規範、工具指引與領域知識 | `skills/<name>/SKILL.md` |
-| Agents | 228／31 類 | 可委派的專業角色，包含任務、限制、權限與輸出契約 | `agents/<role>.md` |
-| Codex adapters | 228 | Codex custom Agent 的 TOML 設定 | `adapters/codex/<role>.toml` |
-| Claude adapters | 228 | Claude Code subagent 的 Markdown 設定 | `adapters/claude/<role>.md` |
-| Cursor adapters | 228 | Cursor subagent 的 Markdown 設定 | `adapters/cursor/<role>.md` |
-| Copilot adapters | 228 | VS Code／GitHub Copilot custom Agent 設定 | `adapters/copilot/<role>.agent.md` |
-| OpenCode adapters | 228 | OpenCode `mode: subagent` 的 Markdown 設定 | `adapters/opencode/<role>.md` |
+| Agents | 237／31 類 | 可委派的專業角色，包含任務、限制、權限與輸出契約 | `agents/<role>.md` |
+| Codex adapters | 237 | Codex custom Agent 的 TOML 設定 | `adapters/codex/<role>.toml` |
+| Claude adapters | 237 | Claude Code subagent 的 Markdown 設定 | `adapters/claude/<role>.md` |
+| Cursor adapters | 237 | Cursor subagent 的 Markdown 設定 | `adapters/cursor/<role>.md` |
+| Copilot adapters | 237 | VS Code／GitHub Copilot custom Agent 設定 | `adapters/copilot/<role>.agent.md` |
+| OpenCode adapters | 237 | OpenCode `mode: subagent` 的 Markdown 設定 | `adapters/opencode/<role>.md` |
 | wshobson reference ledger | 199 definitions | 保存原始角色集合的 reference path 與合併追蹤資料 | `scripts/data/wshobson-agent-inventory.json` |
-| Additional Agent references | 115 paths／17 repositories | 保存在各 canonical Agent 的 `reference-*` metadata | `agents/<role>.md` |
+| All pinned Agent references | 329 paths／24 repositories | 由 manifest 與原創性審計核對固定 commit、tree、路徑與內容 | `scripts/data/agent-reference-sources.json` |
+| Additional Agent references | 131 paths／23 repositories | 保存在各 canonical Agent 的 `reference-*` metadata | `agents/<role>.md` |
 
 各 adapter 會把 canonical `read-only`／`workspace-write` 權限轉成平台可理解的設定。例如 OpenCode 的唯讀角色會設定 `edit: deny` 與 `bash: deny`；Copilot 的唯讀角色只開放 `read`、`search`、`web`、`agent` tools。
 
 <!-- AGENT_COUNT_START -->
-目前共收錄 **228** 個不重複 Agents。
+目前共收錄 **237** 個不重複 Agents。
 <!-- AGENT_COUNT_END -->
 
-`wshobson/agents` ledger 的 199 份 definitions 內含 65 份同名角色變體，共形成 134 個上游角色名稱。內容級覆核後，198 份通用 definitions 對應 132 個 independently rewritten canonical Agents；RunAPI 的產品專屬 `task-executor` 則保留在 ledger 並明確標記為 `excluded`。另外 96 個 Agents 來自其餘十七個 reference repositories，加入前同樣會先比對名稱、職責邊界與 prompt 內容。
+`wshobson/agents` ledger 的 199 份 definitions 內含 65 份同名角色變體，共形成 134 個上游角色名稱。內容級覆核後，198 份通用 definitions 對應 132 個 independently rewritten canonical Agents；RunAPI 的產品專屬 `task-executor` 則保留在 ledger 並明確標記為 `excluded`。另外 105 個 Agents 來自其餘 23 個 reference repositories，加入前同樣會先比對名稱、職責邊界與 prompt 內容。
+
+> [!NOTE]
+> 角色目錄已依 [Agent Coverage Matrix](docs/agent-coverage-matrix.md) 在本專案宣告的通用 AI、軟體、商務、營運、內容與媒體製作 scope 內完成 31／31 類核心責任鏈覆蓋；`npm run validate` 會確認每一類的核心工作、代表 Agent、handoff 與權限邊界仍完整。這代表常見工作都有可路由的責任 owner，不代表收錄現實世界的每個職稱。後續只有在真實需求同時具有獨立 routing trigger、決策權與 durable artifact，且不能由現有 Agent 搭配 Skill 安全完成時，才新增角色；provider、工具、格式步驟與依法必須由合格真人承擔的工作不為了數量轉成 Agent。
 
 ### Agent 與 Skill 的差別
 
@@ -349,10 +353,10 @@ CLI 只列出同時具有 adapter 與有效 Autoverse ownership sidecar 的檔�
 `video-production-workflow` 是一套工具中立、具審批閘門且可恢復執行的完整影片流程。它不綁定特定生成模型或剪輯器；可以由一個 Agent 依序執行，也可以由 `video-director` 統籌多個專業角色。
 
 ```text
-brief → creative treatment → script → storyboard／shot list
-      → production design／camera-lighting／sound／music／VFX／motion graphics／continuity／production plan
-      → assets → edit／picture lock → VFX／graphics／sound／music／color finishing
-      → review／mastering／delivery manifest
+brief／media research → creative treatment → script → storyboard／shot list
+      → casting／location → production design／camera-lighting／sound／continuity／shooting plan
+      → capture／take log／ingest → edit／picture lock → VFX／graphics／music／sound／color
+      → localization／accessibility → review／mastering／delivery manifest
 ```
 
 | 角色 | 主要責任 | 何時加入 |
@@ -360,10 +364,17 @@ brief → creative treatment → script → storyboard／shot list
 | `video-director` | 統籌創意、角色路由、階段閘門、修改仲裁與最終審查 | 完整影片專案的預設入口 |
 | `video-producer` | 排程、預算、權利、供應商、素材與 checkpoint 狀態 | 有外部素材、付費生成、多人或交期限制時 |
 | `creative-director` | 跨媒介創意願景、品牌一致性與設計到製作的交接 | 網站、品牌、活動與影片需要共用創意方向時 |
+| `media-library-researcher` | 具來源、權利、成本、可用性與技術證據的可製作素材候選；不採購或下載 | 需要 stock、archive、既有素材庫或多來源選材時 |
 | `screenwriter` | 故事結構、可拍攝場景、動作、對白／旁白與改稿 | 需要敘事腳本或長短篇改編時 |
 | `storyboard-artist` | 分鏡、shot list、鏡位、運鏡、節奏與場面調度 | 腳本核准後、產生或拍攝素材前 |
+| `casting-director` | 角色 breakdown、授權 audition 證據、公平評估、shortlist、consent 與 likeness rights 狀態 | 真人、配音、avatar 或表演導向製作；最終聘用與合約由人類決定 |
+| `location-manager` | 實景候選、recce、permit／access、物流、限制、condition 與 restoration | live-action 或 hybrid 製作需要真實場地時 |
 | `production-designer` | 場景、環境、道具、服裝、材質、標示與可製作的視覺世界規格 | 世界觀、品牌場景或大量資產需要一致設計時 |
 | `cinematographer` | 鏡頭、焦段、運鏡、對焦、燈光、曝光、拍攝／render 規格與影像技術審查 | 攝影、燈光、renderer 或多 setup 執行複雜時 |
+| `first-assistant-director` | shooting schedule、call package、部門 readiness、coverage progress 與 daily report | live-action、多部門或拍攝日程複雜時；現場安全權限仍屬合格真人 |
+| `script-supervisor` | take-level 劇本、對白、動作、slate、偏離與實際 coverage 記錄 | 需要精確銜接拍攝與剪輯，或生成版本很多時 |
+| `production-sound-mixer` | 現場對白、room tone、wild track、sync、channel／take metadata 與收音品質證據 | 真人對白、同期錄音或 hybrid capture 時 |
+| `media-ingest-manager` | source custody、verified copies、checksum、proxy／dailies lineage、quarantine 與 handoff | 大量實拍、錄音、生成素材或來源不可遺失時 |
 | `visual-continuity-supervisor` | 角色、服裝、產品、道具、場景、時間與畫面狀態連續性 | 多鏡頭、跨場景或生成內容容易漂移時 |
 | `vfx-supervisor` | VFX shot breakdown、plates／camera data、tracking、roto、keying、cleanup、CG／simulation、compositing 與 final-pixel QC | 畫面需要融合、追蹤、移除、延伸、模擬或多層合成時 |
 | `motion-graphics-designer` | 標題、lower thirds、callouts、圖表、diagram、UI 動畫、kinetic type、元件與 graphics render contract | 品牌動畫、資訊圖形、跨比例圖卡或大量動態文字時 |
@@ -371,13 +382,15 @@ brief → creative treatment → script → storyboard／shot list
 | `sound-designer` | 對白、旁白、環境、foley、音效、音樂關係、cue、stem、mix 與聲音 QC | 聲音來源多、需生成／錄製、混音或 loudness 管理時 |
 | `video-editor` | 素材選擇、timeline、節奏、音畫同步、字幕／圖卡、版本化 cut 與交付 QC | 多素材、反覆修改、長篇或交付規格複雜時 |
 | `colorist` | conform、color management、look、shot matching、HDR／SDR trims、scopes 與 color QC | picture lock 後需要一致調色、品牌／產品色準或多顯示目標時 |
+| `audiovisual-localization-producer` | locale matrix、翻譯 context、字幕、配音／voiceover、圖形、metadata、權利與 qualified linguistic review | 多語版本、dubbing 或語系專屬交付時 |
+| `media-accessibility-producer` | captions、descriptive transcript、audio description、sign-language、sensory-safe 與 accessible playback 的整體規劃與驗證 | 需要超出單一字幕檔的媒體無障礙責任時 |
 | `delivery-mastering-specialist` | 鎖版來源的 delivery matrix、variants、transcode、音軌／字幕 mapping、metadata、checksum 與技術 QC | 多平台、多語言、正式母版或客戶規格複雜時；不負責發布 |
 
-執行模式依專案大小調整：短片可由 `video-director` 單獨依序完成；一般專案由導演搭配製片，再按需要加入編劇、分鏡、continuity、聲音與剪輯。`media-production` 目前有 14 個不重複角色；VFX、motion graphics、music supervision、color 與 delivery mastering 都是按需求加入的 finishing specialists，不應為了湊齊團隊而全開。只有品牌活動或跨媒介創意系統才額外加入 `creative-director`。若目前工具不支援 subagent，主 Agent 仍會依相同階段、產物與審批點逐步執行，不會跳過治理要求。
+執行模式依專案大小調整：短片可由 `video-director` 單獨依序完成；一般專案由導演搭配製片，再按需要加入編劇、分鏡、continuity、聲音與剪輯。`media-production` 目前有 23 個不重複角色；casting、location、assistant direction、script supervision、production sound 與 ingest 只在 live-action 或 source-heavy 製作加入，localization 與 accessibility 則依語系與受眾要求加入。VFX、motion graphics、music supervision、color 與 delivery mastering 仍是按需求加入的 finishing specialists，不應為了湊齊團隊而全開。只有品牌活動或跨媒介創意系統才額外加入 `creative-director`。若目前工具不支援 subagent，主 Agent 仍會依相同階段、產物與審批點逐步執行，不會跳過治理要求。
 
-新專案可從 [`skills/video-production-workflow/assets/project-template`](skills/video-production-workflow/assets/project-template) 複製完整模板，預設工作目錄為 `video-projects/<project-id>/`。模板包含 brief、treatment、script、shot、production design、camera-lighting、sound、music、VFX、motion graphics、素材、edit、color finishing、review 與 delivery manifest 契約；每份 artifact 都有版本、owner、輸入、決策與核准狀態，方便中斷後從第一個未驗證階段繼續。
+新專案可從 [`skills/video-production-workflow/assets/project-template`](skills/video-production-workflow/assets/project-template) 複製完整模板，預設工作目錄為 `video-projects/<project-id>/`。模板涵蓋 brief、treatment、script、shot、casting、location、production design、camera-lighting、shooting、take log、production sound、ingest、media shortlist、sound、music、VFX、motion graphics、素材、edit、color、localization、accessibility、review 與 delivery manifest；每份 artifact 都有版本、owner、輸入、決策與核准狀態，方便中斷後從第一個未驗證階段繼續。
 
-以下節點必須明確核准：creative treatment、script、storyboard 與適用的 production-design／camera-lighting／sound／music／VFX／motion-graphics／continuity／production plans、付費或大量生成、會改變成本／權利／隱私的 provider 替換、picture lock、音樂承諾與 clearance、finishing lock、delivery manifest，以及最終 render／發布。前一階段的核准不會自動授權後續外部操作。
+以下節點必須明確核准：creative treatment、script、storyboard、casting 與真人最終選擇、location／permit、適用的 production-design／camera-lighting／production-sound／sound／music／VFX／motion-graphics／continuity／shooting／ingest／production plans、付費或大量生成、外部聯絡、source erasure、會改變成本／權利／隱私的 provider 替換、picture lock、音樂承諾與 clearance、每個 locale 的 qualified review、accessible alternatives、finishing lock、delivery manifest，以及最終 render／發布。前一階段的核准不會自動授權後續外部操作。
 
 可直接這樣要求主 Agent：
 
@@ -433,7 +446,7 @@ Catalog 來源分別是 [skills.json](skills.json) 與 [agents.json](agents.json
 每個 Agent 都有唯一 role、清楚的使用時機、權限模式、相關 Skills，以及固定的 `Role → Task → Constraints → Output` prompt 結構。完整 metadata 以 [agents.json](agents.json) 為準。
 
 <details>
-<summary><strong>展開 31 類、228 個 Agents 的完整索引</strong></summary>
+<summary><strong>展開 31 類、237 個 Agents 的完整索引</strong></summary>
 
 <!-- AGENT_SUMMARY_START -->
 | Category | Count | Agents |
@@ -456,7 +469,7 @@ Catalog 來源分別是 [skills.json](skills.json) 與 [agents.json](agents.json
 | `healthcare` | 6 | [`clinical-data-manager`](agents/clinical-data-manager.md), [`clinical-evidence-reviewer`](agents/clinical-evidence-reviewer.md), [`emergency-preparedness-coordinator`](agents/emergency-preparedness-coordinator.md), [`health-information-manager`](agents/health-information-manager.md), [`healthcare-compliance-specialist`](agents/healthcare-compliance-specialist.md), [`patient-safety-officer`](agents/patient-safety-officer.md) |
 | `machine-learning` | 3 | [`ml-engineer`](agents/ml-engineer.md), [`mlops-engineer`](agents/mlops-engineer.md), [`model-validation-specialist`](agents/model-validation-specialist.md) |
 | `marketing` | 13 | [`content-marketer`](agents/content-marketer.md), [`marketing-measurement-specialist`](agents/marketing-measurement-specialist.md), [`paid-media-auditor`](agents/paid-media-auditor.md), [`seo-authority-builder`](agents/seo-authority-builder.md), [`seo-cannibalization-detector`](agents/seo-cannibalization-detector.md), [`seo-content-auditor`](agents/seo-content-auditor.md), [`seo-content-planner`](agents/seo-content-planner.md), [`seo-content-refresher`](agents/seo-content-refresher.md), [`seo-content-writer`](agents/seo-content-writer.md), [`seo-keyword-strategist`](agents/seo-keyword-strategist.md), [`seo-meta-optimizer`](agents/seo-meta-optimizer.md), [`seo-snippet-hunter`](agents/seo-snippet-hunter.md), [`social-publishing-publisher`](agents/social-publishing-publisher.md) |
-| `media-production` | 14 | [`cinematographer`](agents/cinematographer.md), [`colorist`](agents/colorist.md), [`delivery-mastering-specialist`](agents/delivery-mastering-specialist.md), [`motion-graphics-designer`](agents/motion-graphics-designer.md), [`music-supervisor`](agents/music-supervisor.md), [`production-designer`](agents/production-designer.md), [`screenwriter`](agents/screenwriter.md), [`sound-designer`](agents/sound-designer.md), [`storyboard-artist`](agents/storyboard-artist.md), [`vfx-supervisor`](agents/vfx-supervisor.md), [`video-director`](agents/video-director.md), [`video-editor`](agents/video-editor.md), [`video-producer`](agents/video-producer.md), [`visual-continuity-supervisor`](agents/visual-continuity-supervisor.md) |
+| `media-production` | 23 | [`audiovisual-localization-producer`](agents/audiovisual-localization-producer.md), [`casting-director`](agents/casting-director.md), [`cinematographer`](agents/cinematographer.md), [`colorist`](agents/colorist.md), [`delivery-mastering-specialist`](agents/delivery-mastering-specialist.md), [`first-assistant-director`](agents/first-assistant-director.md), [`location-manager`](agents/location-manager.md), [`media-accessibility-producer`](agents/media-accessibility-producer.md), [`media-ingest-manager`](agents/media-ingest-manager.md), [`media-library-researcher`](agents/media-library-researcher.md), [`motion-graphics-designer`](agents/motion-graphics-designer.md), [`music-supervisor`](agents/music-supervisor.md), [`production-designer`](agents/production-designer.md), [`production-sound-mixer`](agents/production-sound-mixer.md), [`screenwriter`](agents/screenwriter.md), [`script-supervisor`](agents/script-supervisor.md), [`sound-designer`](agents/sound-designer.md), [`storyboard-artist`](agents/storyboard-artist.md), [`vfx-supervisor`](agents/vfx-supervisor.md), [`video-director`](agents/video-director.md), [`video-editor`](agents/video-editor.md), [`video-producer`](agents/video-producer.md), [`visual-continuity-supervisor`](agents/visual-continuity-supervisor.md) |
 | `operations` | 11 | [`chaos-engineer`](agents/chaos-engineer.md), [`deploy-with-verification`](agents/deploy-with-verification.md), [`deployment-engineer`](agents/deployment-engineer.md), [`devops-troubleshooter`](agents/devops-troubleshooter.md), [`error-detective`](agents/error-detective.md), [`incident-responder`](agents/incident-responder.md), [`it-service-manager`](agents/it-service-manager.md), [`mobile-release-engineer`](agents/mobile-release-engineer.md), [`observability-engineer`](agents/observability-engineer.md), [`prod-logs-health-check`](agents/prod-logs-health-check.md), [`sre-engineer`](agents/sre-engineer.md) |
 | `orchestration` | 9 | [`conductor-validator`](agents/conductor-validator.md), [`context-manager`](agents/context-manager.md), [`implement`](agents/implement.md), [`orchestrate`](agents/orchestrate.md), [`session-end`](agents/session-end.md), [`session-start`](agents/session-start.md), [`team-debugger`](agents/team-debugger.md), [`team-implementer`](agents/team-implementer.md), [`team-lead`](agents/team-lead.md) |
 | `performance` | 2 | [`database-optimizer`](agents/database-optimizer.md), [`performance-engineer`](agents/performance-engineer.md) |
@@ -586,11 +599,11 @@ npm pack --dry-run
 - 所有 Agents 與 Skills 的正式 `source` 都是 `HsinPu/Autoverse-Ai-Agent-Skills`，作者為 HsinPu。
 - 外部專案只作為研究、coverage 與設計參考；Agents 使用 `reference-repo`、`reference-paths`、`reference-tree`，Skills 使用 `reference-source`、`reference-license` 獨立記錄，不取代本專案的正式來源。
 - Agent reference repository 的 pinned commit、實際 Git tree、license identifier 與 license path 集中保存在 [agent-reference-sources.json](scripts/data/agent-reference-sources.json)。CI 會向 GitHub 重新驗證 commit → tree 關係、每個 reference path，以及授權檔內容。
-- Agent catalog 參考 [wshobson/agents](https://github.com/wshobson/agents)、[msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents)、[VoltAgent/awesome-claude-code-subagents](https://github.com/VoltAgent/awesome-claude-code-subagents)、[github/awesome-copilot](https://github.com/github/awesome-copilot)、[affaan-m/ECC](https://github.com/affaan-m/ECC)、[supatest-ai/awesome-claude-code-sub-agents](https://github.com/supatest-ai/awesome-claude-code-sub-agents)、[devsforge/marketplace](https://github.com/devsforge/marketplace)、[ajhcs/healthcare-agents](https://github.com/ajhcs/healthcare-agents)、[aws-samples/sample-claude-code-agent-team](https://github.com/aws-samples/sample-claude-code-agent-team)、[DojoCodingLabs/remotion-superpowers](https://github.com/DojoCodingLabs/remotion-superpowers)、[HKUDS/ViMax](https://github.com/HKUDS/ViMax)、[paperclipai/companies](https://github.com/paperclipai/companies)、[HITsz-TMG/AIGC-Claw](https://github.com/HITsz-TMG/AIGC-Claw)、[davila7/claude-code-templates](https://github.com/davila7/claude-code-templates)、[Donchitos/Claude-Code-Game-Studios](https://github.com/Donchitos/Claude-Code-Game-Studios)、[NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent)、[jacobcwright/open-animate](https://github.com/jacobcwright/open-animate) 與 [browser-use/video-use](https://github.com/browser-use/video-use) 的角色定位、路徑與高層責任；prompt 內容均由本專案重新設計與加強，不是原文完整複製。
+- Agent catalog 參考 [wshobson/agents](https://github.com/wshobson/agents)、[msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents)、[VoltAgent/awesome-claude-code-subagents](https://github.com/VoltAgent/awesome-claude-code-subagents)、[github/awesome-copilot](https://github.com/github/awesome-copilot)、[affaan-m/ECC](https://github.com/affaan-m/ECC)、[supatest-ai/awesome-claude-code-sub-agents](https://github.com/supatest-ai/awesome-claude-code-sub-agents)、[devsforge/marketplace](https://github.com/devsforge/marketplace)、[ajhcs/healthcare-agents](https://github.com/ajhcs/healthcare-agents)、[aws-samples/sample-claude-code-agent-team](https://github.com/aws-samples/sample-claude-code-agent-team)、[DojoCodingLabs/remotion-superpowers](https://github.com/DojoCodingLabs/remotion-superpowers)、[HKUDS/ViMax](https://github.com/HKUDS/ViMax)、[paperclipai/companies](https://github.com/paperclipai/companies)、[HITsz-TMG/AIGC-Claw](https://github.com/HITsz-TMG/AIGC-Claw)、[davila7/claude-code-templates](https://github.com/davila7/claude-code-templates)、[Donchitos/Claude-Code-Game-Studios](https://github.com/Donchitos/Claude-Code-Game-Studios)、[NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent)、[jacobcwright/open-animate](https://github.com/jacobcwright/open-animate)、[browser-use/video-use](https://github.com/browser-use/video-use)、[taylordrew4u2/Role-Call](https://github.com/taylordrew4u2/Role-Call)、[ImaniGomez/Scripty](https://github.com/ImaniGomez/Scripty)、[travisoberlander/film-production-manager](https://github.com/travisoberlander/film-production-manager)、[FusinX/DIT_Offload](https://github.com/FusinX/DIT_Offload)、[HKUDS/VideoAgent](https://github.com/HKUDS/VideoAgent) 與 [video-db/Director](https://github.com/video-db/Director) 的角色定位、路徑與高層責任；prompt 內容均由本專案重新設計與加強，不是原文完整複製。
 - 影片工作流另研究 [calesthio/OpenMontage](https://github.com/calesthio/OpenMontage) 的階段化產物與人工核准概念、[showlab/MovieAgent](https://github.com/showlab/MovieAgent) 公開文件中的電影職責分工，以及 Hermes 的 renderer review／conditional role routing、Open Animate 的 motion-graphics lifecycle、video-use 的 overlay／timeline／media-QC 概念。OpenMontage 的 AGPL-3.0 reference metadata 已保留，但不作為 canonical Agent reference；MovieAgent 在採用的 revision 未找到 repository-wide license，因此兩者只使用公開的高層概念，沒有重用程式碼或 prompt 文字。詳細 revision 與改寫邊界記錄在 [`source-notes.md`](skills/video-production-workflow/references/source-notes.md)。
 - 同名或職責相近的上游定義會先依內容合併或排除。`wshobson/agents` 的 199 個 definitions、commit SHA、tree SHA、198 個 canonical mappings 與 1 個明確 exclusion 保存在 [wshobson-agent-inventory.json](scripts/data/wshobson-agent-inventory.json)；其他來源的 repository、path 與 tree SHA 則保存在各 canonical Agent frontmatter。
-- `npm run audit:agent-originality` 會針對 228 個 canonical Agent prompt 與 pinned upstream references 執行逐字重疊檢查；若出現至少 60 個字元的相同行，或 12 個單字的逐字片段，CI 會拒絕通過。這是保護改寫原創性的保守靜態閘門，不等同法律上的相似性判定。
-- Repository 與全部 228 個 Agents 採 Apache-2.0。Skills 的個別授權以各自 `SKILL.md` 與 `skills.json` 為準；目前 188 個為 Apache-2.0，`karpathy-guidelines` 保留 MIT 授權與外部 reference metadata。
+- `npm run audit:agent-originality` 會針對 237 個 canonical Agent prompt 與 pinned upstream references 執行逐字重疊檢查；若出現至少 60 個字元的相同行，或 12 個單字的逐字片段，CI 會拒絕通過。這是保護改寫原創性的保守靜態閘門，不等同法律上的相似性判定。
+- Repository 與全部 237 個 Agents 採 Apache-2.0。Skills 的個別授權以各自 `SKILL.md` 與 `skills.json` 為準；目前 188 個為 Apache-2.0，`karpathy-guidelines` 保留 MIT 授權與外部 reference metadata。
 
 ## 疑難排解
 

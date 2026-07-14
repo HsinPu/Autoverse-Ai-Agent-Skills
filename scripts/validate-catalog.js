@@ -485,6 +485,36 @@ if (inventory) {
 
 if (fs.existsSync(readmePath)) {
   const readme = fs.readFileSync(readmePath, 'utf8');
+  const categoryCount = new Set(agents.map((agent) => agent.category)).size;
+  const allReferenceRepos = new Set();
+  const allReferencePaths = new Set();
+  const additionalReferenceRepos = new Set();
+  const additionalReferencePaths = new Set();
+  let additionalAgentCount = 0;
+  for (const agent of agents) {
+    const repo = agent.references && agent.references.repo;
+    const paths = agent.references && Array.isArray(agent.references.paths) ? agent.references.paths : [];
+    if (!repo) continue;
+    allReferenceRepos.add(repo);
+    for (const referencePath of paths) allReferencePaths.add(`${repo}\0${referencePath}`);
+    if (repo !== 'wshobson/agents') {
+      additionalAgentCount += 1;
+      additionalReferenceRepos.add(repo);
+      for (const referencePath of paths) additionalReferencePaths.add(`${repo}\0${referencePath}`);
+    }
+  }
+  function checkReadmeNumbers(label, pattern, expected) {
+    const match = readme.match(pattern);
+    if (!match) {
+      fail(`README is missing ${label}`);
+      return;
+    }
+    expected.forEach((value, index) => {
+      if (Number(match[index + 1]) !== value) {
+        fail(`README ${label} (${match[index + 1]}) does not match expected value (${value})`);
+      }
+    });
+  }
   const skillCountMatch = readme.match(/\*\*(\d+) Skills\*\*/i);
   if (skillCountMatch && Number(skillCountMatch[1]) !== skills.length) {
     fail(`README skill count (${skillCountMatch[1]}) does not match skills.length (${skills.length})`);
@@ -493,6 +523,35 @@ if (fs.existsSync(readmePath)) {
   if (agentCountMatch && Number(agentCountMatch[1]) !== agents.length) {
     fail(`README Agent count (${agentCountMatch[1]}) does not match agents.length (${agents.length})`);
   }
+  checkReadmeNumbers('Agent badge count', /badge\/Agents-(\d+)-2563eb/, [agents.length]);
+  checkReadmeNumbers('install-all Agent count', /全部 \d+ 個 Skills、(\d+) 個 Agents/, [agents.length]);
+  checkReadmeNumbers('catalog Agent and category counts', /\| Agents \| (\d+)／(\d+) 類 \|/, [agents.length, categoryCount]);
+  for (const adapter of ['Codex', 'Claude', 'Cursor', 'Copilot', 'OpenCode']) {
+    checkReadmeNumbers(`${adapter} adapter count`, new RegExp(`\\| ${adapter} adapters \\| (\\d+) \\|`), [agents.length]);
+  }
+  checkReadmeNumbers(
+    'all Agent reference path and repository counts',
+    /\| All pinned Agent references \| (\d+) paths／(\d+) repositories \|/,
+    [allReferencePaths.size, allReferenceRepos.size]
+  );
+  checkReadmeNumbers(
+    'additional Agent reference path and repository counts',
+    /\| Additional Agent references \| (\d+) paths／(\d+) repositories \|/,
+    [additionalReferencePaths.size, additionalReferenceRepos.size]
+  );
+  checkReadmeNumbers(
+    'additional Agent and repository counts',
+    /另外 (\d+) 個 Agents 來自其餘 (\d+) 個 reference repositories/,
+    [additionalAgentCount, additionalReferenceRepos.size]
+  );
+  checkReadmeNumbers('coverage matrix category counts', /完成 (\d+)／(\d+) 類核心責任鏈覆蓋/, [categoryCount, categoryCount]);
+  checkReadmeNumbers(
+    'expanded index category and Agent counts',
+    /展開 (\d+) 類、(\d+) 個 Agents 的完整索引/,
+    [categoryCount, agents.length]
+  );
+  checkReadmeNumbers('originality audit Agent count', /audit:agent-originality` 會針對 (\d+) 個 canonical Agent prompt/, [agents.length]);
+  checkReadmeNumbers('repository license Agent count', /Repository 與全部 (\d+) 個 Agents 採/, [agents.length]);
 }
 
 if (errors.length > 0) {

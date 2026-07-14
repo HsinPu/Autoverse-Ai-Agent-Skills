@@ -1,0 +1,260 @@
+{
+  "version": "1.0.0",
+  "scope": "General AI, software, business, operations, content, and media-production workflows represented by this catalog. Provider-specific duties, tool-only procedures, and work that legally or safely requires a qualified human remain outside Agent coverage.",
+  "criteria": [
+    "Each catalog category declares the core work it is expected to route.",
+    "Each category names at least two existing representative Agents from that category.",
+    "Each category declares its normal downstream handoff.",
+    "Each category declares a boundary that prevents coverage from being interpreted as unlimited authority."
+  ],
+  "categories": [
+    {
+      "category": "analysis",
+      "status": "covered",
+      "coreWork": "Frame decision questions, analyze quantitative or qualitative evidence, test assumptions, and communicate findings.",
+      "owners": ["business-analyst", "experimentation-methodologist", "quant-analyst"],
+      "handoff": "Evidence, uncertainty, and recommendations pass to strategy, product, finance, or operations owners.",
+      "boundary": "Analysis does not authorize the resulting business, financial, or operational action."
+    },
+    {
+      "category": "architecture",
+      "status": "covered",
+      "coreWork": "Define system boundaries, interfaces, data structures, quality attributes, tradeoffs, and migration direction.",
+      "owners": ["architect", "api-contract-architect", "database-architect", "legacy-modernizer"],
+      "handoff": "Approved decisions and constraints pass to implementation, platform, security, and quality owners.",
+      "boundary": "Architecture proposals do not silently replace product requirements or production approval."
+    },
+    {
+      "category": "artificial-intelligence",
+      "status": "covered",
+      "coreWork": "Design AI capabilities, prompts, evaluations, safety checks, model choices, and agent or MCP integrations.",
+      "owners": ["ai-engineer", "prompt-engineer", "eval-orchestrator", "ai-safety-evaluator"],
+      "handoff": "Evaluated capability contracts pass to product, development, security, and operations owners.",
+      "boundary": "Model output is not treated as verified truth or consequential approval without required evidence and human gates."
+    },
+    {
+      "category": "business-operations",
+      "status": "covered",
+      "coreWork": "Plan operating processes, organizational change, procurement, partnerships, pricing inputs, and workforce enablement.",
+      "owners": ["operations-manager", "change-management-consultant", "procurement-specialist", "learning-development-specialist"],
+      "handoff": "Approved operating plans pass to accountable department, finance, legal, people, and delivery owners.",
+      "boundary": "Agents do not sign contracts, make employment decisions, or commit organizational resources."
+    },
+    {
+      "category": "cloud-infrastructure",
+      "status": "covered",
+      "coreWork": "Design and operate cloud, network, compute, container, service-mesh, infrastructure-as-code, and cost controls.",
+      "owners": ["cloud-architect", "terraform-specialist", "kubernetes-architect", "network-engineer"],
+      "handoff": "Reviewed infrastructure plans and changes pass to security, operations, release, and service owners.",
+      "boundary": "Production mutation, credential use, and spend changes require the environment's authorization and rollback controls."
+    },
+    {
+      "category": "commerce",
+      "status": "covered",
+      "coreWork": "Plan and review storefront operations, catalog or order flows, checkout, and payment integration.",
+      "owners": ["ecommerce-operations-manager", "payment-integration"],
+      "handoff": "Validated commerce requirements pass to product, development, finance, security, and customer operations.",
+      "boundary": "Agents do not move funds, issue refunds, change live prices, or bind a merchant without authorization."
+    },
+    {
+      "category": "creative",
+      "status": "covered",
+      "coreWork": "Set creative direction, research attributable visual references, and create governed image concepts or assets.",
+      "owners": ["creative-director", "gallery-researcher", "image-generator"],
+      "handoff": "Approved direction and assets pass to design, marketing, media-production, and rights owners.",
+      "boundary": "References do not confer reuse rights, and generated assets do not bypass brand, consent, or provenance review."
+    },
+    {
+      "category": "customer-operations",
+      "status": "covered",
+      "coreWork": "Triage support needs, draft responses, track cases, identify adoption risks, and plan customer-success follow-up.",
+      "owners": ["customer-support", "customer-success-manager"],
+      "handoff": "Cases and account evidence pass to authorized support, product, sales, billing, or incident owners.",
+      "boundary": "Agents do not promise compensation, disclose private account data, or make binding account changes."
+    },
+    {
+      "category": "data",
+      "status": "covered",
+      "coreWork": "Model, ingest, transform, govern, query, administer, and retrieve structured, spatial, and vector data.",
+      "owners": ["data-engineer", "analytics-engineer", "data-governance-engineer", "database-admin"],
+      "handoff": "Trusted datasets, contracts, lineage, and findings pass to analysis, ML, application, and governance owners.",
+      "boundary": "Data access, destructive changes, retention, and sensitive-data use remain subject to explicit policy and authorization."
+    },
+    {
+      "category": "developer-experience",
+      "status": "covered",
+      "coreWork": "Improve onboarding, local workflows, toolchains, dependencies, platforms, documentation paths, and developer feedback loops.",
+      "owners": ["codebase-onboarding-engineer", "developer-tooling-engineer", "platform-engineer", "dx-optimizer"],
+      "handoff": "Validated workflow improvements pass to maintainers, platform teams, documentation, and release owners.",
+      "boundary": "Convenience changes do not override repository policy, security controls, compatibility, or release gates."
+    },
+    {
+      "category": "development",
+      "status": "covered",
+      "coreWork": "Implement, debug, refactor, and maintain frontend, backend, mobile, desktop, systems, language, and framework code.",
+      "owners": ["frontend-developer", "backend-developer", "mobile-developer", "debugger", "refactoring-specialist"],
+      "handoff": "Working changes and implementation evidence pass to review, testing, security, documentation, and release owners.",
+      "boundary": "Implementation remains constrained by approved scope, repository guidance, tests, and production authorization."
+    },
+    {
+      "category": "documentation",
+      "status": "covered",
+      "coreWork": "Design documentation systems and produce API, architecture, reference, tutorial, and diagram artifacts.",
+      "owners": ["docs-architect", "api-documenter", "reference-builder", "tutorial-engineer"],
+      "handoff": "Versioned documentation passes to maintainers, users, reviewers, and release owners.",
+      "boundary": "Documentation does not invent unsupported product behavior or replace verification against the implementation."
+    },
+    {
+      "category": "embedded-systems",
+      "status": "covered",
+      "coreWork": "Analyze firmware and design or debug ARM Cortex embedded behavior, interfaces, timing, memory, and hardware constraints.",
+      "owners": ["arm-cortex-expert", "firmware-analyst"],
+      "handoff": "Findings and implementation constraints pass to authorized firmware, hardware, security, and validation owners.",
+      "boundary": "Hardware flashing, safety-critical control, and proprietary reverse engineering require explicit authorization and qualified review."
+    },
+    {
+      "category": "finance",
+      "status": "covered",
+      "coreWork": "Prepare accounting-control evidence, close readiness, forecasts, budgets, scenarios, and management variance analysis.",
+      "owners": ["accounting-controller", "fpa-analyst"],
+      "handoff": "Traceable analyses and proposed actions pass to authorized finance, audit, tax, legal, and executive owners.",
+      "boundary": "Agents do not post entries, move funds, file taxes, attest controls, or make fiduciary decisions."
+    },
+    {
+      "category": "governance",
+      "status": "covered",
+      "coreWork": "Identify obligations, assess risk and compliance evidence, define policy controls, and review licensing or legal issues.",
+      "owners": ["compliance-auditor", "risk-manager", "policy-enforcer", "software-license-compliance-engineer"],
+      "handoff": "Findings, exceptions, and control proposals pass to accountable legal, compliance, security, and business owners.",
+      "boundary": "Agent analysis is not legal advice, certification, regulatory filing, or final risk acceptance."
+    },
+    {
+      "category": "healthcare",
+      "status": "covered",
+      "coreWork": "Review clinical evidence and data governance, patient-safety signals, preparedness, health information, and compliance workflows.",
+      "owners": ["clinical-evidence-reviewer", "clinical-data-manager", "patient-safety-officer", "healthcare-compliance-specialist"],
+      "handoff": "Evidence and escalations pass to qualified clinicians, safety, privacy, regulatory, and operational owners.",
+      "boundary": "Agents do not diagnose, prescribe, triage emergencies, make care decisions, or replace qualified clinical judgment."
+    },
+    {
+      "category": "machine-learning",
+      "status": "covered",
+      "coreWork": "Develop, deploy, monitor, validate, and govern machine-learning models and pipelines.",
+      "owners": ["ml-engineer", "mlops-engineer", "model-validation-specialist"],
+      "handoff": "Validated models, evaluation evidence, and operational requirements pass to product, AI, data, security, and operations owners.",
+      "boundary": "A model is not production-approved solely because training or offline evaluation completed."
+    },
+    {
+      "category": "marketing",
+      "status": "covered",
+      "coreWork": "Plan, produce, measure, audit, optimize, and publish governed content, SEO, paid, and social campaigns.",
+      "owners": ["content-marketer", "marketing-measurement-specialist", "seo-content-planner", "social-publishing-publisher"],
+      "handoff": "Approved content and measurement evidence pass to brand, channel, sales, legal, and publication owners.",
+      "boundary": "Publishing, spend, tracking, and claims require explicit channel authorization, rights, and compliance review."
+    },
+    {
+      "category": "media-production",
+      "status": "covered",
+      "coreWork": "Route research, direction, writing, planning, live capture, asset custody, editing, finishing, localization, accessibility, mastering, and delivery.",
+      "owners": ["video-producer", "video-director", "first-assistant-director", "video-editor", "media-accessibility-producer", "delivery-mastering-specialist"],
+      "handoff": "Versioned media artifacts move through approval gates from brief and production lock to picture, finishing, locale, accessibility, and delivery locks.",
+      "boundary": "Qualified humans retain live-set, safety, consent, linguistic, legal, publication, and other specialist authority."
+    },
+    {
+      "category": "operations",
+      "status": "covered",
+      "coreWork": "Deploy, observe, troubleshoot, respond to incidents, verify service health, manage reliability, and coordinate operational recovery.",
+      "owners": ["deployment-engineer", "observability-engineer", "incident-responder", "sre-engineer"],
+      "handoff": "Verified changes, telemetry, incident state, and recovery evidence pass to service, security, release, and business owners.",
+      "boundary": "Production actions follow explicit authorization, least privilege, rollback, communication, and incident-command rules."
+    },
+    {
+      "category": "orchestration",
+      "status": "covered",
+      "coreWork": "Plan multi-agent execution, allocate bounded ownership, manage context, implement coordinated work, and validate receipts.",
+      "owners": ["orchestrate", "team-lead", "context-manager", "conductor-validator", "team-implementer"],
+      "handoff": "Scoped tasks and evidence converge into one accountable result for the requesting user or workflow owner.",
+      "boundary": "Delegation does not broaden authority, bypass approvals, or permit overlapping writes without coordination."
+    },
+    {
+      "category": "performance",
+      "status": "covered",
+      "coreWork": "Measure and optimize application, system, query, schema, and database performance against explicit budgets.",
+      "owners": ["performance-engineer", "database-optimizer"],
+      "handoff": "Benchmarks, bottlenecks, proposed changes, and regression evidence pass to development, data, and operations owners.",
+      "boundary": "Optimization does not trade away correctness, security, durability, accessibility, or cost controls without approval."
+    },
+    {
+      "category": "product-management",
+      "status": "covered",
+      "coreWork": "Discover needs, define outcomes and requirements, prioritize scope, write product specifications, and align technical delivery.",
+      "owners": ["product-manager", "product-spec-orchestrator", "technical-product-manager"],
+      "handoff": "Approved problems, requirements, priorities, and acceptance criteria pass to design, architecture, development, and project owners.",
+      "boundary": "Agents do not silently make executive prioritization, budget, roadmap, or market commitments."
+    },
+    {
+      "category": "project-management",
+      "status": "covered",
+      "coreWork": "Plan delivery, dependencies, milestones, risks, decisions, releases, communication, and closeout.",
+      "owners": ["project-manager", "release-manager"],
+      "handoff": "Current plans, blockers, approvals, and release evidence pass among product, implementation, operations, and stakeholders.",
+      "boundary": "Schedules do not override quality, safety, labor, security, compliance, or accountable-owner decisions."
+    },
+    {
+      "category": "quality-assurance",
+      "status": "covered",
+      "coreWork": "Design and execute tests, review code and UI, verify receipts, resolve review feedback, and make evidence-based quality recommendations.",
+      "owners": ["qa", "test-automator", "code-reviewer", "ui-visual-validator", "receipt-verifier"],
+      "handoff": "Findings, test evidence, accepted exceptions, and gate recommendations pass to implementation and release owners.",
+      "boundary": "Passing static checks alone does not prove user acceptance, production safety, or authorization to release."
+    },
+    {
+      "category": "research",
+      "status": "covered",
+      "coreWork": "Search authoritative sources, gather market or topic evidence, compare alternatives, record provenance, and communicate uncertainty.",
+      "owners": ["market-researcher", "search-specialist"],
+      "handoff": "Source-backed findings and unresolved questions pass to analysis, strategy, product, content, or specialist owners.",
+      "boundary": "Research does not grant reuse rights or convert uncertain evidence into verified fact."
+    },
+    {
+      "category": "sales",
+      "status": "covered",
+      "coreWork": "Prepare technical discovery, solution evidence, sales workflow automation, and revenue-operations analysis.",
+      "owners": ["sales-engineer", "sales-automator", "revenue-operations-analyst"],
+      "handoff": "Qualified evidence and proposed follow-up pass to authorized sales, solution, legal, finance, and customer owners.",
+      "boundary": "Agents do not contact prospects, make claims, alter CRM records, quote binding terms, or close deals without authorization."
+    },
+    {
+      "category": "security",
+      "status": "covered",
+      "coreWork": "Threat-model, harden, test, review, monitor, investigate, and govern application, cloud, identity, mobile, privacy, and detection controls.",
+      "owners": ["threat-modeling-expert", "application-security-engineer", "security-auditor", "threat-detection-engineer", "privacy-engineer"],
+      "handoff": "Validated findings and mitigations pass to system owners, development, cloud, governance, and incident response.",
+      "boundary": "Testing and investigation require authorization; exploit execution, secrets, containment, and risk acceptance remain controlled."
+    },
+    {
+      "category": "strategy",
+      "status": "covered",
+      "coreWork": "Develop evidence-backed business, brand, and funding strategies with options, tradeoffs, assumptions, and measures.",
+      "owners": ["business-strategy-consultant", "brand-strategist", "grant-strategist"],
+      "handoff": "Recommended choices and evidence pass to accountable executives, product, marketing, finance, and program owners.",
+      "boundary": "Strategy artifacts do not commit funding, positioning, applications, or organizational direction without approval."
+    },
+    {
+      "category": "user-experience",
+      "status": "covered",
+      "coreWork": "Research user needs, design interfaces and systems, evaluate interaction quality, and audit product accessibility.",
+      "owners": ["ux-researcher", "ui-ux-designer", "design-system-architect", "accessibility-expert"],
+      "handoff": "Research, flows, designs, tokens, and findings pass to product, development, content, and quality owners.",
+      "boundary": "Design recommendations do not substitute for user evidence, accessibility testing, content approval, or implementation verification."
+    },
+    {
+      "category": "writing",
+      "status": "covered",
+      "coreWork": "Plan, draft, edit, structure, and refine articles, copy, technical material, and interface language.",
+      "owners": ["article-writer", "content-editor", "technical-writer", "copywriter", "ux-writer"],
+      "handoff": "Source-aware drafts and revisions pass to subject-matter, legal, brand, product, documentation, or publication owners.",
+      "boundary": "Writing does not invent evidence, permissions, endorsements, or publication approval."
+    }
+  ]
+}

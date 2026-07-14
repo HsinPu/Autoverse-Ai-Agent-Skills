@@ -16,14 +16,14 @@ Supersedes:
 
 | Stage | State | Owner | Artifact versions | Evidence or approval | Blocker | Next eligible stage |
 |---|---|---|---|---|---|---|
-| Intake and research | active | | | | | |
+| Intake, research, and media sourcing | active | | | | | |
 | Creative treatment | queued | | | | | |
 | Script | queued | | | | | |
-| Storyboard and shot plan | queued | | | | | |
-| Visual world, camera, sound, continuity, effects, graphics, music, and production plan | queued | | | | | |
-| Asset production | queued | | | | | |
+| Storyboard, casting, location, and shot plan | queued | | | | | |
+| Visual world, camera, sound, continuity, effects, graphics, music, shooting, and production plan | queued | | | | | |
+| Capture, asset production, take logging, and ingest | queued | | | | | |
 | Edit and picture lock | queued | | | | | |
-| VFX, graphics, sound, music, and color finishing | queued | | | | | |
+| VFX, graphics, sound, music, color, localization, and accessibility finishing | queued | | | | | |
 | Review, mastering, and delivery | queued | | | | | |
 
 Allowed stage states: `queued`, `active`, `awaiting-approval`, `blocked`, `verified`.

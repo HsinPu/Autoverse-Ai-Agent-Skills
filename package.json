@@ -21,7 +21,8 @@
     "verify:agent-references": "node scripts/verify-agent-references.js",
     "verify:agent-references:remote": "node scripts/verify-agent-references.js --remote",
     "audit:agent-originality": "node scripts/audit-agent-originality.js",
-    "validate": "node scripts/validate-catalog.js && node scripts/verify-agent-references.js",
+    "validate:agent-coverage": "node scripts/validate-agent-coverage.js",
+    "validate": "node scripts/validate-catalog.js && node scripts/verify-agent-references.js && node scripts/validate-agent-coverage.js",
     "test:cli": "node tests/cli.test.js",
     "smoke:install:powershell": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/smoke-install.ps1",
     "smoke:install:bash": "bash scripts/smoke-install.sh"
@@ -40,14 +41,17 @@
     "scripts/smoke-install.ps1",
     "scripts/smoke-install.sh",
     "scripts/data/agent-reference-sources.json",
+    "scripts/data/agent-coverage-matrix.json",
     "scripts/data/wshobson-agent-inventory.json",
     "scripts/audit-agent-originality.js",
     "scripts/generate-agent-adapters.js",
     "scripts/generate-agent-catalog.js",
     "scripts/sync-agent-reference.js",
+    "scripts/validate-agent-coverage.js",
     "scripts/validate-catalog.js",
     "scripts/verify-agent-references.js",
     "tests/cli.test.js",
+    "docs",
     "LICENSE"
   ],
   "engines": {
