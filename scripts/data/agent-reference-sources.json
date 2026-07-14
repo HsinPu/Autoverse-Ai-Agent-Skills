@@ -106,6 +106,27 @@
       "tree": "45e93bee12c3f1d80052f7406f0180e9bece8382",
       "license": "MIT",
       "licensePath": "LICENSE"
+    },
+    {
+      "repo": "NousResearch/hermes-agent",
+      "commit": "226e8de827a669e8ffa7035b27d70c19e44b1208",
+      "tree": "a85c754d8cf771e496ea6d1e5e2aca99b2b056e1",
+      "license": "MIT",
+      "licensePath": "LICENSE"
+    },
+    {
+      "repo": "jacobcwright/open-animate",
+      "commit": "a6c2b336f827014052bece279c68faa63c84483b",
+      "tree": "586d8f030c66e3a4973370ce0b97d771d22fd9e6",
+      "license": "Apache-2.0",
+      "licensePath": "LICENSE"
+    },
+    {
+      "repo": "browser-use/video-use",
+      "commit": "92c2b34e44c205cbc2acae7f6ca7c1c219d5dd66",
+      "tree": "aa83ac11de689b5d8535dc3cec7d78c1a1e95326",
+      "license": "MIT",
+      "licensePath": "LICENSE"
     }
   ]
 }

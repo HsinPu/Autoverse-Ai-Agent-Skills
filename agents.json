@@ -1,9 +1,9 @@
 {
   "version": "3.0.0",
-  "updated": "2026-07-14T06:39:39.571Z",
-  "total": 223,
+  "updated": "2026-07-14T07:14:39.387Z",
+  "total": 228,
   "categories": 31,
-  "uniqueRoles": 223,
+  "uniqueRoles": 228,
   "agents": [
     {
       "id": "accessibility-expert",
@@ -1336,6 +1336,39 @@
       }
     },
     {
+      "id": "colorist",
+      "name": "colorist",
+      "role": "colorist",
+      "description": "Designs and verifies the post-production color pipeline for an approved video, including conform checks, color management, look execution, shot matching, secondary corrections, HDR or SDR trims, and color-delivery QC. Use when picture finishing needs a dedicated owner beyond capture intent or editorial assembly.",
+      "category": "media-production",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "video-production-workflow",
+        "video-edit",
+        "image-utils",
+        "terminal-ops"
+      ],
+      "tags": [
+        "color-grading",
+        "color-management",
+        "shot-matching",
+        "hdr-sdr-trim",
+        "finishing-qc"
+      ],
+      "path": "agents/colorist.md",
+      "references": {
+        "repo": "NousResearch/hermes-agent",
+        "paths": [
+          "optional-skills/creative/kanban-video-orchestrator/references/role-archetypes.md"
+        ],
+        "tree": "a85c754d8cf771e496ea6d1e5e2aca99b2b056e1"
+      }
+    },
+    {
       "id": "competitive-intelligence-analyst",
       "name": "competitive-intelligence-analyst",
       "role": "competitive-intelligence-analyst",
@@ -1947,6 +1980,39 @@
           "plugins/unit-testing/agents/debugger.md"
         ],
         "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
+      }
+    },
+    {
+      "id": "delivery-mastering-specialist",
+      "name": "delivery-mastering-specialist",
+      "role": "delivery-mastering-specialist",
+      "description": "Creates and verifies technical video masters and delivery variants from approved picture, color, sound, caption, and metadata sources. Use after creative lock when a project needs a delivery matrix, controlled transcodes, platform or client variants, packaging, checksums, source lineage, and evidence-based technical QC.",
+      "category": "media-production",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "video-production-workflow",
+        "video-edit",
+        "subtitle-captions",
+        "terminal-ops"
+      ],
+      "tags": [
+        "video-mastering",
+        "delivery-variants",
+        "technical-qc",
+        "media-manifest",
+        "checksums"
+      ],
+      "path": "agents/delivery-mastering-specialist.md",
+      "references": {
+        "repo": "NousResearch/hermes-agent",
+        "paths": [
+          "optional-skills/creative/kanban-video-orchestrator/references/examples.md"
+        ],
+        "tree": "a85c754d8cf771e496ea6d1e5e2aca99b2b056e1"
       }
     },
     {
@@ -4113,6 +4179,76 @@
           "plugins/developer-essentials/agents/monorepo-architect.md"
         ],
         "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
+      }
+    },
+    {
+      "id": "motion-graphics-designer",
+      "name": "motion-graphics-designer",
+      "role": "motion-graphics-designer",
+      "description": "Designs and verifies a reusable motion-graphics system for titles, lower thirds, callouts, diagrams, charts, interface sequences, kinetic typography, transitions, and end cards. Use when approved copy or data needs brand-consistent animated graphics with explicit timing, layout, accessibility, render, and editorial handoff rules.",
+      "category": "media-production",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "video-production-workflow",
+        "remotion-video-toolkit",
+        "animation-best-practices",
+        "color-font-skill",
+        "video-edit"
+      ],
+      "tags": [
+        "motion-graphics",
+        "kinetic-typography",
+        "title-design",
+        "data-visualization",
+        "graphics-rendering"
+      ],
+      "path": "agents/motion-graphics-designer.md",
+      "references": {
+        "repo": "jacobcwright/open-animate",
+        "paths": [
+          "skills/open-animate/SKILL.md",
+          "skills/open-animate/references/workflow.md",
+          "skills/open-animate/references/animation-cookbook.md"
+        ],
+        "tree": "586d8f030c66e3a4973370ce0b97d771d22fd9e6"
+      }
+    },
+    {
+      "id": "music-supervisor",
+      "name": "music-supervisor",
+      "role": "music-supervisor",
+      "description": "Plans and verifies music selection, commissioning, generation, placement, edit relationships, versions, and clearance evidence for a video without taking over sound design or final mix. Use when music is story-critical, rights-sensitive, multi-cue, custom-composed, beat-driven, or requires a dedicated sourcing and approval owner.",
+      "category": "media-production",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "video-production-workflow",
+        "audio-generation",
+        "web-research-ops",
+        "agent-action-governance",
+        "data-organization-system"
+      ],
+      "tags": [
+        "music-supervision",
+        "music-spotting",
+        "cue-clearance",
+        "beat-mapping",
+        "music-rights"
+      ],
+      "path": "agents/music-supervisor.md",
+      "references": {
+        "repo": "NousResearch/hermes-agent",
+        "paths": [
+          "optional-skills/creative/kanban-video-orchestrator/references/tool-matrix.md"
+        ],
+        "tree": "a85c754d8cf771e496ea6d1e5e2aca99b2b056e1"
       }
     },
     {
@@ -7046,6 +7182,42 @@
           "plugins/llm-application-dev/agents/vector-database-engineer.md"
         ],
         "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
+      }
+    },
+    {
+      "id": "vfx-supervisor",
+      "name": "vfx-supervisor",
+      "role": "vfx-supervisor",
+      "description": "Plans and verifies shot-level visual-effects work across plates, tracking, matchmove, roto, keying, cleanup, simulation, CG, generative elements, and compositing. Use when effects must integrate with approved photography or rendered footage through explicit dependencies, versions, provenance, and final-pixel QC.",
+      "category": "media-production",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "video-production-workflow",
+        "ai-video-generation",
+        "ai-video-prompting",
+        "image-utils",
+        "video-edit"
+      ],
+      "tags": [
+        "visual-effects",
+        "compositing",
+        "vfx-shot-breakdown",
+        "plate-planning",
+        "final-pixel-qc"
+      ],
+      "path": "agents/vfx-supervisor.md",
+      "references": {
+        "repo": "browser-use/video-use",
+        "paths": [
+          "SKILL.md",
+          "helpers/render.py",
+          "helpers/timeline_view.py"
+        ],
+        "tree": "aa83ac11de689b5d8535dc3cec7d78c1a1e95326"
       }
     },
     {

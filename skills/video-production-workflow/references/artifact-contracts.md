@@ -25,8 +25,13 @@ video-projects/<project-id>/
 ├─ assets/
 │  └─ manifest.md
 ├─ sound-plan.md
+├─ music-plan.md
+├─ vfx-plan.md
+├─ motion-graphics-plan.md
 ├─ edit-plan.md
+├─ color-finishing-plan.md
 ├─ review-report.md
+├─ delivery-manifest.md
 └─ renders/
 ```
 
@@ -68,8 +73,13 @@ An artifact is not approved merely because its content exists. Record the approv
 | `production-plan.md` | Video producer | Schedule, dependencies, budget, providers, tools, owners, gates, fallback options, delivery specs |
 | `assets/manifest.md` | Video producer | Asset ID, shot use, source, owner, rights, consent, version, format, generation metadata, status |
 | `sound-plan.md` | Sound designer or sequential runner | Sonic principles, cue IDs, timecodes, dialogue and picture dependencies, source or generation route, rights, stems, mix strategy, loudness and QC targets |
+| `music-plan.md` | Music supervisor or sequential runner | Music brief, emotional arc, spotting and cue sheet, source or commission routes, beat structure, versions, stems, rights evidence, risks, acceptance criteria |
+| `vfx-plan.md` | VFX supervisor or sequential runner | Shot breakdown, effects methods, plates, camera and asset dependencies, handles, color and alpha exchange, versions, provenance, final-pixel acceptance criteria |
+| `motion-graphics-plan.md` | Motion-graphics designer or sequential runner | Graphic and motion language, approved content and data, cue inventory, components, timing, safe areas, variants, render contract, accessibility and QC criteria |
 | `edit-plan.md` | Video editor or sequential runner | Cut structure, source ranges, edit decisions, timing, tracks, audio, captions, graphics, transitions, versions, review evidence |
+| `color-finishing-plan.md` | Colorist or sequential runner | Conform and source lineage, color pipeline, monitoring assumptions, scene and shot strategy, grade versions, HDR or SDR trims, render and color-QC evidence |
 | `review-report.md` | Video director with specialist evidence | Findings, severity, affected artifact or timecode, required fix, owner, gate result |
+| `delivery-manifest.md` | Delivery mastering specialist or sequential runner | Approved source lineage, delivery matrix, transforms, outputs, filenames, technical metadata, checksums, caption and audio mappings, QC evidence, status |
 
 Use `blocker`, `high`, `medium`, and `low` for review severity. Unresolved `blocker` or `high` findings prevent gate approval; every `medium` or `low` finding needs a recorded fix, rejection rationale, or accepted exception.
 

@@ -20,10 +20,11 @@ Supersedes:
 | Creative treatment | queued | | | | | |
 | Script | queued | | | | | |
 | Storyboard and shot plan | queued | | | | | |
-| Visual world, camera, sound, continuity, and production plan | queued | | | | | |
+| Visual world, camera, sound, continuity, effects, graphics, music, and production plan | queued | | | | | |
 | Asset production | queued | | | | | |
-| Edit, sound, and compose | queued | | | | | |
-| Review and delivery | queued | | | | | |
+| Edit and picture lock | queued | | | | | |
+| VFX, graphics, sound, music, and color finishing | queued | | | | | |
+| Review, mastering, and delivery | queued | | | | | |
 
 Allowed stage states: `queued`, `active`, `awaiting-approval`, `blocked`, `verified`.
 

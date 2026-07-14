@@ -25,7 +25,7 @@ Use this skill to coordinate a complete video production without assuming a spec
 
 - Keep `video-director` accountable for creative direction, gates, revision arbitration, and final review.
 - Use `video-producer` for schedule, budget, assets, rights, provider planning, and checkpoint state.
-- Delegate script, storyboard, production design, camera and lighting, continuity, sound, and edit artifacts only to suitable discovered Agents.
+- Delegate script, storyboard, production design, camera and lighting, continuity, music, VFX, motion graphics, edit, sound, color, and mastering artifacts only to suitable discovered Agents.
 - Give one owner exclusive write authority for each canonical artifact at a time.
 - Validate every handoff before starting dependent work.
 
@@ -42,10 +42,11 @@ Use this skill to coordinate a complete video production without assuming a spec
 2. **Creative treatment**: define story approach, visual language, pacing, sound direction, reference principles, exclusions, and feasibility; produce `creative-treatment.md`.
 3. **Script**: create or adapt the approved narrative, scenes, action, dialogue, voiceover, and timing; produce `script.md`.
 4. **Storyboard and shot plan**: translate the script into scenes, shots, framing, camera, motion, audio, duration, assets, and transitions; produce `storyboard.md` and `shot-list.md`.
-5. **Visual world, camera, sound, continuity, and production plan**: translate the approved direction into producible environments, sets, props, wardrobe, materials, camera, lighting, capture or render requirements, sound cues and stems, continuity, schedule, budget, rights, providers, and assets; produce `production-design-bible.md`, `camera-lighting-plan.md`, `sound-plan.md`, `continuity-bible.md`, `production-plan.md`, and `assets/manifest.md` as applicable.
+5. **Visual world, camera, sound, continuity, effects, graphics, music, and production plan**: translate the approved direction into producible environments, sets, props, wardrobe, materials, camera, lighting, capture or render requirements, sound cues and stems, VFX dependencies, motion graphics, music strategy, continuity, schedule, budget, rights, providers, and assets; produce `production-design-bible.md`, `camera-lighting-plan.md`, `sound-plan.md`, `vfx-plan.md`, `motion-graphics-plan.md`, `music-plan.md`, `continuity-bible.md`, `production-plan.md`, and `assets/manifest.md` as applicable.
 6. **Asset production**: generate, source, record, or prepare approved visual, video, voice, music, sound, caption, and graphic assets against their plans; update the manifest after every accepted version.
-7. **Edit, sound, and compose**: assemble picture, motion, dialogue, music, sound, captions, graphics, transitions, and timing through the available edit or code-generated workflow; produce `edit-plan.md`, edit-decision evidence, versioned cuts, stems, and renders.
-8. **Review and delivery**: inspect narrative clarity, continuity, rights, accessibility, technical conformance, audio balance, artifacts, and platform requirements; produce `review-report.md` and the approved deliverables.
+7. **Edit and picture lock**: assemble picture, provisional motion, dialogue, music, sound, captions, graphics, transitions, and timing through the available edit or code-generated workflow; produce `edit-plan.md`, edit-decision evidence, versioned cuts, and an approved picture-lock candidate before dependent finishing.
+8. **VFX, graphics, sound, music, and color finishing**: complete and verify final-pixel effects, approved graphics, music integration, sound mix, conform, grade, and target trims against the locked cut; update specialist plans and produce `color-finishing-plan.md`, versioned stems, graphics, effects, and finishing masters as applicable.
+9. **Review, mastering, and delivery**: inspect narrative clarity, continuity, rights, accessibility, picture, color, audio, captions, technical conformance, and destination requirements; produce `review-report.md`, `delivery-manifest.md`, and the approved deliverables.
 
 ## Checkpoints
 
@@ -65,9 +66,12 @@ Require explicit approval for:
 
 - the creative treatment before detailed production planning;
 - the script before shot-level planning;
-- the storyboard, applicable production-design, camera-lighting, and sound plans, continuity baseline, and production plan before batch asset work;
+- the storyboard, applicable production-design, camera-lighting, sound, music, VFX, and motion-graphics plans, continuity baseline, and production plan before batch asset work;
 - paid generation, licensed assets, identifiable likeness or voice use, and consequential external calls;
 - provider or model substitutions that change cost, rights, privacy, quality, or timing;
+- picture lock before dependent color and delivery mastering;
+- music commitment and clearance evidence before final mix or delivery;
+- finishing lock and technical delivery manifest before final master approval;
 - final render selection and any publication or distribution action.
 
 An earlier approval does not silently authorize later gates. Record any explicit full-run authorization with its scope and exclusions.
@@ -90,16 +94,22 @@ Read [references/artifact-contracts.md](references/artifact-contracts.md) before
 - Use `storyboard-creation` and a discovered `storyboard-artist` for shot-level planning.
 - Use a discovered `production-designer` to define environments, sets, props, wardrobe, materials, signage, and asset specifications.
 - Use a discovered `cinematographer` to own camera, lens, movement, lighting, exposure, capture, render, and visual-technical planning.
+- Use a discovered `vfx-supervisor` for shot-effects breakdowns, plate and camera-data requirements, compositing dependencies, version review, and final-pixel evidence.
+- Use a discovered `motion-graphics-designer` for titles, lower thirds, callouts, diagrams, charts, interface sequences, kinetic type, reusable components, and graphics render contracts.
 - Use `ai-video-prompting` and `ai-video-generation` for generative clips.
 - Use `image-generator`, `ai-image-prompt-design`, and `image-utils` for still assets.
+- Use a discovered `music-supervisor` when selection, commission or generation routes, beat structure, cue versions, and rights evidence need dedicated ownership; the sound designer still owns integration and mix.
 - Use a discovered `sound-designer` with `audio-generation`, `text-to-speech`, and `audio-transcription` for cue planning, sound assets, stems, mix strategy, and sound QC.
 - Use `subtitle-captions` for accessibility assets.
-- Use a discovered `video-editor` with `remotion-video-toolkit` for deterministic programmatic composition and `video-edit` for timeline execution, existing-footage edits, versioned cuts, and delivery transforms.
+- Use a discovered `video-editor` with `remotion-video-toolkit` for deterministic programmatic composition and `video-edit` for timeline execution, existing-footage edits, versioned cuts, and picture lock.
+- Use a discovered `colorist` after conform and picture lock for color management, look execution, shot matching, target trims, and color-finishing QC.
+- Use a discovered `delivery-mastering-specialist` only for locked productions that need multiple technical masters or complex delivery evidence; publication remains a separately authorized action.
 
 ## Rules
 
 - Do not skip stages merely because a tool can produce a video from one prompt.
 - Do not create assets before their purpose, shot, continuity requirements, rights, and acceptance criteria are recorded.
 - Do not allow generated output to silently redefine the approved script, treatment, product appearance, brand, or continuity baseline.
+- Do not begin color finishing or delivery mastering from an unapproved cut, and do not allow technical mastering to become an unrecorded recut, regrade, remix, or caption rewrite.
 - Preserve source media and accepted artifacts; write revisions and renders as new versions.
 - Keep the workflow useful for short, long-form, live-action, animated, AI-generated, and hybrid productions by varying team size rather than changing the contracts.
