@@ -3,7 +3,7 @@
 [![Validate](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/actions/workflows/validate.yml/badge.svg)](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/actions/workflows/validate.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 ![Skills](https://img.shields.io/badge/Skills-188-7c3aed)
-![Agents](https://img.shields.io/badge/Agents-208-2563eb)
+![Agents](https://img.shields.io/badge/Agents-213-2563eb)
 ![Node.js](https://img.shields.io/badge/Node.js-%3E%3D16-339933?logo=nodedotjs&logoColor=white)
 
 由 **HsinPu** 維護的開源 AI Agent 與 Skill catalog，提供可直接安裝的 Codex、Claude Code、Cursor、VS Code／GitHub Copilot、OpenCode Agents 與 Skills，並包含安全更新機制及本機 catalog 查詢 CLI。
@@ -48,7 +48,7 @@ Linux／macOS：
 curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type skill && curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type agent --enable-auto-delegation
 ```
 
-這組命令會安裝全部 188 個 Skills、208 個 Agents，並啟用不依賴專案 `AGENTS.md` 的全域主動委派。
+這組命令會安裝全部 188 個 Skills、213 個 Agents，並啟用不依賴專案 `AGENTS.md` 的全域主動委派。
 
 ### 只安裝全部 Skills
 
@@ -145,22 +145,22 @@ curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/ma
 | 類型 | 數量 | 用途 | Canonical source |
 |---|---:|---|---|
 | Skills | **188 Skills**／7 類 | 可重複使用的工作流程、規範、工具指引與領域知識 | `skills/<name>/SKILL.md` |
-| Agents | 208／29 類 | 可委派的專業角色，包含任務、限制、權限與輸出契約 | `agents/<role>.md` |
-| Codex adapters | 208 | Codex custom Agent 的 TOML 設定 | `adapters/codex/<role>.toml` |
-| Claude adapters | 208 | Claude Code subagent 的 Markdown 設定 | `adapters/claude/<role>.md` |
-| Cursor adapters | 208 | Cursor subagent 的 Markdown 設定 | `adapters/cursor/<role>.md` |
-| Copilot adapters | 208 | VS Code／GitHub Copilot custom Agent 設定 | `adapters/copilot/<role>.agent.md` |
-| OpenCode adapters | 208 | OpenCode `mode: subagent` 的 Markdown 設定 | `adapters/opencode/<role>.md` |
+| Agents | 213／30 類 | 可委派的專業角色，包含任務、限制、權限與輸出契約 | `agents/<role>.md` |
+| Codex adapters | 213 | Codex custom Agent 的 TOML 設定 | `adapters/codex/<role>.toml` |
+| Claude adapters | 213 | Claude Code subagent 的 Markdown 設定 | `adapters/claude/<role>.md` |
+| Cursor adapters | 213 | Cursor subagent 的 Markdown 設定 | `adapters/cursor/<role>.md` |
+| Copilot adapters | 213 | VS Code／GitHub Copilot custom Agent 設定 | `adapters/copilot/<role>.agent.md` |
+| OpenCode adapters | 213 | OpenCode `mode: subagent` 的 Markdown 設定 | `adapters/opencode/<role>.md` |
 | wshobson reference ledger | 199 definitions | 保存原始角色集合的 reference path 與合併追蹤資料 | `scripts/data/wshobson-agent-inventory.json` |
-| Additional Agent references | 87 paths／8 repositories | 保存在各 canonical Agent 的 `reference-*` metadata | `agents/<role>.md` |
+| Additional Agent references | 93 paths／8 repositories | 保存在各 canonical Agent 的 `reference-*` metadata | `agents/<role>.md` |
 
 各 adapter 會把 canonical `read-only`／`workspace-write` 權限轉成平台可理解的設定。例如 OpenCode 的唯讀角色會設定 `edit: deny` 與 `bash: deny`；Copilot 的唯讀角色只開放 `read`、`search`、`web`、`agent` tools。
 
 <!-- AGENT_COUNT_START -->
-目前共收錄 **208** 個不重複 Agents。
+目前共收錄 **213** 個不重複 Agents。
 <!-- AGENT_COUNT_END -->
 
-`wshobson/agents` ledger 的 199 份 definitions 內含 65 份同名角色變體，共形成 134 個上游角色名稱。內容級覆核後，198 份通用 definitions 對應 132 個 independently rewritten canonical Agents；RunAPI 的產品專屬 `task-executor` 則保留在 ledger 並明確標記為 `excluded`。另外 76 個 Agents 來自八個 reference repositories，加入前同樣會先比對名稱、職責邊界與 prompt 內容。
+`wshobson/agents` ledger 的 199 份 definitions 內含 65 份同名角色變體，共形成 134 個上游角色名稱。內容級覆核後，198 份通用 definitions 對應 132 個 independently rewritten canonical Agents；RunAPI 的產品專屬 `task-executor` 則保留在 ledger 並明確標記為 `excluded`。另外 81 個 Agents 來自八個 reference repositories，加入前同樣會先比對名稱、職責邊界與 prompt 內容。
 
 ### Agent 與 Skill 的差別
 
@@ -390,7 +390,7 @@ Catalog 來源分別是 [skills.json](skills.json) 與 [agents.json](agents.json
 每個 Agent 都有唯一 role、清楚的使用時機、權限模式、相關 Skills，以及固定的 `Role → Task → Constraints → Output` prompt 結構。完整 metadata 以 [agents.json](agents.json) 為準。
 
 <details>
-<summary><strong>展開 29 類、208 個 Agents 的完整索引</strong></summary>
+<summary><strong>展開 30 類、213 個 Agents 的完整索引</strong></summary>
 
 <!-- AGENT_SUMMARY_START -->
 | Category | Count | Agents |
@@ -424,6 +424,7 @@ Catalog 來源分別是 [skills.json](skills.json) 與 [agents.json](agents.json
 | `security` | 13 | [`application-security-engineer`](agents/application-security-engineer.md), [`backend-security-coder`](agents/backend-security-coder.md), [`cloud-security-engineer`](agents/cloud-security-engineer.md), [`frontend-security-coder`](agents/frontend-security-coder.md), [`identity-access-engineer`](agents/identity-access-engineer.md), [`malware-analyst`](agents/malware-analyst.md), [`mobile-security-coder`](agents/mobile-security-coder.md), [`penetration-tester`](agents/penetration-tester.md), [`privacy-engineer`](agents/privacy-engineer.md), [`security-auditor`](agents/security-auditor.md), [`threat-detection-engineer`](agents/threat-detection-engineer.md), [`threat-intelligence-analyst`](agents/threat-intelligence-analyst.md), [`threat-modeling-expert`](agents/threat-modeling-expert.md) |
 | `strategy` | 3 | [`brand-strategist`](agents/brand-strategist.md), [`business-strategy-consultant`](agents/business-strategy-consultant.md), [`grant-strategist`](agents/grant-strategist.md) |
 | `user-experience` | 5 | [`accessibility-expert`](agents/accessibility-expert.md), [`design-system-architect`](agents/design-system-architect.md), [`ui-designer`](agents/ui-designer.md), [`ui-ux-designer`](agents/ui-ux-designer.md), [`ux-researcher`](agents/ux-researcher.md) |
+| `writing` | 5 | [`article-writer`](agents/article-writer.md), [`content-editor`](agents/content-editor.md), [`copywriter`](agents/copywriter.md), [`technical-writer`](agents/technical-writer.md), [`ux-writer`](agents/ux-writer.md) |
 <!-- AGENT_SUMMARY_END -->
 
 </details>
@@ -543,8 +544,8 @@ npm pack --dry-run
 - Agent reference repository 的 pinned commit、實際 Git tree、license identifier 與 license path 集中保存在 [agent-reference-sources.json](scripts/data/agent-reference-sources.json)。CI 會向 GitHub 重新驗證 commit → tree 關係、每個 reference path，以及授權檔內容。
 - Agent catalog 參考 [wshobson/agents](https://github.com/wshobson/agents)、[msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents)、[VoltAgent/awesome-claude-code-subagents](https://github.com/VoltAgent/awesome-claude-code-subagents)、[github/awesome-copilot](https://github.com/github/awesome-copilot)、[affaan-m/ECC](https://github.com/affaan-m/ECC)、[supatest-ai/awesome-claude-code-sub-agents](https://github.com/supatest-ai/awesome-claude-code-sub-agents)、[devsforge/marketplace](https://github.com/devsforge/marketplace)、[ajhcs/healthcare-agents](https://github.com/ajhcs/healthcare-agents) 與 [aws-samples/sample-claude-code-agent-team](https://github.com/aws-samples/sample-claude-code-agent-team) 的角色定位、路徑與高層責任；prompt 內容均由本專案重新設計與加強，不是原文完整複製。
 - 同名或職責相近的上游定義會先依內容合併或排除。`wshobson/agents` 的 199 個 definitions、commit SHA、tree SHA、198 個 canonical mappings 與 1 個明確 exclusion 保存在 [wshobson-agent-inventory.json](scripts/data/wshobson-agent-inventory.json)；其他來源的 repository、path 與 tree SHA 則保存在各 canonical Agent frontmatter。
-- `npm run audit:agent-originality` 會逐一比對 208 個 canonical Agent prompt 與 285 個 pinned upstream definitions；若出現至少 60 個字元的相同行，或 12 個單字的逐字片段，CI 會拒絕通過。這是保護改寫原創性的保守靜態閘門，不等同法律上的相似性判定。
-- Repository 與全部 208 個 Agents 採 Apache-2.0。Skills 的個別授權以各自 `SKILL.md` 與 `skills.json` 為準；目前 187 個為 Apache-2.0，`karpathy-guidelines` 保留 MIT 授權與外部 reference metadata。
+- `npm run audit:agent-originality` 會針對 213 個 canonical Agent prompt 執行 291 組 pinned upstream comparisons；若出現至少 60 個字元的相同行，或 12 個單字的逐字片段，CI 會拒絕通過。這是保護改寫原創性的保守靜態閘門，不等同法律上的相似性判定。
+- Repository 與全部 213 個 Agents 採 Apache-2.0。Skills 的個別授權以各自 `SKILL.md` 與 `skills.json` 為準；目前 187 個為 Apache-2.0，`karpathy-guidelines` 保留 MIT 授權與外部 reference metadata。
 
 ## 疑難排解
 

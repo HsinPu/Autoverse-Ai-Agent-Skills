@@ -1,9 +1,9 @@
 {
   "version": "3.0.0",
-  "updated": "2026-07-14T00:42:32.235Z",
-  "total": 208,
-  "categories": 29,
-  "uniqueRoles": 208,
+  "updated": "2026-07-14T02:55:18.147Z",
+  "total": 213,
+  "categories": 30,
+  "uniqueRoles": 213,
   "agents": [
     {
       "id": "accessibility-expert",
@@ -421,6 +421,39 @@
           "plugins/arm-cortex-microcontrollers/agents/arm-cortex-expert.md"
         ],
         "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
+      }
+    },
+    {
+      "id": "article-writer",
+      "name": "article-writer",
+      "role": "article-writer",
+      "description": "Researches and writes original long-form articles for a defined audience, purpose, voice, and evidence standard. Use for explainers, features, blog posts, educational pieces, and thought leadership when search ranking is not the primary objective.",
+      "category": "writing",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "web-research-ops",
+        "markdown-writer",
+        "humanizer",
+        "summary-ops"
+      ],
+      "tags": [
+        "article-writing",
+        "long-form",
+        "editorial",
+        "fact-checking"
+      ],
+      "path": "agents/article-writer.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "marketing/marketing-content-creator.md",
+          "marketing/marketing-linkedin-content-creator.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
       }
     },
     {
@@ -1364,6 +1397,38 @@
       }
     },
     {
+      "id": "content-editor",
+      "name": "content-editor",
+      "role": "content-editor",
+      "description": "Edits existing prose for structure, accuracy, coherence, voice, style, and publication readiness while preserving authorial intent. Use after a draft exists and needs developmental, line, copy, or fact-focused editing.",
+      "category": "writing",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "humanizer",
+        "markdown-writer",
+        "summary-ops",
+        "web-research-ops"
+      ],
+      "tags": [
+        "editing",
+        "editorial-quality",
+        "voice",
+        "fact-checking"
+      ],
+      "path": "agents/content-editor.md",
+      "references": {
+        "repo": "VoltAgent/awesome-claude-code-subagents",
+        "paths": [
+          "categories/08-business-product/content-quality-editor.md"
+        ],
+        "tree": "9c98eac2f7463c79ebb7b914432ace7dbd3bfeaa"
+      }
+    },
+    {
       "id": "content-marketer",
       "name": "content-marketer",
       "role": "content-marketer",
@@ -1425,6 +1490,38 @@
           "plugins/context-management/agents/context-manager.md"
         ],
         "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
+      }
+    },
+    {
+      "id": "copywriter",
+      "name": "copywriter",
+      "role": "copywriter",
+      "description": "Writes concise, persuasion-focused copy for landing pages, campaigns, email, advertising, and product marketing from approved positioning and evidence. Use when a defined audience needs a clear value proposition and responsible next action.",
+      "category": "writing",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "ux-writing",
+        "humanizer",
+        "web-research-ops",
+        "markdown-writer"
+      ],
+      "tags": [
+        "copywriting",
+        "conversion",
+        "messaging",
+        "campaigns"
+      ],
+      "path": "agents/copywriter.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "marketing/marketing-email-strategist.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
       }
     },
     {
@@ -6227,6 +6324,38 @@
       }
     },
     {
+      "id": "technical-writer",
+      "name": "technical-writer",
+      "role": "technical-writer",
+      "description": "Creates scoped technical guides, explanations, procedures, troubleshooting content, and release documentation from verified product behavior. Use when a defined audience needs an accurate technical deliverable rather than a documentation-system redesign.",
+      "category": "writing",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "markdown-writer",
+        "git-readme-writer",
+        "web-research-ops",
+        "terminal-ops"
+      ],
+      "tags": [
+        "technical-writing",
+        "user-guides",
+        "troubleshooting",
+        "documentation"
+      ],
+      "path": "agents/technical-writer.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "engineering/engineering-technical-writer.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
+      }
+    },
+    {
       "id": "temporal-python-pro",
       "name": "temporal-python-pro",
       "role": "temporal-python-pro",
@@ -6646,6 +6775,38 @@
           "design/design-ux-researcher.md"
         ],
         "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
+      }
+    },
+    {
+      "id": "ux-writer",
+      "name": "ux-writer",
+      "role": "ux-writer",
+      "description": "Designs clear, consistent, accessible interface language and content systems across product journeys and states. Use for labels, guidance, errors, onboarding, empty states, notifications, confirmations, and terminology decisions.",
+      "category": "writing",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "ux-writing",
+        "interaction-patterns",
+        "i18n-localization",
+        "accessibility-testing"
+      ],
+      "tags": [
+        "ux-writing",
+        "microcopy",
+        "content-design",
+        "product-language"
+      ],
+      "path": "agents/ux-writer.md",
+      "references": {
+        "repo": "github/awesome-copilot",
+        "paths": [
+          "agents/se-ux-ui-designer.agent.md"
+        ],
+        "tree": "b36521f664a175a1ab32b4e5c8d75f0435d32ccc"
       }
     },
     {
