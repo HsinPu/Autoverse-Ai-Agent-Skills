@@ -22,7 +22,6 @@ tags:
   - verification
 reference-repo: wshobson/agents
 reference-paths:
-  - plugins/runapi-mcp/agents/task-executor.md
   - plugins/ship-mate/agents/implement.md
 reference-tree: deadb68423a57db5a1ab2afd50102be27df1744c
 ---

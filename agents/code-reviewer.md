@@ -11,6 +11,7 @@ model: inherit
 permission: read-only
 skills:
   - code-review
+  - pipeline-review
   - security-code-review
   - testing-strategy
   - git-operations

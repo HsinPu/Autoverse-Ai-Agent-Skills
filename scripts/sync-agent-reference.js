@@ -9,6 +9,12 @@ const catalogPath = path.join(root, 'agents.json');
 const outputPath = path.join(__dirname, 'data', 'wshobson-agent-inventory.json');
 const sourceRepo = 'wshobson/agents';
 const sourceBranch = 'main';
+const excludedDefinitions = new Map([
+  [
+    'plugins/runapi-mcp/agents/task-executor.md',
+    'Product-specific RunAPI media-task executor; intentionally excluded from the general repository implementation role.'
+  ]
+]);
 
 function getJson(url) {
   return new Promise((resolve, reject) => {
@@ -68,12 +74,14 @@ async function main() {
       && catalogEntry.id === runtimeName
       && catalogEntry.name === runtimeName
       && catalogEntry.path === targetPath;
+    const exclusionReason = excludedDefinitions.get(entry.path);
     return {
       id,
       plugin,
       sourceName,
       runtimeName,
-      status: consolidated ? 'consolidated' : 'pending',
+      status: exclusionReason ? 'excluded' : (consolidated ? 'consolidated' : 'pending'),
+      ...(exclusionReason ? { exclusionReason } : {}),
       sourcePath: entry.path,
       sourceBlobSha: entry.sha,
       targetPath
@@ -85,13 +93,14 @@ async function main() {
     roleCounts.set(definition.sourceName, (roleCounts.get(definition.sourceName) || 0) + 1);
   }
   const consolidated = definitions.filter((definition) => definition.status === 'consolidated').length;
+  const excluded = definitions.filter((definition) => definition.status === 'excluded').length;
   const inventory = {
     sourceRepo,
     sourceBranch,
     sourceCommitSha: commit.sha,
     sourceTreeSha: tree.sha,
     generatedAt: new Date().toISOString(),
-    policy: 'Upstream paths, role names, and high-level responsibilities are reference inputs only. Duplicate or semantically overlapping upstream definitions may map to one independently rewritten, strengthened, first-party HsinPu Apache-2.0 Agent.',
+    policy: 'Upstream paths, role names, and high-level responsibilities are reference inputs only. Duplicate or semantically overlapping upstream definitions may map to one independently rewritten, strengthened, first-party HsinPu Apache-2.0 Agent. Product-specific definitions that do not belong in the general catalog remain explicitly excluded with a reason.',
     totals: {
       definitions: definitions.length,
       uniqueRoleNames: roleCounts.size,
@@ -99,14 +108,15 @@ async function main() {
       repeatedDefinitions: definitions.length - roleCounts.size,
       uniqueSourceBlobs: new Set(definitions.map((definition) => definition.sourceBlobSha)).size,
       consolidated,
-      remaining: definitions.length - consolidated
+      excluded,
+      remaining: definitions.length - consolidated - excluded
     },
     definitions
   };
 
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
   fs.writeFileSync(outputPath, `${JSON.stringify(inventory, null, 2)}\n`, 'utf8');
-  console.log(`Agent reference synced: ${definitions.length} definitions, ${roleCounts.size} unique roles, ${consolidated} consolidated, ${definitions.length - consolidated} remaining`);
+  console.log(`Agent reference synced: ${definitions.length} definitions, ${roleCounts.size} unique roles, ${consolidated} consolidated, ${excluded} excluded, ${definitions.length - consolidated - excluded} remaining`);
 }
 
 main().catch((error) => {

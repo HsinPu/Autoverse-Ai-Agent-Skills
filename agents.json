@@ -1,9 +1,9 @@
 {
   "version": "3.0.0",
-  "updated": "2026-07-13T14:23:59.067Z",
-  "total": 194,
+  "updated": "2026-07-14T00:42:32.235Z",
+  "total": 208,
   "categories": 29,
-  "uniqueRoles": 194,
+  "uniqueRoles": 208,
   "agents": [
     {
       "id": "accessibility-expert",
@@ -66,6 +66,38 @@
           "finance/finance-bookkeeper-controller.md"
         ],
         "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
+      }
+    },
+    {
+      "id": "agent-designer",
+      "name": "agent-designer",
+      "role": "agent-designer",
+      "description": "Designs focused, portable Agent definitions with explicit routing, permissions, workflow boundaries, metadata, and verifiable outputs. Use when creating or materially refining a reusable Agent role rather than repository-wide instructions or harness adapters.",
+      "category": "developer-experience",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "agent-creator-design",
+        "subagent-architecture",
+        "agent-instructions-authoring",
+        "context-governance"
+      ],
+      "tags": [
+        "agent-design",
+        "system-prompts",
+        "routing",
+        "portability"
+      ],
+      "path": "agents/agent-designer.md",
+      "references": {
+        "repo": "github/awesome-copilot",
+        "paths": [
+          "agents/custom-agent-foundry.agent.md"
+        ],
+        "tree": "b36521f664a175a1ab32b4e5c8d75f0435d32ccc"
       }
     },
     {
@@ -195,6 +227,38 @@
           "skills/fabric-lakehouse/SKILL.md"
         ],
         "tree": "b36521f664a175a1ab32b4e5c8d75f0435d32ccc"
+      }
+    },
+    {
+      "id": "api-contract-architect",
+      "name": "api-contract-architect",
+      "role": "api-contract-architect",
+      "description": "Designs precise, evolvable API contracts across requests, responses, errors, authentication, concurrency, events, and compatibility. Use when consumers need an implementation-ready boundary without redesigning the whole system.",
+      "category": "architecture",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "api-contract-design",
+        "openapi-spec-generation",
+        "threat-modeling",
+        "specification-authoring"
+      ],
+      "tags": [
+        "api-contracts",
+        "compatibility",
+        "openapi",
+        "integration-design"
+      ],
+      "path": "agents/api-contract-architect.md",
+      "references": {
+        "repo": "VoltAgent/awesome-claude-code-subagents",
+        "paths": [
+          "categories/01-core-development/api-designer.md"
+        ],
+        "tree": "9c98eac2f7463c79ebb7b914432ace7dbd3bfeaa"
       }
     },
     {
@@ -587,6 +651,38 @@
           "design/design-brand-guardian.md"
         ],
         "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
+      }
+    },
+    {
+      "id": "browser-runtime-debugger",
+      "name": "browser-runtime-debugger",
+      "role": "browser-runtime-debugger",
+      "description": "Reproduces browser-only failures, captures runtime evidence, and isolates the failing client, network, server, or environment boundary without editing the implementation. Use when static inspection cannot explain a broken web flow or regression.",
+      "category": "quality-assurance",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "chrome-devtools-debugging",
+        "browser-automation",
+        "webapp-testing",
+        "logging-patterns"
+      ],
+      "tags": [
+        "browser-debugging",
+        "runtime-evidence",
+        "regression",
+        "root-cause"
+      ],
+      "path": "agents/browser-runtime-debugger.md",
+      "references": {
+        "repo": "github/awesome-copilot",
+        "paths": [
+          "agents/devtools-regression-investigator.agent.md"
+        ],
+        "tree": "b36521f664a175a1ab32b4e5c8d75f0435d32ccc"
       }
     },
     {
@@ -1112,6 +1208,7 @@
       "permission": "read-only",
       "skills": [
         "code-review",
+        "pipeline-review",
         "security-code-review",
         "testing-strategy",
         "git-operations"
@@ -1136,6 +1233,38 @@
           "plugins/tdd-workflows/agents/code-reviewer.md"
         ],
         "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
+      }
+    },
+    {
+      "id": "codebase-onboarding-engineer",
+      "name": "codebase-onboarding-engineer",
+      "role": "codebase-onboarding-engineer",
+      "description": "Builds evidence-backed orientation maps for unfamiliar repositories by locating entry points, ownership boundaries, execution paths, data flows, and contributor workflows. Use when a developer needs to understand a codebase before changing it.",
+      "category": "developer-experience",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "project-architecture-review",
+        "code-change-workflow",
+        "terminal-ops",
+        "context-governance"
+      ],
+      "tags": [
+        "codebase-onboarding",
+        "repository-exploration",
+        "execution-tracing",
+        "developer-orientation"
+      ],
+      "path": "agents/codebase-onboarding-engineer.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "engineering/engineering-codebase-onboarding-engineer.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
       }
     },
     {
@@ -1818,6 +1947,40 @@
       }
     },
     {
+      "id": "developer-tooling-engineer",
+      "name": "developer-tooling-engineer",
+      "role": "developer-tooling-engineer",
+      "description": "Designs and implements repository-native developer tools, CLIs, generators, and build workflows with stable automation contracts, cross-platform behavior, measurable performance, and safe distribution. Use when internal tooling itself must be built or changed.",
+      "category": "developer-experience",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "code-change-workflow",
+        "terminal-ops",
+        "testing-strategy",
+        "github-actions-ci"
+      ],
+      "tags": [
+        "developer-tooling",
+        "cli",
+        "build-systems",
+        "code-generation"
+      ],
+      "path": "agents/developer-tooling-engineer.md",
+      "references": {
+        "repo": "VoltAgent/awesome-claude-code-subagents",
+        "paths": [
+          "categories/06-developer-experience/build-engineer.md",
+          "categories/06-developer-experience/cli-developer.md",
+          "categories/06-developer-experience/tooling-engineer.md"
+        ],
+        "tree": "9c98eac2f7463c79ebb7b914432ace7dbd3bfeaa"
+      }
+    },
+    {
       "id": "devops-troubleshooter",
       "name": "devops-troubleshooter",
       "role": "devops-troubleshooter",
@@ -2238,6 +2401,39 @@
           "plugins/backend-development/agents/event-sourcing-architect.md"
         ],
         "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
+      }
+    },
+    {
+      "id": "experimentation-methodologist",
+      "name": "experimentation-methodologist",
+      "role": "experimentation-methodologist",
+      "description": "Designs and audits product experiments with explicit hypotheses, assignment integrity, power, guardrails, cohort analysis, and decision rules. Use before launching an experiment or when results need an independent ship, extend, iterate, or stop recommendation.",
+      "category": "analysis",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "testing-strategy",
+        "spreadsheet-ops",
+        "sql-best-practices",
+        "specification-authoring"
+      ],
+      "tags": [
+        "experimentation",
+        "causal-inference",
+        "ab-testing",
+        "cohort-analysis"
+      ],
+      "path": "agents/experimentation-methodologist.md",
+      "references": {
+        "repo": "VoltAgent/awesome-claude-code-subagents",
+        "paths": [
+          "categories/10-research-analysis/ab-test-analysis.md",
+          "categories/10-research-analysis/cohort-analysis.md"
+        ],
+        "tree": "9c98eac2f7463c79ebb7b914432ace7dbd3bfeaa"
       }
     },
     {
@@ -2879,7 +3075,6 @@
       "references": {
         "repo": "wshobson/agents",
         "paths": [
-          "plugins/runapi-mcp/agents/task-executor.md",
           "plugins/ship-mate/agents/implement.md"
         ],
         "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
@@ -2977,6 +3172,38 @@
           "plugins/multi-platform-apps/agents/ios-developer.md"
         ],
         "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
+      }
+    },
+    {
+      "id": "it-service-manager",
+      "name": "it-service-manager",
+      "role": "it-service-manager",
+      "description": "Governs IT services through business-aligned catalogs, ownership, SLAs, incident and problem practices, change controls, configuration evidence, and continual improvement. Use when IT service delivery needs measurable operating rules rather than an infrastructure fix.",
+      "category": "operations",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "incident-response-postmortems",
+        "observability-engineering",
+        "deployment-operations",
+        "data-organization-system"
+      ],
+      "tags": [
+        "itsm",
+        "service-management",
+        "change-management",
+        "continual-improvement"
+      ],
+      "path": "agents/it-service-manager.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "engineering/engineering-it-service-manager.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
       }
     },
     {
@@ -3205,6 +3432,41 @@
           "plugins/hr-legal-compliance/agents/legal-advisor.md"
         ],
         "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
+      }
+    },
+    {
+      "id": "linux-systems-administrator",
+      "name": "linux-systems-administrator",
+      "role": "linux-systems-administrator",
+      "description": "Diagnoses and plans reversible administration of Linux hosts across package, service, identity, storage, networking, boot, and security boundaries. Use for distribution-aware operating-system maintenance, recovery, migration, or change design.",
+      "category": "cloud-infrastructure",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "terminal-ops",
+        "security-scanning",
+        "observability-engineering",
+        "deployment-operations"
+      ],
+      "tags": [
+        "linux-administration",
+        "systemd",
+        "operating-systems",
+        "infrastructure"
+      ],
+      "path": "agents/linux-systems-administrator.md",
+      "references": {
+        "repo": "github/awesome-copilot",
+        "paths": [
+          "agents/arch-linux-expert.agent.md",
+          "agents/centos-linux-expert.agent.md",
+          "agents/debian-linux-expert.agent.md",
+          "agents/fedora-linux-expert.agent.md"
+        ],
+        "tree": "b36521f664a175a1ab32b4e5c8d75f0435d32ccc"
       }
     },
     {
@@ -3624,6 +3886,38 @@
       }
     },
     {
+      "id": "model-validation-specialist",
+      "name": "model-validation-specialist",
+      "role": "model-validation-specialist",
+      "description": "Independently validates statistical and machine-learning models across data lineage, leakage, reproducibility, calibration, discrimination, robustness, fairness, and monitoring. Use before model approval, material change, or continued production use.",
+      "category": "machine-learning",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "llm-evals",
+        "python-data-engineering",
+        "python-testing-engineering",
+        "testing-strategy"
+      ],
+      "tags": [
+        "model-validation",
+        "model-risk",
+        "calibration",
+        "reproducibility"
+      ],
+      "path": "agents/model-validation-specialist.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "specialized/specialized-model-qa.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
+      }
+    },
+    {
       "id": "monorepo-architect",
       "name": "monorepo-architect",
       "role": "monorepo-architect",
@@ -3757,7 +4051,7 @@
       "id": "orchestrate",
       "name": "orchestrate",
       "role": "orchestrate",
-      "description": "Coordinates a bounded multi-agent implementation by decomposing work, assigning independent ownership, managing dependencies, and integrating verified results. Use when one objective has several genuinely parallel workstreams.",
+      "description": "Executes an approved multi-agent workflow by dispatching bounded work, enforcing dependency gates, collecting handoff evidence, and integrating results in order. Use after a lead has already decided the objective, ownership, and plan.",
       "category": "orchestration",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -3766,9 +4060,9 @@
       "permission": "workspace-write",
       "skills": [
         "subagent-architecture",
-        "todo-first",
         "incremental-implementation",
-        "context-governance"
+        "context-governance",
+        "terminal-ops"
       ],
       "tags": [
         "orchestration",
@@ -3778,12 +4072,11 @@
       ],
       "path": "agents/orchestrate.md",
       "references": {
-        "repo": "wshobson/agents",
+        "repo": "VoltAgent/awesome-claude-code-subagents",
         "paths": [
-          "plugins/agent-teams/agents/team-implementer.md",
-          "plugins/ship-mate/agents/orchestrate.md"
+          "categories/09-meta-orchestration/workflow-orchestrator.md"
         ],
-        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
+        "tree": "9c98eac2f7463c79ebb7b914432ace7dbd3bfeaa"
       }
     },
     {
@@ -4333,6 +4626,38 @@
       }
     },
     {
+      "id": "product-spec-orchestrator",
+      "name": "product-spec-orchestrator",
+      "role": "product-spec-orchestrator",
+      "description": "Guides one product idea from incomplete request to a decision-ready specification through structured discovery, option framing, and explicit approval gates. Use before implementation when the desired product behavior is not yet sufficiently defined.",
+      "category": "product-management",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "ask-questions-if-underspecified",
+        "specification-authoring",
+        "api-contract-design",
+        "context-governance"
+      ],
+      "tags": [
+        "product-discovery",
+        "specification",
+        "requirements",
+        "approval-gates"
+      ],
+      "path": "agents/product-spec-orchestrator.md",
+      "references": {
+        "repo": "wshobson/agents",
+        "paths": [
+          "plugins/ship-mate/agents/orchestrate.md"
+        ],
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
+      }
+    },
+    {
       "id": "project-manager",
       "name": "project-manager",
       "role": "project-manager",
@@ -4587,6 +4912,38 @@
       }
     },
     {
+      "id": "refactoring-specialist",
+      "name": "refactoring-specialist",
+      "role": "refactoring-specialist",
+      "description": "Performs small, behavior-preserving structural code changes backed by characterization tests, dependency analysis, and continuous verification. Use when maintainability must improve without changing features, public contracts, or architecture.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "code-change-workflow",
+        "code-refactoring",
+        "testing-strategy",
+        "incremental-implementation"
+      ],
+      "tags": [
+        "refactoring",
+        "behavior-preservation",
+        "code-quality",
+        "characterization-testing"
+      ],
+      "path": "agents/refactoring-specialist.md",
+      "references": {
+        "repo": "VoltAgent/awesome-claude-code-subagents",
+        "paths": [
+          "categories/06-developer-experience/refactoring-specialist.md"
+        ],
+        "tree": "9c98eac2f7463c79ebb7b914432ace7dbd3bfeaa"
+      }
+    },
+    {
       "id": "reference-builder",
       "name": "reference-builder",
       "role": "reference-builder",
@@ -4711,6 +5068,38 @@
           "plugins/reverse-engineering/agents/reverse-engineer.md"
         ],
         "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
+      }
+    },
+    {
+      "id": "review-feedback-resolver",
+      "name": "review-feedback-resolver",
+      "role": "review-feedback-resolver",
+      "description": "Validates external review findings, applies the smallest justified corrections, and returns evidence for each resolved, rejected, or deferred item. Use after code review when feedback must be addressed without weakening requirements or expanding scope.",
+      "category": "quality-assurance",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "github-code-review",
+        "code-change-workflow",
+        "testing-strategy",
+        "git-operations"
+      ],
+      "tags": [
+        "review-feedback",
+        "remediation",
+        "regression",
+        "traceability"
+      ],
+      "path": "agents/review-feedback-resolver.md",
+      "references": {
+        "repo": "github/awesome-copilot",
+        "paths": [
+          "agents/address-comments.agent.md"
+        ],
+        "tree": "b36521f664a175a1ab32b4e5c8d75f0435d32ccc"
       }
     },
     {
@@ -5709,16 +6098,48 @@
       }
     },
     {
-      "id": "team-lead",
-      "name": "team-lead",
-      "role": "team-lead",
-      "description": "Leads a bounded multi-agent task by maintaining objective, priorities, decisions, ownership, progress, risk, and completion evidence. Use when coordinated work needs one accountable integrator.",
+      "id": "team-implementer",
+      "name": "team-implementer",
+      "role": "team-implementer",
+      "description": "Implements one explicitly owned slice of a coordinated change, preserves shared contracts, and returns integration-ready evidence to the lead. Use when a multi-agent task has already been decomposed and this agent has a non-overlapping delivery boundary.",
       "category": "orchestration",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
       "model": "inherit",
       "permission": "workspace-write",
+      "skills": [
+        "code-change-workflow",
+        "incremental-implementation",
+        "testing-strategy",
+        "context-governance"
+      ],
+      "tags": [
+        "team-implementation",
+        "ownership",
+        "integration",
+        "verification"
+      ],
+      "path": "agents/team-implementer.md",
+      "references": {
+        "repo": "wshobson/agents",
+        "paths": [
+          "plugins/agent-teams/agents/team-implementer.md"
+        ],
+        "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
+      }
+    },
+    {
+      "id": "team-lead",
+      "name": "team-lead",
+      "role": "team-lead",
+      "description": "Governs a bounded multi-agent delivery by deciding objectives, priorities, ownership, risk responses, acceptance gates, and completion. Use when coordinated work needs one accountable lead before and throughout workflow execution.",
+      "category": "orchestration",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
       "skills": [
         "subagent-architecture",
         "todo-first",
@@ -5935,6 +6356,38 @@
         "repo": "msitarzewski/agency-agents",
         "paths": [
           "security/security-threat-detection-engineer.md"
+        ],
+        "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
+      }
+    },
+    {
+      "id": "threat-intelligence-analyst",
+      "name": "threat-intelligence-analyst",
+      "role": "threat-intelligence-analyst",
+      "description": "Produces decision-focused cyber threat intelligence by defining intelligence requirements, corroborating sources, tracking adversary behavior, mapping campaigns to ATT&CK, and assessing confidence. Use when defensive priorities need current actor, campaign, vulnerability, or sector evidence.",
+      "category": "security",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "read-only",
+      "skills": [
+        "web-research-ops",
+        "threat-modeling",
+        "security-scanning",
+        "incident-response-postmortems"
+      ],
+      "tags": [
+        "threat-intelligence",
+        "adversary-tracking",
+        "campaign-analysis",
+        "mitre-attack"
+      ],
+      "path": "agents/threat-intelligence-analyst.md",
+      "references": {
+        "repo": "msitarzewski/agency-agents",
+        "paths": [
+          "security/security-threat-intelligence-analyst.md"
         ],
         "tree": "33b57872e33785b1d225606c513945ca5c52c8c0"
       }

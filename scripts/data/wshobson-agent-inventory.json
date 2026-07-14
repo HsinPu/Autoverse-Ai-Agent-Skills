@@ -4,14 +4,15 @@
   "sourceCommitSha": "2de74ac1c8f6669821dcef13153332c3168033c1",
   "sourceTreeSha": "deadb68423a57db5a1ab2afd50102be27df1744c",
   "generatedAt": "2026-07-13T14:30:58.155Z",
-  "policy": "Upstream paths, role names, and high-level responsibilities are reference inputs only. Duplicate or semantically overlapping upstream definitions may map to one independently rewritten, strengthened, first-party HsinPu Apache-2.0 Agent.",
+  "policy": "Upstream paths, role names, and high-level responsibilities are reference inputs only. Duplicate or semantically overlapping upstream definitions may map to one independently rewritten, strengthened, first-party HsinPu Apache-2.0 Agent. Product-specific definitions that do not belong in the general catalog remain explicitly excluded with a reason.",
   "totals": {
     "definitions": 199,
     "uniqueRoleNames": 134,
     "repeatedRoleNames": 30,
     "repeatedDefinitions": 65,
     "uniqueSourceBlobs": 199,
-    "consolidated": 199,
+    "consolidated": 198,
+    "excluded": 1,
     "remaining": 0
   },
   "definitions": [
@@ -49,11 +50,11 @@
       "id": "agent-teams/team-implementer",
       "plugin": "agent-teams",
       "sourceName": "team-implementer",
-      "runtimeName": "orchestrate",
+      "runtimeName": "team-implementer",
       "status": "consolidated",
       "sourcePath": "plugins/agent-teams/agents/team-implementer.md",
       "sourceBlobSha": "ee75eaada7d63aac123e750022daa2802da167da",
-      "targetPath": "agents/orchestrate.md"
+      "targetPath": "agents/team-implementer.md"
     },
     {
       "id": "agent-teams/team-lead",
@@ -1629,11 +1630,12 @@
       "id": "runapi-mcp/task-executor",
       "plugin": "runapi-mcp",
       "sourceName": "task-executor",
-      "runtimeName": "implement",
-      "status": "consolidated",
+      "runtimeName": "task-executor",
+      "status": "excluded",
+      "exclusionReason": "Product-specific RunAPI media-task executor; intentionally excluded from the general repository implementation role.",
       "sourcePath": "plugins/runapi-mcp/agents/task-executor.md",
       "sourceBlobSha": "204c090227cee1bcafec172443b179421f086471",
-      "targetPath": "agents/implement.md"
+      "targetPath": "agents/task-executor.md"
     },
     {
       "id": "security-compliance/security-auditor",
@@ -1809,11 +1811,11 @@
       "id": "ship-mate/orchestrate",
       "plugin": "ship-mate",
       "sourceName": "orchestrate",
-      "runtimeName": "orchestrate",
+      "runtimeName": "product-spec-orchestrator",
       "status": "consolidated",
       "sourcePath": "plugins/ship-mate/agents/orchestrate.md",
       "sourceBlobSha": "27c1ef16854e4ca5bc2368060bb5fa2ee497115e",
-      "targetPath": "agents/orchestrate.md"
+      "targetPath": "agents/product-spec-orchestrator.md"
     },
     {
       "id": "ship-mate/playwright",

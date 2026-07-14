@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-07-13T00:00:00Z",
-  "total": 187,
+  "updated": "2026-07-14T00:00:00Z",
+  "total": 188,
   "skills": [
     {
       "name": "todo-first",
@@ -138,6 +138,25 @@
         "best-practices",
         "testing",
         "architecture"
+      ]
+    },
+    {
+      "name": "pipeline-review",
+      "description": "Run an independent, read-only review gate between implementation stages using three-level findings, a stable review-report artifact, explicit ownership, and repeatable review loops. Use after a change set or delivery stage is complete and before merge, release, or the next pipeline stage.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "reference": {
+        "source": "wshobson/agents",
+        "license": "MIT"
+      },
+      "tags": [
+        "pipeline-review",
+        "quality-gate",
+        "review-report",
+        "review-loop",
+        "read-only"
       ]
     },
     {

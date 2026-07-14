@@ -429,6 +429,7 @@ if (inventory) {
   const definitions = Array.isArray(inventory.definitions) ? inventory.definitions : [];
   const totals = inventory.totals || {};
   const consolidated = definitions.filter((definition) => definition.status === 'consolidated');
+  const excluded = definitions.filter((definition) => definition.status === 'excluded');
   const pending = definitions.filter((definition) => definition.status === 'pending');
   const uniqueRoleNames = new Set(definitions.map((definition) => definition.sourceName));
   const roleCounts = new Map();
@@ -439,6 +440,7 @@ if (inventory) {
   compare('Agent reference', 'repeatedDefinitions', definitions.length - uniqueRoleNames.size, totals.repeatedDefinitions, 'computed', 'inventory totals');
   compare('Agent reference', 'uniqueSourceBlobs', new Set(definitions.map((definition) => definition.sourceBlobSha)).size, totals.uniqueSourceBlobs, 'computed', 'inventory totals');
   compare('Agent reference', 'consolidated', consolidated.length, totals.consolidated, 'computed', 'inventory totals');
+  compare('Agent reference', 'excluded', excluded.length, totals.excluded, 'computed', 'inventory totals');
   compare('Agent reference', 'remaining', pending.length, totals.remaining, 'computed', 'inventory totals');
 
   const definitionIds = new Set();
@@ -452,7 +454,8 @@ if (inventory) {
     for (const field of ['id', 'plugin', 'sourceName', 'runtimeName', 'status', 'sourcePath', 'sourceBlobSha', 'targetPath']) {
       if (!definition[field]) fail(`Agent reference definition is missing ${field}`);
     }
-    if (!['pending', 'consolidated'].includes(definition.status)) fail(`${definition.id}: invalid status ${definition.status}`);
+    if (!['pending', 'consolidated', 'excluded'].includes(definition.status)) fail(`${definition.id}: invalid status ${definition.status}`);
+    if (definition.status === 'excluded' && !definition.exclusionReason) fail(`${definition.id}: excluded definition is missing exclusionReason`);
     if (definitionIds.has(definition.id)) fail(`Duplicate Agent reference id: ${definition.id}`);
     if (sourcePaths.has(definition.sourcePath)) fail(`Duplicate upstream source path: ${definition.sourcePath}`);
     definitionIds.add(definition.id);
@@ -460,6 +463,7 @@ if (inventory) {
     const catalogEntry = agentsByReferencePath.get(definition.sourcePath);
     if (definition.status === 'consolidated' && !catalogEntry) fail(`${definition.id}: consolidated reference has no canonical Agent`);
     if (definition.status === 'pending' && catalogEntry) fail(`${definition.id}: canonical Agent exists but reference is pending`);
+    if (definition.status === 'excluded' && catalogEntry) fail(`${definition.id}: excluded reference must not map to a canonical Agent`);
     if (catalogEntry) {
       compare(definition.id, 'runtimeName', definition.runtimeName, catalogEntry.name, 'inventory', 'agents.json');
       compare(definition.id, 'targetPath', definition.targetPath, catalogEntry.path, 'inventory', 'agents.json');
