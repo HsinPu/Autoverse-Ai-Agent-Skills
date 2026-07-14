@@ -2,15 +2,15 @@
 
 [![Validate](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/actions/workflows/validate.yml/badge.svg)](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/actions/workflows/validate.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
-![Skills](https://img.shields.io/badge/Skills-188-7c3aed)
-![Agents](https://img.shields.io/badge/Agents-213-2563eb)
+![Skills](https://img.shields.io/badge/Skills-189-7c3aed)
+![Agents](https://img.shields.io/badge/Agents-219-2563eb)
 ![Node.js](https://img.shields.io/badge/Node.js-%3E%3D16-339933?logo=nodedotjs&logoColor=white)
 
 由 **HsinPu** 維護的開源 AI Agent 與 Skill catalog，提供可直接安裝的 Codex、Claude Code、Cursor、VS Code／GitHub Copilot、OpenCode Agents 與 Skills，並包含安全更新機制及本機 catalog 查詢 CLI。
 
 這個專案不是另一套 Agent runtime 或 orchestration framework；它專注在可攜、可查詢、可驗證的角色與能力定義，讓現有 coding agent 能直接使用。
 
-[快速開始](#快速開始) · [Agents](#agents) · [Skills](#skills) · [Catalog CLI](#catalog-cli) · [開發與驗證](#開發與驗證) · [回報問題](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/issues)
+[快速開始](#快速開始) · [Agents](#agents) · [Skills](#skills) · [影片製作工作流](#影片製作工作流) · [Catalog CLI](#catalog-cli) · [開發與驗證](#開發與驗證) · [回報問題](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/issues)
 
 ## 目錄
 
@@ -20,6 +20,7 @@
 - [安裝單一元件](#安裝單一元件)
 - [安全更新與覆蓋保護](#安全更新與覆蓋保護)
 - [如何使用 Agent](#如何使用-agent)
+- [影片製作工作流](#影片製作工作流)
 - [Catalog CLI](#catalog-cli)
 - [Agents](#agents)
 - [Skills](#skills)
@@ -48,7 +49,7 @@ Linux／macOS：
 curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type skill && curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type agent --enable-auto-delegation
 ```
 
-這組命令會安裝全部 188 個 Skills、213 個 Agents，並啟用不依賴專案 `AGENTS.md` 的全域主動委派。
+這組命令會安裝全部 189 個 Skills、219 個 Agents，並啟用不依賴專案 `AGENTS.md` 的全域主動委派。
 
 ### 只安裝全部 Skills
 
@@ -144,23 +145,23 @@ curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/ma
 
 | 類型 | 數量 | 用途 | Canonical source |
 |---|---:|---|---|
-| Skills | **188 Skills**／7 類 | 可重複使用的工作流程、規範、工具指引與領域知識 | `skills/<name>/SKILL.md` |
-| Agents | 213／30 類 | 可委派的專業角色，包含任務、限制、權限與輸出契約 | `agents/<role>.md` |
-| Codex adapters | 213 | Codex custom Agent 的 TOML 設定 | `adapters/codex/<role>.toml` |
-| Claude adapters | 213 | Claude Code subagent 的 Markdown 設定 | `adapters/claude/<role>.md` |
-| Cursor adapters | 213 | Cursor subagent 的 Markdown 設定 | `adapters/cursor/<role>.md` |
-| Copilot adapters | 213 | VS Code／GitHub Copilot custom Agent 設定 | `adapters/copilot/<role>.agent.md` |
-| OpenCode adapters | 213 | OpenCode `mode: subagent` 的 Markdown 設定 | `adapters/opencode/<role>.md` |
+| Skills | **189 Skills**／7 類 | 可重複使用的工作流程、規範、工具指引與領域知識 | `skills/<name>/SKILL.md` |
+| Agents | 219／31 類 | 可委派的專業角色，包含任務、限制、權限與輸出契約 | `agents/<role>.md` |
+| Codex adapters | 219 | Codex custom Agent 的 TOML 設定 | `adapters/codex/<role>.toml` |
+| Claude adapters | 219 | Claude Code subagent 的 Markdown 設定 | `adapters/claude/<role>.md` |
+| Cursor adapters | 219 | Cursor subagent 的 Markdown 設定 | `adapters/cursor/<role>.md` |
+| Copilot adapters | 219 | VS Code／GitHub Copilot custom Agent 設定 | `adapters/copilot/<role>.agent.md` |
+| OpenCode adapters | 219 | OpenCode `mode: subagent` 的 Markdown 設定 | `adapters/opencode/<role>.md` |
 | wshobson reference ledger | 199 definitions | 保存原始角色集合的 reference path 與合併追蹤資料 | `scripts/data/wshobson-agent-inventory.json` |
-| Additional Agent references | 93 paths／8 repositories | 保存在各 canonical Agent 的 `reference-*` metadata | `agents/<role>.md` |
+| Additional Agent references | 99 paths／11 repositories | 保存在各 canonical Agent 的 `reference-*` metadata | `agents/<role>.md` |
 
 各 adapter 會把 canonical `read-only`／`workspace-write` 權限轉成平台可理解的設定。例如 OpenCode 的唯讀角色會設定 `edit: deny` 與 `bash: deny`；Copilot 的唯讀角色只開放 `read`、`search`、`web`、`agent` tools。
 
 <!-- AGENT_COUNT_START -->
-目前共收錄 **213** 個不重複 Agents。
+目前共收錄 **219** 個不重複 Agents。
 <!-- AGENT_COUNT_END -->
 
-`wshobson/agents` ledger 的 199 份 definitions 內含 65 份同名角色變體，共形成 134 個上游角色名稱。內容級覆核後，198 份通用 definitions 對應 132 個 independently rewritten canonical Agents；RunAPI 的產品專屬 `task-executor` 則保留在 ledger 並明確標記為 `excluded`。另外 81 個 Agents 來自八個 reference repositories，加入前同樣會先比對名稱、職責邊界與 prompt 內容。
+`wshobson/agents` ledger 的 199 份 definitions 內含 65 份同名角色變體，共形成 134 個上游角色名稱。內容級覆核後，198 份通用 definitions 對應 132 個 independently rewritten canonical Agents；RunAPI 的產品專屬 `task-executor` 則保留在 ledger 並明確標記為 `excluded`。另外 87 個 Agents 來自其餘十一個 reference repositories，加入前同樣會先比對名稱、職責邊界與 prompt 內容。
 
 ### Agent 與 Skill 的差別
 
@@ -343,6 +344,37 @@ CLI 只列出同時具有 adapter 與有效 Autoverse ownership sidecar 的檔�
 
 平台格式的官方連結集中在 [`project` target 的實際位置](#project-target-的實際位置)一節。
 
+## 影片製作工作流
+
+`video-production-workflow` 是一套工具中立、具審批閘門且可恢復執行的完整影片流程。它不綁定特定生成模型或剪輯器；可以由一個 Agent 依序執行，也可以由 `video-director` 統籌多個專業角色。
+
+```text
+brief → creative treatment → script → storyboard／shot list
+      → continuity／production plan → assets → edit／compose → review／delivery
+```
+
+| 角色 | 主要責任 | 何時加入 |
+|---|---|---|
+| `video-director` | 統籌創意、角色路由、階段閘門、修改仲裁與最終審查 | 完整影片專案的預設入口 |
+| `video-producer` | 排程、預算、權利、供應商、素材與 checkpoint 狀態 | 有外部素材、付費生成、多人或交期限制時 |
+| `creative-director` | 跨媒介創意願景、品牌一致性與設計到製作的交接 | 網站、品牌、活動與影片需要共用創意方向時 |
+| `screenwriter` | 故事結構、可拍攝場景、動作、對白／旁白與改稿 | 需要敘事腳本或長短篇改編時 |
+| `storyboard-artist` | 分鏡、shot list、鏡位、運鏡、節奏與場面調度 | 腳本核准後、產生或拍攝素材前 |
+| `visual-continuity-supervisor` | 角色、服裝、產品、道具、場景、時間與畫面狀態連續性 | 多鏡頭、跨場景或生成內容容易漂移時 |
+
+執行模式依專案大小調整：短片可由 `video-director` 單獨依序完成；一般專案由導演搭配製片，再按需要加入編劇、分鏡與 continuity；長篇、多場景或 recurring-character 專案可完整加入這些影片專職角色，只有品牌活動或跨媒介創意系統才額外加入 `creative-director`。若目前工具不支援 subagent，主 Agent 仍會依相同階段、產物與審批點逐步執行，不會跳過治理要求。
+
+新專案可從 [`skills/video-production-workflow/assets/project-template`](skills/video-production-workflow/assets/project-template) 複製完整模板，預設工作目錄為 `video-projects/<project-id>/`。每個 brief、treatment、script、shot、素材、render 與 review 都有版本、owner、輸入、決策與核准狀態，方便中斷後從第一個未驗證階段繼續。
+
+以下節點必須明確核准：creative treatment、script、storyboard／continuity／production plan、付費或大量生成、會改變成本／權利／隱私的 provider 替換，以及最終 render／發布。前一階段的核准不會自動授權後續外部操作。
+
+可直接這樣要求主 Agent：
+
+```text
+使用 video-production-workflow 規劃這支影片，由 video-director 統籌。
+先建立專案模板並完成 brief 與 creative treatment；在我核准 treatment 前不要開始腳本或素材生成。
+```
+
 ## Catalog CLI
 
 `autoverse-cli.js` 提供離線 catalog 搜尋與安裝狀態查詢，需要 Node.js 16 或更新版本。目前請直接從 repository checkout 執行。
@@ -390,7 +422,7 @@ Catalog 來源分別是 [skills.json](skills.json) 與 [agents.json](agents.json
 每個 Agent 都有唯一 role、清楚的使用時機、權限模式、相關 Skills，以及固定的 `Role → Task → Constraints → Output` prompt 結構。完整 metadata 以 [agents.json](agents.json) 為準。
 
 <details>
-<summary><strong>展開 30 類、213 個 Agents 的完整索引</strong></summary>
+<summary><strong>展開 31 類、219 個 Agents 的完整索引</strong></summary>
 
 <!-- AGENT_SUMMARY_START -->
 | Category | Count | Agents |
@@ -401,7 +433,7 @@ Catalog 來源分別是 [skills.json](skills.json) 與 [agents.json](agents.json
 | `business-operations` | 7 | [`change-management-consultant`](agents/change-management-consultant.md), [`hr-pro`](agents/hr-pro.md), [`learning-development-specialist`](agents/learning-development-specialist.md), [`operations-manager`](agents/operations-manager.md), [`partnership-manager`](agents/partnership-manager.md), [`pricing-strategist`](agents/pricing-strategist.md), [`procurement-specialist`](agents/procurement-specialist.md) |
 | `cloud-infrastructure` | 10 | [`aws-solutions-architect`](agents/aws-solutions-architect.md), [`cloud-architect`](agents/cloud-architect.md), [`finops-engineer`](agents/finops-engineer.md), [`hybrid-cloud-architect`](agents/hybrid-cloud-architect.md), [`kubernetes-architect`](agents/kubernetes-architect.md), [`linux-systems-administrator`](agents/linux-systems-administrator.md), [`network-engineer`](agents/network-engineer.md), [`service-mesh-expert`](agents/service-mesh-expert.md), [`terraform-specialist`](agents/terraform-specialist.md), [`windows-infrastructure-admin`](agents/windows-infrastructure-admin.md) |
 | `commerce` | 2 | [`ecommerce-operations-manager`](agents/ecommerce-operations-manager.md), [`payment-integration`](agents/payment-integration.md) |
-| `creative` | 2 | [`gallery-researcher`](agents/gallery-researcher.md), [`image-generator`](agents/image-generator.md) |
+| `creative` | 3 | [`creative-director`](agents/creative-director.md), [`gallery-researcher`](agents/gallery-researcher.md), [`image-generator`](agents/image-generator.md) |
 | `customer-operations` | 2 | [`customer-success-manager`](agents/customer-success-manager.md), [`customer-support`](agents/customer-support.md) |
 | `data` | 9 | [`analytics-engineer`](agents/analytics-engineer.md), [`data-engineer`](agents/data-engineer.md), [`data-governance-engineer`](agents/data-governance-engineer.md), [`data-scientist`](agents/data-scientist.md), [`database-admin`](agents/database-admin.md), [`gis-analyst`](agents/gis-analyst.md), [`search-relevance-engineer`](agents/search-relevance-engineer.md), [`sql-pro`](agents/sql-pro.md), [`vector-database-engineer`](agents/vector-database-engineer.md) |
 | `developer-experience` | 8 | [`agent-designer`](agents/agent-designer.md), [`agent-harness-optimizer`](agents/agent-harness-optimizer.md), [`codebase-onboarding-engineer`](agents/codebase-onboarding-engineer.md), [`dependency-manager`](agents/dependency-manager.md), [`developer-advocate`](agents/developer-advocate.md), [`developer-tooling-engineer`](agents/developer-tooling-engineer.md), [`dx-optimizer`](agents/dx-optimizer.md), [`platform-engineer`](agents/platform-engineer.md) |
@@ -413,6 +445,7 @@ Catalog 來源分別是 [skills.json](skills.json) 與 [agents.json](agents.json
 | `healthcare` | 6 | [`clinical-data-manager`](agents/clinical-data-manager.md), [`clinical-evidence-reviewer`](agents/clinical-evidence-reviewer.md), [`emergency-preparedness-coordinator`](agents/emergency-preparedness-coordinator.md), [`health-information-manager`](agents/health-information-manager.md), [`healthcare-compliance-specialist`](agents/healthcare-compliance-specialist.md), [`patient-safety-officer`](agents/patient-safety-officer.md) |
 | `machine-learning` | 3 | [`ml-engineer`](agents/ml-engineer.md), [`mlops-engineer`](agents/mlops-engineer.md), [`model-validation-specialist`](agents/model-validation-specialist.md) |
 | `marketing` | 13 | [`content-marketer`](agents/content-marketer.md), [`marketing-measurement-specialist`](agents/marketing-measurement-specialist.md), [`paid-media-auditor`](agents/paid-media-auditor.md), [`seo-authority-builder`](agents/seo-authority-builder.md), [`seo-cannibalization-detector`](agents/seo-cannibalization-detector.md), [`seo-content-auditor`](agents/seo-content-auditor.md), [`seo-content-planner`](agents/seo-content-planner.md), [`seo-content-refresher`](agents/seo-content-refresher.md), [`seo-content-writer`](agents/seo-content-writer.md), [`seo-keyword-strategist`](agents/seo-keyword-strategist.md), [`seo-meta-optimizer`](agents/seo-meta-optimizer.md), [`seo-snippet-hunter`](agents/seo-snippet-hunter.md), [`social-publishing-publisher`](agents/social-publishing-publisher.md) |
+| `media-production` | 5 | [`screenwriter`](agents/screenwriter.md), [`storyboard-artist`](agents/storyboard-artist.md), [`video-director`](agents/video-director.md), [`video-producer`](agents/video-producer.md), [`visual-continuity-supervisor`](agents/visual-continuity-supervisor.md) |
 | `operations` | 11 | [`chaos-engineer`](agents/chaos-engineer.md), [`deploy-with-verification`](agents/deploy-with-verification.md), [`deployment-engineer`](agents/deployment-engineer.md), [`devops-troubleshooter`](agents/devops-troubleshooter.md), [`error-detective`](agents/error-detective.md), [`incident-responder`](agents/incident-responder.md), [`it-service-manager`](agents/it-service-manager.md), [`mobile-release-engineer`](agents/mobile-release-engineer.md), [`observability-engineer`](agents/observability-engineer.md), [`prod-logs-health-check`](agents/prod-logs-health-check.md), [`sre-engineer`](agents/sre-engineer.md) |
 | `orchestration` | 9 | [`conductor-validator`](agents/conductor-validator.md), [`context-manager`](agents/context-manager.md), [`implement`](agents/implement.md), [`orchestrate`](agents/orchestrate.md), [`session-end`](agents/session-end.md), [`session-start`](agents/session-start.md), [`team-debugger`](agents/team-debugger.md), [`team-implementer`](agents/team-implementer.md), [`team-lead`](agents/team-lead.md) |
 | `performance` | 2 | [`database-optimizer`](agents/database-optimizer.md), [`performance-engineer`](agents/performance-engineer.md) |
@@ -431,11 +464,11 @@ Catalog 來源分別是 [skills.json](skills.json) 與 [agents.json](agents.json
 
 ## Skills
 
-188 個 Skills 分成 7 類。每個 package 以 `SKILL.md` 為入口，相關 references、scripts 與 assets 保留在同一資料夾中。
+189 個 Skills 分成 7 類。每個 package 以 `SKILL.md` 為入口，相關 references、scripts 與 assets 保留在同一資料夾中。
 
 | Category | Count | 說明 |
 |---|---:|---|
-| `development` | 150 | 軟體開發、架構、框架、測試、安全、資料與平台工程 |
+| `development` | 151 | 軟體開發、架構、框架、測試、安全、資料與平台工程 |
 | `productivity` | 20 | 規劃、檔案整理、文件與日常工作流程 |
 | `browser-automation` | 7 | Browser automation、DevTools、Playwright 與 webapp testing |
 | `coding-agents-ides` | 5 | Agent、Skill、MCP 與 coding-agent 工作流程 |
@@ -542,10 +575,11 @@ npm pack --dry-run
 - 所有 Agents 與 Skills 的正式 `source` 都是 `HsinPu/Autoverse-Ai-Agent-Skills`，作者為 HsinPu。
 - 外部專案只作為研究、coverage 與設計參考；Agents 使用 `reference-repo`、`reference-paths`、`reference-tree`，Skills 使用 `reference-source`、`reference-license` 獨立記錄，不取代本專案的正式來源。
 - Agent reference repository 的 pinned commit、實際 Git tree、license identifier 與 license path 集中保存在 [agent-reference-sources.json](scripts/data/agent-reference-sources.json)。CI 會向 GitHub 重新驗證 commit → tree 關係、每個 reference path，以及授權檔內容。
-- Agent catalog 參考 [wshobson/agents](https://github.com/wshobson/agents)、[msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents)、[VoltAgent/awesome-claude-code-subagents](https://github.com/VoltAgent/awesome-claude-code-subagents)、[github/awesome-copilot](https://github.com/github/awesome-copilot)、[affaan-m/ECC](https://github.com/affaan-m/ECC)、[supatest-ai/awesome-claude-code-sub-agents](https://github.com/supatest-ai/awesome-claude-code-sub-agents)、[devsforge/marketplace](https://github.com/devsforge/marketplace)、[ajhcs/healthcare-agents](https://github.com/ajhcs/healthcare-agents) 與 [aws-samples/sample-claude-code-agent-team](https://github.com/aws-samples/sample-claude-code-agent-team) 的角色定位、路徑與高層責任；prompt 內容均由本專案重新設計與加強，不是原文完整複製。
+- Agent catalog 參考 [wshobson/agents](https://github.com/wshobson/agents)、[msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents)、[VoltAgent/awesome-claude-code-subagents](https://github.com/VoltAgent/awesome-claude-code-subagents)、[github/awesome-copilot](https://github.com/github/awesome-copilot)、[affaan-m/ECC](https://github.com/affaan-m/ECC)、[supatest-ai/awesome-claude-code-sub-agents](https://github.com/supatest-ai/awesome-claude-code-sub-agents)、[devsforge/marketplace](https://github.com/devsforge/marketplace)、[ajhcs/healthcare-agents](https://github.com/ajhcs/healthcare-agents)、[aws-samples/sample-claude-code-agent-team](https://github.com/aws-samples/sample-claude-code-agent-team)、[DojoCodingLabs/remotion-superpowers](https://github.com/DojoCodingLabs/remotion-superpowers)、[HKUDS/ViMax](https://github.com/HKUDS/ViMax) 與 [paperclipai/companies](https://github.com/paperclipai/companies) 的角色定位、路徑與高層責任；prompt 內容均由本專案重新設計與加強，不是原文完整複製。
+- 影片工作流另研究 [calesthio/OpenMontage](https://github.com/calesthio/OpenMontage) 的階段化產物與人工核准概念，以及 [showlab/MovieAgent](https://github.com/showlab/MovieAgent) 公開文件中的電影職責分工。OpenMontage 的 AGPL-3.0 reference metadata 已保留；MovieAgent 在採用的 revision 未找到 repository-wide license，因此只使用公開的高層概念，沒有重用程式碼或 prompt 文字。詳細 revision 與改寫邊界記錄在 [`source-notes.md`](skills/video-production-workflow/references/source-notes.md)。
 - 同名或職責相近的上游定義會先依內容合併或排除。`wshobson/agents` 的 199 個 definitions、commit SHA、tree SHA、198 個 canonical mappings 與 1 個明確 exclusion 保存在 [wshobson-agent-inventory.json](scripts/data/wshobson-agent-inventory.json)；其他來源的 repository、path 與 tree SHA 則保存在各 canonical Agent frontmatter。
-- `npm run audit:agent-originality` 會針對 213 個 canonical Agent prompt 執行 291 組 pinned upstream comparisons；若出現至少 60 個字元的相同行，或 12 個單字的逐字片段，CI 會拒絕通過。這是保護改寫原創性的保守靜態閘門，不等同法律上的相似性判定。
-- Repository 與全部 213 個 Agents 採 Apache-2.0。Skills 的個別授權以各自 `SKILL.md` 與 `skills.json` 為準；目前 187 個為 Apache-2.0，`karpathy-guidelines` 保留 MIT 授權與外部 reference metadata。
+- `npm run audit:agent-originality` 會針對 219 個 canonical Agent prompt 與 pinned upstream references 執行逐字重疊檢查；若出現至少 60 個字元的相同行，或 12 個單字的逐字片段，CI 會拒絕通過。這是保護改寫原創性的保守靜態閘門，不等同法律上的相似性判定。
+- Repository 與全部 219 個 Agents 採 Apache-2.0。Skills 的個別授權以各自 `SKILL.md` 與 `skills.json` 為準；目前 188 個為 Apache-2.0，`karpathy-guidelines` 保留 MIT 授權與外部 reference metadata。
 
 ## 疑難排解
 

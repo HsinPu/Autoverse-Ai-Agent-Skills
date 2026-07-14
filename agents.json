@@ -1,9 +1,9 @@
 {
   "version": "3.0.0",
-  "updated": "2026-07-14T02:55:18.147Z",
-  "total": 213,
-  "categories": 30,
-  "uniqueRoles": 213,
+  "updated": "2026-07-14T05:20:51.953Z",
+  "total": 219,
+  "categories": 31,
+  "uniqueRoles": 219,
   "agents": [
     {
       "id": "accessibility-expert",
@@ -1553,6 +1553,40 @@
           "plugins/systems-programming/agents/cpp-pro.md"
         ],
         "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
+      }
+    },
+    {
+      "id": "creative-director",
+      "name": "creative-director",
+      "role": "creative-director",
+      "description": "Turns approved brand, audience, and campaign strategy into a coherent cross-medium creative direction, quality rubric, specialist assignments, and review decisions. Use when visual, narrative, motion, and experience work need one creative standard above channel-specific directors and makers.",
+      "category": "creative",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "design-consultation",
+        "color-font-skill",
+        "web-research-ops",
+        "storyboard-creation",
+        "ux-writing"
+      ],
+      "tags": [
+        "creative-direction",
+        "visual-governance",
+        "concept-development",
+        "quality-review",
+        "cross-functional-handoff"
+      ],
+      "path": "agents/creative-director.md",
+      "references": {
+        "repo": "paperclipai/companies",
+        "paths": [
+          "agency-agents/agents/creative-director/AGENTS.md"
+        ],
+        "tree": "8a5942e830955d87770fcf253b4ce2aa046d8210"
       }
     },
     {
@@ -5456,6 +5490,40 @@
       }
     },
     {
+      "id": "screenwriter",
+      "name": "screenwriter",
+      "role": "screenwriter",
+      "description": "Develops or adapts an approved video concept into a filmable screenplay with narrative structure, scenes, visible action, dialogue, voiceover, pacing, and revision traceability. Use when a production needs script ownership beyond short-form copy or when an existing story must become scene-ready audiovisual material.",
+      "category": "media-production",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "short-video-script",
+        "storyboard-creation",
+        "web-research-ops",
+        "humanizer",
+        "summary-ops"
+      ],
+      "tags": [
+        "screenwriting",
+        "screenplay",
+        "narrative-structure",
+        "dialogue",
+        "adaptation"
+      ],
+      "path": "agents/screenwriter.md",
+      "references": {
+        "repo": "HKUDS/ViMax",
+        "paths": [
+          "agents/screenwriter.py"
+        ],
+        "tree": "9a1516e9d53758b75e9a48a40cb91e4a18554241"
+      }
+    },
+    {
       "id": "search-relevance-engineer",
       "name": "search-relevance-engineer",
       "role": "search-relevance-engineer",
@@ -6127,6 +6195,40 @@
           "plugins/startup-business-analyst/agents/startup-analyst.md"
         ],
         "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
+      }
+    },
+    {
+      "id": "storyboard-artist",
+      "name": "storyboard-artist",
+      "role": "storyboard-artist",
+      "description": "Translates an approved script into a production-ready storyboard and shot list with composition, blocking, screen direction, camera, motion, timing, audio, assets, transitions, and continuity flags. Use before filming, animation, AI generation, or programmatic composition needs shot-level visual planning.",
+      "category": "media-production",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "storyboard-creation",
+        "ai-video-prompting",
+        "design-consultation",
+        "animation-best-practices",
+        "responsive-design"
+      ],
+      "tags": [
+        "storyboarding",
+        "shot-list",
+        "cinematography",
+        "visual-storytelling",
+        "production-planning"
+      ],
+      "path": "agents/storyboard-artist.md",
+      "references": {
+        "repo": "HKUDS/ViMax",
+        "paths": [
+          "agents/storyboard_artist.py"
+        ],
+        "tree": "9a1516e9d53758b75e9a48a40cb91e4a18554241"
       }
     },
     {
@@ -6839,6 +6941,108 @@
           "plugins/llm-application-dev/agents/vector-database-engineer.md"
         ],
         "tree": "deadb68423a57db5a1ab2afd50102be27df1744c"
+      }
+    },
+    {
+      "id": "video-director",
+      "name": "video-director",
+      "role": "video-director",
+      "description": "Directs a video project from brief through final review by setting the creative treatment, selecting the smallest useful production team, approving specialist handoffs, and governing revisions. Use when one accountable role must coordinate narrative, visual, generation, edit, and delivery decisions across a complete video workflow.",
+      "category": "media-production",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "video-production-workflow",
+        "storyboard-creation",
+        "ai-video-generation",
+        "remotion-video-toolkit",
+        "video-edit"
+      ],
+      "tags": [
+        "video-direction",
+        "creative-treatment",
+        "production-orchestration",
+        "approval-gates",
+        "final-review"
+      ],
+      "path": "agents/video-director.md",
+      "references": {
+        "repo": "DojoCodingLabs/remotion-superpowers",
+        "paths": [
+          "agents/video-director.md"
+        ],
+        "tree": "403ef89a15c0d371eecb16f53d5b51d3d222fa17"
+      }
+    },
+    {
+      "id": "video-producer",
+      "name": "video-producer",
+      "role": "video-producer",
+      "description": "Plans and governs video production logistics, budget, schedule, assets, rights, provider choices, checkpoints, and approvals without taking over creative direction. Use when a video project needs an auditable operational plan and restartable production state across people, Agents, tools, or generation services.",
+      "category": "media-production",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "video-production-workflow",
+        "agent-action-governance",
+        "data-organization-system",
+        "context-governance",
+        "terminal-ops"
+      ],
+      "tags": [
+        "video-production",
+        "production-planning",
+        "budget-governance",
+        "asset-rights",
+        "checkpoints"
+      ],
+      "path": "agents/video-producer.md",
+      "references": {
+        "repo": "HKUDS/ViMax",
+        "paths": [
+          "agents/global_information_planner.py"
+        ],
+        "tree": "9a1516e9d53758b75e9a48a40cb91e4a18554241"
+      }
+    },
+    {
+      "id": "visual-continuity-supervisor",
+      "name": "visual-continuity-supervisor",
+      "role": "visual-continuity-supervisor",
+      "description": "Maintains the visual continuity baseline for characters, wardrobe, props, products, environments, screen states, style, geography, time, and action across planned and generated shots. Use for multi-shot, multi-scene, iterative, or AI-assisted productions where continuity defects must be caught before edit lock.",
+      "category": "media-production",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "storyboard-creation",
+        "ai-video-prompting",
+        "ai-video-generation",
+        "image-utils",
+        "video-edit"
+      ],
+      "tags": [
+        "visual-continuity",
+        "character-consistency",
+        "scene-consistency",
+        "quality-control",
+        "continuity-bible"
+      ],
+      "path": "agents/visual-continuity-supervisor.md",
+      "references": {
+        "repo": "HKUDS/ViMax",
+        "paths": [
+          "agents/reference_image_selector.py"
+        ],
+        "tree": "9a1516e9d53758b75e9a48a40cb91e4a18554241"
       }
     },
     {

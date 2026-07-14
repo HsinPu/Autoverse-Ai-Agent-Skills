@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "updated": "2026-07-14T00:00:00Z",
-  "total": 188,
+  "total": 189,
   "skills": [
     {
       "name": "todo-first",
@@ -3041,6 +3041,26 @@
         "policy",
         "approvals",
         "signed-receipts"
+      ]
+    },
+    {
+      "name": "video-production-workflow",
+      "description": "Approval-gated, tool-neutral workflow for taking a video from brief or source material through treatment, script, storyboard, continuity, production planning, asset creation, edit, review, and delivery. Use when coordinating a complete video project across Agents and media Skills, or when one agent must execute the same stages sequentially with restartable artifacts.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "reference": {
+        "source": "calesthio/OpenMontage",
+        "license": "AGPL-3.0"
+      },
+      "tags": [
+        "video-production",
+        "multi-agent",
+        "approval-gates",
+        "artifact-handoffs",
+        "continuity",
+        "workflow"
       ]
     }
   ],
