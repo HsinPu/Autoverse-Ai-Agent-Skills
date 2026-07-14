@@ -35,3 +35,4 @@ license: Apache-2.0
 - Use `skill-audit` for package quality and security findings.
 - Use `skill-security-review` for third-party provenance and executable content.
 - Use `llm-evals` for deeper statistical evaluation design.
+- Use `skillctl` to install, update, or publish only after certification evidence is recorded.

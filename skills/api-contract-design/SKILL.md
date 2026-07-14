@@ -26,6 +26,7 @@ Use this skill when shaping an API that other clients will depend on.
 
 ## Handoff
 
+- For provider, consumer, schema, example, and breaking-change verification, use `api-contract-testing`.
 - For implementation details in Spring APIs, use `spring-development`.
 - For MCP tool surfaces, use `mcp-creator-design`.
 - For spec documents, use `specification-authoring`.

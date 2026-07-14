@@ -71,4 +71,6 @@ Use this skill to decide whether the catalog needs an upgrade or a new skill.
 
 - For local catalog navigation, use `skill-explorer`.
 - For CLI search or install actions, use `skillctl`.
+- For a confirmed first-party addition or redesign, use `skill-creator-design`.
+- For third-party packages or bundled executable content, use `skill-security-review` before adoption.
 - For structure checks after edits, use `skill-lint`.

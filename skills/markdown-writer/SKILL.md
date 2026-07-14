@@ -33,6 +33,8 @@ Use this skill when the output itself is Markdown or when an existing Markdown d
 
 - Use `document-to-markdown` first when converting from DOCX, PDF, PPTX, HTML, or Google Docs exports.
 - Use `git-readme-writer` when the task is specifically to design or rewrite a repository README after inspecting the repo.
+- Use `article-writing` when the work requires a sourced long-form narrative before Markdown formatting.
+- Use `content-repurposing` when an approved source must become several channel-specific artifacts.
 - Use `specification-authoring` when the target is a formal technical specification.
 - Use `summary-ops` when the task is to summarize source material before writing the Markdown.
 

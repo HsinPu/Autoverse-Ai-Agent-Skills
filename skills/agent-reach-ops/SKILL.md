@@ -28,3 +28,4 @@ Use this skill when a task needs broad web coverage.
 
 - For shorter outputs from sources, use `summary-ops`.
 - For evidence-backed synthesis, use `web-research-ops`.
+- For a market decision memo after platform evidence is collected, use `market-research`.

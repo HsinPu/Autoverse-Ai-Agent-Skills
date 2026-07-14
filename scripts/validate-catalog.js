@@ -109,12 +109,30 @@ function normalizeNewlines(value) {
 
 const skillCatalog = readJson(skillsJsonPath);
 const skills = skillCatalog && Array.isArray(skillCatalog.skills) ? skillCatalog.skills : [];
+const skillCategories = skillCatalog && Array.isArray(skillCatalog.categories) ? skillCatalog.categories : [];
 if (!skillCatalog || !Array.isArray(skillCatalog.skills)) fail('skills.json must contain a skills array');
+if (!skillCatalog || !Array.isArray(skillCatalog.categories)) fail('skills.json must contain a categories array');
 if (skillCatalog && skillCatalog.total !== skills.length) {
   fail(`skills.json total (${skillCatalog.total}) does not match skills.length (${skills.length})`);
 }
 
+const declaredSkillCategories = new Set();
+for (const category of skillCategories) {
+  const label = category && category.id ? category.id : '(unknown-category)';
+  if (!category || typeof category !== 'object') {
+    fail('skills.json contains a non-object category entry');
+    continue;
+  }
+  for (const field of ['id', 'name', 'description']) {
+    if (!category[field]) fail(`${label} is missing Skill category field: ${field}`);
+  }
+  if (!componentNamePattern.test(category.id || '')) fail(`${label}: invalid Skill category id`);
+  if (declaredSkillCategories.has(category.id)) fail(`Duplicate Skill category id: ${category.id}`);
+  declaredSkillCategories.add(category.id);
+}
+
 const skillNames = new Set();
+const usedSkillCategories = new Set();
 for (const skill of skills) {
   if (!skill.name) fail('A catalog entry is missing name');
   if (!componentNamePattern.test(skill.name || '')) fail(`${skill.name || '(unknown)'}: invalid skill name`);
@@ -126,11 +144,18 @@ for (const skill of skills) {
   if (skill.source !== canonicalSkillSource) {
     fail(`${skill.name || '(unknown)'} source must be ${canonicalSkillSource}`);
   }
+  if (!declaredSkillCategories.has(skill.category)) {
+    fail(`${skill.name || '(unknown)'} uses undeclared Skill category: ${skill.category}`);
+  }
+  usedSkillCategories.add(skill.category);
   if (skill.reference) {
     if (!skill.reference.source) fail(`${skill.name || '(unknown)'} reference.source is required`);
     if (!skill.reference.license) fail(`${skill.name || '(unknown)'} reference.license is required`);
   }
   if (!Array.isArray(skill.tags)) fail(`${skill.name || '(unknown)'} tags must be an array`);
+}
+for (const category of declaredSkillCategories) {
+  if (!usedSkillCategories.has(category)) fail(`Declared Skill category is unused: ${category}`);
 }
 
 if (!fs.existsSync(skillsRoot)) fail('skills/ directory is missing');
@@ -153,8 +178,17 @@ for (const name of skillDirs) {
 }
 
 const skillsByName = new Map(skills.map((skill) => [skill.name, skill]));
+const canonicalAgentRoleNames = new Set(
+  fs.existsSync(agentsRoot)
+    ? fs.readdirSync(agentsRoot, { withFileTypes: true })
+      .filter((entry) => entry.isFile() && entry.name.endsWith('.md'))
+      .map((entry) => path.basename(entry.name, '.md'))
+    : []
+);
+const allowedHandoffExternalTargets = new Set(['gh', 'nodejs']);
 for (const name of skillDirs) {
   const skillFile = path.join(skillsRoot, name, 'SKILL.md');
+  const skillText = fs.readFileSync(skillFile, 'utf8');
   const frontmatter = parseFrontmatter(skillFile);
   const catalogEntry = skillsByName.get(name);
   for (const field of ['name', 'description', 'source', 'license']) {
@@ -169,6 +203,93 @@ for (const name of skillDirs) {
       compare(name, 'reference.source', catalogEntry.reference.source, frontmatter['reference-source'], 'skills.json', 'SKILL.md');
       compare(name, 'reference.license', catalogEntry.reference.license, frontmatter['reference-license'], 'skills.json', 'SKILL.md');
     }
+  }
+
+  const secondLevelHeadings = [...skillText.matchAll(/^ {0,3}##(?!#)[ \t]+([^\r\n]*?)(?:[ \t]+#+)?[ \t]*\r?$/gm)];
+  const handoffHeadings = secondLevelHeadings.filter((match) => /^handoffs?$/i.test(match[1]));
+  const setextHandoffHeadings = [...skillText.matchAll(/^ {0,3}Handoffs?[ \t]*\r?\n {0,3}-{3,}[ \t]*\r?$/gmi)];
+  for (const heading of setextHandoffHeadings) {
+    fail(`${name}: Handoff headings must use canonical "## Handoff" or "## Handoffs" syntax: ${heading[0].split(/\r?\n/, 1)[0].trim()}`);
+  }
+  if (handoffHeadings.length > 1) fail(`${name}: SKILL.md contains multiple Handoff sections`);
+  for (const handoffHeading of handoffHeadings) {
+    const rawHeading = handoffHeading[0].replace(/\r$/, '');
+    if (!/^## Handoffs?$/.test(rawHeading)) {
+      fail(`${name}: Handoff headings must use canonical "## Handoff" or "## Handoffs" syntax: ${rawHeading.trim()}`);
+    }
+    const headingIndex = secondLevelHeadings.indexOf(handoffHeading);
+    const sectionStart = handoffHeading.index + handoffHeading[0].length;
+    const sectionEnd = secondLevelHeadings[headingIndex + 1]
+      ? secondLevelHeadings[headingIndex + 1].index
+      : skillText.length;
+    const handoffBody = skillText.slice(sectionStart, sectionEnd);
+    for (const line of handoffBody.split(/\r?\n/)) {
+      if (!/^\s*-\s+/.test(line)) continue;
+
+      const inlineCode = [...line.matchAll(/`([^`\r\n]+)`/g)];
+      let previousTarget = null;
+      for (const target of inlineCode) {
+        if (componentNamePattern.test(target[1])) {
+          if (
+            !skillNames.has(target[1])
+            && !canonicalAgentRoleNames.has(target[1])
+            && !allowedHandoffExternalTargets.has(target[1])
+          ) {
+            fail(`${name}: Handoff references unknown Skill, Agent, or allowed external target: ${target[1]}`);
+          }
+          previousTarget = target;
+          continue;
+        }
+
+        const prefix = line.slice(0, target.index);
+        const primaryTarget = /(?:\buse|\busing|\bprefer|\bhandoff|\bhand off|\broute|\breturn|\bpair|\bdelegate)(?:\s+(?:to|with|via|through|a|an|the|discovered|available|relevant|matching|appropriate|dedicated|specialized))*\s*$/i.test(prefix)
+          || /(?:使用|用|交給|轉交給|搭配|委派給)\s*$/u.test(prefix);
+        const separator = previousTarget
+          ? line.slice(previousTarget.index + previousTarget[0].length, target.index)
+          : '';
+        const continuedTargetList = previousTarget !== null
+          && /^\s*(?:(?:,\s*)?(?:and|or)|,|\/)\s*(?:(?:a|an|the|another|discovered|available|relevant|matching|appropriate|dedicated|specialized)\s+)*$/i.test(separator);
+
+        if (primaryTarget || continuedTargetList) {
+          fail(`${name}: Handoff target must use a lowercase kebab-case component name: ${target[1]}`);
+          previousTarget = target;
+        } else {
+          previousTarget = null;
+        }
+      }
+    }
+  }
+
+  for (const link of skillText.matchAll(/\[[^\]]+\]\(((?:references?|scripts|assets)[\\/][^)#]+)(?:#[^)]+)?\)/g)) {
+    const rawPath = link[1];
+    if (rawPath.includes('\\')) {
+      fail(`${name}: bundled resource links must use forward slashes: ${rawPath}`);
+      continue;
+    }
+
+    const relativePath = path.posix.normalize(rawPath);
+    if (
+      relativePath !== rawPath
+      || relativePath.startsWith('../')
+      || path.posix.isAbsolute(relativePath)
+    ) {
+      fail(`${name}: bundled resource link must stay within the Skill package: ${link[1]}`);
+      continue;
+    }
+
+    const packageRoot = path.resolve(skillsRoot, name);
+    const resourcePath = path.resolve(packageRoot, ...relativePath.split('/'));
+    const relativeToPackage = path.relative(packageRoot, resourcePath);
+    if (
+      relativeToPackage === '..'
+      || relativeToPackage.startsWith(`..${path.sep}`)
+      || path.isAbsolute(relativeToPackage)
+    ) {
+      fail(`${name}: bundled resource link must stay within the Skill package: ${link[1]}`);
+      continue;
+    }
+
+    if (!fs.existsSync(resourcePath)) fail(`${name}: bundled resource link does not exist: ${link[1]}`);
   }
 }
 
@@ -485,7 +606,12 @@ if (inventory) {
 
 if (fs.existsSync(readmePath)) {
   const readme = fs.readFileSync(readmePath, 'utf8');
-  const categoryCount = new Set(agents.map((agent) => agent.category)).size;
+  const skillCategoryCounts = new Map();
+  for (const skill of skills) {
+    skillCategoryCounts.set(skill.category, (skillCategoryCounts.get(skill.category) || 0) + 1);
+  }
+  const skillCategoryCount = skillCategoryCounts.size;
+  const agentCategoryCount = new Set(agents.map((agent) => agent.category)).size;
   const allReferenceRepos = new Set();
   const allReferencePaths = new Set();
   const additionalReferenceRepos = new Set();
@@ -523,9 +649,47 @@ if (fs.existsSync(readmePath)) {
   if (agentCountMatch && Number(agentCountMatch[1]) !== agents.length) {
     fail(`README Agent count (${agentCountMatch[1]}) does not match agents.length (${agents.length})`);
   }
+  checkReadmeNumbers('Skill badge count', /badge\/Skills-(\d+)-7c3aed/, [skills.length]);
   checkReadmeNumbers('Agent badge count', /badge\/Agents-(\d+)-2563eb/, [agents.length]);
-  checkReadmeNumbers('install-all Agent count', /全部 \d+ 個 Skills、(\d+) 個 Agents/, [agents.length]);
-  checkReadmeNumbers('catalog Agent and category counts', /\| Agents \| (\d+)／(\d+) 類 \|/, [agents.length, categoryCount]);
+  checkReadmeNumbers('install-all component counts', /全部 (\d+) 個 Skills、(\d+) 個 Agents/, [skills.length, agents.length]);
+  checkReadmeNumbers(
+    'catalog Skill and category counts',
+    /\| Skills \| \*\*(\d+) Skills\*\*／(\d+) 類 \|/,
+    [skills.length, skillCategoryCount]
+  );
+  checkReadmeNumbers('catalog Agent and category counts', /\| Agents \| (\d+)／(\d+) 類 \|/, [agents.length, agentCategoryCount]);
+  checkReadmeNumbers(
+    'Skill section total and category counts',
+    /^(\d+) 個 Skills 分成 (\d+) 類。/m,
+    [skills.length, skillCategoryCount]
+  );
+
+  const skillHeading = readme.match(/^## Skills\r?$/m);
+  if (!skillHeading) {
+    fail('README is missing the Skills section');
+  } else {
+    const sectionStart = skillHeading.index + skillHeading[0].length;
+    const remaining = readme.slice(sectionStart);
+    const nextHeadingOffset = remaining.search(/\r?\n## /);
+    const skillSection = nextHeadingOffset === -1 ? remaining : remaining.slice(0, nextHeadingOffset);
+    const readmeCategoryCounts = new Map();
+    for (const match of skillSection.matchAll(/^\| `([^`]+)` \| (\d+) \|/gm)) {
+      if (readmeCategoryCounts.has(match[1])) {
+        fail(`README Skill category table contains a duplicate row: ${match[1]}`);
+      }
+      readmeCategoryCounts.set(match[1], Number(match[2]));
+    }
+    for (const [category, expectedCount] of skillCategoryCounts) {
+      if (!readmeCategoryCounts.has(category)) {
+        fail(`README Skill category table is missing: ${category}`);
+      } else if (readmeCategoryCounts.get(category) !== expectedCount) {
+        fail(`README Skill category ${category} (${readmeCategoryCounts.get(category)}) does not match expected value (${expectedCount})`);
+      }
+    }
+    for (const category of readmeCategoryCounts.keys()) {
+      if (!skillCategoryCounts.has(category)) fail(`README Skill category table contains an unknown category: ${category}`);
+    }
+  }
   for (const adapter of ['Codex', 'Claude', 'Cursor', 'Copilot', 'OpenCode']) {
     checkReadmeNumbers(`${adapter} adapter count`, new RegExp(`\\| ${adapter} adapters \\| (\\d+) \\|`), [agents.length]);
   }
@@ -544,14 +708,19 @@ if (fs.existsSync(readmePath)) {
     /另外 (\d+) 個 Agents 來自其餘 (\d+) 個 reference repositories/,
     [additionalAgentCount, additionalReferenceRepos.size]
   );
-  checkReadmeNumbers('coverage matrix category counts', /完成 (\d+)／(\d+) 類核心責任鏈覆蓋/, [categoryCount, categoryCount]);
+  checkReadmeNumbers('coverage matrix category counts', /完成 (\d+)／(\d+) 類核心責任鏈覆蓋/, [agentCategoryCount, agentCategoryCount]);
   checkReadmeNumbers(
     'expanded index category and Agent counts',
     /展開 (\d+) 類、(\d+) 個 Agents 的完整索引/,
-    [categoryCount, agents.length]
+    [agentCategoryCount, agents.length]
   );
   checkReadmeNumbers('originality audit Agent count', /audit:agent-originality` 會針對 (\d+) 個 canonical Agent prompt/, [agents.length]);
   checkReadmeNumbers('repository license Agent count', /Repository 與全部 (\d+) 個 Agents 採/, [agents.length]);
+  checkReadmeNumbers(
+    'repository Apache-2.0 Skill count',
+    /目前 (\d+) 個為 Apache-2.0/,
+    [skills.filter((skill) => skill.license === 'Apache-2.0').length]
+  );
 }
 
 if (errors.length > 0) {

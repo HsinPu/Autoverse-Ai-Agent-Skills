@@ -27,5 +27,6 @@ Use this skill when the task is to create or maintain an OpenAPI specification.
 ## Handoff
 
 - For API design decisions, use `api-contract-design`.
+- For executable examples against a provider, consumer expectation tests, compatibility diffing, and breaking-change gates, use `api-contract-testing`; keep static OpenAPI syntax, schema composition, and internal example consistency in this Skill.
 - For generated client/SDK work, use `python-api-client-development` or `typescript-development`.
 - For endpoint doc comments, use `api-doc-comments`.

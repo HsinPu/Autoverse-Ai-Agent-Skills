@@ -29,6 +29,7 @@ Use this skill when the task is about database structure rather than one-off que
 
 ## Handoff
 
+- Use `database-migration-workflow` when an approved schema change requires compatibility windows, backfill, production rollout, verification, or recovery gates.
 - Use `sql-best-practices` for writing, reviewing, or optimizing a specific SQL query.
 - Use `postgres-operations` for PostgreSQL roles, backups, VACUUM, replication, extensions, or production operations.
 - Use `prisma-drizzle` when the task is mostly ORM schema, migrations, relations, or TypeScript database access.

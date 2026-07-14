@@ -32,6 +32,8 @@ license: Apache-2.0
 ## Handoff
 
 - Use `logging-patterns` for log event design.
+- Use `agent-introspection-debugging` when agent traces require causal reconstruction rather than general telemetry design.
+- Use `llm-application-delivery-workflow` when telemetry must satisfy an LLM release or rollback gate.
 - Use `deployment-operations` for release verification.
 - Use `incident-response-postmortems` for incident coordination and learning.
 - Use `dashboard-design` for product or executive dashboard information design.

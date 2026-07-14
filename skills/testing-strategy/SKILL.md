@@ -1,6 +1,6 @@
 ---
 name: testing-strategy
-description: Testing strategy workflow for choosing the right test level, shaping fixtures and test data, and balancing confidence, speed, and maintenance cost. Use when planning test coverage or reviewing a feature's test plan.
+description: Testing strategy workflow for choosing the right test level, shaping fixtures and test data, and balancing confidence, speed, and maintenance cost. Use when planning or reviewing test coverage; use test-driven-development separately when implementation must follow a RED-GREEN-REFACTOR cycle.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---
@@ -28,5 +28,8 @@ Use this skill when deciding what to test and at which level.
 ## Handoff
 
 - For local browser validation, use `webapp-testing`.
+- For behavior-first implementation through RED-GREEN-REFACTOR, use `test-driven-development`.
+- For an independent gate over completed implementation and test evidence, use `pipeline-review`.
+- For fresh proof immediately before a completion claim, use `verification-before-completion`.
 - For team-wide code conventions, use `coding-standards`.
 - For language-specific test practices, use the relevant language skill.

@@ -2,7 +2,7 @@
 
 [![Validate](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/actions/workflows/validate.yml/badge.svg)](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/actions/workflows/validate.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
-![Skills](https://img.shields.io/badge/Skills-189-7c3aed)
+![Skills](https://img.shields.io/badge/Skills-204-7c3aed)
 ![Agents](https://img.shields.io/badge/Agents-237-2563eb)
 ![Node.js](https://img.shields.io/badge/Node.js-%3E%3D16-339933?logo=nodedotjs&logoColor=white)
 
@@ -49,7 +49,7 @@ Linux／macOS：
 curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type skill && curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type agent --enable-auto-delegation
 ```
 
-這組命令會安裝全部 189 個 Skills、237 個 Agents，並啟用不依賴專案 `AGENTS.md` 的全域主動委派。
+這組命令會安裝全部 204 個 Skills、237 個 Agents，並啟用不依賴專案 `AGENTS.md` 的全域主動委派。
 
 ### 只安裝全部 Skills
 
@@ -145,7 +145,7 @@ curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/ma
 
 | 類型 | 數量 | 用途 | Canonical source |
 |---|---:|---|---|
-| Skills | **189 Skills**／7 類 | 可重複使用的工作流程、規範、工具指引與領域知識 | `skills/<name>/SKILL.md` |
+| Skills | **204 Skills**／7 類 | 可重複使用的工作流程、規範、工具指引與領域知識 | `skills/<name>/SKILL.md` |
 | Agents | 237／31 類 | 可委派的專業角色，包含任務、限制、權限與輸出契約 | `agents/<role>.md` |
 | Codex adapters | 237 | Codex custom Agent 的 TOML 設定 | `adapters/codex/<role>.toml` |
 | Claude adapters | 237 | Claude Code subagent 的 Markdown 設定 | `adapters/claude/<role>.md` |
@@ -488,17 +488,29 @@ Catalog 來源分別是 [skills.json](skills.json) 與 [agents.json](agents.json
 
 ## Skills
 
-189 個 Skills 分成 7 類。每個 package 以 `SKILL.md` 為入口，相關 references、scripts 與 assets 保留在同一資料夾中。
+204 個 Skills 分成 7 類。每個 package 以 `SKILL.md` 為入口，相關 references、scripts 與 assets 保留在同一資料夾中。
 
 | Category | Count | 說明 |
 |---|---:|---|
-| `development` | 151 | 軟體開發、架構、框架、測試、安全、資料與平台工程 |
+| `development` | 162 | 軟體開發、架構、框架、測試、安全、資料與平台工程 |
 | `productivity` | 20 | 規劃、檔案整理、文件與日常工作流程 |
 | `browser-automation` | 7 | Browser automation、DevTools、Playwright 與 webapp testing |
-| `coding-agents-ides` | 5 | Agent、Skill、MCP 與 coding-agent 工作流程 |
+| `coding-agents-ides` | 6 | Agent、Skill、MCP 與 coding-agent 工作流程 |
 | `cli-utilities` | 3 | Terminal、hotkey 與 command palette |
-| `communication` | 1 | 人類可讀的文字調整與溝通 |
-| `search-research` | 1 | Web research 與資料蒐集 |
+| `communication` | 4 | 人類可讀的文字調整與溝通 |
+| `search-research` | 2 | Web research 與資料蒐集 |
+
+### 主要 Flow 入口
+
+| Flow | 入口或順序 | 適用情境 |
+|---|---|---|
+| Verified software delivery | [`verified-software-delivery`](skills/verified-software-delivery/) | 方案、規格、TDD、分批實作、獨立 review、修正與完成證據 |
+| Research to publication | [`market-research`](skills/market-research/) → [`brand-voice`](skills/brand-voice/) → [`article-writing`](skills/article-writing/) → [`content-repurposing`](skills/content-repurposing/) | 從市場證據到品牌化長文與跨通路衍生內容 |
+| LLM application delivery | [`llm-application-delivery-workflow`](skills/llm-application-delivery-workflow/) | API、Agent、RAG、eval、安全、成本、觀測與部署的階段式交付 |
+| Database migration | [`database-migration-workflow`](skills/database-migration-workflow/) | Expand、backfill、cutover、validate、contract 與 recovery gate |
+| Skill lifecycle | [`skill-gap-analyzer`](skills/skill-gap-analyzer/) → `skill-creator-design` → `skill-lint` → `skill-executor` → `skill-audit` → `skillforge` → `skillctl` | 缺口判斷、設計、執行驗證、稽核、認證與安裝 |
+| Video production | [`video-production-workflow`](skills/video-production-workflow/) | Brief、腳本、分鏡、素材、拍攝、後製、審核與交付 |
+| Design to code | [`web-page-design-to-code`](skills/web-page-design-to-code/)／[`website-redesign-to-code`](skills/website-redesign-to-code/) | 先完成視覺方向與 mockup 核准，再實作和比對 |
 
 請從 [skills.json](skills.json) 瀏覽 metadata，或直接查看 [skills/](skills/) 內的完整 package。
 
@@ -603,7 +615,7 @@ npm pack --dry-run
 - 影片工作流另研究 [calesthio/OpenMontage](https://github.com/calesthio/OpenMontage) 的階段化產物與人工核准概念、[showlab/MovieAgent](https://github.com/showlab/MovieAgent) 公開文件中的電影職責分工，以及 Hermes 的 renderer review／conditional role routing、Open Animate 的 motion-graphics lifecycle、video-use 的 overlay／timeline／media-QC 概念。OpenMontage 的 AGPL-3.0 reference metadata 已保留，但不作為 canonical Agent reference；MovieAgent 在採用的 revision 未找到 repository-wide license，因此兩者只使用公開的高層概念，沒有重用程式碼或 prompt 文字。詳細 revision 與改寫邊界記錄在 [`source-notes.md`](skills/video-production-workflow/references/source-notes.md)。
 - 同名或職責相近的上游定義會先依內容合併或排除。`wshobson/agents` 的 199 個 definitions、commit SHA、tree SHA、198 個 canonical mappings 與 1 個明確 exclusion 保存在 [wshobson-agent-inventory.json](scripts/data/wshobson-agent-inventory.json)；其他來源的 repository、path 與 tree SHA 則保存在各 canonical Agent frontmatter。
 - `npm run audit:agent-originality` 會針對 237 個 canonical Agent prompt 與 pinned upstream references 執行逐字重疊檢查；若出現至少 60 個字元的相同行，或 12 個單字的逐字片段，CI 會拒絕通過。這是保護改寫原創性的保守靜態閘門，不等同法律上的相似性判定。
-- Repository 與全部 237 個 Agents 採 Apache-2.0。Skills 的個別授權以各自 `SKILL.md` 與 `skills.json` 為準；目前 188 個為 Apache-2.0，`karpathy-guidelines` 保留 MIT 授權與外部 reference metadata。
+- Repository 與全部 237 個 Agents 採 Apache-2.0。Skills 的個別授權以各自 `SKILL.md` 與 `skills.json` 為準；目前 203 個為 Apache-2.0，`karpathy-guidelines` 保留 MIT 授權與外部 reference metadata。
 
 ## 疑難排解
 

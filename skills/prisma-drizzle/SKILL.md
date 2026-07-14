@@ -52,7 +52,8 @@ Use this skill when a TypeScript or JavaScript project uses Prisma ORM or Drizzl
 
 ## Handoff
 
-- Use `database-design` for schema modeling and zero-downtime migration planning.
+- Use `database-design` for target schema, relationships, constraints, indexes, and integrity modeling.
+- Use `database-migration-workflow` to coordinate expand, backfill, validate, contract, rollout, and recovery across environments.
 - Use `sql-best-practices` for raw SQL and query optimization.
 - Use `nextjs-development` for Next.js runtime and server component integration.
 - Use `supabase-development` when Supabase Postgres and RLS are part of the stack.

@@ -46,6 +46,7 @@ Use this skill when implementing or reviewing an application that calls OpenAI A
 ## Handoff
 
 - Use `agents-sdk-development` for multi-step agent workflows with tools, handoffs, and tracing.
+- Use `llm-application-delivery-workflow` when implementation must be coordinated with eval, security, budget, deployment, rollback, and production evidence.
 - Use `rag-vector-search` for retrieval-grounded applications.
 - Use `llm-evals` for regression testing, graders, and prompt quality checks.
 - Use `security-code-review` for prompt injection, secret handling, or tool safety reviews.

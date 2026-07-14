@@ -102,6 +102,9 @@ If a slice grows, split it before continuing.
 - Use `todo-first` to track the slice list and status during execution.
 - Use `code-change-workflow` to understand existing behavior before the first slice.
 - Use `code-refactoring` when the slice is behavior-preserving cleanup.
+- Use `test-driven-development` inside slices whose behavior can be expressed as an automated test.
 - Use `testing-strategy` when choosing the right verification depth.
+- Use `verification-before-completion` before marking a slice or the overall change complete.
+- Use `pipeline-review` at stage boundaries that require an independent acceptance decision.
 - Use `project-architecture-review` when the work needs architecture options before slicing.
 - Use stack-specific skills for implementation details inside a slice.

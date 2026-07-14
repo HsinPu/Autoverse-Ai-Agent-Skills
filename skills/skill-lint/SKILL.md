@@ -27,3 +27,5 @@ Use this skill to validate a skill file before it ships.
 
 - For security-focused review, use `skill-security-review`.
 - For authoring or redesigning a skill, use `skill-creator-design`.
+- For controlled execution of bundled scripts or representative tasks, use `skill-executor`.
+- For broader package quality and provenance review, use `skill-audit`.

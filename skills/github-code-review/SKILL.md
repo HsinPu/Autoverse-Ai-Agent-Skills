@@ -33,4 +33,5 @@ Use this skill to review a GitHub change with PR context.
 ## Handoff
 
 - For deeper code-quality review outside GitHub context, use `code-review`.
+- For evaluating and implementing requested changes from review comments, use `receiving-code-review`.
 - For PR creation or other GitHub operations, use `github-operations`.

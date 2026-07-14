@@ -90,3 +90,12 @@ Append a round or preserve prior finding IDs rather than overwriting history. On
 - Do not weaken acceptance criteria merely to end the loop.
 - Do not run destructive tests, mutate external systems, or exceed the review's authorized scope.
 - Do not auto-fix, silently patch, or combine review and implementation in one role.
+
+## Handoff
+
+- Use `code-change-workflow` to route accepted findings back to the implementation owner.
+- Use `receiving-code-review` to triage, remediate, and report the status of accepted findings before re-review.
+- Use `testing-strategy` to close verification gaps with the smallest meaningful test level.
+- Use `verification-before-completion` for fresh implementer-side evidence; keep the reviewer-side acceptance decision in this skill.
+- Use `github-code-review` when the review packet lives in a pull request and needs GitHub context.
+- Use `repo-ready` after the gate passes and repository release readiness still needs work.

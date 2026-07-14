@@ -75,7 +75,12 @@ Use this as the default first skill for existing-code changes. It answers: what 
 
 - Use `karpathy-guidelines` for broader coding behavior, simplicity, and assumption handling.
 - Use `terminal-ops` for command-driven proof and repo state checks.
+- Use `systematic-debugging` first when the failure is reproducible but its root cause is unknown or disputed.
 - Use `incremental-implementation` when the change needs multiple safe slices, checkpoints, or commits.
+- Use `test-driven-development` when the requested behavior can be expressed through a RED-GREEN-REFACTOR cycle.
+- Use `pipeline-review` after a meaningful implementation stage needs an independent read-only acceptance gate.
+- Use `receiving-code-review` when this edit is remediation for an existing finding or review comment.
+- Use `verification-before-completion` immediately before claiming the requested change is complete.
 - Use `code-refactoring` when the goal is behavior-preserving cleanup.
 - Use `testing-strategy` when deciding how much verification is enough.
 - Use language or framework skills for implementation details after the current flow is understood.

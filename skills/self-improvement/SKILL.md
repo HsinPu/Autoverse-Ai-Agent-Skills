@@ -27,4 +27,5 @@ Use this skill to capture repeatable lessons and mistakes.
 ## Handoff
 
 - For general repo memory patterns, context pruning, or reusable lessons, use `context-governance`.
+- For a measurable idea that still needs repeated controlled experiments, use `autoresearch` before promoting it as a durable lesson.
 - For code changes driven by the learning, use `code-refactoring` or the relevant stack skill.

@@ -53,6 +53,8 @@ Use this skill when building or reviewing agentic workflows with the OpenAI Agen
 ## Handoff
 
 - Use `openai-api-development` for lower-level Responses API and SDK integration.
+- Use `llm-application-delivery-workflow` when the agent must pass product, eval, security, cost, deployment, and post-release gates.
+- Use `agent-introspection-debugging` when traces show looping, routing, tool, handoff, guardrail, or context failures.
 - Use `rag-vector-search` for retrieval tools and knowledge grounding.
 - Use `llm-evals` for agent eval datasets, trace grading, and regression checks.
 - Use `karpathy-guidelines` when agent workflows are becoming overengineered.

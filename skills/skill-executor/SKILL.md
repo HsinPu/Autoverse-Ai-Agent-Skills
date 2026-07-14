@@ -27,3 +27,6 @@ Use this skill when you need to prove a skill works.
 
 - For repo shell commands and git state checks, use `terminal-ops`.
 - For automation-heavy browser work, use `webapp-testing`.
+- For deterministic package structure checks, use `skill-lint`.
+- For provenance, safety, and maintenance review, use `skill-audit` or `skill-security-review`.
+- For release certification after the execution proof passes, use `skillforge`.

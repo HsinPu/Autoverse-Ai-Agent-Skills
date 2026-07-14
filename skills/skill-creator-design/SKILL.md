@@ -355,3 +355,10 @@ skill-name/
 - [ ] 問過自己：「agent **真的需要**這段說明嗎？這段文字**值得它消耗的 token** 嗎？」
 - [ ] 寧可多用**簡潔範例**，少用**冗長說明**
 - [ ] 同一資訊**不重複**出現在 SKILL.md 與 reference 中
+
+## Handoff
+
+- Use `skill-lint` for deterministic frontmatter, structure, naming, and link checks.
+- Use `skill-executor` for controlled execution of scripts and representative task proofs.
+- Use `skill-audit` and `skill-security-review` for provenance, safety, and maintenance review.
+- Use `skillforge` for versioned evaluation and release certification.

@@ -29,6 +29,7 @@ Use this skill when the task is to write a short social video script.
 
 ## Handoff
 
+- For adapting an approved article, report, or campaign source across several channels before writing the video script, use `content-repurposing`.
 - For a complete production with treatment, approvals, shot planning, assets, edit, and delivery, use `video-production-workflow` and save the approved script as its versioned `script.md` artifact.
 - For vlog story arcs, filming plans, and platform packaging, use `vlog-production`.
 - For UGC ad structure, use `ugc-video-ads`.

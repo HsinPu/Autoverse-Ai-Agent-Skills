@@ -53,6 +53,7 @@ Use this skill when operating, tuning, debugging, or reviewing PostgreSQL databa
 ## Handoff
 
 - Use `database-design` for schema modeling and data integrity design.
+- Use `database-migration-workflow` for staged production changes, compatibility windows, backfills, and recovery gates.
 - Use `sql-best-practices` for query writing and SQL review.
 - Use `prisma-drizzle` when Prisma or Drizzle controls migrations.
 - Use `rag-vector-search` when using pgvector or retrieval indexes.

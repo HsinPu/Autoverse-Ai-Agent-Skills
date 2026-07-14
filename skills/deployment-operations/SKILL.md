@@ -28,5 +28,7 @@ Use this skill when shipping a build and proving the release is healthy.
 ## Handoff
 
 - For repo setup and release automation, use `repo-ready`.
+- For schema or data rollout with compatibility, backfill, validation, and recovery stages, use `database-migration-workflow`.
+- For an LLM or agent release that requires eval, cost, safety, and observability gates, use `llm-application-delivery-workflow`.
 - For local command execution and proof, use `terminal-ops`.
 - For GitHub releases or workflow checks, use `github-operations`.

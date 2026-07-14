@@ -61,6 +61,7 @@ Stop conditions:
 ## Handoff
 
 - Use `agent-creator-design` for individual agent prompt design.
+- Use `agent-introspection-debugging` when traces indicate routing, ownership, handoff, loop, or context failures in an agent team.
 - Use `todo-first` for visible execution status.
 - Use `context-governance` for durable decisions and long-running handoffs.
 - Use `code-review` after integrating multi-agent implementation.

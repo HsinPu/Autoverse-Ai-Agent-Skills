@@ -24,7 +24,7 @@
     "validate:agent-coverage": "node scripts/validate-agent-coverage.js",
     "validate": "node scripts/validate-catalog.js && node scripts/verify-agent-references.js && node scripts/validate-agent-coverage.js",
     "test:cli": "node tests/cli.test.js",
-    "smoke:install:powershell": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/smoke-install.ps1",
+    "smoke:install:powershell": "set \"PSModuleAnalysisCachePath=NUL\"&& powershell -NoProfile -ExecutionPolicy Bypass -File scripts/smoke-install.ps1",
     "smoke:install:bash": "bash scripts/smoke-install.sh"
   },
   "files": [

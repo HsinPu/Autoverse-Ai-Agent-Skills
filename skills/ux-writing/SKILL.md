@@ -47,6 +47,7 @@ Use this skill when the task is to write or improve user-facing interface copy.
 
 ## Handoff
 
+- Use `brand-voice` when interface copy must follow a reusable organization or product voice profile.
 - Use `frontend-design` when copy is part of a broader visual/UI redesign.
 - Use `interaction-patterns` when the issue is navigation or flow behavior, not just words.
 - Use `markdown-writer` when the output is documentation rather than interface microcopy.

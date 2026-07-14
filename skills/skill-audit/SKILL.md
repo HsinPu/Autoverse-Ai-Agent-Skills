@@ -31,5 +31,6 @@ license: Apache-2.0
 ## Handoff
 
 - Use `skill-lint` for deterministic structure checks.
+- Use `skill-executor` for controlled runtime proof of scripts and representative tasks.
 - Use `skill-security-review` for deeper third-party and supply-chain vetting.
 - Use `skillforge` for certification after remediation.

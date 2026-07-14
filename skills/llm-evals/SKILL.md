@@ -53,6 +53,9 @@ Use this skill when evaluating prompts, AI features, RAG systems, agents, model 
 ## Handoff
 
 - Use `openai-api-development` for model and prompt integration.
+- Use `llm-application-delivery-workflow` to place eval results inside a release and rollback decision.
+- Use `agent-introspection-debugging` to turn failed traces into causal hypotheses and regression cases.
+- Use `autoresearch` when one stable metric should drive controlled prompt, model, retrieval, or configuration experiments.
 - Use `agents-sdk-development` for trace grading and agent workflow evals.
 - Use `rag-vector-search` for retrieval-specific evals.
 - Use `testing-strategy` for deciding where evals fit into CI and release gates.

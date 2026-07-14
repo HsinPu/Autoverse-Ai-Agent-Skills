@@ -26,5 +26,7 @@ Use this skill when text sounds machine-made.
 
 ## Handoff
 
+- For extracting and applying a specific organization or creator voice, use `brand-voice` before this final naturalness pass.
+- For evidence-led long-form drafting and editorial checks, use `article-writing`.
 - For final-answer polish, use `answer-writing`.
 - For Markdown-heavy docs, use `markdown-writer`.

@@ -29,5 +29,7 @@ Use this skill when proof matters.
 ## Handoff
 
 - For code edits that require understanding current behavior before changing files, use `code-change-workflow`.
+- For failures with an unknown root cause, use `systematic-debugging` to structure reproduction and hypothesis testing.
+- For the final evidence gate before claiming completion, use `verification-before-completion`.
 - For git-specific work, use `git-operations`.
 - For designing delegation boundaries or multi-agent command workflows, use `subagent-architecture`.

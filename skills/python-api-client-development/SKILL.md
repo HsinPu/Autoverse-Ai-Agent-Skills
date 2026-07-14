@@ -43,6 +43,7 @@ Use this skill when the task is to build or maintain a Python SDK or HTTP API cl
 
 ## Handoff
 
+- For consumer/provider compatibility and breaking-change gates, hand off to `api-contract-testing`.
 - For packaging and publishing the SDK, hand off to `python-packaging-release`.
 - For hardening secrets and trust boundaries, hand off to `python-security-hardening`.
 - For transport or service-side implementation details, hand off to `python-backend-development`.

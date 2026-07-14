@@ -28,5 +28,6 @@ Use this skill when the task is specifically about GitHub Actions workflows.
 ## Handoff
 
 - For broader repo hygiene and templates, use `repo-ready`.
+- For API compatibility checks that must become required CI gates, use `api-contract-testing`.
 - For release verification after deployment, use `deployment-operations`.
 - For GitHub API, PR, issue, or check inspection, use `github-operations`.

@@ -27,4 +27,6 @@ Use this skill when the task needs current, source-backed research.
 ## Handoff
 
 - If the user only needs shorter source material, use `summary-ops`.
+- If the evidence must support a market, audience, competitor, or positioning decision, use `market-research`.
+- If an approved evidence set should become a sourced long-form publication, use `article-writing`.
 - If the result should become notes or docs, use `markdown-writer`.

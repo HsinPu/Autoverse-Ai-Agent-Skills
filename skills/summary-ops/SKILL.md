@@ -39,5 +39,6 @@ Use this skill when the goal is to compress long content into usable notes.
 ## Handoff
 
 - For cross-source web research, use `web-research-ops`.
+- For channel-specific derivatives from an approved source rather than a simple summary, use `content-repurposing`.
 - For faithful document-to-Markdown conversion, use `document-to-markdown`.
 - For Markdown cleanup after extraction or summarization, use `markdown-writer`.

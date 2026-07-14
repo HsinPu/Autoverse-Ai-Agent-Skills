@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "updated": "2026-07-14T00:00:00Z",
-  "total": 189,
+  "total": 204,
   "skills": [
     {
       "name": "todo-first",
@@ -229,7 +229,7 @@
     },
     {
       "name": "testing-strategy",
-      "description": "Testing strategy workflow for choosing the right test level, shaping fixtures and test data, and balancing confidence, speed, and maintenance cost. Use when planning test coverage or reviewing a feature's test plan.",
+      "description": "Testing strategy workflow for choosing the right test level, shaping fixtures and test data, and balancing confidence, speed, and maintenance cost. Use when planning or reviewing test coverage; use test-driven-development separately when implementation must follow a RED-GREEN-REFACTOR cycle.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -2501,7 +2501,7 @@
     },
     {
       "name": "spec-flow",
-      "description": "Spec-driven development workflow for turning requirements into a concise spec, task breakdown, and execution path. Use when a request needs structured decomposition, implementation planning, or a document-first development flow.",
+      "description": "Spec-driven development workflow for turning clear requirements or an approved solution direction into a concise specification, acceptance criteria, task breakdown, and execution path. Use when a request needs structured decomposition, implementation planning, or a document-first development flow after the intended direction is understood.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -3061,6 +3061,280 @@
         "artifact-handoffs",
         "continuity",
         "workflow"
+      ]
+    },
+    {
+      "name": "solution-discovery",
+      "description": "Solution discovery workflow for turning an unclear software problem into an approved design direction through goals, constraints, alternatives, tradeoffs, and explicit decision checkpoints. Use before specification or implementation when the desired outcome is known but the solution, scope, or architecture direction is not yet agreed.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "reference": {
+        "source": "obra/superpowers",
+        "license": "MIT"
+      },
+      "tags": [
+        "solution-discovery",
+        "design",
+        "tradeoffs",
+        "decision"
+      ]
+    },
+    {
+      "name": "systematic-debugging",
+      "description": "Evidence-first debugging workflow for reproducing failures, tracing root causes, testing competing hypotheses, and defining the smallest justified fix before editing. Use when a test, build, runtime behavior, integration, or intermittent failure has an unknown or disputed cause; do not use for straightforward implementation with an already-known owner and cause.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "reference": {
+        "source": "obra/superpowers",
+        "license": "MIT"
+      },
+      "tags": [
+        "debugging",
+        "root-cause",
+        "hypotheses",
+        "regression"
+      ]
+    },
+    {
+      "name": "test-driven-development",
+      "description": "Test-driven development workflow for implementing observable behavior through strict RED-GREEN-REFACTOR cycles and small verified increments. Use when adding or changing behavior that can be expressed with automated tests, especially regression fixes, public contracts, business rules, and behavior-preserving refactors; skip non-executable documentation and exploratory throwaway work.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "reference": {
+        "source": "obra/superpowers",
+        "license": "MIT"
+      },
+      "tags": [
+        "tdd",
+        "testing",
+        "red-green-refactor",
+        "regression"
+      ]
+    },
+    {
+      "name": "verification-before-completion",
+      "description": "Completion verification gate for proving that requested work satisfies its acceptance criteria with fresh command output, behavior checks, diff and repository-state inspection, and explicit disclosure of unverified items. Use immediately before claiming a code change, fix, refactor, build, test, review remediation, or repository task is complete; it does not replace independent review or post-deployment monitoring.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "reference": {
+        "source": "obra/superpowers",
+        "license": "MIT"
+      },
+      "tags": [
+        "verification",
+        "evidence",
+        "completion",
+        "quality-gate"
+      ]
+    },
+    {
+      "name": "receiving-code-review",
+      "description": "Code-review remediation workflow for triaging incoming findings, validating each claim against the current code and requirements, resolving ambiguity, implementing accepted changes, and returning evidence for re-review. Use when review comments, pull-request feedback, a review report, or requested changes must be evaluated and addressed; do not use to perform the original review.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "reference": {
+        "source": "obra/superpowers",
+        "license": "MIT"
+      },
+      "tags": [
+        "code-review",
+        "remediation",
+        "feedback",
+        "re-review"
+      ]
+    },
+    {
+      "name": "verified-software-delivery",
+      "description": "End-to-end orchestration workflow for carrying non-trivial software work from an approved problem framing through specification, implementation, review remediation, and evidence-backed completion. Use when a feature, refactor, or multi-step fix must be delivered across several stages with explicit artifacts and gates; do not use for a single isolated edit, test run, or review.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "reference": {
+        "source": "obra/superpowers",
+        "license": "MIT"
+      },
+      "tags": [
+        "software-delivery",
+        "workflow",
+        "review-gates",
+        "verification",
+        "orchestration"
+      ]
+    },
+    {
+      "name": "market-research",
+      "description": "Decision-focused market research workflow for defining a market question, collecting current demand and competitor evidence, resolving source conflicts, and producing a confidence-labeled decision memo. Use when product, positioning, launch, audience, or investment decisions require market evidence rather than general web research or unsupported estimates.",
+      "category": "search-research",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "reference": {
+        "source": "affaan-m/ECC",
+        "license": "MIT"
+      },
+      "tags": [
+        "market-research",
+        "competitors",
+        "evidence",
+        "decision-memo"
+      ]
+    },
+    {
+      "name": "brand-voice",
+      "description": "Brand voice extraction and application workflow for deriving reusable tone, vocabulary, rhythm, messaging boundaries, and transformation examples from representative source material. Use when writing must consistently sound like a specific organization, product, publication, or creator rather than merely becoming more natural or less AI-like.",
+      "category": "communication",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "reference": {
+        "source": "affaan-m/ECC",
+        "license": "MIT"
+      },
+      "tags": [
+        "brand",
+        "voice",
+        "tone",
+        "writing"
+      ]
+    },
+    {
+      "name": "article-writing",
+      "description": "Evidence-led long-form writing workflow for turning an approved brief, source ledger, and optional brand voice into a coherent article, guide, essay, or newsletter with claim mapping, fact checks, and editorial quality gates. Use when producing substantial narrative content rather than a summary, technical specification, social post, or short-form video script.",
+      "category": "communication",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "reference": {
+        "source": "affaan-m/ECC",
+        "license": "MIT"
+      },
+      "tags": [
+        "article",
+        "long-form",
+        "editorial",
+        "fact-checking"
+      ]
+    },
+    {
+      "name": "content-repurposing",
+      "description": "Source-controlled content repurposing workflow for adapting an approved article, report, transcript, or campaign asset into channel-specific derivatives while preserving facts, brand voice, core message, CTA, and source traceability. Use when one approved source must become multiple social, email, visual, audio, or video-ready content artifacts without adding unsupported claims or publishing them automatically.",
+      "category": "communication",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "reference": {
+        "source": "affaan-m/ECC",
+        "license": "MIT"
+      },
+      "tags": [
+        "content",
+        "repurposing",
+        "channels",
+        "campaign"
+      ]
+    },
+    {
+      "name": "api-contract-testing",
+      "description": "API contract testing workflow for proving provider and consumer compatibility through schema checks, executable examples, consumer-driven expectations, breaking-change analysis, and release gates. Use when an HTTP, event, webhook, or SDK-facing API must be verified against an explicit contract or protected from incompatible changes; use api-contract-design for design decisions and openapi-spec-generation for authoring specifications.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "reference": {
+        "source": "github/awesome-copilot",
+        "license": "MIT"
+      },
+      "tags": [
+        "api",
+        "contract-testing",
+        "compatibility",
+        "consumer-driven"
+      ]
+    },
+    {
+      "name": "database-migration-workflow",
+      "description": "Approval-gated database migration orchestration workflow for expanding schemas, backfilling data, cutting over application traffic, validating invariants, and retiring old structures with rollback or forward-recovery plans. Use for production or production-like schema and data migrations where compatibility, lock impact, data integrity, observability, or zero-downtime sequencing matters; use database-design for schema modeling and engine or ORM skills for concrete commands.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "reference": {
+        "source": "wshobson/agents",
+        "license": "MIT"
+      },
+      "tags": [
+        "database",
+        "migration",
+        "zero-downtime",
+        "backfill",
+        "recovery"
+      ]
+    },
+    {
+      "name": "agent-introspection-debugging",
+      "description": "Agent execution diagnosis workflow for reconstructing traces, locating the earliest behavioral divergence, classifying failures across instructions, context, routing, tools, guardrails, retrieval, and synthesis, and turning confirmed causes into regression evals. Use when an agent loops, chooses the wrong tool, loses context, misroutes a handoff, violates an output contract, or succeeds inconsistently and traces or structured logs are available.",
+      "category": "coding-agents-ides",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "reference": {
+        "source": "affaan-m/ECC",
+        "license": "MIT"
+      },
+      "tags": [
+        "agents",
+        "debugging",
+        "tracing",
+        "handoffs",
+        "evals"
+      ]
+    },
+    {
+      "name": "autoresearch",
+      "description": "Bounded autonomous experimentation workflow for improving a measurable repository outcome through baseline-controlled hypothesis, change, measurement, and keep-or-revert cycles. Use when code, configuration, prompts, or performance can be optimized with repeatable local experiments, a scalar metric, and explicit constraints; do not use for open-ended web research, feature discovery, or irreversible production trials.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "reference": {
+        "source": "github/awesome-copilot",
+        "license": "MIT"
+      },
+      "tags": [
+        "experimentation",
+        "optimization",
+        "metrics",
+        "automation"
+      ]
+    },
+    {
+      "name": "llm-application-delivery-workflow",
+      "description": "Stage-gated orchestration workflow for taking an LLM feature from a product outcome through architecture routing, data and safety contracts, evaluation evidence, operational readiness, rollout, and post-release learning. Use when an AI application spans two or more of model APIs, agents, RAG, evals, security, observability, API contracts, data migrations, or deployment; do not use for a narrow single-component implementation.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "reference": {
+        "source": "github/awesome-copilot",
+        "license": "MIT"
+      },
+      "tags": [
+        "llm",
+        "agents",
+        "rag",
+        "delivery",
+        "release-gates"
       ]
     }
   ],

@@ -54,6 +54,7 @@ Use this skill when building retrieval-augmented generation, semantic search, do
 ## Handoff
 
 - Use `openai-api-development` for embeddings, file search, and API integration.
+- Use `llm-application-delivery-workflow` when retrieval changes are part of a gated product release.
 - Use `agents-sdk-development` when RAG is exposed as an agent tool.
 - Use `llm-evals` for retrieval and answer quality eval design.
 - Use `database-design` for metadata schema and access-control modeling.

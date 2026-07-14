@@ -203,3 +203,9 @@ try {
 - [ ] 無明顯 N+1、主執行緒阻塞或記憶體洩漏風險
 - [ ] 程式可讀、命名與結構合理
 - [ ] 破壞性變更或行為變更有註記或文件
+
+## Handoff
+
+- Use `receiving-code-review` when an implementer must validate and remediate these findings.
+- Use `pipeline-review` when the review must become a repeatable stage gate with stable finding IDs.
+- Use `github-code-review` when pull-request context, comments, and checks materially affect the review.
