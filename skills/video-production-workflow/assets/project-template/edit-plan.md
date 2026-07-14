@@ -14,8 +14,8 @@ Supersedes:
 
 ## Timeline
 
-| Sequence | Time range | Shot IDs | Asset IDs | Picture action | Audio | Captions or graphics | Transition | Acceptance criteria |
-|---|---|---|---|---|---|---|---|---|
+| Sequence | Time range | Shot IDs | Source ranges and asset IDs | Edit decision and rationale | Picture action | Audio and sound cues | Captions or graphics | Transition | Acceptance criteria |
+|---|---|---|---|---|---|---|---|---|---|
 
 ## Track Plan
 
@@ -32,3 +32,11 @@ Supersedes:
 - Review render:
 - Delivery render and variants:
 - Naming convention:
+
+## Cut Versions and Review
+
+| Cut version | Stage | Source artifact versions | Render or project location | Review owner | Status | Supersedes |
+|---|---|---|---|---|---|---|
+
+| Timecode | Severity | Review note | Responsible owner | Disposition | Verification status |
+|---|---|---|---|---|---|

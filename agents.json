@@ -1,9 +1,9 @@
 {
   "version": "3.0.0",
-  "updated": "2026-07-14T05:20:51.953Z",
-  "total": 219,
+  "updated": "2026-07-14T06:39:39.571Z",
+  "total": 223,
   "categories": 31,
-  "uniqueRoles": 219,
+  "uniqueRoles": 223,
   "agents": [
     {
       "id": "accessibility-expert",
@@ -1030,6 +1030,41 @@
           "categories/04-quality-security/chaos-engineer.md"
         ],
         "tree": "9c98eac2f7463c79ebb7b914432ace7dbd3bfeaa"
+      }
+    },
+    {
+      "id": "cinematographer",
+      "name": "cinematographer",
+      "role": "cinematographer",
+      "description": "Turns an approved storyboard and visual treatment into an executable camera and lighting plan for live-action, animated, AI-generated, or hybrid video. Use when shot-level capture, lens, movement, lighting, exposure, render, or visual-technical consistency decisions need a dedicated owner.",
+      "category": "media-production",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "video-production-workflow",
+        "storyboard-creation",
+        "ai-video-prompting",
+        "ai-video-generation",
+        "animation-best-practices"
+      ],
+      "tags": [
+        "cinematography",
+        "camera-planning",
+        "lighting-design",
+        "shot-execution",
+        "visual-technical-qc"
+      ],
+      "path": "agents/cinematographer.md",
+      "references": {
+        "repo": "HITsz-TMG/AIGC-Claw",
+        "paths": [
+          "FilmAgent/FilmAgent/Prompt/cinematographer.txt",
+          "FilmAgent/FilmAgent/Prompt/shot_review.txt"
+        ],
+        "tree": "c131e9bd0d62118d2abd81daff3f2c5a4efa9877"
       }
     },
     {
@@ -4789,6 +4824,42 @@
       }
     },
     {
+      "id": "production-designer",
+      "name": "production-designer",
+      "role": "production-designer",
+      "description": "Translates an approved video treatment into a coherent, producible visual world covering environments, sets, props, wardrobe, materials, signage, and recurring visual systems. Use when a production needs buildable or generatable design specifications before asset creation and shot execution.",
+      "category": "media-production",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "video-production-workflow",
+        "design-consultation",
+        "color-font-skill",
+        "ai-image-prompt-design",
+        "image-utils"
+      ],
+      "tags": [
+        "production-design",
+        "visual-worldbuilding",
+        "set-design",
+        "prop-design",
+        "asset-specification"
+      ],
+      "path": "agents/production-designer.md",
+      "references": {
+        "repo": "HITsz-TMG/AIGC-Claw",
+        "paths": [
+          "video-claw/video-claw/backend/prompts/setting/setting_zh.txt",
+          "video-claw/video-claw/backend/prompts/setting/eval_setting_zh.txt",
+          "video-claw/video-claw/backend/prompts/setting/eval_select_best_zh.txt"
+        ],
+        "tree": "c131e9bd0d62118d2abd81daff3f2c5a4efa9877"
+      }
+    },
+    {
       "id": "project-manager",
       "name": "project-manager",
       "role": "project-manager",
@@ -6102,6 +6173,40 @@
       }
     },
     {
+      "id": "sound-designer",
+      "name": "sound-designer",
+      "role": "sound-designer",
+      "description": "Designs and verifies the complete sonic system for a video, including dialogue, narration, room tone, ambience, foley, effects, music relationships, transitions, stems, and mix requirements. Use when sound needs dedicated cue-level planning, asset ownership, picture-aware integration, rights tracking, or loudness and delivery QC.",
+      "category": "media-production",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "video-production-workflow",
+        "audio-generation",
+        "text-to-speech",
+        "audio-transcription",
+        "video-edit"
+      ],
+      "tags": [
+        "sound-design",
+        "audio-cue-sheet",
+        "foley",
+        "ambience",
+        "mix-qc"
+      ],
+      "path": "agents/sound-designer.md",
+      "references": {
+        "repo": "Donchitos/Claude-Code-Game-Studios",
+        "paths": [
+          ".claude/agents/sound-designer.md"
+        ],
+        "tree": "45e93bee12c3f1d80052f7406f0180e9bece8382"
+      }
+    },
+    {
       "id": "sql-pro",
       "name": "sql-pro",
       "role": "sql-pro",
@@ -6975,6 +7080,40 @@
           "agents/video-director.md"
         ],
         "tree": "403ef89a15c0d371eecb16f53d5b51d3d222fa17"
+      }
+    },
+    {
+      "id": "video-editor",
+      "name": "video-editor",
+      "role": "video-editor",
+      "description": "Builds and verifies a versioned video edit from approved story, shot, picture, audio, caption, and delivery inputs while preserving source media and director intent. Use when a project needs a dedicated owner for edit structure, selects, timeline decisions, pacing, sync, transitions, graphics placement, cut revisions, and picture-delivery QC.",
+      "category": "media-production",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "model": "inherit",
+      "permission": "workspace-write",
+      "skills": [
+        "video-production-workflow",
+        "video-edit",
+        "remotion-video-toolkit",
+        "subtitle-captions",
+        "terminal-ops"
+      ],
+      "tags": [
+        "video-editing",
+        "timeline-design",
+        "edit-decision-list",
+        "audiovisual-sync",
+        "delivery-qc"
+      ],
+      "path": "agents/video-editor.md",
+      "references": {
+        "repo": "davila7/claude-code-templates",
+        "paths": [
+          "cli-tool/components/agents/ffmpeg-clip-team/video-editor.md"
+        ],
+        "tree": "861d45400d7c03f296865245793f4f596a7d7527"
       }
     },
     {

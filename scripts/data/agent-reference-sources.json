@@ -85,6 +85,27 @@
       "tree": "8a5942e830955d87770fcf253b4ce2aa046d8210",
       "license": "MIT",
       "licensePath": "agency-agents/LICENSE"
+    },
+    {
+      "repo": "HITsz-TMG/AIGC-Claw",
+      "commit": "1324b36020570c279cd9560794a8f5508bf7bb70",
+      "tree": "c131e9bd0d62118d2abd81daff3f2c5a4efa9877",
+      "license": "MIT",
+      "licensePath": "LICENSE"
+    },
+    {
+      "repo": "davila7/claude-code-templates",
+      "commit": "fa79251f9fabea39838c6af01e8ccf8fb6f02100",
+      "tree": "861d45400d7c03f296865245793f4f596a7d7527",
+      "license": "MIT",
+      "licensePath": "LICENSE"
+    },
+    {
+      "repo": "Donchitos/Claude-Code-Game-Studios",
+      "commit": "984023ddac0d5e27624f2baacde6105e45de375f",
+      "tree": "45e93bee12c3f1d80052f7406f0180e9bece8382",
+      "license": "MIT",
+      "licensePath": "LICENSE"
     }
   ]
 }

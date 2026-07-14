@@ -25,7 +25,7 @@ Use this skill to coordinate a complete video production without assuming a spec
 
 - Keep `video-director` accountable for creative direction, gates, revision arbitration, and final review.
 - Use `video-producer` for schedule, budget, assets, rights, provider planning, and checkpoint state.
-- Delegate script, storyboard, and continuity artifacts only to suitable discovered Agents.
+- Delegate script, storyboard, production design, camera and lighting, continuity, sound, and edit artifacts only to suitable discovered Agents.
 - Give one owner exclusive write authority for each canonical artifact at a time.
 - Validate every handoff before starting dependent work.
 
@@ -42,9 +42,9 @@ Use this skill to coordinate a complete video production without assuming a spec
 2. **Creative treatment**: define story approach, visual language, pacing, sound direction, reference principles, exclusions, and feasibility; produce `creative-treatment.md`.
 3. **Script**: create or adapt the approved narrative, scenes, action, dialogue, voiceover, and timing; produce `script.md`.
 4. **Storyboard and shot plan**: translate the script into scenes, shots, framing, camera, motion, audio, duration, assets, and transitions; produce `storyboard.md` and `shot-list.md`.
-5. **Continuity and production plan**: lock character, wardrobe, prop, location, screen-state, style, and temporal continuity while planning schedule, budget, rights, providers, and assets; produce `continuity-bible.md`, `production-plan.md`, and `assets/manifest.md`.
-6. **Asset production**: generate, source, record, or prepare approved visual, video, voice, music, sound, caption, and graphic assets; update the manifest after every accepted version.
-7. **Edit and compose**: assemble picture, motion, audio, captions, graphics, transitions, and timing through the available edit or code-generated workflow; produce `edit-plan.md` and versioned renders.
+5. **Visual world, camera, sound, continuity, and production plan**: translate the approved direction into producible environments, sets, props, wardrobe, materials, camera, lighting, capture or render requirements, sound cues and stems, continuity, schedule, budget, rights, providers, and assets; produce `production-design-bible.md`, `camera-lighting-plan.md`, `sound-plan.md`, `continuity-bible.md`, `production-plan.md`, and `assets/manifest.md` as applicable.
+6. **Asset production**: generate, source, record, or prepare approved visual, video, voice, music, sound, caption, and graphic assets against their plans; update the manifest after every accepted version.
+7. **Edit, sound, and compose**: assemble picture, motion, dialogue, music, sound, captions, graphics, transitions, and timing through the available edit or code-generated workflow; produce `edit-plan.md`, edit-decision evidence, versioned cuts, stems, and renders.
 8. **Review and delivery**: inspect narrative clarity, continuity, rights, accessibility, technical conformance, audio balance, artifacts, and platform requirements; produce `review-report.md` and the approved deliverables.
 
 ## Checkpoints
@@ -65,7 +65,7 @@ Require explicit approval for:
 
 - the creative treatment before detailed production planning;
 - the script before shot-level planning;
-- the storyboard, continuity baseline, and production plan before batch asset work;
+- the storyboard, applicable production-design, camera-lighting, and sound plans, continuity baseline, and production plan before batch asset work;
 - paid generation, licensed assets, identifiable likeness or voice use, and consequential external calls;
 - provider or model substitutions that change cost, rights, privacy, quality, or timing;
 - final render selection and any publication or distribution action.
@@ -88,10 +88,13 @@ Read [references/artifact-contracts.md](references/artifact-contracts.md) before
 - Use `gallery-researcher` and `web-research-ops` for attributable visual and factual research.
 - Use `short-video-script` for short social scripts and a discovered `screenwriter` for broader narrative screenplay ownership.
 - Use `storyboard-creation` and a discovered `storyboard-artist` for shot-level planning.
+- Use a discovered `production-designer` to define environments, sets, props, wardrobe, materials, signage, and asset specifications.
+- Use a discovered `cinematographer` to own camera, lens, movement, lighting, exposure, capture, render, and visual-technical planning.
 - Use `ai-video-prompting` and `ai-video-generation` for generative clips.
 - Use `image-generator`, `ai-image-prompt-design`, and `image-utils` for still assets.
-- Use `audio-generation`, `text-to-speech`, and `subtitle-captions` for sound and accessibility assets.
-- Use `remotion-video-toolkit` for deterministic programmatic composition and `video-edit` for existing-footage edits and delivery transforms.
+- Use a discovered `sound-designer` with `audio-generation`, `text-to-speech`, and `audio-transcription` for cue planning, sound assets, stems, mix strategy, and sound QC.
+- Use `subtitle-captions` for accessibility assets.
+- Use a discovered `video-editor` with `remotion-video-toolkit` for deterministic programmatic composition and `video-edit` for timeline execution, existing-footage edits, versioned cuts, and delivery transforms.
 
 ## Rules
 
