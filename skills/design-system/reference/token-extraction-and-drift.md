@@ -110,4 +110,8 @@ Never edit generated platform artifacts as the only fix. Change the canonical so
 
 ## Completion Gate
 
-Complete extraction only when provenance is recorded, the sample matrix is explicit, observed and approved values remain distinguishable, the DTCG token graph validates, destructive changes are approved, generated outputs are reproducible, and remaining drift is assigned to an owner.
+## Completion by Execution Posture
+
+An audit/dry-run receipt is complete when provenance is recorded, the sample matrix is explicit, observed and approved values remain distinguishable, the in-memory DTCG-compatible candidate graph validates, proposed add/change/rename/alias/deprecate/delete operations and destructive warnings are reported, unverified cells and remaining drift have owners, and the receipt revision and return owner are recorded. This posture does not require approval of destructive changes, generated files, or consumer migration.
+
+Apply/generate work is complete only when the dry-run receipt is satisfied, destructive changes are explicitly approved, the canonical source or transform is updated, generated outputs are reproducible, representative consumers are verified, and remaining drift is assigned to an owner.

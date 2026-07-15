@@ -46,6 +46,11 @@ Use a machine gate when a repeatable tool can produce structured evidence. The m
 
 ```text
 verdict: pass | warn | fail | error
+contract:
+  mode: regression | reference-fidelity
+  matrixCell: <route|viewport|theme|state>
+  referenceId: <approved artifact ID or null>
+  baselineId: <approved implementation baseline ID or null>
 issues:
   - severity: blocking | major | minor | info
     channel: dom | contrast | ocr | console | network | pixel | semantic | temporal
@@ -56,6 +61,8 @@ issues:
 nextAction: done | revise | review | rerun
 baselineAction: unchanged | candidate | approved | rejected
 ```
+
+Regression mode requires `contract.baselineId`; reference-fidelity mode requires `contract.referenceId`. Missing the authority ID makes the evidence non-reproducible and returns `error` with `nextAction: review`.
 
 Map provider-specific fields and exit codes at the adapter boundary. Do not make the Skill depend on one SaaS, model, or testing library.
 

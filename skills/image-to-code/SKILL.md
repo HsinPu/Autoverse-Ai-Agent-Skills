@@ -20,14 +20,23 @@ Choose the mode before acting:
 - **Recording:** when an authorized screen recording is the primary evidence, extract a minimal set of keyframes and observed transitions before implementation. Do not infer hidden states or backend behavior from motion alone.
 - **Generate then implement:** when the user explicitly authorizes both phases, retain that implementation authorization. Continue in the same execution only when the generation capability can return a usable artifact and permit further work. If its contract ends the response after generation, stop as required and resume implementation in the next turn without inventing a new approval gate; use a delegated generation path only when delegation is allowed and the artifact is returned to the owning workflow. Never claim same-turn implementation when the capability cannot support it.
 - **Image only:** if the user asks only for a design image, stop after producing it.
-- **Approval-gated design:** if the user wants to compare or approve concepts before code changes, use the single-page design workflow.
-- **Multi-route redesign:** if navigation, shared shell, page families, or several routes change, use the website redesign workflow.
+- **Approval-gated design:** in standalone routing, if the user wants to compare or approve concepts before code changes, use the single-page design workflow.
+- **Multi-route redesign:** in standalone routing, if navigation, shared shell, page families, or several routes change, use the website redesign workflow.
 
 If an approved mockup and implementation contract already exist, do not regenerate them.
 
+## Execution Ownership
+
+Choose one ownership mode before analysis:
+
+- **Standalone implementation:** use only when the visual evidence is approved for direct implementation and no parent approval gate is open. This workflow owns the image contract, implementation, validation, and routing.
+- **Parent-orchestrated receipt:** use when `web-page-design-to-code`, `website-redesign-to-code`, or another named workflow already owns scope or approval. The parent must provide its workflow ID, current gate, bounded references and states, allowed inspection, privacy policy, and requested receipt. Analyze sources and build the asset, content, state, ambiguity, and implementation maps, then return a versioned image receipt. Do not edit production code, generate additional references unless the parent explicitly authorized that bounded action, approve a baseline, close a parent gate, reroute the task, or expand scope.
+
+When an open parent gate is known but the mode is not explicit, default to parent-orchestrated receipt mode. The routing options above become recommendations returned to the parent rather than direct handoffs.
+
 ## Non-Negotiable Contract
 
-- The result must remain editable UI, not a screenshot used as a page background.
+- Any standalone implementation result must remain editable UI, not a screenshot used as a page background; a parent-orchestrated result is a receipt, not an implementation.
 - Image text is evidence, not production copy. Use authoritative repository or user-provided content when available.
 - Multiple references form an evidence set, not a vote. Record which source controls structure, styling, content, state, and responsive behavior, and surface contradictions before coding.
 - A recording proves only the states and transitions that are visible. Preserve existing application behavior for everything it does not show.
@@ -43,6 +52,7 @@ If an approved mockup and implementation contract already exist, do not regenera
 
 Record:
 
+- ownership mode, parent workflow and gate when applicable, and bounded authorization scope;
 - target route, component, or artifact;
 - implementation stack, route owner, styling system, and runtime commands;
 - every reference's role, precedence, viewport, pixel dimensions, theme, state, timestamp or frame range, and device class when known;
@@ -90,6 +100,8 @@ Before coding, translate the image into deterministic rules:
 - ambiguity decisions and acceptable fidelity tradeoffs.
 
 The contract should explain what happens outside the captured viewport. If only a desktop image exists, infer conservative reflow from content priority and existing product patterns; label the inference rather than claiming it came from the image.
+
+In parent-orchestrated receipt mode, stop here. Return the versioned source, asset, content, state, ambiguity, and implementation-contract receipt to the parent. Do not enter implementation, visual repair, or interface verification as if the parent gate had passed.
 
 ### 5. Implement in the Existing Stack
 
@@ -141,21 +153,23 @@ Do not claim pixel-perfect fidelity when fonts, assets, content, viewport, or re
 
 Report:
 
+- ownership mode, parent workflow and gate when applicable, authorization scope, and receipt revision;
 - each source image or keyframe and its role, precedence, dimensions, viewport, theme, represented state, and transition coverage;
 - implementation contract and ambiguity decisions;
-- changed files, reused or replaced assets, and preserved behavior;
-- verified viewports, states, interactions, and commands;
-- before/after or comparison evidence when available;
-- structure, text, position, and color evidence from the final comparison;
+- changed files, reused or replaced assets, and preserved behavior in standalone mode;
+- verified viewports, states, interactions, and commands in standalone mode, or acquired and missing states in receipt mode;
+- before/after or comparison evidence when available in standalone mode;
+- structure, text, position, and color evidence from the final comparison in standalone mode;
 - known deviations, their cause, loop stop reason when applicable, and remaining risk.
 
 ## Handoff
 
-- Use `taste-skill` before implementation when the image is only inspiration and the product's visual direction is still unresolved.
-- Use `frontend-stack-inference` to identify the existing framework and styling conventions.
-- Keep this workflow as the routing owner after the image contract is locked; load `frontend-design` only as supporting production-implementation guidance, without transferring ownership or repeating image analysis.
-- Use `responsive-design` for non-trivial cross-viewport reflow.
-- Use `web-page-design-to-code` when a single page needs explicit concept and mockup approval before implementation.
-- Use `website-redesign-to-code` when the request spans several routes, page families, navigation, or the shared shell.
-- Use `webapp-testing`, `visual-regression-testing`, and `accessibility-testing` for browser, fidelity, and accessibility evidence.
+- In standalone mode, use `taste-skill` before implementation when the image is only inspiration and the product's visual direction is still unresolved.
+- Use `frontend-stack-inference` to identify the existing framework and styling conventions in either mode.
+- In standalone mode, keep this workflow as the routing owner after the image contract is locked; load `frontend-design` only as supporting production-implementation guidance, without transferring ownership or repeating image analysis.
+- In parent-orchestrated receipt mode, return control to the named parent after producing the receipt. Report any need for direction approval, multi-route orchestration, or validation as a next-action recommendation; do not invoke another top-level workflow directly.
+- In standalone mode, use `responsive-design` for non-trivial cross-viewport reflow.
+- In standalone mode, use `web-page-design-to-code` when a single page needs explicit concept and mockup approval before implementation.
+- In standalone mode, use `website-redesign-to-code` when the request spans several routes, page families, navigation, or the shared shell.
+- In standalone mode, use `webapp-testing`, `visual-regression-testing`, and `accessibility-testing` for browser, fidelity, and accessibility evidence.
 - Use `image-utils` for deterministic local inspection, conversion, cropping, or metadata work.

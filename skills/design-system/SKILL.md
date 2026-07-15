@@ -11,6 +11,15 @@ reference-license: W3C Software and Document License
 
 Use this skill when the task is about the system behind the UI, not just one screen.
 
+## Execution Posture
+
+Choose the write posture separately from the design-system purpose below:
+
+- **Audit/dry-run receipt:** default when a parent workflow has an open approval gate, the user requested no writes, or output paths are not authorized. Inspect allowed sources and return provenance, an in-memory DTCG-compatible candidate graph, observed-versus-approved distinctions, a dry-run drift ledger, destructive-change warnings, unresolved cells, and a versioned receipt. Do not create or overwrite canonical tokens, documentation, previews, generated platform files, or production styles.
+- **Apply/generate:** use only after explicit user authorization permits the system change and the canonical output paths and migration scope are authorized. When a parent approval gate exists, that named gate must also permit the change. Write the smallest maintained source, regenerate derived views, and verify representative consumers.
+
+When called by another approval-gated workflow, record the parent workflow, current gate, receipt scope, and return owner. In standalone work, record the owning task and user authorization instead. This Skill owns the bounded system analysis or migration receipt; an existing parent retains scope and gate authority.
+
 ## Modes
 
 ### 1. Generate or normalize a design system
@@ -23,7 +32,7 @@ Use when starting a new project, standardizing a redesign, or extracting tokens 
 - Keep one canonical token source. Treat CSS, JavaScript, mobile, documentation, and preview outputs as generated views rather than competing authorities.
 - Read [reference/generate.md](reference/generate.md) when you need the generation workflow or output contract.
 
-Expected outputs:
+Expected apply/generate outputs, when authorized:
 
 - `design-tokens.json`
 - `DESIGN.md`
@@ -48,8 +57,9 @@ Use when a running interface is the available source or when source tokens and r
 - Confirm authorization, target routes, themes, states, viewports, login requirements, data fixtures, and network-egress policy.
 - Collect computed styles, CSS custom properties, loaded fonts, component states, layout measurements, and representative screenshots across the bounded matrix.
 - Mark every value as source-declared, runtime-observed, normalized, inferred, or unresolved. Computed styles are evidence, not automatically canonical tokens.
-- Compare observed values with maintained tokens and approved design artifacts. Produce an add/change/rename/alias/delete drift ledger before editing.
+- Compare observed values with maintained tokens and approved design artifacts. Produce an add/change/rename/alias/deprecate/delete drift ledger before editing.
 - Require explicit approval for destructive deletion, semantic renaming, alias rewrites, or wide theme changes.
+- In audit/dry-run receipt posture, do not persist screenshots, caches, token files, previews, or generated outputs unless the parent separately authorizes that exact artifact and location.
 - Read [reference/token-extraction-and-drift.md](reference/token-extraction-and-drift.md) for the DTCG contract, source authority, live sampling, and drift report.
 
 ### 3. Audit a visual system
@@ -75,3 +85,4 @@ Use when the UI feels generic, over-decorated, or visually off.
 - Keep the system semantic: use base tokens, semantic tokens, and component tokens only when necessary.
 - Prefer DTCG 2025.10-compatible token objects using the standard type, value, optional description, and alias fields. Keep tool-specific provenance or mode data in documented extensions rather than custom ambiguous fields.
 - If an existing design system already exists, extend it instead of replacing it.
+- In audit/dry-run receipt posture, return the versioned receipt to the named parent when one exists, otherwise to the owning task or user. Do not apply changes, promote a candidate, or close a parent's gate.

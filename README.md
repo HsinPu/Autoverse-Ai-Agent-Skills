@@ -514,6 +514,8 @@ Catalog 來源分別是 [skills.json](skills.json) 與 [agents.json](agents.json
 | Visual source to code | [`figma-to-code`](skills/figma-to-code/)（Figma 結構化資料為 authority）或 [`image-to-code`](skills/image-to-code/)（圖片／錄影為 authority）作為 orchestrator，按需載入 [`frontend-design`](skills/frontend-design/) → [`visual-regression-testing`](skills/visual-regression-testing/) | 由視覺來源 workflow 持續擁有 evidence contract、實作與驗收路由，將 Figma node、參考圖或錄影關鍵幀轉為可編輯前端，再用 screenshot／DOM／OCR／contrast／runtime 證據完成驗收 |
 | Approval-gated design to code | [`web-page-design-to-code`](skills/web-page-design-to-code/)／[`website-redesign-to-code`](skills/website-redesign-to-code/) | 單頁或整站需要版本化設計決策、mockup 核准、保留契約、component/data map、pilot 與 rollout gate 時使用 |
 
+當單頁或整站 Flow 已開啟 approval gate，它保留頂層 orchestration；design intelligence、Figma／image translation、design-system drift 與 machine visual gate 只回傳有版本的 receipt，不會自行關閉 gate、批准 baseline 或擴張範圍。
+
 請從 [skills.json](skills.json) 瀏覽 metadata，或直接查看 [skills/](skills/) 內的完整 package。
 
 ## 專案結構

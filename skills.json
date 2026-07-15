@@ -452,7 +452,10 @@
         "imagegen",
         "design-to-code",
         "responsive",
-        "visual-validation"
+        "visual-validation",
+        "figma",
+        "design-intelligence",
+        "machine-gate"
       ]
     },
     {
@@ -469,7 +472,11 @@
         "mockup",
         "design-to-code",
         "frontend",
-        "visual-validation"
+        "visual-validation",
+        "figma",
+        "design-intelligence",
+        "dtcg",
+        "machine-gate"
       ]
     },
     {

@@ -51,13 +51,13 @@ Redact credentials and private query parameters from logs. A checksum identifies
 
 ## Fallback Matrix
 
-| Available evidence | Allowed action | Required disclosure |
-| --- | --- | --- |
-| structured context + matching screenshot | full Figma-to-code workflow | identify missing states or assets |
-| structured context only | architecture and initial implementation | visual fidelity remains unverified |
-| screenshot only | route to `image-to-code` | variables, components, and constraints are inferred |
-| URL but no readable provider or export | stop before implementation | state the missing connection or export |
-| partial or truncated node | refetch bounded children | list nodes not acquired |
+| Available evidence | Standalone action | Parent-orchestrated receipt action | Required disclosure |
+| --- | --- | --- | --- |
+| structured context + matching screenshot | full Figma-to-code workflow | complete the bounded evidence and repository-mapping receipt, then return to the parent | identify missing states or assets |
+| structured context only | architecture and initial implementation | return the bounded mapping receipt without implementation | visual fidelity remains unverified |
+| screenshot only | route to `image-to-code` | recommend raster fallback to the parent and stop | variables, components, and constraints are inferred |
+| URL but no readable provider or export | stop before implementation | return a blocked receipt to the parent | state the missing connection or export |
+| partial or truncated node | refetch bounded children | refetch only parent-authorized children, then return the coverage receipt | list nodes not acquired |
 
 Never synthesize missing component IDs, variable names, asset URLs, or prototype behavior.
 
@@ -87,4 +87,6 @@ Use design layers to understand visual composition. Use the repository to decide
 
 ## Completion Gate
 
-The handoff is complete only when the target node and state are identified, structured evidence and a matching visual reference are accounted for, repository mappings are explicit, required states are implemented, and verified cells or remaining gaps are reported.
+In standalone mode, the handoff is complete only when the target node and state are identified, structured evidence and a matching visual reference are accounted for, repository mappings are explicit, required states are implemented, and verified cells or remaining gaps are reported.
+
+In parent-orchestrated receipt mode, completion means the bounded target, acquisition manifest, evidence ledger, repository mappings, conflicts, missing states, unresolved inferences, privacy result, authorization scope, parent workflow and gate, and receipt revision are reported back to the parent. Implementation, baseline approval, rerouting, and parent-gate closure are outside this mode.

@@ -12,6 +12,10 @@ Use these templates when a full-site redesign needs a durable handoff, multiple 
 - Current gate:
 - Gate authority/evidence:
 - Canonical route denominator:
+- Source-authority manifest version:
+- Design-intelligence receipt revision:
+- Token/DTCG and drift receipt revision:
+- Machine-gate matrix status:
 - Completed and approved page families:
 - Current bounded slice:
 - Last verified evidence:
@@ -41,7 +45,7 @@ Update this ledger only after verified evidence or an explicit decision. It reco
 - Reconciliation sources and result:
 - Known access gaps:
 
-| Concrete URL or route pattern | Page family | Layout | Data source | Auth/role | Critical states | SEO contract | Risk | Representative route |
+| Concrete URL or route pattern | Page family | Source authority/artifact revision | Layout | Data source | Auth/role | Critical states | SEO contract | Risk | Representative route |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 
 - Manifest completeness: complete | blocked | accepted exclusions
@@ -83,6 +87,12 @@ Update this ledger only after verified evidence or an explicit decision. It reco
 # Approved site design contract
 
 ## Foundations
+- Canonical token source/revision:
+- DTCG compatibility/version:
+- Extraction sources and representative route/state/viewport matrix:
+- Observed versus approved values:
+- Dry-run drift: add | change | rename | alias | deprecate | delete
+- Destructive migration approval and rollback:
 - Base and semantic colors:
 - Typography:
 - Spacing/grid:
@@ -103,8 +113,15 @@ Update this ledger only after verified evidence or an explicit decision. It reco
 | --- | --- | --- | --- | --- | --- |
 
 ## Page families
-| Family | Representative artifacts and type | Shared shell | Unique components | Responsive rules | Critical states |
-| --- | --- | --- | --- | --- | --- |
+| Family | Authority type and artifact revision | Figma/image evidence receipt | Shared shell | Unique components | Responsive rules | Critical states |
+| --- | --- | --- | --- | --- | --- | --- |
+
+## Design-intelligence receipt, when used
+- Query and filters:
+- Dataset revision and dataset/script SHA-256 values:
+- Selected record IDs, evidence levels, and reasons:
+- Rejected records and counter-signals:
+- Product evidence that overrode a candidate:
 
 ## Approval
 - Selected direction:
@@ -112,6 +129,8 @@ Update this ledger only after verified evidence or an explicit decision. It reco
 - Intentional deviations:
 - Implementation slice order:
 - Pass/fail thresholds:
+- Machine-gate contract: mode, source/baseline IDs, matrix cells, environment, channels, thresholds
+- Machine-gate policy: warn/error handling, baseline approver, retention, cache, and network egress
 - Readiness decision:
 ```
 
@@ -125,9 +144,14 @@ Update this ledger only after verified evidence or an explicit decision. It reco
 
 # Cross-site validation
 
-| Route/family | Viewport | State/journey | Functional | Visual | Accessibility | SEO | Runtime/performance | Evidence |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Route/family | Viewport | State/journey | Functional | Visual verdict | Machine contract/result ID | Next action | Baseline action | Accessibility | SEO | Runtime/performance | Evidence/unverified |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 
+- Canonical normalized results: result ID/path -> mode, matrixCell, referenceId, baselineId, issues, artifacts, unverified
+- Machine-gate provider/version/command:
+- Required channels, thresholds, and warning policy:
+- Baseline owner and candidate approvals:
+- Artifact retention, redaction, cache, and network-egress result:
 - Unverified routes/integrations:
 - Accepted deviations:
 - Legacy paths safe to remove:

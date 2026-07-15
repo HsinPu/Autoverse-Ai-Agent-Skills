@@ -26,6 +26,8 @@ Suggestions may identify product opportunities in visual mode, but do not implem
 
 Use `web-page-design-to-code` instead when only one isolated route or page needs work and the shared shell or design system remains unchanged.
 
+Lock source authority per page family before visual exploration: current implementation or brief, structured Figma, raster or recording, generated approval artifact, or an explicit hybrid. Record artifact IDs and revisions, states and viewports, source conflicts, and the owner of visual approval versus product behavior. If one isolated route already has an approved Figma or raster authority and no site-level gate or shared-system change remains, route it directly to `figma-to-code` or `image-to-code`. Once this workflow opens the scope or visual-direction program gate, it remains the top-level orchestrator for every in-scope family. A source workflow may own a bounded evidence or translation receipt, but it cannot close a program gate or expand the approved site scope.
+
 ## Non-Negotiable Contract
 
 - Inventory the repository and runtime before designing.
@@ -33,6 +35,7 @@ Use `web-page-design-to-code` instead when only one isolated route or page needs
 - Group routes into page families; do not design every URL independently.
 - Freeze preservation requirements before visual exploration.
 - Require explicit approval at the scope, visual-direction, implementation-readiness, and pilot gates. Delegation must name the gate; permission to select a design is separate from permission to implement or migrate the site.
+- Keep one program owner and gate ledger. Supporting design, source, token, and validation Skills return versioned receipts instead of recursively rerouting page families or inferring approval.
 - Do not begin production implementation while a required gate is open.
 - Honor literal no-write requests across the workspace and runtime. Avoid commands, crawls, screenshots, image generation, or browser journeys that create caches, cookies, analytics, carts, orders, emails, inventory changes, or other state until the relevant output and safe environment are authorized.
 - Keep each implementation slice runnable and verifiable.
@@ -68,7 +71,7 @@ Group static and dynamic routes into reusable families such as:
 - legal and long-form content;
 - loading, empty, error, not-found, and permission-denied states.
 
-For dynamic routes, inventory both the pattern and every known concrete URL in scope, then select representative short, long, empty, error, localized, and restricted examples. Record the original route/URL denominator and require every entry to belong to exactly one page family. Prioritize visual representatives by business impact, interaction complexity, SEO value, content density, and reuse across the site.
+For dynamic routes, inventory both the pattern and every known concrete URL in scope, then select representative short, long, empty, error, localized, and restricted examples. Record the original route/URL denominator and require every entry to belong to exactly one page family. Prioritize visual representatives by business impact, interaction complexity, SEO value, content density, and reuse across the site. Attach a source-authority record to each family and mark missing, conflicting, or stale artifacts explicitly; do not assume one Figma file or screenshot governs every route.
 
 ### 3. Create the Preservation Contract
 
@@ -101,7 +104,9 @@ Stop until approved. Reopen this gate if later discovery changes the sitemap, da
 
 ### 4. Establish the Shared Design System
 
-Audit the current system before replacing it. Use `taste-skill` to establish a contextual visual direction and cross-page anti-generic standard when the site needs stronger art direction. Reuse `design-consultation` for lighter aesthetic planning, `design-system` for shared contracts, `frontend-design` for implementation, and `responsive-design` for reflow instead of duplicating their detailed rules. Do not route representative mockups through a direct image-to-code flow because this workflow's scope, preservation, pilot, and rollout gates must remain authoritative.
+Audit the current system before replacing it. When direction is genuinely unresolved and local evidence would improve the decision, use `design-intelligence-search` once for the cross-site problem and only add family-specific queries for material differences. Preserve query, filters, dataset revision, dataset/script SHA-256 values, selected and rejected record IDs, evidence levels, and counter-signals in the program ledger. Search results are candidates, not approval.
+
+Use `taste-skill` to establish a contextual visual direction and cross-page anti-generic standard when the site needs stronger art direction. Reuse `design-consultation` for lighter aesthetic planning, `design-system` for shared contracts, `frontend-design` for implementation, and `responsive-design` for reflow instead of duplicating their detailed rules. For a Figma-authoritative family, apply the `figma-to-code` evidence contract to the exact file, node, state, viewport, variables, components, assets, and repository mappings. That bounded receipt owns Figma acquisition and translation evidence; this workflow still owns program gates, preservation, pilot, and rollout. Do not route representative mockups through a direct image-to-code flow after those program gates are open.
 
 Define:
 
@@ -115,15 +120,17 @@ Define:
 
 Extend a viable current system. Do not create a second permanent set of tokens or components beside it.
 
+Select one canonical token source and revision. When repository declarations, generated outputs, Figma variables, or an authorized running site disagree, use `design-system` in audit/dry-run receipt posture to build a provenance ledger, DTCG-compatible candidate graph, representative source/route/state/viewport matrix, and dry-run add/change/rename/alias/deprecate/delete report. Keep observed and approved values separate. Do not create or overwrite canonical artifacts before Gate 3 approves the migration and output paths. Require explicit approval for destructive migration, and verify regenerated consumers before promoting the candidate system.
+
 When custom Agents are available, use `design-system-architect` for token and component contracts, `ui-designer` for representative layouts, and `ui-ux-designer` only when product mode includes approved information-architecture or journey work.
 
 ### Gate 2: Approve the Visual Direction
 
 Present a small number of cohesive visual directions or one recommended direction. Obtain an explicit selection before expanding into full representative mockups. Selection authorizes design exploration only. Prior authorization may satisfy this gate only when it specifically delegates visual-direction selection; record the selected version.
 
-### 5. Generate Representative Mockups
+### 5. Adopt or Generate Representative Approval Artifacts
 
-Use an available image-generation capability such as `imagegen`, after inspecting any local visual references. Extract design language without copying protected branding, trade dress, copy, or assets.
+For each representative family, adopt exact versioned Figma or raster authority that already covers the required viewport and state instead of generating a competing design. Use an available image-generation capability such as `imagegen`, after inspecting local visual references, only for unresolved direction or missing representative coverage. Extract design language without copying protected branding, trade dress, copy, or assets. Keep one active approval set; any newly generated gap-filler remains a candidate until approved.
 
 At minimum, cover:
 
@@ -135,19 +142,21 @@ For larger sites, add one representative for each materially distinct critical p
 
 Translate selected visuals into tokens, layout constraints, component contracts, state behavior, and responsive rules. Keep scratch artifacts outside production source; persist approved references only when the repository convention or user requires them.
 
-If image generation is unavailable or prohibited, stop and explain the missing artifact. Continue with structured specifications, wireframes, or a sandbox prototype only when the user explicitly approves that substitute; do not call it an image mockup.
+If new image generation is required but unavailable or prohibited, stop and explain the missing artifact. Continue with structured specifications, wireframes, or a sandbox prototype only when the user explicitly approves that substitute; do not call it an image mockup. Existing approved authority that already satisfies the representative coverage contract does not require replacement generation.
 
 ### Gate 3: Confirm Implementation Readiness
 
 Before changing production UI, obtain approval for:
 
-- representative desktop and mobile approval artifacts: image mockups by default, or an explicitly authorized substitute;
+- representative desktop and mobile approval artifacts: adopted approved Figma/raster artifacts, generated image mockups, or an explicitly authorized substitute;
 - page-family and critical-state coverage;
 - shared tokens and component contracts;
+- source-authority, Figma/image evidence, design-intelligence, and token/drift receipt revisions when applicable;
 - component reuse and data-binding maps for the pilot and any shared surface it changes;
 - approved deviations and unresolved risks;
 - implementation slice order, per-slice ownership, rollback points, and verification plan;
 - measurable pass/fail thresholds for route parity, metadata and analytics parity, accessibility, console/network errors, visual comparison, supported browsers, and performance.
+- the machine-visual contract: mode, source or baseline IDs, required matrix cells, deterministic environment, evidence channels and thresholds, retention and network-egress policy, baseline approver, and `warn`/`error` handling.
 
 Stop until the user identifies the approved artifact set and explicitly authorizes implementation. A broad request to redesign the site does not delegate this gate, and no delegation can silently authorize route, IA, backend, SEO, analytics, or data-contract migrations.
 
@@ -171,7 +180,7 @@ After each verified slice, update the program ledger with evidence, newly resolv
 
 ### Gate 4: Accept the Pilot
 
-Present the rendered pilot against its approved representative artifacts or authorized substitutes and contract, together with functional parity, route/metadata parity, accessibility, runtime, and performance evidence. Stop before enabling candidate globals or migrating another page family.
+Present the rendered pilot against its approved representative artifacts or authorized substitutes and contract, together with functional parity, route/metadata parity, accessibility, runtime, performance, and normalized machine-visual evidence. Run every approved machine-gate matrix cell with its locked source or baseline ID, browser, device scale, theme, locale, fixture, channels, thresholds, retention and network-egress policy, and baseline approver. Preserve the complete canonical normalized result, including `verdict`, `contract.mode`, `contract.matrixCell`, `contract.referenceId`, `contract.baselineId`, `nextAction`, `baselineAction`, full issues, artifacts, and unverified cells. Require `referenceId` for reference-fidelity and `baselineId` for regression. A changed capture remains a candidate until the named owner approves it. Stop before enabling candidate globals or migrating another page family.
 
 Proceed only after the pilot meets the Gate 3 thresholds and the user approves rollout, or after an explicitly delegated pilot gate passes every threshold. Then:
 
@@ -195,7 +204,7 @@ Verify:
 - layout shift, responsive image sizing, font loading, and obvious bundle or runtime regressions;
 - supported themes, locales, and browsers by representative sampling.
 
-Apply the Gate 3 pass/fail thresholds. Use representative pages for deep visual and journey testing, but never use sampling as evidence that all-route invariants passed. Exercise commerce only with staging data and sandbox payments, with real emails, inventory effects, customer mutations, and production analytics disabled or safely redirected.
+Apply the Gate 3 pass/fail thresholds. Use representative pages for deep visual and journey testing, but never use sampling as evidence that all-route invariants passed. Require `pass`, or a policy-allowed `warn` with preserved annotations and explicit owner review, for each required machine-gate cell. Treat missing or incomparable evidence as `error`; never turn a failed comparison green by widening thresholds or replacing the baseline automatically. Exercise commerce only with staging data and sandbox payments, with real emails, inventory effects, customer mutations, and production analytics disabled or safely redirected.
 
 When available, use read-only `ui-visual-validator` for visual evidence, `accessibility-expert` for the release accessibility gate, and `seo-structure-architect` whenever URLs, navigation, canonicals, or information architecture change. Validators report findings; implementers repair them.
 
@@ -208,6 +217,7 @@ Report:
 - changed files, removed legacy paths, and intentional migrations;
 - test/build/browser results and route-state coverage;
 - final screenshots or approved non-image evidence and artifact paths;
+- final source-authority, design-intelligence, Figma/image translation, token/drift, and machine-gate receipt revisions;
 - known deviations, unverified integrations, rollback notes, and remaining risks.
 - final program-ledger status, outstanding decisions, and the next safe action when work remains.
 

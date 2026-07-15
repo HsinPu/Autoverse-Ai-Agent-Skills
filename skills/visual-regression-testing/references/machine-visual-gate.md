@@ -40,6 +40,7 @@ Every provider adapter should emit:
   "contract": {
     "mode": "regression | reference-fidelity",
     "matrixCell": "route|viewport|theme|state",
+    "referenceId": "string-or-null",
     "baselineId": "string-or-null"
   },
   "issues": [
@@ -60,6 +61,8 @@ Every provider adapter should emit:
 ```
 
 Reserve `error` for a gate that could not produce valid evidence. A product mismatch is `fail`, not `error`. Use `warn` when evidence is advisory, a non-blocking difference remains, or a human decision is required.
+
+Regression mode requires `contract.baselineId`. Reference-fidelity mode requires `contract.referenceId` for the exact approved Figma node, mockup revision, or other comparison authority. Do not substitute one field for the other; return `error` with `nextAction: review` when the required authority ID is missing.
 
 ## Baseline Lifecycle
 

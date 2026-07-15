@@ -14,17 +14,26 @@ Turn an exact Figma selection into maintainable frontend code. Treat Figma conte
 ## Route the Request
 
 - Use this Skill when the user supplies a Figma URL, file key, selected node, or exported structured context.
-- Use `image-to-code` when the only usable input is a screenshot, recording, or flattened mockup.
-- Use `taste-skill` first when the visual direction is unresolved rather than approved in Figma.
+- In standalone routing, use `image-to-code` when the only usable input is a screenshot, recording, or flattened mockup.
+- In standalone routing, use `taste-skill` first when the visual direction is unresolved rather than approved in Figma.
 - Do not use this Skill to write into Figma, publish Code Connect mappings, or redesign unrelated routes.
 
 If the host cannot read structured Figma data, state the missing capability. Request an export or fall back to `image-to-code` only when a screenshot is available; do not pretend pixels reveal variables, variants, or component identity.
+
+## Execution Ownership
+
+Choose one ownership mode before acquisition:
+
+- **Standalone implementation:** use only when Figma is already approved for direct implementation and no parent approval gate is open. This workflow owns acquisition, repository mapping, implementation, validation, and routing.
+- **Parent-orchestrated receipt:** use when `web-page-design-to-code`, `website-redesign-to-code`, or another named workflow already owns scope or approval. The parent must provide its workflow ID, current gate, bounded nodes and states, allowed acquisition, privacy policy, and requested receipt. Acquire and reconcile evidence, then return a versioned Figma receipt to that parent. Do not edit production code, approve a baseline, close a parent gate, reroute the task, or expand scope.
+
+When an open parent gate is known but the mode is not explicit, default to parent-orchestrated receipt mode. Routing recommendations are findings for the parent, not direct handoffs.
 
 ## Workflow
 
 ### 1. Establish the Contract
 
-Record the target file and node IDs, selected variant or state, target route or component, viewport, themes, required interactions, repository stack, and approval owner. Confirm that the user has access to the design and that any external tool call is allowed for the design's privacy level.
+Record the ownership mode and parent workflow when applicable, target file and node IDs, selected variant or state, target route or component, viewport, themes, required interactions, repository stack, and approval owner. Confirm that the user has access to the design and that any external tool call is allowed for the design's privacy level.
 
 Inspect repository instructions, existing components, tokens, routing, state ownership, data boundaries, and test commands before choosing implementation techniques.
 
@@ -53,6 +62,8 @@ Build a mapping before editing:
 
 Prefer maintained project components and semantic tokens when they express the approved design. Do not paste provider-generated React, Tailwind, or absolute coordinates as the final architecture. Record conflicts where exact Figma values and the maintained system disagree; do not silently choose whichever source was fetched last.
 
+In parent-orchestrated receipt mode, stop here. Return the acquisition manifest, evidence ledger, repository mapping, conflicts, missing states, unresolved inferences, authorized scope, and receipt revision. Do not enter implementation or validation as if the parent gate had passed.
+
 ### 4. Implement in Verifiable Slices
 
 Implement the smallest coherent component or section first. Preserve existing routes, data flow, permissions, analytics, accessibility semantics, and error states unless the design contract explicitly changes them.
@@ -73,10 +84,11 @@ Fix one high-impact mismatch at a time and recapture the same matrix cell. Do no
 
 Return:
 
-- implemented files and reused components;
+- ownership mode, parent workflow and gate when applicable, and bounded authorization scope;
+- implemented files and reused components in standalone mode, or a versioned Figma acquisition/translation receipt in parent-orchestrated mode;
 - Figma file/node IDs, state, viewport, and evidence revision;
 - component, token, asset, and behavior mappings;
-- verified matrix cells and commands;
+- verified matrix cells and commands in standalone mode, or acquired and missing states in receipt mode;
 - deviations classified as accepted, inferred, blocked, or unresolved;
 - remaining owner decisions and the next concrete action.
 
@@ -90,7 +102,8 @@ Return:
 
 ## Handoff
 
-- Use `image-to-code` for raster-only evidence or recordings.
-- Use `design-system` when variables and component styles need durable token extraction or drift governance.
-- Use `visual-regression-testing` for screenshot, DOM, OCR, contrast, and CI evidence gates.
-- Keep this workflow as the routing owner after the Figma evidence contract is locked; load `frontend-design` only as supporting production-implementation guidance without transferring ownership or repeating design acquisition.
+- In standalone mode, use `image-to-code` for raster-only evidence or recordings.
+- In standalone mode, use `design-system` when variables and component styles need durable token extraction or drift governance.
+- In standalone mode, use `visual-regression-testing` for screenshot, DOM, OCR, contrast, and CI evidence gates.
+- In standalone mode, keep this workflow as the routing owner after the Figma evidence contract is locked; load `frontend-design` only as supporting production-implementation guidance without transferring ownership or repeating design acquisition.
+- In parent-orchestrated receipt mode, return control to the named parent after producing the receipt. Report any suggested raster fallback, design-system work, or validation as a next-action recommendation; do not invoke another top-level workflow directly.
