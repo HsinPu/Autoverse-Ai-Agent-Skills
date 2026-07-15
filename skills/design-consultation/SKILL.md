@@ -27,5 +27,6 @@ Use this skill to choose the visual direction before coding.
 ## Handoff
 
 - For screen implementation, use `frontend-design`.
+- For deeper contextual art direction, calibrated visual intensity, or an anti-generic preflight, use `taste-skill`; do not run both direction workflows by default.
 - For system extraction or audit, use `design-system`.
 - For Tailwind-specific execution, use `tailwind-patterns` or `tailwind-development`.

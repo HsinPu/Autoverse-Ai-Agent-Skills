@@ -28,4 +28,4 @@ Use this skill when refining React UI components.
 
 - For shadcn-specific composition, use `shadcn-ui`.
 - For broader Tailwind utilities, use `tailwind-patterns` or `tailwind-development`.
-- For higher-level visual direction, use `frontend-design`.
+- For unresolved higher-level visual direction, use `taste-skill` or `design-consultation`; use `frontend-design` after approval for production implementation.

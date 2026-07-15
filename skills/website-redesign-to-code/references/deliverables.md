@@ -2,6 +2,27 @@
 
 Use these templates when a full-site redesign needs a durable handoff, multiple implementation slices, or auditable approval. Adapt them to repository conventions rather than creating duplicate documentation systems.
 
+## Redesign Program Ledger
+
+```markdown
+# Redesign program ledger
+
+- Scope version:
+- Active design version:
+- Current gate:
+- Gate authority/evidence:
+- Canonical route denominator:
+- Completed and approved page families:
+- Current bounded slice:
+- Last verified evidence:
+- Rollback point/status:
+- Next eligible slice:
+- Open decisions and blockers:
+- Last updated/owner:
+```
+
+Update this ledger only after verified evidence or an explicit decision. It records status but never promotes a design, pilot, or rollout gate by itself.
+
 ## Site Audit and Page-Family Matrix
 
 ```markdown
@@ -72,6 +93,14 @@ Use these templates when a full-site redesign needs a durable handoff, multiple 
 ## Components
 | Component | Owner | Variants | Required states | Migration source |
 | --- | --- | --- | --- | --- |
+
+## Component reuse map
+| Responsibility | Existing owner | Decision: reuse/extend/compose/replace/new | Migration boundary | Confidence/evidence |
+| --- | --- | --- | --- | --- |
+
+## Data-binding map
+| Surface | Source and contract | Read/write behavior | Loading/empty/error | Auth/permission | Mock/fallback and removal condition |
+| --- | --- | --- | --- | --- | --- |
 
 ## Page families
 | Family | Representative artifacts and type | Shared shell | Unique components | Responsive rules | Critical states |

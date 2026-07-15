@@ -14,6 +14,20 @@
 - CSS variables
 - styled-components / emotion / other CSS-in-JS
 - theme files and component styles
+- authorized runtime DOM and computed styles when source and render may differ
+
+## Source and Decision Ledger
+
+Before normalizing values, record the evidence that may define the system:
+
+| Source | Authority | Scope | Revision/status | Owner | Conflict or gap |
+| --- | --- | --- | --- | --- | --- |
+| Production tokens | implementation | foundations and components | <commit/version> | <owner> | <difference> |
+| Runtime observation | rendered implementation | <routes/states/themes> | <capture revision> | <owner> | <difference> |
+| Approved design artifact | visual direction | <routes/families> | selected/approved | <owner> | <difference> |
+| Product or brand document | intent/content | <scope> | active/stale | <owner> | <difference> |
+
+Do not resolve conflicts by silently choosing the newest file. Prefer maintained production behavior for current facts, explicit approval for intentional changes, and repository owners for unresolved contract changes.
 
 ## 抽取哪些 tokens
 
@@ -41,15 +55,20 @@
 
 ### `design-tokens.json`
 
-- Include base + semantic tokens.
-- Normalize values before exporting.
-- Separate light/dark values if the system supports both.
+- Use DTCG 2025.10-compatible `$type` and `$value` fields for the canonical token source.
+- Include primitive + semantic tokens; add component tokens only for real component-specific contracts.
+- Express aliases with `{path.to.token}` instead of copying resolved values into every semantic token.
+- Use `$description` for durable intent and documented `$extensions` for provenance or tool-specific metadata.
+- Normalize values before exporting and validate references before generating platform files.
+- Represent light/dark or other modes through the repository's documented token strategy; do not invent an undocumented custom format.
 
 ### `DESIGN.md`
 
 - Summarize the source patterns that were found.
 - Explain why each token exists.
 - Call out deprecated or merged tokens.
+- Record the active direction version, source ledger, decision owner, last verification, accepted deviations, and conditions that require re-approval.
+- Link to product requirements instead of copying them into a second document.
 
 ### `design-preview.html`
 
@@ -58,12 +77,16 @@
 - Include mobile and desktop views.
 - Include dark mode if the system supports it.
 
+Treat the preview as evidence, not authority. Label the token revision, theme, viewport, representative states, and any mocked content.
+
 ## 生成原則
 
 - Reuse existing values before inventing new ones.
 - Standardize spacing and type scale.
 - Prefer semantic tokens over raw values.
 - If the codebase is inconsistent, normalize toward a smaller and clearer token set.
+- Generate CSS, JavaScript, mobile, or documentation artifacts from the canonical token source; do not hand-edit generated outputs.
+- Dry-run token migrations and report add/change/rename/alias/delete effects before applying them.
 
 ## 交付前檢查
 
@@ -72,3 +95,6 @@
 - Are breakpoints coherent?
 - Does the preview show realistic states?
 - Is the token set small enough to maintain?
+- Are aliases valid and free of cycles?
+- Can every generated platform artifact be traced to the canonical token revision?
+- Are observed runtime values labeled separately from approved tokens?

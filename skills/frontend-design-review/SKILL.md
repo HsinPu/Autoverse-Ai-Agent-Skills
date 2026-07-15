@@ -1,6 +1,6 @@
 ---
 name: frontend-design-review
-description: Frontend design review guide for evaluating implemented UI, PRs, components, and pages against design quality, accessibility, responsive behavior, design-system compliance, visual hierarchy, motion, and production-grade craft. Use when performing a UI review, reviewing UI code, auditing design systems, checking accessibility or responsive behavior, reviewing themes, or detecting generic or inconsistent visual design.
+description: Frontend UI review workflow that separates experience critique, production web audit, and optical polish while evaluating implemented pages, components, and PRs for usability, accessibility, responsive behavior, design-system compliance, state completeness, performance, and visual craft. Use for UI, UX, accessibility, responsive, theme, or design-quality reviews after implementation exists.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---
@@ -8,6 +8,14 @@ license: Apache-2.0
 # Frontend Design Review
 
 Use this skill when the review target is user-visible UI quality. Use `frontend-code-review` for functional frontend bugs, `design-system` for broader token/system audits, and `webapp-testing` for local browser verification.
+
+## Choose the Review Lens
+
+- **Experience critique:** evaluate product-task fit, hierarchy, comprehension, flow, visual intent, and coherence. Label subjective judgment and tie it to product evidence.
+- **Production audit:** evaluate semantic HTML, keyboard and focus behavior, forms, navigation and URL state, responsive and content resilience, accessibility, performance, hydration, themes, and localization.
+- **Polish pass:** evaluate optical alignment, type rhythm, spacing, color, imagery, motion, and consistency after blocking behavior passes.
+
+Use more than one lens when requested, but report them separately. Do not disguise a stylistic preference as a technical defect.
 
 ## Review Focus
 
@@ -20,10 +28,12 @@ Use this skill when the review target is user-visible UI quality. Use `frontend-
 ## Workflow
 
 1. Identify the screen, component, or flow and the user task it supports.
-2. Compare implementation against available design system, Figma/specs, or existing product patterns.
-3. Check desktop, mobile, overflow, loading, error, empty, disabled, hover, focus, and active states when relevant.
-4. Separate blocking usability/accessibility regressions from visual polish.
-5. Report issues with file/line references when reviewing code, and include UI state or viewport context when line references are not enough.
+2. Define the selected lens, source of truth, supported matrix, and available code, browser, screenshot, accessibility, or performance evidence.
+3. Compare implementation against the design system, approved artifacts or specs, existing product behavior, and authoritative content.
+4. Check desktop, mobile, overflow, long and localized content, loading, error, empty, disabled, hover, focus, active, permission, and reduced-motion states when relevant.
+5. Apply [references/production-web-checklist.md](references/production-web-checklist.md) for the technical audit; load only sections relevant to the changed surface.
+6. Separate blocking usability, accessibility, and behavior regressions from major design inconsistencies and optional optical polish.
+7. Report issues with file/line references when reviewing code, and include UI state, viewport, evidence, confidence, impact, and smallest viable fix when line references are not enough.
 
 ## Blocking Issues
 
@@ -43,22 +53,31 @@ Use this skill when the review target is user-visible UI quality. Use `frontend-
 - Check all component variants touched by the change, not only the happy path.
 - Avoid generic AI-looking layouts: indistinct gradients, interchangeable cards, random glow effects, and weak hierarchy.
 
+## Finding Quality
+
+- **Blocking:** prevents task completion, access, safe recovery, or release on a required surface.
+- **Major:** materially harms comprehension, consistency, state behavior, responsive use, or the approved direction.
+- **Minor:** bounded optical or consistency improvement with no material task failure.
+
+Use high, medium, or low confidence. A finding needs observable evidence and user or product impact; otherwise present it as a question or preference, not a defect. Reviewers report and prioritize findings but do not silently redesign or repair the implementation unless separately authorized.
+
 ## Output
 
 ```markdown
 ## Frontend Design Review
 
 ### Blocking
-- `file:line` <issue, impact, and fix>
+- `file:line` <lens; viewport/state; evidence; impact; confidence; smallest fix>
 
 ### Major
-- `file:line` <issue, impact, and fix>
+- `file:line` <lens; viewport/state; evidence; impact; confidence; smallest fix>
 
 ### Minor
-- `file:line` <polish or consistency suggestion>
+- `file:line` <polish evidence, value, confidence, and bounded suggestion>
 
 ### Checks
 - Reviewed states: <states/viewports>
+- Evidence used: <code/browser/screenshots/a11y/performance>
 - Not checked: <gaps and why>
 ```
 

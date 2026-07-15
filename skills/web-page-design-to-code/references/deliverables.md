@@ -38,6 +38,11 @@ Use only the sections that improve traceability for the current task. Keep small
 - Desktop-to-mobile reflow:
 - Preserved behavior:
 
+## Candidate comparison
+
+| Candidate ID | Artifact/viewports | Shared criteria | Decision | Reason | Confidence |
+| --- | --- | --- | --- | --- | --- |
+
 ## Approval
 
 - Status: proposed | approved | rejected | superseded
@@ -71,6 +76,10 @@ Do not infer approval from silence or from general encouragement.
 | Section/component | Layout constraint | Content source | States | Interaction |
 | --- | --- | --- | --- | --- |
 
+## Component and state ownership
+| Responsibility | Existing owner | Reuse/extend/compose/new | Data source | State owner | Required contract change |
+| --- | --- | --- | --- | --- | --- |
+
 ## Responsive behavior
 | Viewport | Reflow and priority rules | Navigation/control changes | Content limits |
 | --- | --- | --- | --- |
@@ -96,6 +105,14 @@ Do not infer approval from silence or from general encouragement.
 | Viewport/state | Approved reference | Rendered evidence | Severity | Finding/status |
 | --- | --- | --- | --- | --- |
 
+## Fidelity evidence
+| Dimension | Method/tolerance | Result | Accepted deviation |
+| --- | --- | --- | --- |
+| Structure | | | |
+| Text | | | |
+| Position | | | |
+| Color | | | |
+
 - Environment and commit:
 - Fonts/data/theme stabilized:
 - Validation mode: pixel comparison | constraint-based comparison
@@ -103,5 +120,6 @@ Do not infer approval from silence or from general encouragement.
 - Functional checks:
 - Accessibility checks:
 - Remaining deviations:
+- Iteration stop reason, if not passed:
 - Final decision: pass | pass with accepted deviations | blocked
 ```

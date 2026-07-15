@@ -85,6 +85,8 @@ For commerce, also freeze cart semantics, prices, currencies, tax and shipping b
 
 Read [references/deliverables.md](references/deliverables.md) for the audit, page-family, preservation, rollout, and QA templates when durable artifacts are warranted.
 
+For multi-session or multi-owner work, maintain one tool-neutral redesign program ledger in the repository's existing planning or design documentation system. Record the active scope version, selected design version, completed and approved page families, current gate, next bounded slice, unresolved decisions, and rollback point. Do not create a provider-specific directory or baton format unless the project already uses it.
+
 ### Gate 1: Freeze Scope
 
 Present and obtain approval for:
@@ -99,7 +101,7 @@ Stop until approved. Reopen this gate if later discovery changes the sitemap, da
 
 ### 4. Establish the Shared Design System
 
-Audit the current system before replacing it. Reuse `design-consultation`, `design-system`, `frontend-design`, and `responsive-design` instead of duplicating their detailed design rules.
+Audit the current system before replacing it. Use `taste-skill` to establish a contextual visual direction and cross-page anti-generic standard when the site needs stronger art direction. Reuse `design-consultation` for lighter aesthetic planning, `design-system` for shared contracts, `frontend-design` for implementation, and `responsive-design` for reflow instead of duplicating their detailed rules. Do not route representative mockups through a direct image-to-code flow because this workflow's scope, preservation, pilot, and rollout gates must remain authoritative.
 
 Define:
 
@@ -107,6 +109,8 @@ Define:
 - typography, spacing, grid, radii, shadows, iconography, and imagery;
 - breakpoints and page-family reflow behavior;
 - component ownership and default, hover, focus, disabled, loading, empty, error, success, overflow, and reduced-motion states;
+- a component reuse map that classifies each shared responsibility as reuse, extend, compose, replace, or new, with an owner and migration boundary;
+- a data-binding map for real, CMS, API, route, user-input, static, and temporary mock sources, including loading, failure, auth, and mutation behavior;
 - a migration plan when existing tokens or components must change.
 
 Extend a viable current system. Do not create a second permanent set of tokens or components beside it.
@@ -140,6 +144,7 @@ Before changing production UI, obtain approval for:
 - representative desktop and mobile approval artifacts: image mockups by default, or an explicitly authorized substitute;
 - page-family and critical-state coverage;
 - shared tokens and component contracts;
+- component reuse and data-binding maps for the pilot and any shared surface it changes;
 - approved deviations and unresolved risks;
 - implementation slice order, per-slice ownership, rollback points, and verification plan;
 - measurable pass/fail thresholds for route parity, metadata and analytics parity, accessibility, console/network errors, visual comparison, supported browsers, and performance.
@@ -161,6 +166,8 @@ Implement only through an isolated representative pilot first:
 Keep legacy global styles, shell, navigation, and shared consumers active outside the pilot until Gate 4 passes. If the architecture cannot isolate the pilot safely, use a separate preview environment or stop and obtain approval for the wider blast radius.
 
 For every slice, define one owner, bounded files and page families, exit criteria, and a rollback point. Keep the site runnable and run proportionate type, lint, build, focused test, browser, console, network, responsive, behavior-parity, and SEO checks. Do not use a big-bang rewrite.
+
+After each verified slice, update the program ledger with evidence, newly resolved decisions, current gate, rollback status, and the next eligible slice. The ledger coordinates work; it does not grant approval for a later gate.
 
 ### Gate 4: Accept the Pilot
 
@@ -202,6 +209,7 @@ Report:
 - test/build/browser results and route-state coverage;
 - final screenshots or approved non-image evidence and artifact paths;
 - known deviations, unverified integrations, rollback notes, and remaining risks.
+- final program-ledger status, outstanding decisions, and the next safe action when work remains.
 
 ## Escalation Conditions
 

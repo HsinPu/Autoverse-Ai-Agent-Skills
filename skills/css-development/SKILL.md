@@ -34,6 +34,6 @@ Use this skill when the work directly changes CSS, style architecture, selectors
 
 ## Handoff
 
-- For visual direction and page composition, use `frontend-design`.
+- For unresolved art direction or page composition, use `taste-skill` or `design-consultation`; use `frontend-design` for production implementation after the direction is approved.
 - For Tailwind-specific work, use `tailwind-development` or `tailwind-patterns`.
 - For system-wide token extraction or audit, use `design-system`.

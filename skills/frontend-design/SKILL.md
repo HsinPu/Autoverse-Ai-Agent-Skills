@@ -1,161 +1,113 @@
 ---
 name: frontend-design
-description: Frontend design guide for creating distinctive, production-grade interfaces with clear visual direction, strong hierarchy, meaningful motion, and non-generic implementation details. Use when building or restyling web components, pages, or applications where the visual design matters as much as the code quality.
+description: Production frontend implementation guide for turning an approved visual direction, design system, or image contract into semantic, responsive, accessible UI in the existing stack. Use when building or restyling components, pages, and applications after the visual direction is clear; use taste-skill or design-consultation first when art direction is unresolved.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
 ---
 
-# 前端設計 Frontend Design
+# Frontend Design
 
-當任務不是只有「做得動」，而是要「看起來真的被設計過」時，使用這個 skill。目標是交付可上線的前端，而不是 generic 的 AI UI。
+Turn an approved visual direction into production UI without losing product behavior, accessibility, responsiveness, or maintainability. This Skill owns implementation craft; it does not reopen art direction that has already been selected.
 
-## 何時使用 When To Use
+## Inputs
 
-- 從零建立 landing page、dashboard、app shell 或 design-heavy component
-- 把 bland 或 generic 的介面改成有明確觀點的產品 UI
-- 把產品概念轉成具體的 visual direction
-- 使用者同時在乎 code quality 與 visual quality
+Start from the strongest available design authority:
 
-## 核心原則 Core Principle
+- an existing product design system;
+- an approved visual direction or design specification;
+- an implementation contract derived from a screenshot or mockup;
+- repository behavior, content, and component conventions.
 
-先選定方向，再全力執行。
+If the visual direction is unresolved, route to a design-direction Skill before writing substantial UI. Do not invent a second design system inside one page.
 
-safe-average UI 通常比不上有明確觀點、少數大膽選擇但整體一致的介面。
+## Bundled Resources
 
-## 進階與參考（Bundled resources）
+- Read [reference/implementation-checklist.md](reference/implementation-checklist.md) for responsive, state, performance, and delivery checks.
+- Read [reference/accessibility.md](reference/accessibility.md) when implementing keyboard behavior, focus, contrast, semantic HTML, or reduced motion.
+- Read [reference/css-tokens.md](reference/css-tokens.md) when introducing or extending CSS variables and theme tokens.
+- Read [reference/implementation-architecture.md](reference/implementation-architecture.md) when deciding component reuse, data binding, state ownership, optimistic behavior, or a boundary between page composition and shared UI.
 
-- **落地檢查清單**：響應式、a11y、狀態、效能與交付物要求，見 [reference/implementation-checklist.md](reference/implementation-checklist.md)。
-- **A11y（無障礙）**：鍵盤操作、focus、對比、reduced motion、語意化 HTML，見 [reference/accessibility.md](reference/accessibility.md)。
-- **CSS tokens**：CSS variables、主題一致性、層級與間距尺度，見 [reference/css-tokens.md](reference/css-tokens.md)。
+## Workflow
+
+### 1. Inspect the Existing Surface
+
+Identify the target route or component, framework, styling system, design tokens, shared primitives, content source, state model, runtime commands, and repository instructions. Record behavior that must remain stable: navigation, forms, data flow, analytics, SEO metadata, permissions, and critical interactions.
+
+Run or inspect the smallest relevant UI surface before changing it. Capture representative desktop and mobile evidence when practical and authorized.
+
+### 2. Translate Direction into Rules
+
+Convert visual intent into implementation decisions:
+
+- typography roles, scale, line length, and font-loading fallbacks;
+- semantic colors, contrast, theme behavior, and status roles;
+- spacing rhythm, grid, content width, and layout constraints;
+- radii, borders, shadows, surfaces, imagery, and icon treatment;
+- component inventory, variants, state coverage, and ownership;
+- breakpoint behavior and content-priority changes;
+- motion purpose, timing family, and reduced-motion behavior.
+
+Prefer project tokens and primitives. Add a token or variant only when it represents a reusable decision, not a one-off value hidden behind a new name.
+
+### 3. Map Component, Data, and State Ownership
+
+Before adding abstractions, classify each meaningful UI unit as reuse, extend, compose, or new. Record its real data source, loading and failure behavior, permissions, and the smallest owner for each state. Keep server state, shareable URL state, cross-surface application state, form state, and transient local interaction state distinct.
+
+Do not duplicate server data into local state without a synchronization reason, hide shareable filters in component state, or create a global store for state that one component owns. Read [reference/implementation-architecture.md](reference/implementation-architecture.md) for the decision tables.
+
+### 4. Build Semantic Components
+
+- Use semantic HTML and native controls before custom replicas.
+- Keep real text selectable and content separate from decoration.
+- Preserve existing data and event contracts by default.
+- Separate reusable components from page-specific composition.
+- Keep decorative layers out of pointer and accessibility flows when appropriate.
+- Cover hover, focus, active, selected, disabled, loading, empty, error, success, overflow, and permission states that the product can reach.
+
+Avoid screenshot-shaped markup, full-page background mockups, brittle fixed positioning, and component abstractions that exist only to reduce line count.
+
+### 5. Implement Responsive Behavior
+
+Design reflow from content priority instead of scaling the desktop page. Check narrow mobile, representative desktop, and any intermediate width where navigation, columns, tables, or media change structure.
+
+Use fluid sizing where it improves resilience, but keep deliberate constraints for readable line length, stable controls, media aspect ratios, and touch targets. Test long content, localization, zoom, empty states, and overflow.
+
+### 6. Add Purposeful Motion
+
+Use motion to explain hierarchy, state change, spatial relationship, or feedback. Concentrate expressive animation in a small number of meaningful moments; frequent product tasks should remain quick and predictable.
+
+Respect reduced-motion preferences and ensure the interface remains understandable when animation is removed. Avoid adding a motion dependency when CSS or the project's existing library is sufficient.
+
+### 7. Verify and Repair
+
+Run proportionate type, lint, test, and build checks. Exercise the rendered UI at the required viewports and states, then inspect:
+
+- hierarchy, spacing, alignment, typography, color, and asset treatment;
+- keyboard flow, focus visibility, semantics, labels, contrast, zoom, and reduced motion;
+- route behavior, data, forms, events, console output, failed requests, and layout shift;
+- visual agreement with the approved direction, design system, or image contract.
+
+Fix structural and behavioral problems before optical polish. Do not update persistent visual baselines merely because a comparison fails.
+
+## Implementation Principles
+
+- Choose patterns because they fit the content and product, not because they are fashionable or unusual.
+- Familiar cards, grids, pills, gradients, and common fonts are acceptable when they are the clearest contextual choice.
+- Distinctiveness should come from a coherent system and one recognizable idea, not unrelated effects.
+- Accessibility and state completeness are part of the design, not a cleanup pass.
+- Put data and state in the smallest durable owner that matches their lifecycle; derive values instead of synchronizing copies.
+- Preserve a viable existing design system and avoid framework migrations outside the requested scope.
+- Keep implementation complexity proportional to the approved visual direction and maintenance capacity.
+
+## Deliverable
+
+Report the implemented direction, changed files, reused or extended tokens and components, data and state ownership decisions, preserved behavior, verified viewports and states, test and browser evidence, known deviations, and unverified areas.
 
 ## Handoff
 
-- Use `design-consultation` when the task needs an aesthetic direction before implementation.
-- Use `frontend-design-review` when evaluating an existing UI for visual, accessibility, responsive, or interaction issues.
-- Use `ui-styling`, `tailwind-patterns`, or `tailwind-development` for implementation-specific styling work.
-- Use `color-font-skill` when the main decision is palette, typography, or brand-safe visual identity.
-- Use `animation-best-practices` when motion behavior is the main concern.
-
-## 設計 Workflow
-
-### 1. 先框定介面
-
-動手寫程式前，先明確決定：
-
-- **目的 Purpose**：介面要解決什麼問題？誰在使用？
-- **受眾 Audience**：誰會使用？他們在意什麼？
-- **調性 Tone**：選一個方向並精準執行，例如 brutally minimal、editorial、industrial、luxury、playful、geometric、retro-futuristic、soft and organic、maximalist。
-- **限制 Constraints**：framework、效能、a11y、裝置、內容密度。
-- **既有系統 Existing system**：若在既有網站/設計系統內工作，優先沿用現有的 layout、元件模式、字體與 tone；差異化只能在系統允許的範圍內做。
-- **差異化 Differentiation**：什麼會讓人**難忘 unforgettable**？使用者會記住哪一點？
-
-不要隨意混搭多種方向。先選一個，再乾淨地執行。
-
-### 2. 建立 visual system
-
-在開始堆畫面前，先定義：
-
-- type hierarchy
-- color variables / theme tokens
-- spacing rhythm
-- layout logic
-- motion rules
-- surface / border / shadow treatment
-
-用 CSS variables 或專案既有 token system 讓風格可擴充，而不是只在單頁看起來漂亮。
-
-### 3. 有意識地構圖
-
-優先考慮：
-
-- asymmetry：在需要強化層級時使用不對稱
-- overlap：在需要深度時使用疊合
-- whitespace：在需要聚焦時使用明確留白
-- density：只有產品真的需要高資訊密度時才採用
-
-不要預設回到對稱 card grid，除非它明顯就是最對的解法。
-
-在小螢幕上，優先重排資訊層級與版面秩序，而不是把所有元素等比縮小。
-
-### 4. 讓動態有意義
-
-動畫應該用來：
-
-- reveal hierarchy
-- stage information
-- reinforce user action
-- create one or two memorable moments
-
-一次有節奏的 load sequence，通常比二十個零散 hover effects 更有力量。
-
-尊重 `prefers-reduced-motion`；reduced motion 時改用淡入或直接移除大幅位移。
-
----
-
-## Strong Defaults
-
-### 字體排版 Typography
-
-- 選用有 character 的字體。
-- 避免 generic 字體（Arial、Inter、Roboto、系統預設）作為設計主角。
-- 偏好 distinctive 的 display 字體搭配可讀的 body 字體。
-- 字體必須可載入：提供可靠的 fallback、避免 FOIT，並注意字重與字距在小螢幕的可讀性。
-
-### 色彩與主題 Color & Theme
-
-- 鎖定一致的美學；用 CSS variables 維持一致性。
-- 主色＋鮮明重點色，優於 timid、evenly-distributed 的配色。
-- 不要預設使用 clichéd 配色，例如 purple gradients on white。
-- 一次選定 1 個主背景語言（mesh / pattern / solid + texture），不要同頁混多種背景邏輯。
-
-### 動態與動畫 Motion
-
-- HTML 優先以純 CSS 實作；React 可搭配 Motion library。
-- 聚焦高光時刻：一次有節奏的 page load 搭配 staggered reveals 比零散 micro-interactions 更有感。
-- 善用 scroll-triggering 與令人驚喜的 hover 狀態。
-
-### 版面與背景 Layout & Background
-
-- 用 atmosphere 與 depth，而不是只靠 solid colors。
-- 依整體美學加入情境效果與紋理：gradient meshes、noise textures、geometric patterns、layered transparencies、dramatic shadows、decorative borders、custom cursors、grain overlays（漸層網格、噪點紋理、幾何圖案、層疊透明、戲劇性陰影、裝飾邊框、自訂游標、顆粒疊加）。
-- 每個裝飾元素都要有目的（導視、分層、節奏），不要只是塞滿特效。
-- 版面可以 break the grid，但閱讀流向仍然要明確。
-
----
-
-## 應避免事項 What to Avoid
-
-- interchangeable SaaS hero sections
-- generic card piles with no hierarchy
-- random accent colors without a system
-- placeholder-feeling typography
-- motion that exists only because animation was easy to add
-- 過度常見的字體（Inter、Roboto、Arial、系統字體）。
-- clichéd 配色（尤其是 purple gradients on white）。
-- predictable 版面與 cookie-cutter 元件套路。
-- 缺乏 context-specific character 的設計。
-- 用 `alert()` / `confirm()` / `prompt()` 當成互動回饋或錯誤提示（改用 inline 狀態、toast/snackbar、banner、modal 等非阻塞 UI）。
-- 沒有 focus/disabled/loading/empty/error 等狀態，只做「截圖式」UI。
-- 只靠陰影、發光與玻璃化（glassmorphism）當成整體風格。
-
-以創意解讀需求，做出真正符合情境的意外選擇。不要在不同產出中收斂到相同的常見字體、配色和 hero 模板。
-
----
-
-## 執行規則 Execution Rules
-
-- 在既有產品內工作時，優先保留既有設計系統與元件模式。
-- 實作複雜度要對應美學願景：maximalist 需要完整效果，minimalist 需要極高的 spacing 與 typography 精度。
-- 維持 accessibility、responsiveness 與 state completeness，不要為了視覺犧牲可用性。
-- 前端在 desktop 和 mobile 都要感覺 deliberate，不只是縮小版。
-
-## Quality Gate
-
-- 介面有清楚的 visual point of view。
-- typography、spacing、color、motion 都是 intentional 的，而不是臨時拼湊。
-- 顏色與動態是在支援產品，不是在隨機裝飾。
-- 手機與桌機都可用且有設計感。
-- 結果看起來不是 generic AI UI。
-- 最終產出是 production-grade，而不只是 visually interesting。
-
-**記住**：全心投入一個 distinctive 願景。不要保留，讓介面看起來像是有人真的做過設計決策，而不是從預設模板裡拼出來的。
+- Use `design-consultation` for a lightweight aesthetic plan when only palette, typography, spacing, or component tone is unresolved.
+- Use `taste-skill` for deeper contextual art direction, design calibration, or anti-generic preflight; once its direction is locked, return here without reopening exploration.
+- Use `image-to-code` when screenshots or recordings are the primary authority, and use `figma-to-code` when structured Figma evidence is the primary authority. Keep that source workflow as the orchestrator after its evidence contract is locked; load this Skill only as supporting production-implementation guidance and return verification evidence to the owning workflow.
+- Use `frontend-design-review` for independent review after implementation.
+- Use `ui-styling`, `tailwind-patterns`, or `tailwind-development` for specialized styling execution.
+- Use `responsive-design` for complex reflow and `animation-best-practices` for motion-heavy behavior.

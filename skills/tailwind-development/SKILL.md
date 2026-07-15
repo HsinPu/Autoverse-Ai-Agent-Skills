@@ -36,7 +36,7 @@ Use this skill when the task is about Tailwind CSS itself: configuration, theme 
 
 - Use `tailwind-patterns` for ready-to-apply layout/component composition patterns in Tailwind.
 - Use `ui-styling` when the task is broader React/shadcn/Radix visual polish.
-- Use `frontend-design`, `design-consultation`, or `color-font-skill` when visual direction, palette, typography, or brand feel is the main issue.
+- Use `taste-skill` or `design-consultation` when visual direction is unresolved, and `color-font-skill` when palette or typography is the main decision. Use `frontend-design` after the direction is approved and production UI implementation is required.
 - Use `css-development` when the project is not primarily Tailwind or needs cascade/layout architecture outside Tailwind.
 
 ## 進階與參考（Bundled resources）

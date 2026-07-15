@@ -42,3 +42,7 @@ Subject + action, environment, visual style, composition, lighting, color palett
 - Return the final prompt in English unless the user asks otherwise.
 - Optionally include `negative prompt`, `aspect ratio`, and `variant` sections.
 - Explain only the most important prompt choices.
+
+## Handoff
+
+- Use `image-to-code` when the generated image is a web UI reference and the authorized next step is an editable frontend implementation.

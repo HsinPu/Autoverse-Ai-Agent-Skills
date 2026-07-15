@@ -1,8 +1,10 @@
 ---
 name: design-system
-description: Design system generation and visual audit guide for extracting cohesive tokens, producing preview artifacts, reviewing UI consistency, and spotting generic AI-style design patterns. Use when starting a new project, auditing an existing codebase, preparing a redesign, reviewing styling PRs, or diagnosing when the UI feels visually off.
+description: Design system generation, live implementation extraction, DTCG-compatible token governance, durable context, drift analysis, and visual audit workflow. Use when starting a project, standardizing or preparing a redesign, extracting observed styles from an authorized running interface, producing cross-platform tokens and preview artifacts, auditing an existing system, reviewing styling changes, or diagnosing when UI feels visually off.
 source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+reference-source: design-tokens/community-group
+reference-license: W3C Software and Document License
 ---
 
 # Design System
@@ -11,13 +13,14 @@ Use this skill when the task is about the system behind the UI, not just one scr
 
 ## Modes
 
-### 1. Generate a design system
+### 1. Generate or normalize a design system
 
 Use when starting a new project, standardizing a redesign, or extracting tokens from an existing codebase.
 
 - Inspect existing CSS, Tailwind `@theme`, CSS variables, styled-components, or component styles.
-- Extract colors, typography, spacing, radii, shadows, borders, breakpoints, and motion rules.
+- Extract colors, typography, spacing, radii, shadows, borders, breakpoints, and motion rules into primitive, semantic, and narrowly scoped component layers.
 - Prefer existing source tokens over inventing new values.
+- Keep one canonical token source. Treat CSS, JavaScript, mobile, documentation, and preview outputs as generated views rather than competing authorities.
 - Read [reference/generate.md](reference/generate.md) when you need the generation workflow or output contract.
 
 Expected outputs:
@@ -26,7 +29,30 @@ Expected outputs:
 - `DESIGN.md`
 - `design-preview.html`
 
-### 2. Audit a visual system
+### Durable design context
+
+When the system will be reused across sessions or page families, make `DESIGN.md` the portable context contract or extend the repository's existing design document instead of creating a parallel source of truth. Record:
+
+- product versus brand surface, audience, primary tasks, trust and density expectations;
+- active visual intent, signature idea, approved direction version, and context-specific anti-references;
+- authoritative source files, artifact IDs, owners, status, and last verified revision;
+- foundations, semantic tokens, components, states, responsive rules, and accessibility constraints;
+- accepted deviations, deprecated decisions, open questions, and conditions that reopen the system.
+
+Link to existing product requirements rather than duplicating them. Generated previews demonstrate the contract; they do not outrank production tokens, approved artifacts, or maintained product behavior.
+
+### 2. Extract an authorized live implementation
+
+Use when a running interface is the available source or when source tokens and rendered behavior may have drifted.
+
+- Confirm authorization, target routes, themes, states, viewports, login requirements, data fixtures, and network-egress policy.
+- Collect computed styles, CSS custom properties, loaded fonts, component states, layout measurements, and representative screenshots across the bounded matrix.
+- Mark every value as source-declared, runtime-observed, normalized, inferred, or unresolved. Computed styles are evidence, not automatically canonical tokens.
+- Compare observed values with maintained tokens and approved design artifacts. Produce an add/change/rename/alias/delete drift ledger before editing.
+- Require explicit approval for destructive deletion, semantic renaming, alias rewrites, or wide theme changes.
+- Read [reference/token-extraction-and-drift.md](reference/token-extraction-and-drift.md) for the DTCG contract, source authority, live sampling, and drift report.
+
+### 3. Audit a visual system
 
 Use when reviewing a codebase, styling PR, or redesign candidate.
 
@@ -34,7 +60,7 @@ Use when reviewing a codebase, styling PR, or redesign candidate.
 - Tie every finding to concrete examples and, when possible, `file:line`.
 - Read [reference/review.md](reference/review.md) for the audit rubric and reporting format.
 
-### 3. Slop check
+### 4. Slop check
 
 Use when the UI feels generic, over-decorated, or visually off.
 
@@ -45,5 +71,7 @@ Use when the UI feels generic, over-decorated, or visually off.
 ## Handoff
 
 - For implementing a specific screen or component, pair with `frontend-design`, `tailwind-development`, or `css-development`.
+- Use `taste-skill` when the visual intent or direction version is unresolved, then record only the approved result in the maintained system context.
 - Keep the system semantic: use base tokens, semantic tokens, and component tokens only when necessary.
+- Prefer DTCG 2025.10-compatible token objects using the standard type, value, optional description, and alias fields. Keep tool-specific provenance or mode data in documented extensions rather than custom ambiguous fields.
 - If an existing design system already exists, extend it instead of replacing it.

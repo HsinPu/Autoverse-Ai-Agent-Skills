@@ -28,4 +28,4 @@ Use this skill to make layouts adapt cleanly across viewports.
 
 - For Tailwind layout work, use `tailwind-patterns`.
 - For CSS-level implementation, use `css-development`.
-- For broader visual direction, use `frontend-design`.
+- For unresolved visual direction, use `taste-skill` or `design-consultation`; use `frontend-design` after the direction is approved and production UI must be implemented.

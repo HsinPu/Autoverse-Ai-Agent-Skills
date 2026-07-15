@@ -13,7 +13,9 @@ Turn one page from an idea, existing implementation, screenshot, or visual refer
 
 Use this workflow for one route, one page, or a small set of tightly coupled states of the same page.
 
-Switch to `website-redesign-to-code` when the request changes global navigation, the shared site shell, multiple page families, the sitemap, or several routes. If the page already has an approved mockup and implementation contract, resume at implementation instead of regenerating the design.
+Switch to `website-redesign-to-code` when the request changes global navigation, the shared site shell, multiple page families, the sitemap, or several routes. If this workflow already produced and approved the page's mockup and implementation contract, resume its implementation phase here instead of regenerating the design or changing workflow ownership.
+
+Use `image-to-code` instead when an external supplied or previously approved image is already the primary design authority, direct implementation is authorized, and no page-design gate remains open. Also use it when one request authorizes both generating a visual and translating it into code; if the generation capability must end the response after returning an image, preserve that authorization and resume implementation in the next turn rather than claiming immediate same-turn completion. Stay in this workflow when it owns the approval artifacts or the user must still review, compare, or approve desktop and mobile mockups before production UI changes.
 
 ## Non-Negotiable Contract
 
@@ -45,7 +47,7 @@ Do not turn this audit into a framework migration or a new parallel design syste
 
 ### 2. Define One Coherent Direction
 
-Use `design-consultation` and `frontend-design` for visual direction, and `responsive-design` for actual reflow behavior. When custom Agents are available, delegate read-only layout and hierarchy work to `ui-designer`.
+Use `taste-skill` when the page needs a deep contextual Design Read, calibrated visual intensity, or anti-generic review. Use `design-consultation` for a lighter aesthetic plan, `frontend-design` for production implementation rules, and `responsive-design` for actual reflow behavior. Do not run both direction Skills automatically. When custom Agents are available, delegate read-only layout and hierarchy work to `ui-designer`.
 
 Prefer one recommended direction. Explore two or three directions only when the user requests options or the product direction is genuinely unresolved. Describe:
 
@@ -54,6 +56,8 @@ Prefer one recommended direction. Explore two or three directions only when the 
 - shared versus page-specific components;
 - interaction and motion intent;
 - desktop-to-mobile changes, not merely scaled dimensions.
+
+When alternatives are compared, assign stable candidate IDs and use the `taste-skill` decision record to preserve the common evaluation criteria, selected or rejected status, reason, confidence, and approval scope. Do not keep only the winning image; the rejection reason prevents later sessions from repeating or overgeneralizing the same exploration.
 
 ### 3. Generate the Visual Mockups
 
@@ -78,6 +82,7 @@ Convert the candidate visual into deterministic, editable requirements before as
 - colors, type scale, spacing, grid, radii, shadows, and imagery;
 - section dimensions and layout constraints;
 - component inventory and state coverage;
+- component reuse, extension, composition, or new-build decisions, plus real data and state ownership for high-risk sections;
 - desktop, tablet when relevant, and mobile reflow rules;
 - interactions, focus behavior, motion, and reduced-motion behavior;
 - asset map, acceptance criteria, and allowed visual tolerance.
@@ -92,6 +97,7 @@ Present together:
 
 - versioned desktop and mobile approval artifacts with their type, viewports, and covered states: image mockups by default, or an explicitly authorized non-raster prototype;
 - the direction summary and source-reference roles;
+- the active decision record, including rejected or superseded candidates when alternatives were explored;
 - the implementation contract and allowed visual tolerance;
 - the list of preserved behavior and any proposed deviations.
 
@@ -104,6 +110,7 @@ The stop may be skipped only when the user has already delegated both final desi
 When custom Agents are available, assign implementation to the workspace-write `frontend-developer`; keep design and validation roles read-only. Load only the framework, styling, accessibility, or testing Skills that the detected stack needs.
 
 - Reuse existing tokens and primitives where they fit.
+- Use the `frontend-design` implementation-architecture reference to confirm component reuse, data binding, and state ownership before introducing new shared UI or stores.
 - Use semantic HTML, real content, accessible controls, and maintainable components.
 - Preserve data flow and business behavior by default.
 - Add dependencies only when justified and authorized by the repository workflow.
@@ -128,6 +135,7 @@ Report:
 - type, lint, test, build, browser, console, and network results;
 - final screenshots or approved non-image evidence and their paths;
 - known deviations, unverified areas, and remaining risks.
+- the final structure, text, position, and color evidence when image fidelity was part of acceptance.
 
 ## Escalation Conditions
 

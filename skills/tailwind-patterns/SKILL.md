@@ -27,4 +27,4 @@ Use this skill for practical Tailwind layout and component styling.
 ## Handoff
 
 - For Tailwind v4 architecture and build behavior, use `tailwind-development`.
-- For broader visual direction, use `frontend-design`.
+- For unresolved visual direction, use `taste-skill` or `design-consultation`; use `frontend-design` after the direction is approved and Tailwind implementation begins.

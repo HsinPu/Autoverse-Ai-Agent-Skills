@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-07-14T00:00:00Z",
-  "total": 204,
+  "updated": "2026-07-15T00:00:00Z",
+  "total": 208,
   "skills": [
     {
       "name": "todo-first",
@@ -212,7 +212,7 @@
     },
     {
       "name": "frontend-design-review",
-      "description": "Frontend design review guide for evaluating implemented UI, PRs, components, and pages against design quality, accessibility, responsive behavior, design-system compliance, visual hierarchy, motion, and production-grade craft. Use when performing a UI review, reviewing UI code, auditing design systems, checking accessibility or responsive behavior, reviewing themes, or detecting generic or inconsistent visual design.",
+      "description": "Frontend UI review workflow that separates experience critique, production web audit, and optical polish while evaluating implemented pages, components, and PRs for usability, accessibility, responsive behavior, design-system compliance, state completeness, performance, and visual craft. Use for UI, UX, accessibility, responsive, theme, or design-quality reviews after implementation exists.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -224,7 +224,9 @@
         "accessibility",
         "design-system",
         "responsive",
-        "review"
+        "review",
+        "production-audit",
+        "ux-review"
       ]
     },
     {
@@ -333,7 +335,7 @@
     },
     {
       "name": "frontend-design",
-      "description": "Frontend design guide for creating distinctive, production-grade interfaces with clear visual direction, strong hierarchy, meaningful motion, and non-generic implementation details. Use when building or restyling web components, pages, or applications where the visual design matters as much as the code quality.",
+      "description": "Production frontend implementation guide for turning an approved visual direction, design system, or image contract into semantic, responsive, accessible UI in the existing stack. Use when building or restyling components, pages, and applications after the visual direction is clear; use taste-skill or design-consultation first when art direction is unresolved.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -343,7 +345,97 @@
         "design",
         "react",
         "css",
-        "ui"
+        "ui",
+        "state-management",
+        "component-architecture"
+      ]
+    },
+    {
+      "name": "taste-skill",
+      "description": "Context-aware visual direction workflow for turning a web product brief, brand constraints, and existing UI evidence into a distinctive design intent, calibrated visual system, and anti-generic quality review. Use when a page, application, or site needs stronger art direction before implementation; use image-to-code when an image or approved mockup is the primary implementation source.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "reference": {
+        "source": "Leonxlnx/taste-skill",
+        "license": "MIT"
+      },
+      "tags": [
+        "frontend",
+        "design-direction",
+        "art-direction",
+        "visual-system",
+        "anti-generic",
+        "ui",
+        "decision-log"
+      ]
+    },
+    {
+      "name": "image-to-code",
+      "description": "Visual-reference implementation workflow for translating supplied screenshots, approved mockups, multi-state reference sets, or explicitly authorized UI recordings and generated designs into editable, semantic, responsive frontend code with an implementation contract and evidence-based fidelity loop. Use when visual evidence is the primary UI source; use approval-gated page or website workflows when the design direction still needs selection.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "reference": {
+        "source": "Leonxlnx/taste-skill",
+        "license": "MIT"
+      },
+      "tags": [
+        "image-to-code",
+        "screenshot",
+        "mockup",
+        "frontend",
+        "responsive",
+        "visual-fidelity",
+        "accessibility",
+        "screen-recording",
+        "multi-state"
+      ]
+    },
+    {
+      "name": "figma-to-code",
+      "description": "Structured Figma-to-frontend implementation workflow for translating a Figma file, node selection, or design-context export into production code by reconciling scene structure, variables, components, assets, screenshots, and repository conventions. Use when Figma is the primary design authority and structured design data is available; use image-to-code when only screenshots or raster references are available.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "reference": {
+        "source": "figma/mcp-server-guide",
+        "license": "No repository-wide OSS license; governed by Figma Developer Terms"
+      },
+      "tags": [
+        "figma",
+        "design-to-code",
+        "frontend",
+        "design-context",
+        "components",
+        "tokens",
+        "assets",
+        "visual-fidelity"
+      ]
+    },
+    {
+      "name": "design-intelligence-search",
+      "description": "Deterministic local search workflow for retrieving relevant product-pattern, visual-direction, color, typography, layout, interaction, accessibility, data-visualization, and content guidance from an auditable design knowledge base. Use when a UI brief needs evidence-labeled candidate directions or stack-aware design constraints before taste-skill, design-system, or frontend implementation; do not use as a substitute for user research or approved brand requirements.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "reference": {
+        "source": "nextlevelbuilder/ui-ux-pro-max-skill",
+        "license": "MIT"
+      },
+      "tags": [
+        "design-intelligence",
+        "search",
+        "ui",
+        "ux",
+        "visual-direction",
+        "accessibility",
+        "data-visualization",
+        "local-dataset"
       ]
     },
     {
@@ -856,11 +948,15 @@
     },
     {
       "name": "design-system",
-      "description": "Design system generation and visual audit guide for extracting cohesive tokens, producing preview artifacts, reviewing UI consistency, and spotting generic AI-style design patterns. Use when starting a new project, auditing an existing codebase, preparing a redesign, reviewing styling PRs, or diagnosing when the UI feels visually off.",
+      "description": "Design system generation, live implementation extraction, DTCG-compatible token governance, durable context, drift analysis, and visual audit workflow. Use when starting a project, standardizing or preparing a redesign, extracting observed styles from an authorized running interface, producing cross-platform tokens and preview artifacts, auditing an existing system, reviewing styling changes, or diagnosing when UI feels visually off.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
+      "reference": {
+        "source": "design-tokens/community-group",
+        "license": "W3C Software and Document License"
+      },
       "tags": [
         "design-system",
         "tokens",
@@ -871,7 +967,13 @@
         "css",
         "tailwind",
         "react",
-        "vue"
+        "vue",
+        "design-context",
+        "provenance",
+        "dtcg",
+        "live-extraction",
+        "drift",
+        "cross-platform"
       ]
     },
     {
@@ -2696,18 +2798,29 @@
     },
     {
       "name": "visual-regression-testing",
-      "description": "Visual regression testing workflow for screenshot baselines, pixel diffs, layout comparisons, Percy, Chromatic, BackstopJS, Playwright screenshot tests, and UI change verification. Use when detecting unintended visual changes across components, pages, viewports, or themes.",
+      "description": "Provider-neutral visual comparison and machine-gate workflow for detecting screenshot regressions and evaluating implementation fidelity against approved references across components, pages, states, viewports, themes, and browsers. Use when UI changes need reproducible screenshot, DOM, OCR, contrast, console, network, or semantic-vision evidence; dimensional acceptance criteria; CI verdicts; baseline approval; or an iterative repair gate.",
       "category": "browser-automation",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
+      "reference": {
+        "source": "amitpatole/agent-vision",
+        "license": "MIT"
+      },
       "tags": [
         "visual-regression",
         "screenshots",
         "percy",
         "chromatic",
         "backstopjs",
-        "ui-testing"
+        "ui-testing",
+        "fidelity-evaluation",
+        "visual-evidence",
+        "machine-gate",
+        "ocr",
+        "dom-geometry",
+        "contrast",
+        "ci"
       ]
     },
     {
