@@ -15,6 +15,7 @@ license: Apache-2.0
 
 ## Handoff
 
+- Use `requirements-deep-dive` when the user wants assumptions challenged through a deliberate multi-decision interview rather than the minimum blocking question.
 - Use `todo-first` after clarification when the confirmed task is multi-step or needs execution tracking.
 - Use `code-change-workflow` when clarification is enough and the next step is to inspect an existing code path.
 - Use `spec-flow` or `specification-authoring` when the missing information should become a structured spec.

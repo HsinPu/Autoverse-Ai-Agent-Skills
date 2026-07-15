@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "updated": "2026-07-15T00:00:00Z",
-  "total": 208,
+  "total": 213,
   "skills": [
     {
       "name": "todo-first",
@@ -2039,11 +2039,16 @@
     },
     {
       "name": "skill-creator-design",
-      "description": "Skill design guide for creating reusable skills with clear metadata, lean instructions, progressive disclosure, and the right mix of scripts, references, and assets. Use when creating a new skill or refining an existing one that extends agent capabilities.",
+      "description": "Design and refine reusable cross-tool Skills by defining invocation, scope, workflow branches, completion evidence, no-op behavior, context budget, and package resources. Use when creating or materially redesigning a SKILL.md package, deciding whether to split or route overlapping skills, or improving trigger precision and task completion across Codex, Claude, Cursor, Copilot, and OpenCode.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
+      "reference": {
+        "source": "mattpocock/skills",
+        "revision": "e9fcdf95b402d360f90f1db8d776d5dd450f9234",
+        "license": "MIT"
+      },
       "tags": [
         "skill",
         "creator",
@@ -2111,11 +2116,16 @@
     },
     {
       "name": "skill-explorer",
-      "description": "Skill discovery and navigation workflow for browsing available skills, understanding category coverage, and finding the right skill for a task. Use when the user needs help exploring the skill catalog or mapping a request to an existing skill.",
+      "description": "Navigate the local Skill catalog and turn a request into the smallest useful execution route, including what to use now, what artifact enables the next Skill, and where to stop. Use when mapping a task to existing Skills, comparing nearby triggers, discovering a multi-Skill flow, or deciding that no specialized Skill is needed.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
+      "reference": {
+        "source": "mattpocock/skills",
+        "revision": "e9fcdf95b402d360f90f1db8d776d5dd450f9234",
+        "license": "MIT"
+      },
       "tags": [
         "discovery",
         "navigation",
@@ -2435,11 +2445,16 @@
     },
     {
       "name": "skill-audit",
-      "description": "Audit Skill packages for trigger quality, instruction coverage, progressive disclosure, provenance, licensing, bundled scripts, external actions, secret access, prompt injection, exfiltration, and maintenance risk. Use before adopting, publishing, upgrading, or trusting a SKILL.md package when linting alone cannot establish quality and safety.",
+      "description": "Audit Skill packages for invocation fit, workflow completeness, completion evidence, no-op and cleanup behavior, overlap, provenance, licensing, scripts, external actions, secrets, prompt injection, exfiltration, and maintenance risk. Use before adopting, publishing, upgrading, or trusting a SKILL.md package when linting alone cannot establish semantic quality and safety.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
+      "reference": {
+        "source": "mattpocock/skills",
+        "revision": "e9fcdf95b402d360f90f1db8d776d5dd450f9234",
+        "license": "MIT"
+      },
       "tags": [
         "audit",
         "security",
@@ -2463,7 +2478,7 @@
     },
     {
       "name": "skill-security-review",
-      "description": "Security vetting workflow for evaluating third-party skills before install or use. Use when checking provenance, file contents, permissions, or suspicious patterns in a marketplace package or repo.",
+      "description": "Perform a focused security and supply-chain review of a third-party Skill package, including provenance, scripts, dependencies, permissions, data flows, prompt injection, downloads, secret access, external actions, and sandboxed runtime behavior. Use when an external Skill contains executable or opaque content, requests broad access, contacts the network, handles credentials, shows suspicious instructions, or needs a security approval before installation; use skill-audit for overall semantic quality and catalog fit.",
       "category": "productivity",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
@@ -2610,11 +2625,16 @@
     },
     {
       "name": "spec-flow",
-      "description": "Spec-driven development workflow for turning clear requirements or an approved solution direction into a concise specification, acceptance criteria, task breakdown, and execution path. Use when a request needs structured decomposition, implementation planning, or a document-first development flow after the intended direction is understood.",
+      "description": "Turn clear requirements or an approved solution direction into acceptance criteria, dependency-aware work items, and an executable delivery path. Use for implementation planning, issue-ready vertical slices, readiness analysis, and delivery sequencing after the intended direction is understood; use specification-authoring instead when the requested deliverable is a formal technical specification with a prescribed document structure.",
       "category": "development",
       "author": "HsinPu",
       "source": "HsinPu/Autoverse-Ai-Agent-Skills",
       "license": "Apache-2.0",
+      "reference": {
+        "source": "mattpocock/skills",
+        "revision": "e9fcdf95b402d360f90f1db8d776d5dd450f9234",
+        "license": "MIT"
+      },
       "tags": [
         "spec",
         "planning",
@@ -3455,6 +3475,106 @@
         "rag",
         "delivery",
         "release-gates"
+      ]
+    },
+    {
+      "name": "domain-modeling",
+      "description": "Build a technology-neutral model of business concepts, language, identity, invariants, state transitions, ownership, boundaries, and domain events from repository evidence and stakeholder decisions. Use when ambiguous terminology, conflicting rules, anemic data shapes, unclear bounded contexts, or hidden business invariants are causing design, specification, API, persistence, or implementation problems.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "reference": {
+        "source": "mattpocock/skills",
+        "revision": "e9fcdf95b402d360f90f1db8d776d5dd450f9234",
+        "license": "MIT"
+      },
+      "tags": [
+        "domain-modeling",
+        "ubiquitous-language",
+        "invariants",
+        "bounded-contexts",
+        "state-transitions"
+      ]
+    },
+    {
+      "name": "requirements-deep-dive",
+      "description": "Run a deliberate one-decision-at-a-time requirements interview that challenges assumptions, exposes contradictions, recommends concrete defaults, records decisions, and can ground questions in repository evidence. Use when the user explicitly asks for a deep interview, wants requirements challenged before implementation, or an approved discovery workflow pauses for consequential choices that available code and documents cannot answer.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "reference": {
+        "source": "mattpocock/skills",
+        "revision": "e9fcdf95b402d360f90f1db8d776d5dd450f9234",
+        "license": "MIT"
+      },
+      "tags": [
+        "requirements",
+        "interview",
+        "decisions",
+        "repository-evidence",
+        "clarification"
+      ]
+    },
+    {
+      "name": "session-handoff",
+      "description": "Create and resume a compact, evidence-linked handoff for work that must continue in another agent, tool, or session. Use when pausing non-trivial work, approaching a context boundary, transferring ownership, or resuming from a prior handoff that must be checked against the current repository revision and working tree.",
+      "category": "coding-agents-ides",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "reference": {
+        "source": "mattpocock/skills",
+        "revision": "e9fcdf95b402d360f90f1db8d776d5dd450f9234",
+        "license": "MIT"
+      },
+      "tags": [
+        "handoff",
+        "sessions",
+        "context",
+        "continuation",
+        "evidence"
+      ]
+    },
+    {
+      "name": "multi-session-planning",
+      "description": "Plan work that spans multiple sessions, agents, tools, or milestones by mapping decisions, dependencies, ready work, unknown regions, ownership, checkpoints, and replanning triggers. Use when a task cannot be completed safely in one context window or one verified implementation slice and needs a durable execution map without pretending unresolved work is already specifiable.",
+      "category": "productivity",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "reference": {
+        "source": "mattpocock/skills",
+        "revision": "e9fcdf95b402d360f90f1db8d776d5dd450f9234",
+        "license": "MIT"
+      },
+      "tags": [
+        "planning",
+        "multi-session",
+        "dependencies",
+        "decisions",
+        "checkpoints"
+      ]
+    },
+    {
+      "name": "throwaway-prototyping",
+      "description": "Build a deliberately disposable experiment that answers one product, interaction, visual, logic, architecture, or integration question with the minimum necessary fidelity. Use during solution discovery when evidence requires executable behavior or a tangible comparison, but production quality, persistence, migration, security hardening, and long-term maintainability would obscure the learning goal.",
+      "category": "development",
+      "author": "HsinPu",
+      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "license": "Apache-2.0",
+      "reference": {
+        "source": "mattpocock/skills",
+        "revision": "e9fcdf95b402d360f90f1db8d776d5dd450f9234",
+        "license": "MIT"
+      },
+      "tags": [
+        "prototype",
+        "experiments",
+        "discovery",
+        "reversible",
+        "evidence"
       ]
     }
   ],

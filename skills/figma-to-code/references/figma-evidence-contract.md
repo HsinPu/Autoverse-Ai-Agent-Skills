@@ -51,13 +51,45 @@ Redact credentials and private query parameters from logs. A checksum identifies
 
 ## Fallback Matrix
 
+<!-- AUTOVERSE_CONTRACT
+{
+  "id": "figma-to-code.fallback",
+  "part": "matrix",
+  "version": 1,
+  "type": "fallback-matrix",
+  "section": "Fallback Matrix",
+  "rows": {
+    "structured_and_screenshot": {
+      "standaloneAction": "full_workflow",
+      "parentAction": "return_receipt"
+    },
+    "structured_only": {
+      "standaloneAction": "initial_implementation",
+      "parentAction": "return_receipt"
+    },
+    "screenshot_only": {
+      "standaloneAction": "route_image_to_code",
+      "parentAction": "recommend_fallback_and_stop"
+    },
+    "unreadable_url": {
+      "standaloneAction": "stop",
+      "parentAction": "blocked_receipt"
+    },
+    "partial_node": {
+      "standaloneAction": "refetch_children",
+      "parentAction": "refetch_authorized_children"
+    }
+  }
+}
+-->
+
 | Available evidence | Standalone action | Parent-orchestrated receipt action | Required disclosure |
 | --- | --- | --- | --- |
-| structured context + matching screenshot | full Figma-to-code workflow | complete the bounded evidence and repository-mapping receipt, then return to the parent | identify missing states or assets |
-| structured context only | architecture and initial implementation | return the bounded mapping receipt without implementation | visual fidelity remains unverified |
-| screenshot only | route to `image-to-code` | recommend raster fallback to the parent and stop | variables, components, and constraints are inferred |
-| URL but no readable provider or export | stop before implementation | return a blocked receipt to the parent | state the missing connection or export |
-| partial or truncated node | refetch bounded children | refetch only parent-authorized children, then return the coverage receipt | list nodes not acquired |
+| `structured_and_screenshot` — structured context + matching screenshot | `full_workflow` — full Figma-to-code workflow | `return_receipt` — complete the bounded evidence and repository-mapping receipt, then return to the parent | identify missing states or assets |
+| `structured_only` — structured context only | `initial_implementation` — architecture and initial implementation | `return_receipt` — return the bounded mapping receipt without implementation | visual fidelity remains unverified |
+| `screenshot_only` — screenshot only | `route_image_to_code` — route to `image-to-code` | `recommend_fallback_and_stop` — recommend raster fallback to the parent and stop | variables, components, and constraints are inferred |
+| `unreadable_url` — URL but no readable provider or export | `stop` — stop before implementation | `blocked_receipt` — return a blocked receipt to the parent | state the missing connection or export |
+| `partial_node` — partial or truncated node | `refetch_children` — refetch bounded children | `refetch_authorized_children` — refetch only parent-authorized children, then return the coverage receipt | list nodes not acquired |
 
 Never synthesize missing component IDs, variable names, asset URLs, or prototype behavior.
 

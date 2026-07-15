@@ -100,6 +100,8 @@ If a slice grows, split it before continuing.
 ## Handoff
 
 - Use `todo-first` to track the slice list and status during execution.
+- Use `multi-session-planning` when the broader dependency and decision map extends beyond implementation slices or one work session.
+- Use `session-handoff` when a verified slice or checkpoint must be resumed by another session, agent, or tool.
 - Use `code-change-workflow` to understand existing behavior before the first slice.
 - Use `code-refactoring` when the slice is behavior-preserving cleanup.
 - Use `test-driven-development` inside slices whose behavior can be expressed as an automated test.

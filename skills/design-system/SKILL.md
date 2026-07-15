@@ -13,12 +13,55 @@ Use this skill when the task is about the system behind the UI, not just one scr
 
 ## Execution Posture
 
+<!-- AUTOVERSE_CONTRACT
+{
+  "id": "design-system.execution",
+  "part": "posture",
+  "version": 1,
+  "type": "write-posture",
+  "section": "Execution Posture",
+  "parentWorkflows": [
+    "web-page-design-to-code.orchestration",
+    "website-redesign-to-code.orchestration"
+  ],
+  "textParts": {
+    "posture": {
+      "section": "Execution Posture",
+      "sha256": "831196f4fcb7bcd326b13a7cf6b32531016325ef5a49a7f3b54bb59a8859c82c"
+    }
+  },
+  "postures": {
+    "audit-dry-run": {
+      "mayWrite": false,
+      "requiresExplicitUserAuthorization": false,
+      "returnOwner": "parent-or-owning-task"
+    },
+    "apply-generate": {
+      "mayWrite": true,
+      "requiresExplicitUserAuthorization": true,
+      "requiresParentGateWhenPresent": true
+    }
+  },
+  "driftKinds": [
+    "add",
+    "change",
+    "rename",
+    "alias",
+    "deprecate",
+    "delete"
+  ],
+  "completionReference": "skills/design-system/reference/token-extraction-and-drift.md"
+}
+-->
+
+<!-- AUTOVERSE_CONTRACT_TEXT_START design-system.execution#posture -->
 Choose the write posture separately from the design-system purpose below:
 
 - **Audit/dry-run receipt:** default when a parent workflow has an open approval gate, the user requested no writes, or output paths are not authorized. Inspect allowed sources and return provenance, an in-memory DTCG-compatible candidate graph, observed-versus-approved distinctions, a dry-run drift ledger, destructive-change warnings, unresolved cells, and a versioned receipt. Do not create or overwrite canonical tokens, documentation, previews, generated platform files, or production styles.
 - **Apply/generate:** use only after explicit user authorization permits the system change and the canonical output paths and migration scope are authorized. When a parent approval gate exists, that named gate must also permit the change. Write the smallest maintained source, regenerate derived views, and verify representative consumers.
 
 When called by another approval-gated workflow, record the parent workflow, current gate, receipt scope, and return owner. In standalone work, record the owning task and user authorization instead. This Skill owns the bounded system analysis or migration receipt; an existing parent retains scope and gate authority.
+<!-- AUTOVERSE_CONTRACT_TEXT_END design-system.execution#posture -->
 
 ## Modes
 

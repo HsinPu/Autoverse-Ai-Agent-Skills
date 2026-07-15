@@ -63,5 +63,7 @@ Stop conditions:
 - Use `agent-creator-design` for individual agent prompt design.
 - Use `agent-introspection-debugging` when traces indicate routing, ownership, handoff, loop, or context failures in an agent team.
 - Use `todo-first` for visible execution status.
-- Use `context-governance` for durable decisions and long-running handoffs.
+- Use `multi-session-planning` when the dependency and ownership map spans several work sessions.
+- Use `session-handoff` for evidence-linked continuation across agents, tools, or sessions.
+- Use `context-governance` for durable lessons and reusable decisions that should outlive the current task.
 - Use `code-review` after integrating multi-agent implementation.

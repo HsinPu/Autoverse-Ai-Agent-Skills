@@ -39,6 +39,7 @@ Use this skill before implementation when the user wants to understand whether a
 
 ## Handoff
 
+- Use `domain-modeling` when architecture boundaries depend on business language, invariants, lifecycle, or consistency ownership.
 - Use `code-change-workflow` when tracing an existing behavior path before edits.
 - Use `code-refactoring` when the target architecture is chosen and the work is behavior-preserving cleanup.
 - Use `python-development`, `java-architecture`, `typescript-development`, `vue-development`, `spring-development`, or another stack skill for language/framework details.

@@ -129,6 +129,51 @@ Do not infer approval from silence or from general encouragement.
 
 ## Visual QA Report
 
+<!-- AUTOVERSE_CONTRACT
+{
+  "id": "web-page-design-to-code.orchestration",
+  "part": "deliverable",
+  "version": 1,
+  "type": "machine-receipt-template",
+  "section": "Visual QA Report",
+  "machineReceiptFields": [
+    "mode",
+    "matrixCell",
+    "referenceId",
+    "baselineId",
+    "verdict",
+    "nextAction",
+    "baselineAction"
+  ],
+  "machineContractFields": {
+    "authority": [
+      "mode",
+      "referenceId",
+      "baselineId",
+      "baselineApprover"
+    ],
+    "environment": [
+      "matrixCell",
+      "browser",
+      "deviceScale",
+      "theme",
+      "locale",
+      "state",
+      "fixture"
+    ],
+    "policy": [
+      "channels",
+      "thresholds",
+      "warnHandling",
+      "errorHandling",
+      "retention",
+      "cache",
+      "networkEgress"
+    ]
+  }
+}
+-->
+
 ```markdown
 # Page visual QA
 

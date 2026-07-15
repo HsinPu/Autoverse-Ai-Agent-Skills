@@ -77,7 +77,7 @@ license: Apache-2.0
 
 ## Durable Handoffs
 
-- 如果任務會跨 session 或可能被中斷，額外保留一段簡短 state note，記錄已完成項目、剩餘工作、阻塞點與下一步。
+- 如果任務會跨 session 或可能被中斷，用 `session-handoff` 建立簡短且可驗證的 continuation record，記錄已完成項目、剩餘工作、阻塞點、版本狀態與下一步。
 - todo list 用來追蹤執行；state note 用來追蹤可恢復的背景資訊，兩者不要混在一起。
 - 重新接手時先讀 current state，再決定延續原 todo 或取消過時項目。
 

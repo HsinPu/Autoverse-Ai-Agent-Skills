@@ -32,6 +32,102 @@ Use multiple channels when one channel cannot distinguish a defect from renderin
 
 ## Normalized Result
 
+<!-- AUTOVERSE_CONTRACT
+{
+  "id": "visual-regression-testing.machine-gate",
+  "part": "schema",
+  "version": 1,
+  "type": "machine-gate",
+  "section": "Normalized Result",
+  "consumers": [
+    "web-page-design-to-code.orchestration",
+    "website-redesign-to-code.orchestration"
+  ],
+  "resultFields": [
+    "verdict",
+    "contract",
+    "issues",
+    "nextAction",
+    "baselineAction",
+    "artifacts",
+    "unverified"
+  ],
+  "contractFields": [
+    "mode",
+    "matrixCell",
+    "referenceId",
+    "baselineId"
+  ],
+  "issueFields": [
+    "severity",
+    "channel",
+    "location",
+    "evidence",
+    "confidence",
+    "remediation"
+  ],
+  "enumValues": {
+    "verdict": [
+      "pass",
+      "warn",
+      "fail",
+      "error"
+    ],
+    "mode": [
+      "regression",
+      "reference-fidelity"
+    ],
+    "issueSeverity": [
+      "blocking",
+      "major",
+      "minor",
+      "info"
+    ],
+    "issueChannel": [
+      "dom",
+      "contrast",
+      "ocr",
+      "console",
+      "network",
+      "pixel",
+      "semantic",
+      "temporal"
+    ],
+    "issueConfidence": [
+      "high",
+      "medium",
+      "low"
+    ],
+    "nextAction": [
+      "done",
+      "revise",
+      "review",
+      "rerun"
+    ],
+    "baselineAction": [
+      "unchanged",
+      "candidate",
+      "approved",
+      "rejected"
+    ]
+  },
+  "authorityByMode": {
+    "regression": {
+      "requiredNonEmpty": "baselineId",
+      "mustBeNull": "referenceId"
+    },
+    "reference-fidelity": {
+      "requiredNonEmpty": "referenceId",
+      "mustBeNull": "baselineId"
+    }
+  },
+  "missingAuthority": {
+    "verdict": "error",
+    "nextAction": "review"
+  }
+}
+-->
+
 Every provider adapter should emit:
 
 ```json

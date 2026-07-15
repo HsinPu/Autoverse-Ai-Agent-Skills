@@ -27,3 +27,4 @@ Use this skill to keep agent work focused and reusable.
 
 - For task-level learning logs, use `self-improvement`.
 - For multi-step planning or execution tracking, use `todo-first`.
+- For a compact, evidence-linked continuation record across sessions or tools, use `session-handoff`.

@@ -17,7 +17,9 @@ Switch to `website-redesign-to-code` when the request changes global navigation,
 
 Use `image-to-code` instead when an external supplied or previously approved image is already the primary design authority, direct implementation is authorized, and no page-design gate remains open. Also use it when one request authorizes both generating a visual and translating it into code; if the generation capability must end the response after returning an image, preserve that authorization and resume implementation in the next turn rather than claiming immediate same-turn completion. Stay in this workflow when it owns the approval artifacts or the user must still review, compare, or approve desktop and mobile mockups before production UI changes.
 
+<!-- AUTOVERSE_CONTRACT_TEXT_START web-page-design-to-code.orchestration#source-boundary -->
 Use `figma-to-code` instead when structured Figma data is the approved primary authority, direct implementation is authorized, and no page-design gate remains open. When Figma, a screenshot, or a recording is only one input to a page redesign whose approval gate is already open, keep this workflow as the top-level orchestrator. The source workflow may own a bounded acquisition or translation receipt, but it must return that receipt here without reopening direction discovery, closing this workflow's gate, or expanding implementation scope.
+<!-- AUTOVERSE_CONTRACT_TEXT_END web-page-design-to-code.orchestration#source-boundary -->
 
 Before design work, lock a source-authority record: brief or current page, structured Figma, raster or recording, generated approval artifact, or an explicit hybrid. Record artifact IDs and revisions, represented state and viewport, the approval owner, conflicts between sources, and which source governs visual approval versus preserved product behavior. Do not let the most recently fetched artifact silently become authoritative.
 
@@ -83,6 +85,43 @@ If a new raster artifact is required but no image-generation capability is avail
 
 ### 4. Draft the Implementation Contract
 
+<!-- AUTOVERSE_CONTRACT
+{
+  "id": "web-page-design-to-code.orchestration",
+  "part": "orchestration",
+  "version": 1,
+  "type": "approval-orchestrator",
+  "section": "4. Draft the Implementation Contract",
+  "owner": "top-level",
+  "supportMode": "parent-receipt",
+  "supportMayEditProductionBeforeGate": false,
+  "supportMayCloseGate": false,
+  "supportMayExpandScope": false,
+  "supportContracts": [
+    "figma-to-code.execution",
+    "image-to-code.execution",
+    "design-system.execution",
+    "visual-regression-testing.machine-gate"
+  ],
+  "textParts": {
+    "source-boundary": {
+      "section": "Route the Request",
+      "sha256": "184bf95606468e357f27e135087b094b18826296b2392f8e8057151dd067a616"
+    },
+    "machine-lock": {
+      "section": "4. Draft the Implementation Contract",
+      "sha256": "73a688b27ff9d79b7a9b92d2444641be9debb0c63460103eacdd56b2093563d8"
+    }
+  },
+  "machineContract": "visual-regression-testing.machine-gate",
+  "phaseBoundaries": {
+    "lockMachineContract": "4. Draft the Implementation Contract",
+    "implementationGate": "5. Stop at the Implementation Approval Gate",
+    "consumeMachineResult": "7. Render, Compare, and Repair"
+  }
+}
+-->
+
 Convert the candidate visual into deterministic, editable requirements before asking for implementation approval:
 
 - source authority, artifact revisions, conflicts, and approval ownership;
@@ -96,7 +135,9 @@ Convert the candidate visual into deterministic, editable requirements before as
 - interactions, focus behavior, motion, and reduced-motion behavior;
 - asset map, acceptance criteria, allowed visual tolerance, and the visual verification gate contract.
 
+<!-- AUTOVERSE_CONTRACT_TEXT_START web-page-design-to-code.orchestration#machine-lock -->
 Before the implementation gate, lock the machine-visual contract: comparison mode; `referenceId` for reference-fidelity or `baselineId` for regression; required matrix cells; browser, device scale, theme, locale, state, and fixture; evidence channels and thresholds; retention, cache, and network-egress policy; baseline approver; and `warn`/`error` handling. Do not change the comparison authority or loosen thresholds after implementation merely to obtain a pass.
+<!-- AUTOVERSE_CONTRACT_TEXT_END web-page-design-to-code.orchestration#machine-lock -->
 
 Choose one token path before finalizing the contract: reuse the maintained system, extract and reconcile a live or source system, or introduce a scoped candidate. When source tokens are incomplete or repository declarations, Figma variables, and an authorized running page appear to drift, use `design-system` in audit/dry-run receipt posture to create a provenance ledger, DTCG-compatible candidate graph, representative source/viewport/state matrix, and dry-run add/change/rename/alias/deprecate/delete report. Keep observed values distinct from approved values. Do not create or overwrite canonical token artifacts, create a parallel permanent token set, or apply migration before the implementation gate and output paths approve it.
 

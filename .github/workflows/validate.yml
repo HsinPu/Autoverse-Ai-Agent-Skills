@@ -10,6 +10,32 @@ permissions:
   contents: read
 
 jobs:
+  node16-compatibility:
+    name: Node 16 compatibility
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 16
+
+      - name: Validate Skill workflow contracts
+        run: npm run validate:skill-contracts
+
+      - name: Test Skill workflow contract validation
+        run: npm run test:skill-contracts
+
+      - name: Test CLI argument validation
+        run: npm run test:cli
+
+      - name: Test catalog validation guards
+        run: npm run test:catalog
+
   catalog:
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -43,6 +69,12 @@ jobs:
 
       - name: Test CLI argument validation
         run: npm run test:cli
+
+      - name: Test catalog validation guards
+        run: npm run test:catalog
+
+      - name: Test Skill workflow contract validation
+        run: npm run test:skill-contracts
 
   installer-powershell:
     name: Installer smoke (PowerShell)

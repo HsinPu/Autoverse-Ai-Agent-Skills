@@ -42,6 +42,25 @@ Do not mix the modes. A new design reference may authorize a product change, but
 
 ## Machine Gate Contract
 
+<!-- AUTOVERSE_CONTRACT
+{
+  "id": "visual-regression-testing.machine-gate",
+  "part": "handoff",
+  "version": 1,
+  "type": "machine-gate-handoff",
+  "section": "Machine Gate Contract",
+  "machineReceiptFields": [
+    "mode",
+    "matrixCell",
+    "referenceId",
+    "baselineId",
+    "verdict",
+    "nextAction",
+    "baselineAction"
+  ]
+}
+-->
+
 Use a machine gate when a repeatable tool can produce structured evidence. The minimum handoff is:
 
 ```text

@@ -136,6 +136,51 @@ Update this ledger only after verified evidence or an explicit decision. It reco
 
 ## Rollout and Validation Matrix
 
+<!-- AUTOVERSE_CONTRACT
+{
+  "id": "website-redesign-to-code.orchestration",
+  "part": "deliverable",
+  "version": 1,
+  "type": "machine-receipt-template",
+  "section": "Rollout and Validation Matrix",
+  "machineReceiptFields": [
+    "mode",
+    "matrixCell",
+    "referenceId",
+    "baselineId",
+    "verdict",
+    "nextAction",
+    "baselineAction"
+  ],
+  "machineContractFields": {
+    "authority": [
+      "mode",
+      "referenceId",
+      "baselineId",
+      "baselineApprover"
+    ],
+    "environment": [
+      "matrixCell",
+      "browser",
+      "deviceScale",
+      "theme",
+      "locale",
+      "state",
+      "fixture"
+    ],
+    "policy": [
+      "channels",
+      "thresholds",
+      "warnHandling",
+      "errorHandling",
+      "retention",
+      "cache",
+      "networkEgress"
+    ]
+  }
+}
+-->
+
 ```markdown
 # Redesign rollout
 

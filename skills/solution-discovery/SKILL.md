@@ -43,6 +43,9 @@ Record:
 ## Handoff
 
 - Use `ask-questions-if-underspecified` when the user explicitly requests a question-first clarification process.
+- Use `requirements-deep-dive` when several consequential choices need a structured interview and repository facts should be separated from stakeholder decisions.
+- Use `domain-modeling` when competing options depend on terminology, invariants, ownership, or lifecycle rules.
+- Use `throwaway-prototyping` when a bounded executable experiment is the cheapest reliable way to compare directions.
 - Use `project-architecture-review` when the options depend on evidence from an existing repository or architecture.
 - Use `design-consultation` when the unresolved direction is specifically visual frontend design.
 - Use `spec-flow` after the solution direction is approved and needs acceptance criteria and executable tasks.

@@ -27,6 +27,8 @@ Use this skill to decide whether the catalog needs an upgrade or a new skill.
 6. Choose one outcome:
    - Upgrade an existing skill when the local skill is close but missing steps, examples, or tooling.
    - Add a new skill when no local skill covers the task cleanly.
+   - Merge overlapping skills when their triggers, outputs, and ownership cannot be distinguished reliably.
+   - Route distinct skills through a parent when a shared decision must choose the correct child workflow.
    - Keep the catalog unchanged when the current skill already fits.
 7. Return the decision with the local skill(s), candidate skill(s), keywords used, quality signals, and the reason.
 
@@ -51,6 +53,8 @@ Use this skill to decide whether the catalog needs an upgrade or a new skill.
 - Prefer the smallest change that solves the gap.
 - Do not create a new skill if a local skill can be widened with a small, clear edit.
 - Prefer a new skill when the task scope is distinct, reusable, and likely to recur.
+- Prefer merging when two packages would compete for the same requests and neither owns a distinct completion artifact.
+- Prefer routing when child capabilities remain independently useful but require the same prerequisite decision, approval, or evidence contract.
 - Use marketplace metadata as evidence, not as the only signal.
 - Treat install counts, stars, and ratings as weak signals; prioritize instruction quality and fit with the local catalog.
 - Prefer well-known or official sources when two candidates have similar fit.
@@ -61,7 +65,7 @@ Use this skill to decide whether the catalog needs an upgrade or a new skill.
 
 ## Output
 
-- `Decision`: upgrade, add, or no action
+- `Decision`: upgrade, add, merge, route, or no action
 - `Keywords`: the query set used for LobeHub search
 - `Candidates`: external skills reviewed, including source and quality signals when available
 - `Why`: short evidence summary, including overlap with the local catalog

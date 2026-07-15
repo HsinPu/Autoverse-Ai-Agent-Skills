@@ -15,6 +15,7 @@ const readmePath = path.join(root, 'README.md');
 
 const errors = [];
 const canonicalSkillSource = 'HsinPu/Autoverse-Ai-Agent-Skills';
+const canonicalSkillAuthor = 'HsinPu';
 const componentNamePattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const canonicalAgentMetadata = {
   author: 'HsinPu',
@@ -133,7 +134,14 @@ for (const category of skillCategories) {
 
 const skillNames = new Set();
 const usedSkillCategories = new Set();
-for (const skill of skills) {
+const validSkills = [];
+for (let index = 0; index < skills.length; index += 1) {
+  const skill = skills[index];
+  if (!skill || typeof skill !== 'object' || Array.isArray(skill)) {
+    fail(`skills.json skills[${index}] must be an object`);
+    continue;
+  }
+  validSkills.push(skill);
   if (!skill.name) fail('A catalog entry is missing name');
   if (!componentNamePattern.test(skill.name || '')) fail(`${skill.name || '(unknown)'}: invalid skill name`);
   if (skillNames.has(skill.name)) fail(`Duplicate catalog skill name: ${skill.name}`);
@@ -144,6 +152,9 @@ for (const skill of skills) {
   if (skill.source !== canonicalSkillSource) {
     fail(`${skill.name || '(unknown)'} source must be ${canonicalSkillSource}`);
   }
+  if (skill.author !== canonicalSkillAuthor) {
+    fail(`${skill.name || '(unknown)'} author must be ${canonicalSkillAuthor}`);
+  }
   if (!declaredSkillCategories.has(skill.category)) {
     fail(`${skill.name || '(unknown)'} uses undeclared Skill category: ${skill.category}`);
   }
@@ -151,6 +162,12 @@ for (const skill of skills) {
   if (skill.reference) {
     if (!skill.reference.source) fail(`${skill.name || '(unknown)'} reference.source is required`);
     if (!skill.reference.license) fail(`${skill.name || '(unknown)'} reference.license is required`);
+    if (Object.prototype.hasOwnProperty.call(skill.reference, 'revision')) {
+      if (!skill.reference.revision) fail(`${skill.name || '(unknown)'} reference.revision is required when declared`);
+      if (!/^[0-9a-f]{40}$/i.test(skill.reference.revision || '')) {
+        fail(`${skill.name || '(unknown)'} reference.revision must be a full 40-character Git commit SHA`);
+      }
+    }
   }
   if (!Array.isArray(skill.tags)) fail(`${skill.name || '(unknown)'} tags must be an array`);
 }
@@ -177,7 +194,7 @@ for (const name of skillDirs) {
   if (!skillNames.has(name)) fail(`Skill directory is missing from skills.json: ${name}`);
 }
 
-const skillsByName = new Map(skills.map((skill) => [skill.name, skill]));
+const skillsByName = new Map(validSkills.filter((skill) => skill.name).map((skill) => [skill.name, skill]));
 const canonicalAgentRoleNames = new Set(
   fs.existsSync(agentsRoot)
     ? fs.readdirSync(agentsRoot, { withFileTypes: true })
@@ -202,6 +219,19 @@ for (const name of skillDirs) {
     if (catalogEntry.reference) {
       compare(name, 'reference.source', catalogEntry.reference.source, frontmatter['reference-source'], 'skills.json', 'SKILL.md');
       compare(name, 'reference.license', catalogEntry.reference.license, frontmatter['reference-license'], 'skills.json', 'SKILL.md');
+    }
+    const skillHasReferenceMetadata = ['reference-source', 'reference-license', 'reference-revision']
+      .some((field) => Object.prototype.hasOwnProperty.call(frontmatter, field));
+    if (!catalogEntry.reference && skillHasReferenceMetadata) {
+      fail(`${name}: SKILL.md declares reference metadata but skills.json has no reference entry`);
+    }
+    const catalogReferenceRevision = catalogEntry.reference && catalogEntry.reference.revision;
+    const skillReferenceRevision = frontmatter['reference-revision'];
+    if (catalogReferenceRevision || skillReferenceRevision) {
+      compare(name, 'reference.revision', catalogReferenceRevision, skillReferenceRevision, 'skills.json', 'SKILL.md');
+      if (!/^[0-9a-f]{40}$/i.test(skillReferenceRevision || '')) {
+        fail(`${name}: reference-revision must be a full 40-character Git commit SHA`);
+      }
     }
   }
 
@@ -607,7 +637,7 @@ if (inventory) {
 if (fs.existsSync(readmePath)) {
   const readme = fs.readFileSync(readmePath, 'utf8');
   const skillCategoryCounts = new Map();
-  for (const skill of skills) {
+  for (const skill of validSkills) {
     skillCategoryCounts.set(skill.category, (skillCategoryCounts.get(skill.category) || 0) + 1);
   }
   const skillCategoryCount = skillCategoryCounts.size;
@@ -719,7 +749,7 @@ if (fs.existsSync(readmePath)) {
   checkReadmeNumbers(
     'repository Apache-2.0 Skill count',
     /目前 (\d+) 個為 Apache-2.0/,
-    [skills.filter((skill) => skill.license === 'Apache-2.0').length]
+    [validSkills.filter((skill) => skill.license === 'Apache-2.0').length]
   );
 }
 
