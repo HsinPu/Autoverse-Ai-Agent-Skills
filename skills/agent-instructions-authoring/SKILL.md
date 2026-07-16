@@ -1,8 +1,10 @@
 ---
 name: agent-instructions-authoring
 description: Repo-level coding-agent instruction authoring workflow for creating, updating, or consolidating AGENTS.md, AGENTS.override.md, CLAUDE.md, GEMINI.md, Cursor rules, Copilot instructions, .agents/skills, and similar AI coding tool guidance. Use when turning real project commands, architecture rules, validation steps, tool conventions, or repeatable procedures into maintainable agent instructions or skills.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Agent Instructions Authoring

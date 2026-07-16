@@ -1,8 +1,10 @@
 ---
 name: jvm-build-tooling
 description: JVM build tooling guide for Maven and Gradle projects, dependency management, wrapper usage, multi-module builds, plugin configuration, reproducible builds, CI commands, and Java version alignment. Use when editing pom.xml, build.gradle, build.gradle.kts, Maven/Gradle wrappers, dependency upgrades, build failures, or Java project setup.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # JVM Build Tooling

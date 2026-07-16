@@ -1,8 +1,10 @@
 ---
 name: skill-lint
 description: Linting and validation workflow for SKILL.md files before publishing or using them. Use when checking structure, frontmatter, required sections, links, naming, or quality issues in an agent skill.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Skill Lint

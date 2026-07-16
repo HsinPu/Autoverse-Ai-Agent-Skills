@@ -1,0 +1,7 @@
+# Provenance controls require explicit review from the repository owner.
+/scripts/data/skill-reference-sources.json @HsinPu
+/scripts/data/skill-reference-lock.json @HsinPu
+/scripts/verify-skill-sources.js @HsinPu
+/scripts/audit-skill-originality.js @HsinPu
+/tests/skill-source-revisions.test.js @HsinPu
+/tests/skill-originality.test.js @HsinPu

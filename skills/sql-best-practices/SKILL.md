@@ -1,8 +1,10 @@
 ---
 name: sql-best-practices
 description: SQL writing and review guide covering naming, formatting, JOINs, subqueries, performance analysis, pagination, batch operations, and security practices. Use when writing, reviewing, or optimizing SQL queries, and pair it with database-design when schema or migration design is also involved.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # SQL Best Practices

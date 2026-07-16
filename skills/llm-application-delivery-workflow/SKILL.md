@@ -1,10 +1,13 @@
 ---
 name: llm-application-delivery-workflow
 description: Stage-gated orchestration workflow for taking an LLM feature from a product outcome through architecture routing, data and safety contracts, evaluation evidence, operational readiness, rollout, and post-release learning. Use when an AI application spans two or more of model APIs, agents, RAG, evals, security, observability, API contracts, data migrations, or deployment; do not use for a narrow single-component implementation.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
-reference-source: github/awesome-copilot
-reference-license: MIT
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  reference-source: "github/awesome-copilot"
+  reference-license: "MIT"
+  reference-revision: "2c2461a7fa383f664bb75546f03a2c6087f3819d"
 ---
 
 # LLM Application Delivery Workflow

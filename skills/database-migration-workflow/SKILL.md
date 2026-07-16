@@ -1,10 +1,13 @@
 ---
 name: database-migration-workflow
 description: Approval-gated database migration orchestration workflow for expanding schemas, backfilling data, cutting over application traffic, validating invariants, and retiring old structures with rollback or forward-recovery plans. Use for production or production-like schema and data migrations where compatibility, lock impact, data integrity, observability, or zero-downtime sequencing matters; use database-design for schema modeling and engine or ORM skills for concrete commands.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
-reference-source: wshobson/agents
-reference-license: MIT
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  reference-source: "wshobson/agents"
+  reference-license: "MIT"
+  reference-revision: "b6af3711058190e4b5c5274b9758498fe626ec5a"
 ---
 
 # Database Migration Workflow

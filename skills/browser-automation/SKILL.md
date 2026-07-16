@@ -1,8 +1,10 @@
 ---
 name: browser-automation
 description: Browser automation workflow for navigating websites, filling forms, clicking elements, taking screenshots, extracting data from JavaScript-rendered pages, and automating repeatable web interactions. Use when a task needs a real browser rather than static HTTP scraping or local web app verification.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Browser Automation

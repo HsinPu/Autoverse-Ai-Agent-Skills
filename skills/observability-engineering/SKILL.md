@@ -1,8 +1,10 @@
 ---
 name: observability-engineering
 description: Engineer production observability with service objectives, OpenTelemetry, metrics, logs, traces, Prometheus, Grafana, dashboards, burn-rate alerts, cardinality budgets, and failure validation. Use when instrumenting services, defining SLIs or SLOs, creating operational dashboards and alerts, diagnosing visibility gaps, or controlling telemetry reliability and cost.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Observability Engineering

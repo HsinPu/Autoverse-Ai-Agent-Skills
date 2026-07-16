@@ -1,8 +1,10 @@
 ---
 name: responsive-design
 description: Responsive frontend layout guidance for breakpoints, fluid typography, container queries, and adaptive component behavior. Use when building or restyling web UI that must work well on mobile, tablet, and desktop, or when fixing layout issues across screen sizes.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Responsive Design

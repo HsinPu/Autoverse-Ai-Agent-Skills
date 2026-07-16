@@ -1,0 +1,16 @@
+{
+  "skill_name": "web-research-ops",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Compare the current official global and project-local Skill installation paths for Codex, Claude Code, Cursor, and OpenCode. Give me a table with links and say where the tools disagree.",
+      "expected_output": "A current, source-attributed comparison based on primary documentation, with access dates and scope qualifiers, clear separation of verified facts from inference, and explicit unknowns where an official source does not define a path.",
+      "assertions": [
+        "Each tool-specific path claim is supported by a directly relevant primary or official source.",
+        "The response records when the sources were accessed and distinguishes global from project-local scope.",
+        "Conflicts, version-dependent behavior, and missing official documentation are labeled explicitly.",
+        "The response does not use search-result snippets or repository popularity as proof."
+      ]
+    }
+  ]
+}

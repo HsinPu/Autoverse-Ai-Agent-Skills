@@ -1,8 +1,10 @@
 ---
 name: spring-webflux
 description: Spring WebFlux and Project Reactor guide for reactive HTTP APIs, WebClient, backpressure, non-blocking persistence, R2DBC, Reactor operators, error handling, testing with WebTestClient, and avoiding blocking calls. Use when building, reviewing, or debugging reactive Spring Boot applications or deciding between MVC and WebFlux.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Spring WebFlux

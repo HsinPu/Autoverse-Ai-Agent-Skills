@@ -1,0 +1,17 @@
+{
+  "skill_name": "spec-flow",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "The product direction for offline document sync is approved. Turn it into implementation tickets, including conflict resolution, schema migration, telemetry, staged rollout, and recovery from a bad client release.",
+      "expected_output": "An executable specification with observable acceptance evidence, a dependency graph, vertical work slices, migration and rollback boundaries, and ready, blocked, and deferred sets that expose unresolved decisions instead of hiding them in tickets.",
+      "assertions": [
+        "The output restates the approved outcome, scope, non-goals, and constraints.",
+        "Acceptance criteria are observable and name the evidence required for completion.",
+        "Work items are dependency-linked vertical slices rather than disconnected frontend and backend task lists.",
+        "Schema compatibility, telemetry, rollout, rollback, and recovery work are represented explicitly.",
+        "Items with unresolved authority or product decisions are marked blocked with exact prerequisites."
+      ]
+    }
+  ]
+}

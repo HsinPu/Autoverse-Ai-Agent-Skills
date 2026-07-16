@@ -1,8 +1,10 @@
 ---
 name: self-improvement
 description: Continuous improvement workflow for logging learnings, errors, and feature requests into project-local memory files. Use when a command fails, the user corrects an answer, a tool behaves unexpectedly, or a better recurring approach is found.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Self-Improvement

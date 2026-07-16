@@ -1,8 +1,10 @@
 ---
 name: python-packaging-release
 description: Python packaging and release engineering guide covering build backends, wheels, sdists, versioning, console scripts, publishing, and release workflows. Use when packaging a Python project for installation or distribution, choosing build metadata, or preparing a release to PyPI or another artifact target.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Python Packaging and Release

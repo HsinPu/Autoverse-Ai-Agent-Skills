@@ -1,8 +1,10 @@
 ---
 name: javascript-development
 description: JavaScript development guide covering code style, module structure, async and error handling, security, and testing in modern Node.js and browser code. Use when writing, reviewing, or refactoring JavaScript.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # JavaScript Development

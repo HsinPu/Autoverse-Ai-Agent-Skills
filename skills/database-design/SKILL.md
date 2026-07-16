@@ -1,8 +1,10 @@
 ---
 name: database-design
 description: Database design guide covering schema modeling, indexing, migrations, normalization, and data integrity for PostgreSQL, MySQL, and NoSQL systems. Use when designing schemas, planning migrations, or improving database structure and performance.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Database Design

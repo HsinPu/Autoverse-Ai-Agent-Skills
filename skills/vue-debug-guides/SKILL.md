@@ -1,8 +1,10 @@
 ---
 name: vue-debug-guides
 description: Vue debugging guidance for diagnosing runtime errors, warnings, SSR and hydration mismatches, reactivity issues, and component failures. Use when fixing Vue bugs, investigating warnings, or tracing broken behavior in Vue 3 applications.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Vue Debug Guides

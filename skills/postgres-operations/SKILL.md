@@ -1,8 +1,10 @@
 ---
 name: postgres-operations
 description: PostgreSQL operations workflow covering roles, permissions, schema migrations, indexes, EXPLAIN, VACUUM, ANALYZE, locks, backups, restores, replication, connection pooling, pgvector, monitoring, and production troubleshooting. Use when operating, tuning, or debugging PostgreSQL databases.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Postgres Operations

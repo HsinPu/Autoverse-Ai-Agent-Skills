@@ -1,8 +1,10 @@
 ---
 name: short-video-script
 description: Short-form video script workflow for TikTok, Reels, YouTube Shorts, Douyin, Xiaohongshu, and similar platforms, covering hooks, talking-head scripts, pacing, captions, CTAs, series planning, retention, and platform-specific creative constraints. Use when writing scripts for short social videos rather than long-form articles or generic marketing copy.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Short Video Script

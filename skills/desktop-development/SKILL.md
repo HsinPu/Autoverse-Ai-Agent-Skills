@@ -1,8 +1,10 @@
 ---
 name: desktop-development
 description: Electron desktop development guide for implementing desktop features, IPC handlers, preload scripts, window management, menu configuration, and desktop-local tooling. Use when building or maintaining Electron apps, native-like desktop UIs, or app-specific desktop integrations rather than browser automation or front-end pages.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Desktop Development

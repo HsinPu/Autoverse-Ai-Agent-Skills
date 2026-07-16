@@ -1,8 +1,10 @@
 ---
 name: rag-vector-search
 description: Retrieval-augmented generation and vector search guide covering document ingestion, parsing, chunking, embeddings, metadata, hybrid retrieval, reranking, citations, freshness, access control, and retrieval evaluation. Use when building, reviewing, or debugging RAG systems or semantic search.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # RAG And Vector Search

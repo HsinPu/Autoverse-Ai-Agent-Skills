@@ -1,8 +1,10 @@
 ---
 name: ui-styling
 description: UI styling guide for composing shadcn/ui, Radix, and Tailwind components with polished color, button, form, and layout patterns. Use when building or restyling React UI components that need consistent spacing, theme-aware colors, and accessible visual polish.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # UI Styling

@@ -1,8 +1,10 @@
 ---
 name: python-web-scraping
 description: Python web scraping and HTML extraction guide covering requests/httpx, HTML parsing, pagination, normalization, retries, and polite crawling of static or lightly dynamic sites. Use when collecting data from web pages, feeds, or HTML documents, and when the task is extraction rather than browser UI testing or general Python architecture.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Python Web Scraping

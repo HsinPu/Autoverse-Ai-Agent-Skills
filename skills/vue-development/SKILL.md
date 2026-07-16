@@ -1,8 +1,10 @@
 ---
 name: vue-development
 description: Vue 3 development guide covering SFC structure, Composition API, component design, Pinia state management, Vue Router, TypeScript, testing, performance, and security. Use when building, reviewing, or refactoring Vue applications.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Vue 開發（Vue Development）

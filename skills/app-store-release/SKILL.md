@@ -1,8 +1,10 @@
 ---
 name: app-store-release
 description: Mobile app store release workflow covering App Store Connect, TestFlight, Google Play Console, signing, metadata, privacy labels, data safety, review guidelines, rollout, rejection handling, and rollback planning. Use when preparing, reviewing, or troubleshooting App Store, TestFlight, Google Play, internal testing, closed testing, or staged mobile releases.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # App Store Release

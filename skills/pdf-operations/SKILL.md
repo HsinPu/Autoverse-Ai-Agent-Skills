@@ -1,8 +1,10 @@
 ---
 name: pdf-operations
 description: PDF workflow for reading, extracting, merging, splitting, rotating, generating, and OCRing PDF documents. Use when a .pdf file is the primary input or output, or when scanned pages need layout-preserving extraction.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # PDF Operations

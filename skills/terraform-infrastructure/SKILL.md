@@ -1,8 +1,10 @@
 ---
 name: terraform-infrastructure
 description: Terraform and OpenTofu infrastructure-as-code workflow for modules, providers, variables, state, plan/apply review, drift detection, imports, workspaces, backends, and safe cloud provisioning. Use when creating, reviewing, or troubleshooting Terraform/OpenTofu configuration rather than doing manual cloud changes.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Terraform Infrastructure

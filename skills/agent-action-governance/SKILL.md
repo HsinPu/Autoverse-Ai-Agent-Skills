@@ -1,8 +1,10 @@
 ---
 name: agent-action-governance
 description: Govern consequential AI-agent tool actions through explicit policy, least authority, human approval windows, dry-run evaluation, command and path controls, MCP policy enforcement, tamper-evident signed receipts, verification, break-glass procedures, and audit retention. Use when coding agents can review, merge, publish, deploy, delete, access secrets, call external tools, or bypass repository safeguards and those actions need attributable authorization.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Agent Action Governance

@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "required_skills": [
+    "agent-action-governance",
+    "image-to-code",
+    "product-experimentation",
+    "skillctl",
+    "spec-flow",
+    "threat-modeling",
+    "ux-research",
+    "verified-software-delivery",
+    "video-production-workflow",
+    "visual-regression-testing",
+    "vulnerability-variant-analysis",
+    "web-research-ops",
+    "website-redesign-to-code",
+    "wordpress-development"
+  ]
+}

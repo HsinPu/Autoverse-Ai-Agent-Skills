@@ -1,8 +1,10 @@
 ---
 name: frontend-code-review
 description: Frontend code review guide for analyzing React, TypeScript, CSS, state, accessibility, performance, business logic, and UI behavior changes in .tsx, .ts, .js, and style files. Use when reviewing frontend diffs, pending working-tree changes, pull requests, or specific frontend files to surface concrete bugs, regressions, and test gaps.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Frontend Code Review

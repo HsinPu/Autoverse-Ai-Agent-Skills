@@ -1,0 +1,17 @@
+{
+  "skill_name": "agent-action-governance",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Design controls for an autonomous release agent that can merge pull requests, deploy production, read deployment secrets, and delete failed releases. Operators also need an emergency bypass during incidents.",
+      "expected_output": "A deny-by-default action policy with least-authority identities, short-lived human approvals, enforced tool boundaries, tamper-evident decision and outcome receipts, fail-closed behavior, and an expiring audited break-glass path.",
+      "assertions": [
+        "Policy decision, human approval, tool execution, and outcome verification are separate controls.",
+        "Grants are scoped to an actor, action, resource, environment, conditions, and short expiry.",
+        "Missing policy, invalid signatures, expired approval, and alternate tool paths fail closed.",
+        "Receipts are attributable and tamper-evident without containing reusable secrets or signing keys.",
+        "Break-glass use has explicit authority, expiry, compensating controls, and mandatory post-use review."
+      ]
+    }
+  ]
+}

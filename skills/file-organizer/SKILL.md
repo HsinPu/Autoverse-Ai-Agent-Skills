@@ -1,8 +1,10 @@
 ---
 name: file-organizer
 description: File organization guide for restructuring folders, finding duplicates, recommending cleaner hierarchies, and automating cleanup workflows. Use when organizing Downloads, Desktop, Documents, folder trees, project archives, media folders, or improving ongoing file management and disk hygiene habits.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # File Organizer

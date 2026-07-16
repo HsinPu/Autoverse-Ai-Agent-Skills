@@ -1,8 +1,10 @@
 ---
 name: shadcn-ui
 description: shadcn/ui integration guide for installing components, composing forms, handling theming, and building React UI patterns with Tailwind and Radix. Use when the user wants to add, customize, or reason about shadcn/ui components or project conventions.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # shadcn/ui

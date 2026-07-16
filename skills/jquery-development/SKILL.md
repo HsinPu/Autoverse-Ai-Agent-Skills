@@ -1,8 +1,10 @@
 ---
 name: jquery-development
 description: jQuery development guide for legacy or hybrid frontends, covering selectors, event delegation, DOM performance, plugin patterns, AJAX, security, jQuery 3/4 upgrade concerns, and migration to modern browser APIs. Use when maintaining, reviewing, debugging, or modernizing jQuery-based code, plugins, widgets, or server-rendered pages with jQuery behavior.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # jQuery 開發（jQuery Development）

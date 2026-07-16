@@ -1,8 +1,10 @@
 ---
 name: mybatis-development
 description: MyBatis development guide covering mapper design, XML and dynamic SQL, result mapping, Spring transaction integration, performance, and security. Use when building or refactoring MyBatis-based persistence layers in Java projects.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # MyBatis 開發（MyBatis Development）

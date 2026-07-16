@@ -1,8 +1,10 @@
 ---
 name: firebase-development
 description: Firebase development workflow covering Authentication, Firestore, Realtime Database, Security Rules, Cloud Functions, Storage, Cloud Messaging, Hosting, Emulator Suite, deploys, indexes, and production safety. Use when building, reviewing, or debugging Firebase-backed apps.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Firebase Development

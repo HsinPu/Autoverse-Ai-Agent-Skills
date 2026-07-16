@@ -1,8 +1,10 @@
 ---
 name: legacy-frontend-modernization
 description: Legacy frontend modernization guide for incrementally refactoring jQuery, Bootstrap-era, global-script, and framework-mixed web apps without breaking existing behavior. Use when planning or executing gradual migration to vanilla DOM APIs, TypeScript, modules, React/Vue/Alpine/HTMX, modern build tooling, or strangler-style replacement of old frontend screens.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Legacy Frontend Modernization

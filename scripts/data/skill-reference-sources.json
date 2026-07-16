@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "repositories": [
+    {
+      "repo": "affaan-m/ECC",
+      "commit": "ed387446052dfbc6b52de149406b70efa65edc59",
+      "tree": "2dad6752ce430188745484648a52f12f6b923f4d",
+      "license": "MIT",
+      "licenseEvidence": { "kind": "license-file", "path": "LICENSE", "blob": "b832b6f642312312367c07688dc7426db40a82ed" },
+      "skills": {
+        "agent-introspection-debugging": [{ "path": ".agents/skills/agent-introspection-debugging/SKILL.md", "blob": "fb668bcc9a811438aef819c97fabcffd1a43b695" }],
+        "article-writing": [{ "path": ".agents/skills/article-writing/SKILL.md", "blob": "2f17b3e67942fb02aa0a06757940e24b080a907d" }],
+        "brand-voice": [{ "path": ".agents/skills/brand-voice/SKILL.md", "blob": "0ade4fc0d677e45e58a2c5f4311a48a801fcdaef" }],
+        "content-repurposing": [
+          { "path": ".agents/skills/content-engine/SKILL.md", "blob": "5c9e2e3f257b0e659c108efdf2ced61dcf31e62c" },
+          { "path": ".agents/skills/crosspost/SKILL.md", "blob": "db4e9dc001f32789034c89688574c97b6f2ba653" }
+        ],
+        "market-research": [{ "path": ".agents/skills/market-research/SKILL.md", "blob": "10c7a7643fd2b0adf33504149eacd356a55bb562" }]
+      }
+    },
+    {
+      "repo": "github/awesome-copilot",
+      "commit": "2c2461a7fa383f664bb75546f03a2c6087f3819d",
+      "tree": "f78bac4743fe4c315308a5bf1135c1e3e1a3223c",
+      "license": "MIT",
+      "licenseEvidence": { "kind": "license-file", "path": "LICENSE", "blob": "89bc5e962c9944cdb050887062afdaaf89be504a" },
+      "skills": {
+        "api-contract-testing": [
+          { "path": "skills/typespec-api-operations/SKILL.md", "blob": "0c9c31734f64c3c231ad97772de95d4ab9431ddd" },
+          { "path": "skills/webapp-testing/SKILL.md", "blob": "281fff4e9d0b10cccb695f283ea6d8136a75ba56" }
+        ],
+        "autoresearch": [{ "path": "skills/autoresearch/SKILL.md", "blob": "ad54af302bb47c0c3ac7848271d610bf268c9661" }],
+        "llm-application-delivery-workflow": [
+          { "path": "skills/agentic-eval/SKILL.md", "blob": "3cb14203efaf62af98065bd599600ba808f0ef31" },
+          { "path": "skills/eval-driven-dev/SKILL.md", "blob": "53b80589bab58082caf4985ebd477104963bb28c" },
+          { "path": "skills/ai-team-orchestration/SKILL.md", "blob": "a5685467555032c42af32270b6ec173e90e1450b" }
+        ]
+      }
+    },
+    {
+      "repo": "wshobson/agents",
+      "commit": "b6af3711058190e4b5c5274b9758498fe626ec5a",
+      "tree": "36cad93774bba4e4e2e702aff34b32aaf746e201",
+      "license": "MIT",
+      "licenseEvidence": { "kind": "license-file", "path": "LICENSE", "blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e" },
+      "skills": {
+        "database-migration-workflow": [
+          { "path": "plugins/database-migrations/commands/sql-migrations.md", "blob": "aee79070521fda22d809608d2d5d8434012d9a01" },
+          { "path": "plugins/database-migrations/commands/migration-observability.md", "blob": "83f0773b80f59468a4b3177725cb16e1b785bd28" }
+        ],
+        "pipeline-review": [{ "path": "plugins/comprehensive-review/commands/full-review.md", "blob": "6d607a1544ed505e6e869ae6eb18d81a1b00fe28" }]
+      }
+    },
+    {
+      "repo": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "commit": "f8ac5e1266dba8354ea96e19994d9f4345e7ec31",
+      "tree": "621a9432f550d77ccbd43ac1e8feea110edf5679",
+      "license": "MIT",
+      "licenseEvidence": { "kind": "license-file", "path": "LICENSE", "blob": "1e71cbf26660f31903807d099fe902c098fc7e4c" },
+      "skills": {
+        "design-intelligence-search": [
+          { "path": ".claude/skills/ui-ux-pro-max/SKILL.md", "blob": "5fffe0c83d03189af7c9eed0622de006fb1ae68e" },
+          { "path": ".claude/skills/ui-ux-pro-max/scripts/search.py", "blob": "2b7562b6515691602cdaa9e096b3b93168e7de1e" },
+          { "path": ".claude/skills/ui-ux-pro-max/data/ux-guidelines.csv", "blob": "49f89c9d0c8b1305b80ac010a36780a8169d65cc" }
+        ]
+      }
+    },
+    {
+      "repo": "design-tokens/community-group",
+      "commit": "191bf0b157cd9d254e992975471a64f90d960a78",
+      "tree": "f7b1d9e6f01b13673b724b3d14604c949f4100db",
+      "license": "W3C Software and Document License",
+      "licenseEvidence": { "kind": "license-file", "path": "LICENSE.md", "blob": "aa8ea5ea13f89efb19ffd000d99153dff85a1ddb" },
+      "skills": {
+        "design-system": [{ "path": "technical-reports/format/design-token.md", "blob": "db240d656075a2e9f1be5e97b7e724e08702f1fe" }]
+      }
+    },
+    {
+      "repo": "mattpocock/skills",
+      "commit": "e9fcdf95b402d360f90f1db8d776d5dd450f9234",
+      "tree": "a180ae588876bfd3dd50e0ea5556dadefca180a8",
+      "license": "MIT",
+      "licenseEvidence": { "kind": "license-file", "path": "LICENSE", "blob": "f1dd2c09108dde1a5f56097cee8461b3ea834499" },
+      "skills": {
+        "domain-modeling": [{ "path": "skills/engineering/domain-modeling/SKILL.md", "blob": "d0f7e1a5ccb06a7184056ff9af02b67bc77f9dda" }],
+        "multi-session-planning": [{ "path": "skills/engineering/wayfinder/SKILL.md", "blob": "42e3644cc57e41a1b87482754f25b4d9462d4bbc" }],
+        "requirements-deep-dive": [
+          { "path": "skills/productivity/grilling/SKILL.md", "blob": "52d8eb3cadd2dca62634d5dccfa73ea6b725b117" },
+          { "path": "skills/engineering/grill-with-docs/SKILL.md", "blob": "bed05d2bd3245306267cea57cd696b5dd94d50fe" }
+        ],
+        "session-handoff": [{ "path": "skills/productivity/handoff/SKILL.md", "blob": "043d9e13dc7eca3002a47d3ab9865c568f647863" }],
+        "skill-audit": [{ "path": "skills/productivity/writing-great-skills/SKILL.md", "blob": "82abd0dce264eecb3ed461b3eac17bdafb52f84b" }],
+        "skill-creator-design": [{ "path": "skills/productivity/writing-great-skills/SKILL.md", "blob": "82abd0dce264eecb3ed461b3eac17bdafb52f84b" }],
+        "skill-explorer": [{ "path": "skills/engineering/ask-matt/SKILL.md", "blob": "70b807b35f85859b0c6cced1919f56e024e6a753" }],
+        "spec-flow": [{ "path": "skills/engineering/to-tickets/SKILL.md", "blob": "23140c577f71c98993523f0dbec74f250561b708" }],
+        "throwaway-prototyping": [{ "path": "skills/engineering/prototype/SKILL.md", "blob": "e75d5331ceffd9b2c5a9554c3db124d848afa054" }]
+      }
+    },
+    {
+      "repo": "figma/mcp-server-guide",
+      "commit": "07316dd2920d61303ca0e52812b31f5f341e7b15",
+      "tree": "8c1f4eb3279ac5e113ef66a0186b314f9a668518",
+      "license": "No repository-wide OSS license; governed by Figma Developer Terms",
+      "licenseEvidence": { "kind": "terms", "path": "README.md", "blob": "31fc37c7628b48805588ca89d1123166eab875c0" },
+      "skills": {
+        "figma-to-code": [{ "path": "skills/figma-design-to-code/SKILL.md", "blob": "1e55d56ca8c170e6e238b241bf20dc1f1964f2cd" }]
+      }
+    },
+    {
+      "repo": "Leonxlnx/taste-skill",
+      "commit": "b17742737e796305d829b3ad39eda3add0d79060",
+      "tree": "4b3d831cc39162fe585b21068019d295338707b4",
+      "license": "MIT",
+      "licenseEvidence": { "kind": "license-file", "path": "LICENSE", "blob": "48a2f6640b81ff8eca9ce7f6a96337692713ef5b" },
+      "skills": {
+        "image-to-code": [{ "path": "skills/image-to-code-skill/SKILL.md", "blob": "d19f8de112252ea88724c540647cad85b7653d46" }],
+        "taste-skill": [{ "path": "skills/taste-skill/SKILL.md", "blob": "b72132fcd466da605623ffe96e370b3991fc5285" }]
+      }
+    },
+    {
+      "repo": "multica-ai/andrej-karpathy-skills",
+      "commit": "2c606141936f1eeef17fa3043a72095b4765b9c2",
+      "tree": "02718e4654045f25a518093899502c8ee932eaf1",
+      "license": "MIT",
+      "licenseEvidence": { "kind": "frontmatter", "path": "skills/karpathy-guidelines/SKILL.md", "blob": "6a62d0441753157ca6ca50479e490c2948033adb" },
+      "skills": {
+        "karpathy-guidelines": [{ "path": "skills/karpathy-guidelines/SKILL.md", "blob": "6a62d0441753157ca6ca50479e490c2948033adb" }]
+      }
+    },
+    {
+      "repo": "obra/superpowers",
+      "commit": "d884ae04edebef577e82ff7c4e143debd0bbec99",
+      "tree": "795caed14920f27a1d2d152a09b4720194f64472",
+      "license": "MIT",
+      "licenseEvidence": { "kind": "license-file", "path": "LICENSE", "blob": "abf0390320aa14406af7a520b9b0739fdda9bf08" },
+      "skills": {
+        "receiving-code-review": [{ "path": "skills/receiving-code-review/SKILL.md", "blob": "4c77a10ee338fb7bddec6f5acf3455c8f2e4465a" }],
+        "solution-discovery": [{ "path": "skills/brainstorming/SKILL.md", "blob": "b0d52b258929b75d408fa4292b3f078a1104f078" }],
+        "systematic-debugging": [{ "path": "skills/systematic-debugging/SKILL.md", "blob": "b0eca38b3cf9523ea86c9211e96949c8e69d1d1c" }],
+        "test-driven-development": [{ "path": "skills/test-driven-development/SKILL.md", "blob": "60d2609ca56c7177a98f462fb71af77844ce92af" }],
+        "verification-before-completion": [{ "path": "skills/verification-before-completion/SKILL.md", "blob": "2f14076e59e6ce5cd6f88007421a85f0bd772520" }],
+        "verified-software-delivery": [
+          { "path": "skills/subagent-driven-development/SKILL.md", "blob": "d8ca081570c1ae7cc86e15f125c2b6063000f755" },
+          { "path": "skills/executing-plans/SKILL.md", "blob": "075a1038f1b98181c54193df1b6bcf0ac8b302f0" }
+        ]
+      }
+    },
+    {
+      "repo": "calesthio/OpenMontage",
+      "commit": "f8d94632ea9bd0057da31904acca1cefecf005dd",
+      "tree": "e96a900e92cd90e7d8d2722c1443f61748b22159",
+      "license": "AGPL-3.0",
+      "licenseEvidence": { "kind": "license-file", "path": "LICENSE", "blob": "be3f7b28e564e7dd05eaf59d64adba1a4065ac0e" },
+      "skills": {
+        "video-production-workflow": [
+          { "path": "AGENT_GUIDE.md", "blob": "2a0b6bd5c1d8b30c5daf4a0d5e7dd74a5cfc7393" },
+          { "path": "schemas/artifacts/proposal_packet.schema.json", "blob": "1f47f24e3977298da5c87634ef8b0039792fb0f7" },
+          { "path": "schemas/artifacts/scene_plan.schema.json", "blob": "751665bfe28152207c00ecbd3bcacc51f7d8a6fc" },
+          { "path": "schemas/artifacts/script.schema.json", "blob": "dfa66ccef1c1f5c461d813d827cccf8065a57a0d" }
+        ]
+      }
+    },
+    {
+      "repo": "amitpatole/agent-vision",
+      "commit": "83f5abdfe76c97fbc47af451a340f5eb5683f547",
+      "tree": "16ba224c18d03c5bad0426a22b6e6bc41a828a06",
+      "license": "MIT",
+      "licenseEvidence": { "kind": "license-file", "path": "LICENSE", "blob": "8c070a3b74304b5b79f024a051aefca58fcd5511" },
+      "skills": {
+        "visual-regression-testing": [{ "path": "skill/SKILL.md", "blob": "57bd7d735829f7038854a6f2b823c9de01047eba" }]
+      }
+    }
+  ]
+}

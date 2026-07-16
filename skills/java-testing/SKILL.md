@@ -1,8 +1,10 @@
 ---
 name: java-testing
 description: Java testing engineering guide for JUnit 5, Mockito, AssertJ, Spring test slices, Testcontainers, JaCoCo coverage, ArchUnit architecture tests, test data builders, and deterministic test design. Use when writing, reviewing, or fixing Java or Spring tests, practicing TDD, adding regression tests, enforcing package boundaries, or diagnosing flaky JUnit test failures.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Java Testing

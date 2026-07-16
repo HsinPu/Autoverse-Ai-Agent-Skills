@@ -1,8 +1,10 @@
 ---
 name: python-testing-engineering
 description: Python testing implementation guide covering pytest fixtures, parametrization, monkeypatching, mocks, async tests, temp paths, capture helpers, and framework-specific adapters. Use when writing, refactoring, or debugging Python tests and test harnesses, or when the task is about how to implement tests rather than choosing the test level.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Python Testing Engineering

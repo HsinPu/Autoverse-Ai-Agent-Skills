@@ -1,8 +1,10 @@
 ---
 name: python-backend-development
 description: Python backend development guide covering Django, Flask, ASGI/WSGI apps, routers, middleware, settings, ORM, migrations, background workers, and server-side web app structure. Use when building or refactoring Python web backends or DB-backed services, and when the task is framework structure or application flow rather than API contract design.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Python Backend Development

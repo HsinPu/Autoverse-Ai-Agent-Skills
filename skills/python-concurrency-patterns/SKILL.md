@@ -1,8 +1,10 @@
 ---
 name: python-concurrency-patterns
 description: Python concurrency patterns guide covering asyncio coordination, TaskGroup usage, cancellation, backpressure, worker orchestration, and safe parallelism. Use when a Python system needs coordinated concurrent work, controlled fan-out/fan-in, or cancellation-aware task flow rather than general async I/O basics.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Python Concurrency Patterns

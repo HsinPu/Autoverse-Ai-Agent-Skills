@@ -1,8 +1,10 @@
 ---
 name: animation-best-practices
 description: UI animation and motion guidance for hover states, button feedback, transitions, loading motion, and interaction polish in web interfaces. Use when a frontend task needs motion that improves clarity, responsiveness, or visual feel, or when fixing awkward, jittery, or excessive animation behavior.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Animation Best Practices

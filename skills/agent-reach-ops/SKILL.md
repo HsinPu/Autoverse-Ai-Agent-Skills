@@ -1,8 +1,10 @@
 ---
 name: agent-reach-ops
 description: Cross-platform web research workflow for searching and reading current content across social, video, code, and RSS sources. Use when the task needs multi-source research, transcripts, or platform-specific web extraction.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Agent Reach Ops

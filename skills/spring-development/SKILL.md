@@ -1,8 +1,10 @@
 ---
 name: spring-development
 description: Spring and Spring Boot development guide covering application layering, dependency injection, configuration, web APIs, data access, security, testing, and observability. Use when building, reviewing, or refactoring Spring-based services and applications.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Spring 開發（Spring Development）

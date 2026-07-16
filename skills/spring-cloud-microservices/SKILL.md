@@ -1,8 +1,10 @@
 ---
 name: spring-cloud-microservices
 description: Spring Cloud and Spring Boot microservices guide covering service boundaries, configuration, discovery, API gateways, Resilience4j, OpenFeign/WebClient clients, messaging, Kafka, saga patterns, distributed tracing, service-to-service security, and operational readiness. Use when designing, building, or reviewing Spring-based distributed systems and cloud-native microservices.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Spring Cloud Microservices

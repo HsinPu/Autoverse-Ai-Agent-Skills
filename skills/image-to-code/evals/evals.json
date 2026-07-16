@@ -1,0 +1,16 @@
+{
+  "skill_name": "image-to-code",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Here is one 1440px desktop screenshot of a dashboard. Recreate it as a responsive React page and infer the tablet, mobile, hover, loading, and error states without asking me anything.",
+      "expected_output": "A visual-evidence contract that separates observed facts from inferred behavior, records the source viewport and missing states, proposes bounded responsive assumptions for approval, and produces semantic editable UI rather than flattening the screenshot.",
+      "assertions": [
+        "The response records the screenshot as the visual authority for a specific viewport and state.",
+        "Observed evidence, repository facts, and inferred responsive or interaction behavior are labeled separately.",
+        "Missing mobile, hover, loading, and error evidence is surfaced instead of presented as exact fact.",
+        "The implementation contract requires semantic, accessible, editable components rather than a flattened image."
+      ]
+    }
+  ]
+}

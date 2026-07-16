@@ -1,8 +1,10 @@
 ---
 name: text-to-speech
 description: Text-to-speech and voiceover workflow for turning scripts, UI copy, accessibility reads, narration, and batch prompts into spoken audio. Use when the user asks to generate speech, create voiceover, read text aloud, choose voices, or prepare narration for video and product content.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Text To Speech

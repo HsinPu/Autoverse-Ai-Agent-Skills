@@ -1,8 +1,10 @@
 ---
 name: skillforge
 description: Certify Skill packages through deterministic linting, provenance, versioning, representative golden cases, rubric-based semantic evaluation, regression thresholds, signing, and reproducible release evidence. Use when a SKILL.md package needs a stronger quality gate before publishing, installing, or reusing it across agent environments.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Skillforge

@@ -1,8 +1,10 @@
 ---
 name: code-change-workflow
 description: Default pre-edit workflow for modifying existing code safely. Use before bug fixes, feature changes, refactors, behavior adjustments, or multi-file edits to inspect entry points, call chains, data flow, tests, constraints, and verification paths, then make the smallest safe change.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Code Change Workflow

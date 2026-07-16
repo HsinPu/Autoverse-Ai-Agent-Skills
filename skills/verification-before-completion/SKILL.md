@@ -1,10 +1,13 @@
 ---
 name: verification-before-completion
 description: Completion verification gate for proving that requested work satisfies its acceptance criteria with fresh command output, behavior checks, diff and repository-state inspection, and explicit disclosure of unverified items. Use immediately before claiming a code change, fix, refactor, build, test, review remediation, or repository task is complete; it does not replace independent review or post-deployment monitoring.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
-reference-source: obra/superpowers
-reference-license: MIT
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  reference-source: "obra/superpowers"
+  reference-license: "MIT"
+  reference-revision: "d884ae04edebef577e82ff7c4e143debd0bbec99"
 ---
 
 # Verification Before Completion

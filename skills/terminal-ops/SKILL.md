@@ -1,8 +1,10 @@
 ---
 name: terminal-ops
 description: Evidence-first repository execution workflow for running commands, checking repo state, debugging failures, and verifying narrow fixes. Use when the user needs exact command output, git state, or a proven local change.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Terminal Ops

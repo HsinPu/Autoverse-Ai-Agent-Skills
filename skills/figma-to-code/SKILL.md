@@ -1,10 +1,13 @@
 ---
 name: figma-to-code
 description: Structured Figma-to-frontend implementation workflow for translating a Figma file, node selection, or design-context export into production code by reconciling scene structure, variables, components, assets, screenshots, and repository conventions. Use when Figma is the primary design authority and structured design data is available; use image-to-code when only screenshots or raster references are available.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
-reference-source: figma/mcp-server-guide
-reference-license: No repository-wide OSS license; governed by Figma Developer Terms
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  reference-source: "figma/mcp-server-guide"
+  reference-license: "No repository-wide OSS license; governed by Figma Developer Terms"
+  reference-revision: "07316dd2920d61303ca0e52812b31f5f341e7b15"
 ---
 
 # Figma to Code

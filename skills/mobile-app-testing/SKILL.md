@@ -1,8 +1,10 @@
 ---
 name: mobile-app-testing
 description: Mobile app testing workflow covering iOS and Android device matrices, simulators, permissions, offline behavior, deep links, push notifications, purchases, crash reporting, accessibility, performance, TestFlight, internal testing, and automation with Maestro, Appium, Detox, or native test tools. Use when planning, writing, or reviewing tests for iOS, Android, React Native, Expo, Flutter, or native mobile apps.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Mobile App Testing

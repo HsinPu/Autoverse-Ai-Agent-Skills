@@ -1,8 +1,10 @@
 ---
 name: skillctl
 description: Skill CLI routing workflow for searching, installing, listing, updating, and lightly validating local or open-ecosystem skills from the command line. Use when you need a direct command-line path for skill discovery or management, including autoverse-cli.js and the open Skills CLI, without deeper scanning or review.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Skillctl

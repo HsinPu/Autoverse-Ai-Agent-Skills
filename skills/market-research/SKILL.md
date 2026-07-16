@@ -1,10 +1,13 @@
 ---
 name: market-research
 description: Decision-focused market research workflow for defining a market question, collecting current demand and competitor evidence, resolving source conflicts, and producing a confidence-labeled decision memo. Use when product, positioning, launch, audience, or investment decisions require market evidence rather than general web research or unsupported estimates.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
-reference-source: affaan-m/ECC
-reference-license: MIT
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  reference-source: "affaan-m/ECC"
+  reference-license: "MIT"
+  reference-revision: "ed387446052dfbc6b52de149406b70efa65edc59"
 ---
 
 # Market Research

@@ -1,8 +1,10 @@
 ---
 name: webapp-testing
 description: Local web application testing workflow with Playwright for verifying frontend behavior, debugging UI, capturing screenshots, and checking browser logs. Use when a local web app needs end-to-end validation or UI troubleshooting.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Webapp Testing

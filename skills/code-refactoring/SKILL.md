@@ -1,8 +1,10 @@
 ---
 name: code-refactoring
 description: Behavior-preserving code refactoring guide for improving structure, readability, and maintainability without changing outputs. Use when cleaning up legacy code, reducing complexity, replacing magic values or hardcoded values with named constants, or simplifying code after the current behavior and verification path are understood.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Code Refactoring（通用重構原則）

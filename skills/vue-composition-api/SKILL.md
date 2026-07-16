@@ -1,8 +1,10 @@
 ---
 name: vue-composition-api
 description: Vue 3 Composition API and SFC macro guide for script setup, defineProps, defineEmits, defineModel, composables, refs, computed values, watchers, lifecycle hooks, and reactivity performance. Use when writing or reviewing Vue 3 Single File Components, extracting composables, choosing ref versus reactive or shallowRef, or fixing Composition API misuse.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Vue Composition API

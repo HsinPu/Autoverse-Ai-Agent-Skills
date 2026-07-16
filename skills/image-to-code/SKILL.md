@@ -1,10 +1,13 @@
 ---
 name: image-to-code
 description: Visual-reference implementation workflow for translating supplied screenshots, approved mockups, multi-state reference sets, or explicitly authorized UI recordings and generated designs into editable, semantic, responsive frontend code with an implementation contract and evidence-based fidelity loop. Use when visual evidence is the primary UI source; use approval-gated page or website workflows when the design direction still needs selection.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
-reference-source: Leonxlnx/taste-skill
-reference-license: MIT
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  reference-source: "Leonxlnx/taste-skill"
+  reference-license: "MIT"
+  reference-revision: "b17742737e796305d829b3ad39eda3add0d79060"
 ---
 
 # Image to Code

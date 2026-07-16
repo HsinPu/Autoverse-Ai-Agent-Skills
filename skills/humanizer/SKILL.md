@@ -1,8 +1,10 @@
 ---
 name: humanizer
 description: Text editing workflow for removing AI-generated patterns and making writing sound more natural and human. Use when revising copy, summaries, comments, or docs that feel stiff, repetitive, promotional, or formulaic.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Humanizer

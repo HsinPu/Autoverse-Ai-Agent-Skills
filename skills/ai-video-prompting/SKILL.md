@@ -1,8 +1,10 @@
 ---
 name: ai-video-prompting
 description: AI video prompt design guide for crafting prompts for Sora, Veo, Kling, Runway, Pika, Luma, Seedance, Wan, image-to-video, reference-based generation, cinematic shots, camera movement, motion continuity, timing, and negative prompts. Use when improving prompts for AI video quality rather than generating still images.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # AI Video Prompting

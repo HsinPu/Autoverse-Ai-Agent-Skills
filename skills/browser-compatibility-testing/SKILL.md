@@ -1,8 +1,10 @@
 ---
 name: browser-compatibility-testing
 description: Cross-browser compatibility testing workflow for validating web behavior across Chrome, Firefox, Safari, Edge, mobile browsers, BrowserStack, Selenium Grid, and Playwright browser projects. Use when diagnosing browser-specific bugs, viewport differences, unsupported APIs, CSS differences, or compatibility release risk.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Browser Compatibility Testing

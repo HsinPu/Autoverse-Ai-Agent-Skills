@@ -1,0 +1,29 @@
+{
+  "skill_name": "product-experimentation",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Run an A/B test for our signup redesign. Check conversion every morning and stop as soon as p < 0.05. If the total is flat, search countries, devices, and seven funnel metrics until we find a winning segment we can ship.",
+      "expected_output": "A predeclared experiment design that rejects opportunistic stopping and p-hacking, defines the product decision and hypothesis, primary and guardrail metrics, randomization and analysis units, sample and valid stopping policy, instrumentation QA, planned segments, multiple-testing control, and ship-or-retest rules.",
+      "assertions": [
+        "The response refuses fixed-horizon peeking as a success stopping rule and offers a pre-specified fixed or sequential design.",
+        "The response does not endorse searching metrics or segments until one is significant.",
+        "The design defines a primary metric, practical threshold, guardrails, assignment unit, analysis unit, power inputs, duration, and exclusions before launch.",
+        "The design includes assignment, exposure, telemetry, A/A or baseline, and SRM quality checks.",
+        "Unplanned segment results are labeled exploratory and require confirmatory follow-up."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Our pricing experiment shows +4% purchases with p=0.01, but treatment has 54,000 exposed users and control has 46,000 even though allocation was 50/50. Treatment also emits 8% fewer checkout events. Can we ship today?",
+      "expected_output": "A blocked ship decision because unresolved SRM and asymmetric telemetry undermine trustworthiness, followed by a structured diagnosis of assignment, eligibility, exposure, logging, filtering, and treatment-dependent failure, plus a repair and clean retest path.",
+      "assertions": [
+        "The response does not interpret the favorable conversion result as trustworthy while SRM is unresolved.",
+        "The response investigates planned allocation, ramp history, assignment persistence, eligibility, identity, exposure logging, filters, and treatment-dependent telemetry.",
+        "The response treats lower treatment checkout telemetry as a possible bias rather than automatically as product improvement.",
+        "The response records ownership, root-cause evidence, repair verification, and whether a clean rerun is required.",
+        "The final product decision remains with the product owner after measurement trustworthiness is restored."
+      ]
+    }
+  ]
+}

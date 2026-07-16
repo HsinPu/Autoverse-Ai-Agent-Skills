@@ -1,8 +1,10 @@
 ---
 name: openai-api-development
 description: OpenAI API development guide covering Responses API, model selection, structured outputs, function calling, tools, files, streaming, multimodal inputs, error handling, rate limits, cost controls, and safe production integration. Use when building, reviewing, or debugging applications that call OpenAI APIs.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # OpenAI API Development

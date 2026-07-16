@@ -1,8 +1,10 @@
 ---
 name: remotion-video-toolkit
 description: Programmatic video creation guidance for Remotion and React, covering compositions, timing, animation, captions, audio, rendering, and reusable video templates. Use when creating data-driven videos, product demos, animated explainers, or video generation pipelines with Remotion.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Remotion Video Toolkit

@@ -1,8 +1,10 @@
 ---
 name: command-palette
 description: Command palette guidance for designing, implementing, and reviewing quick switchers, fuzzy action launchers, and Spotlight-style menus in web apps. Use when building palettes that search, rank, and execute navigation or commands, or when tuning discoverability, empty states, scope, and keyboard-first interaction.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Command Palette

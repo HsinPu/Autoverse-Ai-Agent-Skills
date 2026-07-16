@@ -1,8 +1,10 @@
 ---
 name: pinia-state-management
 description: Pinia state management guide for Vue applications covering setup stores, state, getters, actions, storeToRefs, plugins, composables inside stores, SSR hydration, Nuxt integration, testing with @pinia/testing, and avoiding circular store dependencies. Use when defining, reviewing, refactoring, or testing Pinia stores.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Pinia State Management

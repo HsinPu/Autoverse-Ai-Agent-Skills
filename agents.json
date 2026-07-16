@@ -1,6 +1,6 @@
 {
   "version": "3.0.0",
-  "updated": "2026-07-14T09:05:30.429Z",
+  "updated": "2026-07-15T22:56:18.290Z",
   "total": 237,
   "categories": 31,
   "uniqueRoles": 237,
@@ -308,6 +308,7 @@
       "skills": [
         "threat-modeling",
         "security-code-review",
+        "vulnerability-variant-analysis",
         "security-scanning",
         "github-actions-ci"
       ],
@@ -765,7 +766,9 @@
       "model": "inherit",
       "permission": "read-only",
       "skills": [
-        "specification-authoring",
+        "requirements-deep-dive",
+        "solution-discovery",
+        "domain-modeling",
         "data-organization-system",
         "spreadsheet-ops"
       ],
@@ -1280,6 +1283,7 @@
       "model": "inherit",
       "permission": "workspace-write",
       "skills": [
+        "wordpress-development",
         "security-code-review",
         "database-design",
         "frontend-testing",
@@ -3947,6 +3951,7 @@
       "model": "inherit",
       "permission": "workspace-write",
       "skills": [
+        "product-experimentation",
         "browser-automation",
         "webapp-testing",
         "javascript-development",
@@ -5151,6 +5156,7 @@
       "permission": "read-only",
       "skills": [
         "specification-authoring",
+        "product-experimentation",
         "web-research-ops",
         "data-organization-system",
         "spreadsheet-ops"
@@ -5183,6 +5189,10 @@
       "permission": "read-only",
       "skills": [
         "ask-questions-if-underspecified",
+        "requirements-deep-dive",
+        "solution-discovery",
+        "domain-modeling",
+        "spec-flow",
         "specification-authoring",
         "api-contract-design",
         "context-governance"
@@ -5285,7 +5295,9 @@
       "permission": "read-only",
       "skills": [
         "todo-first",
-        "specification-authoring",
+        "spec-flow",
+        "multi-session-planning",
+        "session-handoff",
         "data-organization-system",
         "spreadsheet-ops"
       ],
@@ -6119,6 +6131,7 @@
       "permission": "read-only",
       "skills": [
         "security-code-review",
+        "vulnerability-variant-analysis",
         "security-scanning",
         "auth-integration"
       ],
@@ -7413,6 +7426,7 @@
       "model": "inherit",
       "permission": "read-only",
       "skills": [
+        "ux-research",
         "design-consultation",
         "web-research-ops",
         "accessibility-testing",

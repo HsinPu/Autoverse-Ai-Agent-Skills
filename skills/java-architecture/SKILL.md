@@ -1,8 +1,10 @@
 ---
 name: java-architecture
 description: Java architecture guide for Clean Architecture, Hexagonal Architecture, Ports and Adapters, Domain-Driven Design, bounded contexts, aggregates, microservice boundaries, and framework-independent domain modeling. Use when designing or refactoring Java backend architecture, decomposing monoliths, defining package/module boundaries, or separating Spring, persistence, messaging, and external API concerns from domain logic.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Java Architecture

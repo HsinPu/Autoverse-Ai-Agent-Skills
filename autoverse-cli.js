@@ -17,15 +17,33 @@ const openCodeHome = process.env.OPENCODE_CONFIG_DIR ||
 const SUPPORTED_CATALOG_TYPES = ['skill', 'agent'];
 const SUPPORTED_TARGETS = ['codex', 'claude', 'cursor', 'vscode', 'copilot', 'opencode', 'project'];
 const ALL_TARGETS = ['codex', 'claude', 'cursor', 'copilot', 'opencode', 'project'];
-const KNOWN_LONG_OPTIONS = new Set([
-  '--agent',
-  '--all',
-  '--category',
-  '--help',
-  '--installed',
-  '--target',
-  '--type',
+const COMMAND_ALIASES = new Map([
+  ['help', 'help'],
+  ['info', 'info'],
+  ['list', 'list'],
+  ['ls', 'list'],
+  ['search', 'search'],
+  ['s', 'search'],
 ]);
+const VALUE_OPTIONS = new Map([
+  ['--agent', { key: 'target', label: '--target/--agent' }],
+  ['--category', { key: 'category', label: '--category' }],
+  ['--target', { key: 'target', label: '--target/--agent' }],
+  ['--type', { key: 'catalogType', label: '--type' }],
+]);
+const FLAG_OPTIONS = new Map([
+  ['--all', 'all'],
+  ['--help', 'help'],
+  ['--installed', 'installed'],
+  ['-h', 'help'],
+]);
+const OPTION_LABELS = {
+  all: '--all',
+  category: '--category',
+  help: '--help/-h',
+  installed: '--installed',
+  target: '--target/--agent',
+};
 
 function resolveCodexSkillProfiles() {
   const profiles = [
@@ -80,66 +98,207 @@ function canonicalizeTarget(value) {
 }
 
 function reportUnknownTarget(value) {
-  console.error(`不支援的 target: ${value || '(空白)'}`);
-  console.error(`可用 targets: ${SUPPORTED_TARGETS.join(', ')}`);
+  reportUsageError(
+    `不支援的 target: ${value || '(空白)'}`,
+    `可用 targets: ${SUPPORTED_TARGETS.join(', ')}`,
+  );
+}
+
+function reportUsageError(message, detail = null) {
+  console.error(message);
+  if (detail) console.error(detail);
+  process.exitCode = 2;
+  return false;
+}
+
+function reportNotFound(message) {
+  console.error(message);
   process.exitCode = 1;
 }
 
-function parseSingleValueOption(values, optionNames, label, defaultValue) {
-  const matches = [];
-  values.forEach((value, index) => {
-    if (optionNames.includes(value)) matches.push(index);
-  });
-
-  if (matches.length === 0) return { ok: true, value: defaultValue };
-
-  if (matches.length > 1) {
-    console.error(`不可重複使用 ${label}。請只指定一個值。`);
-    process.exitCode = 1;
-    return { ok: false, value: null };
+function parseCommandLine(values) {
+  if (values.length === 0) {
+    return {
+      all: false,
+      catalogType: 'skill',
+      category: null,
+      command: 'help',
+      help: false,
+      installed: false,
+      positionals: [],
+      provided: new Set(),
+      target: 'codex',
+    };
   }
 
-  const value = values[matches[0] + 1];
-  if (!value || value.startsWith('-')) {
-    console.error(`缺少 ${label} 的值。`);
-    process.exitCode = 1;
-    return { ok: false, value: null };
-  }
-
-  return { ok: true, value };
-}
-
-function parseCliOptions(values) {
-  const typeOption = parseSingleValueOption(values, ['--type'], '--type', 'skill');
-  if (!typeOption.ok) return null;
-
-  const targetOption = parseSingleValueOption(values, ['--target', '--agent'], '--target/--agent', 'codex');
-  if (!targetOption.ok) return null;
-
-  const categoryOption = parseSingleValueOption(values, ['--category'], '--category', null);
-  if (!categoryOption.ok) return null;
-
-  for (let index = 1; index < values.length; index += 1) {
-    const value = values[index];
-    if (value.startsWith('--') && !KNOWN_LONG_OPTIONS.has(value)) {
-      console.error(`未知選項: ${value}`);
-      process.exitCode = 1;
+  const commandToken = values[0];
+  if (commandToken === '--help' || commandToken === '-h') {
+    if (values.length > 1) {
+      reportUsageError(`${commandToken} 不可與其他參數或選項併用。`);
       return null;
     }
+    return {
+      all: false,
+      catalogType: 'skill',
+      category: null,
+      command: 'help',
+      help: true,
+      installed: false,
+      positionals: [],
+      provided: new Set(['help']),
+      target: 'codex',
+    };
   }
 
-  if (!SUPPORTED_CATALOG_TYPES.includes(typeOption.value)) {
-    console.error(`無效的 --type 值: ${typeOption.value}`);
-    console.error(`允許的值: ${SUPPORTED_CATALOG_TYPES.join(', ')}`);
-    process.exitCode = 1;
+  const command = COMMAND_ALIASES.get(commandToken);
+  if (!command) {
+    const message = commandToken.startsWith('-')
+      ? `未知選項: ${commandToken}`
+      : `未知指令: ${commandToken}`;
+    reportUsageError(message, '使用 autoverse help 查看可用指令。');
     return null;
   }
 
-  return {
-    catalogType: typeOption.value,
-    target: targetOption.value,
-    category: categoryOption.value,
+  const parsed = {
+    all: false,
+    catalogType: 'skill',
+    category: null,
+    command,
+    help: false,
+    installed: false,
+    positionals: [],
+    provided: new Set(),
+    target: 'codex',
   };
+
+  for (let index = 1; index < values.length; index += 1) {
+    const token = values[index];
+    const valueOption = VALUE_OPTIONS.get(token);
+    if (valueOption) {
+      if (parsed.provided.has(valueOption.key)) {
+        reportUsageError(`不可重複使用 ${valueOption.label}。請只指定一個值。`);
+        return null;
+      }
+      const optionValue = values[index + 1];
+      if (!optionValue || optionValue.startsWith('-')) {
+        reportUsageError(`缺少 ${valueOption.label} 的值。`);
+        return null;
+      }
+      parsed.provided.add(valueOption.key);
+      parsed[valueOption.key] = optionValue;
+      index += 1;
+      continue;
+    }
+
+    const flagKey = FLAG_OPTIONS.get(token);
+    if (flagKey) {
+      if (parsed.provided.has(flagKey)) {
+        reportUsageError(`不可重複使用 ${OPTION_LABELS[flagKey]}。`);
+        return null;
+      }
+      parsed.provided.add(flagKey);
+      parsed[flagKey] = true;
+      continue;
+    }
+
+    if (token.startsWith('-')) {
+      reportUsageError(`未知選項: ${token}`);
+      return null;
+    }
+
+    parsed.positionals.push(token);
+  }
+
+  if (!SUPPORTED_CATALOG_TYPES.includes(parsed.catalogType)) {
+    reportUsageError(
+      `無效的 --type 值: ${parsed.catalogType}`,
+      `允許的值: ${SUPPORTED_CATALOG_TYPES.join(', ')}`,
+    );
+    return null;
+  }
+
+  if (parsed.provided.has('target') && !canonicalizeTarget(parsed.target)) {
+    reportUnknownTarget(parsed.target);
+    return null;
+  }
+
+  return parsed;
+}
+
+function getCatalogCategories(catalogType) {
+  const items = catalogType === 'agent'
+    ? (loadAgentsJson().agents || [])
+    : (loadSkillsJson().skills || []);
+  return [...new Set(items.map(item => item.category).filter(Boolean))].sort();
+}
+
+function validateCommandGrammar(parsed) {
+  if (parsed.help) {
+    const hasOtherOptions = [...parsed.provided].some(key => key !== 'help');
+    if (hasOtherOptions || parsed.positionals.length > 0) {
+      return reportUsageError('--help/-h 不可與其他參數或選項併用。');
+    }
+    return true;
+  }
+
+  if (parsed.command === 'help') {
+    if (parsed.provided.size > 0 || parsed.positionals.length > 0) {
+      return reportUsageError('help 指令不接受其他參數或選項。');
+    }
+    return true;
+  }
+
+  if (parsed.command === 'list') {
+    if (parsed.positionals.length > 0) {
+      return reportUsageError('list 指令不接受位置參數。');
+    }
+    if (parsed.all && parsed.provided.has('target')) {
+      return reportUsageError('--all 與 --target/--agent 不可同時使用。');
+    }
+    if (parsed.all && !parsed.installed) {
+      return reportUsageError('--all 只能搭配 list --installed 使用。');
+    }
+    if (parsed.provided.has('target') && !parsed.installed) {
+      return reportUsageError('--target/--agent 只能搭配 list --installed 使用。');
+    }
+    if (parsed.installed && parsed.category) {
+      return reportUsageError('--category 不可搭配 --installed 使用。');
+    }
+    if (parsed.category) {
+      const categories = getCatalogCategories(parsed.catalogType);
+      if (!categories.includes(parsed.category)) {
+        return reportUsageError(
+          `無效的 --category 值: ${parsed.category}`,
+          `可用類別: ${categories.join(', ')}`,
+        );
+      }
+    }
+    return true;
+  }
+
+  const unsupportedOption = ['all', 'installed', 'target', 'category']
+    .find(key => parsed.provided.has(key));
+  if (unsupportedOption) {
+    return reportUsageError(`${OPTION_LABELS[unsupportedOption]} 不可搭配 ${parsed.command} 指令。`);
+  }
+
+  if (parsed.command === 'search') {
+    if (parsed.positionals.length === 0) {
+      return reportUsageError('請指定搜尋關鍵字。', '用法: autoverse search <關鍵字>');
+    }
+    return true;
+  }
+
+  if (parsed.command === 'info') {
+    if (parsed.positionals.length === 0) {
+      return reportUsageError('請指定名稱。', '用法: autoverse info <名稱>');
+    }
+    if (parsed.positionals.length > 1) {
+      return reportUsageError('info 指令只接受一個名稱。');
+    }
+  }
+
+  return true;
 }
 
 function loadSkillsJson() {
@@ -206,7 +365,7 @@ function searchAgents(query) {
     agent.id, agent.name, agent.role, agent.category, agent.description, ...(agent.tags || [])
   ]);
   if (matches.length === 0) {
-    console.log(`沒有找到符合 "${query}" 的 Agent`);
+    reportNotFound(`沒有找到符合 "${query}" 的 Agent`);
     return;
   }
   console.log(`Agent 搜尋結果 (${matches.length} 個):\n`);
@@ -279,7 +438,7 @@ function searchSkills(query) {
     .map(result => result.skill);
   
   if (matches.length === 0) {
-    console.log(`沒有找到符合 "${query}" 的技能`);
+    reportNotFound(`沒有找到符合 "${query}" 的技能`);
     return;
   }
   
@@ -397,9 +556,27 @@ function showInfo(skillName) {
   const skill = data.skills.find(s => s.name === skillName);
   
   if (!skill) {
-    console.log(`找不到技能 "${skillName}"`);
+    reportNotFound(`找不到技能 "${skillName}"`);
     return;
   }
+
+  const routing = (data.routingGroups || [])
+    .map((group) => {
+      const selected = (group.skills || []).find((entry) => entry.name === skill.name);
+      if (!selected) return null;
+
+      const choices = (group.skills || [])
+        .map((entry) => {
+          const marker = entry.name === skill.name ? '[目前]' : '[替代]';
+          return `    ${marker} ${entry.name}: ${entry.when}`;
+        })
+        .join('\n');
+      return `  [${group.title}]\n  判斷原則: ${group.decision}\n${choices}`;
+    })
+    .filter(Boolean);
+  const routingSection = routing.length > 0
+    ? `\n相近 Skill 選擇:\n${routing.join('\n')}\n`
+    : '';
   
   console.log(`
 ${skill.name}
@@ -410,6 +587,7 @@ ${skill.description}
 來源: ${skill.source}
 授權: ${skill.license}
 標籤: ${skill.tags ? skill.tags.join(', ') : '無'}
+${routingSection}
 
 免 Node 安裝:
   powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Agent codex -Skill ${skill.name}'
@@ -420,7 +598,7 @@ ${skill.description}
 function showAgentInfo(agentId) {
   const agent = (loadAgentsJson().agents || []).find(item => item.id === agentId || item.name === agentId);
   if (!agent) {
-    console.log(`找不到 Agent "${agentId}"；請使用角色名稱。`);
+    reportNotFound(`找不到 Agent "${agentId}"；請使用角色名稱。`);
     return;
   }
   console.log(`
@@ -487,73 +665,35 @@ Skill 與 Agent targets:
 `);
 }
 
-const args = process.argv.slice(2);
-const command = args[0];
+const cli = parseCommandLine(process.argv.slice(2));
 
-const allFlag = args.includes('--all');
-const cliOptions = parseCliOptions(args);
-const catalogType = cliOptions ? cliOptions.catalogType : null;
-const target = cliOptions ? cliOptions.target : null;
-const category = cliOptions ? cliOptions.category : null;
-const positionalArgs = getPositionalArgs(args);
-const param = positionalArgs[0];
-const searchQuery = positionalArgs.join(' ');
+if (cli && validateCommandGrammar(cli)) {
+  const searchQuery = cli.positionals.join(' ');
+  const param = cli.positionals[0];
 
-function getPositionalArgs(values) {
-  const optionsWithValue = new Set(['--agent', '--target', '--type', '--category']);
-  const positional = [];
-
-  for (let i = 1; i < values.length; i += 1) {
-    const value = values[i];
-
-    if (optionsWithValue.has(value)) {
-      i += 1;
-      continue;
-    }
-
-    if (value.startsWith('--')) {
-      continue;
-    }
-
-    positional.push(value);
-  }
-
-  return positional;
-}
-
-if (catalogType === null) {
-  // parseCliOptions already reported the user-facing error.
-} else if (!command || command === 'help' || command === '--help' || command === '-h') {
-  showHelp();
-} else if (command === 'list' || command === 'ls') {
-  if (args.includes('--installed')) {
-    if (allFlag) {
-      if (catalogType === 'agent') ALL_TARGETS.forEach(name => listInstalledAgents(name));
-      else ALL_TARGETS.forEach(name => listInstalled(name));
+  if (cli.command === 'help' || cli.help) {
+    showHelp();
+  } else if (cli.command === 'list') {
+    if (cli.installed) {
+      if (cli.all) {
+        if (cli.catalogType === 'agent') ALL_TARGETS.forEach(name => listInstalledAgents(name));
+        else ALL_TARGETS.forEach(name => listInstalled(name));
+      } else if (cli.catalogType === 'agent') {
+        listInstalledAgents(cli.target);
+      } else {
+        listInstalled(cli.target);
+      }
+    } else if (cli.catalogType === 'agent') {
+      listAgents(cli.category);
     } else {
-      if (catalogType === 'agent') listInstalledAgents(target);
-      else listInstalled(target);
+      listSkills(cli.category);
     }
-  } else {
-    if (catalogType === 'agent') listAgents(category);
-    else listSkills(category);
-  }
-} else if (command === 'search' || command === 's') {
-  if (!searchQuery) {
-    console.log('請指定搜尋關鍵字');
-    console.log('用法: autoverse search <關鍵字>');
-  } else {
-    if (catalogType === 'agent') searchAgents(searchQuery);
+  } else if (cli.command === 'search') {
+    if (cli.catalogType === 'agent') searchAgents(searchQuery);
     else searchSkills(searchQuery);
-  }
-} else if (command === 'info') {
-  if (!param) {
-    console.log('請指定名稱');
+  } else if (cli.catalogType === 'agent') {
+    showAgentInfo(param);
   } else {
-    if (catalogType === 'agent') showAgentInfo(param);
-    else showInfo(param);
+    showInfo(param);
   }
-} else {
-  console.log(`未知指令: ${command}`);
-  showHelp();
 }

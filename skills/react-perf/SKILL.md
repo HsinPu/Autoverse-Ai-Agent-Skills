@@ -1,8 +1,10 @@
 ---
 name: react-perf
 description: React performance guide for diagnosing re-render thrash, expensive computations, bundle growth, data waterfalls, and slow UI updates. Use when a React app feels sluggish, a component is too expensive, or performance work needs a focused review.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # React Performance

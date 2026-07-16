@@ -1,10 +1,13 @@
 ---
 name: taste-skill
 description: Context-aware visual direction workflow for turning a web product brief, brand constraints, and existing UI evidence into a distinctive design intent, calibrated visual system, and anti-generic quality review. Use when a page, application, or site needs stronger art direction before implementation; use image-to-code when an image or approved mockup is the primary implementation source.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
-reference-source: Leonxlnx/taste-skill
-reference-license: MIT
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  reference-source: "Leonxlnx/taste-skill"
+  reference-license: "MIT"
+  reference-revision: "b17742737e796305d829b3ad39eda3add0d79060"
 ---
 
 # Taste Skill

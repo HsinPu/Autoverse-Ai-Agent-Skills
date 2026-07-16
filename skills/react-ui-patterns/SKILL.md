@@ -1,8 +1,10 @@
 ---
 name: react-ui-patterns
 description: React UI state patterns for loading, error, empty, optimistic update, Suspense, and transition flows. Use when building or reviewing React components that fetch data, submit mutations, or need predictable async UX and state handling.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # React UI Patterns

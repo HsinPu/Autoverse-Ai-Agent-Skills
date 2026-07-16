@@ -1,8 +1,10 @@
 ---
 name: api-contract-design
 description: API contract design workflow for defining request and response shapes, error models, pagination, idempotency, and versioning so APIs evolve safely without breaking consumers. Use when designing or reviewing a public API or service contract.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # API Contract Design

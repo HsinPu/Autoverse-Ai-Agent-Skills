@@ -1,8 +1,10 @@
 ---
 name: ai-image-prompts-skill
 description: AI image prompt library and inspiration workflow for finding, adapting, and improving text-to-image prompts across models such as Midjourney, DALL-E, Flux, Stable Diffusion, GPT Image, and similar generators. Use when the user needs prompt ideas, reusable prompt patterns, style variants, or higher-quality image-generation wording.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # AI Image Prompts Skill

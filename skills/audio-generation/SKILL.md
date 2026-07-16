@@ -1,8 +1,10 @@
 ---
 name: audio-generation
 description: AI audio generation workflow for creating music beds, sound effects, ambience, jingles, and text-to-audio assets. Use when the user asks to generate music, sound effects, background audio, sonic branding, or audio assets for video, games, presentations, or product demos.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Audio Generation

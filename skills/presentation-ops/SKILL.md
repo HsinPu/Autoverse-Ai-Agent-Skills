@@ -1,8 +1,10 @@
 ---
 name: presentation-ops
 description: Presentation workflow for creating and editing PowerPoint decks (.pptx) with slides, layout fidelity, and editable output. Use when a deck, slide, or presentation is the primary input or output, or when charts, diagrams, or templates need to be preserved.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Presentation Ops

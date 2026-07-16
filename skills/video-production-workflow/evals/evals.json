@@ -1,0 +1,17 @@
+{
+  "skill_name": "video-production-workflow",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Turn this rough product paragraph into a polished 90-second launch video. Generate every asset and the final edit now; I do not want to review a script or storyboard first.",
+      "expected_output": "A staged production plan that resolves the brief, creates and gates the script and storyboard before asset generation, tracks rights and cross-scene continuity, and defines editing, audio, captions, technical QA, and final acceptance evidence.",
+      "assertions": [
+        "The response resolves audience, message, duration, aspect ratio, channels, and success criteria before production.",
+        "A script, scene plan, and storyboard or shot plan precede asset generation and editing.",
+        "The response preserves required human approval gates instead of treating urgency as approval.",
+        "Asset provenance, licensing, character or product continuity, and cross-scene consistency are tracked.",
+        "The delivery plan includes audio, captions, render checks, and a final acceptance review."
+      ]
+    }
+  ]
+}

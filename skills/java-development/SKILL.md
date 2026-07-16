@@ -1,8 +1,10 @@
 ---
 name: java-development
 description: Java development guide covering code style, naming, formatting, Javadoc, exceptions, and design patterns such as SOLID, composition, dependency injection, and immutability. Use when writing, reviewing, or refactoring Java code, or when deciding Java structure and conventions.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Java Development

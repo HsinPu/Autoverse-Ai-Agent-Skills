@@ -1,8 +1,10 @@
 ---
 name: nuxt-development
 description: Nuxt development guide covering application structure, rendering modes, data fetching, Nitro server routes, runtime config, SEO, performance, security, and deployment. Use when building, reviewing, or refactoring Nuxt 3/4 applications.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Nuxt 開發（Nuxt Development）

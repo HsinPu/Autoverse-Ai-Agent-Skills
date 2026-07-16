@@ -1,8 +1,10 @@
 ---
 name: vercel-deployment
 description: Vercel deployment workflow covering projects, builds, environment variables, preview and production deployments, domains, redirects, functions, edge runtime, Next.js behavior, rollback, observability, and release checks. Use when deploying, debugging, or reviewing apps on Vercel.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Vercel Deployment

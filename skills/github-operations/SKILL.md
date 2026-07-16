@@ -1,8 +1,10 @@
 ---
 name: github-operations
 description: GitHub workflow guide for issues, pull requests, releases, CI checks, and API queries via gh. Use when checking repo status, reviewing workflow runs, commenting on issues or PRs, or automating GitHub tasks from the terminal.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # GitHub Operations

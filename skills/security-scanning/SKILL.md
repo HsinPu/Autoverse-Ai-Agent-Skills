@@ -1,8 +1,10 @@
 ---
 name: security-scanning
 description: Configure, run, and govern automated security scanning across source code, dependencies, secrets, containers, infrastructure as code, APIs, SBOMs, and CI gates. Use when selecting or tuning SAST, SCA, secret, image, IaC, or DAST tools; establishing baselines and SARIF reporting; triaging findings; or designing reliable security quality gates.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Security Scanning

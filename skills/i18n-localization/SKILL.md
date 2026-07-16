@@ -1,8 +1,10 @@
 ---
 name: i18n-localization
 description: Internationalization and localization workflow for adding translations, managing locale files, handling pluralization, RTL support, and keeping localized UI text consistent across products. Use when implementing or reviewing i18n keys, locale management, translated strings, or localization updates in apps and extensions.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # I18n Localization

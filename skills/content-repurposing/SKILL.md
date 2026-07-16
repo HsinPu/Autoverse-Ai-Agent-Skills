@@ -1,10 +1,13 @@
 ---
 name: content-repurposing
 description: Source-controlled content repurposing workflow for adapting an approved article, report, transcript, or campaign asset into channel-specific derivatives while preserving facts, brand voice, core message, CTA, and source traceability. Use when one approved source must become multiple social, email, visual, audio, or video-ready content artifacts without adding unsupported claims or publishing them automatically.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
-reference-source: affaan-m/ECC
-reference-license: MIT
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  reference-source: "affaan-m/ECC"
+  reference-license: "MIT"
+  reference-revision: "ed387446052dfbc6b52de149406b70efa65edc59"
 ---
 
 # Content Repurposing

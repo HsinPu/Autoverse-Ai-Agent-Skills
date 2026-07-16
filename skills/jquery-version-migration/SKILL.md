@@ -1,8 +1,10 @@
 ---
 name: jquery-version-migration
 description: jQuery version migration guide for auditing and upgrading projects across jQuery 1.x, 2.x, 3.x, and 4.x. Use when a legacy frontend may contain mixed jQuery versions, old plugins, deprecated APIs, IE-era compatibility, jQuery Migrate warnings, or when planning staged upgrades from 1 to 2, 2 to 3, 3 to 4, or directly toward a supported target version.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # jQuery Version Migration

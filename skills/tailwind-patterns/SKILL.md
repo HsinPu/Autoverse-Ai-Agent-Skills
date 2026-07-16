@@ -1,8 +1,10 @@
 ---
 name: tailwind-patterns
 description: Tailwind CSS pattern guide for building polished layouts, buttons, cards, navigation, forms, typography, and responsive sections with clean utility composition. Use when styling or restyling frontend screens with Tailwind and the task is to make the UI feel balanced, consistent, and production-ready.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Tailwind Patterns

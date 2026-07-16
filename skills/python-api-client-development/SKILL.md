@@ -1,8 +1,10 @@
 ---
 name: python-api-client-development
 description: Python API client and SDK development guide covering OpenAPI-based clients, auth handling, pagination, retries, error mapping, transport setup, and generated client maintenance. Use when building or refactoring a Python client library or SDK that talks to an external HTTP API, including LobeHub OpenAPI-style integrations.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Python API Client Development

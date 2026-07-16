@@ -1,8 +1,10 @@
 ---
 name: dashboard-design
 description: Design decision-focused product, analytics, executive, and operational dashboards through metric ownership, KPI hierarchy, comparison baselines, freshness, visual encoding, drill-down, anomaly context, and responsive layout. Use when planning or reviewing dashboard information architecture, KPI panels, monitoring views, reporting surfaces, or card-based overview screens.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Dashboard Design

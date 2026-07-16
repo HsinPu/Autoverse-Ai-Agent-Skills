@@ -1,8 +1,10 @@
 ---
 name: auth-integration
 description: Authentication integration guide covering sessions, OAuth/OIDC providers, credentials, magic links, passkeys, authorization boundaries, cookies, CSRF, callbacks, adapters, and framework integration. Use when adding, reviewing, or debugging app authentication flows.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Auth Integration

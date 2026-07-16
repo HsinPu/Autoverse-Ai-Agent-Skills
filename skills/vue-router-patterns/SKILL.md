@@ -1,8 +1,10 @@
 ---
 name: vue-router-patterns
 description: Vue Router 4 guide for route records, nested routes, route params, query state, lazy loading, navigation guards, redirects, meta fields, data loading, cleanup, and route lifecycle pitfalls. Use when implementing, reviewing, or debugging Vue Router navigation, guards, route-driven components, or SPA routing behavior.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Vue Router Patterns

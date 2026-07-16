@@ -1,10 +1,13 @@
 ---
 name: test-driven-development
 description: Test-driven development workflow for implementing observable behavior through strict RED-GREEN-REFACTOR cycles and small verified increments. Use when adding or changing behavior that can be expressed with automated tests, especially regression fixes, public contracts, business rules, and behavior-preserving refactors; skip non-executable documentation and exploratory throwaway work.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
-reference-source: obra/superpowers
-reference-license: MIT
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  reference-source: "obra/superpowers"
+  reference-license: "MIT"
+  reference-revision: "d884ae04edebef577e82ff7c4e143debd0bbec99"
 ---
 
 # Test-Driven Development

@@ -1,8 +1,10 @@
 ---
 name: website-redesign-to-code
 description: Approval-gated workflow for redesigning an entire website through route and page-family audit, preservation contracts, shared design systems, representative desktop and mobile mockups, staged frontend implementation, and cross-site verification. Use when a redesign spans multiple routes, templates, navigation, or global UI; use web-page-design-to-code for one isolated page.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Website Redesign to Code

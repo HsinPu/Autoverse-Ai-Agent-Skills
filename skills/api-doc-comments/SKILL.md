@@ -1,8 +1,10 @@
 ---
 name: api-doc-comments
 description: Documentation-comment workflow for writing concise docstrings, Javadoc, TSDoc, and similar API comments for exported functions, classes, modules, and methods. Use when documenting public code contracts, parameters, return values, exceptions, side effects, invariants, or examples; do not use for README docs or language syntax rules.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # API Doc Comments

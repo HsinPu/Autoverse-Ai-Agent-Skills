@@ -1,8 +1,10 @@
 ---
 name: context-governance
 description: Context and lessons governance workflow for managing agent memory, context budget, and skill navigation. Use when a workflow needs to keep notes, prune repetition, or maintain reusable project memory.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Context Governance

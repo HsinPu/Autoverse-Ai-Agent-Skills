@@ -1,8 +1,10 @@
 ---
 name: redis-upstash
 description: Redis and Upstash workflow covering caching, rate limiting, sessions, queues, pub/sub, serverless and edge runtime patterns, key design, TTLs, retries, connection management, observability, and production safety. Use when building or debugging Redis or Upstash-backed features.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Redis And Upstash

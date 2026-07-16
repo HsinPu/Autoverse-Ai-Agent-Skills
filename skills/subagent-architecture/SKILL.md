@@ -1,8 +1,10 @@
 ---
 name: subagent-architecture
 description: Proactively design and route reliable multi-agent workflows by deciding when to delegate, discovering available roles, selecting the smallest useful team, defining file and decision ownership, sequencing dependencies, specifying handoff contracts, and arbitrating parallel results. Use whenever the runtime exposes subagents or custom agents and a task contains multiple bounded workstreams, even when the user did not explicitly request delegation; also use for agent teams, parallel research or implementation, multi-reviewer work, competing debugging hypotheses, and coordinated fan-out and fan-in execution.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Subagent Architecture

@@ -1,8 +1,10 @@
 ---
 name: openapi-spec-generation
 description: OpenAPI specification workflow for generating, updating, validating, and reviewing OpenAPI 3.1 specs from code or design-first contracts. Use when creating API specifications, documenting endpoints, generating SDK inputs, or keeping API contract files consistent with implementation.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # OpenAPI Spec Generation

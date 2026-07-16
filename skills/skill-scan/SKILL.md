@@ -1,8 +1,10 @@
 ---
 name: skill-scan
 description: Skill package scanning workflow for quickly reviewing a skill folder for structure, suspicious content, and release readiness. Use when you need a fast first-pass scan that can escalate to lint, audit, or quality-gate checks.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Skill Scan

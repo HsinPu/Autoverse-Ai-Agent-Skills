@@ -1,8 +1,10 @@
 ---
 name: python-development
 description: Python development guide covering project architecture, package layout, PEP 8, typing, docstrings, design patterns, and modern Python tooling such as uv, ruff, pytest, pydantic, async I/O, and FastAPI. Use when designing, writing, reviewing, or refactoring general Python code, choosing package boundaries, or setting up packaging, testing, and toolchain conventions. For dataframe, ETL, notebook, file-based analytics, web page extraction, local automation, backend framework, testing implementation, debugging workflows, package release workflows, concurrency coordination, security hardening, or API client development, use the more specialized Python skills.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Python 開發（Python Development）

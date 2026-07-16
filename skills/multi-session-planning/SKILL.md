@@ -1,11 +1,13 @@
 ---
 name: multi-session-planning
 description: Plan work that spans multiple sessions, agents, tools, or milestones by mapping decisions, dependencies, ready work, unknown regions, ownership, checkpoints, and replanning triggers. Use when a task cannot be completed safely in one context window or one verified implementation slice and needs a durable execution map without pretending unresolved work is already specifiable.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
-reference-source: mattpocock/skills
-reference-revision: e9fcdf95b402d360f90f1db8d776d5dd450f9234
-reference-license: MIT
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  reference-source: "mattpocock/skills"
+  reference-license: "MIT"
+  reference-revision: "e9fcdf95b402d360f90f1db8d776d5dd450f9234"
 ---
 
 # Multi-Session Planning

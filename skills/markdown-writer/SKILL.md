@@ -1,8 +1,10 @@
 ---
 name: markdown-writer
 description: Markdown writing guide for README files, technical documentation, notes, and other structured docs, with consistent GFM formatting and heading hierarchy. Use when creating or revising Markdown content such as README files, docs, or notes.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Markdown 撰寫（Markdown Writer）

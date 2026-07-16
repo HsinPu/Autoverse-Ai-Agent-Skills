@@ -1,8 +1,10 @@
 ---
 name: incremental-implementation
 description: Large-change slicing workflow for code changes that should not land as one diff. Use after or with code-change-workflow when feature work, refactors, migrations, or multi-file edits need small verified slices, repeated tests, checkpoints, intermediate commits, reviewability, rollback, or later inspection.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Incremental Implementation

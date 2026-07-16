@@ -1,8 +1,10 @@
 ---
 name: prisma-drizzle
 description: Prisma and Drizzle ORM guide covering schema modeling, migrations, relations, query patterns, transactions, raw SQL boundaries, type safety, generated clients, deployment, and production troubleshooting. Use when implementing or reviewing TypeScript database access with Prisma ORM or Drizzle ORM.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Prisma And Drizzle

@@ -1,8 +1,10 @@
 ---
 name: jquery-4-migration
 description: jQuery 4 migration guide for upgrading jQuery 3.x legacy frontends, WordPress themes/plugins, and hybrid web apps. Use when upgrading to jQuery 4, fixing removed API errors such as $.isArray, $.trim, $.parseJSON, $.type, $.now, handling focus/blur event-order changes, choosing slim versus full builds, replacing Deferred/AJAX patterns, or testing with jQuery Migrate.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # jQuery 4 Migration

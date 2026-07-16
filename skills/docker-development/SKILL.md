@@ -1,8 +1,10 @@
 ---
 name: docker-development
 description: Docker development workflow for Dockerfiles, multi-stage builds, Docker Compose, image optimization, build contexts, healthchecks, environment variables, volumes, networking, and container security. Use when containerizing an application, debugging Docker builds, or improving local container workflows.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Docker Development

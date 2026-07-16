@@ -1,8 +1,10 @@
 ---
 name: deployment-operations
 description: Production deployment and release verification workflow for shipping builds, managing rollout and rollback, running smoke checks, and confirming post-deploy health. Use when code needs to be deployed to an environment or a release needs operational verification.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Deployment Operations

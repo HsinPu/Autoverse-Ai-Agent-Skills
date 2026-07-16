@@ -1,8 +1,10 @@
 ---
 name: jpa-hibernate-development
 description: JPA and Hibernate development guide for entity modeling, associations, fetch strategies, transactions, repositories, query optimization, migrations, auditing, pagination, indexing, and Spring Data JPA usage. Use when designing or refactoring Java persistence layers that use JPA/Hibernate rather than MyBatis, especially in Spring Boot services.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # JPA / Hibernate Development

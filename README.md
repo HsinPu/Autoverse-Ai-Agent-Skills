@@ -2,15 +2,15 @@
 
 [![Validate](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/actions/workflows/validate.yml/badge.svg)](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/actions/workflows/validate.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
-![Skills](https://img.shields.io/badge/Skills-213-7c3aed)
+![Skills](https://img.shields.io/badge/Skills-217-7c3aed)
 ![Agents](https://img.shields.io/badge/Agents-237-2563eb)
-![Node.js](https://img.shields.io/badge/Node.js-%3E%3D16-339933?logo=nodedotjs&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-%3E%3D22-339933?logo=nodedotjs&logoColor=white)
 
 由 **HsinPu** 維護的開源 AI Agent 與 Skill catalog，提供可直接安裝的 Codex、Claude Code、Cursor、VS Code／GitHub Copilot、OpenCode Agents 與 Skills，並包含安全更新機制及本機 catalog 查詢 CLI。
 
 這個專案不是另一套 Agent runtime 或 orchestration framework；它專注在可攜、可查詢、可驗證的角色與能力定義，讓現有 coding agent 能直接使用。
 
-[快速開始](#快速開始) · [Agents](#agents) · [Skills](#skills) · [影片製作工作流](#影片製作工作流) · [Catalog CLI](#catalog-cli) · [開發與驗證](#開發與驗證) · [回報問題](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/issues)
+[快速開始](#快速開始) · [Agents](#agents) · [Skills](#skills) · [影片製作工作流](#影片製作工作流) · [Catalog CLI](#catalog-cli) · [開發與驗證](#開發與驗證) · [Release Checklist](docs/release-checklist.md) · [回報問題](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/issues)
 
 ## 目錄
 
@@ -49,7 +49,7 @@ Linux／macOS：
 curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type skill && curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type agent --enable-auto-delegation
 ```
 
-這組命令會安裝全部 213 個 Skills、237 個 Agents，並啟用不依賴專案 `AGENTS.md` 的全域主動委派。
+這組命令會安裝全部 217 個 Skills、237 個 Agents，並啟用不依賴專案 `AGENTS.md` 的全域主動委派。
 
 ### 只安裝全部 Skills
 
@@ -134,10 +134,11 @@ curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/ma
 
 | 功能 | 需求 |
 |---|---|
-| PowerShell 安裝器 | Windows PowerShell／PowerShell 與網路連線 |
-| Bash 安裝器 | Bash、`curl`、`tar`、`mktemp`、`cksum` 與網路連線；安全合併既有 OpenCode JSON 時另需 Python 3 或 Node.js |
-| Catalog CLI | Node.js 16 或更新版本 |
-| 專案開發與驗證 | Node.js 16 或更新版本；CI 使用 Node.js 20 |
+| PowerShell 安裝器 | Windows PowerShell／PowerShell；只有遠端安裝需要網路連線 |
+| Bash 安裝器 | 本機安裝與 smoke 需要 Bash、`mktemp`、`cksum`，以及 `sha256sum` 或 `shasum`；遠端安裝另需 `curl`、`tar` 與網路連線，安全合併既有 OpenCode JSON 時另需 Python 3 或 Node.js |
+| Catalog CLI | Node.js 22 或更新版本 |
+| 專案開發與驗證 | Node.js 22 或更新版本；CI 驗證 Node.js 22 與 24 |
+| Agent 原創性稽核 | Git CLI 與 GitHub 網路連線 |
 
 一般安裝 Skills 或 Agents **不需要 Node.js**；只有 Bash 要安全合併既有、自訂的 OpenCode JSON 時，需有 Python 3 或 Node.js 其中之一。如果不想直接執行遠端腳本，請先 clone repository、檢查 `scripts/install.ps1` 或 `scripts/install.sh`，再依照[本機安裝](#從本機-checkout-安裝)執行。
 
@@ -145,7 +146,7 @@ curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/ma
 
 | 類型 | 數量 | 用途 | Canonical source |
 |---|---:|---|---|
-| Skills | **213 Skills**／7 類 | 可重複使用的工作流程、規範、工具指引與領域知識 | `skills/<name>/SKILL.md` |
+| Skills | **217 Skills**／15 類 | 可重複使用的工作流程、規範、工具指引與領域知識 | `skills/<name>/SKILL.md` |
 | Agents | 237／31 類 | 可委派的專業角色，包含任務、限制、權限與輸出契約 | `agents/<role>.md` |
 | Codex adapters | 237 | Codex custom Agent 的 TOML 設定 | `adapters/codex/<role>.toml` |
 | Claude adapters | 237 | Claude Code subagent 的 Markdown 設定 | `adapters/claude/<role>.md` |
@@ -298,6 +299,8 @@ Ownership metadata：
 
 - Skill：`<skill>/.skill-meta.json`，比對 `repo + component + name + target`。
 - Agent：`<agent-file>.autoverse.json`，除上述欄位外再比對 `id + adapter`。
+- Skill metadata 另保存 canonical `contentSha256`。若安裝後內容被人工或其他工具修改，普通更新會拒絕覆蓋；只有明確使用 Force 才會重設為目前 Autoverse 版本。
+- Skill 更新會在同一檔案系統建立完整 staged package、核對來源與 staged digest、於最後寫入前重新檢查目的地，再以目錄交換提交。失敗時只會回復可證明屬於本 transaction 的內容；若偵測到其他程序剛建立的 newcomer，會保留 newcomer 與 backup 並要求人工復原，不會刪除未知資料。
 - Agent 與 sidecar 會先寫入同目錄暫存檔，再以 atomic replace 更新；不會沿著 symbolic link 或 hard link 改寫安裝目錄外的檔案。
 - 全量 Skill 安裝也會先預檢整批目標；只要一個 ownership 衝突，就不會先更新前面的 Skill 再中途失敗。
 - 全量 Agent 安裝會先預檢整批目標；只要一個衝突，就會在開始寫入前停止。
@@ -401,7 +404,7 @@ brief／media research → creative treatment → script → storyboard／shot l
 
 ## Catalog CLI
 
-`autoverse-cli.js` 提供離線 catalog 搜尋與安裝狀態查詢，需要 Node.js 16 或更新版本。目前請直接從 repository checkout 執行。
+`autoverse-cli.js` 提供離線 catalog 搜尋、安裝狀態與相近 Skill 路由查詢，需要 Node.js 22 或更新版本。目前請直接從 repository checkout 執行。
 
 ### Commands
 
@@ -488,17 +491,27 @@ Catalog 來源分別是 [skills.json](skills.json) 與 [agents.json](agents.json
 
 ## Skills
 
-213 個 Skills 分成 7 類。每個 package 以 `SKILL.md` 為入口，相關 references、scripts 與 assets 保留在同一資料夾中。
+217 個 Skills 分成 15 類。每個 package 以 `SKILL.md` 為入口，相關 references、scripts、assets 與 evals 保留在同一資料夾中。
 
+<!-- SKILL_SUMMARY_START -->
 | Category | Count | 說明 |
 |---|---:|---|
-| `development` | 169 | 軟體開發、架構、框架、測試、安全、資料與平台工程 |
-| `productivity` | 21 | 規劃、檔案整理、文件與日常工作流程 |
-| `browser-automation` | 7 | Browser automation、DevTools、Playwright 與 webapp testing |
-| `coding-agents-ides` | 7 | Agent、Skill、MCP 與 coding-agent 工作流程 |
-| `cli-utilities` | 3 | Terminal、hotkey 與 command palette |
-| `communication` | 4 | 人類可讀的文字調整與溝通 |
-| `search-research` | 2 | Web research 與資料蒐集 |
+| `workflow-planning` | 12 | 任務規劃、需求釐清、分段實作、handoff 與交付協作 |
+| `software-engineering` | 21 | 核心程式設計、架構、語言、重構、版本控制與維護性 |
+| `frontend-design` | 33 | Frontend、視覺方向、design system、互動、responsive 與 design-to-code |
+| `backend-data` | 26 | 後端服務、API、資料庫、持久層、資料工程與 migration |
+| `ai-llm` | 4 | LLM 應用、OpenAI API、RAG、eval 與 AI delivery |
+| `mobile-desktop` | 4 | 行動、跨平台、桌面應用與 app store release |
+| `testing-quality` | 26 | 測試策略、review、debug、無障礙、相容性、回歸與完成證據 |
+| `security-governance` | 7 | 安全分析、hardening、scan、threat modeling、政策與審批 |
+| `cloud-devops` | 14 | 部署、CI、cloud、infrastructure、containers、observability 與 incident |
+| `agent-skill-tooling` | 17 | Agent、Skill 與 MCP 的建立、探索、驗證、執行、治理與發布 |
+| `browser-automation` | 4 | 靜態 web 擷取、browser control、Playwright 與可重複 web 操作 |
+| `media-creative` | 20 | 圖像、音訊、影片、動畫、prompt、剪輯與製作流程 |
+| `writing-content` | 11 | 回覆、技術文件、品牌語氣、長文、編輯與內容再利用 |
+| `research-product` | 7 | 證據蒐集、市場研究、solution discovery、設計情報與實驗 |
+| `documents-productivity` | 11 | 檔案整理、Office 文件、試算表、簡報、PDF、圖表與 workspace |
+<!-- SKILL_SUMMARY_END -->
 
 ### 主要 Flow 入口
 
@@ -508,6 +521,9 @@ Catalog 來源分別是 [skills.json](skills.json) 與 [agents.json](agents.json
 | Research to publication | [`market-research`](skills/market-research/) → [`brand-voice`](skills/brand-voice/) → [`article-writing`](skills/article-writing/) → [`content-repurposing`](skills/content-repurposing/) | 從市場證據到品牌化長文與跨通路衍生內容 |
 | LLM application delivery | [`llm-application-delivery-workflow`](skills/llm-application-delivery-workflow/) | API、Agent、RAG、eval、安全、成本、觀測與部署的階段式交付 |
 | Database migration | [`database-migration-workflow`](skills/database-migration-workflow/) | Expand、backfill、cutover、validate、contract 與 recovery gate |
+| WordPress engineering | [`wordpress-development`](skills/wordpress-development/) | Plugin、theme、hook、REST、WP-CLI、資料遷移與 production-safe 維護；先備份並證明 restore，再進行 staging 與受核准的正式變更 |
+| Security variant analysis | [`threat-modeling`](skills/threat-modeling/)／[`security-code-review`](skills/security-code-review/) → [`vulnerability-variant-analysis`](skills/vulnerability-variant-analysis/) → [`security-scanning`](skills/security-scanning/) | 從風險或已知漏洞根因建立 predicate、搜尋同家族變體、分級、修復與回歸 detector；只限已授權範圍 |
+| Product evidence | [`ux-research`](skills/ux-research/) → [`product-experimentation`](skills/product-experimentation/) | 先用真實使用者證據找出需求與阻礙，再以預先宣告指標、instrumentation、SRM 與停止規則驗證可量化的因果產品決策 |
 | Skill lifecycle | [`skill-gap-analyzer`](skills/skill-gap-analyzer/) → `skill-creator-design` → `skill-lint` → `skill-executor` → `skill-audit` → `skillforge` → `skillctl` | 缺口判斷、設計、執行驗證、稽核、認證與安裝 |
 | Requirements to execution | [`requirements-deep-dive`](skills/requirements-deep-dive/) → [`domain-modeling`](skills/domain-modeling/) → [`solution-discovery`](skills/solution-discovery/) → [`spec-flow`](skills/spec-flow/) | 以深入決策訪談與 repository 證據釐清需求、語言、規則與方案，再拆成可驗證工作 |
 | Long-running work | [`multi-session-planning`](skills/multi-session-planning/) → [`incremental-implementation`](skills/incremental-implementation/) → [`session-handoff`](skills/session-handoff/) | 管理跨 session／agent 的依賴、owner、checkpoint、下一個安全切片與續接驗證 |
@@ -519,7 +535,7 @@ Catalog 來源分別是 [skills.json](skills.json) 與 [agents.json](agents.json
 
 當單頁或整站 Flow 已開啟 approval gate，它保留頂層 orchestration；design intelligence、Figma／image translation、design-system drift 與 machine visual gate 只回傳有版本的 receipt，不會自行關閉 gate、批准 baseline 或擴張範圍。
 
-請從 [skills.json](skills.json) 瀏覽 metadata，或直接查看 [skills/](skills/) 內的完整 package。
+請從 [skills.json](skills.json) 瀏覽 generated metadata，或直接查看 [skills/](skills/) 內的完整 package。執行 `node autoverse-cli.js info <skill-name>` 會列出所屬 routing group 的判斷原則、目前 Skill 與所有替代選項，方便在相近能力間做選擇。
 
 ## 專案結構
 
@@ -539,9 +555,10 @@ Autoverse-Ai-Agent-Skills/
 │     ├─ SKILL.md                   # Skill entrypoint
 │     ├─ references/                # Optional
 │     ├─ scripts/                   # Optional
-│     └─ assets/                    # Optional
-├─ agents.json                      # Agent catalog
-├─ skills.json                      # Skill catalog
+│     ├─ assets/                    # Optional
+│     └─ evals/evals.json           # Optional deterministic eval package
+├─ agents.json                      # Generated Agent catalog
+├─ skills.json                      # Generated Skill catalog
 ├─ autoverse-cli.js                 # Catalog CLI
 ├─ scripts/
 │  ├─ install.cmd                   # Windows CMD wrapper
@@ -551,66 +568,90 @@ Autoverse-Ai-Agent-Skills/
 │  ├─ smoke-install.sh              # Isolated Linux／macOS installer smoke test
 │  ├─ generate-agent-adapters.js
 │  ├─ generate-agent-catalog.js
+│  ├─ generate-skill-catalog.js
 │  ├─ sync-agent-reference.js
 │  ├─ verify-agent-references.js
+│  ├─ verify-skill-sources.js
 │  ├─ audit-agent-originality.js
+│  ├─ audit-skill-originality.js
+│  ├─ validate-agent-coverage.js
 │  ├─ validate-catalog.js
+│  ├─ validate-skill-evals.js
 │  ├─ validate-skill-contracts.js   # Markdown 與跨 Skill contract validator
 │  └─ data/
+│     ├─ agent-coverage-matrix.json  # Canonical Agent responsibility coverage
 │     ├─ agent-reference-sources.json
+│     ├─ skill-catalog.json          # Canonical categories, tags and routing
+│     ├─ skill-eval-coverage.json    # Required eval package baseline
+│     ├─ skill-reference-lock.json   # Review-controlled provenance evidence lock
+│     ├─ skill-reference-sources.json # Pinned Skill tree/path/blob evidence
 │     └─ wshobson-agent-inventory.json
 ├─ tests/
 │  ├─ cli.test.js                   # Zero-dependency CLI argument tests
 │  ├─ catalog-validation.test.js    # Catalog metadata mutation guards
-│  └─ skill-contracts.test.js       # Contract validator mutation matrix
-└─ .github/workflows/validate.yml   # Catalog, CLI and installer CI
+│  ├─ skill-catalog-generation.test.js
+│  ├─ skill-evals.test.js
+│  ├─ skill-originality.test.js
+│  ├─ skill-source-revisions.test.js
+│  ├─ skill-contracts.test.js       # Contract validator mutation matrix
+│  └─ package-inventory.test.js
+├─ docs/release-checklist.md        # Release gates and evidence receipt
+└─ .github/workflows/validate.yml   # Catalog, CLI, source and installer CI
 ```
 
-`agents/<role>.md` 是 Agent 的唯一人工維護來源。請勿直接修改 `adapters/`；五套平台 adapter 與 `agents.json` 都由 scripts 產生。
+`agents/<role>.md` 是 Agent 的唯一人工維護來源。請勿直接修改 `adapters/`；五套平台 adapter 與 `agents.json` 都由 scripts 產生。Skill 的正式內容在 `skills/<name>/`，分類、tags 與相近能力 routing 則由 `scripts/data/skill-catalog.json` 維護；`skills.json` 必須用 generator 重建，不可手動修改。
 
 ## 開發與驗證
 
-需要 Node.js 16 或更新版本。
+需要 Node.js 22 或更新版本。提交前請依 [Release Checklist](docs/release-checklist.md) 留下完整驗證紀錄。
 
 ```bash
 # 從 canonical Agents 重建五平台 adapters 與 agents.json
 npm run generate:agents
 
+# 從 Skill frontmatter 與 canonical taxonomy 重建 skills.json
+npm run generate:skills
+
 # 更新 wshobson/agents reference tree 與逐項 ledger
 npm run sync:agent-reference
 
-# 驗證 catalogs、frontmatter、來源、授權、adapters、ledger、Markdown 表格與跨 Skill contracts
+# 外部 Skill provenance 經 owner 核准變更後，重建 review-controlled evidence lock
+npm run update:skill-reference-lock
+
+# 執行全部本機 catalog、frontmatter、來源、eval、adapter、coverage 與 contract 驗證
 npm run validate
 
-# 驗證 CLI 單值參數、未知選項與正常 Skill／Agent 查詢
+# 執行各項 mutation／regression tests
 npm run test:cli
-
-# 以隔離 mutation fixtures 驗證 author、reference revision 與 malformed catalog 都會被拒絕
 npm run test:catalog
-
-# 以 mutation matrix 驗證權限反轉、phase boundary、fallback 與 machine-gate 漂移都會被拒絕
+npm run test:skill-catalog
+npm run test:skill-evals
+npm run test:skill-originality
+npm run test:skill-sources
 npm run test:skill-contracts
+npm run test:package
 
 # 在隔離暫存目錄實測安裝、更新、修復、metadata 與同名保護
 npm run smoke:install:powershell   # Windows
 npm run smoke:install:bash         # Linux／macOS 或 Git Bash
 
-# Git Bash 本機快速模式；CI 仍會執行完整 catalog
-AUTOVERSE_SMOKE_MODE=quick npm run smoke:install:bash
+# Git Bash／macOS 本機快速模式；Windows／Ubuntu CI 仍執行完整 smoke
+npm run smoke:install:bash:quick
 
-# 連線 GitHub，驗證每個 pinned commit、tree、reference path 與 license
+# 下列四項需要網路：驗證 Agent 與 Skill 的 pinned source，以及兩類原創性
 npm run verify:agent-references:remote
+npm run verify:skill-sources:remote
 
-# 下載 pinned upstream revisions，檢查長行與 12-word verbatim overlap
 npm run audit:agent-originality
+npm run audit:skill-originality
 
 # 預覽 npm package 會包含的檔案
 npm pack --dry-run
 ```
 
-`npm run validate`、CLI tests、catalog mutation tests、Skill contract tests 與 installer smoke tests 都不需要網路。Catalog mutation tests 會在隔離副本中注入 malformed entry、非 canonical author、單邊 reference metadata 與不完整 revision，確認 validator 回報明確 finding 而不是崩潰。Skill contract 內的 `AUTOVERSE_CONTRACT` JSON 區塊是權限、ownership、phase boundary、雙向 parent／support edge、fallback enum 與 machine receipt schema 的機器規範；`AUTOVERSE_CONTRACT_TEXT` 則包住 Agent 實際閱讀的關鍵權限與 Gate 指引，JSON 內的 SHA-256 會阻止文字被刪除或反向改寫。Validator 會檢查一般 Markdown 與 `markdown`／`md` fenced templates 的表頭和每個資料列欄數，忽略其他 fenced examples，且任何 fence 內的 heading 與 contract marker 都不參與契約定位。它也要求 7 組跨 Skill contracts 的每個 machine part 與 canonical text 位於正確階段且保持一致。Mutation matrix 會實際反轉布林與文字權限、製造單向關係、刪除欄位與 fallback row、交換 authority ID 規則，證明 drift 會被拒絕。
+`npm run validate`、本機 tests 與 installer smoke tests 都不需要網路。Catalog generator 使用共用的嚴格、zero-dependency YAML 子集 parser；未閉合引號、錯誤縮排、重複欄位或不支援語法會直接失敗，不會被當成普通字串。Skill eval validator 依 `skill-eval-coverage.json` 具名保護必要 eval packages，並檢查 prompt、expected output、files 與 assertions；新增 eval 可以自動納入統計，但刪除必要 package 會阻斷。Skill contract mutation matrix 會實際反轉權限、破壞 phase boundary、刪除 fallback 與改寫 machine receipt，確認 drift 一定被拒絕。
 
-兩個 installer smoke scripts 會建立獨立暫存 HOME，驗證 project／全域 targets、ownership metadata 與防覆寫行為，完成後自動清除，不會修改真正的使用者安裝。來源遠端驗證與 originality audit 需要連線 GitHub。CI 會在 push 到 `main` 與每個 pull request 上先以 Node.js 16 執行 Skill contract、CLI 與 catalog guard 相容性測試，再以 Node.js 20 執行完整 catalog／來源檢查，以及 Windows PowerShell、Ubuntu Bash 兩套安裝煙霧測試。GitHub Actions 只授予 `contents: read`。
+兩個 installer smoke scripts 會建立獨立暫存 HOME，驗證 project／全域 targets、ownership、原子更新、digest drift、rollback、並行競爭與防覆寫，完成後自動清除，不會修改真正的使用者安裝。CI 在每個 PR 與 main push 以 Node.js 22／24 驗證本機 gates，Windows PowerShell 與 Ubuntu Bash 執行完整 installer smoke，macOS Bash 執行 quick smoke。需要 GitHub 的完整來源與原創性檢查也會在每個 PR、main push、手動觸發與每週排程以有界重試執行；GitHub Actions 權限維持 `contents: read`。
 
 ### 新增或修改 Agent
 
@@ -622,21 +663,26 @@ npm pack --dry-run
 ### 新增或修改 Skill
 
 1. 編輯 `skills/<name>/SKILL.md`，並將所需 references、scripts、assets 放在同一 package。
-2. 確認 `name`、`author`、`source`、`license` 與 catalog metadata 一致。
-3. 同步更新 `skills.json`，再執行 `npm run validate`。
+2. 依 [Agent Skills specification](https://agentskills.io/specification) 將 `name`、`description`、`license` 放在 top-level frontmatter；本專案的 `author`、`source` 與外部 reference 欄位放在 `metadata` mapping，正式作者與來源保持 HsinPu／本 repository。
+3. 在 `scripts/data/skill-catalog.json` 維護 category、tags 與需要的 routing group；不要直接修改 generated `skills.json`。
+4. 依 [Agent Skills eval guidance](https://agentskills.io/skill-creation/evaluating-skills) 視需要新增 `evals/evals.json`。若它應屬於 release 必要基線，同步更新 `scripts/data/skill-eval-coverage.json`。
+5. 若有外部參考，將固定 commit、tree、逐 Skill reference path/blob 與 license evidence 寫入 `scripts/data/skill-reference-sources.json`，再執行 `npm run update:skill-reference-lock`；lock 與 manifest 變更都需要 repository owner 明確覆核。
+6. 執行 `npm run generate:skills`、`npm run validate` 與相關 tests。
 
 ## 來源、改寫與授權政策
 
 - 所有 Agents 與 Skills 的正式 `source` 都是 `HsinPu/Autoverse-Ai-Agent-Skills`，作者為 HsinPu。
-- 外部專案只作為研究、coverage 與設計參考；Agents 使用 `reference-repo`、`reference-paths`、`reference-tree`，Skills 使用 `reference-source`、`reference-license`，並可用已驗證的 `reference-revision` 固定 Git commit，這些欄位不取代本專案的正式來源。
+- 外部專案只作為研究、coverage 與設計參考；Agents 使用 `reference-repo`、`reference-paths`、`reference-tree`，Skills 使用 `reference-source`、`reference-license` 與必要的 `reference-revision`。目前 33 個 referenced Skills 分布於 12 個 repositories，全部由 [`skill-reference-sources.json`](scripts/data/skill-reference-sources.json) 固定 commit、tree、逐 Skill reference path/blob 與 license evidence；[`skill-reference-lock.json`](scripts/data/skill-reference-lock.json) 另外鎖定完整 provenance evidence 的 canonical digest 與數量。[CODEOWNERS](.github/CODEOWNERS) 會把 manifest、lock、verifier 與 originality audit 指派給 HsinPu，發布政策要求取得 owner 明確覆核，避免單獨縮小或替換比對範圍。這些欄位不取代本專案的正式來源。
 - Matt Pocock 相關概念的 pinned revision、逐項 upgrade／add／skip 決策、改名策略與原創改寫邊界記錄在 [`matt-pocock-skill-adaptations.md`](docs/matt-pocock-skill-adaptations.md)。除保留業界通用能力名稱 `domain-modeling` 外，這批沒有沿用上游命令式或品牌化 Skill 名稱、slash commands、固定檔名、模板或 Claude 專用 metadata。
 - 視覺設計相關 Skills 以獨立 metadata 保存主要參考來源：`taste-skill`／`image-to-code` 對應 [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill)，`figma-to-code` 對應 [figma/mcp-server-guide](https://github.com/figma/mcp-server-guide)，`design-intelligence-search` 對應 [ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill)，`design-system` 對應 [DTCG](https://github.com/design-tokens/community-group)，`visual-regression-testing` 對應 [AgentVision](https://github.com/amitpatole/agent-vision)。其他比較來源包含 gstack、Impeccable、Argos、design-extract、Style Dictionary、Vercel Web Interface Guidelines、Addy Osmani Agent Skills、screenshot-to-code、Design2Code、UI2Code_N、Google Stitch Skills、canvas-to-code 與 Anthropic frontend-design。實際採用範圍、授權狀態、未移植項目與原創改寫邊界記錄在 [`visual-design-skill-sources.md`](docs/visual-design-skill-sources.md)，所有 canonical Skill 的正式 `source` 仍為 `HsinPu/Autoverse-Ai-Agent-Skills`。
 - Agent reference repository 的 pinned commit、實際 Git tree、license identifier 與 license path 集中保存在 [agent-reference-sources.json](scripts/data/agent-reference-sources.json)。CI 會向 GitHub 重新驗證 commit → tree 關係、每個 reference path，以及授權檔內容。
+- Skill source remote gate 同樣會核對 commit → tree、每個宣告 path 的 Git blob，以及 license file、terms 或 frontmatter evidence 的固定內容是否吻合宣告授權；任意「同 repository 但與參考內容無關」的有效 commit 不會通過。
 - Agent catalog 參考 [wshobson/agents](https://github.com/wshobson/agents)、[msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents)、[VoltAgent/awesome-claude-code-subagents](https://github.com/VoltAgent/awesome-claude-code-subagents)、[github/awesome-copilot](https://github.com/github/awesome-copilot)、[affaan-m/ECC](https://github.com/affaan-m/ECC)、[supatest-ai/awesome-claude-code-sub-agents](https://github.com/supatest-ai/awesome-claude-code-sub-agents)、[devsforge/marketplace](https://github.com/devsforge/marketplace)、[ajhcs/healthcare-agents](https://github.com/ajhcs/healthcare-agents)、[aws-samples/sample-claude-code-agent-team](https://github.com/aws-samples/sample-claude-code-agent-team)、[DojoCodingLabs/remotion-superpowers](https://github.com/DojoCodingLabs/remotion-superpowers)、[HKUDS/ViMax](https://github.com/HKUDS/ViMax)、[paperclipai/companies](https://github.com/paperclipai/companies)、[HITsz-TMG/AIGC-Claw](https://github.com/HITsz-TMG/AIGC-Claw)、[davila7/claude-code-templates](https://github.com/davila7/claude-code-templates)、[Donchitos/Claude-Code-Game-Studios](https://github.com/Donchitos/Claude-Code-Game-Studios)、[NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent)、[jacobcwright/open-animate](https://github.com/jacobcwright/open-animate)、[browser-use/video-use](https://github.com/browser-use/video-use)、[taylordrew4u2/Role-Call](https://github.com/taylordrew4u2/Role-Call)、[ImaniGomez/Scripty](https://github.com/ImaniGomez/Scripty)、[travisoberlander/film-production-manager](https://github.com/travisoberlander/film-production-manager)、[FusinX/DIT_Offload](https://github.com/FusinX/DIT_Offload)、[HKUDS/VideoAgent](https://github.com/HKUDS/VideoAgent) 與 [video-db/Director](https://github.com/video-db/Director) 的角色定位、路徑與高層責任；prompt 內容均由本專案重新設計與加強，不是原文完整複製。
 - 影片工作流另研究 [calesthio/OpenMontage](https://github.com/calesthio/OpenMontage) 的階段化產物與人工核准概念、[showlab/MovieAgent](https://github.com/showlab/MovieAgent) 公開文件中的電影職責分工，以及 Hermes 的 renderer review／conditional role routing、Open Animate 的 motion-graphics lifecycle、video-use 的 overlay／timeline／media-QC 概念。OpenMontage 的 AGPL-3.0 reference metadata 已保留，但不作為 canonical Agent reference；MovieAgent 在採用的 revision 未找到 repository-wide license，因此兩者只使用公開的高層概念，沒有重用程式碼或 prompt 文字。詳細 revision 與改寫邊界記錄在 [`source-notes.md`](skills/video-production-workflow/references/source-notes.md)。
 - 同名或職責相近的上游定義會先依內容合併或排除。`wshobson/agents` 的 199 個 definitions、commit SHA、tree SHA、198 個 canonical mappings 與 1 個明確 exclusion 保存在 [wshobson-agent-inventory.json](scripts/data/wshobson-agent-inventory.json)；其他來源的 repository、path 與 tree SHA 則保存在各 canonical Agent frontmatter。
 - `npm run audit:agent-originality` 會針對 237 個 canonical Agent prompt 與 pinned upstream references 執行逐字重疊檢查；若出現至少 60 個字元的相同行，或 12 個單字的逐字片段，CI 會拒絕通過。這是保護改寫原創性的保守靜態閘門，不等同法律上的相似性判定。
-- Repository 與全部 237 個 Agents 採 Apache-2.0。Skills 的個別授權以各自 `SKILL.md` 與 `skills.json` 為準；目前 212 個為 Apache-2.0，`karpathy-guidelines` 保留 MIT 授權與外部 reference metadata。
+- `npm run audit:skill-originality` 會把 33 個有外部參考的 canonical Skill packages 逐一與 manifest 固定的 upstream paths 比較，使用相同的長行與 12-word overlap 門檻，並回報本地檔案、固定 commit、上游路徑與雙方證據；結構性 frontmatter 與 Markdown boilerplate 不列入內容重疊。
+- Repository 與全部 237 個 Agents 採 Apache-2.0。Skills 的個別授權以各自 `SKILL.md` 與 `skills.json` 為準；目前 216 個為 Apache-2.0，`karpathy-guidelines` 保留 MIT 授權與外部 reference metadata。
 
 ## 疑難排解
 
@@ -681,14 +727,14 @@ node autoverse-cli.js list --installed --type agent --target codex
 <details>
 <summary><strong>沒有 Node.js，還能安裝嗎？</strong></summary>
 
-可以。一般安裝不需要 Node.js；只有 Bash 要合併既有、自訂的 OpenCode JSON 時，需要 Python 3 或 Node.js 其中之一。Catalog CLI、產生 adapters、驗證與 package 預覽則需要 Node.js 16 或更新版本。
+可以。一般安裝不需要 Node.js；只有 Bash 要合併既有、自訂的 OpenCode JSON 時，需要 Python 3 或 Node.js 其中之一。Catalog CLI、產生 catalogs／adapters、驗證與 package 預覽則需要 Node.js 22 或更新版本。
 
 </details>
 
 <details>
 <summary><strong>Bash 安裝器回報缺少 command</strong></summary>
 
-確認系統已安裝 Bash、`curl`、`tar`、`mktemp` 與 `cksum`。如果只想從本機 checkout 安裝，仍需 Bash，但不需要下載 GitHub archive。若要把 guidance 合併進既有的 OpenCode `opencode.json`，還需要 Python 3 或 Node.js；兩者皆無時仍可建立並重跑安裝器自己的最小 config，但不會冒險改寫自訂 JSON。
+本機 checkout 安裝與 smoke 請確認已有 Bash、`mktemp`、`cksum`，以及 `sha256sum` 或 `shasum`；遠端安裝才另外需要 `curl`、`tar` 與網路連線。若要把 guidance 合併進既有的 OpenCode `opencode.json`，還需要 Python 3 或 Node.js；兩者皆無時仍可建立並重跑安裝器自己的最小 config，但不會冒險改寫自訂 JSON。
 
 </details>
 
@@ -699,8 +745,9 @@ node autoverse-cli.js list --installed --type agent --target codex
 1. 先到 [Issues](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/issues) 說明需求或問題。
 2. Fork repository 並建立聚焦的 branch。
 3. 只修改 canonical source；Agent 變更不要直接編輯 generated adapters。
-4. 執行 `npm run generate:agents`（若 Agent 有變更）與 `npm run validate`。
-5. 建立 [Pull Request](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/pulls)，附上變更目的與驗證結果。
+4. Agent 有變更時執行 `npm run generate:agents`；Skill 或 taxonomy 有變更時執行 `npm run generate:skills`。
+5. 依 [Release Checklist](docs/release-checklist.md) 執行對應本機 gates，至少完成 `npm run validate`、相關 mutation tests 與 `git diff --check`。
+6. 建立 [Pull Request](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/pulls)，附上變更目的與驗證結果。
 
 ## License
 

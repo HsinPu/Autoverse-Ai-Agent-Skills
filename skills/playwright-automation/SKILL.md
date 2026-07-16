@@ -1,8 +1,10 @@
 ---
 name: playwright-automation
 description: Playwright automation workflow for browser navigation, locators, screenshots, traces, console and network inspection, scripted interactions, MCP or CLI-driven browser control, and repeatable UI diagnostics. Use when the task specifically needs Playwright rather than general browser automation or E2E test strategy.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Playwright Automation

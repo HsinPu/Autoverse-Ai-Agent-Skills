@@ -1,10 +1,13 @@
 ---
 name: agent-introspection-debugging
 description: Agent execution diagnosis workflow for reconstructing traces, locating the earliest behavioral divergence, classifying failures across instructions, context, routing, tools, guardrails, retrieval, and synthesis, and turning confirmed causes into regression evals. Use when an agent loops, chooses the wrong tool, loses context, misroutes a handoff, violates an output contract, or succeeds inconsistently and traces or structured logs are available.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
-reference-source: affaan-m/ECC
-reference-license: MIT
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  reference-source: "affaan-m/ECC"
+  reference-license: "MIT"
+  reference-revision: "ed387446052dfbc6b52de149406b70efa65edc59"
 ---
 
 # Agent Introspection Debugging

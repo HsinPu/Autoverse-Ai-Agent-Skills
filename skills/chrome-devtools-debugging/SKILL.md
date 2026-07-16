@@ -1,8 +1,10 @@
 ---
 name: chrome-devtools-debugging
 description: Chrome DevTools and CDP debugging workflow for inspecting console errors, network requests, runtime performance, DOM state, accessibility trees, storage, and page load behavior through Chrome DevTools, CDP, or Chrome DevTools MCP. Use when diagnosing web page behavior rather than only automating clicks.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Chrome DevTools Debugging

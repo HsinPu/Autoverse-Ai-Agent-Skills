@@ -1,8 +1,10 @@
 ---
 name: security-code-review
 description: Security-focused code review guide for finding high-confidence vulnerabilities in diffs, files, pull requests, and code snippets. Use when asked for a security review, vulnerability audit, OWASP-style review, or when reviewing code for injection, XSS, SSRF, auth/authz, deserialization, cryptography, secrets, supply-chain, or infrastructure security risks.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Security Code Review

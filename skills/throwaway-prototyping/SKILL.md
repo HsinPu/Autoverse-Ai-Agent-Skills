@@ -1,11 +1,13 @@
 ---
 name: throwaway-prototyping
 description: Build a deliberately disposable experiment that answers one product, interaction, visual, logic, architecture, or integration question with the minimum necessary fidelity. Use during solution discovery when evidence requires executable behavior or a tangible comparison, but production quality, persistence, migration, security hardening, and long-term maintainability would obscure the learning goal.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
-reference-source: mattpocock/skills
-reference-revision: e9fcdf95b402d360f90f1db8d776d5dd450f9234
-reference-license: MIT
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  reference-source: "mattpocock/skills"
+  reference-license: "MIT"
+  reference-revision: "e9fcdf95b402d360f90f1db8d776d5dd450f9234"
 ---
 
 # Throwaway Prototyping

@@ -1,8 +1,10 @@
 ---
 name: workspace-google-ops
 description: Google Workspace workflow for Gmail, Calendar, Drive, Contacts, Sheets, and Docs via CLI. Use when an email, calendar, drive, contact, sheet, or document task needs command-line automation.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Workspace Google Ops

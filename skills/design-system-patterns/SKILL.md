@@ -1,8 +1,10 @@
 ---
 name: design-system-patterns
 description: Design system architecture guidance for design tokens, theming infrastructure, component patterns, and theme switching in frontend codebases. Use when creating or extending a design system, standardizing UI variants, or aligning colors, spacing, typography, and surface styles across components.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Design System Patterns

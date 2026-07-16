@@ -1,8 +1,10 @@
 ---
 name: css-development
 description: CSS development guide covering cascade management, selectors, responsive design, layout systems, tokens, and maintainable styling architecture. Use when writing, reviewing, or refactoring CSS for production interfaces.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # CSS Development

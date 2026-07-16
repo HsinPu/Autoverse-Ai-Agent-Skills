@@ -1,8 +1,10 @@
 ---
 name: supabase-development
 description: Supabase development guide covering Postgres schema design, Row Level Security, Auth, Storage, Edge Functions, migrations, realtime, environment keys, and local-to-production workflows. Use when building, reviewing, or debugging Supabase-backed applications.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Supabase Development

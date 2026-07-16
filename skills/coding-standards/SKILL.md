@@ -1,8 +1,10 @@
 ---
 name: coding-standards
 description: Universal coding standards guide for TypeScript, JavaScript, React, and Node.js projects. Use when establishing or auditing code conventions, ESLint/Prettier/TypeScript strict settings, feature-based folder structure, layered services, React patterns, testing practices, avoiding hardcoded values, constants/configuration usage, performance, accessibility, or security hygiene.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Coding Standards

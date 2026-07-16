@@ -1,8 +1,10 @@
 ---
 name: spring-security
 description: Spring Security guide for Spring Boot services covering authentication, authorization, OAuth2/OIDC, JWT resource servers, method security, CSRF, CORS, security headers, secrets, rate limiting, and secure error handling. Use when designing, implementing, reviewing, or debugging security in Spring MVC or WebFlux applications.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Spring Security

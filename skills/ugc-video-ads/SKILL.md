@@ -1,8 +1,10 @@
 ---
 name: ugc-video-ads
 description: UGC-style video ad workflow for AI-assisted creator ads, competitor ad analysis, hooks, creator personas, authentic scripts, product demos, objections, social proof, voiceover, B-roll, captions, and platform-specific deliverables. Use when creating paid or organic user-generated-content style ads for products or services.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # UGC Video Ads

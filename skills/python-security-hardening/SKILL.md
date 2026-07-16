@@ -1,8 +1,10 @@
 ---
 name: python-security-hardening
 description: Python security hardening guide covering secrets handling, unsafe deserialization, subprocess and filesystem boundaries, network trust boundaries, and supply-chain hygiene. Use when writing or reviewing Python code with security-sensitive inputs, dependencies, or execution boundaries, and when the task is to harden implementation details rather than review a diff for security findings.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Python Security Hardening

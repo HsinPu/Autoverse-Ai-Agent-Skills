@@ -1,11 +1,13 @@
 ---
 name: spec-flow
 description: Turn clear requirements or an approved solution direction into acceptance criteria, dependency-aware work items, and an executable delivery path. Use for implementation planning, issue-ready vertical slices, readiness analysis, and delivery sequencing after the intended direction is understood; use specification-authoring instead when the requested deliverable is a formal technical specification with a prescribed document structure.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
-reference-source: mattpocock/skills
-reference-revision: e9fcdf95b402d360f90f1db8d776d5dd450f9234
-reference-license: MIT
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  reference-source: "mattpocock/skills"
+  reference-license: "MIT"
+  reference-revision: "e9fcdf95b402d360f90f1db8d776d5dd450f9234"
 ---
 
 # Spec Flow

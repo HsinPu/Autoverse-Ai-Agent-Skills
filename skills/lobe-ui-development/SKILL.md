@@ -1,8 +1,10 @@
 ---
 name: lobe-ui-development
 description: Lobe UI development guide for using @lobehub/ui in React, Next.js, and AIGC web app interfaces. Use when integrating Lobe UI components, ThemeProvider, I18nProvider, ConfigProvider motion setup, Ant Design compatibility, antd-style theming, or building AI product interfaces with the LobeHub UI ecosystem.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Lobe UI Development

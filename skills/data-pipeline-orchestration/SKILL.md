@@ -1,8 +1,10 @@
 ---
 name: data-pipeline-orchestration
 description: Design and operate production data pipelines across Airflow, dbt, Spark, batch and event-driven orchestration, data contracts, partitioning, backfills, idempotency, lineage, quality gates, retries, recovery, and observability. Use when building or debugging scheduled ETL or ELT workflows, analytics transformations, distributed data processing, or governed dataset delivery.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Data Pipeline Orchestration

@@ -1,8 +1,10 @@
 ---
 name: ai-image-prompt-design
 description: AI image prompt design guide for expanding visual ideas into detailed prompts for Flux, Stable Diffusion, Midjourney, DALL-E, and similar image generation models. Use when crafting or improving image prompts, visual concepts, art direction, style references, composition, lighting, camera language, negative prompts, or prompt variants.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # AI Image Prompt Design

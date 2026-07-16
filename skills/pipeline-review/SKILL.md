@@ -1,10 +1,13 @@
 ---
 name: pipeline-review
 description: Run an independent, read-only review gate between implementation stages using three-level findings, a stable review-report artifact, explicit ownership, and repeatable review loops. Use after a change set or delivery stage is complete and before merge, release, or the next pipeline stage.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
-reference-source: wshobson/agents
-reference-license: MIT
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  reference-source: "wshobson/agents"
+  reference-license: "MIT"
+  reference-revision: "b6af3711058190e4b5c5274b9758498fe626ec5a"
 ---
 
 # Pipeline Review

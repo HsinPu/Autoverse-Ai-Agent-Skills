@@ -1,0 +1,16 @@
+{
+  "skill_name": "visual-regression-testing",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "The screenshot test failed after an intentional redesign. Update the baseline automatically so CI is green, and ignore the mobile and dark-mode failures for now.",
+      "expected_output": "A structured regression finding that locks the approved baseline and coverage matrix, refuses automatic baseline approval, reports mobile and dark-mode evidence, and separates a baseline candidate from the authority to approve it.",
+      "assertions": [
+        "The response identifies regression mode and requires an approved baseline ID and reproducible matrix cells.",
+        "The failed desktop, mobile, and dark-mode evidence remains visible in the result.",
+        "A new capture may be labeled as a candidate but is not automatically approved as the baseline.",
+        "The result uses a pass, warn, fail, or error verdict with issue evidence, next action, and baseline action."
+      ]
+    }
+  ]
+}

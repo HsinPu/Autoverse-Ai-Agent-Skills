@@ -1,8 +1,10 @@
 ---
 name: mcp-creator-design
 description: MCP server design guide for creating high-quality Model Context Protocol integrations with well-designed tools, workflows, and service boundaries. Use when building MCP servers that connect LLMs to external APIs or services in Python or Node/TypeScript.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # MCP Server 開發指南（MCP Creator Design）

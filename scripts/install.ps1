@@ -239,6 +239,20 @@ function Test-ComponentName {
     }
 }
 
+function Test-RepositoryCoordinate {
+    param([string]$RepoName)
+    if ($RepoName -notmatch '^[A-Za-z0-9._-]+/[A-Za-z0-9._-]+$') {
+        throw "Invalid GitHub repository '$RepoName'. Expected owner/name using letters, numbers, dot, underscore, or hyphen."
+    }
+}
+
+function Test-BranchName {
+    param([string]$BranchName)
+    if ($BranchName -notmatch '^[A-Za-z0-9._/+_-]+$') {
+        throw "Invalid branch '$BranchName'. Use a GitHub branch name without whitespace, control characters, quotes, or backslashes."
+    }
+}
+
 function Invoke-DownloadArchive {
     param([string]$RepoName, [string]$BranchName, [string]$Destination)
     Write-Info "Downloading $RepoName@$BranchName"
@@ -338,6 +352,134 @@ function Read-StrictUtf8Text {
     }
 }
 
+function Add-Sha256Bytes {
+    param(
+        [System.Security.Cryptography.HashAlgorithm]$Hasher,
+        [byte[]]$Bytes,
+        [int]$Count = -1
+    )
+    if ($Count -lt 0) { $Count = $Bytes.Length }
+    if ($Count -gt 0) {
+        $null = $Hasher.TransformBlock($Bytes, 0, $Count, $Bytes, 0)
+    }
+}
+
+function Compare-Utf8ByteSequence {
+    param([byte[]]$Left, [byte[]]$Right)
+    $sharedLength = [Math]::Min($Left.Length, $Right.Length)
+    for ($index = 0; $index -lt $sharedLength; $index++) {
+        if ($Left[$index] -lt $Right[$index]) { return -1 }
+        if ($Left[$index] -gt $Right[$index]) { return 1 }
+    }
+    if ($Left.Length -lt $Right.Length) { return -1 }
+    if ($Left.Length -gt $Right.Length) { return 1 }
+    return 0
+}
+
+function Get-SkillContentSha256 {
+    param(
+        [string]$RootPath,
+        [string[]]$ExcludedRelativePaths = @()
+    )
+    if (-not (Test-Path -LiteralPath $RootPath -PathType Container)) {
+        throw "Cannot hash Skill content because the directory is missing: $RootPath"
+    }
+
+    $rootItem = Get-Item -Force -LiteralPath $RootPath
+    if (($rootItem.Attributes -band [System.IO.FileAttributes]::ReparsePoint) -ne 0) {
+        throw "Refusing to hash linked Skill content: $RootPath"
+    }
+    $rootFullPath = [System.IO.Path]::GetFullPath($rootItem.FullName).TrimEnd(
+        [System.IO.Path]::DirectorySeparatorChar,
+        [System.IO.Path]::AltDirectorySeparatorChar
+    )
+    $rootPrefix = $rootFullPath + [System.IO.Path]::DirectorySeparatorChar
+    $utf8 = [System.Text.UTF8Encoding]::new($false)
+    $entries = @()
+
+    foreach ($item in @(Get-ChildItem -Force -LiteralPath $rootFullPath -Recurse)) {
+        if (($item.Attributes -band [System.IO.FileAttributes]::ReparsePoint) -ne 0) {
+            throw "Refusing to hash linked Skill content: $($item.FullName)"
+        }
+        if ($item.PSIsContainer) { continue }
+        if ($item -isnot [System.IO.FileInfo]) {
+            throw "Refusing to hash non-regular Skill content: $($item.FullName)"
+        }
+        $fullPath = [System.IO.Path]::GetFullPath($item.FullName)
+        if (-not $fullPath.StartsWith($rootPrefix, [System.StringComparison]::OrdinalIgnoreCase)) {
+            throw "Refusing to hash Skill content outside its root: $fullPath"
+        }
+        $relativePath = $fullPath.Substring($rootPrefix.Length).Replace('\', '/')
+        if ($relativePath -ceq '.skill-meta.json' -or $ExcludedRelativePaths -ccontains $relativePath) { continue }
+        $entries += [pscustomobject]@{
+            FullName = $fullPath
+            RelativePath = $relativePath
+            RelativePathBytes = $utf8.GetBytes($relativePath)
+            Length = [int64]$item.Length
+        }
+    }
+
+    # UTF-8 byte ordering is the cross-platform catalog contract. An insertion
+    # sort keeps that ordering explicit instead of relying on the current locale.
+    for ($index = 1; $index -lt $entries.Count; $index++) {
+        $entry = $entries[$index]
+        $position = $index - 1
+        while ($position -ge 0 -and (Compare-Utf8ByteSequence -Left $entries[$position].RelativePathBytes -Right $entry.RelativePathBytes) -gt 0) {
+            $entries[$position + 1] = $entries[$position]
+            $position--
+        }
+        $entries[$position + 1] = $entry
+    }
+
+    $hasher = [System.Security.Cryptography.SHA256]::Create()
+    try {
+        $nullByte = [byte[]]@(0)
+        Add-Sha256Bytes -Hasher $hasher -Bytes $utf8.GetBytes('autoverse-skill-content-v1')
+        Add-Sha256Bytes -Hasher $hasher -Bytes $nullByte
+        foreach ($entry in $entries) {
+            Add-Sha256Bytes -Hasher $hasher -Bytes $entry.RelativePathBytes
+            Add-Sha256Bytes -Hasher $hasher -Bytes $nullByte
+            $lengthBytes = [System.Text.Encoding]::ASCII.GetBytes($entry.Length.ToString([System.Globalization.CultureInfo]::InvariantCulture))
+            Add-Sha256Bytes -Hasher $hasher -Bytes $lengthBytes
+            Add-Sha256Bytes -Hasher $hasher -Bytes $nullByte
+
+            $stream = [System.IO.File]::Open($entry.FullName, [System.IO.FileMode]::Open, [System.IO.FileAccess]::Read, [System.IO.FileShare]::Read)
+            try {
+                $buffer = New-Object byte[] 65536
+                $totalRead = [int64]0
+                while (($read = $stream.Read($buffer, 0, $buffer.Length)) -gt 0) {
+                    Add-Sha256Bytes -Hasher $hasher -Bytes $buffer -Count $read
+                    $totalRead += $read
+                }
+                if ($totalRead -ne $entry.Length) {
+                    throw "Skill content changed while it was being hashed: $($entry.FullName)"
+                }
+            } finally {
+                $stream.Dispose()
+            }
+            Add-Sha256Bytes -Hasher $hasher -Bytes $nullByte
+        }
+        $empty = New-Object byte[] 0
+        $null = $hasher.TransformFinalBlock($empty, 0, 0)
+        return (($hasher.Hash | ForEach-Object { $_.ToString('x2') }) -join '')
+    } finally {
+        $hasher.Dispose()
+    }
+}
+
+$script:SkillSourceDigestCache = @{}
+
+function Get-SkillSourceContentSha256 {
+    param([string]$RootPath)
+    $cacheKey = [System.IO.Path]::GetFullPath($RootPath)
+    if ($script:SkillSourceDigestCache.ContainsKey($cacheKey)) {
+        return $script:SkillSourceDigestCache[$cacheKey]
+    }
+    $digest = Get-SkillContentSha256 -RootPath $cacheKey
+    $script:SkillSourceDigestCache[$cacheKey] = $digest
+    return $digest
+}
+
 function Get-ExistingMeta {
     param([string]$MetaPath)
     if (-not (Test-Path -LiteralPath $MetaPath -PathType Leaf)) { return $null }
@@ -352,11 +494,15 @@ function Get-ExistingMeta {
         if ($metadata -isnot [System.Management.Automation.PSCustomObject]) {
             throw "metadata root is not a JSON object"
         }
-        foreach ($propertyName in @('source', 'repo', 'branch', 'component', 'name', 'target', 'agent', 'id', 'adapter', 'installedAt', 'updatedAt')) {
+        foreach ($propertyName in @('source', 'repo', 'branch', 'component', 'name', 'target', 'agent', 'id', 'adapter', 'contentSha256', 'installedAt', 'updatedAt')) {
             $property = $metadata.PSObject.Properties | Where-Object { $_.Name -ceq $propertyName } | Select-Object -First 1
             if ($property -and $property.Value -isnot [string]) {
                 throw "metadata property '$propertyName' is not a string"
             }
+        }
+        $contentSha256 = $metadata.PSObject.Properties | Where-Object { $_.Name -ceq 'contentSha256' } | Select-Object -First 1
+        if ($contentSha256 -and $contentSha256.Value -cnotmatch '\A[0-9a-f]{64}\z') {
+            throw "metadata property 'contentSha256' is not a lowercase 64-character hexadecimal SHA-256"
         }
         return $metadata
     } catch {
@@ -371,9 +517,25 @@ function Get-SkillFrontmatterValue {
     $text = Get-Content -Raw -LiteralPath $SkillFile
     $frontmatter = [regex]::Match($text, '\A---\r?\n(?<body>[\s\S]*?)\r?\n---')
     if (-not $frontmatter.Success) { return $null }
-    $field = [regex]::Match($frontmatter.Groups['body'].Value, '(?m)^' + [regex]::Escape($FieldName) + ':\s*(?<value>.+?)\s*$')
-    if (-not $field.Success) { return $null }
-    return $field.Groups['value'].Value.Trim().Trim('"').Trim("'")
+    $body = $frontmatter.Groups['body'].Value
+    $field = [regex]::Match($body, '(?m)^' + [regex]::Escape($FieldName) + ':\s*(?<value>.+?)\s*$')
+    if ($field.Success) {
+        return $field.Groups['value'].Value.Trim().Trim('"').Trim("'")
+    }
+    if ($FieldName -ne 'source' -and $FieldName -notlike 'reference-*' -and $FieldName -ne 'previous-license') { return $null }
+
+    $insideMetadata = $false
+    foreach ($line in @($body -split '\r?\n')) {
+        if (-not $insideMetadata) {
+            if ($line -match '^metadata:\s*(?:#.*)?$') { $insideMetadata = $true }
+            continue
+        }
+        if ($line -match '^\S') { break }
+        if ($line -match '^\s+' + [regex]::Escape($FieldName) + ':\s*(?<value>.+?)\s*$') {
+            return $Matches['value'].Trim().Trim('"').Trim("'")
+        }
+    }
+    return $null
 }
 
 function Test-LegacySkillOwnership {
@@ -439,6 +601,12 @@ function Get-InstallAction {
     }
     if ($ownershipMatches) {
         $ownedAction = if ($targetExists) { "update" } else { "repair" }
+        $contentDigest = if ($existingMeta) {
+            $existingMeta.PSObject.Properties | Where-Object { $_.Name -ceq 'contentSha256' } | Select-Object -First 1
+        } else { $null }
+        if ($ExpectedComponent -eq 'skill' -and $targetExists -and -not $contentDigest) {
+            $ownedAction = "migrate-update"
+        }
         return @{ Action = $ownedAction; ExistingMeta = $existingMeta }
     }
     $legacyTargetMatches = $existingMeta `
@@ -471,32 +639,568 @@ function Get-InstallAction {
     throw "Refusing to replace '$Label' because it has no matching Autoverse metadata. Use -Force to overwrite intentionally."
 }
 
+function Get-SkillInstallPlan {
+    param(
+        [System.IO.DirectoryInfo]$Source,
+        [string]$DestinationRoot,
+        [string]$TargetName,
+        [string[]]$LegacyTargets,
+        [string]$RepoName
+    )
+    $targetPath = Join-Path $DestinationRoot $Source.Name
+    if (-not (Test-TargetWithinRoot -TargetPath $targetPath -RootPath $DestinationRoot)) {
+        throw "Refusing to write outside install directory: $targetPath"
+    }
+    $metaPath = Join-Path $targetPath ".skill-meta.json"
+    $plan = Get-InstallAction -TargetPath $targetPath -MetaPath $metaPath -Label $Source.Name -RepoName $RepoName -ExpectedComponent "skill" -ExpectedName $Source.Name -ExpectedTarget $TargetName -LegacyTargets $LegacyTargets -LegacyIdentityPath (Join-Path $targetPath "SKILL.md") -IncomingIdentityPath (Join-Path $Source.FullName "SKILL.md")
+    $targetExists = Test-Path -LiteralPath $targetPath
+    $plan.ObservedTargetExists = [bool]$targetExists
+    $plan.ObservedTargetSha256 = $null
+    $plan.ObservedTargetSnapshot = $null
+    if ($targetExists) {
+        if (-not (Test-Path -LiteralPath $targetPath -PathType Container)) {
+            throw "Refusing to replace Skill '$($Source.Name)' because its target is not a directory: $targetPath"
+        }
+        $plan.ObservedTargetSnapshot = Get-SkillDirectorySnapshot -Path $targetPath
+        $plan.ObservedTargetSha256 = $plan.ObservedTargetSnapshot.ContentSha256
+        $recordedDigest = if ($plan.ExistingMeta) {
+            $plan.ExistingMeta.PSObject.Properties | Where-Object { $_.Name -ceq 'contentSha256' } | Select-Object -First 1
+        } else { $null }
+        if ($recordedDigest -and $plan.Action -in @('update', 'migrate-update') -and
+            -not [string]::Equals($recordedDigest.Value, $plan.ObservedTargetSha256, [System.StringComparison]::OrdinalIgnoreCase)) {
+            if ($Force) {
+                $plan.Action = 'force-replace'
+            } else {
+                throw "Refusing to update Skill '$($Source.Name)': installed Skill content has changed since the last Autoverse install. Use -Force to reset it intentionally."
+            }
+        }
+    }
+    $plan.IncomingContentSha256 = Get-SkillSourceContentSha256 -RootPath $Source.FullName
+    return $plan
+}
+
+function Assert-SkillTargetUnchanged {
+    param([hashtable]$Plan, [string]$TargetPath, [string]$SkillName)
+    $targetExists = Test-Path -LiteralPath $TargetPath
+    if ([bool]$Plan.ObservedTargetExists -ne [bool]$targetExists) {
+        throw "Refusing to commit Skill '$SkillName' because its target changed while the update was being staged."
+    }
+    if (-not $targetExists) { return $null }
+    if (-not (Test-Path -LiteralPath $TargetPath -PathType Container)) {
+        throw "Refusing to commit Skill '$SkillName' because its target is no longer a directory."
+    }
+    $currentSnapshot = Get-SkillDirectorySnapshot -Path $TargetPath
+    if (-not (Test-SkillDirectorySnapshotMatch -Expected $Plan.ObservedTargetSnapshot -Actual $currentSnapshot)) {
+        throw "Refusing to commit Skill '$SkillName' because its target changed while the update was being staged."
+    }
+    return $currentSnapshot
+}
+
+function Get-TestOnlySkillFault {
+    $mode = [Environment]::GetEnvironmentVariable('AUTOVERSE_INSTALLER_TEST_MODE', 'Process')
+    $acknowledgement = [Environment]::GetEnvironmentVariable('AUTOVERSE_INSTALLER_TEST_ACK', 'Process')
+    $fault = [Environment]::GetEnvironmentVariable('AUTOVERSE_INSTALLER_TEST_FAULT', 'Process')
+    if ($null -eq $mode -and $null -eq $acknowledgement -and $null -eq $fault) { return $null }
+    if ($mode -cne 'skill-atomic-swap' -or
+        $acknowledgement -cne 'I_UNDERSTAND_THIS_IS_TEST_ONLY' -or
+        $fault -cnotin @(
+            'after-backup',
+            'after-recheck-destination-appears',
+            'after-recheck-target-replaced',
+            'fresh-post-move-fail',
+            'stage-path-collision'
+        )) {
+        throw "Invalid test-only Skill fault injection configuration."
+    }
+    return $fault
+}
+
+function Write-Utf8JsonFile {
+    param([object]$Value, [string]$Path)
+    $text = ($Value | ConvertTo-Json -Depth 5) + "`n"
+    [System.IO.File]::WriteAllText($Path, $text, [System.Text.UTF8Encoding]::new($false))
+}
+
+function Initialize-SkillDirectoryNativeType {
+    if ('AutoverseSkillDirectoryNative' -as [type]) { return }
+    Add-Type -TypeDefinition @'
+using System;
+using System.ComponentModel;
+using System.Runtime.InteropServices;
+using Microsoft.Win32.SafeHandles;
+
+public static class AutoverseSkillDirectoryNative
+{
+    private const uint FileShareRead = 0x00000001;
+    private const uint FileShareWrite = 0x00000002;
+    private const uint FileShareDelete = 0x00000004;
+    private const uint OpenExisting = 3;
+    private const uint FileFlagBackupSemantics = 0x02000000;
+    private const uint FileFlagOpenReparsePoint = 0x00200000;
+
+    [StructLayout(LayoutKind.Sequential)]
+    private struct FileTime
+    {
+        public uint Low;
+        public uint High;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    private struct ByHandleFileInformation
+    {
+        public uint FileAttributes;
+        public FileTime CreationTime;
+        public FileTime LastAccessTime;
+        public FileTime LastWriteTime;
+        public uint VolumeSerialNumber;
+        public uint FileSizeHigh;
+        public uint FileSizeLow;
+        public uint NumberOfLinks;
+        public uint FileIndexHigh;
+        public uint FileIndexLow;
+    }
+
+    [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+    private static extern SafeFileHandle CreateFile(
+        string fileName,
+        uint desiredAccess,
+        uint shareMode,
+        IntPtr securityAttributes,
+        uint creationDisposition,
+        uint flagsAndAttributes,
+        IntPtr templateFile
+    );
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern bool GetFileInformationByHandle(
+        SafeFileHandle handle,
+        out ByHandleFileInformation information
+    );
+
+    [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true, EntryPoint = "CreateDirectoryW")]
+    private static extern bool CreateDirectory(string path, IntPtr securityAttributes);
+
+    public static string GetIdentity(string path)
+    {
+        using (SafeFileHandle handle = CreateFile(
+            path,
+            0,
+            FileShareRead | FileShareWrite | FileShareDelete,
+            IntPtr.Zero,
+            OpenExisting,
+            FileFlagBackupSemantics | FileFlagOpenReparsePoint,
+            IntPtr.Zero
+        ))
+        {
+            if (handle.IsInvalid)
+                throw new Win32Exception(Marshal.GetLastWin32Error());
+
+            ByHandleFileInformation information;
+            if (!GetFileInformationByHandle(handle, out information))
+                throw new Win32Exception(Marshal.GetLastWin32Error());
+
+            return string.Format(
+                "{0:x8}:{1:x8}{2:x8}",
+                information.VolumeSerialNumber,
+                information.FileIndexHigh,
+                information.FileIndexLow
+            );
+        }
+    }
+
+    public static void CreateDirectoryExclusive(string path)
+    {
+        if (!CreateDirectory(path, IntPtr.Zero))
+            throw new Win32Exception(Marshal.GetLastWin32Error());
+    }
+}
+'@
+}
+
+function Get-SkillDirectoryIdentity {
+    param([string]$Path)
+    Initialize-SkillDirectoryNativeType
+    return [AutoverseSkillDirectoryNative]::GetIdentity([System.IO.Path]::GetFullPath($Path))
+}
+
+function New-ExclusiveSkillTransactionDirectory {
+    param([string]$Path)
+    Initialize-SkillDirectoryNativeType
+    [AutoverseSkillDirectoryNative]::CreateDirectoryExclusive([System.IO.Path]::GetFullPath($Path))
+}
+
+function New-SkillTransactionToken {
+    $bytes = New-Object byte[] 32
+    $generator = [System.Security.Cryptography.RandomNumberGenerator]::Create()
+    try {
+        $generator.GetBytes($bytes)
+        return (($bytes | ForEach-Object { $_.ToString('x2') }) -join '')
+    } finally {
+        $generator.Dispose()
+    }
+}
+
+function Get-SkillOwnershipMetadataSnapshot {
+    param([string]$RootPath)
+    $metadataPath = Join-Path $RootPath '.skill-meta.json'
+    if (-not (Test-Path -LiteralPath $metadataPath)) {
+        return @{ Exists = $false; Sha256 = $null }
+    }
+    if (-not (Test-Path -LiteralPath $metadataPath -PathType Leaf)) {
+        throw "Refusing to snapshot non-file Skill ownership metadata: $metadataPath"
+    }
+    $metadataItem = Get-Item -Force -LiteralPath $metadataPath
+    if (($metadataItem.Attributes -band [System.IO.FileAttributes]::ReparsePoint) -ne 0) {
+        throw "Refusing to snapshot linked Skill ownership metadata: $metadataPath"
+    }
+    return @{ Exists = $true; Sha256 = Get-FileSha256 -Path $metadataPath }
+}
+
+function Get-SkillDirectorySnapshot {
+    param(
+        [string]$Path,
+        [string[]]$ExcludedRelativePaths = @()
+    )
+    if (-not (Test-Path -LiteralPath $Path -PathType Container)) {
+        throw "Cannot snapshot missing Skill directory: $Path"
+    }
+    return @{
+        Identity = Get-SkillDirectoryIdentity -Path $Path
+        ContentSha256 = Get-SkillContentSha256 -RootPath $Path -ExcludedRelativePaths $ExcludedRelativePaths
+        OwnershipMetadata = Get-SkillOwnershipMetadataSnapshot -RootPath $Path
+    }
+}
+
+function Test-SkillDirectorySnapshotMatch {
+    param([hashtable]$Expected, [hashtable]$Actual)
+    if (-not $Expected -or -not $Actual) { return $false }
+    if ($Expected.Identity -cne $Actual.Identity) { return $false }
+    if (-not [string]::Equals($Expected.ContentSha256, $Actual.ContentSha256, [System.StringComparison]::OrdinalIgnoreCase)) {
+        return $false
+    }
+    if ([bool]$Expected.OwnershipMetadata.Exists -ne [bool]$Actual.OwnershipMetadata.Exists) { return $false }
+    if ($Expected.OwnershipMetadata.Exists -and
+        -not [string]::Equals($Expected.OwnershipMetadata.Sha256, $Actual.OwnershipMetadata.Sha256, [System.StringComparison]::OrdinalIgnoreCase)) {
+        return $false
+    }
+    return $true
+}
+
+function Test-SkillDirectoryMatchesSnapshot {
+    param(
+        [string]$Path,
+        [hashtable]$ExpectedSnapshot,
+        [string[]]$ExcludedRelativePaths = @()
+    )
+    try {
+        $actual = Get-SkillDirectorySnapshot -Path $Path -ExcludedRelativePaths $ExcludedRelativePaths
+        return Test-SkillDirectorySnapshotMatch -Expected $ExpectedSnapshot -Actual $actual
+    } catch {
+        return $false
+    }
+}
+
+function Write-SkillTransactionMarker {
+    param([string]$Path, [string]$Token)
+    $stream = [System.IO.File]::Open($Path, [System.IO.FileMode]::CreateNew, [System.IO.FileAccess]::Write, [System.IO.FileShare]::None)
+    try {
+        $bytes = [System.Text.UTF8Encoding]::new($false).GetBytes($Token)
+        $stream.Write($bytes, 0, $bytes.Length)
+        $stream.Flush($true)
+    } finally {
+        $stream.Dispose()
+    }
+}
+
+function Test-SkillTransactionDirectory {
+    param(
+        [string]$Path,
+        [string]$MarkerName,
+        [string]$TransactionToken,
+        [hashtable]$ExpectedSnapshot
+    )
+    try {
+        if (-not (Test-Path -LiteralPath $Path -PathType Container)) { return $false }
+        $rootItem = Get-Item -Force -LiteralPath $Path
+        if (($rootItem.Attributes -band [System.IO.FileAttributes]::ReparsePoint) -ne 0) { return $false }
+        $markerPath = Join-Path $Path $MarkerName
+        if (-not (Test-Path -LiteralPath $markerPath -PathType Leaf)) { return $false }
+        $markerItem = Get-Item -Force -LiteralPath $markerPath
+        if (($markerItem.Attributes -band [System.IO.FileAttributes]::ReparsePoint) -ne 0) { return $false }
+        if (([System.IO.File]::ReadAllText($markerPath, [System.Text.Encoding]::UTF8)) -cne $TransactionToken) { return $false }
+        return Test-SkillDirectoryMatchesSnapshot `
+            -Path $Path `
+            -ExpectedSnapshot $ExpectedSnapshot `
+            -ExcludedRelativePaths @($MarkerName)
+    } catch {
+        return $false
+    }
+}
+
+function Remove-VerifiedSkillDirectory {
+    param(
+        [string]$Path,
+        [string]$QuarantinePath,
+        [hashtable]$ExpectedSnapshot,
+        [string]$MarkerName,
+        [string]$TransactionToken
+    )
+    $isTransactionDirectory = [bool]$MarkerName
+    $matchesBeforeMove = if ($isTransactionDirectory) {
+        Test-SkillTransactionDirectory `
+            -Path $Path `
+            -MarkerName $MarkerName `
+            -TransactionToken $TransactionToken `
+            -ExpectedSnapshot $ExpectedSnapshot
+    } else {
+        Test-SkillDirectoryMatchesSnapshot -Path $Path -ExpectedSnapshot $ExpectedSnapshot
+    }
+    if (-not $matchesBeforeMove) {
+        throw "Manual recovery required: refusing to delete an unrecognized directory at '$Path'."
+    }
+    if (Test-Path -LiteralPath $QuarantinePath) {
+        throw "Manual recovery required: cleanup quarantine is occupied; preserved '$Path' and '$QuarantinePath'."
+    }
+
+    [System.IO.Directory]::Move($Path, $QuarantinePath)
+    $matchesAfterMove = if ($isTransactionDirectory) {
+        Test-SkillTransactionDirectory `
+            -Path $QuarantinePath `
+            -MarkerName $MarkerName `
+            -TransactionToken $TransactionToken `
+            -ExpectedSnapshot $ExpectedSnapshot
+    } else {
+        Test-SkillDirectoryMatchesSnapshot -Path $QuarantinePath -ExpectedSnapshot $ExpectedSnapshot
+    }
+    if (-not $matchesAfterMove) {
+        throw "Manual recovery required: cleanup identity verification failed; preserved the directory at '$QuarantinePath'."
+    }
+    Remove-Item -Recurse -Force -LiteralPath $QuarantinePath
+}
+
+function Install-AtomicSkillDirectory {
+    param(
+        [System.IO.DirectoryInfo]$Source,
+        [string]$DestinationRoot,
+        [string]$TargetPath,
+        [hashtable]$Plan,
+        [hashtable]$Metadata
+    )
+    New-Item -ItemType Directory -Force -Path $DestinationRoot | Out-Null
+    $suffix = [Guid]::NewGuid().ToString('N')
+    $transactionToken = New-SkillTransactionToken
+    $markerName = '.autoverse-transaction-' + $suffix
+    $stagePath = Join-Path $DestinationRoot ('.autoverse-stage-' + $Source.Name + '-' + $suffix)
+    $backupPath = Join-Path $DestinationRoot ('.autoverse-backup-' + $Source.Name + '-' + $suffix)
+    $failedPath = Join-Path $DestinationRoot ('.autoverse-failed-' + $Source.Name + '-' + $suffix)
+    $stageCleanupPath = Join-Path $DestinationRoot ('.autoverse-cleanup-stage-' + $Source.Name + '-' + $suffix)
+    $backupCleanupPath = Join-Path $DestinationRoot ('.autoverse-cleanup-backup-' + $Source.Name + '-' + $suffix)
+    $failedCleanupPath = Join-Path $DestinationRoot ('.autoverse-cleanup-failed-' + $Source.Name + '-' + $suffix)
+    foreach ($path in @($stagePath, $backupPath, $failedPath, $stageCleanupPath, $backupCleanupPath, $failedCleanupPath)) {
+        if (-not (Test-TargetWithinRoot -TargetPath $path -RootPath $DestinationRoot)) {
+            throw "Refusing to use an atomic Skill path outside the install directory: $path"
+        }
+    }
+    $fault = Get-TestOnlySkillFault
+    $stageSnapshot = $null
+    $backupSnapshot = $null
+    $backupMoved = $false
+    $backupVerified = $false
+    $committed = $false
+    try {
+        if ($fault -ceq 'stage-path-collision') {
+            $null = New-Item -ItemType Directory -Path $stagePath
+            [System.IO.File]::WriteAllText(
+                (Join-Path $stagePath 'AUTOVERSE-STAGE-NEWCOMER.txt'),
+                "test-only stage newcomer that must be preserved`n",
+                [System.Text.UTF8Encoding]::new($false)
+            )
+        }
+        try {
+            New-ExclusiveSkillTransactionDirectory -Path $stagePath
+        } catch {
+            if (Test-Path -LiteralPath $stagePath) {
+                throw "Manual recovery required: the atomic Skill stage path is occupied by an unrecognized newcomer at '$stagePath'."
+            }
+            throw
+        }
+
+        $stageIdentity = Get-SkillDirectoryIdentity -Path $stagePath
+        Write-SkillTransactionMarker -Path (Join-Path $stagePath $markerName) -Token $transactionToken
+        $stageSnapshot = Get-SkillDirectorySnapshot -Path $stagePath -ExcludedRelativePaths @($markerName)
+        if ($stageSnapshot.Identity -cne $stageIdentity) {
+            throw "Manual recovery required: the atomic Skill stage identity changed during creation at '$stagePath'."
+        }
+
+        # Copy into the exclusively-created directory so Copy-Item can never
+        # adopt a pre-existing stage path. If copying fails mid-stream, the
+        # last known snapshot will not match and cleanup fails closed.
+        $stageSnapshot = $null
+        foreach ($sourceItem in @(Get-ChildItem -Force -LiteralPath $Source.FullName)) {
+            Copy-Item -Recurse -Force -LiteralPath $sourceItem.FullName -Destination $stagePath
+        }
+        $stageSnapshot = Get-SkillDirectorySnapshot -Path $stagePath -ExcludedRelativePaths @($markerName)
+        if ($stageSnapshot.Identity -cne $stageIdentity -or
+            -not (Test-SkillTransactionDirectory -Path $stagePath -MarkerName $markerName -TransactionToken $transactionToken -ExpectedSnapshot $stageSnapshot)) {
+            throw "Manual recovery required: the atomic Skill stage changed while content was being copied at '$stagePath'."
+        }
+        $stagedDigest = $stageSnapshot.ContentSha256
+        if (-not [string]::Equals($Plan.IncomingContentSha256, $stagedDigest, [System.StringComparison]::OrdinalIgnoreCase)) {
+            throw "Skill source changed while '$($Source.Name)' was being staged."
+        }
+        $Metadata.contentSha256 = $stagedDigest
+        Write-Utf8JsonFile -Value $Metadata -Path (Join-Path $stagePath '.skill-meta.json')
+        $stageSnapshot = Get-SkillDirectorySnapshot -Path $stagePath -ExcludedRelativePaths @($markerName)
+        if ($stageSnapshot.Identity -cne $stageIdentity -or
+            -not (Test-SkillTransactionDirectory -Path $stagePath -MarkerName $markerName -TransactionToken $transactionToken -ExpectedSnapshot $stageSnapshot)) {
+            throw "Manual recovery required: the atomic Skill stage changed while metadata was being written at '$stagePath'."
+        }
+
+        # This is the last read before the target rename. A concurrent content
+        # or metadata edit must fail without deleting the user's current target.
+        $preMoveTargetSnapshot = Assert-SkillTargetUnchanged -Plan $Plan -TargetPath $TargetPath -SkillName $Source.Name
+        if ($Plan.ObservedTargetExists) {
+            if ($fault -ceq 'after-recheck-target-replaced') {
+                [System.IO.Directory]::Move($TargetPath, $failedPath)
+                $null = New-Item -ItemType Directory -Path $TargetPath
+                [System.IO.File]::WriteAllText(
+                    (Join-Path $TargetPath 'AUTOVERSE-REPLACEMENT-NEWCOMER.txt'),
+                    "test-only replacement newcomer that must be preserved`n",
+                    [System.Text.UTF8Encoding]::new($false)
+                )
+            }
+            [System.IO.Directory]::Move($TargetPath, $backupPath)
+            $backupMoved = $true
+            if (-not (Test-SkillDirectoryMatchesSnapshot -Path $backupPath -ExpectedSnapshot $preMoveTargetSnapshot)) {
+                throw "Manual recovery required: the directory moved to '$backupPath' does not match the pre-move Skill identity, content, and ownership metadata; it was preserved."
+            }
+            $backupSnapshot = $preMoveTargetSnapshot
+            $backupVerified = $true
+        }
+        if ($backupVerified -and $fault -ceq 'after-backup') {
+            throw "Injected test-only failure after Skill backup."
+        }
+        if ($fault -ceq 'after-recheck-destination-appears') {
+            $null = New-Item -ItemType Directory -Path $TargetPath
+            [System.IO.File]::WriteAllText(
+                (Join-Path $TargetPath 'AUTOVERSE-NEWCOMER.txt'),
+                "test-only newcomer that must be preserved`n",
+                [System.Text.UTF8Encoding]::new($false)
+            )
+        }
+        [System.IO.Directory]::Move($stagePath, $TargetPath)
+        if (-not (Test-SkillTransactionDirectory -Path $TargetPath -MarkerName $markerName -TransactionToken $transactionToken -ExpectedSnapshot $stageSnapshot)) {
+            throw "Skill commit identity verification failed for '$($Source.Name)'."
+        }
+        if (-not $Plan.ObservedTargetExists -and $fault -ceq 'fresh-post-move-fail') {
+            throw "Injected test-only failure after fresh Skill stage move."
+        }
+        Remove-Item -Force -LiteralPath (Join-Path $TargetPath $markerName)
+        $committed = $true
+        if ($backupMoved) {
+            try {
+                Remove-VerifiedSkillDirectory `
+                    -Path $backupPath `
+                    -QuarantinePath $backupCleanupPath `
+                    -ExpectedSnapshot $backupSnapshot
+            } catch {
+                throw "Skill committed but backup cleanup failed; inspect the retained backup at '$backupPath'. $($_.Exception.Message)"
+            }
+            $backupMoved = $false
+        }
+    } catch {
+        $originalFailure = $_
+        $recoveryFailure = $null
+        if (-not $committed -and $backupMoved) {
+            if (-not $backupVerified -or -not (Test-Path -LiteralPath $backupPath)) {
+                $recoveryFailure = "Manual recovery required: the unverified directory at '$backupPath' was preserved and was not treated as the original Skill backup."
+            } else {
+                try {
+                    if (Test-Path -LiteralPath $TargetPath) {
+                        if (-not (Test-SkillTransactionDirectory -Path $TargetPath -MarkerName $markerName -TransactionToken $transactionToken -ExpectedSnapshot $stageSnapshot)) {
+                            throw "Manual recovery required: the Skill destination is occupied by an unrecognized newcomer at '$TargetPath'; the original backup was preserved at '$backupPath'."
+                        }
+                        [System.IO.Directory]::Move($TargetPath, $failedPath)
+                        if (-not (Test-SkillTransactionDirectory -Path $failedPath -MarkerName $markerName -TransactionToken $transactionToken -ExpectedSnapshot $stageSnapshot)) {
+                            throw "Manual recovery required: the failed Skill commit could not be safely quarantined; the original backup was preserved at '$backupPath'."
+                        }
+                    }
+                    [System.IO.Directory]::Move($backupPath, $TargetPath)
+                    if (-not (Test-SkillDirectoryMatchesSnapshot -Path $TargetPath -ExpectedSnapshot $backupSnapshot)) {
+                        throw "Manual recovery required: the restored Skill does not match the original directory identity, content, and ownership metadata."
+                    }
+                    $backupMoved = $false
+                    if (Test-Path -LiteralPath $failedPath) {
+                        Remove-VerifiedSkillDirectory `
+                            -Path $failedPath `
+                            -QuarantinePath $failedCleanupPath `
+                            -ExpectedSnapshot $stageSnapshot `
+                            -MarkerName $markerName `
+                            -TransactionToken $transactionToken
+                    }
+                } catch {
+                    $recoveryFailure = $_.Exception.Message
+                }
+            }
+        } elseif (-not $committed -and -not $Plan.ObservedTargetExists -and (Test-Path -LiteralPath $TargetPath)) {
+            try {
+                if (-not $stageSnapshot -or
+                    -not (Test-SkillTransactionDirectory -Path $TargetPath -MarkerName $markerName -TransactionToken $transactionToken -ExpectedSnapshot $stageSnapshot)) {
+                    throw "Manual recovery required: a fresh Skill install failed and the destination is not provably owned by this transaction; preserved '$TargetPath'."
+                }
+                [System.IO.Directory]::Move($TargetPath, $failedPath)
+                if (-not (Test-SkillTransactionDirectory -Path $failedPath -MarkerName $markerName -TransactionToken $transactionToken -ExpectedSnapshot $stageSnapshot)) {
+                    throw "Manual recovery required: the failed fresh Skill install could not be safely quarantined; preserved '$failedPath'."
+                }
+                Remove-VerifiedSkillDirectory `
+                    -Path $failedPath `
+                    -QuarantinePath $failedCleanupPath `
+                    -ExpectedSnapshot $stageSnapshot `
+                    -MarkerName $markerName `
+                    -TransactionToken $transactionToken
+            } catch {
+                $recoveryFailure = $_.Exception.Message
+            }
+        }
+        if ($recoveryFailure) {
+            throw "Atomic Skill update failed and recovery also failed: $($originalFailure.Exception.Message) Recovery error: $recoveryFailure"
+        }
+        throw $originalFailure
+    } finally {
+        if (Test-Path -LiteralPath $stagePath) {
+            if (-not $stageSnapshot -or
+                -not (Test-SkillTransactionDirectory -Path $stagePath -MarkerName $markerName -TransactionToken $transactionToken -ExpectedSnapshot $stageSnapshot)) {
+                throw "Manual recovery required: refusing to clean an unrecognized or changed atomic Skill stage at '$stagePath'."
+            }
+            Remove-VerifiedSkillDirectory `
+                -Path $stagePath `
+                -QuarantinePath $stageCleanupPath `
+                -ExpectedSnapshot $stageSnapshot `
+                -MarkerName $markerName `
+                -TransactionToken $transactionToken
+        }
+    }
+}
+
 function Install-Skill {
     param([System.IO.DirectoryInfo]$Source, [string]$DestinationRoot, [string]$TargetName, [string[]]$LegacyTargets, [string]$RepoName, [string]$BranchName)
     $targetPath = Join-Path $DestinationRoot $Source.Name
-    if (-not (Test-TargetWithinRoot -TargetPath $targetPath -RootPath $DestinationRoot)) { throw "Refusing to write outside install directory: $targetPath" }
-    $metaPath = Join-Path $targetPath ".skill-meta.json"
-    $plan = Get-InstallAction -TargetPath $targetPath -MetaPath $metaPath -Label $Source.Name -RepoName $RepoName -ExpectedComponent "skill" -ExpectedName $Source.Name -ExpectedTarget $TargetName -LegacyTargets $LegacyTargets -LegacyIdentityPath (Join-Path $targetPath "SKILL.md") -IncomingIdentityPath (Join-Path $Source.FullName "SKILL.md")
+    $plan = Get-SkillInstallPlan -Source $Source -DestinationRoot $DestinationRoot -TargetName $TargetName -LegacyTargets $LegacyTargets -RepoName $RepoName
     if ($DryRun) { Write-Host "DRY-RUN $($plan.Action) Skill $($Source.Name) -> $targetPath"; return }
 
-    New-Item -ItemType Directory -Force -Path $DestinationRoot | Out-Null
-    if (Test-Path -LiteralPath $targetPath) { Remove-Item -Recurse -Force -LiteralPath $targetPath }
-    Copy-Item -Recurse -Force -LiteralPath $Source.FullName -Destination $targetPath
     $now = (Get-Date).ToUniversalTime().ToString("o")
     $installedAt = if ($plan.ExistingMeta -and $plan.ExistingMeta.installedAt) { $plan.ExistingMeta.installedAt } else { $now }
-    @{
+    $metadata = @{
         source = $script:SourceKind; repo = $RepoName; branch = $BranchName; component = "skill"
         name = $Source.Name; target = $TargetName; installedAt = $installedAt; updatedAt = $now
-    } | ConvertTo-Json -Depth 3 | Set-Content -LiteralPath $metaPath -Encoding UTF8
+    }
+    Install-AtomicSkillDirectory -Source $Source -DestinationRoot $DestinationRoot -TargetPath $targetPath -Plan $plan -Metadata $metadata
     Write-Success "$($plan.Action) Skill $($Source.Name) -> $targetPath"
 }
 
 function Test-SkillInstall {
     param([System.IO.DirectoryInfo]$Source, [string]$DestinationRoot, [string]$TargetName, [string[]]$LegacyTargets, [string]$RepoName)
-    $targetPath = Join-Path $DestinationRoot $Source.Name
-    if (-not (Test-TargetWithinRoot -TargetPath $targetPath -RootPath $DestinationRoot)) { throw "Refusing to write outside install directory: $targetPath" }
-    $metaPath = Join-Path $targetPath ".skill-meta.json"
-    Get-InstallAction -TargetPath $targetPath -MetaPath $metaPath -Label $Source.Name -RepoName $RepoName -ExpectedComponent "skill" -ExpectedName $Source.Name -ExpectedTarget $TargetName -LegacyTargets $LegacyTargets -LegacyIdentityPath (Join-Path $targetPath "SKILL.md") -IncomingIdentityPath (Join-Path $Source.FullName "SKILL.md") | Out-Null
+    Get-SkillInstallPlan -Source $Source -DestinationRoot $DestinationRoot -TargetName $TargetName -LegacyTargets $LegacyTargets -RepoName $RepoName | Out-Null
 }
 
 function Install-AtomicFile {
@@ -1044,6 +1748,8 @@ function Invoke-AutoDelegationPlan {
 
 try {
     if (-not $Target) { Show-Usage; throw "Target is required." }
+    Test-RepositoryCoordinate -RepoName $Repo
+    Test-BranchName -BranchName $Branch
     $Target = Resolve-TargetName -TargetName $Target -ComponentType $Type
     if ($EnableAutoDelegation -and $Type -ne "agent") {
         throw "EnableAutoDelegation is only supported with -Type agent."

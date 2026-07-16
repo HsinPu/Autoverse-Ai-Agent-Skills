@@ -1,8 +1,10 @@
 ---
 name: python-automation-scripting
 description: Python automation and scripting guide covering command-line tools, filesystem automation, subprocess orchestration, scheduling, and utility scripts. Use when building or refactoring scripts that automate local files, shell commands, batch jobs, or small operational workflows rather than data analysis or web scraping.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Python Automation and Scripting

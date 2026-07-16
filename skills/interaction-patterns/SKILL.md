@@ -1,8 +1,10 @@
 ---
 name: interaction-patterns
 description: Navigation interaction guidance for web UIs, covering tab overflow, scroll behavior, view transitions, progressive disclosure, and other movement-heavy interface patterns. Use when designing or fixing navigation, scrolling, or transition interactions that need to feel coherent across desktop and mobile.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Interaction Patterns

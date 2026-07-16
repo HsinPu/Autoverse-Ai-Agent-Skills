@@ -1,8 +1,10 @@
 ---
 name: agents-sdk-development
 description: OpenAI Agents SDK development guide covering agents, instructions, tools, handoffs, guardrails, tracing, streaming, context, multi-agent workflows, testing, and production observability. Use when building or reviewing agentic applications with the OpenAI Agents SDK.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Agents SDK Development

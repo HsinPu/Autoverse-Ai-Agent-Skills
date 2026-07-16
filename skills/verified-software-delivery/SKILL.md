@@ -1,10 +1,13 @@
 ---
 name: verified-software-delivery
 description: End-to-end orchestration workflow for carrying non-trivial software work from an approved problem framing through specification, implementation, review remediation, and evidence-backed completion. Use when a feature, refactor, or multi-step fix must be delivered across several stages with explicit artifacts and gates; do not use for a single isolated edit, test run, or review.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
-reference-source: obra/superpowers
-reference-license: MIT
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  reference-source: "obra/superpowers"
+  reference-license: "MIT"
+  reference-revision: "d884ae04edebef577e82ff7c4e143debd0bbec99"
 ---
 
 # Verified Software Delivery

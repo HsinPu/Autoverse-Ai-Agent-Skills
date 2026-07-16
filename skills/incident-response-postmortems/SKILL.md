@@ -1,8 +1,10 @@
 ---
 name: incident-response-postmortems
 description: Coordinate production incidents from severity assessment and stabilization through command roles, evidence preservation, communications, recovery validation, on-call handoff, blameless postmortems, and corrective-action closure. Use during active reliability or security incidents, operational handoffs, recovery decisions, and structured post-incident learning.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Incident Response And Postmortems

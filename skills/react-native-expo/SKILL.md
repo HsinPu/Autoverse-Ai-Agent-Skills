@@ -1,8 +1,10 @@
 ---
 name: react-native-expo
 description: React Native and Expo development workflow covering Expo Router, native modules, permissions, app config, EAS Build, EAS Update, EAS Submit, iOS and Android release profiles, device testing, performance, accessibility, and store readiness. Use when building or debugging mobile apps with React Native or Expo.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # React Native Expo

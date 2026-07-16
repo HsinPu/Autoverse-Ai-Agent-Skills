@@ -1,8 +1,10 @@
 ---
 name: github-actions-ci
 description: GitHub Actions CI workflow guide for designing, writing, debugging, and reviewing workflow YAML, jobs, matrix builds, caching, artifacts, permissions, secrets, pull request checks, and release automation. Use when creating or fixing GitHub Actions pipelines rather than general repository hygiene.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # GitHub Actions CI

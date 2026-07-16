@@ -1,8 +1,10 @@
 ---
 name: frontend-design-review
 description: Frontend UI review workflow that separates experience critique, production web audit, and optical polish while evaluating implemented pages, components, and PRs for usability, accessibility, responsive behavior, design-system compliance, state completeness, performance, and visual craft. Use for UI, UX, accessibility, responsive, theme, or design-quality reviews after implementation exists.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Frontend Design Review

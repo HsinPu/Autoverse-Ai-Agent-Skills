@@ -1,8 +1,10 @@
 ---
 name: llm-evals
 description: LLM evaluation guide covering golden datasets, prompt regression tests, graders, rubrics, LLM-as-judge, trace grading, RAG metrics, agent evals, online feedback, cost, latency, and release gates. Use when measuring or improving AI application quality.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # LLM Evals

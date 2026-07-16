@@ -1,8 +1,10 @@
 ---
 name: frontend-design
 description: Production frontend implementation guide for turning an approved visual direction, design system, or image contract into semantic, responsive, accessible UI in the existing stack. Use when building or restyling components, pages, and applications after the visual direction is clear; use taste-skill or design-consultation first when art direction is unresolved.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Frontend Design

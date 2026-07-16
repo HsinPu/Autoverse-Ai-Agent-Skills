@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { parseYamlFrontmatter } = require('./generate-skill-catalog');
 
 const root = path.resolve(__dirname, '..');
 const skillsRoot = path.join(root, 'skills');
@@ -17,6 +18,14 @@ const errors = [];
 const canonicalSkillSource = 'HsinPu/Autoverse-Ai-Agent-Skills';
 const canonicalSkillAuthor = 'HsinPu';
 const componentNamePattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const officialSkillFrontmatterFields = new Set([
+  'name',
+  'description',
+  'license',
+  'compatibility',
+  'metadata',
+  'allowed-tools'
+]);
 const canonicalAgentMetadata = {
   author: 'HsinPu',
   source: 'HsinPu/Autoverse-Ai-Agent-Skills',
@@ -43,56 +52,24 @@ const allowedAgentReferenceTrees = new Map(
     : []
 );
 
-function parseScalar(value) {
-  const trimmed = value.trim();
-  if (trimmed.startsWith('"') && trimmed.endsWith('"')) {
-    try { return JSON.parse(trimmed); } catch { /* Use plain scalar fallback. */ }
-  }
-  if (trimmed === 'true') return true;
-  if (trimmed === 'false') return false;
-  return trimmed.replace(/^['"]|['"]$/g, '');
-}
-
 function parseFrontmatter(filePath) {
-  const text = fs.readFileSync(filePath, 'utf8');
-  const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---/);
-  if (!match) {
-    fail(`${path.relative(root, filePath)} is missing YAML frontmatter`);
+  try {
+    return parseYamlFrontmatter(filePath);
+  } catch (error) {
+    const absolutePrefix = `${filePath}: `;
+    const detail = error.message.startsWith(absolutePrefix)
+      ? error.message.slice(absolutePrefix.length)
+      : error.message;
+    fail(`${path.relative(root, filePath)} has invalid YAML frontmatter: ${detail}`);
     return {};
   }
-  const fields = {};
-  let currentListField = null;
-  for (const line of match[1].split(/\r?\n/)) {
-    const field = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
-    if (field) {
-      fields[field[1]] = field[2].trim() === '' ? [] : parseScalar(field[2]);
-      currentListField = field[2].trim() === '' ? field[1] : null;
-      continue;
-    }
-    const listItem = line.match(/^\s+-\s+(.+)$/);
-    if (listItem && currentListField && Array.isArray(fields[currentListField])) {
-      fields[currentListField].push(parseScalar(listItem[1]));
-    }
-  }
-  return fields;
 }
 
 function parseOpenCodeFrontmatter(filePath) {
   const fields = parseFrontmatter(filePath);
-  const text = fs.readFileSync(filePath, 'utf8');
-  const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---/);
-  let parent = null;
-  if (match) {
-    for (const line of match[1].split(/\r?\n/)) {
-      const topLevel = line.match(/^([A-Za-z0-9_-]+):(?:\s*(.*))?$/);
-      if (topLevel) {
-        parent = topLevel[2] && topLevel[2].trim() !== '' ? null : topLevel[1];
-        continue;
-      }
-      const nested = line.match(/^\s{2}([A-Za-z0-9_-]+):\s*(.+?)\s*$/);
-      if (parent === 'permission' && nested) {
-        fields[`permission.${nested[1]}`] = parseScalar(nested[2]);
-      }
+  if (fields.permission && typeof fields.permission === 'object' && !Array.isArray(fields.permission)) {
+    for (const [name, value] of Object.entries(fields.permission)) {
+      fields[`permission.${name}`] = value;
     }
   }
   return fields;
@@ -208,29 +185,80 @@ for (const name of skillDirs) {
   const skillText = fs.readFileSync(skillFile, 'utf8');
   const frontmatter = parseFrontmatter(skillFile);
   const catalogEntry = skillsByName.get(name);
-  for (const field of ['name', 'description', 'source', 'license']) {
-    if (!frontmatter[field]) fail(`${name}: SKILL.md is missing frontmatter field: ${field}`);
+
+  for (const field of Object.keys(frontmatter)) {
+    if (!officialSkillFrontmatterFields.has(field)) {
+      fail(`${name}: SKILL.md contains unknown top-level frontmatter field: ${field}`);
+    }
   }
+
+  if (typeof frontmatter.name !== 'string' || frontmatter.name.length < 1 || frontmatter.name.length > 64) {
+    fail(`${name}: SKILL.md name must be a string between 1 and 64 characters`);
+  } else if (!componentNamePattern.test(frontmatter.name)) {
+    fail(`${name}: SKILL.md name must contain only lowercase letters, digits, and single hyphens, with no leading or trailing hyphen`);
+  }
+  if (
+    typeof frontmatter.description !== 'string'
+    || frontmatter.description.length < 1
+    || frontmatter.description.length > 1024
+  ) {
+    fail(`${name}: SKILL.md description must be a string between 1 and 1024 characters`);
+  }
+  if (typeof frontmatter.license !== 'string' || frontmatter.license.length < 1) {
+    fail(`${name}: SKILL.md is missing frontmatter field: license`);
+  }
+  if (
+    Object.prototype.hasOwnProperty.call(frontmatter, 'compatibility')
+    && (
+      typeof frontmatter.compatibility !== 'string'
+      || frontmatter.compatibility.length < 1
+      || frontmatter.compatibility.length > 500
+    )
+  ) {
+    fail(`${name}: SKILL.md compatibility must be a string between 1 and 500 characters when declared`);
+  }
+  if (
+    Object.prototype.hasOwnProperty.call(frontmatter, 'allowed-tools')
+    && typeof frontmatter['allowed-tools'] !== 'string'
+  ) {
+    fail(`${name}: SKILL.md allowed-tools must be a space-separated string when declared`);
+  }
+
+  const metadata = frontmatter.metadata;
+  if (!metadata || typeof metadata !== 'object' || Array.isArray(metadata)) {
+    fail(`${name}: SKILL.md metadata must be a string-to-string mapping`);
+  } else {
+    for (const [field, value] of Object.entries(metadata)) {
+      if (typeof field !== 'string' || typeof value !== 'string') {
+        fail(`${name}: SKILL.md metadata must be a string-to-string mapping (${field})`);
+      }
+    }
+    if (!metadata.author) fail(`${name}: SKILL.md metadata.author is required`);
+    if (!metadata.source) fail(`${name}: SKILL.md metadata.source is required`);
+  }
+
   compare(name, 'name', name, frontmatter.name, 'directory', 'SKILL.md');
   if (catalogEntry) {
-    for (const field of ['description', 'source', 'license']) {
-      compare(name, field, catalogEntry[field], frontmatter[field], 'skills.json', 'SKILL.md');
-    }
+    compare(name, 'description', catalogEntry.description, frontmatter.description, 'skills.json', 'SKILL.md');
+    compare(name, 'author', catalogEntry.author, metadata && metadata.author, 'skills.json', 'SKILL.md metadata');
+    compare(name, 'source', catalogEntry.source, metadata && metadata.source, 'skills.json', 'SKILL.md metadata');
+    compare(name, 'license', catalogEntry.license, frontmatter.license, 'skills.json', 'SKILL.md');
+
     if (catalogEntry.reference) {
-      compare(name, 'reference.source', catalogEntry.reference.source, frontmatter['reference-source'], 'skills.json', 'SKILL.md');
-      compare(name, 'reference.license', catalogEntry.reference.license, frontmatter['reference-license'], 'skills.json', 'SKILL.md');
+      compare(name, 'reference.source', catalogEntry.reference.source, metadata && metadata['reference-source'], 'skills.json', 'SKILL.md metadata');
+      compare(name, 'reference.license', catalogEntry.reference.license, metadata && metadata['reference-license'], 'skills.json', 'SKILL.md metadata');
     }
     const skillHasReferenceMetadata = ['reference-source', 'reference-license', 'reference-revision']
-      .some((field) => Object.prototype.hasOwnProperty.call(frontmatter, field));
+      .some((field) => metadata && Object.prototype.hasOwnProperty.call(metadata, field));
     if (!catalogEntry.reference && skillHasReferenceMetadata) {
-      fail(`${name}: SKILL.md declares reference metadata but skills.json has no reference entry`);
+      fail(`${name}: SKILL.md metadata declares reference metadata but skills.json has no reference entry`);
     }
     const catalogReferenceRevision = catalogEntry.reference && catalogEntry.reference.revision;
-    const skillReferenceRevision = frontmatter['reference-revision'];
+    const skillReferenceRevision = metadata && metadata['reference-revision'];
     if (catalogReferenceRevision || skillReferenceRevision) {
-      compare(name, 'reference.revision', catalogReferenceRevision, skillReferenceRevision, 'skills.json', 'SKILL.md');
+      compare(name, 'reference.revision', catalogReferenceRevision, skillReferenceRevision, 'skills.json', 'SKILL.md metadata');
       if (!/^[0-9a-f]{40}$/i.test(skillReferenceRevision || '')) {
-        fail(`${name}: reference-revision must be a full 40-character Git commit SHA`);
+        fail(`${name}: metadata.reference-revision must be a full 40-character Git commit SHA`);
       }
     }
   }

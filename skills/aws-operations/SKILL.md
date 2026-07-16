@@ -1,8 +1,10 @@
 ---
 name: aws-operations
 description: AWS operations workflow covering IAM, accounts, regions, Lambda, API Gateway, S3, CloudFront, ECS, RDS, VPC, CloudWatch, CDK, deployment safety, cost controls, security review, and incident response. Use when building, deploying, debugging, or reviewing AWS-backed systems.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # AWS Operations

@@ -1,8 +1,10 @@
 ---
 name: temporal-workflow-engineering
 description: Engineer durable Temporal workflows and activities with deterministic replay, explicit state, signals, queries, updates, retries, timeouts, heartbeats, cancellation, compensation, child workflows, continue-as-new, versioning, worker deployment, and time-skipping tests. Use when building or reviewing long-running distributed business processes in Python, TypeScript, Java, Go, or another Temporal SDK.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Temporal Workflow Engineering

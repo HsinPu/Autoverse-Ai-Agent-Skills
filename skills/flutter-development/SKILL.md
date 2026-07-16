@@ -1,8 +1,10 @@
 ---
 name: flutter-development
 description: Flutter development workflow covering Dart, widgets, layout, state management, navigation, forms, networking, platform integration, testing, performance, accessibility, build, and release. Use when building, reviewing, or debugging Flutter apps for iOS, Android, web, or desktop.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Flutter Development

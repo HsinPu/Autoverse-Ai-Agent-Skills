@@ -1,8 +1,10 @@
 ---
 name: cloudflare-development
 description: Cloudflare development workflow covering Workers, Pages, Wrangler, bindings, environment variables, D1, KV, R2, Durable Objects, Queues, Hyperdrive, local development, deployment, observability, and edge runtime constraints. Use when building or debugging apps on Cloudflare's developer platform.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Cloudflare Development

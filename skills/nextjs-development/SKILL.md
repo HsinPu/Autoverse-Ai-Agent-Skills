@@ -1,8 +1,10 @@
 ---
 name: nextjs-development
 description: Next.js development guide covering App Router, Server and Client Components, data fetching, caching, Server Actions, route handlers, metadata, performance, security, and deployment. Use when building, reviewing, or refactoring Next.js applications.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Next.js Development

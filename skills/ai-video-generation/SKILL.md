@@ -1,8 +1,10 @@
 ---
 name: ai-video-generation
 description: AI video generation workflow for text-to-video, image-to-video, reference-driven clips, model selection, prompt iteration, parameters, and output review across tools such as Sora, Veo, Kling, Runway, Pika, Luma, Seedance, Wan, and similar generators. Use when creating new AI-generated video rather than editing existing footage or building deterministic Remotion templates.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # AI Video Generation

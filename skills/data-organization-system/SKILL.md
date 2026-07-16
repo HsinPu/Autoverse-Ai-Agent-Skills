@@ -1,8 +1,10 @@
 ---
 name: data-organization-system
 description: Data organization system design workflow for turning scattered files, folders, datasets, exports, notes, screenshots, documents, and project assets into a durable taxonomy with naming rules, metadata, lifecycle stages, retention policy, privacy handling, and retrieval workflows. Use when the user wants a reusable system for organizing business, research, personal knowledge, AI datasets, project evidence, or mixed data sources rather than a one-time Downloads/Desktop cleanup.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Data Organization System

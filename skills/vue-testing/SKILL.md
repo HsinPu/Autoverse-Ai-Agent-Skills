@@ -1,8 +1,10 @@
 ---
 name: vue-testing
 description: Vue testing guide for Vitest, Vue Test Utils, component tests, composable tests, Pinia store setup, async rendering, Suspense, Teleport, browser versus jsdom runners, and Playwright end-to-end checks. Use when writing, reviewing, or fixing tests for Vue 3 components, composables, routes, stores, or user flows.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Vue Testing

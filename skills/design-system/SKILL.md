@@ -1,10 +1,13 @@
 ---
 name: design-system
 description: Design system generation, live implementation extraction, DTCG-compatible token governance, durable context, drift analysis, and visual audit workflow. Use when starting a project, standardizing or preparing a redesign, extracting observed styles from an authorized running interface, producing cross-platform tokens and preview artifacts, auditing an existing system, reviewing styling changes, or diagnosing when UI feels visually off.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
-reference-source: design-tokens/community-group
-reference-license: W3C Software and Document License
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  reference-source: "design-tokens/community-group"
+  reference-license: "W3C Software and Document License"
+  reference-revision: "191bf0b157cd9d254e992975471a64f90d960a78"
 ---
 
 # Design System

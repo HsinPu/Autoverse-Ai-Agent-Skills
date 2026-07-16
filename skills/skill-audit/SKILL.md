@@ -1,11 +1,13 @@
 ---
 name: skill-audit
 description: Audit Skill packages for invocation fit, workflow completeness, completion evidence, no-op and cleanup behavior, overlap, provenance, licensing, scripts, external actions, secrets, prompt injection, exfiltration, and maintenance risk. Use before adopting, publishing, upgrading, or trusting a SKILL.md package when linting alone cannot establish semantic quality and safety.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
-reference-source: mattpocock/skills
-reference-revision: e9fcdf95b402d360f90f1db8d776d5dd450f9234
-reference-license: MIT
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  reference-source: "mattpocock/skills"
+  reference-license: "MIT"
+  reference-revision: "e9fcdf95b402d360f90f1db8d776d5dd450f9234"
 ---
 
 # Skill Audit

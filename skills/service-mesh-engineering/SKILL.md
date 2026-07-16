@@ -1,8 +1,10 @@
 ---
 name: service-mesh-engineering
 description: Evaluate, design, deploy, secure, and operate service meshes using Istio, Linkerd, sidecar or ambient data planes, workload identity, mTLS, authorization policy, traffic routing, retries, timeouts, circuit breaking, canaries, telemetry, upgrades, and rollback. Use when a Kubernetes platform needs uniform service-to-service security, traffic policy, or observability and the operational tradeoffs must be proven.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Service Mesh Engineering

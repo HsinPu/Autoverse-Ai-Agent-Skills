@@ -1,10 +1,13 @@
 ---
 name: autoresearch
 description: Bounded autonomous experimentation workflow for improving a measurable repository outcome through baseline-controlled hypothesis, change, measurement, and keep-or-revert cycles. Use when code, configuration, prompts, or performance can be optimized with repeatable local experiments, a scalar metric, and explicit constraints; do not use for open-ended web research, feature discovery, or irreversible production trials.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
-reference-source: github/awesome-copilot
-reference-license: MIT
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  reference-source: "github/awesome-copilot"
+  reference-license: "MIT"
+  reference-revision: "2c2461a7fa383f664bb75546f03a2c6087f3819d"
 ---
 
 # Autoresearch

@@ -1,8 +1,10 @@
 ---
 name: avatar-video-generation
 description: AI avatar, digital human, talking-head, and lip-sync video workflow for tools such as HeyGen, Synthesia, D-ID, EachLabs, DashScope human avatar, and similar services, covering avatar choice, script preparation, voice rights, pronunciation, lip-sync review, consent, and export QA. Use when generating presenter, spokesperson, or avatar videos.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Avatar Video Generation

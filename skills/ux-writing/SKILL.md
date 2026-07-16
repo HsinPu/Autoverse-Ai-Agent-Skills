@@ -1,8 +1,10 @@
 ---
 name: ux-writing
 description: UX writing and interface microcopy guide for making product text clearer, shorter, warmer, and more action-oriented. Use when writing or revising button labels, empty states, error messages, loading text, onboarding copy, tooltips, form help, notifications, or any UI copy that affects user experience.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # UX Writing

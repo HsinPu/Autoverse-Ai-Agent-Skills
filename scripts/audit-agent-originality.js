@@ -4,19 +4,26 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const { spawnSync } = require('child_process');
+const {
+  MINIMUM_CJK_PHRASE_CHARACTERS,
+  MINIMUM_LINE_CHARACTERS,
+  MINIMUM_PHRASE_WORDS,
+  decodeTextBuffer,
+  firstOverlap,
+} = require('./audit-skill-originality');
 
 const root = path.resolve(__dirname, '..');
 const catalogPath = path.join(root, 'agents.json');
 const manifestPath = path.join(__dirname, 'data', 'agent-reference-sources.json');
-const minimumLineCharacters = 60;
-const minimumPhraseWords = 12;
 
 function usage() {
   console.log(`Usage: node scripts/audit-agent-originality.js
 
 Fetches pinned upstream commits and rejects suspicious verbatim overlap with
 canonical Agent prompt bodies. The audit checks normalized lines of at least
-${minimumLineCharacters} characters and exact phrases of at least ${minimumPhraseWords} words.`);
+${MINIMUM_LINE_CHARACTERS} characters, exact phrases of at least
+${MINIMUM_PHRASE_WORDS} words, and ${MINIMUM_CJK_PHRASE_CHARACTERS}-character
+CJK phrases. Canonical Agent files must be NUL-free UTF-8.`);
 }
 
 function readJson(filePath) {
@@ -37,51 +44,6 @@ function runGit(args, options = {}) {
     throw new Error(`git ${args[0]} failed${detail ? `: ${detail}` : ''}`);
   }
   return result.stdout || '';
-}
-
-function stripFrontmatter(text) {
-  return text.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, '');
-}
-
-function tokens(value) {
-  return (value.normalize('NFKC').toLowerCase().match(/[\p{L}\p{N}]+(?:['’-][\p{L}\p{N}]+)*/gu) || []);
-}
-
-function comparableLines(text) {
-  const lines = new Map();
-  for (const rawLine of stripFrontmatter(text).split(/\r?\n/)) {
-    if (/^\s*#{1,6}\s/.test(rawLine) || /^\s*```/.test(rawLine)) continue;
-    const normalized = tokens(rawLine).join(' ');
-    if (normalized.length >= minimumLineCharacters && tokens(normalized).length >= 8 && !lines.has(normalized)) {
-      lines.set(normalized, rawLine.trim());
-    }
-  }
-  return lines;
-}
-
-function phrases(text) {
-  const results = new Map();
-  for (const rawLine of stripFrontmatter(text).split(/\r?\n/)) {
-    if (/^\s*#{1,6}\s/.test(rawLine) || /^\s*```/.test(rawLine)) continue;
-    const words = tokens(rawLine);
-    for (let index = 0; index <= words.length - minimumPhraseWords; index += 1) {
-      const phrase = words.slice(index, index + minimumPhraseWords).join(' ');
-      if (!results.has(phrase)) results.set(phrase, rawLine.trim());
-    }
-  }
-  return results;
-}
-
-function firstOverlap(canonicalText, upstreamText) {
-  const upstreamLines = comparableLines(upstreamText);
-  for (const [normalized, display] of comparableLines(canonicalText)) {
-    if (upstreamLines.has(normalized)) return { kind: 'line', text: display };
-  }
-  const upstreamPhrases = phrases(upstreamText);
-  for (const [phrase, display] of phrases(canonicalText)) {
-    if (upstreamPhrases.has(phrase)) return { kind: `${minimumPhraseWords}-word phrase`, text: display };
-  }
-  return null;
 }
 
 function fetchRepository(tempRoot, source) {
@@ -129,12 +91,26 @@ function main() {
     for (const agent of catalog.agents) {
       const source = sources.get(agent.references.repo);
       if (!source) throw new Error(`${agent.id}: reference repository is not in the manifest`);
-      const canonicalText = fs.readFileSync(path.join(root, ...agent.path.split('/')), 'utf8');
+      const canonicalPath = path.join(root, ...agent.path.split('/'));
+      const canonicalText = decodeTextBuffer(fs.readFileSync(canonicalPath));
+      if (canonicalText === null) {
+        throw new Error(`${agent.id}: canonical Agent file is not NUL-free UTF-8: ${agent.path}`);
+      }
       for (const referencePath of agent.references.paths) {
         const upstreamText = readUpstream(repositories.get(source.repo), source.commit, referencePath);
         comparisons += 1;
         const overlap = firstOverlap(canonicalText, upstreamText);
-        if (overlap) findings.push({ agent: agent.id, repo: source.repo, path: referencePath, ...overlap });
+        if (overlap) {
+          findings.push({
+            agent: agent.id,
+            repo: source.repo,
+            path: referencePath,
+            kind: overlap.kind,
+            text: overlap.localEvidence,
+            matchedText: overlap.matchedText,
+            upstreamEvidence: overlap.upstreamEvidence,
+          });
+        }
       }
     }
   } finally {
@@ -145,6 +121,8 @@ function main() {
     console.error(`Agent originality audit failed with ${findings.length} suspicious overlap(s):`);
     for (const finding of findings) {
       console.error(`- ${finding.agent} <- ${finding.repo}/${finding.path} (${finding.kind}): ${finding.text}`);
+      console.error(`  matched: ${finding.matchedText}`);
+      console.error(`  upstream evidence: ${finding.upstreamEvidence}`);
     }
     process.exitCode = 1;
     return;

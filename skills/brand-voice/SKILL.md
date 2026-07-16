@@ -1,10 +1,13 @@
 ---
 name: brand-voice
 description: Brand voice extraction and application workflow for deriving reusable tone, vocabulary, rhythm, messaging boundaries, and transformation examples from representative source material. Use when writing must consistently sound like a specific organization, product, publication, or creator rather than merely becoming more natural or less AI-like.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
-reference-source: affaan-m/ECC
-reference-license: MIT
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  reference-source: "affaan-m/ECC"
+  reference-license: "MIT"
+  reference-revision: "ed387446052dfbc6b52de149406b70efa65edc59"
 ---
 
 # Brand Voice

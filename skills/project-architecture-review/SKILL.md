@@ -1,8 +1,10 @@
 ---
 name: project-architecture-review
 description: Project architecture review workflow for auditing existing repositories across languages and frameworks, mapping entry points, module boundaries, dependency direction, data flow, configuration, tests, and deployment constraints. Use when a user says a project architecture feels wrong, says 專案架構不好 or 架構設計需要調整, asks for the best or most suitable architecture, wants to compare restructuring options before coding, or needs an incremental architecture migration plan.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Project Architecture Review

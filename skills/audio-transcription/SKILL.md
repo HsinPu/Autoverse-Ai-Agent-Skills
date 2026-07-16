@@ -1,8 +1,10 @@
 ---
 name: audio-transcription
 description: Speech-to-text workflow for transcribing audio or video files, meetings, interviews, podcasts, voice notes, and multilingual recordings. Use when the user asks to extract spoken text, identify speakers, produce transcripts, translate speech, or prepare recordings for summarization.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Audio Transcription

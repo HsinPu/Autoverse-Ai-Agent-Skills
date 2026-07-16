@@ -1,8 +1,10 @@
 ---
 name: mongodb-development
 description: MongoDB development workflow covering schema design, collections, indexes, aggregation pipelines, transactions, change streams, Atlas, security, backups, performance, and Node.js application integration. Use when building, reviewing, or debugging MongoDB-backed applications.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # MongoDB Development

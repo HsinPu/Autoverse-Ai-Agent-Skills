@@ -1,8 +1,10 @@
 ---
 name: video-edit
 description: Local video editing workflow for trimming, concatenating, resizing, compressing, converting, extracting audio, and inspecting media files with tools such as ffmpeg. Use when editing existing videos or preparing clips for sharing, social platforms, documentation, or downstream video generation.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Video Edit

@@ -1,8 +1,10 @@
 ---
 name: downloads-desktop-cleanup
 description: Focused Windows Downloads and Desktop cleanup workflow for inventorying messy user folders, categorizing files, finding duplicate or large files, separating installers, screenshots, archives, exports, receipts, project candidates, and producing a dry-run move/delete plan. Use when the user asks to organize Downloads, clean the Desktop, recover disk space from personal files, or build a safer weekly file triage routine.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Downloads Desktop Cleanup

@@ -1,8 +1,10 @@
 ---
 name: vlog-production
 description: Vlog production workflow covering concept, audience, story arc, footage organization, footage review, hook, talking-head beats, B-roll, shot list, rough cut, fine cut, captions, title, thumbnail, platform packaging, and repurposing. Use when planning, scripting, directing, editing, or repackaging vlogs for YouTube, Shorts, Reels, TikTok, Xiaohongshu, or personal-brand content.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Vlog Production

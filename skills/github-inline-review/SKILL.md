@@ -1,8 +1,10 @@
 ---
 name: github-inline-review
 description: GitHub inline PR review workflow for submitting line-level comments and suggestion blocks through the gh CLI and GitHub API. Use when posting review findings to an existing GitHub pull request, batching inline comments, adding GitHub suggestion blocks, approving, commenting, or requesting changes from review output.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # GitHub Inline Review

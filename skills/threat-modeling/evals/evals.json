@@ -1,0 +1,16 @@
+{
+  "skill_name": "threat-modeling",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Threat-model a SaaS password-reset flow where support staff can impersonate customers, reset links pass through an email provider, and administrators can revoke sessions. We only have a prose architecture summary.",
+      "expected_output": "An assumption-aware threat model that maps assets, actors, data flows and trust boundaries; derives concrete abuse paths and STRIDE findings; and turns prioritized risks into owned, testable mitigations with residual-risk decisions.",
+      "assertions": [
+        "Verified architecture facts and unresolved assumptions are recorded separately.",
+        "The model covers customer, support, administrator, email-provider, token, and session trust boundaries.",
+        "Each prioritized threat names an asset, actor, entry point, prerequisites, path, impact, and existing controls or gaps.",
+        "Mitigations include testable verification, an owner, residual risk, and acceptance authority."
+      ]
+    }
+  ]
+}

@@ -1,8 +1,10 @@
 ---
 name: storyboard-creation
 description: Storyboard and shot-list workflow for turning video ideas, scripts, product concepts, ads, tutorials, or explainers into scenes, shots, timing, dialogue, visual prompts, camera notes, and production-ready tables for AI video, filming, or animation. Use when planning video structure before generation or editing.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Storyboard Creation

@@ -1,8 +1,10 @@
 ---
 name: python-data-engineering
 description: Python data engineering and analytics guide covering dataframe workflows, ETL/ELT pipelines, notebook-to-script promotion, and file formats such as CSV, Parquet, and JSON/NDJSON. Use when the task centers on tabular datasets, cleaning, joins, aggregations, validation, or reproducible data pipelines rather than spreadsheet editing or database schema design.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Python Data Engineering

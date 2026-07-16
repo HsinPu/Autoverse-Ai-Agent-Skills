@@ -1,8 +1,10 @@
 ---
 name: subtitle-captions
 description: Subtitle and caption workflow for generating, aligning, converting, proofreading, and burning SRT, VTT, ASS, or timed captions into audio/video content. Use when adding subtitles to videos, creating captions from transcripts, syncing text to speech, or preparing accessible media.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Subtitle Captions

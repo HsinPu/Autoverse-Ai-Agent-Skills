@@ -11,6 +11,27 @@ SOURCE_DIR=""
 DRY_RUN=0
 FORCE=0
 ENABLE_AUTO_DELEGATION=0
+SKILL_ACTIVE_TARGET=""
+SKILL_ACTIVE_STAGE=""
+SKILL_ACTIVE_BACKUP=""
+SKILL_ACTIVE_BACKUP_CONTAINER=""
+SKILL_ACTIVE_STAGE_IDENTITY=""
+SKILL_ACTIVE_STAGE_DIGEST=""
+SKILL_ACTIVE_STAGE_META_IDENTITY=""
+SKILL_ACTIVE_STAGE_META_SHA256=""
+SKILL_ACTIVE_STAGE_META_STATE=""
+SKILL_ACTIVE_STAGE_COMMITTED=0
+SKILL_ACTIVE_BACKUP_IDENTITY=""
+SKILL_ACTIVE_BACKUP_DIGEST=""
+SKILL_ACTIVE_BACKUP_META_IDENTITY=""
+SKILL_ACTIVE_BACKUP_META_SHA256=""
+SKILL_ACTIVE_BACKUP_META_STATE=""
+EXPECTED_SKILL_TARGET_IDENTITY=""
+EXPECTED_SKILL_META_IDENTITY=""
+EXPECTED_SKILL_META_SHA256=""
+EXPECTED_SKILL_META_STATE=""
+SKILL_MOVE_PRESERVED_PATH=""
+EXACT_MOVE_PRESERVED_PATH=""
 
 usage() {
   cat <<'EOF'
@@ -370,20 +391,119 @@ validate_flat_metadata() {
   ' "$1"
 }
 
+sha256_stream() {
+  if command -v sha256sum >/dev/null 2>&1; then
+    sha256sum | awk '{ print tolower($1) }'
+  elif command -v shasum >/dev/null 2>&1; then
+    shasum -a 256 | awk '{ print tolower($1) }'
+  else
+    log_error "A SHA-256 tool is required (sha256sum or shasum)."
+    return 1
+  fi
+}
+
+regular_file_sha256() {
+  local path="$1" digest
+  [[ -f "$path" && ! -L "$path" ]] || return 1
+  if ! digest="$(sha256_stream < "$path")"; then return 1; fi
+  [[ "$digest" =~ ^[0-9a-f]{64}$ ]] || return 1
+  printf '%s' "$digest"
+}
+
+regular_file_identity() {
+  local path="$1" identity=""
+  [[ -f "$path" && ! -L "$path" ]] || return 1
+  if identity="$(stat -c '%d:%i' -- "$path" 2>/dev/null)" && [[ "$identity" =~ ^[0-9]+:[0-9]+$ ]]; then
+    printf '%s' "$identity"
+    return 0
+  fi
+  if identity="$(stat -f '%d:%i' "$path" 2>/dev/null)" && [[ "$identity" =~ ^[0-9]+:[0-9]+$ ]]; then
+    printf '%s' "$identity"
+    return 0
+  fi
+  return 1
+}
+
+emit_skill_content_stream() {
+  local root="${1%/}" excluded_relative_path="${2:-}" path relative_path byte_length special_path
+  local -a relative_paths=()
+
+  if [[ ! -d "$root" || -L "$root" ]]; then
+    log_error "Refusing to hash a non-directory or linked Skill root: $root"
+    return 1
+  fi
+  if ! special_path="$(find "$root" -mindepth 1 ! -type d ! -type f ! -type l -print -quit)"; then
+    log_error "Could not inspect Skill content types: $root"
+    return 1
+  fi
+  if [[ -n "$special_path" ]]; then
+    log_error "Refusing to hash non-regular Skill content (FIFO, device, or socket): $special_path"
+    return 1
+  fi
+
+  while IFS= read -r -d '' path; do
+    log_error "Refusing to hash Skill content that contains a symbolic link: $path"
+    return 1
+  done < <(find "$root" -type l -print0)
+
+  while IFS= read -r -d '' path; do
+    relative_path="${path#"$root"/}"
+    if [[ "$relative_path" == *$'\n'* ]]; then
+      log_error "Refusing to hash a Skill path that contains a newline."
+      return 1
+    fi
+    if [[ "$relative_path" == ".skill-meta.json" || ( -n "$excluded_relative_path" && "$relative_path" == "$excluded_relative_path" ) ]]; then continue; fi
+    relative_paths+=("$relative_path")
+  done < <(find "$root" -type f -print0)
+
+  printf 'autoverse-skill-content-v1\0'
+  if [[ "${#relative_paths[@]}" -eq 0 ]]; then return; fi
+  while IFS= read -r relative_path; do
+    byte_length="$(wc -c < "$root/$relative_path" | tr -d '[:space:]')"
+    printf '%s\0%s\0' "$relative_path" "$byte_length"
+    cat "$root/$relative_path"
+    printf '\0'
+  done < <(printf '%s\n' "${relative_paths[@]}" | LC_ALL=C sort)
+}
+
+skill_content_sha256() {
+  local root="$1" excluded_relative_path="${2:-}" digest
+  if ! digest="$(emit_skill_content_stream "$root" "$excluded_relative_path" | sha256_stream)"; then
+    return 1
+  fi
+  if [[ ! "$digest" =~ ^[0-9a-f]{64}$ ]]; then
+    log_error "Could not compute a valid lowercase SHA-256 digest for Skill content: $root"
+    return 1
+  fi
+  printf '%s' "$digest"
+}
+
 yaml_frontmatter_value() {
   local file="$1" key="$2"
   [[ -f "$file" ]] || return 0
   awk -v key="$key" '
+    function emit_value(line, prefix_length, value) {
+      value = substr(line, prefix_length + 1)
+      sub(/^[[:space:]]+/, "", value)
+      sub(/[[:space:]]+$/, "", value)
+      gsub(/^[\047\"]|[\047\"]$/, "", value)
+      print value
+      exit
+    }
     NR == 1 { sub(/^\357\273\277/, "", $0) }
     NR == 1 && $0 == "---" { inside = 1; next }
     inside && $0 == "---" { exit }
-    inside && index($0, key ":") == 1 {
-      value = substr($0, length(key) + 2)
-      sub(/^[[:space:]]+/, "", value)
-      sub(/[[:space:]]+$/, "", value)
-      gsub(/^['\''"]|['\''"]$/, "", value)
-      print value
-      exit
+    !inside { next }
+    /^[^[:space:]]/ {
+      in_metadata = 0
+      if (index($0, key ":") == 1) emit_value($0, length(key) + 1)
+      if ($0 ~ /^metadata:[[:space:]]*(#.*)?$/) in_metadata = 1
+      next
+    }
+    in_metadata {
+      nested = $0
+      sub(/^[[:space:]]+/, "", nested)
+      if (index(nested, key ":") == 1) emit_value(nested, length(key) + 1)
     }
   ' "$file"
 }
@@ -399,17 +519,52 @@ legacy_target_allowed() {
 
 install_action() {
   local target="$1" meta="$2" label="$3" expected_component="$4" expected_name="$5" expected_target="$6" legacy_identity="${7:-}" incoming_identity="${8:-}" expected_id="${9:-}" expected_adapter="${10:-}" legacy_targets="${11:-}"
+  local metadata_identity_before="" metadata_identity_after="" metadata_sha256_before="" metadata_sha256_after=""
+  local target_identity_before="" target_identity_after=""
+  local existing_repo existing_component existing_name existing_target existing_agent existing_id existing_adapter existing_content_sha256 current_content_sha256 identity_matches
   INSTALL_ACTION="install"
   EXISTING_INSTALLED_AT=""
+  EXPECTED_SKILL_CURRENT_SHA256=""
+  EXPECTED_SKILL_TARGET_IDENTITY=""
+  EXPECTED_SKILL_META_IDENTITY=""
+  EXPECTED_SKILL_META_SHA256=""
+  EXPECTED_SKILL_META_STATE=""
+
+  if [[ "$expected_component" == "skill" ]]; then
+    if [[ -L "$meta" || ( -e "$meta" && ! -f "$meta" ) ]]; then
+      log_error "Refusing to replace '$label' because its Skill ownership metadata is linked or non-regular: $meta"
+      exit 1
+    fi
+    if [[ -f "$meta" ]]; then
+      if ! metadata_identity_before="$(regular_file_identity "$meta")" ||
+        ! metadata_sha256_before="$(regular_file_sha256 "$meta")"; then
+        log_error "Refusing to replace '$label' because its ownership metadata identity or SHA-256 could not be captured."
+        exit 1
+      fi
+      EXPECTED_SKILL_META_IDENTITY="$metadata_identity_before"
+      EXPECTED_SKILL_META_SHA256="$metadata_sha256_before"
+      if validate_flat_metadata "$meta"; then
+        EXPECTED_SKILL_META_STATE="valid"
+      else
+        EXPECTED_SKILL_META_STATE="invalid"
+      fi
+    else
+      EXPECTED_SKILL_META_STATE="missing"
+    fi
+  fi
   if [[ ! -e "$target" && ! -f "$meta" ]]; then return; fi
 
   if [[ -f "$meta" ]]; then
-    if ! validate_flat_metadata "$meta"; then
+    if [[ "$expected_component" == "skill" && "$EXPECTED_SKILL_META_STATE" == "invalid" ]]; then
       if [[ "$FORCE" -eq 1 ]]; then INSTALL_ACTION="force-replace"; return; fi
       log_error "Refusing to replace '$label' because its Autoverse metadata is not a strict flat JSON object. Use --force to overwrite intentionally."
       exit 1
     fi
-    local existing_repo existing_component existing_name existing_target existing_agent existing_id existing_adapter identity_matches
+    if [[ "$expected_component" != "skill" ]] && { [[ -L "$meta" ]] || ! validate_flat_metadata "$meta"; }; then
+      if [[ "$FORCE" -eq 1 ]]; then INSTALL_ACTION="force-replace"; return; fi
+      log_error "Refusing to replace '$label' because its Autoverse metadata is not a strict flat JSON object. Use --force to overwrite intentionally."
+      exit 1
+    fi
     existing_repo="$(json_string_value "$meta" "repo")"
     existing_component="$(json_string_value "$meta" "component")"
     existing_name="$(json_string_value "$meta" "name")"
@@ -417,14 +572,70 @@ install_action() {
     existing_agent="$(json_string_value "$meta" "agent")"
     existing_id="$(json_string_value "$meta" "id")"
     existing_adapter="$(json_string_value "$meta" "adapter")"
+    existing_content_sha256="$(json_string_value "$meta" "contentSha256")"
     EXISTING_INSTALLED_AT="$(json_string_value "$meta" "installedAt")"
+    if [[ "$expected_component" == "skill" ]]; then
+      if ! validate_flat_metadata "$meta" ||
+        ! metadata_identity_after="$(regular_file_identity "$meta")" ||
+        ! metadata_sha256_after="$(regular_file_sha256 "$meta")" ||
+        [[ "$metadata_identity_after" != "$metadata_identity_before" || "$metadata_sha256_after" != "$metadata_sha256_before" ]]; then
+        log_error "Refusing to replace '$label' because its ownership metadata changed while it was being parsed. Run the installer again."
+        exit 1
+      fi
+      EXPECTED_SKILL_META_IDENTITY="$metadata_identity_after"
+      EXPECTED_SKILL_META_SHA256="$metadata_sha256_after"
+      EXPECTED_SKILL_META_STATE="valid"
+    fi
+    if [[ "$expected_component" == "skill" && -d "$target" && ! -L "$target" ]]; then
+      if ! target_identity_before="$(skill_directory_identity "$target")" ||
+        ! current_content_sha256="$(skill_content_sha256 "$target")" ||
+        ! target_identity_after="$(skill_directory_identity "$target")" ||
+        [[ "$target_identity_after" != "$target_identity_before" ]]; then
+        log_error "Refusing to replace '$label' because its Skill directory changed while ownership was being checked. Run the installer again."
+        exit 1
+      fi
+      if ! skill_metadata_matches "$meta" "$EXPECTED_SKILL_META_IDENTITY" "$EXPECTED_SKILL_META_SHA256"; then
+        log_error "Refusing to replace '$label' because its ownership metadata changed while Skill content was being checked. Run the installer again."
+        exit 1
+      fi
+      EXPECTED_SKILL_TARGET_IDENTITY="$target_identity_after"
+      EXPECTED_SKILL_CURRENT_SHA256="$current_content_sha256"
+    fi
     identity_matches=1
     if [[ "$expected_component" == "agent" && ( -z "$expected_id" || "$existing_id" != "$expected_id" || -z "$expected_adapter" || "$existing_adapter" != "$expected_adapter" ) ]]; then identity_matches=0; fi
     if [[ "$existing_repo" == "$REPO" && "$existing_component" == "$expected_component" && "$existing_name" == "$expected_name" && "$existing_target" == "$expected_target" && "$identity_matches" -eq 1 ]]; then
+      if [[ "$expected_component" == "skill" && -e "$target" ]]; then
+        if [[ -z "$existing_content_sha256" ]]; then
+          INSTALL_ACTION="migrate-update"
+          return
+        fi
+        if [[ ! "$existing_content_sha256" =~ ^[0-9a-f]{64}$ ]]; then
+          if [[ "$FORCE" -eq 1 ]]; then INSTALL_ACTION="force-replace"; return; fi
+          log_error "Refusing to replace '$label' because its contentSha256 is not a valid lowercase 64-character SHA-256 digest. Use --force to reset it intentionally."
+          exit 1
+        fi
+        if [[ "$current_content_sha256" != "$existing_content_sha256" ]]; then
+          if [[ "$FORCE" -eq 1 ]]; then INSTALL_ACTION="force-replace"; return; fi
+          log_error "Refusing to replace '$label' because the installed Skill content has changed since the last Autoverse install. Use --force to reset it intentionally."
+          exit 1
+        fi
+      fi
       if [[ -e "$target" ]]; then INSTALL_ACTION="update"; else INSTALL_ACTION="repair"; fi
       return
     fi
     if [[ "$existing_repo" == "$REPO" && "$existing_component" == "$expected_component" && "$existing_name" == "$expected_name" && "$identity_matches" -eq 1 ]] && legacy_target_allowed "$existing_target" "$legacy_targets"; then
+      if [[ "$expected_component" == "skill" && -e "$target" && -n "$existing_content_sha256" ]]; then
+        if [[ ! "$existing_content_sha256" =~ ^[0-9a-f]{64}$ ]]; then
+          if [[ "$FORCE" -eq 1 ]]; then INSTALL_ACTION="force-replace"; return; fi
+          log_error "Refusing to replace '$label' because its contentSha256 is not a valid lowercase 64-character SHA-256 digest. Use --force to reset it intentionally."
+          exit 1
+        fi
+        if [[ "$current_content_sha256" != "$existing_content_sha256" ]]; then
+          if [[ "$FORCE" -eq 1 ]]; then INSTALL_ACTION="force-replace"; return; fi
+          log_error "Refusing to replace '$label' because the installed Skill content has changed since the last Autoverse install. Use --force to reset it intentionally."
+          exit 1
+        fi
+      fi
       INSTALL_ACTION="migrate-update"
       return
     fi
@@ -473,18 +684,115 @@ assert_within_destination() {
   esac
 }
 
-assert_regular_agent_leaf() {
-  local path="$1" label="$2"
-  if [[ -L "$path" || ( -e "$path" && ! -f "$path" ) ]]; then
-    log_error "Refusing to replace a non-regular or linked $label file: $path"
+assert_regular_skill_root() {
+  local path="$1"
+  if [[ -L "$path" || ( -e "$path" && ! -d "$path" ) ]]; then
+    log_error "Refusing to replace a non-directory or linked Skill root: $path"
     exit 1
   fi
 }
 
-move_exact_no_clobber() {
-  local source="$1" destination="$2" checksum nested os_name
-  checksum="$(cksum < "$source")"
-  if mv --help 2>&1 | grep -q -- '--no-target-directory'; then
+clear_active_skill_transaction() {
+  SKILL_ACTIVE_TARGET=""
+  SKILL_ACTIVE_STAGE=""
+  SKILL_ACTIVE_BACKUP=""
+  SKILL_ACTIVE_BACKUP_CONTAINER=""
+  SKILL_ACTIVE_STAGE_IDENTITY=""
+  SKILL_ACTIVE_STAGE_DIGEST=""
+  SKILL_ACTIVE_STAGE_META_IDENTITY=""
+  SKILL_ACTIVE_STAGE_META_SHA256=""
+  SKILL_ACTIVE_STAGE_META_STATE=""
+  SKILL_ACTIVE_STAGE_COMMITTED=0
+  SKILL_ACTIVE_BACKUP_IDENTITY=""
+  SKILL_ACTIVE_BACKUP_DIGEST=""
+  SKILL_ACTIVE_BACKUP_META_IDENTITY=""
+  SKILL_ACTIVE_BACKUP_META_SHA256=""
+  SKILL_ACTIVE_BACKUP_META_STATE=""
+}
+
+skill_directory_identity() {
+  local path="$1" identity=""
+  if identity="$(stat -c '%d:%i' -- "$path" 2>/dev/null)" && [[ "$identity" =~ ^[0-9]+:[0-9]+$ ]]; then
+    printf '%s' "$identity"
+    return 0
+  fi
+  if identity="$(stat -f '%d:%i' "$path" 2>/dev/null)" && [[ "$identity" =~ ^[0-9]+:[0-9]+$ ]]; then
+    printf '%s' "$identity"
+    return 0
+  fi
+  log_error "Could not establish filesystem identity for Skill directory: $path"
+  return 1
+}
+
+skill_directory_matches() {
+  local path="$1" expected_identity="$2" expected_digest="$3" actual_identity actual_digest
+  [[ -d "$path" && ! -L "$path" && -n "$expected_identity" && -n "$expected_digest" ]] || return 1
+  actual_identity="$(skill_directory_identity "$path")" || return 1
+  [[ "$actual_identity" == "$expected_identity" ]] || return 1
+  actual_digest="$(skill_content_sha256 "$path")" || return 1
+  [[ "$actual_digest" == "$expected_digest" ]]
+}
+
+skill_metadata_matches() {
+  local path="$1" expected_identity="$2" expected_sha256="$3" actual_identity actual_sha256
+  [[ -f "$path" && ! -L "$path" && -n "$expected_identity" && -n "$expected_sha256" ]] || return 1
+  validate_flat_metadata "$path" || return 1
+  actual_identity="$(regular_file_identity "$path")" || return 1
+  [[ "$actual_identity" == "$expected_identity" ]] || return 1
+  actual_sha256="$(regular_file_sha256 "$path")" || return 1
+  [[ "$actual_sha256" == "$expected_sha256" ]]
+}
+
+skill_metadata_state_matches() {
+  local root="$1" expected_state="$2" expected_identity="${3:-}" expected_sha256="${4:-}"
+  local metadata="$root/.skill-meta.json" actual_identity actual_sha256
+  case "$expected_state" in
+    valid)
+      skill_metadata_matches "$metadata" "$expected_identity" "$expected_sha256"
+      ;;
+    invalid)
+      [[ -f "$metadata" && ! -L "$metadata" && -n "$expected_identity" && -n "$expected_sha256" ]] || return 1
+      actual_identity="$(regular_file_identity "$metadata")" || return 1
+      actual_sha256="$(regular_file_sha256 "$metadata")" || return 1
+      [[ "$actual_identity" == "$expected_identity" && "$actual_sha256" == "$expected_sha256" ]] || return 1
+      ! validate_flat_metadata "$metadata"
+      ;;
+    missing)
+      [[ ! -e "$metadata" && ! -L "$metadata" ]]
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+skill_transaction_snapshot_matches() {
+  local path="$1" expected_identity="$2" expected_digest="$3" expected_meta_identity="$4" expected_meta_sha256="$5"
+  skill_directory_matches "$path" "$expected_identity" "$expected_digest" || return 1
+  skill_metadata_matches "$path/.skill-meta.json" "$expected_meta_identity" "$expected_meta_sha256"
+}
+
+skill_move_snapshot_matches() {
+  local path="$1" expected_identity="$2" expected_digest="$3" expected_meta_identity="${4:-}" expected_meta_sha256="${5:-}" expected_meta_state="${6:-}"
+  skill_directory_matches "$path" "$expected_identity" "$expected_digest" || return 1
+  if [[ -z "$expected_meta_state" && ( -n "$expected_meta_identity" || -n "$expected_meta_sha256" ) ]]; then
+    expected_meta_state="valid"
+  fi
+  if [[ -n "$expected_meta_state" ]]; then
+    skill_metadata_state_matches "$path" "$expected_meta_state" "$expected_meta_identity" "$expected_meta_sha256"
+  fi
+}
+
+move_skill_directory_no_clobber() {
+  local source="$1" destination="$2" expected_identity="$3" expected_digest="$4" expected_meta_identity="${5:-}" expected_meta_sha256="${6:-}" expected_meta_state="${7:-}" nested_policy="${8:-preserve}"
+  local os_name nested source_parent quarantine_container quarantine
+  SKILL_MOVE_PRESERVED_PATH=""
+  case "$nested_policy" in
+    preserve|discard-transaction) ;;
+    *) log_error "Unsupported nested Skill move policy: $nested_policy"; return 1 ;;
+  esac
+  [[ -d "$source" && ! -L "$source" ]] || return 1
+  if ! should_force_portable_skill_move && mv --help 2>&1 | grep -q -- '--no-target-directory'; then
     mv -nT "$source" "$destination" 2>/dev/null || true
   else
     os_name="$(uname -s 2>/dev/null || true)"
@@ -493,39 +801,415 @@ move_exact_no_clobber() {
       *) mv -n "$source" "$destination" 2>/dev/null || true ;;
     esac
   fi
-  if [[ ! -e "$source" && ! -L "$source" && -f "$destination" && ! -L "$destination" ]] &&
-    [[ "$(cksum < "$destination")" == "$checksum" ]]; then
+  if [[ ! -e "$source" && ! -L "$source" ]] && skill_move_snapshot_matches "$destination" "$expected_identity" "$expected_digest" "$expected_meta_identity" "$expected_meta_sha256" "$expected_meta_state"; then
+    return 0
+  fi
+
+  # BSD mv has no GNU -T equivalent. If a destination directory appears after
+  # the last recheck, `mv -n -h` can place our source inside that newcomer.
+  # User backup material is preserved in place for manual recovery. Only a
+  # caller that explicitly marks its source as transaction-owned may isolate
+  # and discard the exact verified nested directory.
+  if [[ ! -e "$source" && ! -L "$source" && -d "$destination" && ! -L "$destination" ]]; then
+    nested="$destination/${source##*/}"
+    if skill_move_snapshot_matches "$nested" "$expected_identity" "$expected_digest" "$expected_meta_identity" "$expected_meta_sha256" "$expected_meta_state"; then
+      if [[ "$nested_policy" == "preserve" ]]; then
+        SKILL_MOVE_PRESERVED_PATH="$nested"
+        log_error "Destination became a directory during the exact Skill move; preserved the source for manual recovery at $nested"
+        return 1
+      fi
+      source_parent="${source%/*}"
+      quarantine_container="$(mktemp -d "$source_parent/.autoverse-skill-quarantine.XXXXXXXX")"
+      quarantine="$quarantine_container/staged"
+      if ! mv "$nested" "$quarantine"; then
+        rmdir "$quarantine_container" 2>/dev/null || true
+        log_error "Could not isolate the transaction-owned nested Skill directory from newcomer destination: $destination"
+        return 1
+      fi
+      if ! skill_move_snapshot_matches "$quarantine" "$expected_identity" "$expected_digest" "$expected_meta_identity" "$expected_meta_sha256" "$expected_meta_state"; then
+        log_error "The nested Skill directory changed while it was quarantined; preserved manual recovery path: $quarantine"
+        return 1
+      fi
+      if ! rm -rf "$quarantine_container"; then
+        log_error "Could not clean the quarantined transaction-owned Skill directory: $quarantine_container"
+        return 1
+      fi
+    fi
+  fi
+  return 1
+}
+
+discard_transaction_skill_directory() {
+  local path="$1" expected_identity="$2" expected_digest="$3" expected_meta_identity="${4:-}" expected_meta_sha256="${5:-}" expected_meta_state="${6:-}"
+  local parent quarantine_container quarantine
+  skill_move_snapshot_matches "$path" "$expected_identity" "$expected_digest" "$expected_meta_identity" "$expected_meta_sha256" "$expected_meta_state" || return 1
+  parent="${path%/*}"
+  quarantine_container="$(mktemp -d "$parent/.autoverse-skill-discard.XXXXXXXX")"
+  quarantine="$quarantine_container/owned"
+  if ! move_skill_directory_no_clobber "$path" "$quarantine" "$expected_identity" "$expected_digest" "$expected_meta_identity" "$expected_meta_sha256" "$expected_meta_state" "discard-transaction"; then
+    rmdir "$quarantine_container" 2>/dev/null || true
+    return 1
+  fi
+  if ! skill_move_snapshot_matches "$quarantine" "$expected_identity" "$expected_digest" "$expected_meta_identity" "$expected_meta_sha256" "$expected_meta_state"; then
+    log_error "Transaction-owned Skill changed after quarantine; preserved manual recovery path: $quarantine"
+    return 1
+  fi
+  rm -rf "$quarantine_container"
+}
+
+cleanup_active_skill_stage() {
+  [[ -n "$SKILL_ACTIVE_STAGE" && -d "$SKILL_ACTIVE_STAGE" && ! -L "$SKILL_ACTIVE_STAGE" ]] || return 0
+  if [[ -n "$SKILL_ACTIVE_STAGE_IDENTITY" && -n "$SKILL_ACTIVE_STAGE_DIGEST" ]]; then
+    discard_transaction_skill_directory \
+      "$SKILL_ACTIVE_STAGE" \
+      "$SKILL_ACTIVE_STAGE_IDENTITY" \
+      "$SKILL_ACTIVE_STAGE_DIGEST" \
+      "$SKILL_ACTIVE_STAGE_META_IDENTITY" \
+      "$SKILL_ACTIVE_STAGE_META_SHA256" \
+      "$SKILL_ACTIVE_STAGE_META_STATE"
+    return
+  fi
+  rmdir "$SKILL_ACTIVE_STAGE" 2>/dev/null
+}
+
+rollback_active_skill_transaction() {
+  local failed_commit="" recovery_path=""
+  if [[ -n "$SKILL_ACTIVE_BACKUP" && -d "$SKILL_ACTIVE_BACKUP" ]]; then
+    if ! skill_move_snapshot_matches \
+      "$SKILL_ACTIVE_BACKUP" \
+      "$SKILL_ACTIVE_BACKUP_IDENTITY" \
+      "$SKILL_ACTIVE_BACKUP_DIGEST" \
+      "$SKILL_ACTIVE_BACKUP_META_IDENTITY" \
+      "$SKILL_ACTIVE_BACKUP_META_SHA256" \
+      "$SKILL_ACTIVE_BACKUP_META_STATE"; then
+      cleanup_active_skill_stage || true
+      log_error "Manual recovery required: the captured Skill ownership metadata or content changed; the backup was preserved at $SKILL_ACTIVE_BACKUP."
+      clear_active_skill_transaction
+      return 1
+    fi
+    if [[ -e "$SKILL_ACTIVE_TARGET" || -L "$SKILL_ACTIVE_TARGET" ]]; then
+      if ! skill_move_snapshot_matches \
+        "$SKILL_ACTIVE_TARGET" \
+        "$SKILL_ACTIVE_STAGE_IDENTITY" \
+        "$SKILL_ACTIVE_STAGE_DIGEST" \
+        "$SKILL_ACTIVE_STAGE_META_IDENTITY" \
+        "$SKILL_ACTIVE_STAGE_META_SHA256" \
+        "$SKILL_ACTIVE_STAGE_META_STATE"; then
+        cleanup_active_skill_stage || true
+        log_error "Manual recovery required: the Skill destination is occupied by an unrecognized newcomer at $SKILL_ACTIVE_TARGET; the original backup was preserved at $SKILL_ACTIVE_BACKUP."
+        clear_active_skill_transaction
+        return 1
+      fi
+      failed_commit="$SKILL_ACTIVE_BACKUP_CONTAINER/failed-commit"
+      if ! move_skill_directory_no_clobber \
+        "$SKILL_ACTIVE_TARGET" \
+        "$failed_commit" \
+        "$SKILL_ACTIVE_STAGE_IDENTITY" \
+        "$SKILL_ACTIVE_STAGE_DIGEST" \
+        "$SKILL_ACTIVE_STAGE_META_IDENTITY" \
+        "$SKILL_ACTIVE_STAGE_META_SHA256" \
+        "$SKILL_ACTIVE_STAGE_META_STATE" \
+        "discard-transaction"; then
+        log_error "Manual recovery required: the failed Skill commit could not be safely quarantined; the original backup was preserved at $SKILL_ACTIVE_BACKUP."
+        clear_active_skill_transaction
+        return 1
+      fi
+    fi
+    if should_create_skill_restore_destination_after_recheck; then
+      mkdir "$SKILL_ACTIVE_TARGET"
+      printf '%s\n' 'test-only restore newcomer that must be preserved' > "$SKILL_ACTIVE_TARGET/AUTOVERSE-NEWCOMER.txt"
+    fi
+    if ! move_skill_directory_no_clobber \
+      "$SKILL_ACTIVE_BACKUP" \
+      "$SKILL_ACTIVE_TARGET" \
+      "$SKILL_ACTIVE_BACKUP_IDENTITY" \
+      "$SKILL_ACTIVE_BACKUP_DIGEST" \
+      "$SKILL_ACTIVE_BACKUP_META_IDENTITY" \
+      "$SKILL_ACTIVE_BACKUP_META_SHA256" \
+      "$SKILL_ACTIVE_BACKUP_META_STATE" \
+      "preserve"; then
+      recovery_path="${SKILL_MOVE_PRESERVED_PATH:-$SKILL_ACTIVE_BACKUP}"
+      cleanup_active_skill_stage || true
+      log_error "Manual recovery required: the original Skill could not be restored to $SKILL_ACTIVE_TARGET; its backup was preserved at $recovery_path."
+      clear_active_skill_transaction
+      return 1
+    fi
+    if ! skill_move_snapshot_matches \
+      "$SKILL_ACTIVE_TARGET" \
+      "$SKILL_ACTIVE_BACKUP_IDENTITY" \
+      "$SKILL_ACTIVE_BACKUP_DIGEST" \
+      "$SKILL_ACTIVE_BACKUP_META_IDENTITY" \
+      "$SKILL_ACTIVE_BACKUP_META_SHA256" \
+      "$SKILL_ACTIVE_BACKUP_META_STATE"; then
+      log_error "Manual recovery required: the restored Skill changed before it could be verified at $SKILL_ACTIVE_TARGET."
+      clear_active_skill_transaction
+      return 1
+    fi
+  elif [[ "$SKILL_ACTIVE_STAGE_COMMITTED" -eq 1 && -n "$SKILL_ACTIVE_TARGET" && ( -e "$SKILL_ACTIVE_TARGET" || -L "$SKILL_ACTIVE_TARGET" ) ]]; then
+    if ! discard_transaction_skill_directory \
+      "$SKILL_ACTIVE_TARGET" \
+      "$SKILL_ACTIVE_STAGE_IDENTITY" \
+      "$SKILL_ACTIVE_STAGE_DIGEST" \
+      "$SKILL_ACTIVE_STAGE_META_IDENTITY" \
+      "$SKILL_ACTIVE_STAGE_META_SHA256" \
+      "$SKILL_ACTIVE_STAGE_META_STATE"; then
+      cleanup_active_skill_stage || true
+      log_error "Manual recovery required: the fresh Skill destination no longer matches this transaction and was preserved at $SKILL_ACTIVE_TARGET."
+      clear_active_skill_transaction
+      return 1
+    fi
+  fi
+  if ! cleanup_active_skill_stage; then
+    log_error "Manual recovery required: an unrecognized Skill staging directory was preserved at $SKILL_ACTIVE_STAGE."
+    clear_active_skill_transaction
+    return 1
+  fi
+  if [[ -n "$failed_commit" && -d "$failed_commit" ]]; then
+    if ! discard_transaction_skill_directory \
+      "$failed_commit" \
+      "$SKILL_ACTIVE_STAGE_IDENTITY" \
+      "$SKILL_ACTIVE_STAGE_DIGEST" \
+      "$SKILL_ACTIVE_STAGE_META_IDENTITY" \
+      "$SKILL_ACTIVE_STAGE_META_SHA256" \
+      "$SKILL_ACTIVE_STAGE_META_STATE"; then
+      log_error "Manual recovery required: the failed Skill commit was preserved at $failed_commit."
+      clear_active_skill_transaction
+      return 1
+    fi
+  fi
+  if [[ -n "$SKILL_ACTIVE_BACKUP_CONTAINER" && -d "$SKILL_ACTIVE_BACKUP_CONTAINER" ]]; then
+    if ! rmdir "$SKILL_ACTIVE_BACKUP_CONTAINER"; then
+      log_error "Manual recovery required: the Skill backup container was not empty and was preserved at $SKILL_ACTIVE_BACKUP_CONTAINER."
+      clear_active_skill_transaction
+      return 1
+    fi
+  fi
+  clear_active_skill_transaction
+}
+
+validate_test_fault_config() {
+  local mode="${AUTOVERSE_INSTALL_TEST_MODE:-}" fault="${AUTOVERSE_INSTALL_TEST_FAULT:-}"
+  case "$mode" in
+    ""|enabled) ;;
+    *) log_error "AUTOVERSE_INSTALL_TEST_MODE must be unset or exactly 'enabled'."; exit 1 ;;
+  esac
+  case "$fault" in
+    ""|skill-commit-after-backup|skill-destination-appears-after-recheck|skill-destination-appears-after-recheck-portable-mv|skill-backup-metadata-changes-after-recheck|skill-fresh-post-move-failure|skill-fresh-post-move-newcomer|skill-backup-capture-destination-race-portable-mv|skill-backup-restore-destination-race-portable-mv|skill-force-invalid-metadata-changes-after-recheck|skill-force-missing-metadata-appears-after-recheck|auto-config-backup-capture-destination-race-portable-mv|auto-config-backup-restore-destination-race-portable-mv) ;;
+    *) log_error "AUTOVERSE_INSTALL_TEST_FAULT has an unsupported test-only value."; exit 1 ;;
+  esac
+  if [[ -n "$fault" && "$mode" != "enabled" ]]; then
+    log_error "AUTOVERSE_INSTALL_TEST_FAULT requires AUTOVERSE_INSTALL_TEST_MODE=enabled."
+    exit 1
+  fi
+}
+
+should_fail_skill_commit_after_backup() {
+  [[ "${AUTOVERSE_INSTALL_TEST_MODE:-}" == "enabled" ]] || return 1
+  case "${AUTOVERSE_INSTALL_TEST_FAULT:-}" in
+    skill-commit-after-backup|skill-backup-restore-destination-race-portable-mv) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
+should_create_skill_destination_after_recheck() {
+  [[ "${AUTOVERSE_INSTALL_TEST_MODE:-}" == "enabled" ]] || return 1
+  case "${AUTOVERSE_INSTALL_TEST_FAULT:-}" in
+    skill-destination-appears-after-recheck|skill-destination-appears-after-recheck-portable-mv) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
+should_force_portable_skill_move() {
+  [[ "${AUTOVERSE_INSTALL_TEST_MODE:-}" == "enabled" ]] || return 1
+  case "${AUTOVERSE_INSTALL_TEST_FAULT:-}" in
+    skill-destination-appears-after-recheck-portable-mv|skill-backup-capture-destination-race-portable-mv|skill-backup-restore-destination-race-portable-mv) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
+should_create_skill_backup_destination_after_recheck() {
+  [[ "${AUTOVERSE_INSTALL_TEST_MODE:-}" == "enabled" && "${AUTOVERSE_INSTALL_TEST_FAULT:-}" == "skill-backup-capture-destination-race-portable-mv" ]]
+}
+
+should_create_skill_restore_destination_after_recheck() {
+  [[ "${AUTOVERSE_INSTALL_TEST_MODE:-}" == "enabled" && "${AUTOVERSE_INSTALL_TEST_FAULT:-}" == "skill-backup-restore-destination-race-portable-mv" ]]
+}
+
+should_force_portable_exact_move() {
+  [[ "${AUTOVERSE_INSTALL_TEST_MODE:-}" == "enabled" ]] || return 1
+  case "${AUTOVERSE_INSTALL_TEST_FAULT:-}" in
+    auto-config-backup-capture-destination-race-portable-mv|auto-config-backup-restore-destination-race-portable-mv) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
+should_create_auto_backup_destination_after_recheck() {
+  [[ "${AUTOVERSE_INSTALL_TEST_MODE:-}" == "enabled" && "${AUTOVERSE_INSTALL_TEST_FAULT:-}" == "auto-config-backup-capture-destination-race-portable-mv" ]]
+}
+
+should_fail_auto_after_backup_for_restore_race() {
+  [[ "${AUTOVERSE_INSTALL_TEST_MODE:-}" == "enabled" && "${AUTOVERSE_INSTALL_TEST_FAULT:-}" == "auto-config-backup-restore-destination-race-portable-mv" ]]
+}
+
+should_create_auto_restore_destination_after_recheck() {
+  should_fail_auto_after_backup_for_restore_race
+}
+
+apply_test_only_force_skill_metadata_race() {
+  local target="$1" name="$2" ownership_target="$3" content_sha256="$4"
+  [[ "${AUTOVERSE_INSTALL_TEST_MODE:-}" == "enabled" ]] || return 0
+  case "${AUTOVERSE_INSTALL_TEST_FAULT:-}" in
+    skill-force-invalid-metadata-changes-after-recheck)
+      printf '%s\n' 'test-only malformed metadata newcomer mutation' >> "$target/.skill-meta.json"
+      ;;
+    skill-force-missing-metadata-appears-after-recheck)
+      write_test_only_foreign_skill_metadata "$target/.skill-meta.json" "$name" "$ownership_target" "$content_sha256"
+      ;;
+  esac
+}
+
+should_change_skill_backup_metadata_after_recheck() {
+  [[ "${AUTOVERSE_INSTALL_TEST_MODE:-}" == "enabled" && "${AUTOVERSE_INSTALL_TEST_FAULT:-}" == "skill-backup-metadata-changes-after-recheck" ]]
+}
+
+should_fail_fresh_skill_post_move() {
+  [[ "${AUTOVERSE_INSTALL_TEST_MODE:-}" == "enabled" ]] || return 1
+  case "${AUTOVERSE_INSTALL_TEST_FAULT:-}" in
+    skill-fresh-post-move-failure|skill-fresh-post-move-newcomer) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
+should_create_fresh_skill_post_move_newcomer() {
+  [[ "${AUTOVERSE_INSTALL_TEST_MODE:-}" == "enabled" && "${AUTOVERSE_INSTALL_TEST_FAULT:-}" == "skill-fresh-post-move-newcomer" ]]
+}
+
+write_test_only_foreign_skill_metadata() {
+  local path="$1" name="$2" ownership_target="$3" content_sha256="$4"
+  [[ "${AUTOVERSE_INSTALL_TEST_MODE:-}" == "enabled" ]] || return 1
+  cat > "$path" <<EOF
+{
+  "source": "test-only-newcomer",
+  "repo": "foreign/repository",
+  "branch": "main",
+  "component": "skill",
+  "name": "$name",
+  "target": "$ownership_target",
+  "contentSha256": "$content_sha256",
+  "installedAt": "2000-01-01T00:00:00Z",
+  "updatedAt": "2000-01-01T00:00:00Z"
+}
+EOF
+}
+
+assert_regular_agent_leaf() {
+  local path="$1" label="$2"
+  if [[ -L "$path" || ( -e "$path" && ! -f "$path" ) ]]; then
+    log_error "Refusing to replace a non-regular or linked $label file: $path"
+    exit 1
+  fi
+}
+
+exact_regular_file_snapshot_matches() {
+  local path="$1" expected_identity="$2" expected_sha256="$3" actual_identity actual_sha256
+  [[ -f "$path" && ! -L "$path" && -n "$expected_identity" && -n "$expected_sha256" ]] || return 1
+  actual_identity="$(regular_file_identity "$path")" || return 1
+  [[ "$actual_identity" == "$expected_identity" ]] || return 1
+  actual_sha256="$(regular_file_sha256 "$path")" || return 1
+  [[ "$actual_sha256" == "$expected_sha256" ]]
+}
+
+discard_transaction_regular_file() {
+  local path="$1" expected_identity="$2" expected_sha256="$3" parent quarantine_container quarantine
+  exact_regular_file_snapshot_matches "$path" "$expected_identity" "$expected_sha256" || return 1
+  parent="${path%/*}"
+  quarantine_container="$(mktemp -d "$parent/.autoverse-file-discard.XXXXXXXX")"
+  quarantine="$quarantine_container/owned"
+  if ! mv "$path" "$quarantine"; then
+    rmdir "$quarantine_container" 2>/dev/null || true
+    return 1
+  fi
+  if ! exact_regular_file_snapshot_matches "$quarantine" "$expected_identity" "$expected_sha256"; then
+    log_error "Transaction-owned file changed while it was quarantined; preserved manual recovery path: $quarantine"
+    return 1
+  fi
+  rm -f "$quarantine"
+  rmdir "$quarantine_container"
+}
+
+move_exact_no_clobber() {
+  local source="$1" destination="$2" nested_policy="${3:-preserve}" source_identity source_sha256 nested os_name
+  EXACT_MOVE_PRESERVED_PATH=""
+  case "$nested_policy" in
+    preserve|discard-transaction) ;;
+    *) log_error "Unsupported exact file move policy: $nested_policy"; return 1 ;;
+  esac
+  source_identity="$(regular_file_identity "$source")" || return 1
+  source_sha256="$(regular_file_sha256 "$source")" || return 1
+  if ! should_force_portable_exact_move && mv --help 2>&1 | grep -q -- '--no-target-directory'; then
+    mv -nT "$source" "$destination" 2>/dev/null || true
+  else
+    os_name="$(uname -s 2>/dev/null || true)"
+    case "$os_name" in
+      Darwin|FreeBSD|NetBSD|OpenBSD) mv -n -h "$source" "$destination" 2>/dev/null || true ;;
+      *) mv -n "$source" "$destination" 2>/dev/null || true ;;
+    esac
+  fi
+  if [[ ! -e "$source" && ! -L "$source" ]] &&
+    exact_regular_file_snapshot_matches "$destination" "$source_identity" "$source_sha256"; then
     return 0
   fi
   if [[ -d "$destination" && ! -L "$destination" ]]; then
     nested="$destination/${source##*/}"
-    if [[ -f "$nested" && ! -L "$nested" ]] && [[ "$(cksum < "$nested")" == "$checksum" ]]; then
-      rm -f "$nested"
+    if exact_regular_file_snapshot_matches "$nested" "$source_identity" "$source_sha256"; then
+      if [[ "$nested_policy" == "preserve" ]]; then
+        EXACT_MOVE_PRESERVED_PATH="$nested"
+        log_error "Destination became a directory during the exact file move; preserved the source for manual recovery at $nested"
+      elif ! discard_transaction_regular_file "$nested" "$source_identity" "$source_sha256"; then
+        log_error "Could not safely isolate the transaction-owned nested file from newcomer destination: $destination"
+      fi
     fi
   fi
   return 1
 }
 
 move_exact_replace() {
-  local source="$1" destination="$2" checksum nested os_name
-  checksum="$(cksum < "$source")"
-  if mv --help 2>&1 | grep -q -- '--no-target-directory'; then
+  local source="$1" destination="$2" nested_policy="${3:-preserve}" source_identity source_sha256 nested os_name
+  EXACT_MOVE_PRESERVED_PATH=""
+  case "$nested_policy" in
+    preserve|discard-transaction) ;;
+    *) log_error "Unsupported exact file move policy: $nested_policy"; return 1 ;;
+  esac
+  source_identity="$(regular_file_identity "$source")" || return 1
+  source_sha256="$(regular_file_sha256 "$source")" || return 1
+  if ! should_force_portable_exact_move && mv --help 2>&1 | grep -q -- '--no-target-directory'; then
     mv -fT "$source" "$destination" 2>/dev/null || true
   else
     os_name="$(uname -s 2>/dev/null || true)"
     case "$os_name" in
-      Darwin|FreeBSD|NetBSD|OpenBSD) mv -f -h "$source" "$destination" 2>/dev/null || true ;;
+      Darwin|FreeBSD|NetBSD|OpenBSD)
+        if [[ "$nested_policy" == "preserve" ]]; then
+          mv -n -h "$source" "$destination" 2>/dev/null || true
+        else
+          mv -f -h "$source" "$destination" 2>/dev/null || true
+        fi
+        ;;
       *) mv -f "$source" "$destination" 2>/dev/null || true ;;
     esac
   fi
-  if [[ ! -e "$source" && ! -L "$source" && -f "$destination" && ! -L "$destination" ]] &&
-    [[ "$(cksum < "$destination")" == "$checksum" ]]; then
+  if [[ ! -e "$source" && ! -L "$source" ]] &&
+    exact_regular_file_snapshot_matches "$destination" "$source_identity" "$source_sha256"; then
     return 0
   fi
   if [[ -d "$destination" && ! -L "$destination" ]]; then
     nested="$destination/${source##*/}"
-    if [[ -f "$nested" && ! -L "$nested" ]] && [[ "$(cksum < "$nested")" == "$checksum" ]]; then
-      rm -f "$nested"
+    if exact_regular_file_snapshot_matches "$nested" "$source_identity" "$source_sha256"; then
+      if [[ "$nested_policy" == "preserve" ]]; then
+        EXACT_MOVE_PRESERVED_PATH="$nested"
+        log_error "Destination became a directory during the exact file replacement; preserved the source for manual recovery at $nested"
+      elif ! discard_transaction_regular_file "$nested" "$source_identity" "$source_sha256"; then
+        log_error "Could not safely isolate the transaction-owned nested replacement from newcomer destination: $destination"
+      fi
     fi
   fi
   return 1
@@ -539,11 +1223,11 @@ install_staged_exact() {
       log_error "Refusing to replace $label because its existing destination changed: $destination"
       return 1
     fi
-    if ! move_exact_replace "$staged" "$destination"; then
+    if ! move_exact_replace "$staged" "$destination" "discard-transaction"; then
       log_error "Could not atomically replace and verify the exact $label destination: $destination"
       return 1
     fi
-  elif ! move_exact_no_clobber "$staged" "$destination"; then
+  elif ! move_exact_no_clobber "$staged" "$destination" "discard-transaction"; then
     log_error "Refusing to install $label because the exact destination was occupied or changed: $destination"
     return 1
   fi
@@ -551,19 +1235,72 @@ install_staged_exact() {
 
 install_skill() {
   local src="$1" destination_root="$2" ownership_target="$3" legacy_targets="${4:-}" name target meta now installed_at
+  local staged backup_container backup target_existed preflight_target_identity preflight_content_sha256 current_content_sha256 incoming_content_sha256 staged_content_sha256
   name="$(basename "$src")"
   target="${destination_root%/}/$name"
   meta="$target/.skill-meta.json"
   assert_within_destination "$target" "$destination_root"
+  assert_regular_skill_root "$target"
   install_action "$target" "$meta" "$name" "skill" "$name" "$ownership_target" "$target/SKILL.md" "$src/SKILL.md" "" "" "$legacy_targets"
+  target_existed=0
+  backup=""
+  backup_container=""
+  preflight_target_identity="$EXPECTED_SKILL_TARGET_IDENTITY"
+  preflight_content_sha256="$EXPECTED_SKILL_CURRENT_SHA256"
+  if [[ -d "$target" ]]; then
+    target_existed=1
+    if [[ -z "$preflight_target_identity" ]]; then
+      if ! preflight_target_identity="$(skill_directory_identity "$target")"; then exit 1; fi
+    fi
+    if [[ -z "$preflight_content_sha256" ]]; then
+      if ! preflight_content_sha256="$(skill_content_sha256 "$target")"; then exit 1; fi
+    fi
+  fi
   if [[ "$DRY_RUN" -eq 1 ]]; then printf 'DRY-RUN %s Skill %s -> %s\n' "$INSTALL_ACTION" "$name" "$target"; return; fi
 
   mkdir -p "$destination_root"
-  rm -rf "$target"
-  cp -R "$src" "$target"
+  staged="$(mktemp -d "$destination_root/.autoverse-skill-stage.XXXXXXXX")"
+  SKILL_ACTIVE_TARGET="$target"
+  SKILL_ACTIVE_STAGE="$staged"
+  SKILL_ACTIVE_BACKUP=""
+  SKILL_ACTIVE_BACKUP_CONTAINER=""
+  SKILL_ACTIVE_STAGE_IDENTITY=""
+  SKILL_ACTIVE_STAGE_DIGEST=""
+  SKILL_ACTIVE_STAGE_META_IDENTITY=""
+  SKILL_ACTIVE_STAGE_META_SHA256=""
+  SKILL_ACTIVE_STAGE_META_STATE="valid"
+  SKILL_ACTIVE_STAGE_COMMITTED=0
+  SKILL_ACTIVE_BACKUP_IDENTITY=""
+  SKILL_ACTIVE_BACKUP_DIGEST=""
+  SKILL_ACTIVE_BACKUP_META_IDENTITY=""
+  SKILL_ACTIVE_BACKUP_META_SHA256=""
+  SKILL_ACTIVE_BACKUP_META_STATE=""
+  if ! incoming_content_sha256="$(skill_content_sha256 "$src")"; then
+    rollback_active_skill_transaction || true
+    exit 1
+  fi
+  if ! cp -R "$src/." "$staged/"; then
+    rollback_active_skill_transaction || true
+    log_error "Could not stage Skill $name."
+    exit 1
+  fi
+  if ! staged_content_sha256="$(skill_content_sha256 "$staged")"; then
+    rollback_active_skill_transaction || true
+    exit 1
+  fi
+  if [[ "$incoming_content_sha256" != "$staged_content_sha256" ]]; then
+    rollback_active_skill_transaction || true
+    log_error "Refusing to install Skill $name because its source changed while the staged snapshot was copied."
+    exit 1
+  fi
+  if ! SKILL_ACTIVE_STAGE_IDENTITY="$(skill_directory_identity "$staged")"; then
+    rollback_active_skill_transaction || true
+    exit 1
+  fi
+  SKILL_ACTIVE_STAGE_DIGEST="$staged_content_sha256"
   now="$(date -u '+%Y-%m-%dT%H:%M:%SZ')"
   installed_at="${EXISTING_INSTALLED_AT:-$now}"
-  cat > "$meta" <<EOF
+  if ! cat > "$staged/.skill-meta.json" <<EOF
 {
   "source": "$SOURCE_KIND",
   "repo": "$REPO",
@@ -571,10 +1308,163 @@ install_skill() {
   "component": "skill",
   "name": "$name",
   "target": "$ownership_target",
+  "contentSha256": "$staged_content_sha256",
   "installedAt": "$installed_at",
   "updatedAt": "$now"
 }
 EOF
+  then
+    rollback_active_skill_transaction || true
+    log_error "Could not stage Skill metadata for $name."
+    exit 1
+  fi
+  if ! validate_flat_metadata "$staged/.skill-meta.json" ||
+    ! SKILL_ACTIVE_STAGE_META_IDENTITY="$(regular_file_identity "$staged/.skill-meta.json")" ||
+    ! SKILL_ACTIVE_STAGE_META_SHA256="$(regular_file_sha256 "$staged/.skill-meta.json")" ||
+    ! skill_transaction_snapshot_matches \
+      "$staged" \
+      "$SKILL_ACTIVE_STAGE_IDENTITY" \
+      "$SKILL_ACTIVE_STAGE_DIGEST" \
+      "$SKILL_ACTIVE_STAGE_META_IDENTITY" \
+      "$SKILL_ACTIVE_STAGE_META_SHA256"; then
+    rollback_active_skill_transaction || true
+    log_error "Could not verify the staged Skill ownership marker for $name."
+    exit 1
+  fi
+
+  assert_regular_skill_root "$target"
+  if [[ "$target_existed" -eq 1 ]]; then
+    apply_test_only_force_skill_metadata_race "$target" "$name" "$ownership_target" "$preflight_content_sha256"
+  fi
+  if [[ "$target_existed" -eq 1 ]]; then
+    if [[ ! -d "$target" ]]; then
+      rollback_active_skill_transaction || true
+      log_error "Refusing to replace Skill $name because its destination disappeared during staging."
+      exit 1
+    fi
+    if ! skill_move_snapshot_matches \
+      "$target" \
+      "$preflight_target_identity" \
+      "$preflight_content_sha256" \
+      "$EXPECTED_SKILL_META_IDENTITY" \
+      "$EXPECTED_SKILL_META_SHA256" \
+      "$EXPECTED_SKILL_META_STATE"; then
+      rollback_active_skill_transaction || true
+      log_error "Refusing to replace Skill $name because its ownership metadata, filesystem identity, or content changed during installation staging. Run the installer again."
+      exit 1
+    fi
+    backup_container="$(mktemp -d "$destination_root/.autoverse-skill-backup.XXXXXXXX")"
+    backup="$backup_container/original"
+    SKILL_ACTIVE_BACKUP_CONTAINER="$backup_container"
+    SKILL_ACTIVE_BACKUP="$backup"
+    SKILL_ACTIVE_BACKUP_IDENTITY="$preflight_target_identity"
+    SKILL_ACTIVE_BACKUP_DIGEST="$preflight_content_sha256"
+    SKILL_ACTIVE_BACKUP_META_IDENTITY="$EXPECTED_SKILL_META_IDENTITY"
+    SKILL_ACTIVE_BACKUP_META_SHA256="$EXPECTED_SKILL_META_SHA256"
+    SKILL_ACTIVE_BACKUP_META_STATE="$EXPECTED_SKILL_META_STATE"
+    if should_create_skill_backup_destination_after_recheck; then
+      mkdir "$backup"
+      printf '%s\n' 'test-only backup destination newcomer that must be preserved' > "$backup/AUTOVERSE-NEWCOMER.txt"
+    fi
+    if ! move_skill_directory_no_clobber \
+      "$target" \
+      "$backup" \
+      "$SKILL_ACTIVE_BACKUP_IDENTITY" \
+      "$SKILL_ACTIVE_BACKUP_DIGEST" \
+      "$SKILL_ACTIVE_BACKUP_META_IDENTITY" \
+      "$SKILL_ACTIVE_BACKUP_META_SHA256" \
+      "$SKILL_ACTIVE_BACKUP_META_STATE" \
+      "preserve"; then
+      rollback_active_skill_transaction || true
+      log_error "Could not capture the existing Skill before atomic replacement: $target"
+      exit 1
+    fi
+    if should_change_skill_backup_metadata_after_recheck; then
+      write_test_only_foreign_skill_metadata "$backup/.skill-meta.json" "$name" "$ownership_target" "$SKILL_ACTIVE_BACKUP_DIGEST"
+    fi
+    if ! skill_move_snapshot_matches \
+      "$backup" \
+      "$SKILL_ACTIVE_BACKUP_IDENTITY" \
+      "$SKILL_ACTIVE_BACKUP_DIGEST" \
+      "$SKILL_ACTIVE_BACKUP_META_IDENTITY" \
+      "$SKILL_ACTIVE_BACKUP_META_SHA256" \
+      "$SKILL_ACTIVE_BACKUP_META_STATE"; then
+      rollback_active_skill_transaction || true
+      log_error "Refusing to continue because the captured Skill ownership metadata, filesystem identity, or content changed after backup."
+      exit 1
+    fi
+    if should_fail_skill_commit_after_backup; then
+      rollback_active_skill_transaction || {
+        log_error "Injected Skill commit failure also failed to restore the original Skill."
+        exit 1
+      }
+      log_error "Injected test-only Skill commit failure after backup."
+      exit 1
+    fi
+  elif [[ -e "$target" || -L "$target" ]]; then
+    rollback_active_skill_transaction || true
+    log_error "Refusing to install Skill $name because its destination appeared during staging."
+    exit 1
+  fi
+
+  if should_create_skill_destination_after_recheck; then
+    mkdir "$target"
+    printf '%s\n' 'test-only newcomer that must be preserved' > "$target/AUTOVERSE-NEWCOMER.txt"
+  fi
+
+  if ! move_skill_directory_no_clobber \
+    "$staged" \
+    "$target" \
+    "$SKILL_ACTIVE_STAGE_IDENTITY" \
+    "$SKILL_ACTIVE_STAGE_DIGEST" \
+    "$SKILL_ACTIVE_STAGE_META_IDENTITY" \
+    "$SKILL_ACTIVE_STAGE_META_SHA256" \
+    "$SKILL_ACTIVE_STAGE_META_STATE" \
+    "discard-transaction"; then
+    rollback_active_skill_transaction || {
+      log_error "Skill $name commit failed and the original Skill could not be restored."
+      exit 1
+    }
+    log_error "Could not atomically commit and verify the exact Skill destination for $name."
+    exit 1
+  fi
+  SKILL_ACTIVE_STAGE_COMMITTED=1
+  if [[ "$target_existed" -eq 0 ]] && should_create_fresh_skill_post_move_newcomer; then
+    write_test_only_foreign_skill_metadata "$target/.skill-meta.json" "$name" "$ownership_target" "$SKILL_ACTIVE_STAGE_DIGEST"
+  fi
+  if ! skill_transaction_snapshot_matches \
+    "$target" \
+    "$SKILL_ACTIVE_STAGE_IDENTITY" \
+    "$SKILL_ACTIVE_STAGE_DIGEST" \
+    "$SKILL_ACTIVE_STAGE_META_IDENTITY" \
+    "$SKILL_ACTIVE_STAGE_META_SHA256" ||
+    { [[ "$target_existed" -eq 0 ]] && should_fail_fresh_skill_post_move; }; then
+    if ! rollback_active_skill_transaction; then
+      log_error "Fresh or updated Skill post-move verification failed; unrecognized content was preserved for manual recovery."
+    else
+      log_error "Injected test-only fresh Skill post-move verification failure."
+    fi
+    exit 1
+  fi
+  if [[ -n "$backup" ]]; then
+    if ! discard_transaction_skill_directory \
+      "$backup" \
+      "$SKILL_ACTIVE_BACKUP_IDENTITY" \
+      "$SKILL_ACTIVE_BACKUP_DIGEST" \
+      "$SKILL_ACTIVE_BACKUP_META_IDENTITY" \
+      "$SKILL_ACTIVE_BACKUP_META_SHA256" \
+      "$SKILL_ACTIVE_BACKUP_META_STATE"; then
+      clear_active_skill_transaction
+      log_error "Skill $name was installed, but the original backup changed before cleanup and was preserved at $backup."
+      exit 1
+    fi
+    if ! rmdir "$backup_container"; then
+      clear_active_skill_transaction
+      log_error "Skill $name was installed, but its non-empty backup container was preserved at $backup_container."
+      exit 1
+    fi
+  fi
+  clear_active_skill_transaction
   log_success "$INSTALL_ACTION Skill $name -> $target"
 }
 
@@ -584,6 +1474,7 @@ preflight_skill() {
   target="${destination_root%/}/$name"
   meta="$target/.skill-meta.json"
   assert_within_destination "$target" "$destination_root"
+  assert_regular_skill_root "$target"
   install_action "$target" "$meta" "$name" "skill" "$name" "$ownership_target" "$target/SKILL.md" "$src/SKILL.md" "" "" "$legacy_targets"
 }
 
@@ -1229,21 +2120,25 @@ restore_captured_config() {
   fi
 
   if [[ ! -e "$destination" && ! -L "$destination" ]]; then
-    if move_exact_no_clobber "$backup" "$destination"; then
+    if should_create_auto_restore_destination_after_recheck; then
+      mkdir "$destination"
+      printf '%s\n' 'test-only config restore newcomer that must be preserved' > "$destination/AUTOVERSE-NEWCOMER.txt"
+    fi
+    if move_exact_no_clobber "$backup" "$destination" "preserve"; then
       AUTO_CAPTURED_BACKUP="" AUTO_CAPTURED_PATH="" AUTO_STAGED_CHECKSUM=""
       log_info "Restored config after incomplete installation: $destination"
       return 0
     fi
   elif [[ -f "$destination" && ! -L "$destination" && -n "$staged_checksum" ]]; then
     current_checksum="$(cksum < "$destination" 2>/dev/null || true)"
-    if [[ "$current_checksum" == "$staged_checksum" ]] && move_exact_replace "$backup" "$destination"; then
+    if [[ "$current_checksum" == "$staged_checksum" ]] && move_exact_replace "$backup" "$destination" "preserve"; then
       AUTO_CAPTURED_BACKUP="" AUTO_CAPTURED_PATH="" AUTO_STAGED_CHECKSUM=""
       log_info "Restored config after incomplete installation: $destination"
       return 0
     fi
   fi
 
-  log_error "Could not safely restore $destination because the destination is occupied or changed. The captured config remains at $backup."
+  log_error "Could not safely restore $destination because the destination is occupied or changed. The captured config remains at ${EXACT_MOVE_PRESERVED_PATH:-$backup}."
   return 1
 }
 
@@ -1294,7 +2189,11 @@ apply_auto_delegation_plan() {
     fi
     backup="$(mktemp "$AUTO_CONFIG_PATH.autoverse-backup-XXXXXXXX")"
     rm -f "$backup"
-    if ! move_exact_no_clobber "$AUTO_CONFIG_PATH" "$backup"; then
+    if should_create_auto_backup_destination_after_recheck; then
+      mkdir "$backup"
+      printf '%s\n' 'test-only config backup destination newcomer that must be preserved' > "$backup/AUTOVERSE-NEWCOMER.txt"
+    fi
+    if ! move_exact_no_clobber "$AUTO_CONFIG_PATH" "$backup" "preserve"; then
       log_error "Could not capture the current config before atomic replacement: $AUTO_CONFIG_PATH"
       exit 1
     fi
@@ -1305,13 +2204,17 @@ apply_auto_delegation_plan() {
       exit 1
     fi
     log_info "Backup: $backup"
+    if should_fail_auto_after_backup_for_restore_race; then
+      log_error "Injected test-only auto-delegation failure after config backup."
+      exit 1
+    fi
   fi
 
   if [[ -n "$AUTO_SIBLING_PATH" && ( -e "$AUTO_SIBLING_PATH" || -L "$AUTO_SIBLING_PATH" ) ]]; then
     log_error "Refusing to apply OpenCode auto-delegation because a sibling config appeared: $AUTO_SIBLING_PATH"
     exit 1
   fi
-  if ! move_exact_no_clobber "$staged" "$AUTO_CONFIG_PATH"; then
+  if ! move_exact_no_clobber "$staged" "$AUTO_CONFIG_PATH" "discard-transaction"; then
     log_error "Could not atomically install and verify the exact config destination: $AUTO_CONFIG_PATH"
     exit 1
   fi
@@ -1319,6 +2222,7 @@ apply_auto_delegation_plan() {
   log_success "$AUTO_ACTION $AUTO_RUNTIME auto-delegation -> $AUTO_CONFIG_PATH"
 }
 
+validate_test_fault_config
 if [[ -z "$TARGET" ]]; then usage; log_error "Target is required."; exit 1; fi
 if [[ "$TYPE" != "skill" && "$TYPE" != "agent" ]]; then log_error "Type must be skill or agent."; exit 1; fi
 if [[ ! "$REPO" =~ ^[A-Za-z0-9._-]+/[A-Za-z0-9._-]+$ ]]; then
@@ -1377,6 +2281,7 @@ AUTO_CAPTURED_PATH=""
 AUTO_SIBLING_PATH=""
 cleanup() {
   restore_captured_config || true
+  rollback_active_skill_transaction || true
   [[ -z "$AUTO_STAGED" ]] || rm -f "$AUTO_STAGED"
   [[ -z "$TMP_DIR" ]] || rm -rf "$TMP_DIR"
   [[ -z "$AUTO_PLAN_DIR" ]] || rm -rf "$AUTO_PLAN_DIR"

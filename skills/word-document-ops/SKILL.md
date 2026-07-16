@@ -1,8 +1,10 @@
 ---
 name: word-document-ops
 description: Word document workflow for creating, editing, and converting .docx files with formatting, tracked changes, comments, and tables. Use when a Word doc or .docx file is the primary input or output, or when a report, memo, letter, or template needs docx formatting.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Word Document Ops

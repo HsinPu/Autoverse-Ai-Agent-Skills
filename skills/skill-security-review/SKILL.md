@@ -1,8 +1,10 @@
 ---
 name: skill-security-review
 description: Perform a focused security and supply-chain review of a third-party Skill package, including provenance, scripts, dependencies, permissions, data flows, prompt injection, downloads, secret access, external actions, and sandboxed runtime behavior. Use when an external Skill contains executable or opaque content, requests broad access, contacts the network, handles credentials, shows suspicious instructions, or needs a security approval before installation; use skill-audit for overall semantic quality and catalog fit.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Skill Security Review

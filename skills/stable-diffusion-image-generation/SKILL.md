@@ -1,8 +1,10 @@
 ---
 name: stable-diffusion-image-generation
 description: Stable Diffusion image generation guidance for text-to-image, image-to-image, inpainting, and custom diffusion pipelines using tools such as HuggingFace Diffusers. Use when working with Stable Diffusion models, local or hosted diffusion workflows, generation parameters, seeds, schedulers, LoRA, or pipeline troubleshooting.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Stable Diffusion Image Generation

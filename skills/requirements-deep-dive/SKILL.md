@@ -1,11 +1,13 @@
 ---
 name: requirements-deep-dive
 description: Run a deliberate one-decision-at-a-time requirements interview that challenges assumptions, exposes contradictions, recommends concrete defaults, records decisions, and can ground questions in repository evidence. Use when the user explicitly asks for a deep interview, wants requirements challenged before implementation, or an approved discovery workflow pauses for consequential choices that available code and documents cannot answer.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
-reference-source: mattpocock/skills
-reference-revision: e9fcdf95b402d360f90f1db8d776d5dd450f9234
-reference-license: MIT
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  reference-source: "mattpocock/skills"
+  reference-license: "MIT"
+  reference-revision: "e9fcdf95b402d360f90f1db8d776d5dd450f9234"
 ---
 
 # Requirements Deep Dive

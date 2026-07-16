@@ -1,8 +1,10 @@
 ---
 name: web-research-ops
 description: Web research workflow for finding, checking, and synthesizing current information from the web. Use when a task needs fresh facts, source comparison, or evidence-backed answers from URLs and search results.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Web Research Ops

@@ -1,10 +1,13 @@
 ---
 name: article-writing
 description: Evidence-led long-form writing workflow for turning an approved brief, source ledger, and optional brand voice into a coherent article, guide, essay, or newsletter with claim mapping, fact checks, and editorial quality gates. Use when producing substantial narrative content rather than a summary, technical specification, social post, or short-form video script.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
-reference-source: affaan-m/ECC
-reference-license: MIT
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  reference-source: "affaan-m/ECC"
+  reference-license: "MIT"
+  reference-revision: "ed387446052dfbc6b52de149406b70efa65edc59"
 ---
 
 # Article Writing

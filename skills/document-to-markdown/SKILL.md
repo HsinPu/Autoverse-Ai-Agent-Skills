@@ -1,8 +1,10 @@
 ---
 name: document-to-markdown
 description: Document-to-Markdown conversion workflow for turning DOCX, DOC, PDF, PPTX, HTML, RTF, Google Docs exports, and extracted document text into clean Markdown. Use when converting docs to markdown, docs 轉 Markdown, 文件轉 Markdown, docx to md, PDF to Markdown, marker pdf markdown, or when the final deliverable must be a reviewed .md file with preserved headings, lists, tables, links, images, and code blocks.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Document To Markdown

@@ -1,8 +1,10 @@
 ---
 name: frontend-testing
 description: Frontend testing guide for unit, component, and RTL-style tests in React and TypeScript projects. Use when writing or reviewing frontend tests, testing UI behavior, or deciding how to cover component and hook logic without full browser E2E.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Frontend Testing

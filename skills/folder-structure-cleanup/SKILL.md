@@ -1,8 +1,10 @@
 ---
 name: folder-structure-cleanup
 description: Folder structure cleanup workflow for auditing, simplifying, merging, renaming, archiving, and documenting messy directory trees. Use when the user asks to organize folders rather than individual files, reduce nested folders, clean empty folders, separate active and archived project folders, standardize folder names, or design a safer folder hierarchy with a dry-run move plan.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Folder Structure Cleanup

@@ -1,8 +1,10 @@
 ---
 name: stripe-payments
 description: Stripe payments guide covering Checkout, PaymentIntents, subscriptions, webhooks, idempotency, customer records, Connect basics, testing, and secure server-side integration. Use when implementing, reviewing, or debugging payments, billing, or Stripe webhook flows.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Stripe Payments

@@ -1,8 +1,10 @@
 ---
 name: summary-ops
 description: Summarization workflow for extracting concise summaries or transcripts from URLs, local files, podcasts, and videos. Use when a link, audio/video file, or long text needs a short summary, transcript, or quick triage.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Summary Ops

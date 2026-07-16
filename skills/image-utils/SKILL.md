@@ -1,8 +1,10 @@
 ---
 name: image-utils
 description: Deterministic image post-processing workflow for resizing, cropping, compositing, converting formats, optimizing assets, adding watermarks, and preparing generated images for web or documentation. Use when modifying existing image files with predictable pixel-level operations rather than generating new images.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Image Utils

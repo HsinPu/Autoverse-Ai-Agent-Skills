@@ -1,11 +1,13 @@
 ---
 name: skill-explorer
 description: Navigate the local Skill catalog and turn a request into the smallest useful execution route, including what to use now, what artifact enables the next Skill, and where to stop. Use when mapping a task to existing Skills, comparing nearby triggers, discovering a multi-Skill flow, or deciding that no specialized Skill is needed.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
-reference-source: mattpocock/skills
-reference-revision: e9fcdf95b402d360f90f1db8d776d5dd450f9234
-reference-license: MIT
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  reference-source: "mattpocock/skills"
+  reference-license: "MIT"
+  reference-revision: "e9fcdf95b402d360f90f1db8d776d5dd450f9234"
 ---
 
 # Skill Explorer

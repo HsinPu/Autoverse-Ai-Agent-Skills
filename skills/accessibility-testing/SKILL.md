@@ -1,8 +1,10 @@
 ---
 name: accessibility-testing
 description: Test web and mobile interfaces for accessibility through WCAG-oriented audits, keyboard navigation, focus behavior, semantic structure, zoom and reflow, contrast, reduced motion, and hands-on screen-reader workflows for VoiceOver, NVDA, JAWS, TalkBack, and platform accessibility APIs. Use when validating an implemented interface, reproducing an accessibility defect, preparing a release, or defining verifiable remediation criteria.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Accessibility Testing

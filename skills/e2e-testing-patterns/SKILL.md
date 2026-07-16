@@ -1,8 +1,10 @@
 ---
 name: e2e-testing-patterns
 description: End-to-end testing patterns for designing, writing, debugging, and maintaining browser E2E suites with tools such as Playwright or Cypress. Use when creating reliable E2E tests, choosing critical user flows, reducing flaky tests, designing fixtures, or integrating browser tests into CI.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # E2E Testing Patterns

@@ -1,10 +1,13 @@
 ---
 name: solution-discovery
 description: Solution discovery workflow for turning an unclear software problem into an approved design direction through goals, constraints, alternatives, tradeoffs, and explicit decision checkpoints. Use before specification or implementation when the desired outcome is known but the solution, scope, or architecture direction is not yet agreed.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
-reference-source: obra/superpowers
-reference-license: MIT
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  reference-source: "obra/superpowers"
+  reference-license: "MIT"
+  reference-revision: "d884ae04edebef577e82ff7c4e143debd0bbec99"
 ---
 
 # Solution Discovery

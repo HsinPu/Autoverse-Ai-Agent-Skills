@@ -1,8 +1,10 @@
 ---
 name: typescript-development
 description: TypeScript development guide covering code style, type safety, design patterns, API design, and refactoring techniques for TypeScript-heavy codebases. Use when writing, reviewing, or restructuring TypeScript code, or when deciding type and module design.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # TypeScript Development

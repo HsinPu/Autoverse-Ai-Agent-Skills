@@ -1,8 +1,10 @@
 ---
 name: web-page-design-to-code
 description: Approval-gated workflow for turning a single web page brief, screenshot, or visual reference into desktop and mobile mockups, an implementation contract, production frontend code in the existing stack, and browser-verified visual evidence. Use when creating or materially redesigning one page and the design must be reviewed before coding; use website-redesign-to-code for multiple routes or a full-site redesign.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Web Page Design to Code

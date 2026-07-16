@@ -1,8 +1,10 @@
 ---
 name: ask-questions-if-underspecified
 description: Requirement-clarification guide for identifying the minimum missing information before implementation. Use when the user explicitly asks to clarify requirements first or requests a question-first approach before coding. Do not use automatically.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Ask Questions If Underspecified

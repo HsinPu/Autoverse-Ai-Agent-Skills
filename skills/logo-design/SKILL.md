@@ -1,8 +1,10 @@
 ---
 name: logo-design
 description: Logo design workflow for turning brand context into simple, recognizable logo concepts and SVG-ready visual directions. Use when creating or refining logos, brand marks, wordmarks, icon marks, monograms, brand symbols, or visual identity concepts for products, companies, apps, and communities.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Logo Design

@@ -1,8 +1,10 @@
 ---
 name: frontend-stack-inference
 description: Frontend stack inference workflow for identifying JavaScript frameworks, jQuery, Bootstrap, CSS frameworks, build tools, meta-frameworks, and legacy patterns from repository files, HTML, DOM attributes, global variables, script URLs, package metadata, and bundle signals. Use when auditing an unknown frontend, planning migration, documenting tech stack, or deciding which frontend skill to load next.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Frontend Stack Inference

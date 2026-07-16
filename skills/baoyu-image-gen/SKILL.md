@@ -1,8 +1,10 @@
 ---
 name: baoyu-image-gen
 description: General AI image generation workflow for creating images from text prompts with provider-backed APIs such as OpenAI, Google, and DashScope. Use when the user asks to generate, create, draw, or produce images from text, with optional reference images, aspect ratios, or multiple output variants.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Baoyu Image Gen

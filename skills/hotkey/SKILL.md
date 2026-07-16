@@ -1,8 +1,10 @@
 ---
 name: hotkey
 description: Keyboard shortcut guidance for web and React UI work, covering hotkey design, keybinding registration, shortcut conflict resolution, and discoverability. Use when implementing or reviewing keyboard shortcuts, command bindings, or keyboard-driven actions in an application.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Hotkey

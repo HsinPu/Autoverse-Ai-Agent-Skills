@@ -1,8 +1,10 @@
 ---
 name: kubernetes-operations
 description: Operate and deliver Kubernetes workloads through manifests, Helm, GitOps, kubectl diagnosis, rollout control, probes, resources, networking, RBAC, Pod Security, and policy validation. Use when creating, deploying, inspecting, securing, or debugging Kubernetes applications, Helm charts, Argo CD or Flux delivery, or cluster workload configuration.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Kubernetes Operations

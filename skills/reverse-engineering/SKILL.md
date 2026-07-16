@@ -1,8 +1,10 @@
 ---
 name: reverse-engineering
 description: Perform authorized static and controlled dynamic analysis of binaries, firmware, memory images, and network protocols through artifact provenance, hashing, format identification, disassembly, decompilation, control-flow and data-flow analysis, memory forensics, protocol inference, and behavioral specification. Use for compatibility, migration, incident investigation, malware triage, documentation, or clean-room interoperability without bypassing access controls or weaponizing findings.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Reverse Engineering

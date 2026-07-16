@@ -1,8 +1,10 @@
 ---
 name: git-advanced
 description: Advanced Git workflow guide for worktrees, bisect, interactive rebase, recovery, hooks, and history repair. Use when a Git task needs deeper control than basic commits, branches, merges, or push/pull flows.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Git Advanced

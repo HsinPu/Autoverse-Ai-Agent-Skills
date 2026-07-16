@@ -1,8 +1,10 @@
 ---
 name: code-review
 description: Code review guide for identifying correctness, security, performance, maintainability, architecture, and testing issues in code changes while providing constructive, actionable feedback. Use when reviewing pull requests, modified files, code diffs, or pasted code and when the goal is to surface concrete findings, risks, review decisions, and test gaps.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Code Review

@@ -1,8 +1,10 @@
 ---
 name: git-readme-writer
 description: README design and authoring guide for Git-based repositories, covering apps, libraries, CLIs, APIs, templates, monorepos, and internal or Gerrit-based projects. Use when creating, rewriting, expanding, or standardizing repository README documentation after inspecting project structure, setup flow, and usage patterns.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Git README Writer

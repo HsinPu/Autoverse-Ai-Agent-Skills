@@ -1,8 +1,10 @@
 ---
 name: lobe-icons-usage
 description: Lobe Icons usage guide for selecting and integrating AI, LLM, model, provider, and application brand icons from the @lobehub/icons ecosystem. Use when building model selectors, provider lists, AI dashboards, settings pages, marketplace cards, or brand/icon systems that need consistent AI product logos in React, React Native, SVG, PNG, or WebP form.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Lobe Icons Usage

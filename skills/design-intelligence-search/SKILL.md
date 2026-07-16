@@ -1,10 +1,13 @@
 ---
 name: design-intelligence-search
 description: Deterministic local search workflow for retrieving relevant product-pattern, visual-direction, color, typography, layout, interaction, accessibility, data-visualization, and content guidance from an auditable design knowledge base. Use when a UI brief needs evidence-labeled candidate directions or stack-aware design constraints before taste-skill, design-system, or frontend implementation; do not use as a substitute for user research or approved brand requirements.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
-reference-source: nextlevelbuilder/ui-ux-pro-max-skill
-reference-license: MIT
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  reference-source: "nextlevelbuilder/ui-ux-pro-max-skill"
+  reference-license: "MIT"
+  reference-revision: "f8ac5e1266dba8354ea96e19994d9f4345e7ec31"
 ---
 
 # Design Intelligence Search

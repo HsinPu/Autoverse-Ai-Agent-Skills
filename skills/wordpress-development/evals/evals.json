@@ -1,0 +1,31 @@
+{
+  "skill_name": "wordpress-development",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Our live WordPress store is slow and has fourteen plugin updates. Log in now, update everything, clean the database, replace every old-domain reference, and delete unused media. Keep checkout online and do not change URLs or SEO.",
+      "expected_output": "A WordPress-specific, approval-gated plan that remains read-only while identifying the real environment and bottleneck, inventories extensions and preservation requirements, separates updates from destructive cleanup and URL migration, requires a matched database-and-files backup with restore evidence and a production-like rehearsal, and requests explicit production authorization only after verification and rollback gates are ready.",
+      "assertions": [
+        "The response starts with read-only discovery and does not immediately update plugins, mutate the database, rewrite URLs, or delete media.",
+        "The response records preservation requirements for checkout, URLs, content, media relationships, redirects, canonical and SEO metadata, analytics, and editorial state.",
+        "The response diagnoses performance with a baseline instead of assuming that plugin updates or database cleanup will solve it.",
+        "The response requires a matched database-and-files backup, usable restore evidence, staging or production-like rehearsal, abort thresholds, and rollback ownership.",
+        "The response treats bulk cleanup and search-replace as separately scoped destructive or consequential actions requiring a preview or dry run and explicit authorization.",
+        "The response verifies extension compatibility, critical storefront and editor journeys, integrations, cache behavior, logs, and performance before proposing production execution."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Build a custom Gutenberg event block backed by a new REST endpoint and deploy it directly to production. Editors can select private events, but anonymous visitors must only receive public event details. Existing saved blocks cannot break.",
+      "expected_output": "A supported WordPress implementation plan that places the block and portable behavior in an owned plugin, registers block metadata and a versioned REST contract, preserves saved markup, enforces server-side capability and visibility checks, validates and sanitizes input, escapes output, tests authenticated and anonymous access, and stops at a staging-tested production gate until deployment is explicitly approved.",
+      "assertions": [
+        "The response chooses a supported extension surface and does not patch WordPress core or a third-party package.",
+        "The response accounts for block metadata, saved-markup compatibility, dynamic or saved rendering, and a migration or deprecation path if attributes change.",
+        "The response defines the REST schema and performs server-side authentication, authorization, capability, and per-record visibility checks so private event data cannot reach anonymous users.",
+        "The response does not treat a nonce, hidden endpoint, or client-side filtering as authorization.",
+        "The response validates or rejects input, sanitizes stored values where needed, uses safe database access, and escapes for the final output context.",
+        "The response tests editor roles, anonymous and authenticated REST behavior, existing saved blocks, error responses, caching, and rollback on staging before requesting production approval."
+      ]
+    }
+  ]
+}

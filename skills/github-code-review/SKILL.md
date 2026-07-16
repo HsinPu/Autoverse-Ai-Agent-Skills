@@ -1,8 +1,10 @@
 ---
 name: github-code-review
 description: GitHub pull request review workflow for analyzing diffs, comments, checks, and review context through gh. Use when reviewing a PR or GitHub change and the goal is to produce concrete findings, risks, and review guidance.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # GitHub Code Review

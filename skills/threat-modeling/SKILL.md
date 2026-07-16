@@ -1,8 +1,10 @@
 ---
 name: threat-modeling
 description: Build actionable threat models from assets, actors, architecture, data flows, trust boundaries, STRIDE analysis, abuse cases, attack trees, existing controls, security requirements, mitigation mapping, and residual-risk ownership. Use before sensitive design or release decisions, after major architecture changes, or when security findings need to be translated into prioritized requirements and tests.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Threat Modeling

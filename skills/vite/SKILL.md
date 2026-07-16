@@ -1,8 +1,10 @@
 ---
 name: vite
 description: Vite build tool guidance for configuring vite.config.ts, plugins, dev server behavior, SSR, library builds, and migration work. Use when working in Vite projects, tuning build and dev tooling, or fixing Vite configuration and plugin issues.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Vite

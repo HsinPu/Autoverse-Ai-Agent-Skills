@@ -1,10 +1,13 @@
 ---
 name: api-contract-testing
 description: API contract testing workflow for proving provider and consumer compatibility through schema checks, executable examples, consumer-driven expectations, breaking-change analysis, and release gates. Use when an HTTP, event, webhook, or SDK-facing API must be verified against an explicit contract or protected from incompatible changes; use api-contract-design for design decisions and openapi-spec-generation for authoring specifications.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
-reference-source: github/awesome-copilot
-reference-license: MIT
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  reference-source: "github/awesome-copilot"
+  reference-license: "MIT"
+  reference-revision: "2c2461a7fa383f664bb75546f03a2c6087f3819d"
 ---
 
 # API Contract Testing

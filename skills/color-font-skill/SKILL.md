@@ -1,8 +1,10 @@
 ---
 name: color-font-skill
 description: Color and typography guidance for choosing palettes, font pairings, and visual theme directions in frontend and design tasks. Use when a UI needs stronger color balance, brand-safe palettes, readable font pairing, or a deliberate visual identity before implementation.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Color Font Skill

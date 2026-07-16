@@ -1,8 +1,10 @@
 ---
 name: tailwind-development
 description: Tailwind CSS development guide covering utility-first architecture, theme variables, class composition, custom layers and directives, dark mode, Preflight, and build output-size concerns. Use when building, reviewing, or refactoring Tailwind-based interfaces.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Tailwind CSS 開發（Tailwind Development）

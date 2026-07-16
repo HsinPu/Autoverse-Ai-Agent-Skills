@@ -1,8 +1,10 @@
 ---
 name: python-observability-debugging
 description: Python observability and debugging guide covering traceback triage, logging investigation, profiling, memory diagnosis, performance troubleshooting, and runtime failure analysis. Use when a Python system is failing, slow, memory-heavy, or hard to diagnose, and the task is to isolate root cause rather than design application code.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Python Observability and Debugging

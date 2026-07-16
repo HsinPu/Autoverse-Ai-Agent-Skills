@@ -1,8 +1,10 @@
 ---
 name: spreadsheet-ops
 description: Spreadsheet workflow for reading, cleaning, editing, and generating .xlsx, .csv, and .tsv files with formulas, formatting, and charts. Use when a spreadsheet is the primary input or output, or when tabular cleanup and calculation matter.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Spreadsheet Ops

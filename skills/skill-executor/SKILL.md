@@ -1,8 +1,10 @@
 ---
 name: skill-executor
 description: Sandboxed execution workflow for running agent skills, checking outputs, and validating tool behavior. Use when a skill needs controlled execution, local verification, or a reproducible run before adoption.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Skill Executor

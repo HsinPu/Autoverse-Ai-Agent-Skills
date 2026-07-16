@@ -1,10 +1,13 @@
 ---
 name: video-production-workflow
 description: Approval-gated, tool-neutral workflow for taking a video from brief or source material through treatment, script, storyboard, continuity, production planning, asset creation, edit, review, and delivery. Use when coordinating a complete video project across Agents and media Skills, or when one agent must execute the same stages sequentially with restartable artifacts.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
-reference-source: calesthio/OpenMontage
-reference-license: AGPL-3.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  reference-source: "calesthio/OpenMontage"
+  reference-license: "AGPL-3.0"
+  reference-revision: "f8d94632ea9bd0057da31904acca1cefecf005dd"
 ---
 
 # Video Production Workflow

@@ -1,10 +1,13 @@
 ---
 name: visual-regression-testing
 description: Provider-neutral visual comparison and machine-gate workflow for detecting screenshot regressions and evaluating implementation fidelity against approved references across components, pages, states, viewports, themes, and browsers. Use when UI changes need reproducible screenshot, DOM, OCR, contrast, console, network, or semantic-vision evidence; dimensional acceptance criteria; CI verdicts; baseline approval; or an iterative repair gate.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
-reference-source: amitpatole/agent-vision
-reference-license: MIT
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  reference-source: "amitpatole/agent-vision"
+  reference-license: "MIT"
+  reference-revision: "83f5abdfe76c97fbc47af451a340f5eb5683f547"
 ---
 
 # Visual Regression Testing

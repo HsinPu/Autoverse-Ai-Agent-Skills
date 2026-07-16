@@ -1,0 +1,17 @@
+{
+  "skill_name": "website-redesign-to-code",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Redesign our whole commerce site from a few screenshots and start coding immediately. Keep all URLs, checkout behavior, analytics, and SEO unchanged, including mobile pages we did not capture.",
+      "expected_output": "An approval-gated redesign plan that inventories routes and page families, freezes preservation requirements, records missing source authority, proposes representative desktop and mobile artifacts, and stops before production implementation until the required gates are approved.",
+      "assertions": [
+        "The response treats the request as a multi-route website redesign rather than an isolated page implementation.",
+        "The response creates a route and page-family inventory with explicit coverage gaps.",
+        "The preservation contract includes URLs, SEO, analytics, commerce behavior, authentication, and critical states.",
+        "The response requires explicit scope, visual, and implementation approval before production coding.",
+        "The response does not invent uncaptured mobile behavior or automatically replace a visual baseline."
+      ]
+    }
+  ]
+}

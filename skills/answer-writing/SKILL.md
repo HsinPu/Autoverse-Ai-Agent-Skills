@@ -1,8 +1,10 @@
 ---
 name: answer-writing
 description: Final-response writing guide for producing clear, actionable user-facing answers with concise structure and strong readability. Use when preparing the final reply to the user, especially when the answer should be polished, direct, and easy to act on.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Answer Writing

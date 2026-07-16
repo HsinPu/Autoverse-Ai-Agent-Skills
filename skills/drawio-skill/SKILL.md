@@ -1,8 +1,10 @@
 ---
 name: drawio-skill
 description: Diagram generation workflow for turning text or rough ideas into draw.io diagrams and exportable visual assets. Use when a flowchart, architecture diagram, or visual explanation needs to be created or updated.
-source: HsinPu/Autoverse-Ai-Agent-Skills
 license: Apache-2.0
+metadata:
+  author: "HsinPu"
+  source: "HsinPu/Autoverse-Ai-Agent-Skills"
 ---
 
 # Draw.io Skill
