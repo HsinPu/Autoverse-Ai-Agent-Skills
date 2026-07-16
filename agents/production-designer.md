@@ -21,7 +21,7 @@ tags:
   - set-design
   - prop-design
   - asset-specification
-reference-repo: HITsz-TMG/AIGC-Claw
+reference-repo: HITsz-TMG/VideoClaw
 reference-paths:
   - video-claw/video-claw/backend/prompts/setting/setting_zh.txt
   - video-claw/video-claw/backend/prompts/setting/eval_setting_zh.txt

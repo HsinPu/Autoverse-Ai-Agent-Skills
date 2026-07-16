@@ -15,6 +15,21 @@ function Assert-Equal {
     }
 }
 
+function Get-Sha256Hex {
+    param([string]$Path)
+    $stream = [System.IO.File]::OpenRead($Path)
+    try {
+        $hasher = [System.Security.Cryptography.SHA256]::Create()
+        try {
+            return (($hasher.ComputeHash($stream) | ForEach-Object { $_.ToString('X2') }) -join '')
+        } finally {
+            $hasher.Dispose()
+        }
+    } finally {
+        $stream.Dispose()
+    }
+}
+
 function Assert-FileContentMatches {
     param([string]$ActualPath, [string]$ExpectedPath, [string]$Label)
     if (-not (Test-Path -LiteralPath $ActualPath -PathType Leaf)) {
@@ -23,8 +38,8 @@ function Assert-FileContentMatches {
     if (-not (Test-Path -LiteralPath $ExpectedPath -PathType Leaf)) {
         throw "$Label source is missing: $ExpectedPath"
     }
-    $actualHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $ActualPath).Hash
-    $expectedHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $ExpectedPath).Hash
+    $actualHash = Get-Sha256Hex -Path $ActualPath
+    $expectedHash = Get-Sha256Hex -Path $ExpectedPath
     Assert-Equal $actualHash $expectedHash "$Label content hash"
 }
 
@@ -423,11 +438,11 @@ try {
     $foreignSkillFile = Join-Path $foreignSkill "SKILL.md"
     $foreignSkillMeta = Join-Path $foreignSkill ".skill-meta.json"
     [System.IO.File]::WriteAllText($foreignSkillFile, "FOREIGN SKILL SENTINEL - AUTOVERSE MUST NOT REPLACE THIS FILE`n", [System.Text.UTF8Encoding]::new($false))
-    $foreignSkillHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $foreignSkillFile).Hash
+    $foreignSkillHash = Get-Sha256Hex -Path $foreignSkillFile
     Invoke-ExpectedFailure -Label "project Skill ownership collision" -ExpectedMessage "no matching Autoverse metadata" -InstallerArgs @(
         "-Target", "project", "-Type", "skill", "-Name", "python-development", "-SourceDir", $repoRoot, "-InstallDir", $skillCollisionRoot
     )
-    Assert-Equal (Get-FileHash -Algorithm SHA256 -LiteralPath $foreignSkillFile).Hash $foreignSkillHash "foreign Skill sentinel hash"
+    Assert-Equal (Get-Sha256Hex -Path $foreignSkillFile) $foreignSkillHash "foreign Skill sentinel hash"
     if (Test-Path -LiteralPath $foreignSkillMeta) {
         throw "Skill collision added ownership metadata to the foreign sentinel"
     }
@@ -441,11 +456,11 @@ try {
     $foreignAgent = Join-Path $foreignAgentParent "code-reviewer.md"
     $foreignAgentMeta = $foreignAgent + ".autoverse.json"
     [System.IO.File]::WriteAllText($foreignAgent, "FOREIGN AGENT SENTINEL - AUTOVERSE MUST NOT REPLACE THIS FILE`n", [System.Text.UTF8Encoding]::new($false))
-    $foreignAgentHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $foreignAgent).Hash
+    $foreignAgentHash = Get-Sha256Hex -Path $foreignAgent
     Invoke-ExpectedFailure -Label "project Agent ownership collision" -ExpectedMessage "no matching Autoverse metadata" -InstallerArgs @(
         "-Target", "project", "-Type", "agent", "-Name", "code-reviewer", "-SourceDir", $repoRoot, "-InstallDir", $agentCollisionRoot
     )
-    Assert-Equal (Get-FileHash -Algorithm SHA256 -LiteralPath $foreignAgent).Hash $foreignAgentHash "foreign Agent sentinel hash"
+    Assert-Equal (Get-Sha256Hex -Path $foreignAgent) $foreignAgentHash "foreign Agent sentinel hash"
     if (Test-Path -LiteralPath $foreignAgentMeta) {
         throw "Agent collision added ownership metadata to the foreign sentinel"
     }
@@ -469,7 +484,7 @@ try {
     $ownedSkillFile = Join-Path $ownedSkillRoot "SKILL.md"
     $ownedSkillMeta = Join-Path $ownedSkillRoot ".skill-meta.json"
     $ownedSkillBaselineMeta = Get-Content -Raw -LiteralPath $ownedSkillMeta
-    $ownedSkillBaselineHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $ownedSkillFile).Hash
+    $ownedSkillBaselineHash = Get-Sha256Hex -Path $ownedSkillFile
     $skillMetadataCases = @(
         @{ Label = "repo mismatch"; Field = "repo"; Value = "foreign/repository"; Expected = "installed from" },
         @{ Label = "component mismatch"; Field = "component"; Value = "agent"; Expected = "ownership metadata does not match" },
@@ -482,14 +497,14 @@ try {
         Invoke-ExpectedFailure -Label ("Skill ownership " + $case.Label) -ExpectedMessage $case.Expected -InstallerArgs @(
             "-Target", "claude", "-Type", "skill", "-Name", "terminal-ops", "-SourceDir", $repoRoot, "-InstallDir", $skillOwnershipRoot
         )
-        Assert-Equal (Get-FileHash -Algorithm SHA256 -LiteralPath $ownedSkillFile).Hash $ownedSkillBaselineHash ("Skill ownership " + $case.Label + " content hash")
+        Assert-Equal (Get-Sha256Hex -Path $ownedSkillFile) $ownedSkillBaselineHash ("Skill ownership " + $case.Label + " content hash")
     }
 
     Write-Utf8NoBom -Path $ownedSkillMeta -Text "{`n"
     Invoke-ExpectedFailure -Label "Skill malformed ownership metadata" -ExpectedMessage "Existing Autoverse metadata is invalid" -InstallerArgs @(
         "-Target", "claude", "-Type", "skill", "-Name", "terminal-ops", "-SourceDir", $repoRoot, "-InstallDir", $skillOwnershipRoot
     )
-    Assert-Equal (Get-FileHash -Algorithm SHA256 -LiteralPath $ownedSkillFile).Hash $ownedSkillBaselineHash "Skill malformed metadata content hash"
+    Assert-Equal (Get-Sha256Hex -Path $ownedSkillFile) $ownedSkillBaselineHash "Skill malformed metadata content hash"
 
     Write-Utf8NoBom -Path $ownedSkillMeta -Text $ownedSkillBaselineMeta
     Set-MetadataString -Path $ownedSkillMeta -Field "repo" -Value "foreign/repository"
@@ -507,14 +522,14 @@ try {
 
     $localDriftFile = Join-Path $ownedSkillRoot "LOCAL-DRIFT.txt"
     Write-Utf8NoBom -Path $localDriftFile -Text "local customization that must not be overwritten`n"
-    $driftFileHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $localDriftFile).Hash
-    $driftSkillHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $ownedSkillFile).Hash
+    $driftFileHash = Get-Sha256Hex -Path $localDriftFile
+    $driftSkillHash = Get-Sha256Hex -Path $ownedSkillFile
     $driftMetadataText = Get-Content -Raw -LiteralPath $ownedSkillMeta
     Invoke-ExpectedFailure -Label "Skill local content drift refusal" -ExpectedMessage "installed Skill content has changed since the last Autoverse install" -InstallerArgs @(
         "-Target", "claude", "-Type", "skill", "-Name", "terminal-ops", "-SourceDir", $repoRoot, "-InstallDir", $skillOwnershipRoot
     )
-    Assert-Equal (Get-FileHash -Algorithm SHA256 -LiteralPath $localDriftFile).Hash $driftFileHash "drift refusal local file hash"
-    Assert-Equal (Get-FileHash -Algorithm SHA256 -LiteralPath $ownedSkillFile).Hash $driftSkillHash "drift refusal Skill hash"
+    Assert-Equal (Get-Sha256Hex -Path $localDriftFile) $driftFileHash "drift refusal local file hash"
+    Assert-Equal (Get-Sha256Hex -Path $ownedSkillFile) $driftSkillHash "drift refusal Skill hash"
     Assert-Equal (Get-Content -Raw -LiteralPath $ownedSkillMeta) $driftMetadataText "drift refusal metadata"
     Assert-NoAtomicSkillArtifacts -DestinationRoot $skillOwnershipRoot -Label "drift refusal"
 
@@ -529,8 +544,8 @@ try {
 
     $rollbackSentinel = Join-Path $ownedSkillRoot "ROLLBACK-SENTINEL.txt"
     Write-Utf8NoBom -Path $rollbackSentinel -Text "the original directory must return after an injected commit failure`n"
-    $rollbackSentinelHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $rollbackSentinel).Hash
-    $rollbackSkillHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $ownedSkillFile).Hash
+    $rollbackSentinelHash = Get-Sha256Hex -Path $rollbackSentinel
+    $rollbackSkillHash = Get-Sha256Hex -Path $ownedSkillFile
     $rollbackMetadataText = Get-Content -Raw -LiteralPath $ownedSkillMeta
     $faultEnvironmentNames = @(
         "AUTOVERSE_INSTALLER_TEST_MODE",
@@ -555,8 +570,8 @@ try {
             "-Target", "claude", "-Type", "skill", "-Name", "terminal-ops", "-SourceDir", $repoRoot, "-InstallDir", $skillOwnershipRoot, "-Force"
         )
 
-        Assert-Equal (Get-FileHash -Algorithm SHA256 -LiteralPath $rollbackSentinel).Hash $rollbackSentinelHash "atomic rollback sentinel hash before race"
-        Assert-Equal (Get-FileHash -Algorithm SHA256 -LiteralPath $ownedSkillFile).Hash $rollbackSkillHash "atomic rollback Skill hash before race"
+        Assert-Equal (Get-Sha256Hex -Path $rollbackSentinel) $rollbackSentinelHash "atomic rollback sentinel hash before race"
+        Assert-Equal (Get-Sha256Hex -Path $ownedSkillFile) $rollbackSkillHash "atomic rollback Skill hash before race"
         Assert-Equal (Get-Content -Raw -LiteralPath $ownedSkillMeta) $rollbackMetadataText "atomic rollback metadata before race"
 
         $env:AUTOVERSE_INSTALLER_TEST_FAULT = "after-recheck-target-replaced"
@@ -579,8 +594,8 @@ try {
         if (-not (Test-Path -LiteralPath (Join-Path $replacementBackup "AUTOVERSE-REPLACEMENT-NEWCOMER.txt") -PathType Leaf)) {
             throw "Skill final-check replacement deleted the foreign directory"
         }
-        Assert-Equal (Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $replacementOriginal "ROLLBACK-SENTINEL.txt")).Hash $rollbackSentinelHash "Skill final-check replacement original sentinel hash"
-        Assert-Equal (Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $replacementOriginal "SKILL.md")).Hash $rollbackSkillHash "Skill final-check replacement original Skill hash"
+        Assert-Equal (Get-Sha256Hex -Path (Join-Path $replacementOriginal "ROLLBACK-SENTINEL.txt")) $rollbackSentinelHash "Skill final-check replacement original sentinel hash"
+        Assert-Equal (Get-Sha256Hex -Path (Join-Path $replacementOriginal "SKILL.md")) $rollbackSkillHash "Skill final-check replacement original Skill hash"
         Assert-Equal (Get-Content -Raw -LiteralPath (Join-Path $replacementOriginal ".skill-meta.json")) $rollbackMetadataText "Skill final-check replacement original metadata"
         Remove-Item -Recurse -Force -LiteralPath $replacementBackup
         [System.IO.Directory]::Move($replacementOriginal, $ownedSkillRoot)
@@ -599,8 +614,8 @@ try {
         })
         Assert-Equal $raceBackups.Count 1 "Skill destination race retained backup count"
         $raceBackup = $raceBackups[0].FullName
-        Assert-Equal (Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $raceBackup "ROLLBACK-SENTINEL.txt")).Hash $rollbackSentinelHash "Skill destination race backup sentinel hash"
-        Assert-Equal (Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $raceBackup "SKILL.md")).Hash $rollbackSkillHash "Skill destination race backup Skill hash"
+        Assert-Equal (Get-Sha256Hex -Path (Join-Path $raceBackup "ROLLBACK-SENTINEL.txt")) $rollbackSentinelHash "Skill destination race backup sentinel hash"
+        Assert-Equal (Get-Sha256Hex -Path (Join-Path $raceBackup "SKILL.md")) $rollbackSkillHash "Skill destination race backup Skill hash"
         Assert-Equal (Get-Content -Raw -LiteralPath (Join-Path $raceBackup ".skill-meta.json")) $rollbackMetadataText "Skill destination race backup metadata"
 
         Remove-Item -Recurse -Force -LiteralPath $ownedSkillRoot
@@ -645,8 +660,8 @@ try {
             }
         }
     }
-    Assert-Equal (Get-FileHash -Algorithm SHA256 -LiteralPath $rollbackSentinel).Hash $rollbackSentinelHash "atomic rollback sentinel hash"
-    Assert-Equal (Get-FileHash -Algorithm SHA256 -LiteralPath $ownedSkillFile).Hash $rollbackSkillHash "atomic rollback Skill hash"
+    Assert-Equal (Get-Sha256Hex -Path $rollbackSentinel) $rollbackSentinelHash "atomic rollback sentinel hash"
+    Assert-Equal (Get-Sha256Hex -Path $ownedSkillFile) $rollbackSkillHash "atomic rollback Skill hash"
     Assert-Equal (Get-Content -Raw -LiteralPath $ownedSkillMeta) $rollbackMetadataText "atomic rollback metadata"
     Assert-NoAtomicSkillArtifacts -DestinationRoot $skillOwnershipRoot -Label "atomic rollback"
     Write-Pass "Skill digest, local drift refusal, force reset, and atomic rollback"
@@ -707,7 +722,7 @@ try {
     $ownedAgentFile = Join-Path $agentOwnershipRoot "code-reviewer.md"
     $ownedAgentMeta = $ownedAgentFile + ".autoverse.json"
     $ownedAgentBaselineMeta = Get-Content -Raw -LiteralPath $ownedAgentMeta
-    $ownedAgentBaselineHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $ownedAgentFile).Hash
+    $ownedAgentBaselineHash = Get-Sha256Hex -Path $ownedAgentFile
     foreach ($case in @(
         @{ Label = "id mismatch"; Field = "id"; Value = "debugger" },
         @{ Label = "adapter mismatch"; Field = "adapter"; Value = "codex" }
@@ -717,7 +732,7 @@ try {
         Invoke-ExpectedFailure -Label ("Agent ownership " + $case.Label) -ExpectedMessage "ownership metadata does not match" -InstallerArgs @(
             "-Target", "claude", "-Type", "agent", "-Name", "code-reviewer", "-SourceDir", $repoRoot, "-InstallDir", $agentOwnershipRoot
         )
-        Assert-Equal (Get-FileHash -Algorithm SHA256 -LiteralPath $ownedAgentFile).Hash $ownedAgentBaselineHash ("Agent ownership " + $case.Label + " content hash")
+        Assert-Equal (Get-Sha256Hex -Path $ownedAgentFile) $ownedAgentBaselineHash ("Agent ownership " + $case.Label + " content hash")
     }
     Write-Pass "ownership metadata mismatch, malformed, force, and legacy migration matrix"
 

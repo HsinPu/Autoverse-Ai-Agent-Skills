@@ -1,6 +1,6 @@
 {
   "version": "3.0.0",
-  "updated": "2026-07-15T22:56:18.290Z",
+  "updated": "2026-07-16T13:26:10.594Z",
   "total": 237,
   "categories": 31,
   "uniqueRoles": 237,
@@ -1131,7 +1131,7 @@
       ],
       "path": "agents/cinematographer.md",
       "references": {
-        "repo": "HITsz-TMG/AIGC-Claw",
+        "repo": "HITsz-TMG/VideoClaw",
         "paths": [
           "FilmAgent/FilmAgent/Prompt/cinematographer.txt",
           "FilmAgent/FilmAgent/Prompt/shot_review.txt"
@@ -5239,7 +5239,7 @@
       ],
       "path": "agents/production-designer.md",
       "references": {
-        "repo": "HITsz-TMG/AIGC-Claw",
+        "repo": "HITsz-TMG/VideoClaw",
         "paths": [
           "video-claw/video-claw/backend/prompts/setting/setting_zh.txt",
           "video-claw/video-claw/backend/prompts/setting/eval_setting_zh.txt",

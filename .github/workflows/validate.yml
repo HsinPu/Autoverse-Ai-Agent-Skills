@@ -176,6 +176,13 @@ jobs:
         with:
           node-version: 24
 
+      - name: Show Windows runner diagnostics
+        shell: powershell
+        run: |
+          Write-Host "PSVersion=$($PSVersionTable.PSVersion)"
+          Write-Host "ImageOS=$env:ImageOS"
+          Write-Host "ImageVersion=$env:ImageVersion"
+
       - name: Run isolated PowerShell installer smoke test
         run: npm run smoke:install:powershell
 

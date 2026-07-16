@@ -21,7 +21,7 @@ tags:
   - lighting-design
   - shot-execution
   - visual-technical-qc
-reference-repo: HITsz-TMG/AIGC-Claw
+reference-repo: HITsz-TMG/VideoClaw
 reference-paths:
   - FilmAgent/FilmAgent/Prompt/cinematographer.txt
   - FilmAgent/FilmAgent/Prompt/shot_review.txt

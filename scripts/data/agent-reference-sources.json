@@ -87,7 +87,7 @@
       "licensePath": "agency-agents/LICENSE"
     },
     {
-      "repo": "HITsz-TMG/AIGC-Claw",
+      "repo": "HITsz-TMG/VideoClaw",
       "commit": "1324b36020570c279cd9560794a8f5508bf7bb70",
       "tree": "c131e9bd0d62118d2abd81daff3f2c5a4efa9877",
       "license": "MIT",
