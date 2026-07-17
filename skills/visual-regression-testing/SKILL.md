@@ -45,7 +45,7 @@ Do not mix the modes. A new design reference may authorize a product change, but
 
 ## Machine Gate Contract
 
-<!-- AUTOVERSE_CONTRACT
+<!-- CRAFTROSTER_CONTRACT
 {
   "id": "visual-regression-testing.machine-gate",
   "part": "handoff",

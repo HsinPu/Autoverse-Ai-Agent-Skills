@@ -28,9 +28,9 @@ Suggestions may identify product opportunities in visual mode, but do not implem
 
 Use `web-page-design-to-code` instead when only one isolated route or page needs work and the shared shell or design system remains unchanged.
 
-<!-- AUTOVERSE_CONTRACT_TEXT_START website-redesign-to-code.orchestration#source-boundary -->
+<!-- CRAFTROSTER_CONTRACT_TEXT_START website-redesign-to-code.orchestration#source-boundary -->
 Lock source authority per page family before visual exploration: current implementation or brief, structured Figma, raster or recording, generated approval artifact, or an explicit hybrid. Record artifact IDs and revisions, states and viewports, source conflicts, and the owner of visual approval versus product behavior. If one isolated route already has an approved Figma or raster authority and no site-level gate or shared-system change remains, route it directly to `figma-to-code` or `image-to-code`. Once this workflow opens the scope or visual-direction program gate, it remains the top-level orchestrator for every in-scope family. A source workflow may own a bounded evidence or translation receipt, but it cannot close a program gate or expand the approved site scope.
-<!-- AUTOVERSE_CONTRACT_TEXT_END website-redesign-to-code.orchestration#source-boundary -->
+<!-- CRAFTROSTER_CONTRACT_TEXT_END website-redesign-to-code.orchestration#source-boundary -->
 
 ## Non-Negotiable Contract
 
@@ -150,7 +150,7 @@ If new image generation is required but unavailable or prohibited, stop and expl
 
 ### Gate 3: Confirm Implementation Readiness
 
-<!-- AUTOVERSE_CONTRACT
+<!-- CRAFTROSTER_CONTRACT
 {
   "id": "website-redesign-to-code.orchestration",
   "part": "orchestration",
@@ -187,7 +187,7 @@ If new image generation is required but unavailable or prohibited, stop and expl
 }
 -->
 
-<!-- AUTOVERSE_CONTRACT_TEXT_START website-redesign-to-code.orchestration#gate3 -->
+<!-- CRAFTROSTER_CONTRACT_TEXT_START website-redesign-to-code.orchestration#gate3 -->
 Before changing production UI, obtain approval for:
 
 - representative desktop and mobile approval artifacts: adopted approved Figma/raster artifacts, generated image mockups, or an explicitly authorized substitute;
@@ -201,7 +201,7 @@ Before changing production UI, obtain approval for:
 - the machine-visual contract: mode, source or baseline IDs, required matrix cells, deterministic environment, evidence channels and thresholds, retention and network-egress policy, baseline approver, and `warn`/`error` handling.
 
 Stop until the user identifies the approved artifact set and explicitly authorizes implementation. A broad request to redesign the site does not delegate this gate, and no delegation can silently authorize route, IA, backend, SEO, analytics, or data-contract migrations.
-<!-- AUTOVERSE_CONTRACT_TEXT_END website-redesign-to-code.orchestration#gate3 -->
+<!-- CRAFTROSTER_CONTRACT_TEXT_END website-redesign-to-code.orchestration#gate3 -->
 
 ### 6. Implement in Verified Slices
 

@@ -136,7 +136,7 @@ Update this ledger only after verified evidence or an explicit decision. It reco
 
 ## Rollout and Validation Matrix
 
-<!-- AUTOVERSE_CONTRACT
+<!-- CRAFTROSTER_CONTRACT
 {
   "id": "website-redesign-to-code.orchestration",
   "part": "deliverable",

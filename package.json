@@ -13,8 +13,7 @@
   },
   "homepage": "https://github.com/HsinPu/CraftRoster#readme",
   "bin": {
-    "craftroster": "./craftroster-cli.js",
-    "autoverse": "./autoverse-cli.js"
+    "craftroster": "./craftroster-cli.js"
   },
   "scripts": {
     "generate:agents": "node scripts/generate-agent-adapters.js && node scripts/generate-agent-catalog.js",
@@ -46,7 +45,6 @@
   },
   "files": [
     "craftroster-cli.js",
-    "autoverse-cli.js",
     "adapters",
     "agents",
     "agents.json",

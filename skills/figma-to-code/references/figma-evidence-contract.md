@@ -51,7 +51,7 @@ Redact credentials and private query parameters from logs. A checksum identifies
 
 ## Fallback Matrix
 
-<!-- AUTOVERSE_CONTRACT
+<!-- CRAFTROSTER_CONTRACT
 {
   "id": "figma-to-code.fallback",
   "part": "matrix",

@@ -9,7 +9,7 @@ const { spawnSync } = require('child_process');
 
 const root = path.resolve(__dirname, '..');
 const validator = path.join(root, 'scripts', 'validate-skill-evals.js');
-const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'autoverse-skill-evals-'));
+const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'craftroster-skill-evals-'));
 let passed = 0;
 
 function createCase(name) {
@@ -118,7 +118,7 @@ function safeCleanup() {
     relative === ''
     || relative.startsWith(`..${path.sep}`)
     || path.isAbsolute(relative)
-    || !path.basename(resolvedTarget).startsWith('autoverse-skill-evals-')
+    || !path.basename(resolvedTarget).startsWith('craftroster-skill-evals-')
   ) {
     throw new Error(`Refusing to clean unexpected test path: ${resolvedTarget}`);
   }

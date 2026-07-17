@@ -2,9 +2,7 @@
 set -euo pipefail
 
 CANONICAL_REPO="HsinPu/CraftRoster"
-LEGACY_REPO="HsinPu/Autoverse-Ai-Agent-Skills"
 REPO="$CANONICAL_REPO"
-REPO_OPTION_EXPLICIT=0
 BRANCH="main"
 TARGET=""
 TYPE="skill"
@@ -87,76 +85,16 @@ require_option_value() {
 
 repo_matches_expected() {
   local existing_repo="$1"
-  [[ "$existing_repo" == "$REPO" ]] && return 0
-  [[ "$REPO_OPTION_EXPLICIT" -eq 0 && "$REPO" == "$CANONICAL_REPO" && "$existing_repo" == "$LEGACY_REPO" ]]
-}
-
-repo_needs_migration() {
-  local existing_repo="$1"
-  [[ "$REPO_OPTION_EXPLICIT" -eq 0 && "$REPO" == "$CANONICAL_REPO" && "$existing_repo" == "$LEGACY_REPO" ]]
-}
-
-is_owned_codex_legacy_skill() {
-  local root="$1" skill_name="$2" meta existing_repo existing_component existing_name existing_target existing_agent
-  meta="${root%/}/$skill_name/.skill-meta.json"
-  [[ -f "$meta" && ! -L "$meta" ]] || return 1
-  validate_flat_metadata "$meta" || return 1
-  existing_repo="$(json_string_value "$meta" "repo")"
-  existing_component="$(json_string_value "$meta" "component")"
-  existing_name="$(json_string_value "$meta" "name")"
-  existing_target="$(json_string_value "$meta" "target")"
-  existing_agent="$(json_string_value "$meta" "agent")"
-  repo_matches_expected "$existing_repo" && [[ "$existing_name" == "$skill_name" ]] || return 1
-  if [[ "$existing_component" == "skill" && "$existing_target" == "codex" ]]; then return 0; fi
-  [[ -z "$existing_component" && -z "$existing_target" && "$existing_agent" == "codex" ]]
+  [[ "$existing_repo" == "$REPO" ]]
 }
 
 codex_skill_path() {
-  local scope="$1" skill_name="${2:-}" canonical_root agents_alternate default_codex_alternate root target
-  local found_count=0 found_root="" found_owned=0
-  local -a candidate_roots=()
-  if [[ "$scope" != "user" ]]; then
+  local scope="$1"
+  if [[ "$scope" == "user" ]]; then
+    printf '%s/skills' "${CODEX_HOME:-$HOME/.codex}"
+  else
     printf '%s' "$PWD/.agents/skills"
-    return
   fi
-
-  canonical_root="${CODEX_HOME:-$HOME/.codex}/skills"
-  [[ -n "$skill_name" ]] || { printf '%s' "$canonical_root"; return; }
-
-  agents_alternate="$HOME/.agents/skills"
-  default_codex_alternate="$HOME/.codex/skills"
-  candidate_roots+=("$canonical_root")
-  if [[ "$agents_alternate" != "$canonical_root" ]]; then candidate_roots+=("$agents_alternate"); fi
-  if [[ "$default_codex_alternate" != "$canonical_root" && "$default_codex_alternate" != "$agents_alternate" ]]; then
-    candidate_roots+=("$default_codex_alternate")
-  fi
-
-  for root in "${candidate_roots[@]}"; do
-    target="${root%/}/$skill_name"
-    [[ -e "$target" || -L "$target" ]] || continue
-    found_count=$((found_count + 1))
-    found_root="$root"
-    found_owned=0
-    if is_owned_codex_legacy_skill "$root" "$skill_name"; then found_owned=1; fi
-  done
-
-  if [[ "$found_count" -gt 1 ]]; then
-    log_error "Codex Skill '$skill_name' exists in more than one canonical or alternate root. Remove or reconcile the duplicates before installing."
-    return 2
-  fi
-  if [[ "$found_count" -eq 1 ]]; then
-    if [[ "$found_root" == "$canonical_root" ]]; then
-      printf '%s' "$canonical_root"
-      return
-    fi
-    if [[ "$found_owned" -eq 1 ]]; then
-      printf '%s' "$found_root"
-      return
-    fi
-    log_error "Codex Skill '$skill_name' exists in alternate root '$found_root' without matching CraftRoster ownership metadata. Refusing to create a duplicate in '$canonical_root'."
-    return 2
-  fi
-  printf '%s' "$canonical_root"
 }
 
 opencode_config_root() {
@@ -175,7 +113,7 @@ while [[ $# -gt 0 ]]; do
     --skill) require_option_value "$1" "${2:-}"; TYPE="skill"; NAME="$2"; shift 2 ;;
     --agent-profile) require_option_value "$1" "${2:-}"; TYPE="agent"; NAME="$2"; shift 2 ;;
     --branch) require_option_value "$1" "${2:-}"; BRANCH="$2"; shift 2 ;;
-    --repo) require_option_value "$1" "${2:-}"; REPO="$2"; REPO_OPTION_EXPLICIT=1; shift 2 ;;
+    --repo) require_option_value "$1" "${2:-}"; REPO="$2"; shift 2 ;;
     --dir) require_option_value "$1" "${2:-}"; INSTALL_DIR="$2"; shift 2 ;;
     --source-dir) require_option_value "$1" "${2:-}"; SOURCE_DIR="$2"; shift 2 ;;
     --enable-auto-delegation) ENABLE_AUTO_DELEGATION=1; shift ;;
@@ -222,19 +160,15 @@ validate_target() {
 add_skill_profile() {
   SKILL_DESTINATIONS+=("$1")
   SKILL_OWNERSHIP_TARGETS+=("$2")
-  SKILL_LEGACY_TARGETS+=("${3:-}")
-  SKILL_CODEX_LEGACY_CHECKS+=("${4:-0}")
 }
 
 configure_skill_profiles() {
   local use_install_override="$1" destination
   SKILL_DESTINATIONS=()
   SKILL_OWNERSHIP_TARGETS=()
-  SKILL_LEGACY_TARGETS=()
-  SKILL_CODEX_LEGACY_CHECKS=()
   if [[ "$TARGET" == "project" ]]; then
-    add_skill_profile "$PROJECT_ROOT/.agents/skills" "project" "codex-project" 0
-    add_skill_profile "$PROJECT_ROOT/.claude/skills" "project" "claude-project" 0
+    add_skill_profile "$PROJECT_ROOT/.agents/skills" "project"
+    add_skill_profile "$PROJECT_ROOT/.claude/skills" "project"
     return
   fi
   if [[ "$use_install_override" -eq 1 && -n "$INSTALL_DIR" ]]; then
@@ -245,22 +179,7 @@ configure_skill_profiles() {
     log_error "Unsupported skill target: $TARGET"
     exit 1
   fi
-  if [[ "$TARGET" == "codex" && ! ( "$use_install_override" -eq 1 && -n "$INSTALL_DIR" ) ]]; then
-    add_skill_profile "$destination" "$TARGET" "" 1
-  elif [[ "$TARGET" == "copilot" ]]; then
-    add_skill_profile "$destination" "$TARGET" "vscode" 0
-  else
-    add_skill_profile "$destination" "$TARGET" "" 0
-  fi
-}
-
-resolve_skill_profile_destination() {
-  local destination_root="$1" skill_name="$2" check_codex_legacy="$3"
-  if [[ "$check_codex_legacy" -eq 1 ]]; then
-    codex_skill_path user "$skill_name"
-  else
-    printf '%s' "$destination_root"
-  fi
+  add_skill_profile "$destination" "$TARGET"
 }
 
 add_agent_profile() {
@@ -268,7 +187,6 @@ add_agent_profile() {
   AGENT_SUFFIXES+=("$2")
   AGENT_DESTINATIONS+=("$3")
   AGENT_OWNERSHIP_TARGETS+=("$4")
-  AGENT_LEGACY_TARGETS+=("${5:-}")
 }
 
 configure_agent_profiles() {
@@ -277,13 +195,12 @@ configure_agent_profiles() {
   AGENT_SUFFIXES=()
   AGENT_DESTINATIONS=()
   AGENT_OWNERSHIP_TARGETS=()
-  AGENT_LEGACY_TARGETS=()
   if [[ "$TARGET" == "project" ]]; then
-    add_agent_profile "codex" ".toml" "$PROJECT_ROOT/.codex/agents" "project" "codex-project"
-    add_agent_profile "claude" ".md" "$PROJECT_ROOT/.claude/agents" "project" "claude-project"
-    add_agent_profile "cursor" ".md" "$PROJECT_ROOT/.cursor/agents" "project" "cursor-project"
-    add_agent_profile "copilot" ".agent.md" "$PROJECT_ROOT/.github/agents" "project" "copilot-project,vscode-project,vscode"
-    add_agent_profile "opencode" ".md" "$PROJECT_ROOT/.opencode/agents" "project" "opencode-project"
+    add_agent_profile "codex" ".toml" "$PROJECT_ROOT/.codex/agents" "project"
+    add_agent_profile "claude" ".md" "$PROJECT_ROOT/.claude/agents" "project"
+    add_agent_profile "cursor" ".md" "$PROJECT_ROOT/.cursor/agents" "project"
+    add_agent_profile "copilot" ".agent.md" "$PROJECT_ROOT/.github/agents" "project"
+    add_agent_profile "opencode" ".md" "$PROJECT_ROOT/.opencode/agents" "project"
     return
   fi
   if [[ -n "$INSTALL_DIR" ]]; then
@@ -298,7 +215,7 @@ configure_agent_profiles() {
     codex) add_agent_profile "codex" ".toml" "$destination" "$TARGET" ;;
     claude) add_agent_profile "claude" ".md" "$destination" "$TARGET" ;;
     cursor) add_agent_profile "cursor" ".md" "$destination" "$TARGET" ;;
-    copilot) add_agent_profile "copilot" ".agent.md" "$destination" "$TARGET" "vscode" ;;
+    copilot) add_agent_profile "copilot" ".agent.md" "$destination" "$TARGET" ;;
     opencode) add_agent_profile "opencode" ".md" "$destination" "$TARGET" ;;
     *) log_error "Unsupported agent target: $TARGET"; exit 1 ;;
   esac
@@ -470,7 +387,7 @@ emit_skill_content_stream() {
     relative_paths+=("$relative_path")
   done < <(find "$root" -type f -print0)
 
-  printf 'autoverse-skill-content-v1\0'
+  printf 'craftroster-skill-content-v1\0'
   if [[ "${#relative_paths[@]}" -eq 0 ]]; then return; fi
   while IFS= read -r relative_path; do
     byte_length="$(wc -c < "$root/$relative_path" | tr -d '[:space:]')"
@@ -492,50 +409,11 @@ skill_content_sha256() {
   printf '%s' "$digest"
 }
 
-yaml_frontmatter_value() {
-  local file="$1" key="$2"
-  [[ -f "$file" ]] || return 0
-  awk -v key="$key" '
-    function emit_value(line, prefix_length, value) {
-      value = substr(line, prefix_length + 1)
-      sub(/^[[:space:]]+/, "", value)
-      sub(/[[:space:]]+$/, "", value)
-      gsub(/^[\047\"]|[\047\"]$/, "", value)
-      print value
-      exit
-    }
-    NR == 1 { sub(/^\357\273\277/, "", $0) }
-    NR == 1 && $0 == "---" { inside = 1; next }
-    inside && $0 == "---" { exit }
-    !inside { next }
-    /^[^[:space:]]/ {
-      in_metadata = 0
-      if (index($0, key ":") == 1) emit_value($0, length(key) + 1)
-      if ($0 ~ /^metadata:[[:space:]]*(#.*)?$/) in_metadata = 1
-      next
-    }
-    in_metadata {
-      nested = $0
-      sub(/^[[:space:]]+/, "", nested)
-      if (index(nested, key ":") == 1) emit_value(nested, length(key) + 1)
-    }
-  ' "$file"
-}
-
-legacy_target_allowed() {
-  local candidate="$1" allowed_targets="$2"
-  [[ -n "$candidate" && -n "$allowed_targets" ]] || return 1
-  case ",$allowed_targets," in
-    *",$candidate,"*) return 0 ;;
-    *) return 1 ;;
-  esac
-}
-
 install_action() {
-  local target="$1" meta="$2" label="$3" expected_component="$4" expected_name="$5" expected_target="$6" legacy_identity="${7:-}" incoming_identity="${8:-}" expected_id="${9:-}" expected_adapter="${10:-}" legacy_targets="${11:-}"
+  local target="$1" meta="$2" label="$3" expected_component="$4" expected_name="$5" expected_target="$6" expected_id="${7:-}" expected_adapter="${8:-}"
   local metadata_identity_before="" metadata_identity_after="" metadata_sha256_before="" metadata_sha256_after=""
   local target_identity_before="" target_identity_after=""
-  local existing_repo existing_component existing_name existing_target existing_agent existing_id existing_adapter existing_content_sha256 current_content_sha256 identity_matches repository_matches repository_needs_migration
+  local existing_repo existing_component existing_name existing_target existing_id existing_adapter existing_content_sha256 current_content_sha256 identity_matches repository_matches
   INSTALL_ACTION="install"
   EXISTING_INSTALLED_AT=""
   EXPECTED_SKILL_CURRENT_SHA256=""
@@ -583,15 +461,12 @@ install_action() {
     existing_component="$(json_string_value "$meta" "component")"
     existing_name="$(json_string_value "$meta" "name")"
     existing_target="$(json_string_value "$meta" "target")"
-    existing_agent="$(json_string_value "$meta" "agent")"
     existing_id="$(json_string_value "$meta" "id")"
     existing_adapter="$(json_string_value "$meta" "adapter")"
     existing_content_sha256="$(json_string_value "$meta" "contentSha256")"
     EXISTING_INSTALLED_AT="$(json_string_value "$meta" "installedAt")"
     repository_matches=0
-    repository_needs_migration=0
     if repo_matches_expected "$existing_repo"; then repository_matches=1; fi
-    if repo_needs_migration "$existing_repo"; then repository_needs_migration=1; fi
     if [[ "$expected_component" == "skill" ]]; then
       if ! validate_flat_metadata "$meta" ||
         ! metadata_identity_after="$(regular_file_identity "$meta")" ||
@@ -622,66 +497,24 @@ install_action() {
     identity_matches=1
     if [[ "$expected_component" == "agent" && ( -z "$expected_id" || "$existing_id" != "$expected_id" || -z "$expected_adapter" || "$existing_adapter" != "$expected_adapter" ) ]]; then identity_matches=0; fi
     if [[ "$repository_matches" -eq 1 && "$existing_component" == "$expected_component" && "$existing_name" == "$expected_name" && "$existing_target" == "$expected_target" && "$identity_matches" -eq 1 ]]; then
-      if [[ "$expected_component" == "skill" && -e "$target" ]]; then
-        if [[ -z "$existing_content_sha256" ]]; then
-          INSTALL_ACTION="migrate-update"
-          return
-        fi
+      if [[ "$expected_component" == "skill" ]]; then
         if [[ ! "$existing_content_sha256" =~ ^[0-9a-f]{64}$ ]]; then
           if [[ "$FORCE" -eq 1 ]]; then INSTALL_ACTION="force-replace"; return; fi
           log_error "Refusing to replace '$label' because its contentSha256 is not a valid lowercase 64-character SHA-256 digest. Use --force to reset it intentionally."
           exit 1
         fi
-        if [[ "$current_content_sha256" != "$existing_content_sha256" ]]; then
+        if [[ -e "$target" && "$current_content_sha256" != "$existing_content_sha256" ]]; then
           if [[ "$FORCE" -eq 1 ]]; then INSTALL_ACTION="force-replace"; return; fi
           log_error "Refusing to replace '$label' because the installed Skill content has changed since the last CraftRoster install. Use --force to reset it intentionally."
           exit 1
         fi
       fi
-      if [[ "$repository_needs_migration" -eq 1 ]]; then
-        INSTALL_ACTION="migrate-update"
-      elif [[ -e "$target" ]]; then
+      if [[ -e "$target" ]]; then
         INSTALL_ACTION="update"
       else
         INSTALL_ACTION="repair"
       fi
       return
-    fi
-    if [[ "$repository_matches" -eq 1 && "$existing_component" == "$expected_component" && "$existing_name" == "$expected_name" && "$identity_matches" -eq 1 ]] && legacy_target_allowed "$existing_target" "$legacy_targets"; then
-      if [[ "$expected_component" == "skill" && -e "$target" && -n "$existing_content_sha256" ]]; then
-        if [[ ! "$existing_content_sha256" =~ ^[0-9a-f]{64}$ ]]; then
-          if [[ "$FORCE" -eq 1 ]]; then INSTALL_ACTION="force-replace"; return; fi
-          log_error "Refusing to replace '$label' because its contentSha256 is not a valid lowercase 64-character SHA-256 digest. Use --force to reset it intentionally."
-          exit 1
-        fi
-        if [[ "$current_content_sha256" != "$existing_content_sha256" ]]; then
-          if [[ "$FORCE" -eq 1 ]]; then INSTALL_ACTION="force-replace"; return; fi
-          log_error "Refusing to replace '$label' because the installed Skill content has changed since the last CraftRoster install. Use --force to reset it intentionally."
-          exit 1
-        fi
-      fi
-      INSTALL_ACTION="migrate-update"
-      return
-    fi
-    if [[ "$repository_matches" -eq 1 && "$expected_component" == "skill" && -z "$existing_component" && -z "$existing_target" && "$existing_name" == "$expected_name" && "$existing_agent" == "$expected_target" ]]; then
-      local legacy_skill_name legacy_skill_source legacy_skill_license incoming_skill_name incoming_skill_source incoming_skill_reference_source incoming_skill_license incoming_skill_previous_license source_matches license_matches
-      legacy_skill_name="$(yaml_frontmatter_value "$legacy_identity" "name")"
-      legacy_skill_source="$(yaml_frontmatter_value "$legacy_identity" "source")"
-      legacy_skill_license="$(yaml_frontmatter_value "$legacy_identity" "license")"
-      incoming_skill_name="$(yaml_frontmatter_value "$incoming_identity" "name")"
-      incoming_skill_source="$(yaml_frontmatter_value "$incoming_identity" "source")"
-      incoming_skill_reference_source="$(yaml_frontmatter_value "$incoming_identity" "reference-source")"
-      incoming_skill_license="$(yaml_frontmatter_value "$incoming_identity" "license")"
-      incoming_skill_previous_license="$(yaml_frontmatter_value "$incoming_identity" "previous-license")"
-      source_matches=0
-      license_matches=0
-      if [[ "$legacy_skill_source" == "$incoming_skill_source" || ( -n "$incoming_skill_reference_source" && "$legacy_skill_source" == "$incoming_skill_reference_source" ) ]]; then source_matches=1; fi
-      if [[ "$source_matches" -eq 0 && "$repository_needs_migration" -eq 1 && "$legacy_skill_source" == "$LEGACY_REPO" && "$incoming_skill_source" == "$CANONICAL_REPO" ]]; then source_matches=1; fi
-      if [[ "$legacy_skill_license" == "$incoming_skill_license" || ( -n "$incoming_skill_previous_license" && "$legacy_skill_license" == "$incoming_skill_previous_license" ) ]]; then license_matches=1; fi
-      if [[ "$legacy_skill_name" == "$expected_name" && "$incoming_skill_name" == "$expected_name" && -n "$legacy_skill_source" && "$source_matches" -eq 1 && -n "$legacy_skill_license" && "$license_matches" -eq 1 ]]; then
-        INSTALL_ACTION="migrate-update"
-        return
-      fi
     fi
     if [[ "$FORCE" -eq 1 ]]; then INSTALL_ACTION="force-replace"; return; fi
     if [[ -n "$existing_repo" && "$repository_matches" -eq 0 ]]; then
@@ -844,7 +677,7 @@ move_skill_directory_no_clobber() {
         return 1
       fi
       source_parent="${source%/*}"
-      quarantine_container="$(mktemp -d "$source_parent/.autoverse-skill-quarantine.XXXXXXXX")"
+      quarantine_container="$(mktemp -d "$source_parent/.craftroster-skill-quarantine.XXXXXXXX")"
       quarantine="$quarantine_container/staged"
       if ! mv "$nested" "$quarantine"; then
         rmdir "$quarantine_container" 2>/dev/null || true
@@ -869,7 +702,7 @@ discard_transaction_skill_directory() {
   local parent quarantine_container quarantine
   skill_move_snapshot_matches "$path" "$expected_identity" "$expected_digest" "$expected_meta_identity" "$expected_meta_sha256" "$expected_meta_state" || return 1
   parent="${path%/*}"
-  quarantine_container="$(mktemp -d "$parent/.autoverse-skill-discard.XXXXXXXX")"
+  quarantine_container="$(mktemp -d "$parent/.craftroster-skill-discard.XXXXXXXX")"
   quarantine="$quarantine_container/owned"
   if ! move_skill_directory_no_clobber "$path" "$quarantine" "$expected_identity" "$expected_digest" "$expected_meta_identity" "$expected_meta_sha256" "$expected_meta_state" "discard-transaction"; then
     rmdir "$quarantine_container" 2>/dev/null || true
@@ -942,7 +775,7 @@ rollback_active_skill_transaction() {
     fi
     if should_create_skill_restore_destination_after_recheck; then
       mkdir "$SKILL_ACTIVE_TARGET"
-      printf '%s\n' 'test-only restore newcomer that must be preserved' > "$SKILL_ACTIVE_TARGET/AUTOVERSE-NEWCOMER.txt"
+      printf '%s\n' 'test-only restore newcomer that must be preserved' > "$SKILL_ACTIVE_TARGET/CRAFTROSTER-NEWCOMER.txt"
     fi
     if ! move_skill_directory_no_clobber \
       "$SKILL_ACTIVE_BACKUP" \
@@ -1013,67 +846,67 @@ rollback_active_skill_transaction() {
 }
 
 validate_test_fault_config() {
-  local mode="${AUTOVERSE_INSTALL_TEST_MODE:-}" fault="${AUTOVERSE_INSTALL_TEST_FAULT:-}"
+  local mode="${CRAFTROSTER_INSTALL_TEST_MODE:-}" fault="${CRAFTROSTER_INSTALL_TEST_FAULT:-}"
   case "$mode" in
     ""|enabled) ;;
-    *) log_error "AUTOVERSE_INSTALL_TEST_MODE must be unset or exactly 'enabled'."; exit 1 ;;
+    *) log_error "CRAFTROSTER_INSTALL_TEST_MODE must be unset or exactly 'enabled'."; exit 1 ;;
   esac
   case "$fault" in
     ""|skill-commit-after-backup|skill-destination-appears-after-recheck|skill-destination-appears-after-recheck-portable-mv|skill-backup-metadata-changes-after-recheck|skill-fresh-post-move-failure|skill-fresh-post-move-newcomer|skill-backup-capture-destination-race-portable-mv|skill-backup-restore-destination-race-portable-mv|skill-force-invalid-metadata-changes-after-recheck|skill-force-missing-metadata-appears-after-recheck|auto-config-backup-capture-destination-race-portable-mv|auto-config-backup-restore-destination-race-portable-mv) ;;
-    *) log_error "AUTOVERSE_INSTALL_TEST_FAULT has an unsupported test-only value."; exit 1 ;;
+    *) log_error "CRAFTROSTER_INSTALL_TEST_FAULT has an unsupported test-only value."; exit 1 ;;
   esac
   if [[ -n "$fault" && "$mode" != "enabled" ]]; then
-    log_error "AUTOVERSE_INSTALL_TEST_FAULT requires AUTOVERSE_INSTALL_TEST_MODE=enabled."
+    log_error "CRAFTROSTER_INSTALL_TEST_FAULT requires CRAFTROSTER_INSTALL_TEST_MODE=enabled."
     exit 1
   fi
 }
 
 should_fail_skill_commit_after_backup() {
-  [[ "${AUTOVERSE_INSTALL_TEST_MODE:-}" == "enabled" ]] || return 1
-  case "${AUTOVERSE_INSTALL_TEST_FAULT:-}" in
+  [[ "${CRAFTROSTER_INSTALL_TEST_MODE:-}" == "enabled" ]] || return 1
+  case "${CRAFTROSTER_INSTALL_TEST_FAULT:-}" in
     skill-commit-after-backup|skill-backup-restore-destination-race-portable-mv) return 0 ;;
     *) return 1 ;;
   esac
 }
 
 should_create_skill_destination_after_recheck() {
-  [[ "${AUTOVERSE_INSTALL_TEST_MODE:-}" == "enabled" ]] || return 1
-  case "${AUTOVERSE_INSTALL_TEST_FAULT:-}" in
+  [[ "${CRAFTROSTER_INSTALL_TEST_MODE:-}" == "enabled" ]] || return 1
+  case "${CRAFTROSTER_INSTALL_TEST_FAULT:-}" in
     skill-destination-appears-after-recheck|skill-destination-appears-after-recheck-portable-mv) return 0 ;;
     *) return 1 ;;
   esac
 }
 
 should_force_portable_skill_move() {
-  [[ "${AUTOVERSE_INSTALL_TEST_MODE:-}" == "enabled" ]] || return 1
-  case "${AUTOVERSE_INSTALL_TEST_FAULT:-}" in
+  [[ "${CRAFTROSTER_INSTALL_TEST_MODE:-}" == "enabled" ]] || return 1
+  case "${CRAFTROSTER_INSTALL_TEST_FAULT:-}" in
     skill-destination-appears-after-recheck-portable-mv|skill-backup-capture-destination-race-portable-mv|skill-backup-restore-destination-race-portable-mv) return 0 ;;
     *) return 1 ;;
   esac
 }
 
 should_create_skill_backup_destination_after_recheck() {
-  [[ "${AUTOVERSE_INSTALL_TEST_MODE:-}" == "enabled" && "${AUTOVERSE_INSTALL_TEST_FAULT:-}" == "skill-backup-capture-destination-race-portable-mv" ]]
+  [[ "${CRAFTROSTER_INSTALL_TEST_MODE:-}" == "enabled" && "${CRAFTROSTER_INSTALL_TEST_FAULT:-}" == "skill-backup-capture-destination-race-portable-mv" ]]
 }
 
 should_create_skill_restore_destination_after_recheck() {
-  [[ "${AUTOVERSE_INSTALL_TEST_MODE:-}" == "enabled" && "${AUTOVERSE_INSTALL_TEST_FAULT:-}" == "skill-backup-restore-destination-race-portable-mv" ]]
+  [[ "${CRAFTROSTER_INSTALL_TEST_MODE:-}" == "enabled" && "${CRAFTROSTER_INSTALL_TEST_FAULT:-}" == "skill-backup-restore-destination-race-portable-mv" ]]
 }
 
 should_force_portable_exact_move() {
-  [[ "${AUTOVERSE_INSTALL_TEST_MODE:-}" == "enabled" ]] || return 1
-  case "${AUTOVERSE_INSTALL_TEST_FAULT:-}" in
+  [[ "${CRAFTROSTER_INSTALL_TEST_MODE:-}" == "enabled" ]] || return 1
+  case "${CRAFTROSTER_INSTALL_TEST_FAULT:-}" in
     auto-config-backup-capture-destination-race-portable-mv|auto-config-backup-restore-destination-race-portable-mv) return 0 ;;
     *) return 1 ;;
   esac
 }
 
 should_create_auto_backup_destination_after_recheck() {
-  [[ "${AUTOVERSE_INSTALL_TEST_MODE:-}" == "enabled" && "${AUTOVERSE_INSTALL_TEST_FAULT:-}" == "auto-config-backup-capture-destination-race-portable-mv" ]]
+  [[ "${CRAFTROSTER_INSTALL_TEST_MODE:-}" == "enabled" && "${CRAFTROSTER_INSTALL_TEST_FAULT:-}" == "auto-config-backup-capture-destination-race-portable-mv" ]]
 }
 
 should_fail_auto_after_backup_for_restore_race() {
-  [[ "${AUTOVERSE_INSTALL_TEST_MODE:-}" == "enabled" && "${AUTOVERSE_INSTALL_TEST_FAULT:-}" == "auto-config-backup-restore-destination-race-portable-mv" ]]
+  [[ "${CRAFTROSTER_INSTALL_TEST_MODE:-}" == "enabled" && "${CRAFTROSTER_INSTALL_TEST_FAULT:-}" == "auto-config-backup-restore-destination-race-portable-mv" ]]
 }
 
 should_create_auto_restore_destination_after_recheck() {
@@ -1082,8 +915,8 @@ should_create_auto_restore_destination_after_recheck() {
 
 apply_test_only_force_skill_metadata_race() {
   local target="$1" name="$2" ownership_target="$3" content_sha256="$4"
-  [[ "${AUTOVERSE_INSTALL_TEST_MODE:-}" == "enabled" ]] || return 0
-  case "${AUTOVERSE_INSTALL_TEST_FAULT:-}" in
+  [[ "${CRAFTROSTER_INSTALL_TEST_MODE:-}" == "enabled" ]] || return 0
+  case "${CRAFTROSTER_INSTALL_TEST_FAULT:-}" in
     skill-force-invalid-metadata-changes-after-recheck)
       printf '%s\n' 'test-only malformed metadata newcomer mutation' >> "$target/.skill-meta.json"
       ;;
@@ -1094,24 +927,24 @@ apply_test_only_force_skill_metadata_race() {
 }
 
 should_change_skill_backup_metadata_after_recheck() {
-  [[ "${AUTOVERSE_INSTALL_TEST_MODE:-}" == "enabled" && "${AUTOVERSE_INSTALL_TEST_FAULT:-}" == "skill-backup-metadata-changes-after-recheck" ]]
+  [[ "${CRAFTROSTER_INSTALL_TEST_MODE:-}" == "enabled" && "${CRAFTROSTER_INSTALL_TEST_FAULT:-}" == "skill-backup-metadata-changes-after-recheck" ]]
 }
 
 should_fail_fresh_skill_post_move() {
-  [[ "${AUTOVERSE_INSTALL_TEST_MODE:-}" == "enabled" ]] || return 1
-  case "${AUTOVERSE_INSTALL_TEST_FAULT:-}" in
+  [[ "${CRAFTROSTER_INSTALL_TEST_MODE:-}" == "enabled" ]] || return 1
+  case "${CRAFTROSTER_INSTALL_TEST_FAULT:-}" in
     skill-fresh-post-move-failure|skill-fresh-post-move-newcomer) return 0 ;;
     *) return 1 ;;
   esac
 }
 
 should_create_fresh_skill_post_move_newcomer() {
-  [[ "${AUTOVERSE_INSTALL_TEST_MODE:-}" == "enabled" && "${AUTOVERSE_INSTALL_TEST_FAULT:-}" == "skill-fresh-post-move-newcomer" ]]
+  [[ "${CRAFTROSTER_INSTALL_TEST_MODE:-}" == "enabled" && "${CRAFTROSTER_INSTALL_TEST_FAULT:-}" == "skill-fresh-post-move-newcomer" ]]
 }
 
 write_test_only_foreign_skill_metadata() {
   local path="$1" name="$2" ownership_target="$3" content_sha256="$4"
-  [[ "${AUTOVERSE_INSTALL_TEST_MODE:-}" == "enabled" ]] || return 1
+  [[ "${CRAFTROSTER_INSTALL_TEST_MODE:-}" == "enabled" ]] || return 1
   cat > "$path" <<EOF
 {
   "source": "test-only-newcomer",
@@ -1148,7 +981,7 @@ discard_transaction_regular_file() {
   local path="$1" expected_identity="$2" expected_sha256="$3" parent quarantine_container quarantine
   exact_regular_file_snapshot_matches "$path" "$expected_identity" "$expected_sha256" || return 1
   parent="${path%/*}"
-  quarantine_container="$(mktemp -d "$parent/.autoverse-file-discard.XXXXXXXX")"
+  quarantine_container="$(mktemp -d "$parent/.craftroster-file-discard.XXXXXXXX")"
   quarantine="$quarantine_container/owned"
   if ! mv "$path" "$quarantine"; then
     rmdir "$quarantine_container" 2>/dev/null || true
@@ -1259,14 +1092,14 @@ install_staged_exact() {
 }
 
 install_skill() {
-  local src="$1" destination_root="$2" ownership_target="$3" legacy_targets="${4:-}" name target meta now installed_at
+  local src="$1" destination_root="$2" ownership_target="$3" name target meta now installed_at
   local staged backup_container backup target_existed preflight_target_identity preflight_content_sha256 current_content_sha256 incoming_content_sha256 staged_content_sha256
   name="$(basename "$src")"
   target="${destination_root%/}/$name"
   meta="$target/.skill-meta.json"
   assert_within_destination "$target" "$destination_root"
   assert_regular_skill_root "$target"
-  install_action "$target" "$meta" "$name" "skill" "$name" "$ownership_target" "$target/SKILL.md" "$src/SKILL.md" "" "" "$legacy_targets"
+  install_action "$target" "$meta" "$name" "skill" "$name" "$ownership_target"
   target_existed=0
   backup=""
   backup_container=""
@@ -1284,7 +1117,7 @@ install_skill() {
   if [[ "$DRY_RUN" -eq 1 ]]; then printf 'DRY-RUN %s Skill %s -> %s\n' "$INSTALL_ACTION" "$name" "$target"; return; fi
 
   mkdir -p "$destination_root"
-  staged="$(mktemp -d "$destination_root/.autoverse-skill-stage.XXXXXXXX")"
+  staged="$(mktemp -d "$destination_root/.craftroster-skill-stage.XXXXXXXX")"
   SKILL_ACTIVE_TARGET="$target"
   SKILL_ACTIVE_STAGE="$staged"
   SKILL_ACTIVE_BACKUP=""
@@ -1378,7 +1211,7 @@ EOF
       log_error "Refusing to replace Skill $name because its ownership metadata, filesystem identity, or content changed during installation staging. Run the installer again."
       exit 1
     fi
-    backup_container="$(mktemp -d "$destination_root/.autoverse-skill-backup.XXXXXXXX")"
+    backup_container="$(mktemp -d "$destination_root/.craftroster-skill-backup.XXXXXXXX")"
     backup="$backup_container/original"
     SKILL_ACTIVE_BACKUP_CONTAINER="$backup_container"
     SKILL_ACTIVE_BACKUP="$backup"
@@ -1389,7 +1222,7 @@ EOF
     SKILL_ACTIVE_BACKUP_META_STATE="$EXPECTED_SKILL_META_STATE"
     if should_create_skill_backup_destination_after_recheck; then
       mkdir "$backup"
-      printf '%s\n' 'test-only backup destination newcomer that must be preserved' > "$backup/AUTOVERSE-NEWCOMER.txt"
+      printf '%s\n' 'test-only backup destination newcomer that must be preserved' > "$backup/CRAFTROSTER-NEWCOMER.txt"
     fi
     if ! move_skill_directory_no_clobber \
       "$target" \
@@ -1434,7 +1267,7 @@ EOF
 
   if should_create_skill_destination_after_recheck; then
     mkdir "$target"
-    printf '%s\n' 'test-only newcomer that must be preserved' > "$target/AUTOVERSE-NEWCOMER.txt"
+    printf '%s\n' 'test-only newcomer that must be preserved' > "$target/CRAFTROSTER-NEWCOMER.txt"
   fi
 
   if ! move_skill_directory_no_clobber \
@@ -1494,23 +1327,23 @@ EOF
 }
 
 preflight_skill() {
-  local src="$1" destination_root="$2" ownership_target="$3" legacy_targets="${4:-}" name target meta
+  local src="$1" destination_root="$2" ownership_target="$3" name target meta
   name="$(basename "$src")"
   target="${destination_root%/}/$name"
   meta="$target/.skill-meta.json"
   assert_within_destination "$target" "$destination_root"
   assert_regular_skill_root "$target"
-  install_action "$target" "$meta" "$name" "skill" "$name" "$ownership_target" "$target/SKILL.md" "$src/SKILL.md" "" "" "$legacy_targets"
+  install_action "$target" "$meta" "$name" "skill" "$name" "$ownership_target"
 }
 
 install_agent_profile() {
-  local src="$1" runtime_name="$2" agent_id="$3" platform="$4" destination_root="$5" ownership_target="$6" suffix="$7" legacy_targets="${8:-}" target meta now installed_at staged_agent staged_meta target_existed meta_existed
+  local src="$1" runtime_name="$2" agent_id="$3" platform="$4" destination_root="$5" ownership_target="$6" suffix="$7" target meta now installed_at staged_agent staged_meta target_existed meta_existed
   target="${destination_root%/}/$runtime_name$suffix"
-  meta="$target.autoverse.json"
+  meta="$target.craftroster.json"
   assert_within_destination "$target" "$destination_root"
   assert_regular_agent_leaf "$target" "Agent"
   assert_regular_agent_leaf "$meta" "Agent metadata"
-  install_action "$target" "$meta" "$agent_id" "agent" "$runtime_name" "$ownership_target" "" "" "$agent_id" "$platform" "$legacy_targets"
+  install_action "$target" "$meta" "$agent_id" "agent" "$runtime_name" "$ownership_target" "$agent_id" "$platform"
   target_existed=0
   meta_existed=0
   if [[ -f "$target" ]]; then target_existed=1; fi
@@ -1520,8 +1353,8 @@ install_agent_profile() {
   mkdir -p "$destination_root"
   now="$(date -u '+%Y-%m-%dT%H:%M:%SZ')"
   installed_at="${EXISTING_INSTALLED_AT:-$now}"
-  staged_agent="$(mktemp "$destination_root/.autoverse-agent.XXXXXXXX")"
-  staged_meta="$(mktemp "$destination_root/.autoverse-agent-meta.XXXXXXXX")"
+  staged_agent="$(mktemp "$destination_root/.craftroster-agent.XXXXXXXX")"
+  staged_meta="$(mktemp "$destination_root/.craftroster-agent-meta.XXXXXXXX")"
   if ! cp "$src" "$staged_agent"; then
     rm -f "$staged_agent" "$staged_meta"
     log_error "Could not stage Agent $agent_id."
@@ -1577,13 +1410,13 @@ EOF
 }
 
 preflight_agent_profile() {
-  local src="$1" runtime_name="$2" agent_id="$3" platform="$4" destination_root="$5" ownership_target="$6" suffix="$7" legacy_targets="${8:-}" target meta
+  local src="$1" runtime_name="$2" agent_id="$3" platform="$4" destination_root="$5" ownership_target="$6" suffix="$7" target meta
   target="${destination_root%/}/$runtime_name$suffix"
-  meta="$target.autoverse.json"
+  meta="$target.craftroster.json"
   assert_within_destination "$target" "$destination_root"
   assert_regular_agent_leaf "$target" "Agent"
   assert_regular_agent_leaf "$meta" "Agent metadata"
-  install_action "$target" "$meta" "$agent_id" "agent" "$runtime_name" "$ownership_target" "" "" "$agent_id" "$platform" "$legacy_targets"
+  install_action "$target" "$meta" "$agent_id" "agent" "$runtime_name" "$ownership_target" "$agent_id" "$platform"
 }
 
 has_codex_developer_instructions_conflict() {
@@ -1670,11 +1503,11 @@ plan_codex_auto_delegation() {
   fi
   block_file="$AUTO_PLAN_DIR/codex-block.toml"
   {
-    printf '# AUTOVERSE_AUTO_DELEGATION_START\n'
+    printf '# CRAFTROSTER_AUTO_DELEGATION_START\n'
     printf "developer_instructions = '''\n"
     cat "$guidance_file"
     printf "\n'''\n"
-    printf '# AUTOVERSE_AUTO_DELEGATION_END\n'
+    printf '# CRAFTROSTER_AUTO_DELEGATION_END\n'
   } > "$block_file"
 
   AUTO_RUNTIME="Codex"
@@ -1696,19 +1529,19 @@ plan_codex_auto_delegation() {
     log_error "Refusing to rewrite BOM-prefixed Codex config $config_path. Remove the BOM or merge the guidance manually."
     exit 1
   fi
-  start_count="$(grep -c '^# AUTOVERSE_AUTO_DELEGATION_START[[:space:]]*$' "$AUTO_ORIGINAL_FILE" || true)"
-  end_count="$(grep -c '^# AUTOVERSE_AUTO_DELEGATION_END[[:space:]]*$' "$AUTO_ORIGINAL_FILE" || true)"
+  start_count="$(grep -c '^# CRAFTROSTER_AUTO_DELEGATION_START[[:space:]]*$' "$AUTO_ORIGINAL_FILE" || true)"
+  end_count="$(grep -c '^# CRAFTROSTER_AUTO_DELEGATION_END[[:space:]]*$' "$AUTO_ORIGINAL_FILE" || true)"
   if [[ "$start_count" -ne "$end_count" || "$start_count" -gt 1 ]]; then
-    log_error "Refusing to edit $config_path because its Autoverse auto-delegation markers are incomplete or duplicated."
+    log_error "Refusing to edit $config_path because its CraftRoster auto-delegation markers are incomplete or duplicated."
     exit 1
   fi
-  if [[ "$start_count" -eq 1 && "$(head -n 1 "$AUTO_ORIGINAL_FILE" | tr -d '\r')" != "# AUTOVERSE_AUTO_DELEGATION_START" ]]; then
-    log_error "Refusing to edit $config_path because the Autoverse marker is not a managed block at the start of the file."
+  if [[ "$start_count" -eq 1 && "$(head -n 1 "$AUTO_ORIGINAL_FILE" | tr -d '\r')" != "# CRAFTROSTER_AUTO_DELEGATION_START" ]]; then
+    log_error "Refusing to edit $config_path because the CraftRoster marker is not a managed block at the start of the file."
     exit 1
   fi
 
   if [[ "$start_count" -eq 1 ]]; then
-    end_line="$(grep -n '^# AUTOVERSE_AUTO_DELEGATION_END[[:space:]]*$' "$AUTO_ORIGINAL_FILE" | cut -d: -f1)"
+    end_line="$(grep -n '^# CRAFTROSTER_AUTO_DELEGATION_END[[:space:]]*$' "$AUTO_ORIGINAL_FILE" | cut -d: -f1)"
     second_line="$(sed -n '2p' "$AUTO_ORIGINAL_FILE" | tr -d '\r')"
     closing_line=""
     if [[ "$end_line" -gt 1 ]]; then closing_line="$(sed -n "$((end_line - 1))p" "$AUTO_ORIGINAL_FILE" | tr -d '\r')"; fi
@@ -1717,13 +1550,13 @@ plan_codex_auto_delegation() {
       literal_close_count="$(sed -n "3,$((end_line - 1))p" "$AUTO_ORIGINAL_FILE" | tr -d '\r' | grep -c "^'''[[:space:]]*$" || true)"
     fi
     if [[ "$end_line" -lt 4 || "$second_line" != "developer_instructions = '''" || "$closing_line" != "'''" || "$literal_close_count" -ne 1 ]]; then
-      log_error "Refusing to edit $config_path because its Autoverse managed block has an unexpected structure."
+      log_error "Refusing to edit $config_path because its CraftRoster managed block has an unexpected structure."
       exit 1
     fi
     remainder_file="$AUTO_PLAN_DIR/codex-remainder.toml"
     tail -n "+$((end_line + 1))" "$AUTO_ORIGINAL_FILE" > "$remainder_file"
     if has_codex_developer_instructions_conflict "$remainder_file"; then
-      log_error "Refusing to edit $config_path because it also defines developer_instructions outside the Autoverse managed block. Merge the guidance manually."
+      log_error "Refusing to edit $config_path because it also defines developer_instructions outside the CraftRoster managed block. Merge the guidance manually."
       exit 1
     fi
     {
@@ -1732,7 +1565,7 @@ plan_codex_auto_delegation() {
     } > "$AUTO_NEW_TEXT"
   else
     if has_codex_developer_instructions_conflict "$AUTO_ORIGINAL_FILE"; then
-      log_error "Refusing to edit $config_path because it already defines developer_instructions outside the Autoverse managed block. Merge the guidance manually."
+      log_error "Refusing to edit $config_path because it already defines developer_instructions outside the CraftRoster managed block. Merge the guidance manually."
       exit 1
     fi
     {
@@ -2147,7 +1980,7 @@ restore_captured_config() {
   if [[ ! -e "$destination" && ! -L "$destination" ]]; then
     if should_create_auto_restore_destination_after_recheck; then
       mkdir "$destination"
-      printf '%s\n' 'test-only config restore newcomer that must be preserved' > "$destination/AUTOVERSE-NEWCOMER.txt"
+      printf '%s\n' 'test-only config restore newcomer that must be preserved' > "$destination/CRAFTROSTER-NEWCOMER.txt"
     fi
     if move_exact_no_clobber "$backup" "$destination" "preserve"; then
       AUTO_CAPTURED_BACKUP="" AUTO_CAPTURED_PATH="" AUTO_STAGED_CHECKSUM=""
@@ -2203,7 +2036,7 @@ apply_auto_delegation_plan() {
 
   parent="$(dirname "$AUTO_CONFIG_PATH")"
   mkdir -p "$parent"
-  staged="$(mktemp "$parent/.autoverse-config.XXXXXXXX")"
+  staged="$(mktemp "$parent/.craftroster-config.XXXXXXXX")"
   AUTO_STAGED="$staged"
   cat "$AUTO_NEW_TEXT" > "$staged"
   AUTO_STAGED_CHECKSUM="$(cksum < "$staged")"
@@ -2212,11 +2045,11 @@ apply_auto_delegation_plan() {
       log_error "Refusing to replace $AUTO_CONFIG_PATH because it changed after installation planning. Run the installer again."
       exit 1
     fi
-    backup="$(mktemp "$AUTO_CONFIG_PATH.autoverse-backup-XXXXXXXX")"
+    backup="$(mktemp "$AUTO_CONFIG_PATH.craftroster-backup-XXXXXXXX")"
     rm -f "$backup"
     if should_create_auto_backup_destination_after_recheck; then
       mkdir "$backup"
-      printf '%s\n' 'test-only config backup destination newcomer that must be preserved' > "$backup/AUTOVERSE-NEWCOMER.txt"
+      printf '%s\n' 'test-only config backup destination newcomer that must be preserved' > "$backup/CRAFTROSTER-NEWCOMER.txt"
     fi
     if ! move_exact_no_clobber "$AUTO_CONFIG_PATH" "$backup" "preserve"; then
       log_error "Could not capture the current config before atomic replacement: $AUTO_CONFIG_PATH"
@@ -2319,7 +2152,7 @@ else
   require_command curl
   require_command tar
   require_command mktemp
-  TMP_DIR="$(mktemp -d "${TMPDIR:-/tmp}/autoverse-$TYPE.XXXXXX")"
+  TMP_DIR="$(mktemp -d "${TMPDIR:-/tmp}/craftroster-$TYPE.XXXXXX")"
   ARCHIVE="$TMP_DIR/repo.tar.gz"
   EXTRACT_DIR="$TMP_DIR/repo"
   mkdir -p "$EXTRACT_DIR"
@@ -2342,13 +2175,11 @@ if [[ "$TYPE" == "agent" ]]; then
   AGENT_JOB_DESTINATIONS=()
   AGENT_JOB_OWNERSHIP_TARGETS=()
   AGENT_JOB_SUFFIXES=()
-  AGENT_JOB_LEGACY_TARGETS=()
   for ((profile_index = 0; profile_index < ${#AGENT_PLATFORMS[@]}; profile_index++)); do
     PLATFORM="${AGENT_PLATFORMS[$profile_index]}"
     SUFFIX="${AGENT_SUFFIXES[$profile_index]}"
     DESTINATION="${AGENT_DESTINATIONS[$profile_index]}"
     OWNERSHIP_TARGET="${AGENT_OWNERSHIP_TARGETS[$profile_index]}"
-    LEGACY_TARGETS="${AGENT_LEGACY_TARGETS[$profile_index]}"
     ADAPTER_ROOT="$REPO_ROOT/adapters/$PLATFORM"
     PROFILE_SOURCE_COUNT=0
     if [[ -n "$NAME" ]]; then
@@ -2361,7 +2192,6 @@ if [[ "$TYPE" == "agent" ]]; then
       AGENT_JOB_DESTINATIONS+=("$DESTINATION")
       AGENT_JOB_OWNERSHIP_TARGETS+=("$OWNERSHIP_TARGET")
       AGENT_JOB_SUFFIXES+=("$SUFFIX")
-      AGENT_JOB_LEGACY_TARGETS+=("$LEGACY_TARGETS")
       PROFILE_SOURCE_COUNT=1
     else
       for source in "$ADAPTER_ROOT"/*"$SUFFIX"; do
@@ -2374,7 +2204,6 @@ if [[ "$TYPE" == "agent" ]]; then
         AGENT_JOB_DESTINATIONS+=("$DESTINATION")
         AGENT_JOB_OWNERSHIP_TARGETS+=("$OWNERSHIP_TARGET")
         AGENT_JOB_SUFFIXES+=("$SUFFIX")
-        AGENT_JOB_LEGACY_TARGETS+=("$LEGACY_TARGETS")
         PROFILE_SOURCE_COUNT=$((PROFILE_SOURCE_COUNT + 1))
       done
     fi
@@ -2388,14 +2217,12 @@ if [[ "$TYPE" == "agent" ]]; then
       "${AGENT_JOB_PLATFORMS[$job_index]}" \
       "${AGENT_JOB_DESTINATIONS[$job_index]}" \
       "${AGENT_JOB_OWNERSHIP_TARGETS[$job_index]}" \
-      "${AGENT_JOB_SUFFIXES[$job_index]}" \
-      "${AGENT_JOB_LEGACY_TARGETS[$job_index]}"
+      "${AGENT_JOB_SUFFIXES[$job_index]}"
   done
 
   INSTALL_COMPANION_SKILL=0
   COMPANION_DESTINATIONS=()
   COMPANION_OWNERSHIP_TARGETS=()
-  COMPANION_LEGACY_TARGETS=()
   COMPANION_SOURCE=""
   if [[ -z "$NAME" || "$ENABLE_AUTO_DELEGATION" -eq 1 ]]; then
     INSTALL_COMPANION_SKILL=1
@@ -2403,18 +2230,17 @@ if [[ "$TYPE" == "agent" ]]; then
     if [[ ! -f "$COMPANION_SOURCE/SKILL.md" ]]; then log_error "Companion Skill not found in archive: subagent-architecture"; exit 1; fi
     configure_skill_profiles 0
     for ((profile_index = 0; profile_index < ${#SKILL_DESTINATIONS[@]}; profile_index++)); do
-      COMPANION_DESTINATION="$(resolve_skill_profile_destination "${SKILL_DESTINATIONS[$profile_index]}" "subagent-architecture" "${SKILL_CODEX_LEGACY_CHECKS[$profile_index]}")"
+      COMPANION_DESTINATION="${SKILL_DESTINATIONS[$profile_index]}"
       COMPANION_DESTINATIONS+=("$COMPANION_DESTINATION")
       COMPANION_OWNERSHIP_TARGETS+=("${SKILL_OWNERSHIP_TARGETS[$profile_index]}")
-      COMPANION_LEGACY_TARGETS+=("${SKILL_LEGACY_TARGETS[$profile_index]}")
-      preflight_skill "$COMPANION_SOURCE" "$COMPANION_DESTINATION" "${SKILL_OWNERSHIP_TARGETS[$profile_index]}" "${SKILL_LEGACY_TARGETS[$profile_index]}"
+      preflight_skill "$COMPANION_SOURCE" "$COMPANION_DESTINATION" "${SKILL_OWNERSHIP_TARGETS[$profile_index]}"
       log_info "Companion Skill destination: $COMPANION_DESTINATION"
     done
   fi
 
   if [[ "$ENABLE_AUTO_DELEGATION" -eq 1 ]]; then
     require_command mktemp
-    AUTO_PLAN_DIR="$(mktemp -d "${TMPDIR:-/tmp}/autoverse-auto-delegation.XXXXXX")"
+    AUTO_PLAN_DIR="$(mktemp -d "${TMPDIR:-/tmp}/craftroster-auto-delegation.XXXXXX")"
     GUIDANCE_FILE="$REPO_ROOT/skills/subagent-architecture/references/global-auto-delegation.md"
     if [[ ! -s "$GUIDANCE_FILE" ]]; then log_error "Auto-delegation guidance is missing or empty: $GUIDANCE_FILE"; exit 1; fi
     if grep -Fq "'''" "$GUIDANCE_FILE"; then log_error "Auto-delegation guidance cannot contain a TOML multiline literal delimiter."; exit 1; fi
@@ -2429,7 +2255,7 @@ if [[ "$TYPE" == "agent" ]]; then
 
   if [[ "$INSTALL_COMPANION_SKILL" -eq 1 ]]; then
     for ((profile_index = 0; profile_index < ${#COMPANION_DESTINATIONS[@]}; profile_index++)); do
-      install_skill "$COMPANION_SOURCE" "${COMPANION_DESTINATIONS[$profile_index]}" "${COMPANION_OWNERSHIP_TARGETS[$profile_index]}" "${COMPANION_LEGACY_TARGETS[$profile_index]}"
+      install_skill "$COMPANION_SOURCE" "${COMPANION_DESTINATIONS[$profile_index]}" "${COMPANION_OWNERSHIP_TARGETS[$profile_index]}"
     done
   fi
   log_info "$(if [[ "$DRY_RUN" -eq 1 ]]; then printf Planning; else printf Installing; fi) ${#AGENT_JOB_SOURCES[@]} Agent profile file(s) across ${#AGENT_PLATFORMS[@]} destination(s) for $TARGET"
@@ -2441,8 +2267,7 @@ if [[ "$TYPE" == "agent" ]]; then
       "${AGENT_JOB_PLATFORMS[$job_index]}" \
       "${AGENT_JOB_DESTINATIONS[$job_index]}" \
       "${AGENT_JOB_OWNERSHIP_TARGETS[$job_index]}" \
-      "${AGENT_JOB_SUFFIXES[$job_index]}" \
-      "${AGENT_JOB_LEGACY_TARGETS[$job_index]}"
+      "${AGENT_JOB_SUFFIXES[$job_index]}"
   done
   if [[ "$ENABLE_AUTO_DELEGATION" -eq 1 ]]; then apply_auto_delegation_plan; fi
 else
@@ -2462,16 +2287,16 @@ else
   for ((profile_index = 0; profile_index < ${#SKILL_DESTINATIONS[@]}; profile_index++)); do
     for src in "${SOURCES[@]}"; do
       SKILL_NAME="$(basename "$src")"
-      SKILL_DESTINATION="$(resolve_skill_profile_destination "${SKILL_DESTINATIONS[$profile_index]}" "$SKILL_NAME" "${SKILL_CODEX_LEGACY_CHECKS[$profile_index]}")"
-      preflight_skill "$src" "$SKILL_DESTINATION" "${SKILL_OWNERSHIP_TARGETS[$profile_index]}" "${SKILL_LEGACY_TARGETS[$profile_index]}"
+      SKILL_DESTINATION="${SKILL_DESTINATIONS[$profile_index]}"
+      preflight_skill "$src" "$SKILL_DESTINATION" "${SKILL_OWNERSHIP_TARGETS[$profile_index]}"
     done
   done
   log_info "$(if [[ "$DRY_RUN" -eq 1 ]]; then printf Planning; else printf Installing; fi) ${#SOURCES[@]} Skill(s) across ${#SKILL_DESTINATIONS[@]} destination(s) for $TARGET"
   for ((profile_index = 0; profile_index < ${#SKILL_DESTINATIONS[@]}; profile_index++)); do
     for src in "${SOURCES[@]}"; do
       SKILL_NAME="$(basename "$src")"
-      SKILL_DESTINATION="$(resolve_skill_profile_destination "${SKILL_DESTINATIONS[$profile_index]}" "$SKILL_NAME" "${SKILL_CODEX_LEGACY_CHECKS[$profile_index]}")"
-      install_skill "$src" "$SKILL_DESTINATION" "${SKILL_OWNERSHIP_TARGETS[$profile_index]}" "${SKILL_LEGACY_TARGETS[$profile_index]}"
+      SKILL_DESTINATION="${SKILL_DESTINATIONS[$profile_index]}"
+      install_skill "$src" "$SKILL_DESTINATION" "${SKILL_OWNERSHIP_TARGETS[$profile_index]}"
     done
   done
 fi

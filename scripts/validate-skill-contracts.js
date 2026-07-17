@@ -556,7 +556,7 @@ function extractContractBlocks(text, label = 'document.md') {
   const errors = [];
   const blocks = [];
   const fenceMask = buildFenceMask(text.split(/\r?\n/));
-  const pattern = /<!--\s*AUTOVERSE_CONTRACT\s*\r?\n([\s\S]*?)\r?\n\s*-->/g;
+  const pattern = /<!--\s*CRAFTROSTER_CONTRACT\s*\r?\n([\s\S]*?)\r?\n\s*-->/g;
   let match;
   while ((match = pattern.exec(text)) !== null) {
     const line = text.slice(0, match.index).split(/\r?\n/).length;
@@ -565,7 +565,7 @@ function extractContractBlocks(text, label = 'document.md') {
       const value = JSON.parse(match[1]);
       blocks.push({ value, index: match.index, line, label });
     } catch (error) {
-      errors.push(`${label}:${line}: AUTOVERSE_CONTRACT JSON is invalid (${error.message})`);
+      errors.push(`${label}:${line}: CRAFTROSTER_CONTRACT JSON is invalid (${error.message})`);
     }
   }
   return { blocks, errors };
@@ -588,7 +588,7 @@ function extractContractTextBlocks(text, label = 'document.md') {
   const errors = [];
   const blocks = [];
   const fenceMask = buildFenceMask(text.split(/\r?\n/));
-  const pattern = /<!--\s*AUTOVERSE_CONTRACT_TEXT_START\s+([^\s]+)\s*-->\r?\n([\s\S]*?)\r?\n<!--\s*AUTOVERSE_CONTRACT_TEXT_END\s+([^\s]+)\s*-->/g;
+  const pattern = /<!--\s*CRAFTROSTER_CONTRACT_TEXT_START\s+([^\s]+)\s*-->\r?\n([\s\S]*?)\r?\n<!--\s*CRAFTROSTER_CONTRACT_TEXT_END\s+([^\s]+)\s*-->/g;
   let match;
   while ((match = pattern.exec(text)) !== null) {
     const line = text.slice(0, match.index).split(/\r?\n/).length;
@@ -680,7 +680,7 @@ function validateStructuredContracts(documents) {
   for (const block of found) {
     const key = contractKey(block.value);
     if (seenParts.has(key)) {
-      errors.push(`${block.file}:${block.line}: duplicate AUTOVERSE_CONTRACT part ${key}`);
+      errors.push(`${block.file}:${block.line}: duplicate CRAFTROSTER_CONTRACT part ${key}`);
     } else {
       seenParts.set(key, block);
     }
@@ -690,7 +690,7 @@ function validateStructuredContracts(documents) {
   for (const block of found) {
     const key = contractKey(block.value);
     if (!expectedKeys.has(key)) {
-      errors.push(`${block.file}:${block.line}: unexpected AUTOVERSE_CONTRACT part ${key}`);
+      errors.push(`${block.file}:${block.line}: unexpected CRAFTROSTER_CONTRACT part ${key}`);
     }
   }
 
@@ -698,7 +698,7 @@ function validateStructuredContracts(documents) {
     const key = contractKey(expected.value);
     const block = seenParts.get(key);
     if (!block) {
-      errors.push(`${expected.file}: missing AUTOVERSE_CONTRACT part ${key}`);
+      errors.push(`${expected.file}: missing CRAFTROSTER_CONTRACT part ${key}`);
       continue;
     }
     if (block.file !== expected.file) {

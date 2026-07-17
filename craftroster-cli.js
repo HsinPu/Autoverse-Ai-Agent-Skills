@@ -6,10 +6,7 @@ const os = require('os');
 
 const SKILLS_JSON = path.join(__dirname, 'skills.json');
 const AGENTS_JSON = path.join(__dirname, 'agents.json');
-const REPOSITORY_IDS = new Set([
-  'HsinPu/CraftRoster',
-  'HsinPu/Autoverse-Ai-Agent-Skills',
-]);
+const REPOSITORY_ID = 'HsinPu/CraftRoster';
 const homeDir = os.homedir();
 const codexHome = process.env.CODEX_HOME || path.join(homeDir, '.codex');
 const projectRoot = process.cwd();
@@ -48,23 +45,8 @@ const OPTION_LABELS = {
   target: '--target/--agent',
 };
 
-function resolveCodexSkillProfiles() {
-  const profiles = [
-    { label: 'codex/CODEX_HOME', dir: path.join(codexHome, 'skills'), target: 'codex' },
-    { label: 'codex/standard', dir: path.join(homeDir, '.agents', 'skills'), target: 'codex' },
-    { label: 'codex/legacy', dir: path.join(homeDir, '.codex', 'skills'), target: 'codex' },
-  ];
-  const seen = new Set();
-  return profiles.filter((profile) => {
-    const identity = path.resolve(profile.dir).toLowerCase();
-    if (seen.has(identity)) return false;
-    seen.add(identity);
-    return true;
-  });
-}
-
 const SKILL_PROFILE_PATHS = {
-  codex: resolveCodexSkillProfiles(),
+  codex: [{ label: 'codex', dir: path.join(codexHome, 'skills'), target: 'codex' }],
   claude: [{ label: 'claude', dir: path.join(homeDir, '.claude', 'skills'), target: 'claude' }],
   cursor: [{ label: 'cursor', dir: path.join(homeDir, '.cursor', 'skills'), target: 'cursor' }],
   copilot: [{ label: 'copilot', dir: path.join(homeDir, '.copilot', 'skills'), target: 'copilot' }],
@@ -470,7 +452,7 @@ function readJsonFile(filePath) {
 }
 
 function isCraftRosterRepository(repositoryId) {
-  return REPOSITORY_IDS.has(repositoryId);
+  return repositoryId === REPOSITORY_ID;
 }
 
 function findInstalledSkills(profile) {
@@ -528,7 +510,7 @@ function findInstalledAgents(profile) {
       .filter((name) => {
         if (!name.endsWith(profile.extension)) return false;
         const role = path.basename(name, profile.extension);
-        const metadata = readJsonFile(path.join(profile.dir, `${name}.autoverse.json`));
+        const metadata = readJsonFile(path.join(profile.dir, `${name}.craftroster.json`));
         return isCraftRosterRepository(metadata?.repo) && metadata.component === 'agent' &&
           metadata.target === profile.target && metadata.adapter === profile.adapter &&
           metadata.id === role && metadata.name === role;
@@ -639,8 +621,6 @@ CraftRoster - AI Agents, Skills & Workflows Catalog
 用法:
   craftroster <指令> [選項]
   (或: node craftroster-cli.js <指令> [選項])
-
-  相容別名: autoverse、node autoverse-cli.js
 
 指令:
   list                  列出可用 Skills（加 --type agent 列出 Agents）

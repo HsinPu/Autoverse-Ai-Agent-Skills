@@ -25,7 +25,7 @@ If the host cannot read structured Figma data, state the missing capability. Req
 
 ## Execution Ownership
 
-<!-- AUTOVERSE_CONTRACT
+<!-- CRAFTROSTER_CONTRACT
 {
   "id": "figma-to-code.execution",
   "part": "execution",
@@ -65,14 +65,14 @@ If the host cannot read structured Figma data, state the missing capability. Req
 }
 -->
 
-<!-- AUTOVERSE_CONTRACT_TEXT_START figma-to-code.execution#ownership -->
+<!-- CRAFTROSTER_CONTRACT_TEXT_START figma-to-code.execution#ownership -->
 Choose one ownership mode before acquisition:
 
 - **Standalone implementation:** use only when Figma is already approved for direct implementation and no parent approval gate is open. This workflow owns acquisition, repository mapping, implementation, validation, and routing.
 - **Parent-orchestrated receipt:** use when `web-page-design-to-code`, `website-redesign-to-code`, or another named workflow already owns scope or approval. The parent must provide its workflow ID, current gate, bounded nodes and states, allowed acquisition, privacy policy, and requested receipt. Acquire and reconcile evidence, then return a versioned Figma receipt to that parent. Do not edit production code, approve a baseline, close a parent gate, reroute the task, or expand scope.
 
 When an open parent gate is known but the mode is not explicit, default to parent-orchestrated receipt mode. Routing recommendations are findings for the parent, not direct handoffs.
-<!-- AUTOVERSE_CONTRACT_TEXT_END figma-to-code.execution#ownership -->
+<!-- CRAFTROSTER_CONTRACT_TEXT_END figma-to-code.execution#ownership -->
 
 ## Workflow
 
@@ -107,9 +107,9 @@ Build a mapping before editing:
 
 Prefer maintained project components and semantic tokens when they express the approved design. Do not paste provider-generated React, Tailwind, or absolute coordinates as the final architecture. Record conflicts where exact Figma values and the maintained system disagree; do not silently choose whichever source was fetched last.
 
-<!-- AUTOVERSE_CONTRACT_TEXT_START figma-to-code.execution#stop -->
+<!-- CRAFTROSTER_CONTRACT_TEXT_START figma-to-code.execution#stop -->
 In parent-orchestrated receipt mode, stop here. Return the acquisition manifest, evidence ledger, repository mapping, conflicts, missing states, unresolved inferences, authorized scope, and receipt revision. Do not enter implementation or validation as if the parent gate had passed.
-<!-- AUTOVERSE_CONTRACT_TEXT_END figma-to-code.execution#stop -->
+<!-- CRAFTROSTER_CONTRACT_TEXT_END figma-to-code.execution#stop -->
 
 ### 4. Implement in Verifiable Slices
 

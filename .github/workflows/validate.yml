@@ -88,7 +88,6 @@ jobs:
           node craftroster-cli.js list
           node craftroster-cli.js search python
           node craftroster-cli.js info python-development
-          node autoverse-cli.js --help
 
       - name: Test CLI argument validation
         run: npm run test:cli

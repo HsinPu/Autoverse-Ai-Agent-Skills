@@ -129,7 +129,7 @@ Do not infer approval from silence or from general encouragement.
 
 ## Visual QA Report
 
-<!-- AUTOVERSE_CONTRACT
+<!-- CRAFTROSTER_CONTRACT
 {
   "id": "web-page-design-to-code.orchestration",
   "part": "deliverable",

@@ -195,7 +195,7 @@ Agent 可以引用一個或多個相關 Skills；Skill 也能由主 Agent 直接
 | `opencode` | `~/.config/opencode/skills/` | `~/.config/opencode/agents/` | `<role>.md` |
 | `project` | `<cwd>/.agents/skills/` + `<cwd>/.claude/skills/` | 五個平台各自的 project 目錄 | 依平台產生 |
 
-`vscode` 是 `copilot` 的等價 alias；兩者使用同一組路徑與 `copilot` ownership identity，所以可交替執行更新。OpenCode 會優先採用官方 [custom directory](https://opencode.ai/docs/config/#custom-directory) 環境變數 `OPENCODE_CONFIG_DIR`；未設定時依序使用 `XDG_CONFIG_HOME/opencode` 或 `~/.config/opencode`。全域 `codex` target 跟隨 Codex 內建 `$skill-installer`：config、Skills 與 Agents 都以 `CODEX_HOME` 為根目錄，新 Skill 安裝到 `$CODEX_HOME/skills`，未設定時即 `~/.codex/skills`。若同名元件已由 CraftRoster 安全安裝在 `~/.agents/skills`，安裝器仍會原地更新，避免建立重複副本。
+`vscode` 是 `copilot` 的等價 alias；兩者使用同一組路徑與 `copilot` ownership identity，所以可交替執行更新。OpenCode 會優先採用官方 [custom directory](https://opencode.ai/docs/config/#custom-directory) 環境變數 `OPENCODE_CONFIG_DIR`；未設定時依序使用 `XDG_CONFIG_HOME/opencode` 或 `~/.config/opencode`。全域 `codex` target 跟隨 Codex 內建 `$skill-installer`：config、Skills 與 Agents 都以 `CODEX_HOME` 為根目錄，新 Skill 安裝到 `$CODEX_HOME/skills`，未設定時即 `~/.codex/skills`。
 
 ### `project` target 的實際位置
 
@@ -281,7 +281,7 @@ bash scripts/install.sh --target codex --type agent --source-dir . --enable-auto
 | 預演 | `-DryRun` | `--dry-run` | 只顯示計畫，不寫入 |
 | 強制覆蓋 | `-Force` | `--force` | 明確略過 ownership 保護 |
 
-相容舊參數：PowerShell 的 `-Agent` 是 `-Target` alias、`-Skill` 是 `-Name` alias；Bash 支援 `--agent`、`--skill` 與 `--agent-profile`。新腳本建議使用 `Target + Type + Name`。
+安裝參數以 `Target + Type + Name` 為主。PowerShell 也接受 `-Agent` 作為 `-Target` alias、`-Skill` 作為 `-Name` alias；Bash 也接受 `--agent`、`--skill` 與 `--agent-profile`。
 
 ## 安全更新與覆蓋保護
 
@@ -292,7 +292,6 @@ bash scripts/install.sh --target codex --type agent --source-dir . --enable-auto
 | 目標不存在 | 正常安裝 |
 | metadata 與目前 repository、元件、名稱及 target 相符 | 安全更新 |
 | Agent 檔缺失，但 sidecar identity 完整吻合 | 執行 `repair` |
-| 舊 Skill metadata 與新內容身份完整吻合 | 執行一次 `migrate-update` |
 | 同名內容沒有 metadata | 拒絕覆蓋 |
 | metadata 無效、來源不同或身份不符 | 拒絕覆蓋 |
 | 明確使用 Force | 執行 `force-replace` |
@@ -300,20 +299,18 @@ bash scripts/install.sh --target codex --type agent --source-dir . --enable-auto
 Ownership metadata：
 
 - Skill：`<skill>/.skill-meta.json`，比對 `repo + component + name + target`。
-- Agent：`<agent-file>.autoverse.json`，除上述欄位外再比對 `id + adapter`。副檔名保留為既有安裝的 legacy compatibility identifier。
+- Agent：`<agent-file>.craftroster.json`，除上述欄位外再比對 `id + adapter`。
 - Skill metadata 另保存 canonical `contentSha256`。若安裝後內容被人工或其他工具修改，普通更新會拒絕覆蓋；只有明確使用 Force 才會重設為目前 CraftRoster 版本。
 - Skill 更新會在同一檔案系統建立完整 staged package、核對來源與 staged digest、於最後寫入前重新檢查目的地，再以目錄交換提交。失敗時只會回復可證明屬於本 transaction 的內容；若偵測到其他程序剛建立的 newcomer，會保留 newcomer 與 backup 並要求人工復原，不會刪除未知資料。
 - Agent 與 sidecar 會先寫入同目錄暫存檔，再以 atomic replace 更新；不會沿著 symbolic link 或 hard link 改寫安裝目錄外的檔案。
 - 全量 Skill 安裝也會先預檢整批目標；只要一個 ownership 衝突，就不會先更新前面的 Skill 再中途失敗。
 - 全量 Agent 安裝會先預檢整批目標；只要一個衝突，就會在開始寫入前停止。
 - 所有平台的全量 Agent 安裝都會先預檢並安裝 `subagent-architecture`；一般 target 的 `InstallDir`／`--dir` 只覆蓋 Agent 位置，companion Skill 仍使用該 runtime 的標準 Skill 位置。`project` 則以同一 project root 建立完整多目的地計畫。
-- 舊版 Skill 只有在 repository、舊欄位，以及 `name`、`source/reference-source`、`license/previous-license` 都吻合時才會遷移。
-
 啟用全域主動委派時：
 
-- Codex 只管理 `~/.codex/config.toml` 內的 `AUTOVERSE_AUTO_DELEGATION` marker 區塊；這是為了辨識既有設定而保留的 legacy compatibility identifier。若已有區塊外的 `developer_instructions` 就停止。
+- Codex 只管理 `~/.codex/config.toml` 內的 `CRAFTROSTER_AUTO_DELEGATION` marker 區塊。若已有區塊外的 `developer_instructions` 就停止。
 - OpenCode 只對 strict UTF-8 JSON 的全域 `opencode.json` 合併一個 guidance 路徑；其根目錄依序採用 `OPENCODE_CONFIG_DIR`、`XDG_CONFIG_HOME/opencode` 或 `~/.config/opencode`。JSONC、無效型別、多份衝突 config 或重複 JSON key 會停止並要求手動合併。Bash 在既有自訂 config 上需要 Python 3 或 Node.js 做 strict validation；安裝器自己建立的最小 config 可在兩者皆無時安全重跑。
-- 修改既有全域 config 前會留下 `*.autoverse-backup-*` 備份；這個 legacy compatibility filename 會繼續保留，`Force` 不會繞過這些設定保護。
+- 修改既有全域 config 前會留下 `*.craftroster-backup-*` 備份；`Force` 不會繞過這些設定保護。
 - 安裝計畫完成後若全域 config 又被其他程式修改，安裝器會在 replace 前停止，避免用舊快照蓋掉新設定。
 
 先用 dry run 查看更新計畫：
@@ -349,7 +346,7 @@ node craftroster-cli.js list --installed --type agent --target opencode
 node craftroster-cli.js list --installed --type agent --target project
 ```
 
-CLI 只列出同時具有 adapter 與有效 CraftRoster ownership sidecar 的檔案；為了平順升級，它接受 canonical `HsinPu/CraftRoster` 與 legacy `HsinPu/Autoverse-Ai-Agent-Skills` repository ID，但不接受其他 repository。它用來確認安裝結果，不等同於檢查目前已開啟的工具是否重新載入。
+CLI 只列出同時具有 adapter 與有效 CraftRoster ownership sidecar 的檔案；ownership repository ID 必須是 `HsinPu/CraftRoster`，其他 repository 一律不列出。它用來確認安裝結果，不等同於檢查目前已開啟的工具是否重新載入。
 
 平台格式的官方連結集中在 [`project` target 的實際位置](#project-target-的實際位置)一節。
 
@@ -406,7 +403,7 @@ brief／media research → creative treatment → script → storyboard／shot l
 
 ## Catalog CLI
 
-`craftroster-cli.js` 提供離線 catalog 搜尋、安裝狀態與相近 Skill 路由查詢，需要 Node.js 22 或更新版本。目前請直接從 repository checkout 執行。`autoverse` npm command 與 `autoverse-cli.js` 會保留至少一個相容版本，既有腳本可繼續使用；新腳本請改用 `craftroster` 或 `craftroster-cli.js`。
+`craftroster-cli.js` 提供離線 catalog 搜尋、安裝狀態與相近 Skill 路由查詢，需要 Node.js 22 或更新版本。目前請直接從 repository checkout 執行，或透過 npm package 提供的 `craftroster` command 使用。
 
 ### Commands
 
@@ -562,7 +559,6 @@ CraftRoster/
 ├─ agents.json                      # Generated Agent catalog
 ├─ skills.json                      # Generated Skill catalog
 ├─ craftroster-cli.js               # Canonical Catalog CLI entrypoint
-├─ autoverse-cli.js                 # Legacy CLI compatibility entrypoint
 ├─ scripts/
 │  ├─ install.cmd                   # Windows CMD wrapper
 │  ├─ install.ps1                   # Windows installer
@@ -674,7 +670,7 @@ npm pack --dry-run
 
 ## 來源、改寫與授權政策
 
-- 所有 Agents 與 Skills 的正式 `source` 都是 `HsinPu/CraftRoster`，作者為 HsinPu。安裝器與 CLI 只為升級既有安裝而接受 legacy repository ID `HsinPu/Autoverse-Ai-Agent-Skills`。
+- 所有 Agents 與 Skills 的正式 `source` 都是 `HsinPu/CraftRoster`，作者為 HsinPu；安裝器與 CLI 的 ownership repository ID 也必須是 `HsinPu/CraftRoster`。
 - 外部專案只作為研究、coverage 與設計參考；Agents 使用 `reference-repo`、`reference-paths`、`reference-tree`，Skills 使用 `reference-source`、`reference-license` 與必要的 `reference-revision`。目前 33 個 referenced Skills 分布於 12 個 repositories，全部由 [`skill-reference-sources.json`](scripts/data/skill-reference-sources.json) 固定 commit、tree、逐 Skill reference path/blob 與 license evidence；[`skill-reference-lock.json`](scripts/data/skill-reference-lock.json) 另外鎖定完整 provenance evidence 的 canonical digest 與數量。[CODEOWNERS](.github/CODEOWNERS) 會把 manifest、lock、verifier 與 originality audit 指派給 HsinPu，發布政策要求取得 owner 明確覆核，避免單獨縮小或替換比對範圍。這些欄位不取代本專案的正式來源。
 - Matt Pocock 相關概念的 pinned revision、逐項 upgrade／add／skip 決策、改名策略與原創改寫邊界記錄在 [`matt-pocock-skill-adaptations.md`](docs/matt-pocock-skill-adaptations.md)。除保留業界通用能力名稱 `domain-modeling` 外，這批沒有沿用上游命令式或品牌化 Skill 名稱、slash commands、固定檔名、模板或 Claude 專用 metadata。
 - 視覺設計相關 Skills 以獨立 metadata 保存主要參考來源：`taste-skill`／`image-to-code` 對應 [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill)，`figma-to-code` 對應 [figma/mcp-server-guide](https://github.com/figma/mcp-server-guide)，`design-intelligence-search` 對應 [ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill)，`design-system` 對應 [DTCG](https://github.com/design-tokens/community-group)，`visual-regression-testing` 對應 [AgentVision](https://github.com/amitpatole/agent-vision)。其他比較來源包含 gstack、Impeccable、Argos、design-extract、Style Dictionary、Vercel Web Interface Guidelines、Addy Osmani Agent Skills、screenshot-to-code、Design2Code、UI2Code_N、Google Stitch Skills、canvas-to-code 與 Anthropic frontend-design。實際採用範圍、授權狀態、未移植項目與原創改寫邊界記錄在 [`visual-design-skill-sources.md`](docs/visual-design-skill-sources.md)，所有 canonical Skill 的正式 `source` 仍為 `HsinPu/CraftRoster`。
@@ -701,7 +697,7 @@ npm pack --dry-run
 
 這表示同名路徑已存在，但 ownership metadata 缺失、無效、來自其他 repository，或 component／name／target／Agent identity 不一致。
 
-先檢查 Skill 內的 `.skill-meta.json`，或 Agent 旁的 `.autoverse.json` legacy compatibility sidecar，確認現有內容的來源。不要直接刪除或覆蓋別人的安裝。只有在確定應由 CraftRoster 取代並完成備份後，才使用 `-Force`／`--force`。
+先檢查 Skill 內的 `.skill-meta.json`，或 Agent 旁的 `.craftroster.json` sidecar，確認現有內容的來源。不要直接刪除或覆蓋別人的安裝。只有在確定應由 CraftRoster 取代並完成備份後，才使用 `-Force`／`--force`。
 
 </details>
 

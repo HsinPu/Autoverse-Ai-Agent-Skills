@@ -30,7 +30,7 @@ If an approved mockup and implementation contract already exist, do not regenera
 
 ## Execution Ownership
 
-<!-- AUTOVERSE_CONTRACT
+<!-- CRAFTROSTER_CONTRACT
 {
   "id": "image-to-code.execution",
   "part": "execution",
@@ -70,14 +70,14 @@ If an approved mockup and implementation contract already exist, do not regenera
 }
 -->
 
-<!-- AUTOVERSE_CONTRACT_TEXT_START image-to-code.execution#ownership -->
+<!-- CRAFTROSTER_CONTRACT_TEXT_START image-to-code.execution#ownership -->
 Choose one ownership mode before analysis:
 
 - **Standalone implementation:** use only when the visual evidence is approved for direct implementation and no parent approval gate is open. This workflow owns the image contract, implementation, validation, and routing.
 - **Parent-orchestrated receipt:** use when `web-page-design-to-code`, `website-redesign-to-code`, or another named workflow already owns scope or approval. The parent must provide its workflow ID, current gate, bounded references and states, allowed inspection, privacy policy, and requested receipt. Analyze sources and build the asset, content, state, ambiguity, and implementation maps, then return a versioned image receipt. Do not edit production code, generate additional references unless the parent explicitly authorized that bounded action, approve a baseline, close a parent gate, reroute the task, or expand scope.
 
 When an open parent gate is known but the mode is not explicit, default to parent-orchestrated receipt mode. The routing options above become recommendations returned to the parent rather than direct handoffs.
-<!-- AUTOVERSE_CONTRACT_TEXT_END image-to-code.execution#ownership -->
+<!-- CRAFTROSTER_CONTRACT_TEXT_END image-to-code.execution#ownership -->
 
 ## Non-Negotiable Contract
 
@@ -146,9 +146,9 @@ Before coding, translate the image into deterministic rules:
 
 The contract should explain what happens outside the captured viewport. If only a desktop image exists, infer conservative reflow from content priority and existing product patterns; label the inference rather than claiming it came from the image.
 
-<!-- AUTOVERSE_CONTRACT_TEXT_START image-to-code.execution#stop -->
+<!-- CRAFTROSTER_CONTRACT_TEXT_START image-to-code.execution#stop -->
 In parent-orchestrated receipt mode, stop here. Return the versioned source, asset, content, state, ambiguity, and implementation-contract receipt to the parent. Do not enter implementation, visual repair, or interface verification as if the parent gate had passed.
-<!-- AUTOVERSE_CONTRACT_TEXT_END image-to-code.execution#stop -->
+<!-- CRAFTROSTER_CONTRACT_TEXT_END image-to-code.execution#stop -->
 
 ### 5. Implement in the Existing Stack
 

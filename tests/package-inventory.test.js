@@ -167,7 +167,6 @@ function runProcess(command, args, cwd, label) {
 
 function verifyStagedPackage() {
   runProcess(process.execPath, ['craftroster-cli.js', '--help'], stageRoot, 'packed craftroster --help');
-  runProcess(process.execPath, ['autoverse-cli.js', '--help'], stageRoot, 'packed legacy autoverse --help');
   for (const scriptName of [
     'validate',
     'test:skill-catalog',
@@ -181,8 +180,11 @@ function verifyStagedPackage() {
 
 try {
   assert.strictEqual(packageJson.name, 'craftroster', 'package name must match the public brand');
-  assert.strictEqual(packageJson.bin?.craftroster, './craftroster-cli.js', 'package must expose the craftroster CLI');
-  assert.strictEqual(packageJson.bin?.autoverse, './autoverse-cli.js', 'package must preserve the legacy CLI alias');
+  assert.deepStrictEqual(
+    packageJson.bin,
+    { craftroster: './craftroster-cli.js' },
+    'package must expose only the craftroster CLI'
+  );
   for (const sentinelPath of sentinelPaths) {
     assert(!fs.existsSync(sentinelPath), `refusing to overwrite package test sentinel: ${sentinelPath}`);
     fs.writeFileSync(sentinelPath, 'CRAFTROSTER PACKAGE INVENTORY TEST SENTINEL\n', 'utf8');
@@ -212,7 +214,6 @@ try {
   for (const requiredPath of [
     'package.json',
     'craftroster-cli.js',
-    'autoverse-cli.js',
     'agents.json',
     'skills.json',
     'README.md',

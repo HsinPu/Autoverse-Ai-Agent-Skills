@@ -10,7 +10,7 @@ function Write-Pass {
 
 function Assert-Equal {
     param($Actual, $Expected, [string]$Label)
-    if ($Actual -ne $Expected) {
+    if ($Actual -cne $Expected) {
         throw "$Label expected $Expected, got $Actual"
     }
 }
@@ -102,7 +102,7 @@ function Get-CanonicalSingleFileSkillSha256 {
     $stream = [System.IO.MemoryStream]::new()
     try {
         foreach ($bytes in @(
-            $utf8.GetBytes('autoverse-skill-content-v1'),
+            $utf8.GetBytes('craftroster-skill-content-v1'),
             [byte[]]@(0),
             $utf8.GetBytes($RelativePath.Replace('\', '/')),
             [byte[]]@(0),
@@ -127,10 +127,10 @@ function Get-CanonicalSingleFileSkillSha256 {
 function Assert-NoAtomicSkillArtifacts {
     param([string]$DestinationRoot, [string]$Label)
     $leftovers = @(Get-ChildItem -Force -LiteralPath $DestinationRoot -ErrorAction SilentlyContinue | Where-Object {
-        $_.Name -like '.autoverse-stage-*' -or
-        $_.Name -like '.autoverse-backup-*' -or
-        $_.Name -like '.autoverse-failed-*' -or
-        $_.Name -like '.autoverse-cleanup-*'
+        $_.Name -like '.craftroster-stage-*' -or
+        $_.Name -like '.craftroster-backup-*' -or
+        $_.Name -like '.craftroster-failed-*' -or
+        $_.Name -like '.craftroster-cleanup-*'
     })
     if ($leftovers.Count -gt 0) {
         throw "$Label left atomic Skill artifacts: $($leftovers.Name -join ', ')"
@@ -180,7 +180,7 @@ function Assert-SafeSmokeRoot {
     if (-not [string]::Equals([System.IO.Path]::GetDirectoryName($resolved), $tempRoot, [System.StringComparison]::OrdinalIgnoreCase)) {
         throw "Refusing to use smoke root outside the direct temp directory: $resolved"
     }
-    if (-not [System.IO.Path]::GetFileName($resolved).StartsWith("autoverse-install-smoke-", [System.StringComparison]::Ordinal)) {
+    if (-not [System.IO.Path]::GetFileName($resolved).StartsWith("craftroster-install-smoke-", [System.StringComparison]::Ordinal)) {
         throw "Refusing to use an unexpected smoke root: $resolved"
     }
     return $resolved
@@ -189,15 +189,14 @@ function Assert-SafeSmokeRoot {
 $repoRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "..")).Path
 $script:Installer = Join-Path $repoRoot "scripts\install.ps1"
 $expectedRepo = "HsinPu/CraftRoster"
-$legacyRepo = "HsinPu/Autoverse-Ai-Agent-Skills"
 $expectedSkills = (Get-Content -Raw -LiteralPath (Join-Path $repoRoot "skills.json") | ConvertFrom-Json).skills.Count
 $expectedAgents = (Get-Content -Raw -LiteralPath (Join-Path $repoRoot "agents.json") | ConvertFrom-Json).agents.Count
-$smokeRoot = Assert-SafeSmokeRoot -Path (Join-Path ([System.IO.Path]::GetTempPath()) "autoverse-install-smoke-$([Guid]::NewGuid().ToString('N'))")
+$smokeRoot = Assert-SafeSmokeRoot -Path (Join-Path ([System.IO.Path]::GetTempPath()) "craftroster-install-smoke-$([Guid]::NewGuid().ToString('N'))")
 $projectRoot = Join-Path $smokeRoot "project"
 $originalEnvironment = @{}
 foreach ($name in @(
     "USERPROFILE", "HOME", "CODEX_HOME", "XDG_CONFIG_HOME", "OPENCODE_CONFIG_DIR", "LOCALAPPDATA",
-    "AUTOVERSE_INSTALLER_TEST_MODE", "AUTOVERSE_INSTALLER_TEST_ACK", "AUTOVERSE_INSTALLER_TEST_FAULT"
+    "CRAFTROSTER_INSTALLER_TEST_MODE", "CRAFTROSTER_INSTALLER_TEST_ACK", "CRAFTROSTER_INSTALLER_TEST_FAULT"
 )) {
     $originalEnvironment[$name] = [Environment]::GetEnvironmentVariable($name, "Process")
 }
@@ -219,7 +218,7 @@ try {
         "-Target", "codex", "-Type", "skill", "-Name", "terminal-ops", "-Branch", "main branch", "-SourceDir", $repoRoot, "-DryRun"
     )
 
-    $canonicalDigestExpected = "3bb91f7d0ae1482c6e89f568675d98fc1c8b4e6e8bbb35314de43996a96a37b4"
+    $canonicalDigestExpected = "b2554ea43bb23e6a7765c32462897815f250cd749467357ddf4ac94478fec3dc"
     $canonicalSourceRoot = Join-Path $smokeRoot "canonical-digest-source"
     $canonicalSkillRoot = Join-Path $canonicalSourceRoot "skills\canonical-digest-fixture"
     $canonicalNestedRoot = Join-Path $canonicalSkillRoot "nested"
@@ -285,14 +284,14 @@ try {
     foreach ($profile in $agentProfiles) {
         $root = Join-Path $projectRoot $profile.Root
         Assert-Equal @(Get-ChildItem -LiteralPath $root -File -Filter $profile.Pattern).Count $expectedAgents "$($profile.Name) Agent count"
-        Assert-Equal @(Get-ChildItem -LiteralPath $root -File -Filter "*.autoverse.json").Count $expectedAgents "$($profile.Name) Agent metadata count"
+        Assert-Equal @(Get-ChildItem -LiteralPath $root -File -Filter "*.craftroster.json").Count $expectedAgents "$($profile.Name) Agent metadata count"
         $representativeAgentPath = Join-Path $root ("code-reviewer" + $profile.Suffix)
         Assert-FileContentMatches `
             -ActualPath $representativeAgentPath `
             -ExpectedPath (Join-Path $repoRoot ("adapters\" + $profile.Adapter + "\code-reviewer" + $profile.Suffix)) `
             -Label "$($profile.Name) project Agent"
         Assert-OwnershipMetadata `
-            -Path ($representativeAgentPath + ".autoverse.json") `
+            -Path ($representativeAgentPath + ".craftroster.json") `
             -ExpectedRepo $expectedRepo `
             -ExpectedComponent "agent" `
             -ExpectedName "code-reviewer" `
@@ -403,7 +402,7 @@ try {
             -ExpectedPath (Join-Path $repoRoot ("adapters\" + $profile.Adapter + "\" + $profile.AgentName + $profile.Suffix)) `
             -Label "$($profile.Label) global Agent"
         Assert-OwnershipMetadata `
-            -Path ($globalAgentPath + ".autoverse.json") `
+            -Path ($globalAgentPath + ".craftroster.json") `
             -ExpectedRepo $expectedRepo `
             -ExpectedComponent "agent" `
             -ExpectedName $profile.AgentName `
@@ -420,7 +419,7 @@ try {
             -ExpectedPath (Join-Path $repoRoot ("adapters\" + $profile.Adapter + "\" + $profile.AgentName + $profile.Suffix)) `
             -Label "$($profile.Label) updated global Agent"
         Assert-OwnershipMetadata `
-            -Path ($globalAgentPath + ".autoverse.json") `
+            -Path ($globalAgentPath + ".craftroster.json") `
             -ExpectedRepo $expectedRepo `
             -ExpectedComponent "agent" `
             -ExpectedName $profile.AgentName `
@@ -455,7 +454,7 @@ try {
     $foreignAgentParent = Join-Path $agentCollisionRoot ".opencode\agents"
     New-Item -ItemType Directory -Force -Path $foreignAgentParent | Out-Null
     $foreignAgent = Join-Path $foreignAgentParent "code-reviewer.md"
-    $foreignAgentMeta = $foreignAgent + ".autoverse.json"
+    $foreignAgentMeta = $foreignAgent + ".craftroster.json"
     [System.IO.File]::WriteAllText($foreignAgent, "FOREIGN AGENT SENTINEL - CRAFTROSTER MUST NOT REPLACE THIS FILE`n", [System.Text.UTF8Encoding]::new($false))
     $foreignAgentHash = Get-Sha256Hex -Path $foreignAgent
     Invoke-ExpectedFailure -Label "project Agent ownership collision" -ExpectedMessage "no matching CraftRoster metadata" -InstallerArgs @(
@@ -472,7 +471,7 @@ try {
         ".github\agents\code-reviewer.agent.md"
     )) {
         $partialPath = Join-Path $agentCollisionRoot $partial
-        if ((Test-Path -LiteralPath $partialPath) -or (Test-Path -LiteralPath ($partialPath + ".autoverse.json"))) {
+        if ((Test-Path -LiteralPath $partialPath) -or (Test-Path -LiteralPath ($partialPath + ".craftroster.json"))) {
             throw "Agent collision left a partial profile install: $partial"
         }
     }
@@ -487,26 +486,13 @@ try {
     $ownedSkillBaselineMeta = Get-Content -Raw -LiteralPath $ownedSkillMeta
     $ownedSkillBaselineHash = Get-Sha256Hex -Path $ownedSkillFile
 
-    Write-Utf8NoBom -Path $ownedSkillMeta -Text $ownedSkillBaselineMeta
-    Set-MetadataString -Path $ownedSkillMeta -Field "repo" -Value $legacyRepo
-    $skillRepositoryMigration = Invoke-InstallerStep -Label "Skill legacy repository alias migration" -InstallerArgs @(
-        "-Target", "claude", "-Type", "skill", "-Name", "terminal-ops", "-SourceDir", $repoRoot, "-InstallDir", $skillOwnershipRoot
-    )
-    Assert-Equal @($skillRepositoryMigration.Output | Where-Object { $_ -match '^OK\s+migrate-update Skill ' }).Count 1 "Skill legacy repository migration count"
-    Assert-OwnershipMetadata -Path $ownedSkillMeta -ExpectedRepo $expectedRepo -ExpectedComponent "skill" -ExpectedName "terminal-ops" -ExpectedTarget "claude" -Label "legacy-repository migrated Skill"
-
-    Write-Utf8NoBom -Path $ownedSkillMeta -Text $ownedSkillBaselineMeta
-    Set-MetadataString -Path $ownedSkillMeta -Field "repo" -Value $legacyRepo
-    Invoke-ExpectedFailure -Label "Skill explicit repository disables legacy alias" -ExpectedMessage "installed from '$legacyRepo'" -InstallerArgs @(
-        "-Target", "claude", "-Type", "skill", "-Name", "terminal-ops", "-Repo", $expectedRepo, "-SourceDir", $repoRoot, "-InstallDir", $skillOwnershipRoot
-    )
-    Assert-Equal (Get-Content -Raw -LiteralPath $ownedSkillMeta | ConvertFrom-Json).repo $legacyRepo "Skill explicit repository refusal preserved legacy owner"
-
     $skillMetadataCases = @(
         @{ Label = "repo mismatch"; Field = "repo"; Value = "foreign/repository"; Expected = "installed from" },
+        @{ Label = "repo case mismatch"; Field = "repo"; Value = "hsinpu/craftroster"; Expected = "installed from" },
         @{ Label = "component mismatch"; Field = "component"; Value = "agent"; Expected = "ownership metadata does not match" },
+        @{ Label = "component case mismatch"; Field = "component"; Value = "Skill"; Expected = "ownership metadata does not match" },
         @{ Label = "name mismatch"; Field = "name"; Value = "python-development"; Expected = "ownership metadata does not match" },
-        @{ Label = "target mismatch"; Field = "target"; Value = "codex"; Expected = "ownership metadata does not match" }
+        @{ Label = "stored input alias target"; Field = "target"; Value = "vscode"; Expected = "ownership metadata does not match" }
     )
     foreach ($case in $skillMetadataCases) {
         Write-Utf8NoBom -Path $ownedSkillMeta -Text $ownedSkillBaselineMeta
@@ -516,6 +502,14 @@ try {
         )
         Assert-Equal (Get-Sha256Hex -Path $ownedSkillFile) $ownedSkillBaselineHash ("Skill ownership " + $case.Label + " content hash")
     }
+
+    $missingDigestMetadata = $ownedSkillBaselineMeta | ConvertFrom-Json
+    $missingDigestMetadata.PSObject.Properties.Remove("contentSha256")
+    Write-Utf8NoBom -Path $ownedSkillMeta -Text (($missingDigestMetadata | ConvertTo-Json -Depth 5) + "`n")
+    Invoke-ExpectedFailure -Label "Skill missing content digest" -ExpectedMessage "ownership metadata does not match" -InstallerArgs @(
+        "-Target", "claude", "-Type", "skill", "-Name", "terminal-ops", "-SourceDir", $repoRoot, "-InstallDir", $skillOwnershipRoot
+    )
+    Assert-Equal (Get-Sha256Hex -Path $ownedSkillFile) $ownedSkillBaselineHash "Skill missing content digest file hash"
 
     Write-Utf8NoBom -Path $ownedSkillMeta -Text "{`n"
     Invoke-ExpectedFailure -Label "Skill malformed ownership metadata" -ExpectedMessage "Existing CraftRoster metadata is invalid" -InstallerArgs @(
@@ -565,24 +559,24 @@ try {
     $rollbackSkillHash = Get-Sha256Hex -Path $ownedSkillFile
     $rollbackMetadataText = Get-Content -Raw -LiteralPath $ownedSkillMeta
     $faultEnvironmentNames = @(
-        "AUTOVERSE_INSTALLER_TEST_MODE",
-        "AUTOVERSE_INSTALLER_TEST_ACK",
-        "AUTOVERSE_INSTALLER_TEST_FAULT"
+        "CRAFTROSTER_INSTALLER_TEST_MODE",
+        "CRAFTROSTER_INSTALLER_TEST_ACK",
+        "CRAFTROSTER_INSTALLER_TEST_FAULT"
     )
     $savedFaultEnvironment = @{}
     foreach ($name in $faultEnvironmentNames) {
         $savedFaultEnvironment[$name] = [Environment]::GetEnvironmentVariable($name, "Process")
     }
     try {
-        $env:AUTOVERSE_INSTALLER_TEST_MODE = "skill-atomic-swap"
-        $env:AUTOVERSE_INSTALLER_TEST_ACK = "invalid-acknowledgement"
-        $env:AUTOVERSE_INSTALLER_TEST_FAULT = "after-backup"
+        $env:CRAFTROSTER_INSTALLER_TEST_MODE = "skill-atomic-swap"
+        $env:CRAFTROSTER_INSTALLER_TEST_ACK = "invalid-acknowledgement"
+        $env:CRAFTROSTER_INSTALLER_TEST_FAULT = "after-backup"
         Invoke-ExpectedFailure -Label "Skill fault injection strict gate" -ExpectedMessage "Invalid test-only Skill fault injection configuration" -InstallerArgs @(
             "-Target", "claude", "-Type", "skill", "-Name", "terminal-ops", "-SourceDir", $repoRoot, "-InstallDir", $skillOwnershipRoot, "-Force"
         )
         Assert-NoAtomicSkillArtifacts -DestinationRoot $skillOwnershipRoot -Label "invalid fault gate"
 
-        $env:AUTOVERSE_INSTALLER_TEST_ACK = "I_UNDERSTAND_THIS_IS_TEST_ONLY"
+        $env:CRAFTROSTER_INSTALLER_TEST_ACK = "I_UNDERSTAND_THIS_IS_TEST_ONLY"
         Invoke-ExpectedFailure -Label "Skill atomic rollback after backup" -ExpectedMessage "Injected test-only failure after Skill backup" -InstallerArgs @(
             "-Target", "claude", "-Type", "skill", "-Name", "terminal-ops", "-SourceDir", $repoRoot, "-InstallDir", $skillOwnershipRoot, "-Force"
         )
@@ -591,7 +585,7 @@ try {
         Assert-Equal (Get-Sha256Hex -Path $ownedSkillFile) $rollbackSkillHash "atomic rollback Skill hash before race"
         Assert-Equal (Get-Content -Raw -LiteralPath $ownedSkillMeta) $rollbackMetadataText "atomic rollback metadata before race"
 
-        $env:AUTOVERSE_INSTALLER_TEST_FAULT = "after-recheck-target-replaced"
+        $env:CRAFTROSTER_INSTALLER_TEST_FAULT = "after-recheck-target-replaced"
         Invoke-ExpectedFailure -Label "Skill final-check replacement preserves foreign backup" -ExpectedMessage "Manual recovery required" -InstallerArgs @(
             "-Target", "claude", "-Type", "skill", "-Name", "terminal-ops", "-SourceDir", $repoRoot, "-InstallDir", $skillOwnershipRoot, "-Force"
         )
@@ -599,16 +593,16 @@ try {
             throw "Skill final-check replacement unexpectedly recreated the destination"
         }
         $replacementBackups = @(Get-ChildItem -Force -LiteralPath $skillOwnershipRoot -Directory | Where-Object {
-            $_.Name -like '.autoverse-backup-terminal-ops-*'
+            $_.Name -like '.craftroster-backup-terminal-ops-*'
         })
         $replacementOriginals = @(Get-ChildItem -Force -LiteralPath $skillOwnershipRoot -Directory | Where-Object {
-            $_.Name -like '.autoverse-failed-terminal-ops-*'
+            $_.Name -like '.craftroster-failed-terminal-ops-*'
         })
         Assert-Equal $replacementBackups.Count 1 "Skill final-check replacement foreign backup count"
         Assert-Equal $replacementOriginals.Count 1 "Skill final-check replacement original count"
         $replacementBackup = $replacementBackups[0].FullName
         $replacementOriginal = $replacementOriginals[0].FullName
-        if (-not (Test-Path -LiteralPath (Join-Path $replacementBackup "AUTOVERSE-REPLACEMENT-NEWCOMER.txt") -PathType Leaf)) {
+        if (-not (Test-Path -LiteralPath (Join-Path $replacementBackup "CRAFTROSTER-REPLACEMENT-NEWCOMER.txt") -PathType Leaf)) {
             throw "Skill final-check replacement deleted the foreign directory"
         }
         Assert-Equal (Get-Sha256Hex -Path (Join-Path $replacementOriginal "ROLLBACK-SENTINEL.txt")) $rollbackSentinelHash "Skill final-check replacement original sentinel hash"
@@ -618,16 +612,16 @@ try {
         [System.IO.Directory]::Move($replacementOriginal, $ownedSkillRoot)
         Assert-NoAtomicSkillArtifacts -DestinationRoot $skillOwnershipRoot -Label "final-check replacement recovery"
 
-        $env:AUTOVERSE_INSTALLER_TEST_FAULT = "after-recheck-destination-appears"
+        $env:CRAFTROSTER_INSTALLER_TEST_FAULT = "after-recheck-destination-appears"
         Invoke-ExpectedFailure -Label "Skill destination race preserves newcomer" -ExpectedMessage "Manual recovery required" -InstallerArgs @(
             "-Target", "claude", "-Type", "skill", "-Name", "terminal-ops", "-SourceDir", $repoRoot, "-InstallDir", $skillOwnershipRoot, "-Force"
         )
-        $newcomerSentinel = Join-Path $ownedSkillRoot "AUTOVERSE-NEWCOMER.txt"
+        $newcomerSentinel = Join-Path $ownedSkillRoot "CRAFTROSTER-NEWCOMER.txt"
         if (-not (Test-Path -LiteralPath $newcomerSentinel -PathType Leaf)) {
             throw "Skill destination race removed the newcomer sentinel"
         }
         $raceBackups = @(Get-ChildItem -Force -LiteralPath $skillOwnershipRoot -Directory | Where-Object {
-            $_.Name -like '.autoverse-backup-terminal-ops-*'
+            $_.Name -like '.craftroster-backup-terminal-ops-*'
         })
         Assert-Equal $raceBackups.Count 1 "Skill destination race retained backup count"
         $raceBackup = $raceBackups[0].FullName
@@ -640,7 +634,7 @@ try {
 
         $freshPostMoveRoot = Join-Path $smokeRoot "fresh-post-move-fault"
         New-Item -ItemType Directory -Path $freshPostMoveRoot | Out-Null
-        $env:AUTOVERSE_INSTALLER_TEST_FAULT = "fresh-post-move-fail"
+        $env:CRAFTROSTER_INSTALLER_TEST_FAULT = "fresh-post-move-fail"
         Invoke-ExpectedFailure -Label "fresh Skill post-move failure cleans only transaction" -ExpectedMessage "Injected test-only failure after fresh Skill stage move" -InstallerArgs @(
             "-Target", "claude", "-Type", "skill", "-Name", "terminal-ops", "-SourceDir", $repoRoot, "-InstallDir", $freshPostMoveRoot
         )
@@ -651,7 +645,7 @@ try {
 
         $stageCollisionRoot = Join-Path $smokeRoot "stage-collision-fault"
         New-Item -ItemType Directory -Path $stageCollisionRoot | Out-Null
-        $env:AUTOVERSE_INSTALLER_TEST_FAULT = "stage-path-collision"
+        $env:CRAFTROSTER_INSTALLER_TEST_FAULT = "stage-path-collision"
         Invoke-ExpectedFailure -Label "Skill stage collision preserves newcomer" -ExpectedMessage "refusing to clean an unrecognized or changed atomic Skill stage" -InstallerArgs @(
             "-Target", "claude", "-Type", "skill", "-Name", "terminal-ops", "-SourceDir", $repoRoot, "-InstallDir", $stageCollisionRoot
         )
@@ -659,11 +653,11 @@ try {
             throw "Skill stage collision unexpectedly installed the Skill"
         }
         $collisionStages = @(Get-ChildItem -Force -LiteralPath $stageCollisionRoot -Directory | Where-Object {
-            $_.Name -like '.autoverse-stage-terminal-ops-*'
+            $_.Name -like '.craftroster-stage-terminal-ops-*'
         })
         Assert-Equal $collisionStages.Count 1 "Skill stage collision retained newcomer count"
         $collisionStage = $collisionStages[0].FullName
-        if (-not (Test-Path -LiteralPath (Join-Path $collisionStage "AUTOVERSE-STAGE-NEWCOMER.txt") -PathType Leaf)) {
+        if (-not (Test-Path -LiteralPath (Join-Path $collisionStage "CRAFTROSTER-STAGE-NEWCOMER.txt") -PathType Leaf)) {
             throw "Skill stage collision deleted the newcomer sentinel"
         }
         Remove-Item -Recurse -Force -LiteralPath $collisionStage
@@ -683,91 +677,30 @@ try {
     Assert-NoAtomicSkillArtifacts -DestinationRoot $skillOwnershipRoot -Label "atomic rollback"
     Write-Pass "Skill digest, local drift refusal, force reset, and atomic rollback"
 
-    $legacySkillRoot = Join-Path $smokeRoot "legacy-skill-migration"
-    New-Item -ItemType Directory -Force -Path $legacySkillRoot | Out-Null
-    Copy-Item -Recurse -LiteralPath (Join-Path $repoRoot "skills\terminal-ops") -Destination $legacySkillRoot
-    $legacySkillMeta = Join-Path $legacySkillRoot "terminal-ops\.skill-meta.json"
-    $legacyTimestamp = (Get-Date).ToUniversalTime().ToString("o")
-    $legacyMetadata = @{
-        source = "local-checkout"; repo = $expectedRepo; branch = "main"; name = "terminal-ops"; agent = "claude"
-        installedAt = $legacyTimestamp; updatedAt = $legacyTimestamp
-    } | ConvertTo-Json -Depth 3
-    Write-Utf8NoBom -Path $legacySkillMeta -Text ($legacyMetadata + "`n")
-    $legacyMigration = Invoke-InstallerStep -Label "legacy Skill metadata migration" -InstallerArgs @(
-        "-Target", "claude", "-Type", "skill", "-Name", "terminal-ops", "-SourceDir", $repoRoot, "-InstallDir", $legacySkillRoot
-    )
-    Assert-Equal @($legacyMigration.Output | Where-Object { $_ -match '^OK\s+migrate-update Skill ' }).Count 1 "legacy Skill migration count"
-    Assert-OwnershipMetadata -Path $legacySkillMeta -ExpectedRepo $expectedRepo -ExpectedComponent "skill" -ExpectedName "terminal-ops" -ExpectedTarget "claude" -Label "legacy migrated Skill"
-
-    $licenseMigrationRoot = Join-Path $smokeRoot "legacy-license-migration"
-    New-Item -ItemType Directory -Force -Path $licenseMigrationRoot | Out-Null
-    $repoReadySource = Join-Path $repoRoot "skills\repo-ready"
-    Copy-Item -Recurse -LiteralPath $repoReadySource -Destination $licenseMigrationRoot
-    $legacyRepoReadyRoot = Join-Path $licenseMigrationRoot "repo-ready"
-    $legacyRepoReadyFile = Join-Path $legacyRepoReadyRoot "SKILL.md"
-    $currentRepoReadyText = Get-Content -Raw -LiteralPath (Join-Path $repoReadySource "SKILL.md")
-    $repoReadyFrontmatter = [regex]::Match($currentRepoReadyText, '\A---\r?\n[\s\S]*?\r?\n---(?<body>[\s\S]*)\z')
-    if (-not $repoReadyFrontmatter.Success) { throw "repo-ready source frontmatter fixture is invalid" }
-    $legacyRepoReadyText = @(
-        "---",
-        "name: repo-ready",
-        "description: Legacy repo-ready migration fixture.",
-        "source: `"$expectedRepo`"",
-        "license: MIT",
-        "---"
-    ) -join "`n"
-    $legacyRepoReadyText += $repoReadyFrontmatter.Groups['body'].Value
-    Write-Utf8NoBom -Path $legacyRepoReadyFile -Text $legacyRepoReadyText
-    $legacyRepoReadyMeta = Join-Path $legacyRepoReadyRoot ".skill-meta.json"
-    $legacyRepoReadyMetadata = @{
-        source = "local-checkout"; repo = $expectedRepo; branch = "main"; name = "repo-ready"; agent = "claude"
-        installedAt = $legacyTimestamp; updatedAt = $legacyTimestamp
-    } | ConvertTo-Json -Depth 3
-    Write-Utf8NoBom -Path $legacyRepoReadyMeta -Text ($legacyRepoReadyMetadata + "`n")
-    $licenseMigration = Invoke-InstallerStep -Label "legacy Skill nested previous-license migration" -InstallerArgs @(
-        "-Target", "claude", "-Type", "skill", "-Name", "repo-ready", "-SourceDir", $repoRoot, "-InstallDir", $licenseMigrationRoot
-    )
-    Assert-Equal @($licenseMigration.Output | Where-Object { $_ -match '^OK\s+migrate-update Skill ' }).Count 1 "legacy nested previous-license migration count"
-    Assert-FileContentMatches -ActualPath $legacyRepoReadyFile -ExpectedPath (Join-Path $repoReadySource "SKILL.md") -Label "nested previous-license migrated Skill"
-    Assert-OwnershipMetadata -Path $legacyRepoReadyMeta -ExpectedRepo $expectedRepo -ExpectedComponent "skill" -ExpectedName "repo-ready" -ExpectedTarget "claude" -Label "nested previous-license migrated Skill"
-    Assert-NoAtomicSkillArtifacts -DestinationRoot $licenseMigrationRoot -Label "nested previous-license migration"
-
     $agentOwnershipRoot = Join-Path $smokeRoot "agent-ownership-matrix"
     Invoke-InstallerStep -Label "Agent ownership matrix baseline install" -InstallerArgs @(
         "-Target", "claude", "-Type", "agent", "-Name", "code-reviewer", "-SourceDir", $repoRoot, "-InstallDir", $agentOwnershipRoot
     ) | Out-Null
     $ownedAgentFile = Join-Path $agentOwnershipRoot "code-reviewer.md"
-    $ownedAgentMeta = $ownedAgentFile + ".autoverse.json"
+    $ownedAgentMeta = $ownedAgentFile + ".craftroster.json"
     $ownedAgentBaselineMeta = Get-Content -Raw -LiteralPath $ownedAgentMeta
     $ownedAgentBaselineHash = Get-Sha256Hex -Path $ownedAgentFile
 
-    Write-Utf8NoBom -Path $ownedAgentMeta -Text $ownedAgentBaselineMeta
-    Set-MetadataString -Path $ownedAgentMeta -Field "repo" -Value $legacyRepo
-    $agentRepositoryMigration = Invoke-InstallerStep -Label "Agent legacy repository alias migration" -InstallerArgs @(
-        "-Target", "claude", "-Type", "agent", "-Name", "code-reviewer", "-SourceDir", $repoRoot, "-InstallDir", $agentOwnershipRoot
-    )
-    Assert-Equal @($agentRepositoryMigration.Output | Where-Object { $_ -match '^OK\s+migrate-update Agent ' }).Count 1 "Agent legacy repository migration count"
-    Assert-OwnershipMetadata -Path $ownedAgentMeta -ExpectedRepo $expectedRepo -ExpectedComponent "agent" -ExpectedName "code-reviewer" -ExpectedTarget "claude" -ExpectedId "code-reviewer" -ExpectedAdapter "claude" -Label "legacy-repository migrated Agent"
-
-    Write-Utf8NoBom -Path $ownedAgentMeta -Text $ownedAgentBaselineMeta
-    Set-MetadataString -Path $ownedAgentMeta -Field "repo" -Value $legacyRepo
-    Invoke-ExpectedFailure -Label "Agent explicit repository disables legacy alias" -ExpectedMessage "installed from '$legacyRepo'" -InstallerArgs @(
-        "-Target", "claude", "-Type", "agent", "-Name", "code-reviewer", "-Repo", $expectedRepo, "-SourceDir", $repoRoot, "-InstallDir", $agentOwnershipRoot
-    )
-    Assert-Equal (Get-Content -Raw -LiteralPath $ownedAgentMeta | ConvertFrom-Json).repo $legacyRepo "Agent explicit repository refusal preserved legacy owner"
-
     foreach ($case in @(
-        @{ Label = "id mismatch"; Field = "id"; Value = "debugger" },
-        @{ Label = "adapter mismatch"; Field = "adapter"; Value = "codex" }
+        @{ Label = "repo mismatch"; Field = "repo"; Value = "foreign/repository"; Expected = "installed from" },
+        @{ Label = "repo case mismatch"; Field = "repo"; Value = "hsinpu/craftroster"; Expected = "installed from" },
+        @{ Label = "stored input alias target"; Field = "target"; Value = "vscode"; Expected = "ownership metadata does not match" },
+        @{ Label = "id mismatch"; Field = "id"; Value = "debugger"; Expected = "ownership metadata does not match" },
+        @{ Label = "adapter mismatch"; Field = "adapter"; Value = "codex"; Expected = "ownership metadata does not match" }
     )) {
         Write-Utf8NoBom -Path $ownedAgentMeta -Text $ownedAgentBaselineMeta
         Set-MetadataString -Path $ownedAgentMeta -Field $case.Field -Value $case.Value
-        Invoke-ExpectedFailure -Label ("Agent ownership " + $case.Label) -ExpectedMessage "ownership metadata does not match" -InstallerArgs @(
+        Invoke-ExpectedFailure -Label ("Agent ownership " + $case.Label) -ExpectedMessage $case.Expected -InstallerArgs @(
             "-Target", "claude", "-Type", "agent", "-Name", "code-reviewer", "-SourceDir", $repoRoot, "-InstallDir", $agentOwnershipRoot
         )
         Assert-Equal (Get-Sha256Hex -Path $ownedAgentFile) $ownedAgentBaselineHash ("Agent ownership " + $case.Label + " content hash")
     }
-    Write-Pass "ownership metadata mismatch, malformed, force, and legacy migration matrix"
+    Write-Pass "ownership metadata mismatch, strict schema, malformed metadata, and force matrix"
 
     Invoke-InstallerStep -Label "Codex auto-delegation install" -InstallerArgs @(
         "-Target", "codex", "-Type", "agent", "-Name", "debugger", "-SourceDir", $repoRoot, "-EnableAutoDelegation"
@@ -778,7 +711,7 @@ try {
     Assert-Equal @($codexUpdate.Output | Where-Object { $_ -match '^OK\s+update Agent ' }).Count 1 "Codex Agent update count"
     $configPath = Join-Path $env:CODEX_HOME "config.toml"
     $configText = Get-Content -Raw -LiteralPath $configPath
-    Assert-Equal ([regex]::Matches($configText, '(?m)^# AUTOVERSE_AUTO_DELEGATION_START\s*$').Count) 1 "Codex auto-delegation block count"
+    Assert-Equal ([regex]::Matches($configText, '(?m)^# CRAFTROSTER_AUTO_DELEGATION_START\s*$').Count) 1 "Codex auto-delegation block count"
     if (-not (Test-Path -LiteralPath (Join-Path $env:CODEX_HOME "agents\debugger.toml") -PathType Leaf)) {
         throw "Codex Agent was not installed in the isolated CODEX_HOME"
     }

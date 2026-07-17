@@ -7,7 +7,6 @@ fail() { printf 'FAIL %s\n' "$1" >&2; exit 1; }
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 INSTALLER="$REPO_ROOT/scripts/install.sh"
 EXPECTED_REPO="HsinPu/CraftRoster"
-LEGACY_REPO="HsinPu/Autoverse-Ai-Agent-Skills"
 EXPECTED_SKILLS="$(node -e "console.log(require(process.argv[1]).skills.length)" "$REPO_ROOT/skills.json")"
 EXPECTED_AGENTS="$(node -e "console.log(require(process.argv[1]).agents.length)" "$REPO_ROOT/agents.json")"
 
@@ -16,7 +15,7 @@ if [[ "$#" -gt 1 ]]; then
 fi
 
 case "${1:-}" in
-  "") SMOKE_MODE="${AUTOVERSE_SMOKE_MODE:-full}" ;;
+  "") SMOKE_MODE="${CRAFTROSTER_SMOKE_MODE:-full}" ;;
   --full) SMOKE_MODE="full" ;;
   --quick) SMOKE_MODE="quick" ;;
   *) fail "Unknown option: $1. Usage: scripts/smoke-install.sh [--full|--quick]" ;;
@@ -35,36 +34,36 @@ case "$SMOKE_MODE" in
     EXPECTED_PROJECT_SKILLS=1
     EXPECTED_PROJECT_AGENTS=1
     ;;
-  *) fail "AUTOVERSE_SMOKE_MODE must be full or quick" ;;
+  *) fail "CRAFTROSTER_SMOKE_MODE must be full or quick" ;;
 esac
 TEMP_BASE="$(cd "${TMPDIR:-/tmp}" && pwd -P)"
-SMOKE_ROOT="$(mktemp -d "$TEMP_BASE/autoverse-install-smoke-XXXXXXXX")"
+SMOKE_ROOT="$(mktemp -d "$TEMP_BASE/craftroster-install-smoke-XXXXXXXX")"
 PROJECT_ROOT="$SMOKE_ROOT/project"
 LAST_OUTPUT=""
 ORIGINAL_TEST_MODE_SET=0
 ORIGINAL_TEST_MODE=""
 ORIGINAL_TEST_FAULT_SET=0
 ORIGINAL_TEST_FAULT=""
-if [[ "${AUTOVERSE_INSTALL_TEST_MODE+set}" == "set" ]]; then
+if [[ "${CRAFTROSTER_INSTALL_TEST_MODE+set}" == "set" ]]; then
   ORIGINAL_TEST_MODE_SET=1
-  ORIGINAL_TEST_MODE="$AUTOVERSE_INSTALL_TEST_MODE"
+  ORIGINAL_TEST_MODE="$CRAFTROSTER_INSTALL_TEST_MODE"
 fi
-if [[ "${AUTOVERSE_INSTALL_TEST_FAULT+set}" == "set" ]]; then
+if [[ "${CRAFTROSTER_INSTALL_TEST_FAULT+set}" == "set" ]]; then
   ORIGINAL_TEST_FAULT_SET=1
-  ORIGINAL_TEST_FAULT="$AUTOVERSE_INSTALL_TEST_FAULT"
+  ORIGINAL_TEST_FAULT="$CRAFTROSTER_INSTALL_TEST_FAULT"
 fi
-unset AUTOVERSE_INSTALL_TEST_MODE AUTOVERSE_INSTALL_TEST_FAULT
+unset CRAFTROSTER_INSTALL_TEST_MODE CRAFTROSTER_INSTALL_TEST_FAULT
 
 restore_test_environment() {
   if [[ "$ORIGINAL_TEST_MODE_SET" -eq 1 ]]; then
-    export AUTOVERSE_INSTALL_TEST_MODE="$ORIGINAL_TEST_MODE"
+    export CRAFTROSTER_INSTALL_TEST_MODE="$ORIGINAL_TEST_MODE"
   else
-    unset AUTOVERSE_INSTALL_TEST_MODE
+    unset CRAFTROSTER_INSTALL_TEST_MODE
   fi
   if [[ "$ORIGINAL_TEST_FAULT_SET" -eq 1 ]]; then
-    export AUTOVERSE_INSTALL_TEST_FAULT="$ORIGINAL_TEST_FAULT"
+    export CRAFTROSTER_INSTALL_TEST_FAULT="$ORIGINAL_TEST_FAULT"
   else
-    unset AUTOVERSE_INSTALL_TEST_FAULT
+    unset CRAFTROSTER_INSTALL_TEST_FAULT
   fi
 }
 
@@ -72,7 +71,7 @@ cleanup() {
   local resolved
   resolved="$(cd "$SMOKE_ROOT" 2>/dev/null && pwd -P || true)"
   case "$resolved" in
-    "$TEMP_BASE"/autoverse-install-smoke-*) ;;
+    "$TEMP_BASE"/craftroster-install-smoke-*) ;;
     "") return ;;
     *) printf 'Refusing to clean unexpected smoke root: %s\n' "$resolved" >&2; return 1 ;;
   esac
@@ -215,7 +214,7 @@ walk(root);
 relativePaths.sort((left, right) => Buffer.compare(Buffer.from(left), Buffer.from(right)));
 
 const hash = crypto.createHash('sha256');
-hash.update(Buffer.from('autoverse-skill-content-v1\0'));
+hash.update(Buffer.from('craftroster-skill-content-v1\0'));
 for (const relativePath of relativePaths) {
   const content = fs.readFileSync(path.join(root, ...relativePath.split('/')));
   hash.update(Buffer.from(relativePath));
@@ -247,7 +246,7 @@ assert_skill_profile() {
 
 assert_agent_profile() {
   local installed_file="$1" agent_name="$2" ownership_target="$3" adapter="$4" label="$5"
-  assert_metadata "$installed_file.autoverse.json" "agent" "$agent_name" "$ownership_target" "$adapter" "$label"
+  assert_metadata "$installed_file.craftroster.json" "agent" "$agent_name" "$ownership_target" "$adapter" "$label"
   local suffix="${installed_file##*/$agent_name}"
   cmp -s "$REPO_ROOT/adapters/$adapter/$agent_name$suffix" "$installed_file" ||
     fail "$label Agent content does not match the $adapter adapter"
@@ -290,16 +289,16 @@ expect_failure "Bash strict repository coordinate" "Invalid GitHub repository" \
   --target codex --type skill --name terminal-ops --repo owner/repo/extra --source-dir "$REPO_ROOT" --dry-run
 expect_failure "Bash strict branch name" "Invalid branch" \
   --target codex --type skill --name terminal-ops --branch 'main branch' --source-dir "$REPO_ROOT" --dry-run
-export AUTOVERSE_INSTALL_TEST_FAULT=skill-commit-after-backup
-expect_failure "Bash fault injection requires test gate" "requires AUTOVERSE_INSTALL_TEST_MODE=enabled" \
+export CRAFTROSTER_INSTALL_TEST_FAULT=skill-commit-after-backup
+expect_failure "Bash fault injection requires test gate" "requires CRAFTROSTER_INSTALL_TEST_MODE=enabled" \
   --target codex --type skill --name terminal-ops --source-dir "$REPO_ROOT" --dry-run
-unset AUTOVERSE_INSTALL_TEST_FAULT
-export AUTOVERSE_INSTALL_TEST_MODE=true
+unset CRAFTROSTER_INSTALL_TEST_FAULT
+export CRAFTROSTER_INSTALL_TEST_MODE=true
 expect_failure "Bash test gate has strict value" "must be unset or exactly 'enabled'" \
   --target codex --type skill --name terminal-ops --source-dir "$REPO_ROOT" --dry-run
-unset AUTOVERSE_INSTALL_TEST_MODE
+unset CRAFTROSTER_INSTALL_TEST_MODE
 
-CANONICAL_DIGEST_EXPECTED='3bb91f7d0ae1482c6e89f568675d98fc1c8b4e6e8bbb35314de43996a96a37b4'
+CANONICAL_DIGEST_EXPECTED='b2554ea43bb23e6a7765c32462897815f250cd749467357ddf4ac94478fec3dc'
 CANONICAL_SOURCE_ROOT="$SMOKE_ROOT/canonical-digest-source"
 CANONICAL_SKILL_ROOT="$CANONICAL_SOURCE_ROOT/skills/canonical-digest-fixture"
 CANONICAL_DESTINATION_ROOT="$SMOKE_ROOT/canonical-digest-destination"
@@ -338,7 +337,7 @@ PROFILE_SUFFIXES=('.toml' '.md' '.md' '.agent.md' '.md')
 PROFILE_ADAPTERS=('codex' 'claude' 'cursor' 'copilot' 'opencode')
 for ((index = 0; index < ${#PROFILE_ROOTS[@]}; index++)); do
   assert_equal "$(count_profile_files "${PROFILE_ROOTS[$index]}" "${PROFILE_PATTERNS[$index]}")" "$EXPECTED_PROJECT_AGENTS" "Agent profile $index count"
-  assert_equal "$(count_profile_files "${PROFILE_ROOTS[$index]}" '*.autoverse.json')" "$EXPECTED_PROJECT_AGENTS" "Agent profile $index metadata count"
+  assert_equal "$(count_profile_files "${PROFILE_ROOTS[$index]}" '*.craftroster.json')" "$EXPECTED_PROJECT_AGENTS" "Agent profile $index metadata count"
   assert_agent_profile \
     "${PROFILE_ROOTS[$index]}/code-reviewer${PROFILE_SUFFIXES[$index]}" \
     "code-reviewer" \
@@ -386,7 +385,7 @@ expect_failure "project Agent ownership collision" "no matching CraftRoster meta
   --target project --type agent --name code-reviewer --source-dir "$REPO_ROOT" --dir "$AGENT_COLLISION_ROOT"
 assert_equal "$(cksum < "$AGENT_COLLISION_FILE")" "$AGENT_COLLISION_CHECKSUM" "foreign Agent sentinel checksum"
 assert_equal "$(cat "$AGENT_COLLISION_FILE")" "$AGENT_SENTINEL" "foreign Agent sentinel content"
-[[ ! -e "$AGENT_COLLISION_FILE.autoverse.json" ]] || fail "Agent collision added ownership metadata to foreign content"
+[[ ! -e "$AGENT_COLLISION_FILE.craftroster.json" ]] || fail "Agent collision added ownership metadata to foreign content"
 for partial in \
   '.codex/agents/code-reviewer.toml' \
   '.claude/agents/code-reviewer.md' \
@@ -404,22 +403,9 @@ OWNED_SKILL_META="$OWNED_SKILL_ROOT/.skill-meta.json"
 OWNED_SKILL_BASELINE_META="$(cat "$OWNED_SKILL_META")"
 OWNED_SKILL_BASELINE_CHECKSUM="$(cksum < "$OWNED_SKILL_FILE")"
 
-printf '%s\n' "$OWNED_SKILL_BASELINE_META" > "$OWNED_SKILL_META"
-mutate_json_string "$OWNED_SKILL_META" repo "$LEGACY_REPO"
-run_installer "Skill legacy repository alias migration" \
-  --target claude --type skill --name terminal-ops --source-dir "$REPO_ROOT" --dir "$SKILL_OWNERSHIP_ROOT"
-assert_equal "$(count_output_lines '^OK  migrate-update Skill ')" 1 "Skill legacy repository migration count"
-assert_skill_profile "$SKILL_OWNERSHIP_ROOT" terminal-ops claude "legacy-repository migrated Skill"
-
-printf '%s\n' "$OWNED_SKILL_BASELINE_META" > "$OWNED_SKILL_META"
-mutate_json_string "$OWNED_SKILL_META" repo "$LEGACY_REPO"
-expect_failure "Skill explicit repository disables legacy alias" "installed from '$LEGACY_REPO'" \
-  --target claude --type skill --name terminal-ops --repo "$EXPECTED_REPO" --source-dir "$REPO_ROOT" --dir "$SKILL_OWNERSHIP_ROOT"
-assert_equal "$(node -e 'console.log(JSON.parse(require("fs").readFileSync(process.argv[1], "utf8")).repo)' "$OWNED_SKILL_META")" "$LEGACY_REPO" "Skill explicit repository refusal preserved legacy owner"
-
-SKILL_METADATA_FIELDS=('repo' 'component' 'name' 'target')
-SKILL_METADATA_VALUES=('foreign/repository' 'agent' 'python-development' 'codex')
-SKILL_METADATA_MESSAGES=('installed from' 'ownership metadata does not match' 'ownership metadata does not match' 'ownership metadata does not match')
+SKILL_METADATA_FIELDS=('repo' 'component' 'name' 'target' 'contentSha256')
+SKILL_METADATA_VALUES=('foreign/repository' 'agent' 'python-development' 'codex' '')
+SKILL_METADATA_MESSAGES=('installed from' 'ownership metadata does not match' 'ownership metadata does not match' 'ownership metadata does not match' 'contentSha256 is not a valid lowercase 64-character SHA-256 digest')
 for ((index = 0; index < ${#SKILL_METADATA_FIELDS[@]}; index++)); do
   printf '%s\n' "$OWNED_SKILL_BASELINE_META" > "$OWNED_SKILL_META"
   mutate_json_string "$OWNED_SKILL_META" "${SKILL_METADATA_FIELDS[$index]}" "${SKILL_METADATA_VALUES[$index]}"
@@ -440,14 +426,14 @@ FORCE_INVALID_SKILL="$FORCE_INVALID_ROOT/terminal-ops/SKILL.md"
 FORCE_INVALID_META="$FORCE_INVALID_ROOT/terminal-ops/.skill-meta.json"
 printf '{\n' > "$FORCE_INVALID_META"
 FORCE_INVALID_SKILL_CHECKSUM="$(cksum < "$FORCE_INVALID_SKILL")"
-export AUTOVERSE_INSTALL_TEST_MODE=enabled
-export AUTOVERSE_INSTALL_TEST_FAULT=skill-force-invalid-metadata-changes-after-recheck
+export CRAFTROSTER_INSTALL_TEST_MODE=enabled
+export CRAFTROSTER_INSTALL_TEST_FAULT=skill-force-invalid-metadata-changes-after-recheck
 expect_failure "forced malformed Skill metadata race" "ownership metadata, filesystem identity, or content changed" \
   --target claude --type skill --name terminal-ops --source-dir "$REPO_ROOT" --dir "$FORCE_INVALID_ROOT" --force
-unset AUTOVERSE_INSTALL_TEST_MODE AUTOVERSE_INSTALL_TEST_FAULT
+unset CRAFTROSTER_INSTALL_TEST_MODE CRAFTROSTER_INSTALL_TEST_FAULT
 assert_equal "$(cksum < "$FORCE_INVALID_SKILL")" "$FORCE_INVALID_SKILL_CHECKSUM" "forced malformed metadata race Skill checksum"
 grep -Fq 'test-only malformed metadata newcomer mutation' "$FORCE_INVALID_META" || fail "forced malformed metadata race removed its newcomer mutation"
-if find "$FORCE_INVALID_ROOT" -mindepth 1 -maxdepth 1 -name '.autoverse-skill-*' -print | grep -q .; then
+if find "$FORCE_INVALID_ROOT" -mindepth 1 -maxdepth 1 -name '.craftroster-skill-*' -print | grep -q .; then
   fail "forced malformed metadata race left transaction residue"
 fi
 
@@ -457,15 +443,15 @@ cp -R "$REPO_ROOT/skills/terminal-ops" "$FORCE_MISSING_ROOT/"
 FORCE_MISSING_SKILL="$FORCE_MISSING_ROOT/terminal-ops/SKILL.md"
 FORCE_MISSING_META="$FORCE_MISSING_ROOT/terminal-ops/.skill-meta.json"
 FORCE_MISSING_SKILL_CHECKSUM="$(cksum < "$FORCE_MISSING_SKILL")"
-export AUTOVERSE_INSTALL_TEST_MODE=enabled
-export AUTOVERSE_INSTALL_TEST_FAULT=skill-force-missing-metadata-appears-after-recheck
+export CRAFTROSTER_INSTALL_TEST_MODE=enabled
+export CRAFTROSTER_INSTALL_TEST_FAULT=skill-force-missing-metadata-appears-after-recheck
 expect_failure "forced missing Skill metadata appearance race" "ownership metadata, filesystem identity, or content changed" \
   --target claude --type skill --name terminal-ops --source-dir "$REPO_ROOT" --dir "$FORCE_MISSING_ROOT" --force
-unset AUTOVERSE_INSTALL_TEST_MODE AUTOVERSE_INSTALL_TEST_FAULT
+unset CRAFTROSTER_INSTALL_TEST_MODE CRAFTROSTER_INSTALL_TEST_FAULT
 assert_equal "$(cksum < "$FORCE_MISSING_SKILL")" "$FORCE_MISSING_SKILL_CHECKSUM" "forced missing metadata race Skill checksum"
 [[ -f "$FORCE_MISSING_META" && ! -L "$FORCE_MISSING_META" ]] || fail "forced missing metadata race did not preserve the newcomer metadata"
 assert_equal "$(node -e 'console.log(JSON.parse(require("fs").readFileSync(process.argv[1], "utf8")).repo)' "$FORCE_MISSING_META")" "foreign/repository" "forced missing metadata race newcomer owner"
-if find "$FORCE_MISSING_ROOT" -mindepth 1 -maxdepth 1 -name '.autoverse-skill-*' -print | grep -q .; then
+if find "$FORCE_MISSING_ROOT" -mindepth 1 -maxdepth 1 -name '.craftroster-skill-*' -print | grep -q .; then
   fail "forced missing metadata race left transaction residue"
 fi
 
@@ -491,15 +477,15 @@ assert_skill_profile "$SKILL_OWNERSHIP_ROOT" terminal-ops claude "drift-reset Sk
 ROLLBACK_SKILL_CHECKSUM="$(cksum < "$OWNED_SKILL_FILE")"
 ROLLBACK_META_CHECKSUM="$(cksum < "$OWNED_SKILL_META")"
 ROLLBACK_META_CONTENT="$(cat "$OWNED_SKILL_META")"
-export AUTOVERSE_INSTALL_TEST_MODE=enabled
-export AUTOVERSE_INSTALL_TEST_FAULT=skill-commit-after-backup
+export CRAFTROSTER_INSTALL_TEST_MODE=enabled
+export CRAFTROSTER_INSTALL_TEST_FAULT=skill-commit-after-backup
 expect_failure "Skill atomic rollback after backup" "Injected test-only Skill commit failure after backup" \
   --target claude --type skill --name terminal-ops --source-dir "$REPO_ROOT" --dir "$SKILL_OWNERSHIP_ROOT"
-unset AUTOVERSE_INSTALL_TEST_MODE AUTOVERSE_INSTALL_TEST_FAULT
+unset CRAFTROSTER_INSTALL_TEST_MODE CRAFTROSTER_INSTALL_TEST_FAULT
 assert_equal "$(cksum < "$OWNED_SKILL_FILE")" "$ROLLBACK_SKILL_CHECKSUM" "Skill rollback content checksum"
 assert_equal "$(cksum < "$OWNED_SKILL_META")" "$ROLLBACK_META_CHECKSUM" "Skill rollback metadata checksum"
 assert_skill_profile "$SKILL_OWNERSHIP_ROOT" terminal-ops claude "rolled-back Skill"
-if find "$SKILL_OWNERSHIP_ROOT" -mindepth 1 -maxdepth 1 -name '.autoverse-skill-*' -print | grep -q .; then
+if find "$SKILL_OWNERSHIP_ROOT" -mindepth 1 -maxdepth 1 -name '.craftroster-skill-*' -print | grep -q .; then
   fail "Skill rollback left a staging or backup directory"
 fi
 
@@ -509,22 +495,22 @@ run_installer "Skill backup capture race baseline install" \
 SKILL_CAPTURE_TARGET="$SKILL_CAPTURE_RACE_ROOT/terminal-ops"
 SKILL_CAPTURE_CONTENT_CHECKSUM="$(cksum < "$SKILL_CAPTURE_TARGET/SKILL.md")"
 SKILL_CAPTURE_META_CHECKSUM="$(cksum < "$SKILL_CAPTURE_TARGET/.skill-meta.json")"
-export AUTOVERSE_INSTALL_TEST_MODE=enabled
-export AUTOVERSE_INSTALL_TEST_FAULT=skill-backup-capture-destination-race-portable-mv
+export CRAFTROSTER_INSTALL_TEST_MODE=enabled
+export CRAFTROSTER_INSTALL_TEST_FAULT=skill-backup-capture-destination-race-portable-mv
 expect_failure "Skill backup capture portable-mv race" "preserved the source for manual recovery" \
   --target claude --type skill --name terminal-ops --source-dir "$REPO_ROOT" --dir "$SKILL_CAPTURE_RACE_ROOT"
-unset AUTOVERSE_INSTALL_TEST_MODE AUTOVERSE_INSTALL_TEST_FAULT
+unset CRAFTROSTER_INSTALL_TEST_MODE CRAFTROSTER_INSTALL_TEST_FAULT
 [[ ! -e "$SKILL_CAPTURE_TARGET" ]] || fail "Skill backup capture race unexpectedly recreated the exact destination"
-SKILL_CAPTURE_CONTAINER="$(find "$SKILL_CAPTURE_RACE_ROOT" -mindepth 1 -maxdepth 1 -type d -name '.autoverse-skill-backup.*' -print)"
+SKILL_CAPTURE_CONTAINER="$(find "$SKILL_CAPTURE_RACE_ROOT" -mindepth 1 -maxdepth 1 -type d -name '.craftroster-skill-backup.*' -print)"
 assert_equal "$(printf '%s\n' "$SKILL_CAPTURE_CONTAINER" | sed '/^$/d' | wc -l | tr -d ' ')" 1 "Skill backup capture race container count"
 SKILL_CAPTURE_WRAPPER="$SKILL_CAPTURE_CONTAINER/original"
 SKILL_CAPTURE_RECOVERY="$SKILL_CAPTURE_WRAPPER/terminal-ops"
-[[ -f "$SKILL_CAPTURE_WRAPPER/AUTOVERSE-NEWCOMER.txt" ]] || fail "Skill backup capture race removed the destination newcomer"
+[[ -f "$SKILL_CAPTURE_WRAPPER/CRAFTROSTER-NEWCOMER.txt" ]] || fail "Skill backup capture race removed the destination newcomer"
 [[ -d "$SKILL_CAPTURE_RECOVERY" && ! -L "$SKILL_CAPTURE_RECOVERY" ]] || fail "Skill backup capture race did not preserve nested original Skill"
 assert_equal "$(cksum < "$SKILL_CAPTURE_RECOVERY/SKILL.md")" "$SKILL_CAPTURE_CONTENT_CHECKSUM" "Skill backup capture race original content checksum"
 assert_equal "$(cksum < "$SKILL_CAPTURE_RECOVERY/.skill-meta.json")" "$SKILL_CAPTURE_META_CHECKSUM" "Skill backup capture race original metadata checksum"
 mv "$SKILL_CAPTURE_RECOVERY" "$SKILL_CAPTURE_TARGET"
-rm "$SKILL_CAPTURE_WRAPPER/AUTOVERSE-NEWCOMER.txt"
+rm "$SKILL_CAPTURE_WRAPPER/CRAFTROSTER-NEWCOMER.txt"
 rmdir "$SKILL_CAPTURE_WRAPPER" "$SKILL_CAPTURE_CONTAINER"
 assert_skill_profile "$SKILL_CAPTURE_RACE_ROOT" terminal-ops claude "manually recovered Skill capture race"
 
@@ -534,36 +520,36 @@ run_installer "Skill backup restore race baseline install" \
 SKILL_RESTORE_TARGET="$SKILL_RESTORE_RACE_ROOT/terminal-ops"
 SKILL_RESTORE_CONTENT_CHECKSUM="$(cksum < "$SKILL_RESTORE_TARGET/SKILL.md")"
 SKILL_RESTORE_META_CHECKSUM="$(cksum < "$SKILL_RESTORE_TARGET/.skill-meta.json")"
-export AUTOVERSE_INSTALL_TEST_MODE=enabled
-export AUTOVERSE_INSTALL_TEST_FAULT=skill-backup-restore-destination-race-portable-mv
+export CRAFTROSTER_INSTALL_TEST_MODE=enabled
+export CRAFTROSTER_INSTALL_TEST_FAULT=skill-backup-restore-destination-race-portable-mv
 expect_failure "Skill backup restore portable-mv race" "original Skill could not be restored" \
   --target claude --type skill --name terminal-ops --source-dir "$REPO_ROOT" --dir "$SKILL_RESTORE_RACE_ROOT"
-unset AUTOVERSE_INSTALL_TEST_MODE AUTOVERSE_INSTALL_TEST_FAULT
-[[ -f "$SKILL_RESTORE_TARGET/AUTOVERSE-NEWCOMER.txt" ]] || fail "Skill backup restore race removed the destination newcomer"
+unset CRAFTROSTER_INSTALL_TEST_MODE CRAFTROSTER_INSTALL_TEST_FAULT
+[[ -f "$SKILL_RESTORE_TARGET/CRAFTROSTER-NEWCOMER.txt" ]] || fail "Skill backup restore race removed the destination newcomer"
 SKILL_RESTORE_RECOVERY="$SKILL_RESTORE_TARGET/original"
 [[ -d "$SKILL_RESTORE_RECOVERY" && ! -L "$SKILL_RESTORE_RECOVERY" ]] || fail "Skill backup restore race did not preserve nested original Skill"
 assert_equal "$(cksum < "$SKILL_RESTORE_RECOVERY/SKILL.md")" "$SKILL_RESTORE_CONTENT_CHECKSUM" "Skill backup restore race original content checksum"
 assert_equal "$(cksum < "$SKILL_RESTORE_RECOVERY/.skill-meta.json")" "$SKILL_RESTORE_META_CHECKSUM" "Skill backup restore race original metadata checksum"
-if find "$SKILL_RESTORE_RACE_ROOT" -mindepth 1 -maxdepth 1 -type d -name '.autoverse-skill-stage.*' -print | grep -q .; then
+if find "$SKILL_RESTORE_RACE_ROOT" -mindepth 1 -maxdepth 1 -type d -name '.craftroster-skill-stage.*' -print | grep -q .; then
   fail "Skill backup restore race left transaction staging content"
 fi
-SKILL_RESTORE_CONTAINER="$(find "$SKILL_RESTORE_RACE_ROOT" -mindepth 1 -maxdepth 1 -type d -name '.autoverse-skill-backup.*' -print)"
+SKILL_RESTORE_CONTAINER="$(find "$SKILL_RESTORE_RACE_ROOT" -mindepth 1 -maxdepth 1 -type d -name '.craftroster-skill-backup.*' -print)"
 assert_equal "$(printf '%s\n' "$SKILL_RESTORE_CONTAINER" | sed '/^$/d' | wc -l | tr -d ' ')" 1 "Skill backup restore race container count"
 SKILL_RESTORE_TEMP="$SKILL_RESTORE_RACE_ROOT/.manual-recovery-terminal-ops"
 mv "$SKILL_RESTORE_RECOVERY" "$SKILL_RESTORE_TEMP"
-rm "$SKILL_RESTORE_TARGET/AUTOVERSE-NEWCOMER.txt"
+rm "$SKILL_RESTORE_TARGET/CRAFTROSTER-NEWCOMER.txt"
 rmdir "$SKILL_RESTORE_TARGET"
 mv "$SKILL_RESTORE_TEMP" "$SKILL_RESTORE_TARGET"
 rmdir "$SKILL_RESTORE_CONTAINER"
 assert_skill_profile "$SKILL_RESTORE_RACE_ROOT" terminal-ops claude "manually recovered Skill restore race"
 
-export AUTOVERSE_INSTALL_TEST_MODE=enabled
-export AUTOVERSE_INSTALL_TEST_FAULT=skill-backup-metadata-changes-after-recheck
+export CRAFTROSTER_INSTALL_TEST_MODE=enabled
+export CRAFTROSTER_INSTALL_TEST_FAULT=skill-backup-metadata-changes-after-recheck
 expect_failure "Skill ownership marker race preserves changed backup" "captured Skill ownership metadata or content changed" \
   --target claude --type skill --name terminal-ops --source-dir "$REPO_ROOT" --dir "$SKILL_OWNERSHIP_ROOT"
-unset AUTOVERSE_INSTALL_TEST_MODE AUTOVERSE_INSTALL_TEST_FAULT
+unset CRAFTROSTER_INSTALL_TEST_MODE CRAFTROSTER_INSTALL_TEST_FAULT
 [[ ! -e "$OWNED_SKILL_ROOT" ]] || fail "Skill ownership marker race unexpectedly recreated the destination"
-METADATA_RACE_BACKUP_CONTAINER="$(find "$SKILL_OWNERSHIP_ROOT" -mindepth 1 -maxdepth 1 -type d -name '.autoverse-skill-backup.*' -print)"
+METADATA_RACE_BACKUP_CONTAINER="$(find "$SKILL_OWNERSHIP_ROOT" -mindepth 1 -maxdepth 1 -type d -name '.craftroster-skill-backup.*' -print)"
 assert_equal "$(printf '%s\n' "$METADATA_RACE_BACKUP_CONTAINER" | sed '/^$/d' | wc -l | tr -d ' ')" 1 "Skill ownership marker race retained backup count"
 METADATA_RACE_BACKUP_ROOT="$METADATA_RACE_BACKUP_CONTAINER/original"
 [[ -d "$METADATA_RACE_BACKUP_ROOT" ]] || fail "Skill ownership marker race did not preserve its backup"
@@ -575,39 +561,39 @@ rmdir "$METADATA_RACE_BACKUP_CONTAINER"
 assert_skill_profile "$SKILL_OWNERSHIP_ROOT" terminal-ops claude "manually recovered ownership marker race fixture"
 
 FRESH_POST_MOVE_ROOT="$SMOKE_ROOT/fresh-post-move"
-export AUTOVERSE_INSTALL_TEST_MODE=enabled
-export AUTOVERSE_INSTALL_TEST_FAULT=skill-fresh-post-move-failure
+export CRAFTROSTER_INSTALL_TEST_MODE=enabled
+export CRAFTROSTER_INSTALL_TEST_FAULT=skill-fresh-post-move-failure
 expect_failure "fresh Skill post-move failure removes exact transaction" "Injected test-only fresh Skill post-move verification failure" \
   --target claude --type skill --name terminal-ops --source-dir "$REPO_ROOT" --dir "$FRESH_POST_MOVE_ROOT"
-unset AUTOVERSE_INSTALL_TEST_MODE AUTOVERSE_INSTALL_TEST_FAULT
+unset CRAFTROSTER_INSTALL_TEST_MODE CRAFTROSTER_INSTALL_TEST_FAULT
 [[ ! -e "$FRESH_POST_MOVE_ROOT/terminal-ops" ]] || fail "fresh Skill post-move failure retained exact transaction content"
-if find "$FRESH_POST_MOVE_ROOT" -mindepth 1 -maxdepth 1 -name '.autoverse-skill-*' -print | grep -q .; then
+if find "$FRESH_POST_MOVE_ROOT" -mindepth 1 -maxdepth 1 -name '.craftroster-skill-*' -print | grep -q .; then
   fail "fresh Skill post-move failure left transaction residue"
 fi
 
 FRESH_NEWCOMER_ROOT="$SMOKE_ROOT/fresh-post-move-newcomer"
-export AUTOVERSE_INSTALL_TEST_MODE=enabled
-export AUTOVERSE_INSTALL_TEST_FAULT=skill-fresh-post-move-newcomer
+export CRAFTROSTER_INSTALL_TEST_MODE=enabled
+export CRAFTROSTER_INSTALL_TEST_FAULT=skill-fresh-post-move-newcomer
 expect_failure "fresh Skill post-move newcomer is preserved" "Manual recovery required" \
   --target claude --type skill --name terminal-ops --source-dir "$REPO_ROOT" --dir "$FRESH_NEWCOMER_ROOT"
-unset AUTOVERSE_INSTALL_TEST_MODE AUTOVERSE_INSTALL_TEST_FAULT
+unset CRAFTROSTER_INSTALL_TEST_MODE CRAFTROSTER_INSTALL_TEST_FAULT
 [[ -f "$FRESH_NEWCOMER_ROOT/terminal-ops/SKILL.md" ]] || fail "fresh Skill post-move newcomer content was removed"
 assert_equal "$(node -e 'console.log(JSON.parse(require("fs").readFileSync(process.argv[1], "utf8")).repo)' "$FRESH_NEWCOMER_ROOT/terminal-ops/.skill-meta.json")" "foreign/repository" "fresh Skill post-move newcomer owner"
-if find "$FRESH_NEWCOMER_ROOT" -mindepth 1 -maxdepth 1 -name '.autoverse-skill-*' -print | grep -q .; then
+if find "$FRESH_NEWCOMER_ROOT" -mindepth 1 -maxdepth 1 -name '.craftroster-skill-*' -print | grep -q .; then
   fail "fresh Skill post-move newcomer test left transaction residue"
 fi
 
-export AUTOVERSE_INSTALL_TEST_MODE=enabled
-export AUTOVERSE_INSTALL_TEST_FAULT=skill-destination-appears-after-recheck-portable-mv
+export CRAFTROSTER_INSTALL_TEST_MODE=enabled
+export CRAFTROSTER_INSTALL_TEST_FAULT=skill-destination-appears-after-recheck-portable-mv
 expect_failure "Skill destination race preserves newcomer" "Manual recovery required" \
   --target claude --type skill --name terminal-ops --source-dir "$REPO_ROOT" --dir "$SKILL_OWNERSHIP_ROOT"
-unset AUTOVERSE_INSTALL_TEST_MODE AUTOVERSE_INSTALL_TEST_FAULT
-[[ -f "$OWNED_SKILL_ROOT/AUTOVERSE-NEWCOMER.txt" ]] || fail "Skill destination race removed the newcomer sentinel"
+unset CRAFTROSTER_INSTALL_TEST_MODE CRAFTROSTER_INSTALL_TEST_FAULT
+[[ -f "$OWNED_SKILL_ROOT/CRAFTROSTER-NEWCOMER.txt" ]] || fail "Skill destination race removed the newcomer sentinel"
 assert_equal "$(find "$OWNED_SKILL_ROOT" -mindepth 1 -maxdepth 1 -print | wc -l | tr -d ' ')" 1 "Skill portable-mv race newcomer entry count"
-if find "$OWNED_SKILL_ROOT" -mindepth 1 -type d -name '.autoverse-skill-stage.*' -print | grep -q .; then
+if find "$OWNED_SKILL_ROOT" -mindepth 1 -type d -name '.craftroster-skill-stage.*' -print | grep -q .; then
   fail "Skill portable-mv race left transaction staging content inside the newcomer"
 fi
-RACE_BACKUP_CONTAINER="$(find "$SKILL_OWNERSHIP_ROOT" -mindepth 1 -maxdepth 1 -type d -name '.autoverse-skill-backup.*' -print)"
+RACE_BACKUP_CONTAINER="$(find "$SKILL_OWNERSHIP_ROOT" -mindepth 1 -maxdepth 1 -type d -name '.craftroster-skill-backup.*' -print)"
 assert_equal "$(printf '%s\n' "$RACE_BACKUP_CONTAINER" | sed '/^$/d' | wc -l | tr -d ' ')" 1 "Skill destination race retained backup count"
 RACE_BACKUP_ROOT="$RACE_BACKUP_CONTAINER/original"
 [[ -d "$RACE_BACKUP_ROOT" ]] || fail "Skill destination race did not retain the original backup"
@@ -617,7 +603,7 @@ rm -rf "$OWNED_SKILL_ROOT"
 mv "$RACE_BACKUP_ROOT" "$OWNED_SKILL_ROOT"
 rmdir "$RACE_BACKUP_CONTAINER"
 assert_skill_profile "$SKILL_OWNERSHIP_ROOT" terminal-ops claude "manually recovered Skill race fixture"
-if find "$SKILL_OWNERSHIP_ROOT" -mindepth 1 -maxdepth 1 -name '.autoverse-skill-*' -print | grep -q .; then
+if find "$SKILL_OWNERSHIP_ROOT" -mindepth 1 -maxdepth 1 -name '.craftroster-skill-*' -print | grep -q .; then
   fail "Skill destination race cleanup left a staging or backup directory"
 fi
 
@@ -634,48 +620,13 @@ else
   log_pass "FIFO smoke skipped because this platform cannot create a FIFO"
 fi
 
-LEGACY_SKILL_ROOT="$SMOKE_ROOT/legacy-skill-migration"
-mkdir -p "$LEGACY_SKILL_ROOT"
-cp -R "$REPO_ROOT/skills/terminal-ops" "$LEGACY_SKILL_ROOT/"
-cat > "$LEGACY_SKILL_ROOT/terminal-ops/SKILL.md" <<'EOF'
----
-name: terminal-ops
-description: Legacy top-level provenance fixture.
-source: HsinPu/Autoverse-Ai-Agent-Skills
-license: Apache-2.0
----
-
-# Legacy Terminal Ops
-EOF
-LEGACY_SKILL_META="$LEGACY_SKILL_ROOT/terminal-ops/.skill-meta.json"
-LEGACY_TIMESTAMP="$(date -u '+%Y-%m-%dT%H:%M:%SZ')"
-printf '{\n  "source": "local-checkout",\n  "repo": "HsinPu/Autoverse-Ai-Agent-Skills",\n  "branch": "main",\n  "name": "terminal-ops",\n  "agent": "claude",\n  "installedAt": "%s",\n  "updatedAt": "%s"\n}\n' \
-  "$LEGACY_TIMESTAMP" "$LEGACY_TIMESTAMP" > "$LEGACY_SKILL_META"
-run_installer "legacy Skill metadata migration" \
-  --target claude --type skill --name terminal-ops --source-dir "$REPO_ROOT" --dir "$LEGACY_SKILL_ROOT"
-assert_equal "$(count_output_lines '^OK  migrate-update Skill ')" 1 "legacy Skill migration count"
-assert_skill_profile "$LEGACY_SKILL_ROOT" terminal-ops claude "legacy migrated Skill"
-
 AGENT_OWNERSHIP_ROOT="$SMOKE_ROOT/agent-ownership-matrix"
 run_installer "Agent ownership matrix baseline install" \
   --target claude --type agent --name code-reviewer --source-dir "$REPO_ROOT" --dir "$AGENT_OWNERSHIP_ROOT"
 OWNED_AGENT_FILE="$AGENT_OWNERSHIP_ROOT/code-reviewer.md"
-OWNED_AGENT_META="$OWNED_AGENT_FILE.autoverse.json"
+OWNED_AGENT_META="$OWNED_AGENT_FILE.craftroster.json"
 OWNED_AGENT_BASELINE_META="$(cat "$OWNED_AGENT_META")"
 OWNED_AGENT_BASELINE_CHECKSUM="$(cksum < "$OWNED_AGENT_FILE")"
-
-printf '%s\n' "$OWNED_AGENT_BASELINE_META" > "$OWNED_AGENT_META"
-mutate_json_string "$OWNED_AGENT_META" repo "$LEGACY_REPO"
-run_installer "Agent legacy repository alias migration" \
-  --target claude --type agent --name code-reviewer --source-dir "$REPO_ROOT" --dir "$AGENT_OWNERSHIP_ROOT"
-assert_equal "$(count_output_lines '^OK  migrate-update Agent ')" 1 "Agent legacy repository migration count"
-assert_agent_profile "$OWNED_AGENT_FILE" code-reviewer claude claude "legacy-repository migrated Agent"
-
-printf '%s\n' "$OWNED_AGENT_BASELINE_META" > "$OWNED_AGENT_META"
-mutate_json_string "$OWNED_AGENT_META" repo "$LEGACY_REPO"
-expect_failure "Agent explicit repository disables legacy alias" "installed from '$LEGACY_REPO'" \
-  --target claude --type agent --name code-reviewer --repo "$EXPECTED_REPO" --source-dir "$REPO_ROOT" --dir "$AGENT_OWNERSHIP_ROOT"
-assert_equal "$(node -e 'console.log(JSON.parse(require("fs").readFileSync(process.argv[1], "utf8")).repo)' "$OWNED_AGENT_META")" "$LEGACY_REPO" "Agent explicit repository refusal preserved legacy owner"
 
 AGENT_METADATA_FIELDS=('id' 'adapter')
 AGENT_METADATA_VALUES=('debugger' 'codex')
@@ -686,7 +637,7 @@ for ((index = 0; index < ${#AGENT_METADATA_FIELDS[@]}; index++)); do
     --target claude --type agent --name code-reviewer --source-dir "$REPO_ROOT" --dir "$AGENT_OWNERSHIP_ROOT"
   assert_equal "$(cksum < "$OWNED_AGENT_FILE")" "$OWNED_AGENT_BASELINE_CHECKSUM" "Agent ownership ${AGENT_METADATA_FIELDS[$index]} mismatch content checksum"
 done
-log_pass "ownership metadata mismatch, malformed, force, and legacy migration matrix"
+log_pass "ownership metadata mismatch, malformed, digest, and force matrix"
 
 GLOBAL_TARGETS=('codex' 'claude' 'cursor' 'vscode' 'copilot' 'opencode')
 GLOBAL_SKILL_NAMES=('terminal-ops' 'terminal-ops' 'terminal-ops' 'terminal-ops' 'python-development' 'terminal-ops')
@@ -753,19 +704,19 @@ export CODEX_HOME="$AUTO_CAPTURE_CODEX_HOME"
 mkdir -p "$CODEX_HOME"
 printf '%s\n' '# original capture-race config' 'model = "test-model"' > "$CODEX_HOME/config.toml"
 AUTO_CAPTURE_CONFIG_CHECKSUM="$(cksum < "$CODEX_HOME/config.toml")"
-export AUTOVERSE_INSTALL_TEST_MODE=enabled
-export AUTOVERSE_INSTALL_TEST_FAULT=auto-config-backup-capture-destination-race-portable-mv
+export CRAFTROSTER_INSTALL_TEST_MODE=enabled
+export CRAFTROSTER_INSTALL_TEST_FAULT=auto-config-backup-capture-destination-race-portable-mv
 expect_failure "auto-delegation config backup capture portable-mv race" "preserved the source for manual recovery" \
   --target codex --type agent --name debugger --source-dir "$REPO_ROOT" --enable-auto-delegation
-unset AUTOVERSE_INSTALL_TEST_MODE AUTOVERSE_INSTALL_TEST_FAULT
+unset CRAFTROSTER_INSTALL_TEST_MODE CRAFTROSTER_INSTALL_TEST_FAULT
 [[ ! -e "$CODEX_HOME/config.toml" ]] || fail "auto-delegation backup capture race unexpectedly recreated the config destination"
-AUTO_CAPTURE_BACKUP_DIR="$(find "$CODEX_HOME" -mindepth 1 -maxdepth 1 -type d -name 'config.toml.autoverse-backup-*' -print)"
+AUTO_CAPTURE_BACKUP_DIR="$(find "$CODEX_HOME" -mindepth 1 -maxdepth 1 -type d -name 'config.toml.craftroster-backup-*' -print)"
 assert_equal "$(printf '%s\n' "$AUTO_CAPTURE_BACKUP_DIR" | sed '/^$/d' | wc -l | tr -d ' ')" 1 "auto-delegation backup capture race directory count"
-[[ -f "$AUTO_CAPTURE_BACKUP_DIR/AUTOVERSE-NEWCOMER.txt" ]] || fail "auto-delegation backup capture race removed the backup destination newcomer"
+[[ -f "$AUTO_CAPTURE_BACKUP_DIR/CRAFTROSTER-NEWCOMER.txt" ]] || fail "auto-delegation backup capture race removed the backup destination newcomer"
 [[ -f "$AUTO_CAPTURE_BACKUP_DIR/config.toml" && ! -L "$AUTO_CAPTURE_BACKUP_DIR/config.toml" ]] || fail "auto-delegation backup capture race did not preserve nested original config"
 assert_equal "$(cksum < "$AUTO_CAPTURE_BACKUP_DIR/config.toml")" "$AUTO_CAPTURE_CONFIG_CHECKSUM" "auto-delegation backup capture original config checksum"
 mv "$AUTO_CAPTURE_BACKUP_DIR/config.toml" "$CODEX_HOME/config.toml"
-rm "$AUTO_CAPTURE_BACKUP_DIR/AUTOVERSE-NEWCOMER.txt"
+rm "$AUTO_CAPTURE_BACKUP_DIR/CRAFTROSTER-NEWCOMER.txt"
 rmdir "$AUTO_CAPTURE_BACKUP_DIR"
 
 AUTO_RESTORE_CODEX_HOME="$SMOKE_ROOT/auto-config-backup-restore-race"
@@ -773,18 +724,18 @@ export CODEX_HOME="$AUTO_RESTORE_CODEX_HOME"
 mkdir -p "$CODEX_HOME"
 printf '%s\n' '# original restore-race config' 'model = "test-model"' > "$CODEX_HOME/config.toml"
 AUTO_RESTORE_CONFIG_CHECKSUM="$(cksum < "$CODEX_HOME/config.toml")"
-export AUTOVERSE_INSTALL_TEST_MODE=enabled
-export AUTOVERSE_INSTALL_TEST_FAULT=auto-config-backup-restore-destination-race-portable-mv
+export CRAFTROSTER_INSTALL_TEST_MODE=enabled
+export CRAFTROSTER_INSTALL_TEST_FAULT=auto-config-backup-restore-destination-race-portable-mv
 expect_failure "auto-delegation config backup restore portable-mv race" "captured config remains at" \
   --target codex --type agent --name debugger --source-dir "$REPO_ROOT" --enable-auto-delegation
-unset AUTOVERSE_INSTALL_TEST_MODE AUTOVERSE_INSTALL_TEST_FAULT
-[[ -f "$CODEX_HOME/config.toml/AUTOVERSE-NEWCOMER.txt" ]] || fail "auto-delegation config restore race removed the destination newcomer"
-AUTO_RESTORE_RECOVERY="$(find "$CODEX_HOME/config.toml" -mindepth 1 -maxdepth 1 -type f ! -name 'AUTOVERSE-NEWCOMER.txt' -print)"
+unset CRAFTROSTER_INSTALL_TEST_MODE CRAFTROSTER_INSTALL_TEST_FAULT
+[[ -f "$CODEX_HOME/config.toml/CRAFTROSTER-NEWCOMER.txt" ]] || fail "auto-delegation config restore race removed the destination newcomer"
+AUTO_RESTORE_RECOVERY="$(find "$CODEX_HOME/config.toml" -mindepth 1 -maxdepth 1 -type f ! -name 'CRAFTROSTER-NEWCOMER.txt' -print)"
 assert_equal "$(printf '%s\n' "$AUTO_RESTORE_RECOVERY" | sed '/^$/d' | wc -l | tr -d ' ')" 1 "auto-delegation config restore recovery file count"
 assert_equal "$(cksum < "$AUTO_RESTORE_RECOVERY")" "$AUTO_RESTORE_CONFIG_CHECKSUM" "auto-delegation config restore original checksum"
 AUTO_RESTORE_TEMP="$CODEX_HOME/.manual-recovery-config.toml"
 mv "$AUTO_RESTORE_RECOVERY" "$AUTO_RESTORE_TEMP"
-rm "$CODEX_HOME/config.toml/AUTOVERSE-NEWCOMER.txt"
+rm "$CODEX_HOME/config.toml/CRAFTROSTER-NEWCOMER.txt"
 rmdir "$CODEX_HOME/config.toml"
 mv "$AUTO_RESTORE_TEMP" "$CODEX_HOME/config.toml"
 
@@ -794,7 +745,7 @@ run_installer "Codex auto-delegation install" \
 run_installer "Codex auto-delegation update" \
   --target codex --type agent --name debugger --source-dir "$REPO_ROOT" --enable-auto-delegation
 assert_equal "$(count_output_lines '^OK  update Agent ')" 1 "Codex Agent update count"
-assert_equal "$(grep -c '^# AUTOVERSE_AUTO_DELEGATION_START$' "$CODEX_HOME/config.toml")" 1 "Codex auto-delegation block count"
+assert_equal "$(grep -c '^# CRAFTROSTER_AUTO_DELEGATION_START$' "$CODEX_HOME/config.toml")" 1 "Codex auto-delegation block count"
 assert_agent_profile "$CODEX_HOME/agents/debugger.toml" "debugger" "codex" "codex" "Codex auto-delegation"
 assert_skill_profile "$CODEX_HOME/skills" "subagent-architecture" "codex" "Codex auto-delegation companion"
 

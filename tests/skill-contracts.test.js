@@ -144,7 +144,7 @@ test('ignores headings inside fenced examples', () => {
 });
 
 test('ignores machine contract markers inside fenced examples', () => {
-  const example = '```markdown\n<!-- AUTOVERSE_CONTRACT\n{ invalid json }\n-->\n```\n';
+  const example = '```markdown\n<!-- CRAFTROSTER_CONTRACT\n{ invalid json }\n-->\n```\n';
   assert.deepEqual(extractContractBlocks(example, 'fixture.md'), { blocks: [], errors: [] });
 });
 
@@ -253,11 +253,11 @@ test('rejects an unknown parent workflow and a one-way support edge', () => {
 test('rejects an invalid or duplicate machine contract marker', () => {
   const file = 'skills/figma-to-code/SKILL.md';
   const invalid = mutateDocument(file, '"version": 1,', '"version": nope,');
-  assert.match(joined(validateContractDocuments(invalid)), /AUTOVERSE_CONTRACT JSON is invalid/);
+  assert.match(joined(validateContractDocuments(invalid)), /CRAFTROSTER_CONTRACT JSON is invalid/);
 
-  const block = documents[file].match(/<!-- AUTOVERSE_CONTRACT[\s\S]*?-->/)[0];
+  const block = documents[file].match(/<!-- CRAFTROSTER_CONTRACT[\s\S]*?-->/)[0];
   const duplicate = { ...documents, [file]: `${documents[file]}\n${block}\n` };
-  assert.match(joined(validateContractDocuments(duplicate)), /duplicate AUTOVERSE_CONTRACT part/);
+  assert.match(joined(validateContractDocuments(duplicate)), /duplicate CRAFTROSTER_CONTRACT part/);
 });
 
 test('rejects a missing Figma screenshot-only fallback row', () => {

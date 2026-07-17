@@ -18,9 +18,6 @@ param(
 
 $ErrorActionPreference = "Stop"
 $ProgressPreference = "SilentlyContinue"
-$script:CanonicalRepository = "HsinPu/CraftRoster"
-$script:LegacyRepository = "HsinPu/Autoverse-Ai-Agent-Skills"
-$script:AllowLegacyRepositoryAlias = -not $PSBoundParameters.ContainsKey("Repo")
 
 try { [Console]::OutputEncoding = [System.Text.UTF8Encoding]::new() } catch {}
 
@@ -74,17 +71,15 @@ function Get-HomeDir {
 
 function Test-OwnershipRepositoryMatch {
     param([string]$ExistingRepo, [string]$ExpectedRepo)
-    if ($ExistingRepo -eq $ExpectedRepo) { return $true }
-    return $script:AllowLegacyRepositoryAlias `
-        -and $ExpectedRepo -ceq $script:CanonicalRepository `
-        -and $ExistingRepo -ceq $script:LegacyRepository
+    return $ExistingRepo -ceq $ExpectedRepo
 }
 
-function Test-OwnershipRepositoryNeedsMigration {
-    param([string]$ExistingRepo, [string]$ExpectedRepo)
-    return $script:AllowLegacyRepositoryAlias `
-        -and $ExpectedRepo -ceq $script:CanonicalRepository `
-        -and $ExistingRepo -ceq $script:LegacyRepository
+function Get-ExactMetadataString {
+    param($Metadata, [string]$Name)
+    if (-not $Metadata) { return $null }
+    $property = $Metadata.PSObject.Properties | Where-Object { $_.Name -ceq $Name } | Select-Object -First 1
+    if (-not $property -or $property.Value -isnot [string]) { return $null }
+    return $property.Value
 }
 
 function Get-CodexHome {
@@ -93,54 +88,7 @@ function Get-CodexHome {
 }
 
 function Get-CodexSkillRoot {
-    param(
-        [string]$SkillName,
-        [string]$RepoName,
-        [string]$IncomingSkillFile
-    )
-    $homeDir = Get-HomeDir
-    $canonicalRoot = Join-Path (Get-CodexHome) "skills"
-    if (-not $SkillName) { return $canonicalRoot }
-
-    $alternateRoots = @(Join-Path $homeDir ".agents\skills")
-    $defaultLegacyRoot = Join-Path $homeDir ".codex\skills"
-    if ([System.IO.Path]::GetFullPath($canonicalRoot) -ine [System.IO.Path]::GetFullPath($defaultLegacyRoot)) {
-        $alternateRoots += $defaultLegacyRoot
-    }
-    $alternateRoots = @($alternateRoots | Where-Object {
-        [System.IO.Path]::GetFullPath($_) -ine [System.IO.Path]::GetFullPath($canonicalRoot)
-    } | Sort-Object -Unique)
-
-    $canonicalTarget = Join-Path $canonicalRoot $SkillName
-    $existingAlternateRoots = @($alternateRoots | Where-Object { Test-Path -LiteralPath (Join-Path $_ $SkillName) })
-    if (Test-Path -LiteralPath $canonicalTarget) {
-        if ($existingAlternateRoots.Count -gt 0) {
-            throw "Codex Skill '$SkillName' exists in both canonical root '$canonicalRoot' and alternate root(s): $($existingAlternateRoots -join ', '). Remove or reconcile the duplicate before installing."
-        }
-        return $canonicalRoot
-    }
-    if ($existingAlternateRoots.Count -gt 1) {
-        throw "Codex Skill '$SkillName' has multiple alternate copies: $($existingAlternateRoots -join ', '). Remove or reconcile the duplicate before installing."
-    }
-
-    $ownedAlternateRoots = @()
-    foreach ($alternateRoot in $existingAlternateRoots) {
-        $alternateTarget = Join-Path $alternateRoot $SkillName
-        $metaPath = Join-Path $alternateTarget ".skill-meta.json"
-        try {
-            $plan = Get-InstallAction -TargetPath $alternateTarget -MetaPath $metaPath -Label $SkillName -RepoName $RepoName -ExpectedComponent "skill" -ExpectedName $SkillName -ExpectedTarget "codex" -LegacyIdentityPath (Join-Path $alternateTarget "SKILL.md") -IncomingIdentityPath $IncomingSkillFile
-            if ($plan.Action -in @("update", "repair", "migrate-update")) {
-                $ownedAlternateRoots += $alternateRoot
-            }
-        } catch {
-            # Alternate content without matching ownership is never an update destination.
-        }
-    }
-    if ($ownedAlternateRoots.Count -eq 1) { return $ownedAlternateRoots[0] }
-    if ($existingAlternateRoots.Count -gt 0) {
-        throw "Codex Skill '$SkillName' already exists in alternate root '$($existingAlternateRoots[0])' without matching CraftRoster ownership. Refusing to create a duplicate in canonical root '$canonicalRoot'."
-    }
-    return $canonicalRoot
+    return Join-Path (Get-CodexHome) "skills"
 }
 
 function Get-ConfigHome {
@@ -162,7 +110,7 @@ function Resolve-TargetName {
 }
 
 function Resolve-InstallPath {
-    param([string]$TargetName, [string]$ComponentType, [string]$ComponentName, [string]$RepoName, [string]$IncomingSkillFile)
+    param([string]$TargetName, [string]$ComponentType)
     $homeDir = Get-HomeDir
     $codexHome = Get-CodexHome
     $openCodeRoot = Get-OpenCodeConfigRoot
@@ -181,7 +129,7 @@ function Resolve-InstallPath {
     switch ($TargetName.ToLowerInvariant()) {
         "claude" { return Join-Path $homeDir ".claude\skills" }
         "cursor" { return Join-Path $homeDir ".cursor\skills" }
-        "codex" { return Get-CodexSkillRoot -SkillName $ComponentName -RepoName $RepoName -IncomingSkillFile $IncomingSkillFile }
+        "codex" { return Get-CodexSkillRoot }
         "copilot" { return Join-Path $homeDir ".copilot\skills" }
         "opencode" { return Join-Path $openCodeRoot "skills" }
         default { throw "Unsupported Skill target: $TargetName" }
@@ -195,21 +143,20 @@ function Get-ProjectRoot {
 }
 
 function Get-SkillInstallProfiles {
-    param([string]$TargetName, [string]$ComponentName, [string]$RequestedInstallDir, [string]$RepoName, [string]$IncomingSkillFile)
+    param([string]$TargetName, [string]$RequestedInstallDir)
     if ($TargetName -eq "project") {
         $root = Get-ProjectRoot -RequestedRoot $RequestedInstallDir
         return @(
-            @{ DestinationRoot = Join-Path $root ".agents\skills"; TargetName = "project"; LegacyTargets = @("codex-project") },
-            @{ DestinationRoot = Join-Path $root ".claude\skills"; TargetName = "project"; LegacyTargets = @("claude-project") }
+            @{ DestinationRoot = Join-Path $root ".agents\skills"; TargetName = "project" },
+            @{ DestinationRoot = Join-Path $root ".claude\skills"; TargetName = "project" }
         )
     }
     $destinationRoot = if ($RequestedInstallDir) {
         [System.IO.Path]::GetFullPath($RequestedInstallDir)
     } else {
-        Resolve-InstallPath -TargetName $TargetName -ComponentType "skill" -ComponentName $ComponentName -RepoName $RepoName -IncomingSkillFile $IncomingSkillFile
+        Resolve-InstallPath -TargetName $TargetName -ComponentType "skill"
     }
-    $legacyTargets = if ($TargetName -eq "copilot") { @("vscode") } else { @() }
-    return ,@{ DestinationRoot = $destinationRoot; TargetName = $TargetName; LegacyTargets = $legacyTargets }
+    return ,@{ DestinationRoot = $destinationRoot; TargetName = $TargetName }
 }
 
 function Get-AgentInstallProfiles {
@@ -217,11 +164,11 @@ function Get-AgentInstallProfiles {
     if ($TargetName -eq "project") {
         $root = Get-ProjectRoot -RequestedRoot $RequestedInstallDir
         return @(
-            @{ DestinationRoot = Join-Path $root ".codex\agents"; TargetName = "project"; Platform = "codex"; OutputSuffix = ".toml"; LegacyTargets = @("codex-project") },
-            @{ DestinationRoot = Join-Path $root ".claude\agents"; TargetName = "project"; Platform = "claude"; OutputSuffix = ".md"; LegacyTargets = @("claude-project") },
-            @{ DestinationRoot = Join-Path $root ".cursor\agents"; TargetName = "project"; Platform = "cursor"; OutputSuffix = ".md"; LegacyTargets = @("cursor-project") },
-            @{ DestinationRoot = Join-Path $root ".github\agents"; TargetName = "project"; Platform = "copilot"; OutputSuffix = ".agent.md"; LegacyTargets = @("copilot-project", "vscode-project", "vscode") },
-            @{ DestinationRoot = Join-Path $root ".opencode\agents"; TargetName = "project"; Platform = "opencode"; OutputSuffix = ".md"; LegacyTargets = @("opencode-project") }
+            @{ DestinationRoot = Join-Path $root ".codex\agents"; TargetName = "project"; Platform = "codex"; OutputSuffix = ".toml" },
+            @{ DestinationRoot = Join-Path $root ".claude\agents"; TargetName = "project"; Platform = "claude"; OutputSuffix = ".md" },
+            @{ DestinationRoot = Join-Path $root ".cursor\agents"; TargetName = "project"; Platform = "cursor"; OutputSuffix = ".md" },
+            @{ DestinationRoot = Join-Path $root ".github\agents"; TargetName = "project"; Platform = "copilot"; OutputSuffix = ".agent.md" },
+            @{ DestinationRoot = Join-Path $root ".opencode\agents"; TargetName = "project"; Platform = "opencode"; OutputSuffix = ".md" }
         )
     }
 
@@ -238,8 +185,7 @@ function Get-AgentInstallProfiles {
     } else {
         Resolve-InstallPath -TargetName $TargetName -ComponentType "agent"
     }
-    $legacyTargets = if ($TargetName -eq "copilot") { @("vscode") } else { @() }
-    return ,@{ DestinationRoot = $destinationRoot; TargetName = $TargetName; Platform = $platform; OutputSuffix = $outputSuffix; LegacyTargets = $legacyTargets }
+    return ,@{ DestinationRoot = $destinationRoot; TargetName = $TargetName; Platform = $platform; OutputSuffix = $outputSuffix }
 }
 
 function Test-ComponentName {
@@ -452,7 +398,7 @@ function Get-SkillContentSha256 {
     $hasher = [System.Security.Cryptography.SHA256]::Create()
     try {
         $nullByte = [byte[]]@(0)
-        Add-Sha256Bytes -Hasher $hasher -Bytes $utf8.GetBytes('autoverse-skill-content-v1')
+        Add-Sha256Bytes -Hasher $hasher -Bytes $utf8.GetBytes('craftroster-skill-content-v1')
         Add-Sha256Bytes -Hasher $hasher -Bytes $nullByte
         foreach ($entry in $entries) {
             Add-Sha256Bytes -Hasher $hasher -Bytes $entry.RelativePathBytes
@@ -529,69 +475,6 @@ function Get-ExistingMeta {
     }
 }
 
-function Get-SkillFrontmatterValue {
-    param([string]$SkillFile, [string]$FieldName)
-    if (-not (Test-Path -LiteralPath $SkillFile -PathType Leaf)) { return $null }
-    $text = Get-Content -Raw -LiteralPath $SkillFile
-    $frontmatter = [regex]::Match($text, '\A---\r?\n(?<body>[\s\S]*?)\r?\n---')
-    if (-not $frontmatter.Success) { return $null }
-    $body = $frontmatter.Groups['body'].Value
-    $field = [regex]::Match($body, '(?m)^' + [regex]::Escape($FieldName) + ':\s*(?<value>.+?)\s*$')
-    if ($field.Success) {
-        return $field.Groups['value'].Value.Trim().Trim('"').Trim("'")
-    }
-    if ($FieldName -ne 'source' -and $FieldName -notlike 'reference-*' -and $FieldName -ne 'previous-license') { return $null }
-
-    $insideMetadata = $false
-    foreach ($line in @($body -split '\r?\n')) {
-        if (-not $insideMetadata) {
-            if ($line -match '^metadata:\s*(?:#.*)?$') { $insideMetadata = $true }
-            continue
-        }
-        if ($line -match '^\S') { break }
-        if ($line -match '^\s+' + [regex]::Escape($FieldName) + ':\s*(?<value>.+?)\s*$') {
-            return $Matches['value'].Trim().Trim('"').Trim("'")
-        }
-    }
-    return $null
-}
-
-function Test-LegacySkillOwnership {
-    param(
-        [object]$ExistingMeta,
-        [string]$ExistingSkillFile,
-        [string]$IncomingSkillFile,
-        [string]$RepoName,
-        [string]$ExpectedName,
-        [string]$ExpectedTarget
-    )
-    if (-not $ExistingMeta -or -not (Test-OwnershipRepositoryMatch -ExistingRepo $ExistingMeta.repo -ExpectedRepo $RepoName)) { return $false }
-    if ($ExistingMeta.PSObject.Properties['component'] -or $ExistingMeta.PSObject.Properties['target']) { return $false }
-    if ($ExistingMeta.name -ne $ExpectedName -or $ExistingMeta.agent -ne $ExpectedTarget) { return $false }
-    $existingName = Get-SkillFrontmatterValue -SkillFile $ExistingSkillFile -FieldName 'name'
-    $existingSource = Get-SkillFrontmatterValue -SkillFile $ExistingSkillFile -FieldName 'source'
-    $existingLicense = Get-SkillFrontmatterValue -SkillFile $ExistingSkillFile -FieldName 'license'
-    $incomingName = Get-SkillFrontmatterValue -SkillFile $IncomingSkillFile -FieldName 'name'
-    $incomingSource = Get-SkillFrontmatterValue -SkillFile $IncomingSkillFile -FieldName 'source'
-    $incomingReferenceSource = Get-SkillFrontmatterValue -SkillFile $IncomingSkillFile -FieldName 'reference-source'
-    $incomingLicense = Get-SkillFrontmatterValue -SkillFile $IncomingSkillFile -FieldName 'license'
-    $incomingPreviousLicense = Get-SkillFrontmatterValue -SkillFile $IncomingSkillFile -FieldName 'previous-license'
-    $sourceMatches = $existingSource -eq $incomingSource -or ($incomingReferenceSource -and $existingSource -eq $incomingReferenceSource)
-    if (-not $sourceMatches -and
-        (Test-OwnershipRepositoryNeedsMigration -ExistingRepo $ExistingMeta.repo -ExpectedRepo $RepoName) -and
-        $existingSource -ceq $script:LegacyRepository -and
-        $incomingSource -ceq $script:CanonicalRepository) {
-        $sourceMatches = $true
-    }
-    $licenseMatches = $existingLicense -eq $incomingLicense -or ($incomingPreviousLicense -and $existingLicense -eq $incomingPreviousLicense)
-    return $existingName -eq $ExpectedName `
-        -and $incomingName -eq $ExpectedName `
-        -and $existingSource `
-        -and $sourceMatches `
-        -and $existingLicense `
-        -and $licenseMatches
-}
-
 function Get-InstallAction {
     param(
         [string]$TargetPath,
@@ -602,61 +485,43 @@ function Get-InstallAction {
         [string]$ExpectedName,
         [string]$ExpectedTarget,
         [string]$ExpectedId,
-        [string]$ExpectedAdapter,
-        [string[]]$LegacyTargets,
-        [string]$LegacyIdentityPath,
-        [string]$IncomingIdentityPath
+        [string]$ExpectedAdapter
     )
     $targetExists = Test-Path -LiteralPath $TargetPath
     $metaExists = Test-Path -LiteralPath $MetaPath -PathType Leaf
     if (-not $targetExists -and -not $metaExists) { return @{ Action = "install"; ExistingMeta = $null } }
     $existingMeta = Get-ExistingMeta -MetaPath $MetaPath
-    $repositoryMatches = $existingMeta -and (Test-OwnershipRepositoryMatch -ExistingRepo $existingMeta.repo -ExpectedRepo $RepoName)
-    $repositoryNeedsMigration = $existingMeta -and (Test-OwnershipRepositoryNeedsMigration -ExistingRepo $existingMeta.repo -ExpectedRepo $RepoName)
+    $existingRepo = Get-ExactMetadataString -Metadata $existingMeta -Name 'repo'
+    $existingComponent = Get-ExactMetadataString -Metadata $existingMeta -Name 'component'
+    $existingName = Get-ExactMetadataString -Metadata $existingMeta -Name 'name'
+    $existingTarget = Get-ExactMetadataString -Metadata $existingMeta -Name 'target'
+    $repositoryMatches = $existingMeta -and (Test-OwnershipRepositoryMatch -ExistingRepo $existingRepo -ExpectedRepo $RepoName)
     $ownershipMatches = $existingMeta `
         -and $repositoryMatches `
-        -and $existingMeta.component -eq $ExpectedComponent `
-        -and $existingMeta.name -eq $ExpectedName `
-        -and $existingMeta.target -eq $ExpectedTarget
+        -and $existingComponent -ceq $ExpectedComponent `
+        -and $existingName -ceq $ExpectedName `
+        -and $existingTarget -ceq $ExpectedTarget
     if ($ExpectedComponent -eq 'agent') {
+        $existingId = Get-ExactMetadataString -Metadata $existingMeta -Name 'id'
+        $existingAdapter = Get-ExactMetadataString -Metadata $existingMeta -Name 'adapter'
         $ownershipMatches = $ownershipMatches `
             -and $ExpectedId `
-            -and $existingMeta.id -eq $ExpectedId `
+            -and $existingId -ceq $ExpectedId `
             -and $ExpectedAdapter `
-            -and $existingMeta.adapter -eq $ExpectedAdapter
+            -and $existingAdapter -ceq $ExpectedAdapter
     }
-    if ($ownershipMatches) {
-        $ownedAction = if ($repositoryNeedsMigration) { "migrate-update" } elseif ($targetExists) { "update" } else { "repair" }
+    if ($ExpectedComponent -eq 'skill') {
         $contentDigest = if ($existingMeta) {
             $existingMeta.PSObject.Properties | Where-Object { $_.Name -ceq 'contentSha256' } | Select-Object -First 1
         } else { $null }
-        if ($ExpectedComponent -eq 'skill' -and $targetExists -and -not $contentDigest) {
-            $ownedAction = "migrate-update"
-        }
-        return @{ Action = $ownedAction; ExistingMeta = $existingMeta }
+        $ownershipMatches = $ownershipMatches -and $contentDigest
     }
-    $legacyTargetMatches = $existingMeta `
-        -and $repositoryMatches `
-        -and $existingMeta.component -eq $ExpectedComponent `
-        -and $existingMeta.name -eq $ExpectedName `
-        -and $LegacyTargets `
-        -and $LegacyTargets -contains $existingMeta.target
-    if ($ExpectedComponent -eq 'agent') {
-        $legacyTargetMatches = $legacyTargetMatches `
-            -and $ExpectedId `
-            -and $existingMeta.id -eq $ExpectedId `
-            -and $ExpectedAdapter `
-            -and $existingMeta.adapter -eq $ExpectedAdapter
-    }
-    if ($legacyTargetMatches) {
-        return @{ Action = "migrate-update"; ExistingMeta = $existingMeta }
-    }
-    if ($ExpectedComponent -eq 'skill' -and (Test-LegacySkillOwnership -ExistingMeta $existingMeta -ExistingSkillFile $LegacyIdentityPath -IncomingSkillFile $IncomingIdentityPath -RepoName $RepoName -ExpectedName $ExpectedName -ExpectedTarget $ExpectedTarget)) {
-        return @{ Action = "migrate-update"; ExistingMeta = $existingMeta }
+    if ($ownershipMatches) {
+        return @{ Action = $(if ($targetExists) { "update" } else { "repair" }); ExistingMeta = $existingMeta }
     }
     if ($Force) { return @{ Action = "force-replace"; ExistingMeta = $existingMeta } }
-    if ($existingMeta -and $existingMeta.repo -and -not $repositoryMatches) {
-        throw "Refusing to replace '$Label' because it was installed from '$($existingMeta.repo)', not '$RepoName'. Use -Force to overwrite intentionally."
+    if ($existingMeta -and $existingRepo -and -not $repositoryMatches) {
+        throw "Refusing to replace '$Label' because it was installed from '$existingRepo', not '$RepoName'. Use -Force to overwrite intentionally."
     }
     if ($existingMeta -and $repositoryMatches) {
         $agentIdentity = if ($ExpectedComponent -eq 'agent') { ", id='$ExpectedId', and adapter='$ExpectedAdapter'" } else { "" }
@@ -670,7 +535,6 @@ function Get-SkillInstallPlan {
         [System.IO.DirectoryInfo]$Source,
         [string]$DestinationRoot,
         [string]$TargetName,
-        [string[]]$LegacyTargets,
         [string]$RepoName
     )
     $targetPath = Join-Path $DestinationRoot $Source.Name
@@ -678,7 +542,7 @@ function Get-SkillInstallPlan {
         throw "Refusing to write outside install directory: $targetPath"
     }
     $metaPath = Join-Path $targetPath ".skill-meta.json"
-    $plan = Get-InstallAction -TargetPath $targetPath -MetaPath $metaPath -Label $Source.Name -RepoName $RepoName -ExpectedComponent "skill" -ExpectedName $Source.Name -ExpectedTarget $TargetName -LegacyTargets $LegacyTargets -LegacyIdentityPath (Join-Path $targetPath "SKILL.md") -IncomingIdentityPath (Join-Path $Source.FullName "SKILL.md")
+    $plan = Get-InstallAction -TargetPath $targetPath -MetaPath $metaPath -Label $Source.Name -RepoName $RepoName -ExpectedComponent "skill" -ExpectedName $Source.Name -ExpectedTarget $TargetName
     $targetExists = Test-Path -LiteralPath $targetPath
     $plan.ObservedTargetExists = [bool]$targetExists
     $plan.ObservedTargetSha256 = $null
@@ -692,7 +556,7 @@ function Get-SkillInstallPlan {
         $recordedDigest = if ($plan.ExistingMeta) {
             $plan.ExistingMeta.PSObject.Properties | Where-Object { $_.Name -ceq 'contentSha256' } | Select-Object -First 1
         } else { $null }
-        if ($recordedDigest -and $plan.Action -in @('update', 'migrate-update') -and
+        if ($recordedDigest -and $plan.Action -eq 'update' -and
             -not [string]::Equals($recordedDigest.Value, $plan.ObservedTargetSha256, [System.StringComparison]::OrdinalIgnoreCase)) {
             if ($Force) {
                 $plan.Action = 'force-replace'
@@ -723,9 +587,9 @@ function Assert-SkillTargetUnchanged {
 }
 
 function Get-TestOnlySkillFault {
-    $mode = [Environment]::GetEnvironmentVariable('AUTOVERSE_INSTALLER_TEST_MODE', 'Process')
-    $acknowledgement = [Environment]::GetEnvironmentVariable('AUTOVERSE_INSTALLER_TEST_ACK', 'Process')
-    $fault = [Environment]::GetEnvironmentVariable('AUTOVERSE_INSTALLER_TEST_FAULT', 'Process')
+    $mode = [Environment]::GetEnvironmentVariable('CRAFTROSTER_INSTALLER_TEST_MODE', 'Process')
+    $acknowledgement = [Environment]::GetEnvironmentVariable('CRAFTROSTER_INSTALLER_TEST_ACK', 'Process')
+    $fault = [Environment]::GetEnvironmentVariable('CRAFTROSTER_INSTALLER_TEST_FAULT', 'Process')
     if ($null -eq $mode -and $null -eq $acknowledgement -and $null -eq $fault) { return $null }
     if ($mode -cne 'skill-atomic-swap' -or
         $acknowledgement -cne 'I_UNDERSTAND_THIS_IS_TEST_ONLY' -or
@@ -748,14 +612,14 @@ function Write-Utf8JsonFile {
 }
 
 function Initialize-SkillDirectoryNativeType {
-    if ('AutoverseSkillDirectoryNative' -as [type]) { return }
+    if ('CraftRosterSkillDirectoryNative' -as [type]) { return }
     Add-Type -TypeDefinition @'
 using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
-public static class AutoverseSkillDirectoryNative
+public static class CraftRosterSkillDirectoryNative
 {
     private const uint FileShareRead = 0x00000001;
     private const uint FileShareWrite = 0x00000002;
@@ -846,13 +710,13 @@ public static class AutoverseSkillDirectoryNative
 function Get-SkillDirectoryIdentity {
     param([string]$Path)
     Initialize-SkillDirectoryNativeType
-    return [AutoverseSkillDirectoryNative]::GetIdentity([System.IO.Path]::GetFullPath($Path))
+    return [CraftRosterSkillDirectoryNative]::GetIdentity([System.IO.Path]::GetFullPath($Path))
 }
 
 function New-ExclusiveSkillTransactionDirectory {
     param([string]$Path)
     Initialize-SkillDirectoryNativeType
-    [AutoverseSkillDirectoryNative]::CreateDirectoryExclusive([System.IO.Path]::GetFullPath($Path))
+    [CraftRosterSkillDirectoryNative]::CreateDirectoryExclusive([System.IO.Path]::GetFullPath($Path))
 }
 
 function New-SkillTransactionToken {
@@ -1015,13 +879,13 @@ function Install-AtomicSkillDirectory {
     New-Item -ItemType Directory -Force -Path $DestinationRoot | Out-Null
     $suffix = [Guid]::NewGuid().ToString('N')
     $transactionToken = New-SkillTransactionToken
-    $markerName = '.autoverse-transaction-' + $suffix
-    $stagePath = Join-Path $DestinationRoot ('.autoverse-stage-' + $Source.Name + '-' + $suffix)
-    $backupPath = Join-Path $DestinationRoot ('.autoverse-backup-' + $Source.Name + '-' + $suffix)
-    $failedPath = Join-Path $DestinationRoot ('.autoverse-failed-' + $Source.Name + '-' + $suffix)
-    $stageCleanupPath = Join-Path $DestinationRoot ('.autoverse-cleanup-stage-' + $Source.Name + '-' + $suffix)
-    $backupCleanupPath = Join-Path $DestinationRoot ('.autoverse-cleanup-backup-' + $Source.Name + '-' + $suffix)
-    $failedCleanupPath = Join-Path $DestinationRoot ('.autoverse-cleanup-failed-' + $Source.Name + '-' + $suffix)
+    $markerName = '.craftroster-transaction-' + $suffix
+    $stagePath = Join-Path $DestinationRoot ('.craftroster-stage-' + $Source.Name + '-' + $suffix)
+    $backupPath = Join-Path $DestinationRoot ('.craftroster-backup-' + $Source.Name + '-' + $suffix)
+    $failedPath = Join-Path $DestinationRoot ('.craftroster-failed-' + $Source.Name + '-' + $suffix)
+    $stageCleanupPath = Join-Path $DestinationRoot ('.craftroster-cleanup-stage-' + $Source.Name + '-' + $suffix)
+    $backupCleanupPath = Join-Path $DestinationRoot ('.craftroster-cleanup-backup-' + $Source.Name + '-' + $suffix)
+    $failedCleanupPath = Join-Path $DestinationRoot ('.craftroster-cleanup-failed-' + $Source.Name + '-' + $suffix)
     foreach ($path in @($stagePath, $backupPath, $failedPath, $stageCleanupPath, $backupCleanupPath, $failedCleanupPath)) {
         if (-not (Test-TargetWithinRoot -TargetPath $path -RootPath $DestinationRoot)) {
             throw "Refusing to use an atomic Skill path outside the install directory: $path"
@@ -1037,7 +901,7 @@ function Install-AtomicSkillDirectory {
         if ($fault -ceq 'stage-path-collision') {
             $null = New-Item -ItemType Directory -Path $stagePath
             [System.IO.File]::WriteAllText(
-                (Join-Path $stagePath 'AUTOVERSE-STAGE-NEWCOMER.txt'),
+                (Join-Path $stagePath 'CRAFTROSTER-STAGE-NEWCOMER.txt'),
                 "test-only stage newcomer that must be preserved`n",
                 [System.Text.UTF8Encoding]::new($false)
             )
@@ -1090,7 +954,7 @@ function Install-AtomicSkillDirectory {
                 [System.IO.Directory]::Move($TargetPath, $failedPath)
                 $null = New-Item -ItemType Directory -Path $TargetPath
                 [System.IO.File]::WriteAllText(
-                    (Join-Path $TargetPath 'AUTOVERSE-REPLACEMENT-NEWCOMER.txt'),
+                    (Join-Path $TargetPath 'CRAFTROSTER-REPLACEMENT-NEWCOMER.txt'),
                     "test-only replacement newcomer that must be preserved`n",
                     [System.Text.UTF8Encoding]::new($false)
                 )
@@ -1109,7 +973,7 @@ function Install-AtomicSkillDirectory {
         if ($fault -ceq 'after-recheck-destination-appears') {
             $null = New-Item -ItemType Directory -Path $TargetPath
             [System.IO.File]::WriteAllText(
-                (Join-Path $TargetPath 'AUTOVERSE-NEWCOMER.txt'),
+                (Join-Path $TargetPath 'CRAFTROSTER-NEWCOMER.txt'),
                 "test-only newcomer that must be preserved`n",
                 [System.Text.UTF8Encoding]::new($false)
             )
@@ -1209,9 +1073,9 @@ function Install-AtomicSkillDirectory {
 }
 
 function Install-Skill {
-    param([System.IO.DirectoryInfo]$Source, [string]$DestinationRoot, [string]$TargetName, [string[]]$LegacyTargets, [string]$RepoName, [string]$BranchName)
+    param([System.IO.DirectoryInfo]$Source, [string]$DestinationRoot, [string]$TargetName, [string]$RepoName, [string]$BranchName)
     $targetPath = Join-Path $DestinationRoot $Source.Name
-    $plan = Get-SkillInstallPlan -Source $Source -DestinationRoot $DestinationRoot -TargetName $TargetName -LegacyTargets $LegacyTargets -RepoName $RepoName
+    $plan = Get-SkillInstallPlan -Source $Source -DestinationRoot $DestinationRoot -TargetName $TargetName -RepoName $RepoName
     if ($DryRun) { Write-Host "DRY-RUN $($plan.Action) Skill $($Source.Name) -> $targetPath"; return }
 
     $now = (Get-Date).ToUniversalTime().ToString("o")
@@ -1225,16 +1089,16 @@ function Install-Skill {
 }
 
 function Test-SkillInstall {
-    param([System.IO.DirectoryInfo]$Source, [string]$DestinationRoot, [string]$TargetName, [string[]]$LegacyTargets, [string]$RepoName)
-    Get-SkillInstallPlan -Source $Source -DestinationRoot $DestinationRoot -TargetName $TargetName -LegacyTargets $LegacyTargets -RepoName $RepoName | Out-Null
+    param([System.IO.DirectoryInfo]$Source, [string]$DestinationRoot, [string]$TargetName, [string]$RepoName)
+    Get-SkillInstallPlan -Source $Source -DestinationRoot $DestinationRoot -TargetName $TargetName -RepoName $RepoName | Out-Null
 }
 
 function Install-AtomicFile {
     param([string]$SourcePath, [string]$DestinationPath, [string]$Label)
     $parent = Split-Path -Parent $DestinationPath
     New-Item -ItemType Directory -Force -Path $parent | Out-Null
-    $tempPath = Join-Path $parent (".autoverse-" + [Guid]::NewGuid().ToString('N') + ".tmp")
-    $backupPath = Join-Path $parent (".autoverse-replaced-" + [Guid]::NewGuid().ToString('N') + ".bak")
+    $tempPath = Join-Path $parent (".craftroster-" + [Guid]::NewGuid().ToString('N') + ".tmp")
+    $backupPath = Join-Path $parent (".craftroster-replaced-" + [Guid]::NewGuid().ToString('N') + ".bak")
     try {
         Copy-Item -LiteralPath $SourcePath -Destination $tempPath
         Assert-RegularInstallLeaf -Path $DestinationPath -Label $Label
@@ -1253,8 +1117,8 @@ function Write-AtomicUtf8Text {
     param([string]$DestinationPath, [string]$Text, [string]$Label)
     $parent = Split-Path -Parent $DestinationPath
     New-Item -ItemType Directory -Force -Path $parent | Out-Null
-    $tempPath = Join-Path $parent (".autoverse-" + [Guid]::NewGuid().ToString('N') + ".tmp")
-    $backupPath = Join-Path $parent (".autoverse-replaced-" + [Guid]::NewGuid().ToString('N') + ".bak")
+    $tempPath = Join-Path $parent (".craftroster-" + [Guid]::NewGuid().ToString('N') + ".tmp")
+    $backupPath = Join-Path $parent (".craftroster-replaced-" + [Guid]::NewGuid().ToString('N') + ".bak")
     try {
         [System.IO.File]::WriteAllText($tempPath, $Text, [System.Text.UTF8Encoding]::new($false))
         Assert-RegularInstallLeaf -Path $DestinationPath -Label $Label
@@ -1270,13 +1134,13 @@ function Write-AtomicUtf8Text {
 }
 
 function Install-AgentProfile {
-    param([System.IO.FileInfo]$Source, [string]$RuntimeName, [string]$AgentId, [string]$Platform, [string]$OutputSuffix, [string]$DestinationRoot, [string]$TargetName, [string[]]$LegacyTargets, [string]$RepoName, [string]$BranchName)
+    param([System.IO.FileInfo]$Source, [string]$RuntimeName, [string]$AgentId, [string]$Platform, [string]$OutputSuffix, [string]$DestinationRoot, [string]$TargetName, [string]$RepoName, [string]$BranchName)
     $targetPath = Join-Path $DestinationRoot ($RuntimeName + $OutputSuffix)
     if (-not (Test-TargetWithinRoot -TargetPath $targetPath -RootPath $DestinationRoot)) { throw "Refusing to write outside install directory: $targetPath" }
-    $metaPath = "$targetPath.autoverse.json"
+    $metaPath = "$targetPath.craftroster.json"
     Assert-RegularInstallLeaf -Path $targetPath -Label "Agent"
     Assert-RegularInstallLeaf -Path $metaPath -Label "Agent metadata"
-    $plan = Get-InstallAction -TargetPath $targetPath -MetaPath $metaPath -Label $AgentId -RepoName $RepoName -ExpectedComponent "agent" -ExpectedName $RuntimeName -ExpectedTarget $TargetName -ExpectedId $AgentId -ExpectedAdapter $Platform -LegacyTargets $LegacyTargets
+    $plan = Get-InstallAction -TargetPath $targetPath -MetaPath $metaPath -Label $AgentId -RepoName $RepoName -ExpectedComponent "agent" -ExpectedName $RuntimeName -ExpectedTarget $TargetName -ExpectedId $AgentId -ExpectedAdapter $Platform
     if ($DryRun) { Write-Host "DRY-RUN $($plan.Action) Agent $AgentId -> $targetPath"; return }
 
     $now = (Get-Date).ToUniversalTime().ToString("o")
@@ -1297,13 +1161,13 @@ function Install-AgentProfile {
 }
 
 function Test-AgentProfileInstall {
-    param([System.IO.FileInfo]$Source, [string]$RuntimeName, [string]$AgentId, [string]$Platform, [string]$OutputSuffix, [string]$DestinationRoot, [string]$TargetName, [string[]]$LegacyTargets, [string]$RepoName)
+    param([System.IO.FileInfo]$Source, [string]$RuntimeName, [string]$AgentId, [string]$Platform, [string]$OutputSuffix, [string]$DestinationRoot, [string]$TargetName, [string]$RepoName)
     $targetPath = Join-Path $DestinationRoot ($RuntimeName + $OutputSuffix)
     if (-not (Test-TargetWithinRoot -TargetPath $targetPath -RootPath $DestinationRoot)) { throw "Refusing to write outside install directory: $targetPath" }
-    $metaPath = "$targetPath.autoverse.json"
+    $metaPath = "$targetPath.craftroster.json"
     Assert-RegularInstallLeaf -Path $targetPath -Label "Agent"
     Assert-RegularInstallLeaf -Path $metaPath -Label "Agent metadata"
-    Get-InstallAction -TargetPath $targetPath -MetaPath $metaPath -Label $AgentId -RepoName $RepoName -ExpectedComponent "agent" -ExpectedName $RuntimeName -ExpectedTarget $TargetName -ExpectedId $AgentId -ExpectedAdapter $Platform -LegacyTargets $LegacyTargets | Out-Null
+    Get-InstallAction -TargetPath $targetPath -MetaPath $metaPath -Label $AgentId -RepoName $RepoName -ExpectedComponent "agent" -ExpectedName $RuntimeName -ExpectedTarget $TargetName -ExpectedId $AgentId -ExpectedAdapter $Platform | Out-Null
 }
 
 function Get-AutoDelegationGuidance {
@@ -1596,41 +1460,41 @@ function Get-CodexAutoDelegationPlan {
     if ($exists -and (Get-FileSha256 -Path $configPath) -cne $originalHash) {
         throw "Refusing to edit $configPath because it changed during installation planning. Run the installer again."
     }
-    $startPattern = '(?m)^# AUTOVERSE_AUTO_DELEGATION_START\s*$'
-    $endPattern = '(?m)^# AUTOVERSE_AUTO_DELEGATION_END\s*$'
+    $startPattern = '(?m)^# CRAFTROSTER_AUTO_DELEGATION_START\s*$'
+    $endPattern = '(?m)^# CRAFTROSTER_AUTO_DELEGATION_END\s*$'
     $startCount = [regex]::Matches($text, $startPattern).Count
     $endCount = [regex]::Matches($text, $endPattern).Count
     if ($startCount -ne $endCount -or $startCount -gt 1) {
-        throw "Refusing to edit $configPath because its Autoverse auto-delegation markers are incomplete or duplicated."
+        throw "Refusing to edit $configPath because its CraftRoster auto-delegation markers are incomplete or duplicated."
     }
-    if ($startCount -eq 1 -and -not [regex]::IsMatch($text, '\A# AUTOVERSE_AUTO_DELEGATION_START\s*\r?\n')) {
-        throw "Refusing to edit $configPath because the Autoverse marker is not a managed block at the start of the file."
+    if ($startCount -eq 1 -and -not [regex]::IsMatch($text, '\A# CRAFTROSTER_AUTO_DELEGATION_START\s*\r?\n')) {
+        throw "Refusing to edit $configPath because the CraftRoster marker is not a managed block at the start of the file."
     }
 
     $newLine = if ($text.Contains("`r`n")) { "`r`n" } else { "`n" }
     $normalizedGuidance = [regex]::Replace($Guidance, '\r?\n', $newLine)
     $block = @(
-        "# AUTOVERSE_AUTO_DELEGATION_START",
+        "# CRAFTROSTER_AUTO_DELEGATION_START",
         "developer_instructions = '''",
         $normalizedGuidance,
         "'''",
-        "# AUTOVERSE_AUTO_DELEGATION_END"
+        "# CRAFTROSTER_AUTO_DELEGATION_END"
     ) -join $newLine
 
     if ($startCount -eq 1) {
-        $managedPattern = "(?s)\A# AUTOVERSE_AUTO_DELEGATION_START[^\S\r\n]*\r?\ndeveloper_instructions = '''\r?\n.*?\r?\n'''\r?\n# AUTOVERSE_AUTO_DELEGATION_END[^\S\r\n]*(?:\r?\n)?"
+        $managedPattern = "(?s)\A# CRAFTROSTER_AUTO_DELEGATION_START[^\S\r\n]*\r?\ndeveloper_instructions = '''\r?\n.*?\r?\n'''\r?\n# CRAFTROSTER_AUTO_DELEGATION_END[^\S\r\n]*(?:\r?\n)?"
         $managedMatch = [regex]::Match($text, $managedPattern)
         if (-not $managedMatch.Success) {
-            throw "Refusing to edit $configPath because its Autoverse managed block has an unexpected structure."
+            throw "Refusing to edit $configPath because its CraftRoster managed block has an unexpected structure."
         }
         $remainder = $text.Substring($managedMatch.Length)
         if (Test-CodexDeveloperInstructionsConflict -Text $remainder) {
-            throw "Refusing to edit $configPath because it also defines developer_instructions outside the Autoverse managed block. Merge the guidance manually."
+            throw "Refusing to edit $configPath because it also defines developer_instructions outside the CraftRoster managed block. Merge the guidance manually."
         }
         $newText = $block + $newLine + $remainder
     } else {
         if (Test-CodexDeveloperInstructionsConflict -Text $text) {
-            throw "Refusing to edit $configPath because it already defines developer_instructions outside the Autoverse managed block. Merge the guidance manually."
+            throw "Refusing to edit $configPath because it already defines developer_instructions outside the CraftRoster managed block. Merge the guidance manually."
         }
         $newText = if ($text) { $block + $newLine + $newLine + $text } else { $block + $newLine }
     }
@@ -1737,7 +1601,7 @@ function Invoke-AutoDelegationPlan {
 
     $parent = Split-Path -Parent $Plan.ConfigPath
     New-Item -ItemType Directory -Force -Path $parent | Out-Null
-    $tempPath = "$($Plan.ConfigPath).autoverse-$([Guid]::NewGuid().ToString('N')).tmp"
+    $tempPath = "$($Plan.ConfigPath).craftroster-$([Guid]::NewGuid().ToString('N')).tmp"
     try {
         [System.IO.File]::WriteAllText($tempPath, $Plan.NewText, [System.Text.UTF8Encoding]::new($false))
         if ($Plan.Existing) {
@@ -1748,10 +1612,10 @@ function Invoke-AutoDelegationPlan {
             if ($Plan.SiblingConfigPath -and (Test-Path -LiteralPath $Plan.SiblingConfigPath)) {
                 throw "Refusing to apply OpenCode auto-delegation because a sibling config appeared: $($Plan.SiblingConfigPath)"
             }
-            $backupPath = "$($Plan.ConfigPath).autoverse-backup-$((Get-Date).ToUniversalTime().ToString('yyyyMMddHHmmssfff'))-$([Guid]::NewGuid().ToString('N'))"
+            $backupPath = "$($Plan.ConfigPath).craftroster-backup-$((Get-Date).ToUniversalTime().ToString('yyyyMMddHHmmssfff'))-$([Guid]::NewGuid().ToString('N'))"
             [System.IO.File]::Replace($tempPath, $Plan.ConfigPath, $backupPath, $true)
             if ((Get-FileSha256 -Path $backupPath) -cne $Plan.OriginalHash) {
-                $rejectedPath = "$($Plan.ConfigPath).autoverse-rejected-$([Guid]::NewGuid().ToString('N')).tmp"
+                $rejectedPath = "$($Plan.ConfigPath).craftroster-rejected-$([Guid]::NewGuid().ToString('N')).tmp"
                 [System.IO.File]::Replace($backupPath, $Plan.ConfigPath, $rejectedPath, $true)
                 Remove-Item -Force -LiteralPath $rejectedPath -ErrorAction SilentlyContinue
                 throw "Refusing to keep the new $($Plan.Runtime) config because the destination changed during atomic replacement. The concurrent version was restored."
@@ -1791,7 +1655,7 @@ try {
         if ($SourceDir) {
             $repoRoot = (Resolve-Path -LiteralPath $SourceDir).Path
         } else {
-            $tempRoot = Join-Path ([System.IO.Path]::GetTempPath()) "autoverse-$Type-$([Guid]::NewGuid().ToString('N'))"
+            $tempRoot = Join-Path ([System.IO.Path]::GetTempPath()) "craftroster-$Type-$([Guid]::NewGuid().ToString('N'))"
             $archivePath = Join-Path $tempRoot "repo.zip"
             $extractDir = Join-Path $tempRoot "repo"
             New-Item -ItemType Directory -Force -Path $tempRoot, $extractDir | Out-Null
@@ -1810,7 +1674,7 @@ try {
             foreach ($profile in $agentProfiles) {
                 $profileSources = @(Get-AgentSources -RepoRoot $repoRoot -Platform $profile.Platform -OutputSuffix $profile.OutputSuffix -AgentId $Name)
                 foreach ($agentSource in $profileSources) {
-                    Test-AgentProfileInstall -Source $agentSource.Source -RuntimeName $agentSource.RuntimeName -AgentId $agentSource.Id -Platform $agentSource.Platform -OutputSuffix $agentSource.OutputSuffix -DestinationRoot $profile.DestinationRoot -TargetName $profile.TargetName -LegacyTargets $profile.LegacyTargets -RepoName $Repo
+                    Test-AgentProfileInstall -Source $agentSource.Source -RuntimeName $agentSource.RuntimeName -AgentId $agentSource.Id -Platform $agentSource.Platform -OutputSuffix $agentSource.OutputSuffix -DestinationRoot $profile.DestinationRoot -TargetName $profile.TargetName -RepoName $Repo
                     $agentPlans += @{ Source = $agentSource; Profile = $profile }
                 }
             }
@@ -1821,9 +1685,9 @@ try {
             if ($installCompanionSkill) {
                 $companionSource = @(Get-SkillSources -RepoRoot $repoRoot -SkillName "subagent-architecture")[0]
                 $companionInstallDir = if ($Target -eq "project") { $InstallDir } else { $null }
-                $companionProfiles = @(Get-SkillInstallProfiles -TargetName $Target -ComponentName "subagent-architecture" -RequestedInstallDir $companionInstallDir -RepoName $Repo -IncomingSkillFile (Join-Path $companionSource.FullName "SKILL.md"))
+                $companionProfiles = @(Get-SkillInstallProfiles -TargetName $Target -RequestedInstallDir $companionInstallDir)
                 foreach ($profile in $companionProfiles) {
-                    Test-SkillInstall -Source $companionSource -DestinationRoot $profile.DestinationRoot -TargetName $profile.TargetName -LegacyTargets $profile.LegacyTargets -RepoName $Repo
+                    Test-SkillInstall -Source $companionSource -DestinationRoot $profile.DestinationRoot -TargetName $profile.TargetName -RepoName $Repo
                     Write-Info "Companion Skill destination: $($profile.DestinationRoot)"
                 }
             }
@@ -1841,21 +1705,21 @@ try {
 
             if ($installCompanionSkill) {
                 foreach ($profile in $companionProfiles) {
-                    Install-Skill -Source $companionSource -DestinationRoot $profile.DestinationRoot -TargetName $profile.TargetName -LegacyTargets $profile.LegacyTargets -RepoName $Repo -BranchName $Branch
+                    Install-Skill -Source $companionSource -DestinationRoot $profile.DestinationRoot -TargetName $profile.TargetName -RepoName $Repo -BranchName $Branch
                 }
             }
             Write-Info "$(if ($DryRun) { 'Planning' } else { 'Installing' }) $($agentPlans.Count) Agent profile(s) for $Target"
             foreach ($agentPlan in $agentPlans) {
                 $agentSource = $agentPlan.Source
                 $profile = $agentPlan.Profile
-                Install-AgentProfile -Source $agentSource.Source -RuntimeName $agentSource.RuntimeName -AgentId $agentSource.Id -Platform $agentSource.Platform -OutputSuffix $agentSource.OutputSuffix -DestinationRoot $profile.DestinationRoot -TargetName $profile.TargetName -LegacyTargets $profile.LegacyTargets -RepoName $Repo -BranchName $Branch
+                Install-AgentProfile -Source $agentSource.Source -RuntimeName $agentSource.RuntimeName -AgentId $agentSource.Id -Platform $agentSource.Platform -OutputSuffix $agentSource.OutputSuffix -DestinationRoot $profile.DestinationRoot -TargetName $profile.TargetName -RepoName $Repo -BranchName $Branch
             }
             if ($autoDelegationPlan) { Invoke-AutoDelegationPlan -Plan $autoDelegationPlan }
         } else {
             $sources = @(Get-SkillSources -RepoRoot $repoRoot -SkillName $Name)
             $skillPlans = @()
             foreach ($source in $sources) {
-                $sourceProfiles = @(Get-SkillInstallProfiles -TargetName $Target -ComponentName $source.Name -RequestedInstallDir $InstallDir -RepoName $Repo -IncomingSkillFile (Join-Path $source.FullName "SKILL.md"))
+                $sourceProfiles = @(Get-SkillInstallProfiles -TargetName $Target -RequestedInstallDir $InstallDir)
                 foreach ($profile in $sourceProfiles) {
                     $skillPlans += @{ Source = $source; Profile = $profile }
                 }
@@ -1865,13 +1729,13 @@ try {
             foreach ($skillPlan in $skillPlans) {
                 $source = $skillPlan.Source
                 $profile = $skillPlan.Profile
-                Test-SkillInstall -Source $source -DestinationRoot $profile.DestinationRoot -TargetName $profile.TargetName -LegacyTargets $profile.LegacyTargets -RepoName $Repo
+                Test-SkillInstall -Source $source -DestinationRoot $profile.DestinationRoot -TargetName $profile.TargetName -RepoName $Repo
             }
             Write-Info "$(if ($DryRun) { 'Planning' } else { 'Installing' }) $($skillPlans.Count) Skill profile(s) for $Target"
             foreach ($skillPlan in $skillPlans) {
                 $source = $skillPlan.Source
                 $profile = $skillPlan.Profile
-                Install-Skill -Source $source -DestinationRoot $profile.DestinationRoot -TargetName $profile.TargetName -LegacyTargets $profile.LegacyTargets -RepoName $Repo -BranchName $Branch
+                Install-Skill -Source $source -DestinationRoot $profile.DestinationRoot -TargetName $profile.TargetName -RepoName $Repo -BranchName $Branch
             }
         }
 

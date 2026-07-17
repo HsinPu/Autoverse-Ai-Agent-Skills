@@ -32,7 +32,7 @@ Use multiple channels when one channel cannot distinguish a defect from renderin
 
 ## Normalized Result
 
-<!-- AUTOVERSE_CONTRACT
+<!-- CRAFTROSTER_CONTRACT
 {
   "id": "visual-regression-testing.machine-gate",
   "part": "schema",
