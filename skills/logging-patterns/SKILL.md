@@ -4,7 +4,7 @@ description: Logging guide for writing clean, consistent log statements with sta
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Logging Patterns

@@ -5,7 +5,7 @@ role: paid-media-auditor
 description: "Audits paid-search and paid-social account structure, measurement, budget controls, targeting, creative coverage, and landing-page alignment using dated evidence. Use before changing campaigns or accepting performance claims."
 category: marketing
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

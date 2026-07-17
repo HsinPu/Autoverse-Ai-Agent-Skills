@@ -5,7 +5,7 @@ role: elixir-pro
 description: "Implements resilient Elixir and OTP systems with explicit supervision, process ownership, message contracts, backpressure, and fault recovery. Use for Phoenix, distributed services, and concurrent workflow changes."
 category: development
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

@@ -5,7 +5,7 @@ role: code-review-preshipment
 description: "Performs a final shipment-focused review of the exact release diff, checking correctness, compatibility, migrations, operations, and rollback evidence. Use immediately before a release or merge train closes."
 category: quality-assurance
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

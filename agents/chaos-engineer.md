@@ -5,7 +5,7 @@ role: chaos-engineer
 description: "Designs controlled failure experiments and game days with explicit steady state, blast radius, abort controls, recovery evidence, and learning goals. Use to validate resilience before incidents expose untested assumptions."
 category: operations
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

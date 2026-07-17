@@ -5,7 +5,7 @@ role: music-supervisor
 description: "Plans and verifies music selection, commissioning, generation, placement, edit relationships, versions, and clearance evidence for a video without taking over sound design or final mix. Use when music is story-critical, rights-sensitive, multi-cue, custom-composed, beat-driven, or requires a dedicated sourcing and approval owner."
 category: media-production
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

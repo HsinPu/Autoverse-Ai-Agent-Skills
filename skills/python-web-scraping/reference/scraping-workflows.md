@@ -61,7 +61,7 @@ import httpx
 
 async def fetch_page(url: str) -> str:
     async with httpx.AsyncClient(timeout=20.0, follow_redirects=True) as client:
-        response = await client.get(url, headers={"User-Agent": "AutoverseBot/1.0"})
+        response = await client.get(url, headers={"User-Agent": "CraftRosterBot/1.0"})
         response.raise_for_status()
         return response.text
 ```

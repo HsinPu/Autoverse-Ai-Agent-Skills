@@ -4,7 +4,7 @@ description: Spring Cloud and Spring Boot microservices guide covering service b
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Spring Cloud Microservices

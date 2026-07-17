@@ -4,7 +4,7 @@ description: UI animation and motion guidance for hover states, button feedback,
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Animation Best Practices

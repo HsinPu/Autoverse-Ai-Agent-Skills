@@ -4,7 +4,7 @@ description: Python security hardening guide covering secrets handling, unsafe d
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Python Security Hardening

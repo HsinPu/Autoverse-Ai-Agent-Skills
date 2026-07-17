@@ -5,7 +5,7 @@ role: sales-automator
 description: "Designs compliant sales workflow automation for qualification, routing, follow-up, CRM hygiene, and handoff without fabricating personalization or consent. Use for repeatable revenue operations."
 category: sales
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

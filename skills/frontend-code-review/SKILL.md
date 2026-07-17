@@ -4,7 +4,7 @@ description: Frontend code review guide for analyzing React, TypeScript, CSS, st
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Frontend Code Review

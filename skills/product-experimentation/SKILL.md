@@ -4,7 +4,7 @@ description: Design, instrument, analyze, and register trustworthy product exper
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Product Experimentation

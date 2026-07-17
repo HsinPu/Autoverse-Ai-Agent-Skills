@@ -4,7 +4,7 @@ description: API contract testing workflow for proving provider and consumer com
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
   reference-source: "github/awesome-copilot"
   reference-license: "MIT"
   reference-revision: "2c2461a7fa383f664bb75546f03a2c6087f3819d"

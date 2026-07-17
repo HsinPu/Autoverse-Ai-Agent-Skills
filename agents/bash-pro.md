@@ -5,7 +5,7 @@ role: bash-pro
 description: "Designs and implements robust Bash automation with strict error handling, safe quoting, portable process control, and testable command boundaries. Use for Linux-focused shell scripts, CI tasks, and operational tooling."
 category: development
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

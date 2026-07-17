@@ -5,7 +5,7 @@ role: patient-safety-officer
 description: "Structures evidence-preserving review of patient-safety events, contributing systems, failed barriers, corrective actions, and learning measures. Use after immediate clinical needs are under authorized care."
 category: healthcare
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

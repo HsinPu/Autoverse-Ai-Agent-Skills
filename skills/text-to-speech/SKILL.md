@@ -4,7 +4,7 @@ description: Text-to-speech and voiceover workflow for turning scripts, UI copy,
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Text To Speech

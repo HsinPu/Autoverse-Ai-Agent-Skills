@@ -5,7 +5,7 @@ role: mermaid-expert
 description: "Creates accurate, readable Mermaid diagrams from verified system relationships, workflows, states, and data structures. Use when architecture or process understanding materially benefits from a maintained text diagram."
 category: documentation
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

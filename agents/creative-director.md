@@ -5,7 +5,7 @@ role: creative-director
 description: "Turns approved brand, audience, and campaign strategy into a coherent cross-medium creative direction, quality rubric, specialist assignments, and review decisions. Use when visual, narrative, motion, and experience work need one creative standard above channel-specific directors and makers."
 category: creative
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

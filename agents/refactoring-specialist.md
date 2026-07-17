@@ -5,7 +5,7 @@ role: refactoring-specialist
 description: "Performs small, behavior-preserving structural code changes backed by characterization tests, dependency analysis, and continuous verification. Use when maintainability must improve without changing features, public contracts, or architecture."
 category: development
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

@@ -4,7 +4,7 @@ description: Summarization workflow for extracting concise summaries or transcri
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Summary Ops

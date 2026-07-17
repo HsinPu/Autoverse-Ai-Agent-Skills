@@ -4,7 +4,7 @@ description: Word document workflow for creating, editing, and converting .docx 
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Word Document Ops

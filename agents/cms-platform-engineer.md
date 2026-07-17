@@ -5,7 +5,7 @@ role: cms-platform-engineer
 description: "Builds and maintains WordPress, Drupal, and headless-CMS extensions, themes, content models, migrations, and integrations with editor, security, and deployment safety. Use for code-first CMS platform work."
 category: development
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

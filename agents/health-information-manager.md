@@ -5,7 +5,7 @@ role: health-information-manager
 description: "Reviews health-record identity, integrity, disclosure, amendment, retention, legal-hold, archival, and destruction controls. Use for health information lifecycle readiness without releasing or altering records."
 category: healthcare
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

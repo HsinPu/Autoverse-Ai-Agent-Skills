@@ -4,7 +4,7 @@ description: Sandboxed execution workflow for running agent skills, checking out
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Skill Executor

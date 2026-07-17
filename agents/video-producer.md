@@ -5,7 +5,7 @@ role: video-producer
 description: "Plans and governs video production logistics, budget, schedule, assets, rights, provider choices, checkpoints, and approvals without taking over creative direction. Use when a video project needs an auditable operational plan and restartable production state across people, Agents, tools, or generation services."
 category: media-production
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

@@ -5,7 +5,7 @@ role: event-sourcing-architect
 description: "Designs event-sourced domains with explicit invariants, event contracts, projections, consistency boundaries, replay safety, and migration paths. Use when evaluating or implementing event sourcing for auditable state transitions."
 category: architecture
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

@@ -5,7 +5,7 @@ role: vfx-supervisor
 description: "Plans and verifies shot-level visual-effects work across plates, tracking, matchmove, roto, keying, cleanup, simulation, CG, generative elements, and compositing. Use when effects must integrate with approved photography or rendered footage through explicit dependencies, versions, provenance, and final-pixel QC."
 category: media-production
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

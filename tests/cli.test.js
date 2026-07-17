@@ -1,15 +1,20 @@
 const assert = require('node:assert/strict');
 const { spawnSync } = require('node:child_process');
+const fs = require('node:fs');
+const os = require('node:os');
 const path = require('node:path');
 
-const CLI_PATH = path.join(__dirname, '..', 'autoverse-cli.js');
+const CLI_PATH = path.join(__dirname, '..', 'craftroster-cli.js');
+const LEGACY_CLI_PATH = path.join(__dirname, '..', 'autoverse-cli.js');
 const EXPECTED_SKILL_COUNT = require('../skills.json').skills.length;
-const MISSING_NAME = 'definitely-not-an-autoverse-component';
+const MISSING_NAME = 'definitely-not-a-craftroster-component';
 
-function runCli(args) {
-  return spawnSync(process.execPath, [CLI_PATH, ...args], {
+function runCli(args, options = {}) {
+  const cliPath = options.cliPath || CLI_PATH;
+  return spawnSync(process.execPath, [cliPath, ...args], {
     cwd: path.dirname(CLI_PATH),
     encoding: 'utf8',
+    env: options.env || process.env,
   });
 }
 
@@ -18,7 +23,7 @@ function combinedOutput(result) {
 }
 
 function assertCliCase(testCase) {
-  const result = runCli(testCase.args);
+  const result = runCli(testCase.args, testCase);
   const output = combinedOutput(result);
 
   assert.equal(result.status, testCase.status, output);
@@ -33,7 +38,14 @@ const successCases = [
     name: 'shows help when no command is provided',
     args: [],
     status: 0,
-    stdout: /Autoverse AI Agent Skills/,
+    stdout: /CraftRoster/,
+  },
+  {
+    name: 'preserves the legacy autoverse CLI entrypoint',
+    args: ['--help'],
+    cliPath: LEGACY_CLI_PATH,
+    status: 0,
+    stdout: /CraftRoster/,
   },
   {
     name: 'supports the help command',
@@ -317,6 +329,60 @@ const notFoundCases = [
 const tests = [...successCases, ...usageErrorCases, ...notFoundCases];
 let failures = 0;
 
+function writeInstalledSkill(codexHome, name, repo) {
+  const skillDir = path.join(codexHome, 'skills', name);
+  fs.mkdirSync(skillDir, { recursive: true });
+  fs.writeFileSync(path.join(skillDir, 'SKILL.md'), `# ${name}\n`, 'utf8');
+  fs.writeFileSync(path.join(skillDir, '.skill-meta.json'), JSON.stringify({
+    repo,
+    component: 'skill',
+    target: 'codex',
+    name,
+  }), 'utf8');
+}
+
+function writeInstalledAgent(codexHome, name, repo) {
+  const agentDir = path.join(codexHome, 'agents');
+  const agentFile = `${name}.toml`;
+  fs.mkdirSync(agentDir, { recursive: true });
+  fs.writeFileSync(path.join(agentDir, agentFile), `name = "${name}"\n`, 'utf8');
+  fs.writeFileSync(path.join(agentDir, `${agentFile}.autoverse.json`), JSON.stringify({
+    repo,
+    component: 'agent',
+    target: 'codex',
+    adapter: 'codex',
+    id: name,
+    name,
+  }), 'utf8');
+}
+
+function assertOwnershipCompatibility() {
+  const codexHome = fs.mkdtempSync(path.join(os.tmpdir(), 'craftroster-cli-ownership-'));
+  try {
+    writeInstalledSkill(codexHome, 'canonical-skill', 'HsinPu/CraftRoster');
+    writeInstalledSkill(codexHome, 'legacy-skill', 'HsinPu/Autoverse-Ai-Agent-Skills');
+    writeInstalledSkill(codexHome, 'foreign-skill', 'SomeoneElse/CraftRoster');
+    writeInstalledAgent(codexHome, 'canonical-agent', 'HsinPu/CraftRoster');
+    writeInstalledAgent(codexHome, 'legacy-agent', 'HsinPu/Autoverse-Ai-Agent-Skills');
+    writeInstalledAgent(codexHome, 'foreign-agent', 'SomeoneElse/CraftRoster');
+
+    const env = { ...process.env, CODEX_HOME: codexHome };
+    const skills = runCli(['list', '--installed', '--target', 'codex'], { env });
+    assert.equal(skills.status, 0, combinedOutput(skills));
+    assert.match(skills.stdout, /canonical-skill/);
+    assert.match(skills.stdout, /legacy-skill/);
+    assert.doesNotMatch(skills.stdout, /foreign-skill/);
+
+    const agents = runCli(['list', '--installed', '--type', 'agent', '--target', 'codex'], { env });
+    assert.equal(agents.status, 0, combinedOutput(agents));
+    assert.match(agents.stdout, /canonical-agent/);
+    assert.match(agents.stdout, /legacy-agent/);
+    assert.doesNotMatch(agents.stdout, /foreign-agent/);
+  } finally {
+    fs.rmSync(codexHome, { recursive: true, force: true });
+  }
+}
+
 for (const testCase of tests) {
   try {
     assertCliCase(testCase);
@@ -326,6 +392,15 @@ for (const testCase of tests) {
     console.error(`FAIL ${testCase.name}`);
     console.error(error.stack || error.message);
   }
+}
+
+try {
+  assertOwnershipCompatibility();
+  console.log('PASS accepts canonical and legacy ownership while rejecting foreign repositories');
+} catch (error) {
+  failures += 1;
+  console.error('FAIL accepts canonical and legacy ownership while rejecting foreign repositories');
+  console.error(error.stack || error.message);
 }
 
 if (failures > 0) {

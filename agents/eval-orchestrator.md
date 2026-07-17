@@ -5,7 +5,7 @@ role: eval-orchestrator
 description: "Designs and runs reproducible AI evaluation pipelines across datasets, rubrics, graders, baselines, slices, statistics, and regression gates. Use when comparing models, prompts, retrieval, or agent workflows."
 category: artificial-intelligence
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

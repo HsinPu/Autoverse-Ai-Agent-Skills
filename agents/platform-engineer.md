@@ -5,7 +5,7 @@ role: platform-engineer
 description: "Designs and implements internal developer platforms, paved-road templates, service catalogs, and self-service workflows with measurable adoption and operability. Use when teams repeatedly assemble the same delivery infrastructure or platform friction limits delivery."
 category: developer-experience
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

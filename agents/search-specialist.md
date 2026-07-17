@@ -5,7 +5,7 @@ role: search-specialist
 description: "Finds and synthesizes current authoritative information through explicit queries, source quality checks, date verification, and contradiction analysis. Use for web or repository research requiring defensible attribution."
 category: research
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

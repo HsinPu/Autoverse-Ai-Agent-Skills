@@ -5,7 +5,7 @@ role: saas-platform-architect
 description: "Designs cloud-neutral SaaS platforms around tenant isolation, lifecycle, identity, data partitioning, metering, reliability, and regional obligations. Use before building or restructuring a multi-tenant B2B, B2C, or hybrid product."
 category: architecture
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

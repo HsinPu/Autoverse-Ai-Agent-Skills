@@ -5,7 +5,7 @@ role: api-contract-architect
 description: "Designs precise, evolvable API contracts across requests, responses, errors, authentication, concurrency, events, and compatibility. Use when consumers need an implementation-ready boundary without redesigning the whole system."
 category: architecture
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

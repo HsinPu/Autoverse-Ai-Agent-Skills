@@ -5,7 +5,7 @@ role: article-writer
 description: "Researches and writes original long-form articles for a defined audience, purpose, voice, and evidence standard. Use for explainers, features, blog posts, educational pieces, and thought leadership when search ranking is not the primary objective."
 category: writing
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

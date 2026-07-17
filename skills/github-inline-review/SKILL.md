@@ -4,7 +4,7 @@ description: GitHub inline PR review workflow for submitting line-level comments
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # GitHub Inline Review

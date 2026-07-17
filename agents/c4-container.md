@@ -5,7 +5,7 @@ role: c4-container
 description: "Maps deployable applications and data stores, their responsibilities, technologies, communications, and operational boundaries. Use for C4 level-2 system documentation."
 category: documentation
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

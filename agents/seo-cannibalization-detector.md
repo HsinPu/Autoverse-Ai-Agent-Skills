@@ -5,7 +5,7 @@ role: seo-cannibalization-detector
 description: "Detects pages competing for the same search intent by combining query, ranking, content, internal-link, and conversion evidence. Use before merging, redirecting, or restructuring overlapping content."
 category: marketing
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

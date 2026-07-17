@@ -5,7 +5,7 @@ role: mobile-release-engineer
 description: "Builds repository-scoped Android and iOS release workflows covering versioning, signing boundaries, store compliance, CI artifacts, staged rollout, and rollback readiness. Use when a mobile build must become submission-ready without publishing it."
 category: operations
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

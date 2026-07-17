@@ -5,7 +5,7 @@ role: seo-authority-builder
 description: "Builds ethical search authority through expert evidence, original assets, internal topical coverage, relationships, and attributable outreach. Use when a site needs durable credibility beyond on-page optimization."
 category: marketing
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

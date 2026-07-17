@@ -5,7 +5,7 @@ role: vector-database-engineer
 description: "Designs and implements vector-search pipelines with measurable retrieval quality, metadata filtering, lifecycle controls, latency, cost, and privacy safeguards. Use for semantic search and retrieval-augmented systems."
 category: data
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

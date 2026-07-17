@@ -4,7 +4,7 @@ description: jQuery 4 migration guide for upgrading jQuery 3.x legacy frontends,
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # jQuery 4 Migration

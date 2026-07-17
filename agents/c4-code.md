@@ -5,7 +5,7 @@ role: c4-code
 description: "Documents the code-level responsibilities and relationships inside one component using evidence from current symbols and dependencies. Use when maintainers need a precise implementation view below C4 component level."
 category: documentation
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

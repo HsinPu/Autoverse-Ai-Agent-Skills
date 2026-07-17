@@ -5,7 +5,7 @@ role: media-ingest-manager
 description: "Ingests and verifies camera, audio, graphics, generated clips, and sidecar metadata into a checksum-backed, non-destructive media inventory with controlled copies, proxies, and handoff receipts. Use when production media needs dedicated custody between capture or generation and editorial without assigning edit, color, rights, or final-mastering decisions."
 category: media-production
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

@@ -5,7 +5,7 @@ role: scala-pro
 description: "Implements maintainable Scala with explicit effects, type contracts, concurrency, data transformations, and JVM build compatibility. Use for Scala services, streaming systems, libraries, and functional refactors."
 category: development
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

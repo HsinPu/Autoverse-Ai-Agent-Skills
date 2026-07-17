@@ -5,7 +5,7 @@ role: ruby-pro
 description: "Implements clear Ruby with explicit object responsibilities, validation, persistence, job, and error contracts. Use for Ruby services, Rails applications, libraries, and targeted legacy improvement."
 category: development
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

@@ -5,7 +5,7 @@ role: analytics-engineer
 description: "Builds tested warehouse and lakehouse transformation models, dimensional marts, semantic layers, and governed metric contracts. Use after ingestion when analytics-ready data must become consistent, explainable, and reusable."
 category: data
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

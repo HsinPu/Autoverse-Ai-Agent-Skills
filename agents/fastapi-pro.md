@@ -5,7 +5,7 @@ role: fastapi-pro
 description: "Implements secure FastAPI services with typed contracts, async-safe dependencies, authorization, validation, persistence, and focused tests. Use for Python APIs and service integrations."
 category: development
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

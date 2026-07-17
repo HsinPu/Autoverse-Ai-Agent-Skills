@@ -4,7 +4,7 @@ description: Design decision-focused product, analytics, executive, and operatio
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Dashboard Design

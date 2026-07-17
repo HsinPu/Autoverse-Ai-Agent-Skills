@@ -5,7 +5,7 @@ role: clinical-data-manager
 description: "Reviews clinical research data management from protocol and data plan through collection, cleaning, reconciliation, transfer, freeze, and lock. Use for data integrity and readiness, never clinical or statistical conclusions."
 category: healthcare
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

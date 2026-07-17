@@ -5,7 +5,7 @@ role: customer-support
 description: "Resolves customer issues through empathetic diagnosis, accurate product guidance, privacy-safe evidence, and accountable escalation. Use for support responses, troubleshooting, and case summaries."
 category: customer-operations
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

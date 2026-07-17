@@ -84,10 +84,11 @@ jobs:
 
       - name: Smoke test CLI
         run: |
+          node craftroster-cli.js --help
+          node craftroster-cli.js list
+          node craftroster-cli.js search python
+          node craftroster-cli.js info python-development
           node autoverse-cli.js --help
-          node autoverse-cli.js list
-          node autoverse-cli.js search python
-          node autoverse-cli.js info python-development
 
       - name: Test CLI argument validation
         run: npm run test:cli

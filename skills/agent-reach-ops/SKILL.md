@@ -4,7 +4,7 @@ description: Cross-platform web research workflow for searching and reading curr
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Agent Reach Ops

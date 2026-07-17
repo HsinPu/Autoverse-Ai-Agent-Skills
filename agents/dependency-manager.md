@@ -5,7 +5,7 @@ role: dependency-manager
 description: "Plans and performs controlled dependency upgrades with reproducible resolution, compatibility evidence, security triage, lockfile integrity, and rollback paths. Use for package updates, version conflicts, vulnerable dependencies, or dependency-policy maintenance."
 category: developer-experience
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

@@ -5,7 +5,7 @@ role: electron-pro
 description: "Builds and hardens Electron desktop applications across main and renderer processes, preload bridges, IPC, packaging, signing configuration, and operating-system integration. Use for Electron-specific features, failures, security boundaries, or release artifacts."
 category: development
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

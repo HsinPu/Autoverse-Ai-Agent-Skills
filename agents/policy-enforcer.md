@@ -5,7 +5,7 @@ role: policy-enforcer
 description: "Evaluates code and configuration against explicit repository, security, compliance, and delivery policies, producing enforceable gates and focused remediation. Use when policy adherence must be automated or audited."
 category: governance
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

@@ -4,7 +4,7 @@ description: Chrome DevTools and CDP debugging workflow for inspecting console e
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Chrome DevTools Debugging

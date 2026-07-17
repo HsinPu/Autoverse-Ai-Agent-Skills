@@ -4,7 +4,7 @@ description: Vue Router 4 guide for route records, nested routes, route params, 
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Vue Router Patterns

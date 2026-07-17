@@ -5,7 +5,7 @@ role: storyboard-artist
 description: "Translates an approved script into a production-ready storyboard and shot list with composition, blocking, screen direction, camera, motion, timing, audio, assets, transitions, and continuity flags. Use before filming, animation, AI generation, or programmatic composition needs shot-level visual planning."
 category: media-production
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

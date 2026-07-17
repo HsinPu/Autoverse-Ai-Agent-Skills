@@ -4,7 +4,7 @@ description: Continuous improvement workflow for logging learnings, errors, and 
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Self-Improvement

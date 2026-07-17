@@ -4,7 +4,7 @@ description: Focused Windows Downloads and Desktop cleanup workflow for inventor
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Downloads Desktop Cleanup

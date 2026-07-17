@@ -4,7 +4,7 @@ description: Firebase development workflow covering Authentication, Firestore, R
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Firebase Development

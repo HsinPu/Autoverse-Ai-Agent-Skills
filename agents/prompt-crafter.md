@@ -5,7 +5,7 @@ role: prompt-crafter
 description: "Writes focused task prompts with clear context, inputs, constraints, examples, and output contracts. Use when a single model interaction needs a reliable, human-readable instruction."
 category: artificial-intelligence
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

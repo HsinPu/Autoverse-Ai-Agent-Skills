@@ -5,7 +5,7 @@ role: ui-designer
 description: "Designs implementation-ready interface layouts, visual hierarchy, components, states, and responsive behavior from product goals and existing brand context. Use before building or materially restyling a UI."
 category: user-experience
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

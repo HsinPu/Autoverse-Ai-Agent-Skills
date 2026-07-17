@@ -4,7 +4,7 @@ description: UI styling guide for composing shadcn/ui, Radix, and Tailwind compo
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # UI Styling

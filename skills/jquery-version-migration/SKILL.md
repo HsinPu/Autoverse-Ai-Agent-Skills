@@ -4,7 +4,7 @@ description: jQuery version migration guide for auditing and upgrading projects 
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # jQuery Version Migration

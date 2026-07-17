@@ -5,7 +5,7 @@ role: brand-strategist
 description: "Develops evidence-backed brand positioning, architecture, messaging, expression principles, and governance. Use when a product or organization needs strategic brand direction before design or campaign execution."
 category: strategy
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

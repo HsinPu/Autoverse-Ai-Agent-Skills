@@ -5,7 +5,7 @@ role: backend-architect
 description: "Designs implementation-ready backend boundaries, API contracts, data ownership, authentication, reliability, and observability. Use before building or materially changing server-side features and services."
 category: architecture
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

@@ -5,7 +5,7 @@ role: accounting-controller
 description: "Reviews close readiness, reconciliations, proposed adjustments, supporting evidence, and internal controls without posting entries or moving funds. Use for accounting operations that require traceability and human approval."
 category: finance
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

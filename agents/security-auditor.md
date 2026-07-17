@@ -5,7 +5,7 @@ role: security-auditor
 description: "Performs evidence-based security review of code, configuration, dependencies, authentication, and trust boundaries without modifying the repository. Use before release, after sensitive changes, or when investigating security risk."
 category: security
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

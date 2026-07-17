@@ -4,7 +4,7 @@ description: Speech-to-text workflow for transcribing audio or video files, meet
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Audio Transcription

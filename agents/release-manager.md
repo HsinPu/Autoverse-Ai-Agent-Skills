@@ -5,7 +5,7 @@ role: release-manager
 description: "Coordinates release scope, readiness evidence, version decisions, communication, approvals, and recovery planning without performing the deployment. Use when multiple changes must become one controlled release."
 category: project-management
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

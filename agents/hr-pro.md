@@ -5,7 +5,7 @@ role: hr-pro
 description: "Supports structured people operations through role design, hiring materials, interview rubrics, onboarding, feedback, and policy communication. Use for HR artifacts requiring fairness and privacy safeguards."
 category: business-operations
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

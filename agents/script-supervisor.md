@@ -5,7 +5,7 @@ role: script-supervisor
 description: "Tracks take-level script, dialogue, action, timing, coverage, slate, and approved deviations during production, producing editor-ready records without replacing the screenplay, visual continuity baseline, or edit. Use when filmed or generated shot execution needs a dedicated owner for what was actually captured and whether planned coverage remains complete."
 category: media-production
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

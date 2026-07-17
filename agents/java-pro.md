@@ -5,7 +5,7 @@ role: java-pro
 description: "Implements production Java with clear domain, concurrency, resource, exception, and build boundaries while preserving framework conventions. Use for JVM services, libraries, migrations, and difficult Java defects."
 category: development
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

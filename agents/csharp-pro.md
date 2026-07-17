@@ -5,7 +5,7 @@ role: csharp-pro
 description: "Implements maintainable C# and .NET code with clear async, dependency, resource, nullability, and test boundaries. Use for .NET services, desktop tools, libraries, and scoped modernization work."
 category: development
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

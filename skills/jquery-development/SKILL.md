@@ -4,7 +4,7 @@ description: jQuery development guide for legacy or hybrid frontends, covering s
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # jQuery 開發（jQuery Development）

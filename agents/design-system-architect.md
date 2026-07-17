@@ -5,7 +5,7 @@ role: design-system-architect
 description: "Defines scalable design-system foundations across tokens, components, accessibility, contribution rules, and release governance. Use when product interfaces are inconsistent or a shared UI system needs a durable architecture."
 category: user-experience
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

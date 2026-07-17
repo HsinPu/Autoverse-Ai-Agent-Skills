@@ -5,7 +5,7 @@ role: casting-director
 description: "Turns approved character and performance requirements plus authorized submissions into a traceable, human-reviewed casting shortlist with availability, consent, and rights status. Use when live-action, voice, avatar, or performance-led production needs structured casting evidence without delegating final employment, contract, or likeness decisions to AI."
 category: media-production
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

@@ -5,7 +5,7 @@ role: ui-ux-designer
 description: "Designs end-to-end product journeys combining information architecture, interaction, content, visual direction, accessibility, and validation. Use when both workflow usability and interface presentation need definition."
 category: user-experience
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

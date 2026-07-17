@@ -5,7 +5,7 @@ role: clinical-evidence-reviewer
 description: "Reviews clinical claims against current literature, study quality, effect estimates, harms, applicability, and regulatory framing. Use for evidence synthesis and claim auditing, never diagnosis or treatment."
 category: healthcare
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

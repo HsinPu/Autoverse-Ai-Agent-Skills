@@ -4,7 +4,7 @@ description: UGC-style video ad workflow for AI-assisted creator ads, competitor
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # UGC Video Ads

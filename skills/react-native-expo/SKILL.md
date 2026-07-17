@@ -4,7 +4,7 @@ description: React Native and Expo development workflow covering Expo Router, na
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # React Native Expo

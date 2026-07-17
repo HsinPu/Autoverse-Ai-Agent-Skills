@@ -1,18 +1,19 @@
 {
-  "name": "autoverse-ai-agent-skills",
+  "name": "craftroster",
   "version": "1.0.0",
-  "description": "Autoverse AI agent and skill collection with no-Node installers and a catalog query CLI",
+  "description": "Cross-platform AI agent, skill, and workflow catalog with no-Node installers and a query CLI",
   "license": "Apache-2.0",
   "author": "HsinPu",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HsinPu/Autoverse-Ai-Agent-Skills.git"
+    "url": "git+https://github.com/HsinPu/CraftRoster.git"
   },
   "bugs": {
-    "url": "https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/issues"
+    "url": "https://github.com/HsinPu/CraftRoster/issues"
   },
-  "homepage": "https://github.com/HsinPu/Autoverse-Ai-Agent-Skills#readme",
+  "homepage": "https://github.com/HsinPu/CraftRoster#readme",
   "bin": {
+    "craftroster": "./craftroster-cli.js",
     "autoverse": "./autoverse-cli.js"
   },
   "scripts": {
@@ -44,6 +45,7 @@
     "smoke:install:bash:quick": "bash scripts/smoke-install.sh --quick"
   },
   "files": [
+    "craftroster-cli.js",
     "autoverse-cli.js",
     "adapters",
     "agents",

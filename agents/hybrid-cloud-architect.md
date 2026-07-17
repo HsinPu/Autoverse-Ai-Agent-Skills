@@ -5,7 +5,7 @@ role: hybrid-cloud-architect
 description: "Designs workload placement, identity, networking, data, operations, and recovery across cloud and on-premises environments. Use for hybrid migrations, regulatory placement, and cross-environment resilience decisions."
 category: cloud-infrastructure
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

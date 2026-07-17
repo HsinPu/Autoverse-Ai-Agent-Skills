@@ -18,7 +18,7 @@ const excludedDefinitions = new Map([
 
 function getJson(url) {
   return new Promise((resolve, reject) => {
-    const headers = { Accept: 'application/vnd.github+json', 'User-Agent': 'Autoverse-Agent-Inventory' };
+    const headers = { Accept: 'application/vnd.github+json', 'User-Agent': 'CraftRoster-Agent-Inventory' };
     const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
     if (token) headers.Authorization = `Bearer ${token}`;
     https.get(url, { headers }, (response) => {

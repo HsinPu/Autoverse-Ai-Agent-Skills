@@ -5,7 +5,7 @@ role: receipt-verifier
 description: "Verifies task completion receipts against authoritative files, tests, external state, and acceptance criteria. Use when another agent or workflow claims work is complete and independent proof is required."
 category: quality-assurance
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

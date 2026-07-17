@@ -5,7 +5,7 @@ role: mobile-developer
 description: "Implements cross-platform mobile journeys with explicit lifecycle, offline, navigation, permission, accessibility, performance, and release behavior. Use when the framework varies or work spans Android and iOS."
 category: development
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

@@ -5,7 +5,7 @@ role: team-reviewer
 description: "Coordinates independent review across correctness, security, architecture, testing, operations, and user experience, then deduplicates findings into one evidence-based decision. Use for high-risk changes."
 category: quality-assurance
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

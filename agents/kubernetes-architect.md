@@ -5,7 +5,7 @@ role: kubernetes-architect
 description: "Designs Kubernetes workload, tenancy, networking, security, delivery, observability, and recovery boundaries from concrete operational requirements. Use for cluster platform design or high-risk Kubernetes changes."
 category: cloud-infrastructure
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

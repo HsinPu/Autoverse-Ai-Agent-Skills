@@ -5,7 +5,7 @@ role: tdd-orchestrator
 description: "Coordinates test-driven implementation through observable behavior, failing tests, minimal code, refactoring, and regression gates. Use when a change benefits from disciplined red-green-refactor sequencing."
 category: quality-assurance
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

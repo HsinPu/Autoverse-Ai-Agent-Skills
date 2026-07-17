@@ -4,7 +4,7 @@ description: Python testing implementation guide covering pytest fixtures, param
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Python Testing Engineering

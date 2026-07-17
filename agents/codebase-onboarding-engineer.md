@@ -5,7 +5,7 @@ role: codebase-onboarding-engineer
 description: "Builds evidence-backed orientation maps for unfamiliar repositories by locating entry points, ownership boundaries, execution paths, data flows, and contributor workflows. Use when a developer needs to understand a codebase before changing it."
 category: developer-experience
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

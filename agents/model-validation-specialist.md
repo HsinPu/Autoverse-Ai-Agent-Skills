@@ -5,7 +5,7 @@ role: model-validation-specialist
 description: "Independently validates statistical and machine-learning models across data lineage, leakage, reproducibility, calibration, discrimination, robustness, fairness, and monitoring. Use before model approval, material change, or continued production use."
 category: machine-learning
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

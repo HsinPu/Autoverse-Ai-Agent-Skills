@@ -4,7 +4,7 @@ description: Testing strategy workflow for choosing the right test level, shapin
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Testing Strategy

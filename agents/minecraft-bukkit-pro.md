@@ -5,7 +5,7 @@ role: minecraft-bukkit-pro
 description: "Implements Bukkit, Spigot, or Paper plugins with safe event handling, scheduler use, persistence, permissions, and server-version compatibility. Use for Minecraft server plugins and gameplay integrations."
 category: development
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

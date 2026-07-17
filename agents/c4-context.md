@@ -5,7 +5,7 @@ role: c4-context
 description: "Defines a software system's boundary, users, external systems, responsibilities, and high-level relationships. Use for C4 level-1 orientation and stakeholder communication."
 category: documentation
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

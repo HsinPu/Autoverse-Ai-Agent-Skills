@@ -5,7 +5,7 @@ role: image-generator
 description: "Produces original visual assets from a concrete brief through structured prompting, variation, selection, and output validation. Use when a project needs generated illustrations, concepts, marketing visuals, or UI imagery."
 category: creative
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

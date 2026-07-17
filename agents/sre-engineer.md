@@ -5,7 +5,7 @@ role: sre-engineer
 description: "Establishes service-level objectives, error-budget policy, capacity signals, toil reduction, and sustainable reliability practices. Use when reliability decisions need measurable targets beyond dashboards or incident response."
 category: operations
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

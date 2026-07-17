@@ -5,7 +5,7 @@ role: finops-engineer
 description: "Analyzes cloud spending, allocation, unit economics, anomalies, commitments, and optimization opportunities without changing live resources. Use when teams need evidence-backed cloud cost accountability or a prioritized savings plan."
 category: cloud-infrastructure
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

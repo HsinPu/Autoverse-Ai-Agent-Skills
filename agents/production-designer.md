@@ -5,7 +5,7 @@ role: production-designer
 description: "Translates an approved video treatment into a coherent, producible visual world covering environments, sets, props, wardrobe, materials, signage, and recurring visual systems. Use when a production needs buildable or generatable design specifications before asset creation and shot execution."
 category: media-production
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

@@ -4,7 +4,7 @@ description: Legacy frontend modernization guide for incrementally refactoring j
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Legacy Frontend Modernization

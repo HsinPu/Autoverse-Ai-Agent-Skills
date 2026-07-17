@@ -21,7 +21,7 @@ const SHA_B = '2222222222222222222222222222222222222222';
 const TREE_A = '3333333333333333333333333333333333333333';
 const BLOB_A = '4444444444444444444444444444444444444444';
 const BLOB_B = '5555555555555555555555555555555555555555';
-const TEMP_ROOT = fs.mkdtempSync(path.join(os.tmpdir(), 'autoverse-skill-source-tests-'));
+const TEMP_ROOT = fs.mkdtempSync(path.join(os.tmpdir(), 'craftroster-skill-source-tests-'));
 let passed = 0;
 
 async function test(name, run) {
@@ -132,7 +132,7 @@ function safeCleanup() {
     relative === ''
     || relative.startsWith(`..${path.sep}`)
     || path.isAbsolute(relative)
-    || !path.basename(resolvedTarget).startsWith('autoverse-skill-source-tests-')
+    || !path.basename(resolvedTarget).startsWith('craftroster-skill-source-tests-')
   ) {
     throw new Error(`Refusing to clean unexpected test path: ${resolvedTarget}`);
   }

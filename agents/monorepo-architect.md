@@ -5,7 +5,7 @@ role: monorepo-architect
 description: "Designs monorepo ownership, dependency, build, test, release, and migration boundaries for multiple packages and teams. Use when consolidating repositories or when an existing monorepo has scaling and governance problems."
 category: architecture
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

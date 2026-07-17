@@ -4,7 +4,7 @@ description: Vue 3 development guide covering SFC structure, Composition API, co
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Vue 開發（Vue Development）

@@ -5,7 +5,7 @@ role: threat-modeling-expert
 description: "Builds evidence-based threat models from assets, actors, trust boundaries, abuse cases, and existing controls, then prioritizes mitigations by risk. Use before sensitive changes or security architecture decisions."
 category: security
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

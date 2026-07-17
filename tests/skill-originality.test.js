@@ -15,7 +15,7 @@ const {
 const { computeReferenceLock } = require('../scripts/verify-skill-sources');
 
 const SHA = '1111111111111111111111111111111111111111';
-const TEMP_ROOT = fs.mkdtempSync(path.join(os.tmpdir(), 'autoverse-skill-originality-'));
+const TEMP_ROOT = fs.mkdtempSync(path.join(os.tmpdir(), 'craftroster-skill-originality-'));
 let passed = 0;
 
 async function test(name, callback) {
@@ -41,7 +41,7 @@ function createFixture(name, options = {}) {
       description: 'Fixture',
       category: 'testing',
       author: 'HsinPu',
-      source: 'HsinPu/Autoverse-Ai-Agent-Skills',
+      source: 'HsinPu/CraftRoster',
       license: 'Apache-2.0',
       tags: ['testing', 'originality'],
       reference: {
@@ -100,7 +100,7 @@ function safeCleanup() {
     relative === ''
     || relative.startsWith(`..${path.sep}`)
     || path.isAbsolute(relative)
-    || !path.basename(resolvedTarget).startsWith('autoverse-skill-originality-')
+    || !path.basename(resolvedTarget).startsWith('craftroster-skill-originality-')
   ) {
     throw new Error(`Refusing to clean unexpected test path: ${resolvedTarget}`);
   }
@@ -193,7 +193,7 @@ async function main() {
         'license: Apache-2.0',
         'metadata:',
         '  author: HsinPu',
-        '  source: HsinPu/Autoverse-Ai-Agent-Skills',
+        '  source: HsinPu/CraftRoster',
         'reference:',
         '  source: example/reference',
         '  license: MIT',

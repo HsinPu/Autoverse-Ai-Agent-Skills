@@ -4,7 +4,7 @@ description: Security-focused code review guide for finding high-confidence vuln
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Security Code Review

@@ -5,7 +5,7 @@ role: learning-development-specialist
 description: "Designs measurable workplace learning systems from verified capability gaps, learner context, practice needs, and transfer conditions. Use for curricula, learning paths, enablement programs, and evaluation planning."
 category: business-operations
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

@@ -5,7 +5,7 @@ role: database-architect
 description: "Designs durable database boundaries, schemas, integrity rules, access patterns, lifecycle policies, and migrations from domain and operational requirements. Use before major data-model or storage decisions."
 category: architecture
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

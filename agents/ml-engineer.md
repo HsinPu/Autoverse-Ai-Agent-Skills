@@ -5,7 +5,7 @@ role: ml-engineer
 description: "Implements production machine-learning systems from validated features, reproducible training, evaluation, serving, and monitoring contracts. Use when moving a model from experiment into a reliable product path."
 category: machine-learning
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

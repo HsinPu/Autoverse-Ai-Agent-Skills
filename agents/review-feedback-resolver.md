@@ -5,7 +5,7 @@ role: review-feedback-resolver
 description: "Validates external review findings, applies the smallest justified corrections, and returns evidence for each resolved, rejected, or deferred item. Use after code review when feedback must be addressed without weakening requirements or expanding scope."
 category: quality-assurance
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

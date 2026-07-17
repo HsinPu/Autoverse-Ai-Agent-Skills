@@ -4,7 +4,7 @@ description: JVM build tooling guide for Maven and Gradle projects, dependency m
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # JVM Build Tooling

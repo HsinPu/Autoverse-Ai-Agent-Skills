@@ -5,7 +5,7 @@ role: search-relevance-engineer
 description: "Improves application search quality through query analysis, judged evaluation sets, retrieval, ranking, reranking, and controlled experiments. Use when users cannot find the right results or a search change needs measurable relevance validation."
 category: data
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

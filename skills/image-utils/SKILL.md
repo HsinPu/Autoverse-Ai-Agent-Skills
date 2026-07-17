@@ -4,7 +4,7 @@ description: Deterministic image post-processing workflow for resizing, cropping
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Image Utils

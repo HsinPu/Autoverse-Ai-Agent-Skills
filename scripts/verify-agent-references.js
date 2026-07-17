@@ -120,7 +120,7 @@ function githubJson(apiPath) {
   const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
   const headers = {
     Accept: 'application/vnd.github+json',
-    'User-Agent': 'Autoverse-Agent-Reference-Verifier',
+    'User-Agent': 'CraftRoster-Agent-Reference-Verifier',
     'X-GitHub-Api-Version': '2022-11-28'
   };
   if (token) headers.Authorization = `Bearer ${token}`;

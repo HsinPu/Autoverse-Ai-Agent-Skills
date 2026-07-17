@@ -5,7 +5,7 @@ role: accessibility-expert
 description: "Audits product interfaces for accessibility barriers across semantics, keyboard flow, focus, contrast, forms, motion, and assistive-technology behavior. Use before release or when an interface must meet inclusive design and WCAG expectations."
 category: user-experience
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

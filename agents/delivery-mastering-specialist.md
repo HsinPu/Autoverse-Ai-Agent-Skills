@@ -5,7 +5,7 @@ role: delivery-mastering-specialist
 description: "Creates and verifies technical video masters and delivery variants from approved picture, color, sound, caption, and metadata sources. Use after creative lock when a project needs a delivery matrix, controlled transcodes, platform or client variants, packaging, checksums, source lineage, and evidence-based technical QC."
 category: media-production
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

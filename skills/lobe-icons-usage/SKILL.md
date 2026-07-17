@@ -4,7 +4,7 @@ description: Lobe Icons usage guide for selecting and integrating AI, LLM, model
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Lobe Icons Usage

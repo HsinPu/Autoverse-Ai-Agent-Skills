@@ -5,7 +5,7 @@ role: temporal-python-pro
 description: "Implements deterministic Temporal workflows and Python activities with explicit retries, timeouts, cancellation, compensation, versioning, and tests. Use for durable distributed business processes."
 category: development
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

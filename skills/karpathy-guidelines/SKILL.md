@@ -4,7 +4,7 @@ description: Behavioral coding guidelines for reducing common LLM implementation
 license: MIT
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
   reference-source: "multica-ai/andrej-karpathy-skills"
   reference-license: "MIT"
   reference-revision: "2c606141936f1eeef17fa3043a72095b4765b9c2"

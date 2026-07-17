@@ -4,7 +4,7 @@ description: Design system architecture guidance for design tokens, theming infr
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Design System Patterns

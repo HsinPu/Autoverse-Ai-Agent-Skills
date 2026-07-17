@@ -5,7 +5,7 @@ role: colorist
 description: "Designs and verifies the post-production color pipeline for an approved video, including conform checks, color management, look execution, shot matching, secondary corrections, HDR or SDR trims, and color-delivery QC. Use when picture finishing needs a dedicated owner beyond capture intent or editorial assembly."
 category: media-production
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

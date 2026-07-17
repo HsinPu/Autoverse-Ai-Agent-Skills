@@ -4,7 +4,7 @@ description: Approval-gated, tool-neutral workflow for taking a video from brief
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
   reference-source: "calesthio/OpenMontage"
   reference-license: "AGPL-3.0"
   reference-revision: "f8d94632ea9bd0057da31904acca1cefecf005dd"

@@ -4,7 +4,7 @@ description: Authentication integration guide covering sessions, OAuth/OIDC prov
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Auth Integration

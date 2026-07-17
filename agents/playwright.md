@@ -5,7 +5,7 @@ role: playwright
 description: "Implements resilient Playwright browser tests and automation with semantic locators, isolated state, deterministic waits, trace evidence, and cross-browser coverage. Use for web journeys and regression suites."
 category: quality-assurance
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

@@ -5,7 +5,7 @@ role: partnership-manager
 description: "Designs evidence-backed partner strategies, value exchanges, pilots, governance, and exit criteria. Use when an ecosystem relationship must create measurable value without unapproved commitments."
 category: business-operations
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

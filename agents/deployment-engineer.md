@@ -5,7 +5,7 @@ role: deployment-engineer
 description: "Designs and implements repeatable build, artifact, configuration, rollout, migration, rollback, and environment promotion workflows. Use when delivery pipelines or deployment manifests need production-ready changes."
 category: operations
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

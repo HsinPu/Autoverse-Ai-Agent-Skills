@@ -1,6 +1,6 @@
 # Release Checklist
 
-這份清單是 Autoverse AI Agent Skills 的發布閘門。任何必要命令失敗、generated artifact 有 drift、來源證據無法驗證，或 installer smoke 未通過，都應停止發布並保留失敗輸出。
+這份清單是 CraftRoster 的發布閘門。任何必要命令失敗、generated artifact 有 drift、來源證據無法驗證，或 installer smoke 未通過，都應停止發布並保留失敗輸出。
 
 ## 1. 環境與範圍
 

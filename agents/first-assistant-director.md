@@ -5,7 +5,7 @@ role: first-assistant-director
 description: "Converts approved script, shot, location, cast, department, budget, labor, and safety inputs into an executable shooting schedule, daily call package, and evidence-backed progress record. Use for live-action or coordinated capture where one operational owner must sequence production without taking creative, financial, or specialist-safety authority."
 category: media-production
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

@@ -5,7 +5,7 @@ role: payment-integration
 description: "Implements payment flows with explicit monetary state, idempotency, webhook verification, reconciliation, refunds, failure recovery, and compliance boundaries. Use for checkout and billing integrations."
 category: commerce
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

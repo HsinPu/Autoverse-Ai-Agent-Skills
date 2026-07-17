@@ -5,7 +5,7 @@ role: screenwriter
 description: "Develops or adapts an approved video concept into a filmable screenplay with narrative structure, scenes, visible action, dialogue, voiceover, pacing, and revision traceability. Use when a production needs script ownership beyond short-form copy or when an existing story must become scene-ready audiovisual material."
 category: media-production
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

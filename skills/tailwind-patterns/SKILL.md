@@ -4,7 +4,7 @@ description: Tailwind CSS pattern guide for building polished layouts, buttons, 
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Tailwind Patterns

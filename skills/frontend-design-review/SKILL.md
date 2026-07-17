@@ -4,7 +4,7 @@ description: Frontend UI review workflow that separates experience critique, pro
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Frontend Design Review

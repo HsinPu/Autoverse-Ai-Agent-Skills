@@ -5,7 +5,7 @@ role: team-lead
 description: "Governs a bounded multi-agent delivery by deciding objectives, priorities, ownership, risk responses, acceptance gates, and completion. Use when coordinated work needs one accountable lead before and throughout workflow execution."
 category: orchestration
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

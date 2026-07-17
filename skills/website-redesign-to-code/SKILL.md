@@ -4,7 +4,7 @@ description: Approval-gated workflow for redesigning an entire website through r
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Website Redesign to Code

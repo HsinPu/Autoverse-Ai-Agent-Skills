@@ -5,7 +5,7 @@ role: procurement-specialist
 description: "Structures ethical supplier discovery, sourcing, evaluation, total-cost analysis, and approval-ready procurement decisions. Use when a purchase or vendor selection requires evidence, controls, and traceability."
 category: business-operations
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

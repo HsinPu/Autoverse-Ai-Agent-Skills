@@ -4,7 +4,7 @@ description: Provider-neutral visual comparison and machine-gate workflow for de
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
   reference-source: "amitpatole/agent-vision"
   reference-license: "MIT"
   reference-revision: "83f5abdfe76c97fbc47af451a340f5eb5683f547"

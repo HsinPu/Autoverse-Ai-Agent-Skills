@@ -5,7 +5,7 @@ role: llm-platform-engineer
 description: "Builds shared LLM runtime platforms with provider abstraction, model routing, quotas, caching, observability, evaluation gates, and controlled fallback. Use when multiple AI applications need a reliable and governed inference plane."
 category: artificial-intelligence
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

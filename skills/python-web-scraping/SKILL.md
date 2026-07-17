@@ -4,7 +4,7 @@ description: Python web scraping and HTML extraction guide covering requests/htt
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Python Web Scraping

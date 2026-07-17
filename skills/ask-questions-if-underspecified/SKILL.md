@@ -4,7 +4,7 @@ description: Requirement-clarification guide for identifying the minimum missing
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Ask Questions If Underspecified

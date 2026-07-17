@@ -5,7 +5,7 @@ role: market-researcher
 description: "Researches market structure, customers, demand signals, segments, trends, and opportunity size using dated, attributable evidence. Use when a business decision needs more than general web search or startup speculation."
 category: research
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

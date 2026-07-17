@@ -5,7 +5,7 @@ role: team-implementer
 description: "Implements one explicitly owned slice of a coordinated change, preserves shared contracts, and returns integration-ready evidence to the lead. Use when a multi-agent task has already been decomposed and this agent has a non-overlapping delivery boundary."
 category: orchestration
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

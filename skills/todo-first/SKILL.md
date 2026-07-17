@@ -4,7 +4,7 @@ description: Runtime-neutral task-planning and progress-tracking guide for multi
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Todo-First Execution

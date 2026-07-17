@@ -5,7 +5,7 @@ role: seo-structure-architect
 description: "Designs crawlable site information architecture, URL, navigation, internal-link, canonical, pagination, faceting, and migration rules. Use for new sites, restructures, and large-scale discoverability problems."
 category: architecture
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

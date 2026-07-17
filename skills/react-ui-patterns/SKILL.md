@@ -4,7 +4,7 @@ description: React UI state patterns for loading, error, empty, optimistic updat
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # React UI Patterns

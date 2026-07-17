@@ -5,7 +5,7 @@ role: dx-optimizer
 description: "Diagnoses and improves developer setup, feedback loops, commands, errors, documentation, and CI friction using measured workflows. Use when repository contribution is slow or unreliable."
 category: developer-experience
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

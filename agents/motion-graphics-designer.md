@@ -5,7 +5,7 @@ role: motion-graphics-designer
 description: "Designs and verifies a reusable motion-graphics system for titles, lower thirds, callouts, diagrams, charts, interface sequences, kinetic typography, transitions, and end cards. Use when approved copy or data needs brand-consistent animated graphics with explicit timing, layout, accessibility, render, and editorial handoff rules."
 category: media-production
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

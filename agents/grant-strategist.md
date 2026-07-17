@@ -5,7 +5,7 @@ role: grant-strategist
 description: "Evaluates funding opportunities and builds compliant, evidence-backed grant strategies across fit, outcomes, partnerships, budgets, work plans, and review gates. Use before committing to a grant application or when a proposal needs a defensible funding case."
 category: strategy
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

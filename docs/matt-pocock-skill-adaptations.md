@@ -1,6 +1,6 @@
 # Matt Pocock Skill Adaptation Ledger
 
-This ledger records how selected concepts from `mattpocock/skills` were studied and independently redesigned for Autoverse.
+This ledger records how selected concepts from `mattpocock/skills` were studied and independently redesigned for CraftRoster.
 
 ## Pinned Source
 
@@ -10,11 +10,11 @@ This ledger records how selected concepts from `mattpocock/skills` were studied 
 - Reference license: [MIT](https://github.com/mattpocock/skills/blob/e9fcdf95b402d360f90f1db8d776d5dd450f9234/LICENSE)
 - Reviewed on: 2026-07-15
 
-The canonical Autoverse packages keep `source: HsinPu/Autoverse-Ai-Agent-Skills`, `author: HsinPu` in the catalog, and `license: Apache-2.0`. The upstream repository is recorded separately as a pinned reference and does not replace canonical authorship.
+The canonical CraftRoster packages keep `source: HsinPu/CraftRoster`, `author: HsinPu` in the catalog, and `license: Apache-2.0`. The upstream repository is recorded separately as a pinned reference and does not replace canonical authorship.
 
 ## Adaptation Map
 
-| Upstream concept | Autoverse result | Decision |
+| Upstream concept | CraftRoster result | Decision |
 |---|---|---|
 | `writing-great-skills` | `skill-creator-design`, `skill-audit` | Strengthened invocation, completion, no-op, residue, overlap, and context checks instead of adding a duplicate authoring Skill |
 | `ask-matt` | `skill-explorer` | Converted local discovery into a bounded `use now → then → stop` route with an explicit no-Skill result |
@@ -30,7 +30,7 @@ The canonical Autoverse packages keep `source: HsinPu/Autoverse-Ai-Agent-Skills`
 
 The adaptation intentionally does not copy upstream prose, templates, bespoke heading sequences, slash-command names, fixed filenames, tracker labels, OS-specific handoff paths, or Claude-only invocation metadata. The generic capability name and heading `domain-modeling`／`Domain Modeling` are retained because they describe an established software-design practice rather than upstream branding.
 
-Autoverse changes include:
+CraftRoster changes include:
 
 - self-describing names such as `requirements-deep-dive` and `multi-session-planning`;
 - cross-tool behavior for Codex, Claude, Cursor, Copilot, OpenCode, and project-local installs;

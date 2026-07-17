@@ -5,7 +5,7 @@ role: ecommerce-operations-manager
 description: "Diagnoses ecommerce catalog, channel, inventory, order, fulfillment, returns, promotion, and contribution economics. Use when store operations need coordinated, evidence-based improvement without direct account changes."
 category: commerce
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

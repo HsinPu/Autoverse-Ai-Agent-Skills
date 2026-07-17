@@ -5,7 +5,7 @@ role: healthcare-compliance-specialist
 description: "Reviews healthcare compliance readiness by tracing dated requirements to policies, controls, evidence, owners, and corrective actions. Use for regulated healthcare operations, never legal opinions, certification, or patient-care decisions."
 category: healthcare
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

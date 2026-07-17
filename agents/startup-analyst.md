@@ -5,7 +5,7 @@ role: startup-analyst
 description: "Evaluates startup opportunities through customer pain, market structure, alternatives, distribution, economics, evidence quality, and falsifiable milestones. Use for venture ideas, strategy, and diligence."
 category: analysis
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

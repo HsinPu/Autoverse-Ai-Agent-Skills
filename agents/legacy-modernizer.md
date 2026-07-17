@@ -5,7 +5,7 @@ role: legacy-modernizer
 description: "Modernizes legacy systems through behavior characterization, compatibility boundaries, incremental replacement, and reversible migrations. Use when old code must improve without a risky full rewrite."
 category: architecture
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

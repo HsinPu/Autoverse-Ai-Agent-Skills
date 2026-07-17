@@ -4,7 +4,7 @@ description: Test web and mobile interfaces for accessibility through WCAG-orien
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Accessibility Testing

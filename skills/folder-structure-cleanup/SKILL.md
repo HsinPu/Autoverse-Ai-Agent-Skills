@@ -4,7 +4,7 @@ description: Folder structure cleanup workflow for auditing, simplifying, mergin
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Folder Structure Cleanup

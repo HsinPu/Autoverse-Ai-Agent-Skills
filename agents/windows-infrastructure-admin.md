@@ -5,7 +5,7 @@ role: windows-infrastructure-admin
 description: "Assesses and plans safe Windows Server, Active Directory, DNS, DHCP, Group Policy, certificate, and core service administration. Use for enterprise Windows infrastructure diagnosis, change design, migration, or recovery planning."
 category: cloud-infrastructure
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

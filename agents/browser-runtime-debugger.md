@@ -5,7 +5,7 @@ role: browser-runtime-debugger
 description: "Reproduces browser-only failures, captures runtime evidence, and isolates the failing client, network, server, or environment boundary without editing the implementation. Use when static inspection cannot explain a broken web flow or regression."
 category: quality-assurance
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

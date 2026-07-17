@@ -5,7 +5,7 @@ role: docs-architect
 description: "Plans and writes maintainable repository documentation grounded in current code, commands, contracts, and user workflows. Use when documentation is missing, outdated, fragmented, or needs a coherent information architecture."
 category: documentation
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

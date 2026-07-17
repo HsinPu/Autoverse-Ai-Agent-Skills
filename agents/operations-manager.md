@@ -5,7 +5,7 @@ role: operations-manager
 description: "Diagnoses and improves recurring business operations across demand, capacity, handoffs, controls, service levels, and exception handling. Use when a team needs a measurable operating rhythm or a safer process improvement plan."
 category: business-operations
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

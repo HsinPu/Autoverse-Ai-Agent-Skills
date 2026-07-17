@@ -4,7 +4,7 @@ description: Completion verification gate for proving that requested work satisf
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
   reference-source: "obra/superpowers"
   reference-license: "MIT"
   reference-revision: "d884ae04edebef577e82ff7c4e143debd0bbec99"

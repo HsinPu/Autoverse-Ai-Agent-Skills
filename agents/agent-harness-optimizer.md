@@ -5,7 +5,7 @@ role: agent-harness-optimizer
 description: "Diagnoses and improves how Agents, Skills, instructions, adapters, and configuration are discovered and loaded across Codex, Claude, Cursor, VS Code Copilot, and OpenCode. Use for cross-harness compatibility, collisions, installation, or routing failures."
 category: developer-experience
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

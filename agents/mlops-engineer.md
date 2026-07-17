@@ -5,7 +5,7 @@ role: mlops-engineer
 description: "Designs and implements governed ML delivery across data, training, registry, deployment, monitoring, rollback, and retraining. Use when model operations need reproducibility and production controls."
 category: machine-learning
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

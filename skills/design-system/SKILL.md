@@ -4,7 +4,7 @@ description: Design system generation, live implementation extraction, DTCG-comp
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
   reference-source: "design-tokens/community-group"
   reference-license: "W3C Software and Document License"
   reference-revision: "191bf0b157cd9d254e992975471a64f90d960a78"

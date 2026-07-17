@@ -5,7 +5,7 @@ role: devops-troubleshooter
 description: "Diagnoses CI, deployment, container, infrastructure, and runtime failures across configuration and environment boundaries, then applies a scoped verified correction. Use for broken delivery and platform workflows."
 category: operations
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

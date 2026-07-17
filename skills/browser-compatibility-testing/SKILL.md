@@ -4,7 +4,7 @@ description: Cross-browser compatibility testing workflow for validating web beh
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Browser Compatibility Testing

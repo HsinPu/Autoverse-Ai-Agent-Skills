@@ -5,7 +5,7 @@ role: marketing-measurement-specialist
 description: "Designs and verifies privacy-aware event, conversion, tag, and attribution implementations across application code and marketing platforms. Use when analytics must be reproducible, deduplicated, and tied to decisions."
 category: marketing
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

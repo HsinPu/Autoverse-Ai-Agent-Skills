@@ -4,7 +4,7 @@ description: Approval-gated database migration orchestration workflow for expand
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
   reference-source: "wshobson/agents"
   reference-license: "MIT"
   reference-revision: "b6af3711058190e4b5c5274b9758498fe626ec5a"

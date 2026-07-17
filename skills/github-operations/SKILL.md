@@ -4,7 +4,7 @@ description: GitHub workflow guide for issues, pull requests, releases, CI check
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # GitHub Operations

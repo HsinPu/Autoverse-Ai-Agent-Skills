@@ -5,7 +5,7 @@ role: test-automator
 description: "Designs and implements focused automated tests at the cheapest reliable level for critical behavior, regressions, and failure paths. Use after feature work, bug fixes, or when important behavior lacks repeatable verification."
 category: quality-assurance
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

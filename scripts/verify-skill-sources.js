@@ -8,7 +8,7 @@ const { parseYamlFrontmatter } = require('./generate-skill-catalog');
 
 const ROOT = path.resolve(__dirname, '..');
 const CANONICAL_AUTHOR = 'HsinPu';
-const CANONICAL_SOURCE = 'HsinPu/Autoverse-Ai-Agent-Skills';
+const CANONICAL_SOURCE = 'HsinPu/CraftRoster';
 const REPOSITORY_PATTERN = /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/;
 const REVISION_PATTERN = /^[0-9a-f]{40}$/;
 const REFERENCE_MANIFEST_PATH = path.join('scripts', 'data', 'skill-reference-sources.json');
@@ -470,7 +470,7 @@ function githubJsonRequest(apiPath) {
   const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
   const headers = {
     Accept: 'application/vnd.github+json',
-    'User-Agent': 'Autoverse-Skill-Source-Verifier',
+    'User-Agent': 'CraftRoster-Skill-Source-Verifier',
     'X-GitHub-Api-Version': '2022-11-28',
   };
   if (token) headers.Authorization = `Bearer ${token}`;

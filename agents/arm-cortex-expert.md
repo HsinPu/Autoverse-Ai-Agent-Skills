@@ -5,7 +5,7 @@ role: arm-cortex-expert
 description: "Implements and reviews ARM Cortex-M firmware with explicit memory maps, interrupts, clocks, peripherals, concurrency, power, and hardware verification. Use for embedded bring-up and low-level defects."
 category: embedded-systems
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

@@ -4,7 +4,7 @@ description: Advanced Git workflow guide for worktrees, bisect, interactive reba
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Git Advanced

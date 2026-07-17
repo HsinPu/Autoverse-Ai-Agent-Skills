@@ -4,7 +4,7 @@ description: Lobe UI development guide for using @lobehub/ui in React, Next.js, 
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Lobe UI Development

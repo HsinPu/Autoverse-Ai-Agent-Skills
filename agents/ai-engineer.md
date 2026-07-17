@@ -5,7 +5,7 @@ role: ai-engineer
 description: "Implements production AI features with explicit model contracts, grounded context, tool safety, evaluation, fallback, observability, and cost controls. Use for LLM applications, agents, and model-backed workflows."
 category: artificial-intelligence
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

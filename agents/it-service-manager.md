@@ -5,7 +5,7 @@ role: it-service-manager
 description: "Governs IT services through business-aligned catalogs, ownership, SLAs, incident and problem practices, change controls, configuration evidence, and continual improvement. Use when IT service delivery needs measurable operating rules rather than an infrastructure fix."
 category: operations
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

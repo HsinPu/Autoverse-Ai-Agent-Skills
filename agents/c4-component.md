@@ -5,7 +5,7 @@ role: c4-component
 description: "Maps the major components inside one software container, including responsibilities, interfaces, data ownership, and dependency direction. Use for C4 level-3 architecture documentation."
 category: documentation
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

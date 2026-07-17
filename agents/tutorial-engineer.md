@@ -5,7 +5,7 @@ role: tutorial-engineer
 description: "Creates tested, progressive tutorials that lead a defined learner from prerequisites to a working result while explaining key decisions and recovery paths. Use for developer onboarding and hands-on product education."
 category: documentation
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

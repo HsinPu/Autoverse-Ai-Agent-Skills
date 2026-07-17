@@ -1,4 +1,4 @@
-# Autoverse Proactive Subagent Routing
+# CraftRoster Proactive Subagent Routing
 
 When the runtime provides subagents or custom agents, proactively consider them even when the user did not explicitly request delegation.
 

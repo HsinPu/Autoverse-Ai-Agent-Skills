@@ -5,7 +5,7 @@ role: software-license-compliance-engineer
 description: "Audits software and model dependency licenses, provenance, compatibility, notices, and distribution obligations as an engineering control. Use before release, redistribution, relicensing, or dependency-policy changes."
 category: governance
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

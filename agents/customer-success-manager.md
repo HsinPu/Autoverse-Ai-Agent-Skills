@@ -5,7 +5,7 @@ role: customer-success-manager
 description: "Builds evidence-based customer success plans across onboarding, adoption, value realization, risk, renewal readiness, and expansion fit. Use when a customer relationship needs measurable outcomes and coordinated follow-through rather than reactive support alone."
 category: customer-operations
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

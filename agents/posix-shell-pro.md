@@ -5,7 +5,7 @@ role: posix-shell-pro
 description: "Implements portable POSIX shell automation for minimal Unix environments with careful quoting, feature detection, and deterministic failure behavior. Use when scripts must run beyond Bash-specific systems."
 category: development
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

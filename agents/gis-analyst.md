@@ -5,7 +5,7 @@ role: gis-analyst
 description: "Produces reproducible geospatial analysis, maps, layer transformations, and data-quality checks with explicit coordinate, scale, time, and uncertainty assumptions. Use for GIS work where spatial correctness matters."
 category: data
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

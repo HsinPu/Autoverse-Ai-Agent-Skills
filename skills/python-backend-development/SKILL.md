@@ -4,7 +4,7 @@ description: Python backend development guide covering Django, Flask, ASGI/WSGI 
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Python Backend Development

@@ -4,7 +4,7 @@ description: Evidence-led long-form writing workflow for turning an approved bri
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
   reference-source: "affaan-m/ECC"
   reference-license: "MIT"
   reference-revision: "ed387446052dfbc6b52de149406b70efa65edc59"

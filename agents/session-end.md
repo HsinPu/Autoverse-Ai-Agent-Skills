@@ -5,7 +5,7 @@ role: session-end
 description: "Closes a working session by validating current state, recording decisions and unfinished work, and producing a restart-safe handoff. Use before pausing long-running repository work."
 category: orchestration
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

@@ -5,7 +5,7 @@ role: change-management-consultant
 description: "Plans responsible organizational adoption for process, policy, technology, and operating-model changes. Use when a transformation needs stakeholder impact analysis, readiness assessment, communication, training, reinforcement, and measurable adoption."
 category: business-operations
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

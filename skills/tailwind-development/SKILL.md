@@ -4,7 +4,7 @@ description: Tailwind CSS development guide covering utility-first architecture,
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Tailwind CSS 開發（Tailwind Development）

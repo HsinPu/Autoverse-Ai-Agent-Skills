@@ -85,7 +85,7 @@
       "description": "Test web and mobile interfaces for accessibility through WCAG-oriented audits, keyboard navigation, focus behavior, semantic structure, zoom and reflow, contrast, reduced motion, and hands-on screen-reader workflows for VoiceOver, NVDA, JAWS, TalkBack, and platform accessibility APIs. Use when validating an implemented interface, reproducing an accessibility defect, preparing a release, or defining verifiable remediation criteria.",
       "category": "testing-quality",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "accessibility",
@@ -100,7 +100,7 @@
       "description": "Govern consequential AI-agent tool actions through explicit policy, least authority, human approval windows, dry-run evaluation, command and path controls, MCP policy enforcement, tamper-evident signed receipts, verification, break-glass procedures, and audit retention. Use when coding agents can review, merge, publish, deploy, delete, access secrets, call external tools, or bypass repository safeguards and those actions need attributable authorization.",
       "category": "security-governance",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "agents",
@@ -115,7 +115,7 @@
       "description": "System prompt design guide for writing maintainable agent instructions, YAML metadata, four-part body structure, templates, and output rules. Use when creating a new agent prompt, refining an existing system prompt, or deciding how to structure a focused role or workflow.",
       "category": "agent-skill-tooling",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "agent",
@@ -128,7 +128,7 @@
       "description": "Repo-level coding-agent instruction authoring workflow for creating, updating, or consolidating AGENTS.md, AGENTS.override.md, CLAUDE.md, GEMINI.md, Cursor rules, Copilot instructions, .agents/skills, and similar AI coding tool guidance. Use when turning real project commands, architecture rules, validation steps, tool conventions, or repeatable procedures into maintainable agent instructions or skills.",
       "category": "agent-skill-tooling",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "agent-instructions",
@@ -147,7 +147,7 @@
       "description": "Agent execution diagnosis workflow for reconstructing traces, locating the earliest behavioral divergence, classifying failures across instructions, context, routing, tools, guardrails, retrieval, and synthesis, and turning confirmed causes into regression evals. Use when an agent loops, chooses the wrong tool, loses context, misroutes a handoff, violates an output contract, or succeeds inconsistently and traces or structured logs are available.",
       "category": "agent-skill-tooling",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "agents",
@@ -167,7 +167,7 @@
       "description": "Cross-platform web research workflow for searching and reading current content across social, video, code, and RSS sources. Use when the task needs multi-source research, transcripts, or platform-specific web extraction.",
       "category": "browser-automation",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "research",
@@ -182,7 +182,7 @@
       "description": "OpenAI Agents SDK development guide covering agents, instructions, tools, handoffs, guardrails, tracing, streaming, context, multi-agent workflows, testing, and production observability. Use when building or reviewing agentic applications with the OpenAI Agents SDK.",
       "category": "agent-skill-tooling",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "openai",
@@ -199,7 +199,7 @@
       "description": "AI image prompt design guide for expanding visual ideas into detailed prompts for Flux, Stable Diffusion, Midjourney, DALL-E, and similar image generation models. Use when crafting or improving image prompts, visual concepts, art direction, style references, composition, lighting, camera language, negative prompts, or prompt variants.",
       "category": "media-creative",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "image-generation",
@@ -215,7 +215,7 @@
       "description": "AI image prompt library and inspiration workflow for finding, adapting, and improving text-to-image prompts across models such as Midjourney, DALL-E, Flux, Stable Diffusion, GPT Image, and similar generators. Use when the user needs prompt ideas, reusable prompt patterns, style variants, or higher-quality image-generation wording.",
       "category": "media-creative",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "image-prompts",
@@ -231,7 +231,7 @@
       "description": "AI video generation workflow for text-to-video, image-to-video, reference-driven clips, model selection, prompt iteration, parameters, and output review across tools such as Sora, Veo, Kling, Runway, Pika, Luma, Seedance, Wan, and similar generators. Use when creating new AI-generated video rather than editing existing footage or building deterministic Remotion templates.",
       "category": "media-creative",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "ai-video",
@@ -247,7 +247,7 @@
       "description": "AI video prompt design guide for crafting prompts for Sora, Veo, Kling, Runway, Pika, Luma, Seedance, Wan, image-to-video, reference-based generation, cinematic shots, camera movement, motion continuity, timing, and negative prompts. Use when improving prompts for AI video quality rather than generating still images.",
       "category": "media-creative",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "ai-video",
@@ -262,7 +262,7 @@
       "description": "UI animation and motion guidance for hover states, button feedback, transitions, loading motion, and interaction polish in web interfaces. Use when a frontend task needs motion that improves clarity, responsiveness, or visual feel, or when fixing awkward, jittery, or excessive animation behavior.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "animation",
@@ -278,7 +278,7 @@
       "description": "Final-response writing guide for producing clear, actionable user-facing answers with concise structure and strong readability. Use when preparing the final reply to the user, especially when the answer should be polished, direct, and easy to act on.",
       "category": "writing-content",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "writing",
@@ -292,7 +292,7 @@
       "description": "API contract design workflow for defining request and response shapes, error models, pagination, idempotency, and versioning so APIs evolve safely without breaking consumers. Use when designing or reviewing a public API or service contract.",
       "category": "backend-data",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "api",
@@ -306,7 +306,7 @@
       "description": "API contract testing workflow for proving provider and consumer compatibility through schema checks, executable examples, consumer-driven expectations, breaking-change analysis, and release gates. Use when an HTTP, event, webhook, or SDK-facing API must be verified against an explicit contract or protected from incompatible changes; use api-contract-design for design decisions and openapi-spec-generation for authoring specifications.",
       "category": "testing-quality",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "api",
@@ -325,7 +325,7 @@
       "description": "Documentation-comment workflow for writing concise docstrings, Javadoc, TSDoc, and similar API comments for exported functions, classes, modules, and methods. Use when documenting public code contracts, parameters, return values, exceptions, side effects, invariants, or examples; do not use for README docs or language syntax rules.",
       "category": "writing-content",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "docstrings",
@@ -340,7 +340,7 @@
       "description": "Mobile app store release workflow covering App Store Connect, TestFlight, Google Play Console, signing, metadata, privacy labels, data safety, review guidelines, rollout, rejection handling, and rollback planning. Use when preparing, reviewing, or troubleshooting App Store, TestFlight, Google Play, internal testing, closed testing, or staged mobile releases.",
       "category": "mobile-desktop",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "app-store",
@@ -357,7 +357,7 @@
       "description": "Evidence-led long-form writing workflow for turning an approved brief, source ledger, and optional brand voice into a coherent article, guide, essay, or newsletter with claim mapping, fact checks, and editorial quality gates. Use when producing substantial narrative content rather than a summary, technical specification, social post, or short-form video script.",
       "category": "writing-content",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "article",
@@ -376,7 +376,7 @@
       "description": "Requirement-clarification guide for identifying the minimum missing information before implementation. Use when the user explicitly asks to clarify requirements first or requests a question-first approach before coding. Do not use automatically.",
       "category": "workflow-planning",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "clarification",
@@ -389,7 +389,7 @@
       "description": "AI audio generation workflow for creating music beds, sound effects, ambience, jingles, and text-to-audio assets. Use when the user asks to generate music, sound effects, background audio, sonic branding, or audio assets for video, games, presentations, or product demos.",
       "category": "media-creative",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "audio",
@@ -404,7 +404,7 @@
       "description": "Speech-to-text workflow for transcribing audio or video files, meetings, interviews, podcasts, voice notes, and multilingual recordings. Use when the user asks to extract spoken text, identify speakers, produce transcripts, translate speech, or prepare recordings for summarization.",
       "category": "media-creative",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "audio",
@@ -419,7 +419,7 @@
       "description": "Authentication integration guide covering sessions, OAuth/OIDC providers, credentials, magic links, passkeys, authorization boundaries, cookies, CSRF, callbacks, adapters, and framework integration. Use when adding, reviewing, or debugging app authentication flows.",
       "category": "backend-data",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "auth",
@@ -436,7 +436,7 @@
       "description": "Bounded autonomous experimentation workflow for improving a measurable repository outcome through baseline-controlled hypothesis, change, measurement, and keep-or-revert cycles. Use when code, configuration, prompts, or performance can be optimized with repeatable local experiments, a scalar metric, and explicit constraints; do not use for open-ended web research, feature discovery, or irreversible production trials.",
       "category": "research-product",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "experimentation",
@@ -455,7 +455,7 @@
       "description": "AI avatar, digital human, talking-head, and lip-sync video workflow for tools such as HeyGen, Synthesia, D-ID, EachLabs, DashScope human avatar, and similar services, covering avatar choice, script preparation, voice rights, pronunciation, lip-sync review, consent, and export QA. Use when generating presenter, spokesperson, or avatar videos.",
       "category": "media-creative",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "avatar",
@@ -470,7 +470,7 @@
       "description": "AWS operations workflow covering IAM, accounts, regions, Lambda, API Gateway, S3, CloudFront, ECS, RDS, VPC, CloudWatch, CDK, deployment safety, cost controls, security review, and incident response. Use when building, deploying, debugging, or reviewing AWS-backed systems.",
       "category": "cloud-devops",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "aws",
@@ -487,7 +487,7 @@
       "description": "General AI image generation workflow for creating images from text prompts with provider-backed APIs such as OpenAI, Google, and DashScope. Use when the user asks to generate, create, draw, or produce images from text, with optional reference images, aspect ratios, or multiple output variants.",
       "category": "media-creative",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "image-generation",
@@ -503,7 +503,7 @@
       "description": "Brand voice extraction and application workflow for deriving reusable tone, vocabulary, rhythm, messaging boundaries, and transformation examples from representative source material. Use when writing must consistently sound like a specific organization, product, publication, or creator rather than merely becoming more natural or less AI-like.",
       "category": "writing-content",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "brand",
@@ -522,7 +522,7 @@
       "description": "Browser automation workflow for navigating websites, filling forms, clicking elements, taking screenshots, extracting data from JavaScript-rendered pages, and automating repeatable web interactions. Use when a task needs a real browser rather than static HTTP scraping or local web app verification.",
       "category": "browser-automation",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "browser",
@@ -537,7 +537,7 @@
       "description": "Cross-browser compatibility testing workflow for validating web behavior across Chrome, Firefox, Safari, Edge, mobile browsers, BrowserStack, Selenium Grid, and Playwright browser projects. Use when diagnosing browser-specific bugs, viewport differences, unsupported APIs, CSS differences, or compatibility release risk.",
       "category": "testing-quality",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "cross-browser",
@@ -553,7 +553,7 @@
       "description": "Chrome DevTools and CDP debugging workflow for inspecting console errors, network requests, runtime performance, DOM state, accessibility trees, storage, and page load behavior through Chrome DevTools, CDP, or Chrome DevTools MCP. Use when diagnosing web page behavior rather than only automating clicks.",
       "category": "testing-quality",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "chrome-devtools",
@@ -569,7 +569,7 @@
       "description": "Cloudflare development workflow covering Workers, Pages, Wrangler, bindings, environment variables, D1, KV, R2, Durable Objects, Queues, Hyperdrive, local development, deployment, observability, and edge runtime constraints. Use when building or debugging apps on Cloudflare's developer platform.",
       "category": "cloud-devops",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "cloudflare",
@@ -586,7 +586,7 @@
       "description": "Default pre-edit workflow for modifying existing code safely. Use before bug fixes, feature changes, refactors, behavior adjustments, or multi-file edits to inspect entry points, call chains, data flow, tests, constraints, and verification paths, then make the smallest safe change.",
       "category": "workflow-planning",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "code-change",
@@ -603,7 +603,7 @@
       "description": "Behavior-preserving code refactoring guide for improving structure, readability, and maintainability without changing outputs. Use when cleaning up legacy code, reducing complexity, replacing magic values or hardcoded values with named constants, or simplifying code after the current behavior and verification path are understood.",
       "category": "software-engineering",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "refactoring",
@@ -620,7 +620,7 @@
       "description": "Code review guide for identifying correctness, security, performance, maintainability, architecture, and testing issues in code changes while providing constructive, actionable feedback. Use when reviewing pull requests, modified files, code diffs, or pasted code and when the goal is to surface concrete findings, risks, review decisions, and test gaps.",
       "category": "testing-quality",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "code-review",
@@ -635,7 +635,7 @@
       "description": "Universal coding standards guide for TypeScript, JavaScript, React, and Node.js projects. Use when establishing or auditing code conventions, ESLint/Prettier/TypeScript strict settings, feature-based folder structure, layered services, React patterns, testing practices, avoiding hardcoded values, constants/configuration usage, performance, accessibility, or security hygiene.",
       "category": "software-engineering",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "coding-standards",
@@ -658,7 +658,7 @@
       "description": "Color and typography guidance for choosing palettes, font pairings, and visual theme directions in frontend and design tasks. Use when a UI needs stronger color balance, brand-safe palettes, readable font pairing, or a deliberate visual identity before implementation.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "color",
@@ -674,7 +674,7 @@
       "description": "Command palette guidance for designing, implementing, and reviewing quick switchers, fuzzy action launchers, and Spotlight-style menus in web apps. Use when building palettes that search, rank, and execute navigation or commands, or when tuning discoverability, empty states, scope, and keyboard-first interaction.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "command-palette",
@@ -690,7 +690,7 @@
       "description": "Source-controlled content repurposing workflow for adapting an approved article, report, transcript, or campaign asset into channel-specific derivatives while preserving facts, brand voice, core message, CTA, and source traceability. Use when one approved source must become multiple social, email, visual, audio, or video-ready content artifacts without adding unsupported claims or publishing them automatically.",
       "category": "writing-content",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "content",
@@ -709,7 +709,7 @@
       "description": "Context and lessons governance workflow for managing agent memory, context budget, and skill navigation. Use when a workflow needs to keep notes, prune repetition, or maintain reusable project memory.",
       "category": "workflow-planning",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "context",
@@ -723,7 +723,7 @@
       "description": "CSS development guide covering cascade management, selectors, responsive design, layout systems, tokens, and maintainable styling architecture. Use when writing, reviewing, or refactoring CSS for production interfaces.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "css",
@@ -740,7 +740,7 @@
       "description": "Design decision-focused product, analytics, executive, and operational dashboards through metric ownership, KPI hierarchy, comparison baselines, freshness, visual encoding, drill-down, anomaly context, and responsive layout. Use when planning or reviewing dashboard information architecture, KPI panels, monitoring views, reporting surfaces, or card-based overview screens.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "dashboard",
@@ -756,7 +756,7 @@
       "description": "Data organization system design workflow for turning scattered files, folders, datasets, exports, notes, screenshots, documents, and project assets into a durable taxonomy with naming rules, metadata, lifecycle stages, retention policy, privacy handling, and retrieval workflows. Use when the user wants a reusable system for organizing business, research, personal knowledge, AI datasets, project evidence, or mixed data sources rather than a one-time Downloads/Desktop cleanup.",
       "category": "documents-productivity",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "data-organization",
@@ -771,7 +771,7 @@
       "description": "Design and operate production data pipelines across Airflow, dbt, Spark, batch and event-driven orchestration, data contracts, partitioning, backfills, idempotency, lineage, quality gates, retries, recovery, and observability. Use when building or debugging scheduled ETL or ELT workflows, analytics transformations, distributed data processing, or governed dataset delivery.",
       "category": "backend-data",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "data-engineering",
@@ -786,7 +786,7 @@
       "description": "Database design guide covering schema modeling, indexing, migrations, normalization, and data integrity for PostgreSQL, MySQL, and NoSQL systems. Use when designing schemas, planning migrations, or improving database structure and performance.",
       "category": "backend-data",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "database",
@@ -801,7 +801,7 @@
       "description": "Approval-gated database migration orchestration workflow for expanding schemas, backfilling data, cutting over application traffic, validating invariants, and retiring old structures with rollback or forward-recovery plans. Use for production or production-like schema and data migrations where compatibility, lock impact, data integrity, observability, or zero-downtime sequencing matters; use database-design for schema modeling and engine or ORM skills for concrete commands.",
       "category": "backend-data",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "database",
@@ -821,7 +821,7 @@
       "description": "Production deployment and release verification workflow for shipping builds, managing rollout and rollback, running smoke checks, and confirming post-deploy health. Use when code needs to be deployed to an environment or a release needs operational verification.",
       "category": "cloud-devops",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "deployment",
@@ -835,7 +835,7 @@
       "description": "Frontend design consultation for defining visual direction, including color palette, typography, spacing, layout, motion, and component style. Use when a task needs an explicit aesthetic plan before implementation or when restyling a screen, page, dashboard, or component so it feels intentionally designed rather than generic.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "design",
@@ -851,7 +851,7 @@
       "description": "Deterministic local search workflow for retrieving relevant product-pattern, visual-direction, color, typography, layout, interaction, accessibility, data-visualization, and content guidance from an auditable design knowledge base. Use when a UI brief needs evidence-labeled candidate directions or stack-aware design constraints before taste-skill, design-system, or frontend implementation; do not use as a substitute for user research or approved brand requirements.",
       "category": "research-product",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "design-intelligence",
@@ -874,7 +874,7 @@
       "description": "Design system generation, live implementation extraction, DTCG-compatible token governance, durable context, drift analysis, and visual audit workflow. Use when starting a project, standardizing or preparing a redesign, extracting observed styles from an authorized running interface, producing cross-platform tokens and preview artifacts, auditing an existing system, reviewing styling changes, or diagnosing when UI feels visually off.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "design-system",
@@ -905,7 +905,7 @@
       "description": "Design system architecture guidance for design tokens, theming infrastructure, component patterns, and theme switching in frontend codebases. Use when creating or extending a design system, standardizing UI variants, or aligning colors, spacing, typography, and surface styles across components.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "design-system",
@@ -921,7 +921,7 @@
       "description": "Electron desktop development guide for implementing desktop features, IPC handlers, preload scripts, window management, menu configuration, and desktop-local tooling. Use when building or maintaining Electron apps, native-like desktop UIs, or app-specific desktop integrations rather than browser automation or front-end pages.",
       "category": "mobile-desktop",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "electron",
@@ -936,7 +936,7 @@
       "description": "Docker development workflow for Dockerfiles, multi-stage builds, Docker Compose, image optimization, build contexts, healthchecks, environment variables, volumes, networking, and container security. Use when containerizing an application, debugging Docker builds, or improving local container workflows.",
       "category": "cloud-devops",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "docker",
@@ -951,7 +951,7 @@
       "description": "Document-to-Markdown conversion workflow for turning DOCX, DOC, PDF, PPTX, HTML, RTF, Google Docs exports, and extracted document text into clean Markdown. Use when converting docs to markdown, docs 轉 Markdown, 文件轉 Markdown, docx to md, PDF to Markdown, marker pdf markdown, or when the final deliverable must be a reviewed .md file with preserved headings, lists, tables, links, images, and code blocks.",
       "category": "documents-productivity",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "markdown",
@@ -972,7 +972,7 @@
       "description": "Build a technology-neutral model of business concepts, language, identity, invariants, state transitions, ownership, boundaries, and domain events from repository evidence and stakeholder decisions. Use when ambiguous terminology, conflicting rules, anemic data shapes, unclear bounded contexts, or hidden business invariants are causing design, specification, API, persistence, or implementation problems.",
       "category": "software-engineering",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "domain-modeling",
@@ -992,7 +992,7 @@
       "description": "Focused Windows Downloads and Desktop cleanup workflow for inventorying messy user folders, categorizing files, finding duplicate or large files, separating installers, screenshots, archives, exports, receipts, project candidates, and producing a dry-run move/delete plan. Use when the user asks to organize Downloads, clean the Desktop, recover disk space from personal files, or build a safer weekly file triage routine.",
       "category": "documents-productivity",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "downloads",
@@ -1007,7 +1007,7 @@
       "description": "Diagram generation workflow for turning text or rough ideas into draw.io diagrams and exportable visual assets. Use when a flowchart, architecture diagram, or visual explanation needs to be created or updated.",
       "category": "documents-productivity",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "diagram",
@@ -1021,7 +1021,7 @@
       "description": "End-to-end testing patterns for designing, writing, debugging, and maintaining browser E2E suites with tools such as Playwright or Cypress. Use when creating reliable E2E tests, choosing critical user flows, reducing flaky tests, designing fixtures, or integrating browser tests into CI.",
       "category": "testing-quality",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "e2e",
@@ -1036,7 +1036,7 @@
       "description": "Design and implement event-sourced domains, event stores, aggregates, commands, immutable event contracts, CQRS read models, projections, snapshots, idempotency, consistency boundaries, replay, correction, and schema evolution. Use when a system needs auditable state transitions, temporal reconstruction, separate read models, or migration and recovery for existing event-driven data.",
       "category": "backend-data",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "event-sourcing",
@@ -1051,7 +1051,7 @@
       "description": "Structured Figma-to-frontend implementation workflow for translating a Figma file, node selection, or design-context export into production code by reconciling scene structure, variables, components, assets, screenshots, and repository conventions. Use when Figma is the primary design authority and structured design data is available; use image-to-code when only screenshots or raster references are available.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "figma",
@@ -1074,7 +1074,7 @@
       "description": "File organization guide for restructuring folders, finding duplicates, recommending cleaner hierarchies, and automating cleanup workflows. Use when organizing Downloads, Desktop, Documents, folder trees, project archives, media folders, or improving ongoing file management and disk hygiene habits.",
       "category": "documents-productivity",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "file-management",
@@ -1087,7 +1087,7 @@
       "description": "Firebase development workflow covering Authentication, Firestore, Realtime Database, Security Rules, Cloud Functions, Storage, Cloud Messaging, Hosting, Emulator Suite, deploys, indexes, and production safety. Use when building, reviewing, or debugging Firebase-backed apps.",
       "category": "backend-data",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "firebase",
@@ -1104,7 +1104,7 @@
       "description": "Flutter development workflow covering Dart, widgets, layout, state management, navigation, forms, networking, platform integration, testing, performance, accessibility, build, and release. Use when building, reviewing, or debugging Flutter apps for iOS, Android, web, or desktop.",
       "category": "mobile-desktop",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "flutter",
@@ -1121,7 +1121,7 @@
       "description": "Folder structure cleanup workflow for auditing, simplifying, merging, renaming, archiving, and documenting messy directory trees. Use when the user asks to organize folders rather than individual files, reduce nested folders, clean empty folders, separate active and archived project folders, standardize folder names, or design a safer folder hierarchy with a dry-run move plan.",
       "category": "documents-productivity",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "folders",
@@ -1136,7 +1136,7 @@
       "description": "Frontend code review guide for analyzing React, TypeScript, CSS, state, accessibility, performance, business logic, and UI behavior changes in .tsx, .ts, .js, and style files. Use when reviewing frontend diffs, pending working-tree changes, pull requests, or specific frontend files to surface concrete bugs, regressions, and test gaps.",
       "category": "testing-quality",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "frontend",
@@ -1153,7 +1153,7 @@
       "description": "Production frontend implementation guide for turning an approved visual direction, design system, or image contract into semantic, responsive, accessible UI in the existing stack. Use when building or restyling components, pages, and applications after the visual direction is clear; use taste-skill or design-consultation first when art direction is unresolved.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "frontend",
@@ -1170,7 +1170,7 @@
       "description": "Frontend UI review workflow that separates experience critique, production web audit, and optical polish while evaluating implemented pages, components, and PRs for usability, accessibility, responsive behavior, design-system compliance, state completeness, performance, and visual craft. Use for UI, UX, accessibility, responsive, theme, or design-quality reviews after implementation exists.",
       "category": "testing-quality",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "frontend",
@@ -1189,7 +1189,7 @@
       "description": "Frontend stack inference workflow for identifying JavaScript frameworks, jQuery, Bootstrap, CSS frameworks, build tools, meta-frameworks, and legacy patterns from repository files, HTML, DOM attributes, global variables, script URLs, package metadata, and bundle signals. Use when auditing an unknown frontend, planning migration, documenting tech stack, or deciding which frontend skill to load next.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "frontend",
@@ -1206,7 +1206,7 @@
       "description": "Frontend testing guide for unit, component, and RTL-style tests in React and TypeScript projects. Use when writing or reviewing frontend tests, testing UI behavior, or deciding how to cover component and hook logic without full browser E2E.",
       "category": "testing-quality",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "frontend",
@@ -1221,7 +1221,7 @@
       "description": "Advanced Git workflow guide for worktrees, bisect, interactive rebase, recovery, hooks, and history repair. Use when a Git task needs deeper control than basic commits, branches, merges, or push/pull flows.",
       "category": "software-engineering",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "git",
@@ -1237,7 +1237,7 @@
       "description": "Git workflow guide for Windows covering repository state checks, branching, staging, commits, pulls, pushes, merges, rebases, stashes, and conflict handling. Use when performing or reviewing any Git operation such as commit, push, pull, branch management, or history inspection.",
       "category": "software-engineering",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "git",
@@ -1250,7 +1250,7 @@
       "description": "README design and authoring guide for Git-based repositories, covering apps, libraries, CLIs, APIs, templates, monorepos, and internal or Gerrit-based projects. Use when creating, rewriting, expanding, or standardizing repository README documentation after inspecting project structure, setup flow, and usage patterns.",
       "category": "writing-content",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "markdown",
@@ -1266,7 +1266,7 @@
       "description": "GitHub Actions CI workflow guide for designing, writing, debugging, and reviewing workflow YAML, jobs, matrix builds, caching, artifacts, permissions, secrets, pull request checks, and release automation. Use when creating or fixing GitHub Actions pipelines rather than general repository hygiene.",
       "category": "cloud-devops",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "github-actions",
@@ -1281,7 +1281,7 @@
       "description": "GitHub pull request review workflow for analyzing diffs, comments, checks, and review context through gh. Use when reviewing a PR or GitHub change and the goal is to produce concrete findings, risks, and review guidance.",
       "category": "testing-quality",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "github",
@@ -1297,7 +1297,7 @@
       "description": "GitHub inline PR review workflow for submitting line-level comments and suggestion blocks through the gh CLI and GitHub API. Use when posting review findings to an existing GitHub pull request, batching inline comments, adding GitHub suggestion blocks, approving, commenting, or requesting changes from review output.",
       "category": "testing-quality",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "github",
@@ -1313,7 +1313,7 @@
       "description": "GitHub workflow guide for issues, pull requests, releases, CI checks, and API queries via gh. Use when checking repo status, reviewing workflow runs, commenting on issues or PRs, or automating GitHub tasks from the terminal.",
       "category": "cloud-devops",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "github",
@@ -1329,7 +1329,7 @@
       "description": "Keyboard shortcut guidance for web and React UI work, covering hotkey design, keybinding registration, shortcut conflict resolution, and discoverability. Use when implementing or reviewing keyboard shortcuts, command bindings, or keyboard-driven actions in an application.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "keyboard",
@@ -1345,7 +1345,7 @@
       "description": "Text editing workflow for removing AI-generated patterns and making writing sound more natural and human. Use when revising copy, summaries, comments, or docs that feel stiff, repetitive, promotional, or formulaic.",
       "category": "writing-content",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "writing",
@@ -1359,7 +1359,7 @@
       "description": "Internationalization and localization workflow for adding translations, managing locale files, handling pluralization, RTL support, and keeping localized UI text consistent across products. Use when implementing or reviewing i18n keys, locale management, translated strings, or localization updates in apps and extensions.",
       "category": "software-engineering",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "i18n",
@@ -1374,7 +1374,7 @@
       "description": "Visual-reference implementation workflow for translating supplied screenshots, approved mockups, multi-state reference sets, or explicitly authorized UI recordings and generated designs into editable, semantic, responsive frontend code with an implementation contract and evidence-based fidelity loop. Use when visual evidence is the primary UI source; use approval-gated page or website workflows when the design direction still needs selection.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "image-to-code",
@@ -1398,7 +1398,7 @@
       "description": "Deterministic image post-processing workflow for resizing, cropping, compositing, converting formats, optimizing assets, adding watermarks, and preparing generated images for web or documentation. Use when modifying existing image files with predictable pixel-level operations rather than generating new images.",
       "category": "media-creative",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "image-processing",
@@ -1414,7 +1414,7 @@
       "description": "Coordinate production incidents from severity assessment and stabilization through command roles, evidence preservation, communications, recovery validation, on-call handoff, blameless postmortems, and corrective-action closure. Use during active reliability or security incidents, operational handoffs, recovery decisions, and structured post-incident learning.",
       "category": "cloud-devops",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "incident-response",
@@ -1428,7 +1428,7 @@
       "description": "Large-change slicing workflow for code changes that should not land as one diff. Use after or with code-change-workflow when feature work, refactors, migrations, or multi-file edits need small verified slices, repeated tests, checkpoints, intermediate commits, reviewability, rollback, or later inspection.",
       "category": "workflow-planning",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "incremental",
@@ -1445,7 +1445,7 @@
       "description": "Navigation interaction guidance for web UIs, covering tab overflow, scroll behavior, view transitions, progressive disclosure, and other movement-heavy interface patterns. Use when designing or fixing navigation, scrolling, or transition interactions that need to feel coherent across desktop and mobile.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "navigation",
@@ -1461,7 +1461,7 @@
       "description": "Java architecture guide for Clean Architecture, Hexagonal Architecture, Ports and Adapters, Domain-Driven Design, bounded contexts, aggregates, microservice boundaries, and framework-independent domain modeling. Use when designing or refactoring Java backend architecture, decomposing monoliths, defining package/module boundaries, or separating Spring, persistence, messaging, and external API concerns from domain logic.",
       "category": "software-engineering",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "java",
@@ -1478,7 +1478,7 @@
       "description": "Java development guide covering code style, naming, formatting, Javadoc, exceptions, and design patterns such as SOLID, composition, dependency injection, and immutability. Use when writing, reviewing, or refactoring Java code, or when deciding Java structure and conventions.",
       "category": "software-engineering",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "java",
@@ -1491,7 +1491,7 @@
       "description": "Java testing engineering guide for JUnit 5, Mockito, AssertJ, Spring test slices, Testcontainers, JaCoCo coverage, ArchUnit architecture tests, test data builders, and deterministic test design. Use when writing, reviewing, or fixing Java or Spring tests, practicing TDD, adding regression tests, enforcing package boundaries, or diagnosing flaky JUnit test failures.",
       "category": "testing-quality",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "java",
@@ -1510,7 +1510,7 @@
       "description": "JavaScript development guide covering code style, module structure, async and error handling, security, and testing in modern Node.js and browser code. Use when writing, reviewing, or refactoring JavaScript.",
       "category": "software-engineering",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "javascript",
@@ -1526,7 +1526,7 @@
       "description": "JPA and Hibernate development guide for entity modeling, associations, fetch strategies, transactions, repositories, query optimization, migrations, auditing, pagination, indexing, and Spring Data JPA usage. Use when designing or refactoring Java persistence layers that use JPA/Hibernate rather than MyBatis, especially in Spring Boot services.",
       "category": "backend-data",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "java",
@@ -1543,7 +1543,7 @@
       "description": "jQuery 4 migration guide for upgrading jQuery 3.x legacy frontends, WordPress themes/plugins, and hybrid web apps. Use when upgrading to jQuery 4, fixing removed API errors such as $.isArray, $.trim, $.parseJSON, $.type, $.now, handling focus/blur event-order changes, choosing slim versus full builds, replacing Deferred/AJAX patterns, or testing with jQuery Migrate.",
       "category": "software-engineering",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "jquery",
@@ -1560,7 +1560,7 @@
       "description": "jQuery development guide for legacy or hybrid frontends, covering selectors, event delegation, DOM performance, plugin patterns, AJAX, security, jQuery 3/4 upgrade concerns, and migration to modern browser APIs. Use when maintaining, reviewing, debugging, or modernizing jQuery-based code, plugins, widgets, or server-rendered pages with jQuery behavior.",
       "category": "software-engineering",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "jquery",
@@ -1578,7 +1578,7 @@
       "description": "jQuery version migration guide for auditing and upgrading projects across jQuery 1.x, 2.x, 3.x, and 4.x. Use when a legacy frontend may contain mixed jQuery versions, old plugins, deprecated APIs, IE-era compatibility, jQuery Migrate warnings, or when planning staged upgrades from 1 to 2, 2 to 3, 3 to 4, or directly toward a supported target version.",
       "category": "software-engineering",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "jquery",
@@ -1596,7 +1596,7 @@
       "description": "JVM build tooling guide for Maven and Gradle projects, dependency management, wrapper usage, multi-module builds, plugin configuration, reproducible builds, CI commands, and Java version alignment. Use when editing pom.xml, build.gradle, build.gradle.kts, Maven/Gradle wrappers, dependency upgrades, build failures, or Java project setup.",
       "category": "software-engineering",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "java",
@@ -1613,7 +1613,7 @@
       "description": "Behavioral coding guidelines for reducing common LLM implementation mistakes. Use when writing, reviewing, or refactoring code to surface assumptions, avoid overengineering, keep changes surgical, and define verifiable success criteria before execution.",
       "category": "software-engineering",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "MIT",
       "tags": [
         "coding-guidelines",
@@ -1635,7 +1635,7 @@
       "description": "Operate and deliver Kubernetes workloads through manifests, Helm, GitOps, kubectl diagnosis, rollout control, probes, resources, networking, RBAC, Pod Security, and policy validation. Use when creating, deploying, inspecting, securing, or debugging Kubernetes applications, Helm charts, Argo CD or Flux delivery, or cluster workload configuration.",
       "category": "cloud-devops",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "kubernetes",
@@ -1650,7 +1650,7 @@
       "description": "Legacy frontend modernization guide for incrementally refactoring jQuery, Bootstrap-era, global-script, and framework-mixed web apps without breaking existing behavior. Use when planning or executing gradual migration to vanilla DOM APIs, TypeScript, modules, React/Vue/Alpine/HTMX, modern build tooling, or strangler-style replacement of old frontend screens.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "frontend",
@@ -1667,7 +1667,7 @@
       "description": "Stage-gated orchestration workflow for taking an LLM feature from a product outcome through architecture routing, data and safety contracts, evaluation evidence, operational readiness, rollout, and post-release learning. Use when an AI application spans two or more of model APIs, agents, RAG, evals, security, observability, API contracts, data migrations, or deployment; do not use for a narrow single-component implementation.",
       "category": "ai-llm",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "llm",
@@ -1687,7 +1687,7 @@
       "description": "LLM evaluation guide covering golden datasets, prompt regression tests, graders, rubrics, LLM-as-judge, trace grading, RAG metrics, agent evals, online feedback, cost, latency, and release gates. Use when measuring or improving AI application quality.",
       "category": "ai-llm",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "llm",
@@ -1704,7 +1704,7 @@
       "description": "Lobe Icons usage guide for selecting and integrating AI, LLM, model, provider, and application brand icons from the @lobehub/icons ecosystem. Use when building model selectors, provider lists, AI dashboards, settings pages, marketplace cards, or brand/icon systems that need consistent AI product logos in React, React Native, SVG, PNG, or WebP form.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "lobehub",
@@ -1720,7 +1720,7 @@
       "description": "Lobe UI development guide for using @lobehub/ui in React, Next.js, and AIGC web app interfaces. Use when integrating Lobe UI components, ThemeProvider, I18nProvider, ConfigProvider motion setup, Ant Design compatibility, antd-style theming, or building AI product interfaces with the LobeHub UI ecosystem.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "lobehub",
@@ -1736,7 +1736,7 @@
       "description": "Logging guide for writing clean, consistent log statements with stable message patterns, sensible log levels, and low-noise context fields. Use when adding, refactoring, or reviewing application logs so messages stay readable, searchable, and easy to correlate.",
       "category": "software-engineering",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "logging",
@@ -1750,7 +1750,7 @@
       "description": "Logo design workflow for turning brand context into simple, recognizable logo concepts and SVG-ready visual directions. Use when creating or refining logos, brand marks, wordmarks, icon marks, monograms, brand symbols, or visual identity concepts for products, companies, apps, and communities.",
       "category": "media-creative",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "logo",
@@ -1765,7 +1765,7 @@
       "description": "Markdown writing guide for README files, technical documentation, notes, and other structured docs, with consistent GFM formatting and heading hierarchy. Use when creating or revising Markdown content such as README files, docs, or notes.",
       "category": "writing-content",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "markdown",
@@ -1778,7 +1778,7 @@
       "description": "Decision-focused market research workflow for defining a market question, collecting current demand and competitor evidence, resolving source conflicts, and producing a confidence-labeled decision memo. Use when product, positioning, launch, audience, or investment decisions require market evidence rather than general web research or unsupported estimates.",
       "category": "research-product",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "market-research",
@@ -1797,7 +1797,7 @@
       "description": "MCP server design guide for creating high-quality Model Context Protocol integrations with well-designed tools, workflows, and service boundaries. Use when building MCP servers that connect LLMs to external APIs or services in Python or Node/TypeScript.",
       "category": "agent-skill-tooling",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "mcp",
@@ -1812,7 +1812,7 @@
       "description": "MCP workflow for listing, configuring, authenticating, and calling MCP servers or tools from the terminal. Use when a task needs MCP server discovery, tool invocation, auth setup, or type and CLI generation.",
       "category": "agent-skill-tooling",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "mcp",
@@ -1827,7 +1827,7 @@
       "description": "Mobile app testing workflow covering iOS and Android device matrices, simulators, permissions, offline behavior, deep links, push notifications, purchases, crash reporting, accessibility, performance, TestFlight, internal testing, and automation with Maestro, Appium, Detox, or native test tools. Use when planning, writing, or reviewing tests for iOS, Android, React Native, Expo, Flutter, or native mobile apps.",
       "category": "testing-quality",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "mobile",
@@ -1844,7 +1844,7 @@
       "description": "MongoDB development workflow covering schema design, collections, indexes, aggregation pipelines, transactions, change streams, Atlas, security, backups, performance, and Node.js application integration. Use when building, reviewing, or debugging MongoDB-backed applications.",
       "category": "backend-data",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "mongodb",
@@ -1861,7 +1861,7 @@
       "description": "Plan work that spans multiple sessions, agents, tools, or milestones by mapping decisions, dependencies, ready work, unknown regions, ownership, checkpoints, and replanning triggers. Use when a task cannot be completed safely in one context window or one verified implementation slice and needs a durable execution map without pretending unresolved work is already specifiable.",
       "category": "workflow-planning",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "planning",
@@ -1881,7 +1881,7 @@
       "description": "MyBatis development guide covering mapper design, XML and dynamic SQL, result mapping, Spring transaction integration, performance, and security. Use when building or refactoring MyBatis-based persistence layers in Java projects.",
       "category": "backend-data",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "mybatis",
@@ -1899,7 +1899,7 @@
       "description": "Next.js development guide covering App Router, Server and Client Components, data fetching, caching, Server Actions, route handlers, metadata, performance, security, and deployment. Use when building, reviewing, or refactoring Next.js applications.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "nextjs",
@@ -1916,7 +1916,7 @@
       "description": "Nuxt development guide covering application structure, rendering modes, data fetching, Nitro server routes, runtime config, SEO, performance, security, and deployment. Use when building, reviewing, or refactoring Nuxt 3/4 applications.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "nuxt",
@@ -1937,7 +1937,7 @@
       "description": "Engineer production observability with service objectives, OpenTelemetry, metrics, logs, traces, Prometheus, Grafana, dashboards, burn-rate alerts, cardinality budgets, and failure validation. Use when instrumenting services, defining SLIs or SLOs, creating operational dashboards and alerts, diagnosing visibility gaps, or controlling telemetry reliability and cost.",
       "category": "cloud-devops",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "observability",
@@ -1952,7 +1952,7 @@
       "description": "OpenAI API development guide covering Responses API, model selection, structured outputs, function calling, tools, files, streaming, multimodal inputs, error handling, rate limits, cost controls, and safe production integration. Use when building, reviewing, or debugging applications that call OpenAI APIs.",
       "category": "ai-llm",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "openai",
@@ -1969,7 +1969,7 @@
       "description": "OpenAPI specification workflow for generating, updating, validating, and reviewing OpenAPI 3.1 specs from code or design-first contracts. Use when creating API specifications, documenting endpoints, generating SDK inputs, or keeping API contract files consistent with implementation.",
       "category": "backend-data",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "openapi",
@@ -1984,7 +1984,7 @@
       "description": "PDF workflow for reading, extracting, merging, splitting, rotating, generating, and OCRing PDF documents. Use when a .pdf file is the primary input or output, or when scanned pages need layout-preserving extraction.",
       "category": "documents-productivity",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "pdf",
@@ -2000,7 +2000,7 @@
       "description": "Pinia state management guide for Vue applications covering setup stores, state, getters, actions, storeToRefs, plugins, composables inside stores, SSR hydration, Nuxt integration, testing with @pinia/testing, and avoiding circular store dependencies. Use when defining, reviewing, refactoring, or testing Pinia stores.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "vue",
@@ -2017,7 +2017,7 @@
       "description": "Run an independent, read-only review gate between implementation stages using three-level findings, a stable review-report artifact, explicit ownership, and repeatable review loops. Use after a change set or delivery stage is complete and before merge, release, or the next pipeline stage.",
       "category": "testing-quality",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "pipeline-review",
@@ -2037,7 +2037,7 @@
       "description": "Playwright automation workflow for browser navigation, locators, screenshots, traces, console and network inspection, scripted interactions, MCP or CLI-driven browser control, and repeatable UI diagnostics. Use when the task specifically needs Playwright rather than general browser automation or E2E test strategy.",
       "category": "browser-automation",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "playwright",
@@ -2053,7 +2053,7 @@
       "description": "PostgreSQL operations workflow covering roles, permissions, schema migrations, indexes, EXPLAIN, VACUUM, ANALYZE, locks, backups, restores, replication, connection pooling, pgvector, monitoring, and production troubleshooting. Use when operating, tuning, or debugging PostgreSQL databases.",
       "category": "backend-data",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "postgres",
@@ -2070,7 +2070,7 @@
       "description": "Presentation workflow for creating and editing PowerPoint decks (.pptx) with slides, layout fidelity, and editable output. Use when a deck, slide, or presentation is the primary input or output, or when charts, diagrams, or templates need to be preserved.",
       "category": "documents-productivity",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "pptx",
@@ -2085,7 +2085,7 @@
       "description": "Prisma and Drizzle ORM guide covering schema modeling, migrations, relations, query patterns, transactions, raw SQL boundaries, type safety, generated clients, deployment, and production troubleshooting. Use when implementing or reviewing TypeScript database access with Prisma ORM or Drizzle ORM.",
       "category": "backend-data",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "prisma",
@@ -2102,7 +2102,7 @@
       "description": "Design, instrument, analyze, and register trustworthy product experiments with predeclared hypotheses, primary and guardrail metrics, randomization units, sample and stopping policies, SRM checks, and ship-or-stop decisions. Use for A/B tests, holdouts, feature experiments, experiment telemetry QA, or interpreting experiment results without peeking, p-hacking, or unsupported causal claims.",
       "category": "research-product",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "experimentation",
@@ -2120,7 +2120,7 @@
       "description": "Project architecture review workflow for auditing existing repositories across languages and frameworks, mapping entry points, module boundaries, dependency direction, data flow, configuration, tests, and deployment constraints. Use when a user says a project architecture feels wrong, says 專案架構不好 or 架構設計需要調整, asks for the best or most suitable architecture, wants to compare restructuring options before coding, or needs an incremental architecture migration plan.",
       "category": "software-engineering",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "architecture",
@@ -2137,7 +2137,7 @@
       "description": "Python API client and SDK development guide covering OpenAPI-based clients, auth handling, pagination, retries, error mapping, transport setup, and generated client maintenance. Use when building or refactoring a Python client library or SDK that talks to an external HTTP API, including LobeHub OpenAPI-style integrations.",
       "category": "backend-data",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "python",
@@ -2157,7 +2157,7 @@
       "description": "Python automation and scripting guide covering command-line tools, filesystem automation, subprocess orchestration, scheduling, and utility scripts. Use when building or refactoring scripts that automate local files, shell commands, batch jobs, or small operational workflows rather than data analysis or web scraping.",
       "category": "software-engineering",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "python",
@@ -2177,7 +2177,7 @@
       "description": "Python backend development guide covering Django, Flask, ASGI/WSGI apps, routers, middleware, settings, ORM, migrations, background workers, and server-side web app structure. Use when building or refactoring Python web backends or DB-backed services, and when the task is framework structure or application flow rather than API contract design.",
       "category": "backend-data",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "python",
@@ -2197,7 +2197,7 @@
       "description": "Python concurrency patterns guide covering asyncio coordination, TaskGroup usage, cancellation, backpressure, worker orchestration, and safe parallelism. Use when a Python system needs coordinated concurrent work, controlled fan-out/fan-in, or cancellation-aware task flow rather than general async I/O basics.",
       "category": "software-engineering",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "python",
@@ -2217,7 +2217,7 @@
       "description": "Python data engineering and analytics guide covering dataframe workflows, ETL/ELT pipelines, notebook-to-script promotion, and file formats such as CSV, Parquet, and JSON/NDJSON. Use when the task centers on tabular datasets, cleaning, joins, aggregations, validation, or reproducible data pipelines rather than spreadsheet editing or database schema design.",
       "category": "backend-data",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "python",
@@ -2237,7 +2237,7 @@
       "description": "Python development guide covering project architecture, package layout, PEP 8, typing, docstrings, design patterns, and modern Python tooling such as uv, ruff, pytest, pydantic, async I/O, and FastAPI. Use when designing, writing, reviewing, or refactoring general Python code, choosing package boundaries, or setting up packaging, testing, and toolchain conventions. For dataframe, ETL, notebook, file-based analytics, web page extraction, local automation, backend framework, testing implementation, debugging workflows, package release workflows, concurrency coordination, security hardening, or API client development, use the more specialized Python skills.",
       "category": "software-engineering",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "python",
@@ -2261,7 +2261,7 @@
       "description": "Python observability and debugging guide covering traceback triage, logging investigation, profiling, memory diagnosis, performance troubleshooting, and runtime failure analysis. Use when a Python system is failing, slow, memory-heavy, or hard to diagnose, and the task is to isolate root cause rather than design application code.",
       "category": "testing-quality",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "python",
@@ -2281,7 +2281,7 @@
       "description": "Python packaging and release engineering guide covering build backends, wheels, sdists, versioning, console scripts, publishing, and release workflows. Use when packaging a Python project for installation or distribution, choosing build metadata, or preparing a release to PyPI or another artifact target.",
       "category": "software-engineering",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "python",
@@ -2301,7 +2301,7 @@
       "description": "Python security hardening guide covering secrets handling, unsafe deserialization, subprocess and filesystem boundaries, network trust boundaries, and supply-chain hygiene. Use when writing or reviewing Python code with security-sensitive inputs, dependencies, or execution boundaries, and when the task is to harden implementation details rather than review a diff for security findings.",
       "category": "security-governance",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "python",
@@ -2321,7 +2321,7 @@
       "description": "Python testing implementation guide covering pytest fixtures, parametrization, monkeypatching, mocks, async tests, temp paths, capture helpers, and framework-specific adapters. Use when writing, refactoring, or debugging Python tests and test harnesses, or when the task is about how to implement tests rather than choosing the test level.",
       "category": "testing-quality",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "python",
@@ -2341,7 +2341,7 @@
       "description": "Python web scraping and HTML extraction guide covering requests/httpx, HTML parsing, pagination, normalization, retries, and polite crawling of static or lightly dynamic sites. Use when collecting data from web pages, feeds, or HTML documents, and when the task is extraction rather than browser UI testing or general Python architecture.",
       "category": "browser-automation",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "python",
@@ -2361,7 +2361,7 @@
       "description": "Retrieval-augmented generation and vector search guide covering document ingestion, parsing, chunking, embeddings, metadata, hybrid retrieval, reranking, citations, freshness, access control, and retrieval evaluation. Use when building, reviewing, or debugging RAG systems or semantic search.",
       "category": "ai-llm",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "rag",
@@ -2378,7 +2378,7 @@
       "description": "React Native and Expo development workflow covering Expo Router, native modules, permissions, app config, EAS Build, EAS Update, EAS Submit, iOS and Android release profiles, device testing, performance, accessibility, and store readiness. Use when building or debugging mobile apps with React Native or Expo.",
       "category": "mobile-desktop",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "react-native",
@@ -2395,7 +2395,7 @@
       "description": "React performance guide for diagnosing re-render thrash, expensive computations, bundle growth, data waterfalls, and slow UI updates. Use when a React app feels sluggish, a component is too expensive, or performance work needs a focused review.",
       "category": "testing-quality",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "react",
@@ -2410,7 +2410,7 @@
       "description": "React UI state patterns for loading, error, empty, optimistic update, Suspense, and transition flows. Use when building or reviewing React components that fetch data, submit mutations, or need predictable async UX and state handling.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "react",
@@ -2428,7 +2428,7 @@
       "description": "Code-review remediation workflow for triaging incoming findings, validating each claim against the current code and requirements, resolving ambiguity, implementing accepted changes, and returning evidence for re-review. Use when review comments, pull-request feedback, a review report, or requested changes must be evaluated and addressed; do not use to perform the original review.",
       "category": "testing-quality",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "code-review",
@@ -2447,7 +2447,7 @@
       "description": "Redis and Upstash workflow covering caching, rate limiting, sessions, queues, pub/sub, serverless and edge runtime patterns, key design, TTLs, retries, connection management, observability, and production safety. Use when building or debugging Redis or Upstash-backed features.",
       "category": "backend-data",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "redis",
@@ -2464,7 +2464,7 @@
       "description": "Programmatic video creation guidance for Remotion and React, covering compositions, timing, animation, captions, audio, rendering, and reusable video templates. Use when creating data-driven videos, product demos, animated explainers, or video generation pipelines with Remotion.",
       "category": "media-creative",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "video",
@@ -2480,7 +2480,7 @@
       "description": "Prepare and harden repositories through stack-aware structure, contributor instructions, AGENTS.md guidance, documentation, quality commands, CI, security automation, templates, release metadata, and pre-commit safeguards. Use when starting a repository, making an existing project contributor-ready, or auditing repository hygiene and automation without adding generic boilerplate.",
       "category": "cloud-devops",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "repo",
@@ -2495,7 +2495,7 @@
       "description": "Run a deliberate one-decision-at-a-time requirements interview that challenges assumptions, exposes contradictions, recommends concrete defaults, records decisions, and can ground questions in repository evidence. Use when the user explicitly asks for a deep interview, wants requirements challenged before implementation, or an approved discovery workflow pauses for consequential choices that available code and documents cannot answer.",
       "category": "workflow-planning",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "requirements",
@@ -2515,7 +2515,7 @@
       "description": "Responsive frontend layout guidance for breakpoints, fluid typography, container queries, and adaptive component behavior. Use when building or restyling web UI that must work well on mobile, tablet, and desktop, or when fixing layout issues across screen sizes.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "responsive",
@@ -2531,7 +2531,7 @@
       "description": "Perform authorized static and controlled dynamic analysis of binaries, firmware, memory images, and network protocols through artifact provenance, hashing, format identification, disassembly, decompilation, control-flow and data-flow analysis, memory forensics, protocol inference, and behavioral specification. Use for compatibility, migration, incident investigation, malware triage, documentation, or clean-room interoperability without bypassing access controls or weaponizing findings.",
       "category": "security-governance",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "reverse-engineering",
@@ -2546,7 +2546,7 @@
       "description": "Security-focused code review guide for finding high-confidence vulnerabilities in diffs, files, pull requests, and code snippets. Use when asked for a security review, vulnerability audit, OWASP-style review, or when reviewing code for injection, XSS, SSRF, auth/authz, deserialization, cryptography, secrets, supply-chain, or infrastructure security risks.",
       "category": "security-governance",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "security",
@@ -2564,7 +2564,7 @@
       "description": "Configure, run, and govern automated security scanning across source code, dependencies, secrets, containers, infrastructure as code, APIs, SBOMs, and CI gates. Use when selecting or tuning SAST, SCA, secret, image, IaC, or DAST tools; establishing baselines and SARIF reporting; triaging findings; or designing reliable security quality gates.",
       "category": "security-governance",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "security",
@@ -2579,7 +2579,7 @@
       "description": "Continuous improvement workflow for logging learnings, errors, and feature requests into project-local memory files. Use when a command fails, the user corrects an answer, a tool behaves unexpectedly, or a better recurring approach is found.",
       "category": "workflow-planning",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "learning",
@@ -2593,7 +2593,7 @@
       "description": "Evaluate, design, deploy, secure, and operate service meshes using Istio, Linkerd, sidecar or ambient data planes, workload identity, mTLS, authorization policy, traffic routing, retries, timeouts, circuit breaking, canaries, telemetry, upgrades, and rollback. Use when a Kubernetes platform needs uniform service-to-service security, traffic policy, or observability and the operational tradeoffs must be proven.",
       "category": "cloud-devops",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "service-mesh",
@@ -2608,7 +2608,7 @@
       "description": "Create and resume a compact, evidence-linked handoff for work that must continue in another agent, tool, or session. Use when pausing non-trivial work, approaching a context boundary, transferring ownership, or resuming from a prior handoff that must be checked against the current repository revision and working tree.",
       "category": "workflow-planning",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "handoff",
@@ -2628,7 +2628,7 @@
       "description": "shadcn/ui integration guide for installing components, composing forms, handling theming, and building React UI patterns with Tailwind and Radix. Use when the user wants to add, customize, or reason about shadcn/ui components or project conventions.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "shadcn",
@@ -2643,7 +2643,7 @@
       "description": "Short-form video script workflow for TikTok, Reels, YouTube Shorts, Douyin, Xiaohongshu, and similar platforms, covering hooks, talking-head scripts, pacing, captions, CTAs, series planning, retention, and platform-specific creative constraints. Use when writing scripts for short social videos rather than long-form articles or generic marketing copy.",
       "category": "media-creative",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "short-video",
@@ -2658,7 +2658,7 @@
       "description": "Audit Skill packages for invocation fit, workflow completeness, completion evidence, no-op and cleanup behavior, overlap, provenance, licensing, scripts, external actions, secrets, prompt injection, exfiltration, and maintenance risk. Use before adopting, publishing, upgrading, or trusting a SKILL.md package when linting alone cannot establish semantic quality and safety.",
       "category": "agent-skill-tooling",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "audit",
@@ -2677,7 +2677,7 @@
       "description": "Design and refine reusable cross-tool Skills by defining invocation, scope, workflow branches, completion evidence, no-op behavior, context budget, and package resources. Use when creating or materially redesigning a SKILL.md package, deciding whether to split or route overlapping skills, or improving trigger precision and task completion across Codex, Claude, Cursor, Copilot, and OpenCode.",
       "category": "agent-skill-tooling",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "skill",
@@ -2696,7 +2696,7 @@
       "description": "Sandboxed execution workflow for running agent skills, checking outputs, and validating tool behavior. Use when a skill needs controlled execution, local verification, or a reproducible run before adoption.",
       "category": "agent-skill-tooling",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "sandbox",
@@ -2710,7 +2710,7 @@
       "description": "Navigate the local Skill catalog and turn a request into the smallest useful execution route, including what to use now, what artifact enables the next Skill, and where to stop. Use when mapping a task to existing Skills, comparing nearby triggers, discovering a multi-Skill flow, or deciding that no specialized Skill is needed.",
       "category": "agent-skill-tooling",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "discovery",
@@ -2729,7 +2729,7 @@
       "description": "Skill catalog gap analysis workflow for generating search keywords, comparing local skills with external marketplace or GitHub candidates, and deciding whether to upgrade an existing skill, add a new one, adapt marketplace ideas, or keep the catalog unchanged. Use when evaluating coverage gaps, overlap, or upgrade opportunities in a skill catalog.",
       "category": "agent-skill-tooling",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "skills",
@@ -2747,7 +2747,7 @@
       "description": "Linting and validation workflow for SKILL.md files before publishing or using them. Use when checking structure, frontmatter, required sections, links, naming, or quality issues in an agent skill.",
       "category": "agent-skill-tooling",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "lint",
@@ -2761,7 +2761,7 @@
       "description": "Skill package scanning workflow for quickly reviewing a skill folder for structure, suspicious content, and release readiness. Use when you need a fast first-pass scan that can escalate to lint, audit, or quality-gate checks.",
       "category": "agent-skill-tooling",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "scan",
@@ -2775,7 +2775,7 @@
       "description": "Perform a focused security and supply-chain review of a third-party Skill package, including provenance, scripts, dependencies, permissions, data flows, prompt injection, downloads, secret access, external actions, and sandboxed runtime behavior. Use when an external Skill contains executable or opaque content, requests broad access, contacts the network, handles credentials, shows suspicious instructions, or needs a security approval before installation; use skill-audit for overall semantic quality and catalog fit.",
       "category": "agent-skill-tooling",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "security",
@@ -2786,10 +2786,10 @@
     },
     {
       "name": "skillctl",
-      "description": "Skill CLI routing workflow for searching, installing, listing, updating, and lightly validating local or open-ecosystem skills from the command line. Use when you need a direct command-line path for skill discovery or management, including autoverse-cli.js and the open Skills CLI, without deeper scanning or review.",
+      "description": "Skill CLI routing workflow for searching, installing, listing, updating, and lightly validating local or open-ecosystem skills from the command line. Use when you need a direct command-line path for skill discovery or management, including craftroster-cli.js and the open Skills CLI, without deeper scanning or review.",
       "category": "agent-skill-tooling",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "cli",
@@ -2805,7 +2805,7 @@
       "description": "Certify Skill packages through deterministic linting, provenance, versioning, representative golden cases, rubric-based semantic evaluation, regression thresholds, signing, and reproducible release evidence. Use when a SKILL.md package needs a stronger quality gate before publishing, installing, or reusing it across agent environments.",
       "category": "agent-skill-tooling",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "quality",
@@ -2819,7 +2819,7 @@
       "description": "Solution discovery workflow for turning an unclear software problem into an approved design direction through goals, constraints, alternatives, tradeoffs, and explicit decision checkpoints. Use before specification or implementation when the desired outcome is known but the solution, scope, or architecture direction is not yet agreed.",
       "category": "research-product",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "solution-discovery",
@@ -2838,7 +2838,7 @@
       "description": "Turn clear requirements or an approved solution direction into acceptance criteria, dependency-aware work items, and an executable delivery path. Use for implementation planning, issue-ready vertical slices, readiness analysis, and delivery sequencing after the intended direction is understood; use specification-authoring instead when the requested deliverable is a formal technical specification with a prescribed document structure.",
       "category": "workflow-planning",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "spec",
@@ -2857,7 +2857,7 @@
       "description": "Technical specification authoring guide for writing, restructuring, and reviewing Spec documents with required YAML front matter, fixed chapter structure, mirrored feature numbering, Mermaid diagrams, and code-to-spec workflow support. Use when producing a Spec from requirements or reverse-engineering a codebase, or when checking completeness and version history.",
       "category": "writing-content",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "spec",
@@ -2871,7 +2871,7 @@
       "description": "Spreadsheet workflow for reading, cleaning, editing, and generating .xlsx, .csv, and .tsv files with formulas, formatting, and charts. Use when a spreadsheet is the primary input or output, or when tabular cleanup and calculation matter.",
       "category": "documents-productivity",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "xlsx",
@@ -2886,7 +2886,7 @@
       "description": "Spring Cloud and Spring Boot microservices guide covering service boundaries, configuration, discovery, API gateways, Resilience4j, OpenFeign/WebClient clients, messaging, Kafka, saga patterns, distributed tracing, service-to-service security, and operational readiness. Use when designing, building, or reviewing Spring-based distributed systems and cloud-native microservices.",
       "category": "backend-data",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "spring",
@@ -2903,7 +2903,7 @@
       "description": "Spring and Spring Boot development guide covering application layering, dependency injection, configuration, web APIs, data access, security, testing, and observability. Use when building, reviewing, or refactoring Spring-based services and applications.",
       "category": "backend-data",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "spring",
@@ -2921,7 +2921,7 @@
       "description": "Spring Security guide for Spring Boot services covering authentication, authorization, OAuth2/OIDC, JWT resource servers, method security, CSRF, CORS, security headers, secrets, rate limiting, and secure error handling. Use when designing, implementing, reviewing, or debugging security in Spring MVC or WebFlux applications.",
       "category": "backend-data",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "spring",
@@ -2938,7 +2938,7 @@
       "description": "Spring WebFlux and Project Reactor guide for reactive HTTP APIs, WebClient, backpressure, non-blocking persistence, R2DBC, Reactor operators, error handling, testing with WebTestClient, and avoiding blocking calls. Use when building, reviewing, or debugging reactive Spring Boot applications or deciding between MVC and WebFlux.",
       "category": "backend-data",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "spring",
@@ -2955,7 +2955,7 @@
       "description": "SQL writing and review guide covering naming, formatting, JOINs, subqueries, performance analysis, pagination, batch operations, and security practices. Use when writing, reviewing, or optimizing SQL queries, and pair it with database-design when schema or migration design is also involved.",
       "category": "backend-data",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "sql",
@@ -2969,7 +2969,7 @@
       "description": "Stable Diffusion image generation guidance for text-to-image, image-to-image, inpainting, and custom diffusion pipelines using tools such as HuggingFace Diffusers. Use when working with Stable Diffusion models, local or hosted diffusion workflows, generation parameters, seeds, schedulers, LoRA, or pipeline troubleshooting.",
       "category": "media-creative",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "stable-diffusion",
@@ -2985,7 +2985,7 @@
       "description": "Storyboard and shot-list workflow for turning video ideas, scripts, product concepts, ads, tutorials, or explainers into scenes, shots, timing, dialogue, visual prompts, camera notes, and production-ready tables for AI video, filming, or animation. Use when planning video structure before generation or editing.",
       "category": "media-creative",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "storyboard",
@@ -3000,7 +3000,7 @@
       "description": "Stripe payments guide covering Checkout, PaymentIntents, subscriptions, webhooks, idempotency, customer records, Connect basics, testing, and secure server-side integration. Use when implementing, reviewing, or debugging payments, billing, or Stripe webhook flows.",
       "category": "backend-data",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "stripe",
@@ -3017,7 +3017,7 @@
       "description": "Proactively design and route reliable multi-agent workflows by deciding when to delegate, discovering available roles, selecting the smallest useful team, defining file and decision ownership, sequencing dependencies, specifying handoff contracts, and arbitrating parallel results. Use whenever the runtime exposes subagents or custom agents and a task contains multiple bounded workstreams, even when the user did not explicitly request delegation; also use for agent teams, parallel research or implementation, multi-reviewer work, competing debugging hypotheses, and coordinated fan-out and fan-in execution.",
       "category": "agent-skill-tooling",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "subagent",
@@ -3031,7 +3031,7 @@
       "description": "Subtitle and caption workflow for generating, aligning, converting, proofreading, and burning SRT, VTT, ASS, or timed captions into audio/video content. Use when adding subtitles to videos, creating captions from transcripts, syncing text to speech, or preparing accessible media.",
       "category": "media-creative",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "subtitles",
@@ -3046,7 +3046,7 @@
       "description": "Summarization workflow for extracting concise summaries or transcripts from URLs, local files, podcasts, and videos. Use when a link, audio/video file, or long text needs a short summary, transcript, or quick triage.",
       "category": "writing-content",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "summary",
@@ -3060,7 +3060,7 @@
       "description": "Supabase development guide covering Postgres schema design, Row Level Security, Auth, Storage, Edge Functions, migrations, realtime, environment keys, and local-to-production workflows. Use when building, reviewing, or debugging Supabase-backed applications.",
       "category": "backend-data",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "supabase",
@@ -3077,7 +3077,7 @@
       "description": "Evidence-first debugging workflow for reproducing failures, tracing root causes, testing competing hypotheses, and defining the smallest justified fix before editing. Use when a test, build, runtime behavior, integration, or intermittent failure has an unknown or disputed cause; do not use for straightforward implementation with an already-known owner and cause.",
       "category": "testing-quality",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "debugging",
@@ -3096,7 +3096,7 @@
       "description": "Tailwind CSS development guide covering utility-first architecture, theme variables, class composition, custom layers and directives, dark mode, Preflight, and build output-size concerns. Use when building, reviewing, or refactoring Tailwind-based interfaces.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "tailwind",
@@ -3115,7 +3115,7 @@
       "description": "Tailwind CSS pattern guide for building polished layouts, buttons, cards, navigation, forms, typography, and responsive sections with clean utility composition. Use when styling or restyling frontend screens with Tailwind and the task is to make the UI feel balanced, consistent, and production-ready.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "tailwind",
@@ -3132,7 +3132,7 @@
       "description": "Context-aware visual direction workflow for turning a web product brief, brand constraints, and existing UI evidence into a distinctive design intent, calibrated visual system, and anti-generic quality review. Use when a page, application, or site needs stronger art direction before implementation; use image-to-code when an image or approved mockup is the primary implementation source.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "frontend",
@@ -3154,7 +3154,7 @@
       "description": "Engineer durable Temporal workflows and activities with deterministic replay, explicit state, signals, queries, updates, retries, timeouts, heartbeats, cancellation, compensation, child workflows, continue-as-new, versioning, worker deployment, and time-skipping tests. Use when building or reviewing long-running distributed business processes in Python, TypeScript, Java, Go, or another Temporal SDK.",
       "category": "backend-data",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "temporal",
@@ -3169,7 +3169,7 @@
       "description": "Evidence-first repository execution workflow for running commands, checking repo state, debugging failures, and verifying narrow fixes. Use when the user needs exact command output, git state, or a proven local change.",
       "category": "cloud-devops",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "terminal",
@@ -3183,7 +3183,7 @@
       "description": "Terraform and OpenTofu infrastructure-as-code workflow for modules, providers, variables, state, plan/apply review, drift detection, imports, workspaces, backends, and safe cloud provisioning. Use when creating, reviewing, or troubleshooting Terraform/OpenTofu configuration rather than doing manual cloud changes.",
       "category": "cloud-devops",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "terraform",
@@ -3198,7 +3198,7 @@
       "description": "Test-driven development workflow for implementing observable behavior through strict RED-GREEN-REFACTOR cycles and small verified increments. Use when adding or changing behavior that can be expressed with automated tests, especially regression fixes, public contracts, business rules, and behavior-preserving refactors; skip non-executable documentation and exploratory throwaway work.",
       "category": "testing-quality",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "tdd",
@@ -3217,7 +3217,7 @@
       "description": "Testing strategy workflow for choosing the right test level, shaping fixtures and test data, and balancing confidence, speed, and maintenance cost. Use when planning or reviewing test coverage; use test-driven-development separately when implementation must follow a RED-GREEN-REFACTOR cycle.",
       "category": "testing-quality",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "testing",
@@ -3231,7 +3231,7 @@
       "description": "Text-to-speech and voiceover workflow for turning scripts, UI copy, accessibility reads, narration, and batch prompts into spoken audio. Use when the user asks to generate speech, create voiceover, read text aloud, choose voices, or prepare narration for video and product content.",
       "category": "media-creative",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "audio",
@@ -3246,7 +3246,7 @@
       "description": "Build actionable threat models from assets, actors, architecture, data flows, trust boundaries, STRIDE analysis, abuse cases, attack trees, existing controls, security requirements, mitigation mapping, and residual-risk ownership. Use before sensitive design or release decisions, after major architecture changes, or when security findings need to be translated into prioritized requirements and tests.",
       "category": "security-governance",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "security",
@@ -3261,7 +3261,7 @@
       "description": "Build a deliberately disposable experiment that answers one product, interaction, visual, logic, architecture, or integration question with the minimum necessary fidelity. Use during solution discovery when evidence requires executable behavior or a tangible comparison, but production quality, persistence, migration, security hardening, and long-term maintainability would obscure the learning goal.",
       "category": "workflow-planning",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "prototype",
@@ -3281,7 +3281,7 @@
       "description": "Runtime-neutral task-planning and progress-tracking guide for multi-step or non-trivial work. Use when work has 3+ meaningful steps, spans files or commands, includes verification, requires many tool calls, risks losing context, or bundles several requests. Track it with Codex update_plan, another runtime's native todo or plan mechanism, or an inline checklist when no planning tool is available; skip planning overhead for trivial or purely informational requests.",
       "category": "workflow-planning",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "planning",
@@ -3295,7 +3295,7 @@
       "description": "TypeScript development guide covering code style, type safety, design patterns, API design, and refactoring techniques for TypeScript-heavy codebases. Use when writing, reviewing, or restructuring TypeScript code, or when deciding type and module design.",
       "category": "software-engineering",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "typescript",
@@ -3309,7 +3309,7 @@
       "description": "UGC-style video ad workflow for AI-assisted creator ads, competitor ad analysis, hooks, creator personas, authentic scripts, product demos, objections, social proof, voiceover, B-roll, captions, and platform-specific deliverables. Use when creating paid or organic user-generated-content style ads for products or services.",
       "category": "media-creative",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "ugc",
@@ -3324,7 +3324,7 @@
       "description": "UI styling guide for composing shadcn/ui, Radix, and Tailwind components with polished color, button, form, and layout patterns. Use when building or restyling React UI components that need consistent spacing, theme-aware colors, and accessible visual polish.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "ui",
@@ -3342,7 +3342,7 @@
       "description": "Plan and synthesize ethical user interviews, contextual inquiry, usability studies, diary studies, surveys, and existing-evidence reviews with traceable findings. Use when a product or design decision needs real user evidence, participant recruitment and consent safeguards, a neutral research protocol, evidence-backed severity and confidence, or recommendations that must remain linked to observations.",
       "category": "research-product",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "ux-research",
@@ -3359,7 +3359,7 @@
       "description": "UX writing and interface microcopy guide for making product text clearer, shorter, warmer, and more action-oriented. Use when writing or revising button labels, empty states, error messages, loading text, onboarding copy, tooltips, form help, notifications, or any UI copy that affects user experience.",
       "category": "writing-content",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "ux-writing",
@@ -3374,7 +3374,7 @@
       "description": "Vercel deployment workflow covering projects, builds, environment variables, preview and production deployments, domains, redirects, functions, edge runtime, Next.js behavior, rollback, observability, and release checks. Use when deploying, debugging, or reviewing apps on Vercel.",
       "category": "cloud-devops",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "vercel",
@@ -3391,7 +3391,7 @@
       "description": "Completion verification gate for proving that requested work satisfies its acceptance criteria with fresh command output, behavior checks, diff and repository-state inspection, and explicit disclosure of unverified items. Use immediately before claiming a code change, fix, refactor, build, test, review remediation, or repository task is complete; it does not replace independent review or post-deployment monitoring.",
       "category": "testing-quality",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "verification",
@@ -3410,7 +3410,7 @@
       "description": "End-to-end orchestration workflow for carrying non-trivial software work from an approved problem framing through specification, implementation, review remediation, and evidence-backed completion. Use when a feature, refactor, or multi-step fix must be delivered across several stages with explicit artifacts and gates; do not use for a single isolated edit, test run, or review.",
       "category": "workflow-planning",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "software-delivery",
@@ -3430,7 +3430,7 @@
       "description": "Local video editing workflow for trimming, concatenating, resizing, compressing, converting, extracting audio, and inspecting media files with tools such as ffmpeg. Use when editing existing videos or preparing clips for sharing, social platforms, documentation, or downstream video generation.",
       "category": "media-creative",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "video",
@@ -3446,7 +3446,7 @@
       "description": "Approval-gated, tool-neutral workflow for taking a video from brief or source material through treatment, script, storyboard, continuity, production planning, asset creation, edit, review, and delivery. Use when coordinating a complete video project across Agents and media Skills, or when one agent must execute the same stages sequentially with restartable artifacts.",
       "category": "media-creative",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "video-production",
@@ -3467,7 +3467,7 @@
       "description": "Provider-neutral visual comparison and machine-gate workflow for detecting screenshot regressions and evaluating implementation fidelity against approved references across components, pages, states, viewports, themes, and browsers. Use when UI changes need reproducible screenshot, DOM, OCR, contrast, console, network, or semantic-vision evidence; dimensional acceptance criteria; CI verdicts; baseline approval; or an iterative repair gate.",
       "category": "testing-quality",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "visual-regression",
@@ -3495,7 +3495,7 @@
       "description": "Vite build tool guidance for configuring vite.config.ts, plugins, dev server behavior, SSR, library builds, and migration work. Use when working in Vite projects, tuning build and dev tooling, or fixing Vite configuration and plugin issues.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "vite",
@@ -3511,7 +3511,7 @@
       "description": "Vlog production workflow covering concept, audience, story arc, footage organization, footage review, hook, talking-head beats, B-roll, shot list, rough cut, fine cut, captions, title, thumbnail, platform packaging, and repurposing. Use when planning, scripting, directing, editing, or repackaging vlogs for YouTube, Shorts, Reels, TikTok, Xiaohongshu, or personal-brand content.",
       "category": "media-creative",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "vlog",
@@ -3528,7 +3528,7 @@
       "description": "Vue 3 Composition API and SFC macro guide for script setup, defineProps, defineEmits, defineModel, composables, refs, computed values, watchers, lifecycle hooks, and reactivity performance. Use when writing or reviewing Vue 3 Single File Components, extracting composables, choosing ref versus reactive or shallowRef, or fixing Composition API misuse.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "vue",
@@ -3546,7 +3546,7 @@
       "description": "Vue debugging guidance for diagnosing runtime errors, warnings, SSR and hydration mismatches, reactivity issues, and component failures. Use when fixing Vue bugs, investigating warnings, or tracing broken behavior in Vue 3 applications.",
       "category": "testing-quality",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "vue",
@@ -3562,7 +3562,7 @@
       "description": "Vue 3 development guide covering SFC structure, Composition API, component design, Pinia state management, Vue Router, TypeScript, testing, performance, and security. Use when building, reviewing, or refactoring Vue applications.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "vue",
@@ -3583,7 +3583,7 @@
       "description": "Vue Router 4 guide for route records, nested routes, route params, query state, lazy loading, navigation guards, redirects, meta fields, data loading, cleanup, and route lifecycle pitfalls. Use when implementing, reviewing, or debugging Vue Router navigation, guards, route-driven components, or SPA routing behavior.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "vue",
@@ -3600,7 +3600,7 @@
       "description": "Vue testing guide for Vitest, Vue Test Utils, component tests, composable tests, Pinia store setup, async rendering, Suspense, Teleport, browser versus jsdom runners, and Playwright end-to-end checks. Use when writing, reviewing, or fixing tests for Vue 3 components, composables, routes, stores, or user flows.",
       "category": "testing-quality",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "vue",
@@ -3618,7 +3618,7 @@
       "description": "Find and close vulnerability families by turning an authorized known issue into a root-cause predicate, searching code and data flows for related candidates, safely validating exploitability, and producing a remediation family, regression tests, and variant ledger. Use after a credible vulnerability seed, incomplete fix, recurring weakness, or security finding suggests similar instances may exist in an explicitly authorized codebase.",
       "category": "security-governance",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "security",
@@ -3636,7 +3636,7 @@
       "description": "Approval-gated workflow for turning a single web page brief, screenshot, or visual reference into desktop and mobile mockups, an implementation contract, production frontend code in the existing stack, and browser-verified visual evidence. Use when creating or materially redesigning one page and the design must be reviewed before coding; use website-redesign-to-code for multiple routes or a full-site redesign.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "frontend",
@@ -3656,7 +3656,7 @@
       "description": "Web research workflow for finding, checking, and synthesizing current information from the web. Use when a task needs fresh facts, source comparison, or evidence-backed answers from URLs and search results.",
       "category": "research-product",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "search",
@@ -3670,7 +3670,7 @@
       "description": "Local web application testing workflow with Playwright for verifying frontend behavior, debugging UI, capturing screenshots, and checking browser logs. Use when a local web app needs end-to-end validation or UI troubleshooting.",
       "category": "testing-quality",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "playwright",
@@ -3685,7 +3685,7 @@
       "description": "Approval-gated workflow for redesigning an entire website through route and page-family audit, preservation contracts, shared design systems, representative desktop and mobile mockups, staged frontend implementation, and cross-site verification. Use when a redesign spans multiple routes, templates, navigation, or global UI; use web-page-design-to-code for one isolated page.",
       "category": "frontend-design",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "website-redesign",
@@ -3706,7 +3706,7 @@
       "description": "Word document workflow for creating, editing, and converting .docx files with formatting, tracked changes, comments, and tables. Use when a Word doc or .docx file is the primary input or output, or when a report, memo, letter, or template needs docx formatting.",
       "category": "documents-productivity",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "docx",
@@ -3721,7 +3721,7 @@
       "description": "WordPress development and operations workflow for auditing existing sites, building or changing themes, plugins, blocks, hooks, REST integrations, WP-CLI tasks, migrations, updates, performance, permissions, security hardening, and staged releases. Use when code, configuration, content, media, URLs, SEO metadata, or production state in a WordPress site may change and the work needs discovery, backup, validation, rollback, or explicit deployment approval.",
       "category": "backend-data",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "wordpress",
@@ -3741,7 +3741,7 @@
       "description": "Google Workspace workflow for Gmail, Calendar, Drive, Contacts, Sheets, and Docs via CLI. Use when an email, calendar, drive, contact, sheet, or document task needs command-line automation.",
       "category": "documents-productivity",
       "author": "HsinPu",
-      "source": "HsinPu/Autoverse-Ai-Agent-Skills",
+      "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "gmail",

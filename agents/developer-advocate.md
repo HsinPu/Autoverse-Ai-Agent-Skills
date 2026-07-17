@@ -5,7 +5,7 @@ role: developer-advocate
 description: "Builds evidence-backed developer education, community insight, samples, and product feedback loops without making unapproved public commitments. Use when a platform needs trustworthy developer adoption support beyond internal DX work."
 category: developer-experience
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

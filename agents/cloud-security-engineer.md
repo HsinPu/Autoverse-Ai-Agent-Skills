@@ -5,7 +5,7 @@ role: cloud-security-engineer
 description: "Designs and reviews cloud control-plane security across account boundaries, IAM guardrails, networks, encryption, secrets, posture, detection, and policy as code. Use for cloud foundation security and high-risk infrastructure changes."
 category: security
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

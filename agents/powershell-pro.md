@@ -5,7 +5,7 @@ role: powershell-pro
 description: "Designs and implements safe PowerShell automation across Windows PowerShell 5.1 and PowerShell 7+, with explicit edition compatibility, object-pipeline contracts, testing, and rollback. Use for scripts, modules, CI, and Windows administration tooling."
 category: development
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

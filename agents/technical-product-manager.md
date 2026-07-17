@@ -5,7 +5,7 @@ role: technical-product-manager
 description: "Defines evidence-backed product direction for APIs, platforms, SDKs, developer tools, and internal infrastructure. Use when product decisions must account for technical contracts, adoption, compatibility, and lifecycle risk."
 category: product-management
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

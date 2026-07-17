@@ -13,7 +13,7 @@ const {
   validateConfig
 } = require('../scripts/generate-skill-catalog');
 
-const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'autoverse-skill-catalog-'));
+const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'craftroster-skill-catalog-'));
 let passed = 0;
 
 function writeJson(filePath, value) {
@@ -24,7 +24,7 @@ function writeJson(filePath, value) {
 function writeSkill(root, name, options = {}) {
   const metadata = [
     '  author: "HsinPu"',
-    '  source: "HsinPu/Autoverse-Ai-Agent-Skills"'
+    '  source: "HsinPu/CraftRoster"'
   ];
   if (options.reference) {
     metadata.push(`  reference-source: "${options.reference.source}"`);
@@ -111,7 +111,7 @@ function safeCleanup() {
     relative === ''
     || relative.startsWith(`..${path.sep}`)
     || path.isAbsolute(relative)
-    || !path.basename(resolvedTarget).startsWith('autoverse-skill-catalog-')
+    || !path.basename(resolvedTarget).startsWith('craftroster-skill-catalog-')
   ) {
     throw new Error(`Refusing to clean unexpected test path: ${resolvedTarget}`);
   }

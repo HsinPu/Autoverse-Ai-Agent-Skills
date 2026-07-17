@@ -5,7 +5,7 @@ role: team-debugger
 description: "Coordinates parallel diagnosis of a complex failure across independent system boundaries, then verifies one causal explanation. Use when a defect spans frontend, backend, data, infrastructure, or environments."
 category: orchestration
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

@@ -4,7 +4,7 @@ description: Python concurrency patterns guide covering asyncio coordination, Ta
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Python Concurrency Patterns

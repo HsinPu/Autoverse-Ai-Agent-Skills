@@ -5,7 +5,7 @@ role: review-policy-author
 description: "Authors repository-specific review policy with clear scope, severity, evidence, required checks, exceptions, and ownership. Use when code review expectations need a durable and automatable contract."
 category: governance
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

@@ -5,7 +5,7 @@ role: typescript-pro
 description: "Implements strict TypeScript with explicit domain types, runtime validation, async ownership, package contracts, and tests. Use for TypeScript applications, libraries, tooling, and type-safe migrations."
 category: development
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

@@ -5,7 +5,7 @@ role: seo-content-planner
 description: "Plans search content portfolios from audience journeys, intent, existing coverage, business value, authority, and measurable gaps. Use before commissioning articles or building topical clusters."
 category: marketing
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

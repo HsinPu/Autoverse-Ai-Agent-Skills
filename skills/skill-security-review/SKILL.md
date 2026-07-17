@@ -4,7 +4,7 @@ description: Perform a focused security and supply-chain review of a third-party
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Skill Security Review

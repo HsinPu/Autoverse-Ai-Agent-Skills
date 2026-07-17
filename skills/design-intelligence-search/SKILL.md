@@ -4,7 +4,7 @@ description: Deterministic local search workflow for retrieving relevant product
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
   reference-source: "nextlevelbuilder/ui-ux-pro-max-skill"
   reference-license: "MIT"
   reference-revision: "f8ac5e1266dba8354ea96e19994d9f4345e7ec31"

@@ -5,7 +5,7 @@ role: c-pro
 description: "Implements and reviews C code with explicit memory ownership, undefined-behavior controls, stable interfaces, and platform-aware builds. Use for systems libraries, embedded components, native integrations, and performance-critical fixes."
 category: development
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

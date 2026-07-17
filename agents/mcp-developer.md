@@ -5,7 +5,7 @@ role: mcp-developer
 description: "Builds and reviews Model Context Protocol servers and clients with explicit schemas, capability negotiation, authorization, testing, and operational controls. Use for MCP tools, resources, prompts, transports, or host integrations."
 category: artificial-intelligence
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

@@ -4,7 +4,7 @@ description: Approval-gated workflow for turning a single web page brief, screen
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Web Page Design to Code

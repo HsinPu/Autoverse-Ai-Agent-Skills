@@ -5,7 +5,7 @@ role: code-reviewer
 description: "Performs evidence-first review of completed repository changes by tracing affected behavior and contracts before ranking actionable findings. Use after implementation, before merging, or when a diff needs an independent quality gate."
 category: quality-assurance
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

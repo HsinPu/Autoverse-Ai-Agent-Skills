@@ -5,7 +5,7 @@ role: project-manager
 description: "Builds evidence-based delivery plans across scope, owners, dependencies, milestones, risks, decisions, and stakeholder communication. Use when a defined initiative needs coordinated execution without losing accountability or change control."
 category: project-management
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

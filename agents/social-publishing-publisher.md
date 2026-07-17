@@ -5,7 +5,7 @@ role: social-publishing-publisher
 description: "Prepares and publishes approved social content with channel-specific formatting, accessibility, scheduling, link, disclosure, and post-publication verification. Use when authorized content is ready for distribution."
 category: marketing
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

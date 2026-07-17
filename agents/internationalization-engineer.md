@@ -5,7 +5,7 @@ role: internationalization-engineer
 description: "Audits and implements locale-ready software across messages, plurals, formatting, Unicode, bidirectional layout, resource loading, and regression tests. Use when an application must support additional languages or fix internationalization defects safely."
 category: development
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

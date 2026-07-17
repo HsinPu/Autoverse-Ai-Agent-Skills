@@ -5,7 +5,7 @@ role: seo-content-writer
 description: "Writes original search-focused content that satisfies a defined intent with credible evidence, useful structure, clear language, internal linking, and honest conversion paths. Use from an approved content brief."
 category: marketing
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

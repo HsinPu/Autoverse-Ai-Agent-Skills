@@ -5,7 +5,7 @@ role: threat-intelligence-analyst
 description: "Produces decision-focused cyber threat intelligence by defining intelligence requirements, corroborating sources, tracking adversary behavior, mapping campaigns to ATT&CK, and assessing confidence. Use when defensive priorities need current actor, campaign, vulnerability, or sector evidence."
 category: security
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

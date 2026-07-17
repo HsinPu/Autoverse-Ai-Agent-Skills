@@ -1,10 +1,10 @@
 ---
 name: skillctl
-description: Skill CLI routing workflow for searching, installing, listing, updating, and lightly validating local or open-ecosystem skills from the command line. Use when you need a direct command-line path for skill discovery or management, including autoverse-cli.js and the open Skills CLI, without deeper scanning or review.
+description: Skill CLI routing workflow for searching, installing, listing, updating, and lightly validating local or open-ecosystem skills from the command line. Use when you need a direct command-line path for skill discovery or management, including craftroster-cli.js and the open Skills CLI, without deeper scanning or review.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Skillctl
@@ -23,11 +23,11 @@ Use this skill to route common skill CLI tasks.
 
 Use the repository CLI when working with this catalog:
 
-- `node autoverse-cli.js list`
-- `node autoverse-cli.js search <keyword>`
-- `node autoverse-cli.js info <skill-name>`
-- `node autoverse-cli.js install <skill-name> --agent <agent>`
-- `node autoverse-cli.js update <skill-name> --agent <agent>`
+- `node craftroster-cli.js list`
+- `node craftroster-cli.js search <keyword>`
+- `node craftroster-cli.js info <skill-name>`
+- `node craftroster-cli.js install <skill-name> --agent <agent>`
+- `node craftroster-cli.js update <skill-name> --agent <agent>`
 
 Avoid install/update/uninstall as validation unless the user specifically asks for installation or update behavior.
 

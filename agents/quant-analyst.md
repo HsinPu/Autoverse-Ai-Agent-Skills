@@ -5,7 +5,7 @@ role: quant-analyst
 description: "Develops reproducible quantitative analyses with explicit data timing, transaction costs, risk, uncertainty, and out-of-sample validation. Use for strategy research, forecasting, portfolio analysis, and financial models."
 category: analysis
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

@@ -5,7 +5,7 @@ role: product-spec-orchestrator
 description: "Guides one product idea from incomplete request to a decision-ready specification through structured discovery, option framing, and explicit approval gates. Use before implementation when the desired product behavior is not yet sufficiently defined."
 category: product-management
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

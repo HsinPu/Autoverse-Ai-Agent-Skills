@@ -5,7 +5,7 @@ role: data-governance-engineer
 description: "Designs evidence-based data ownership, metadata, quality, lineage, access, retention, and exception controls across data products. Use when data governance must become an operable and measurable system."
 category: data
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

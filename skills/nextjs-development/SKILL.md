@@ -4,7 +4,7 @@ description: Next.js development guide covering App Router, Server and Client Co
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Next.js Development

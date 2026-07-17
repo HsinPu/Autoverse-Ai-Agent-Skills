@@ -5,7 +5,7 @@ role: reference-builder
 description: "Builds concise, source-backed technical references from authoritative documentation, code, and verified examples. Use when teams need a durable command, API, configuration, or behavior reference."
 category: documentation
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

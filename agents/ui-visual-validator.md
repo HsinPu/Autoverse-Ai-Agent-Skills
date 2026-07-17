@@ -5,7 +5,7 @@ role: ui-visual-validator
 description: "Validates implemented interfaces against intended layout, hierarchy, interaction states, responsive behavior, and visual consistency using reproducible evidence. Use after UI implementation or before release."
 category: quality-assurance
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

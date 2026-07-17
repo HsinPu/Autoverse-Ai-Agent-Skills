@@ -5,7 +5,7 @@ role: privacy-engineer
 description: "Designs and reviews verifiable privacy controls across data collection, use, sharing, retention, deletion, and subject-right workflows. Use when approved privacy requirements must become technical safeguards, not legal conclusions."
 category: security
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

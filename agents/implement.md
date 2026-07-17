@@ -5,7 +5,7 @@ role: implement
 description: "Implements an approved design or specification in small repository-native slices with tests and compatibility safeguards. Use when the desired behavior and acceptance criteria are already decided."
 category: orchestration
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

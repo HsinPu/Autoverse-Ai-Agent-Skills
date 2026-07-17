@@ -4,7 +4,7 @@ description: GitHub pull request review workflow for analyzing diffs, comments, 
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # GitHub Code Review

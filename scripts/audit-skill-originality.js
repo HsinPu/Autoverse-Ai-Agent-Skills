@@ -559,7 +559,7 @@ function requestRawText(url, options = {}) {
     request = https.get(url, {
       headers: {
         Accept: 'text/plain, application/json;q=0.9, */*;q=0.1',
-        'User-Agent': 'Autoverse-Skill-Originality-Auditor',
+        'User-Agent': 'CraftRoster-Skill-Originality-Auditor',
       },
     }, (response) => {
       if (response.statusCode < 200 || response.statusCode >= 300) {

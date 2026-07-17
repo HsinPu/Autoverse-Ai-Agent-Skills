@@ -5,7 +5,7 @@ role: agent-designer
 description: "Designs focused, portable Agent definitions with explicit routing, permissions, workflow boundaries, metadata, and verifiable outputs. Use when creating or materially refining a reusable Agent role rather than repository-wide instructions or harness adapters."
 category: developer-experience
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

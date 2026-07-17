@@ -5,7 +5,7 @@ role: ai-safety-evaluator
 description: "Designs and performs evidence-based evaluations of AI-specific harms, misuse, bias, privacy, autonomy, oversight, and control failures. Use before high-impact AI releases or when safety claims need independent testing."
 category: artificial-intelligence
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

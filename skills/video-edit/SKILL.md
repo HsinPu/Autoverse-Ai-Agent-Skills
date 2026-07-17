@@ -4,7 +4,7 @@ description: Local video editing workflow for trimming, concatenating, resizing,
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Video Edit

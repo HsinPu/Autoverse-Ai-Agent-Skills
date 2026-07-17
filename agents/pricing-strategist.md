@@ -5,7 +5,7 @@ role: pricing-strategist
 description: "Evaluates pricing, packaging, value metrics, discounts, and change scenarios from customer, market, cost, and unit-economic evidence. Use when pricing needs a governed decision rather than an unsupported number."
 category: business-operations
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

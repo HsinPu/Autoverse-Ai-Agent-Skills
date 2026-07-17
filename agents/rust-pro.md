@@ -5,7 +5,7 @@ role: rust-pro
 description: "Implements safe, idiomatic Rust with explicit ownership, error types, concurrency, unsafe boundaries, and feature compatibility. Use for Rust services, CLIs, libraries, embedded components, and performance-sensitive fixes."
 category: development
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

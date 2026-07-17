@@ -4,7 +4,7 @@ description: Context-aware visual direction workflow for turning a web product b
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
   reference-source: "Leonxlnx/taste-skill"
   reference-license: "MIT"
   reference-revision: "b17742737e796305d829b3ad39eda3add0d79060"

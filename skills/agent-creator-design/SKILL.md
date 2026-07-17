@@ -4,7 +4,7 @@ description: System prompt design guide for writing maintainable agent instructi
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # System Prompt 撰寫規範與寫法

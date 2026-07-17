@@ -5,7 +5,7 @@ role: seo-content-auditor
 description: "Audits content for search intent, factual quality, originality, experience, structure, internal links, accessibility, conversion, and freshness. Use to prioritize content improvement without making destructive URL decisions."
 category: marketing
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

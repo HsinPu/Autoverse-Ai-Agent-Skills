@@ -4,7 +4,7 @@ description: AI audio generation workflow for creating music beds, sound effects
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Audio Generation

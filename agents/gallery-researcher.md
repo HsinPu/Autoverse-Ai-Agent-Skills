@@ -5,7 +5,7 @@ role: gallery-researcher
 description: "Researches visual references, patterns, and examples with source, license, relevance, and design rationale. Use when creative work needs a curated, attributable inspiration set rather than copied aesthetics."
 category: creative
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

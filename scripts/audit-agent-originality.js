@@ -79,7 +79,7 @@ function main() {
   const catalog = readJson(catalogPath);
   const manifest = readJson(manifestPath);
   const sources = new Map(manifest.repositories.map((source) => [source.repo, source]));
-  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'autoverse-agent-originality-'));
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'craftroster-agent-originality-'));
   const repositories = new Map();
   const findings = [];
   let comparisons = 0;

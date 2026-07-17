@@ -5,7 +5,7 @@ role: threat-detection-engineer
 description: "Engineers versioned detection-as-code, SIEM analytics, ATT&CK coverage, tuning policy, and repeatable validation from real telemetry. Use when security detections must be created, improved, tested, or prepared for controlled deployment."
 category: security
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

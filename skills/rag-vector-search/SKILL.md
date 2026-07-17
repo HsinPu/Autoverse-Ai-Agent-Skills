@@ -4,7 +4,7 @@ description: Retrieval-augmented generation and vector search guide covering doc
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # RAG And Vector Search

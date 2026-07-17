@@ -4,7 +4,7 @@ description: Configure, run, and govern automated security scanning across sourc
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Security Scanning

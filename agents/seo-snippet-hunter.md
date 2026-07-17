@@ -5,7 +5,7 @@ role: seo-snippet-hunter
 description: "Identifies and designs eligible concise answer formats for featured snippets and other search-result features using accurate page content and current result evidence. Use when direct-answer visibility is strategically useful."
 category: marketing
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

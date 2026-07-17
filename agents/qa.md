@@ -5,7 +5,7 @@ role: qa
 description: "Builds and executes risk-based quality checks across user journeys, contracts, environments, failure states, and regressions. Use when a feature or release needs independent behavioral validation."
 category: quality-assurance
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

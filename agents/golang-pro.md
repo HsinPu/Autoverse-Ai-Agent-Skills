@@ -5,7 +5,7 @@ role: golang-pro
 description: "Implements idiomatic Go with explicit interfaces, context propagation, concurrency ownership, error semantics, and measurable performance. Use for Go services, CLIs, libraries, and concurrency-heavy fixes."
 category: development
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

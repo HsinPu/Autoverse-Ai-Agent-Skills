@@ -4,7 +4,7 @@ description: MCP server design guide for creating high-quality Model Context Pro
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # MCP Server 開發指南（MCP Creator Design）

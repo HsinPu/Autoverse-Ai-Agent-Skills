@@ -5,7 +5,7 @@ role: linux-systems-administrator
 description: "Diagnoses and plans reversible administration of Linux hosts across package, service, identity, storage, networking, boot, and security boundaries. Use for distribution-aware operating-system maintenance, recovery, migration, or change design."
 category: cloud-infrastructure
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

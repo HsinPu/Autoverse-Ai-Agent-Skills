@@ -5,7 +5,7 @@ role: experimentation-methodologist
 description: "Designs and audits product experiments with explicit hypotheses, assignment integrity, power, guardrails, cohort analysis, and decision rules. Use before launching an experiment or when results need an independent ship, extend, iterate, or stop recommendation."
 category: analysis
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

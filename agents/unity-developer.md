@@ -5,7 +5,7 @@ role: unity-developer
 description: "Implements Unity gameplay and tools with clear lifecycle, scene, asset, physics, input, serialization, and performance boundaries. Use for Unity games, simulations, editor tooling, and platform fixes."
 category: development
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

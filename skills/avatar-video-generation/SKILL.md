@@ -4,7 +4,7 @@ description: AI avatar, digital human, talking-head, and lip-sync video workflow
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Avatar Video Generation

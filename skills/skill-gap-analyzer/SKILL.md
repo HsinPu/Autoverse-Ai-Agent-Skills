@@ -4,7 +4,7 @@ description: Skill catalog gap analysis workflow for generating search keywords,
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Skill Gap Analyzer

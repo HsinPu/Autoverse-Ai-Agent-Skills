@@ -5,7 +5,7 @@ role: debugger
 description: "Diagnoses reproducible software failures, isolates the smallest causal path, implements a scoped fix, and verifies the regression. Use for runtime errors, failing tests, broken builds, or behavior that differs from expectations."
 category: development
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

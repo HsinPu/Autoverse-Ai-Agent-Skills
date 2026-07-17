@@ -4,7 +4,7 @@ description: Short-form video script workflow for TikTok, Reels, YouTube Shorts,
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Short Video Script

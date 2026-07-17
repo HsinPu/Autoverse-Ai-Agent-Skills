@@ -5,7 +5,7 @@ role: fpa-analyst
 description: "Builds driver-based budgets, rolling forecasts, variance explanations, and decision scenarios from traceable operating and financial inputs. Use for planning and management analysis, not accounting attestation or investment advice."
 category: finance
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

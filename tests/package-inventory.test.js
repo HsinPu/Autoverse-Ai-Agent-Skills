@@ -8,14 +8,14 @@ const { spawnSync } = require('child_process');
 
 const root = path.resolve(__dirname, '..');
 const packageJson = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
-const cacheRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'autoverse-npm-pack-cache-'));
-const stageBase = fs.mkdtempSync(path.join(os.tmpdir(), 'autoverse-npm-package-stage-'));
+const cacheRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'craftroster-npm-pack-cache-'));
+const stageBase = fs.mkdtempSync(path.join(os.tmpdir(), 'craftroster-npm-package-stage-'));
 const stageRoot = path.join(stageBase, 'package');
 const token = `${process.pid}-${Date.now()}`;
 const sentinelPaths = [
-  path.join(root, `.env.autoverse-package-${token}`),
-  path.join(root, `autoverse-package-${token}.tmp`),
-  path.join(root, 'scripts', 'data', `autoverse-package-secret-${token}.json`)
+  path.join(root, `.env.craftroster-package-${token}`),
+  path.join(root, `craftroster-package-${token}.tmp`),
+  path.join(root, 'scripts', 'data', `craftroster-package-secret-${token}.json`)
 ];
 const expectedRuntimeManifests = runtimeManifests();
 const expectedTarball = `${packageJson.name.replace(/^@/, '').replace(/\//g, '-')}-${packageJson.version}.tgz`;
@@ -166,7 +166,8 @@ function runProcess(command, args, cwd, label) {
 }
 
 function verifyStagedPackage() {
-  runProcess(process.execPath, ['autoverse-cli.js', '--help'], stageRoot, 'packed autoverse --help');
+  runProcess(process.execPath, ['craftroster-cli.js', '--help'], stageRoot, 'packed craftroster --help');
+  runProcess(process.execPath, ['autoverse-cli.js', '--help'], stageRoot, 'packed legacy autoverse --help');
   for (const scriptName of [
     'validate',
     'test:skill-catalog',
@@ -179,9 +180,12 @@ function verifyStagedPackage() {
 }
 
 try {
+  assert.strictEqual(packageJson.name, 'craftroster', 'package name must match the public brand');
+  assert.strictEqual(packageJson.bin?.craftroster, './craftroster-cli.js', 'package must expose the craftroster CLI');
+  assert.strictEqual(packageJson.bin?.autoverse, './autoverse-cli.js', 'package must preserve the legacy CLI alias');
   for (const sentinelPath of sentinelPaths) {
     assert(!fs.existsSync(sentinelPath), `refusing to overwrite package test sentinel: ${sentinelPath}`);
-    fs.writeFileSync(sentinelPath, 'AUTOVERSE PACKAGE INVENTORY TEST SENTINEL\n', 'utf8');
+    fs.writeFileSync(sentinelPath, 'CRAFTROSTER PACKAGE INVENTORY TEST SENTINEL\n', 'utf8');
   }
 
   const inventory = runPack();
@@ -207,6 +211,7 @@ try {
 
   for (const requiredPath of [
     'package.json',
+    'craftroster-cli.js',
     'autoverse-cli.js',
     'agents.json',
     'skills.json',

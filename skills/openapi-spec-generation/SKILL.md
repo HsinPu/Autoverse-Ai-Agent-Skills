@@ -4,7 +4,7 @@ description: OpenAPI specification workflow for generating, updating, validating
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # OpenAPI Spec Generation

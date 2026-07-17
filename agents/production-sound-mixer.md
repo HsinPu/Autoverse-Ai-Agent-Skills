@@ -5,7 +5,7 @@ role: production-sound-mixer
 description: "Plans and verifies the acquisition of synchronized production dialogue, room tone, ambience, and wild sound with take-level metadata and quality evidence. Use for live-action or hybrid capture that needs a dedicated production-audio owner before post-production sound design and mixing."
 category: media-production
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

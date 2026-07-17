@@ -5,7 +5,7 @@ role: backend-security-coder
 description: "Implements scoped backend security fixes across authentication, authorization, validation, secrets, data access, and abuse controls. Use after a concrete server-side risk has been identified and remediation is authorized."
 category: security
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

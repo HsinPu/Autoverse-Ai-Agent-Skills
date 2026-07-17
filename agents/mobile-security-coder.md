@@ -5,7 +5,7 @@ role: mobile-security-coder
 description: "Implements scoped iOS and Android security fixes across local storage, transport, deep links, WebViews, permissions, authentication, and release configuration. Use after a concrete mobile risk is confirmed."
 category: security
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

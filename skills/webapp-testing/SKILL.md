@@ -4,7 +4,7 @@ description: Local web application testing workflow with Playwright for verifyin
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Webapp Testing

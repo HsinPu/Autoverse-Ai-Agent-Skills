@@ -4,7 +4,7 @@ description: Python development guide covering project architecture, package lay
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Python 開發（Python Development）

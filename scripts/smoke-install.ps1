@@ -188,7 +188,8 @@ function Assert-SafeSmokeRoot {
 
 $repoRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "..")).Path
 $script:Installer = Join-Path $repoRoot "scripts\install.ps1"
-$expectedRepo = "HsinPu/Autoverse-Ai-Agent-Skills"
+$expectedRepo = "HsinPu/CraftRoster"
+$legacyRepo = "HsinPu/Autoverse-Ai-Agent-Skills"
 $expectedSkills = (Get-Content -Raw -LiteralPath (Join-Path $repoRoot "skills.json") | ConvertFrom-Json).skills.Count
 $expectedAgents = (Get-Content -Raw -LiteralPath (Join-Path $repoRoot "agents.json") | ConvertFrom-Json).agents.Count
 $smokeRoot = Assert-SafeSmokeRoot -Path (Join-Path ([System.IO.Path]::GetTempPath()) "autoverse-install-smoke-$([Guid]::NewGuid().ToString('N'))")
@@ -437,9 +438,9 @@ try {
     New-Item -ItemType Directory -Path $foreignSkill | Out-Null
     $foreignSkillFile = Join-Path $foreignSkill "SKILL.md"
     $foreignSkillMeta = Join-Path $foreignSkill ".skill-meta.json"
-    [System.IO.File]::WriteAllText($foreignSkillFile, "FOREIGN SKILL SENTINEL - AUTOVERSE MUST NOT REPLACE THIS FILE`n", [System.Text.UTF8Encoding]::new($false))
+    [System.IO.File]::WriteAllText($foreignSkillFile, "FOREIGN SKILL SENTINEL - CRAFTROSTER MUST NOT REPLACE THIS FILE`n", [System.Text.UTF8Encoding]::new($false))
     $foreignSkillHash = Get-Sha256Hex -Path $foreignSkillFile
-    Invoke-ExpectedFailure -Label "project Skill ownership collision" -ExpectedMessage "no matching Autoverse metadata" -InstallerArgs @(
+    Invoke-ExpectedFailure -Label "project Skill ownership collision" -ExpectedMessage "no matching CraftRoster metadata" -InstallerArgs @(
         "-Target", "project", "-Type", "skill", "-Name", "python-development", "-SourceDir", $repoRoot, "-InstallDir", $skillCollisionRoot
     )
     Assert-Equal (Get-Sha256Hex -Path $foreignSkillFile) $foreignSkillHash "foreign Skill sentinel hash"
@@ -455,9 +456,9 @@ try {
     New-Item -ItemType Directory -Force -Path $foreignAgentParent | Out-Null
     $foreignAgent = Join-Path $foreignAgentParent "code-reviewer.md"
     $foreignAgentMeta = $foreignAgent + ".autoverse.json"
-    [System.IO.File]::WriteAllText($foreignAgent, "FOREIGN AGENT SENTINEL - AUTOVERSE MUST NOT REPLACE THIS FILE`n", [System.Text.UTF8Encoding]::new($false))
+    [System.IO.File]::WriteAllText($foreignAgent, "FOREIGN AGENT SENTINEL - CRAFTROSTER MUST NOT REPLACE THIS FILE`n", [System.Text.UTF8Encoding]::new($false))
     $foreignAgentHash = Get-Sha256Hex -Path $foreignAgent
-    Invoke-ExpectedFailure -Label "project Agent ownership collision" -ExpectedMessage "no matching Autoverse metadata" -InstallerArgs @(
+    Invoke-ExpectedFailure -Label "project Agent ownership collision" -ExpectedMessage "no matching CraftRoster metadata" -InstallerArgs @(
         "-Target", "project", "-Type", "agent", "-Name", "code-reviewer", "-SourceDir", $repoRoot, "-InstallDir", $agentCollisionRoot
     )
     Assert-Equal (Get-Sha256Hex -Path $foreignAgent) $foreignAgentHash "foreign Agent sentinel hash"
@@ -485,6 +486,22 @@ try {
     $ownedSkillMeta = Join-Path $ownedSkillRoot ".skill-meta.json"
     $ownedSkillBaselineMeta = Get-Content -Raw -LiteralPath $ownedSkillMeta
     $ownedSkillBaselineHash = Get-Sha256Hex -Path $ownedSkillFile
+
+    Write-Utf8NoBom -Path $ownedSkillMeta -Text $ownedSkillBaselineMeta
+    Set-MetadataString -Path $ownedSkillMeta -Field "repo" -Value $legacyRepo
+    $skillRepositoryMigration = Invoke-InstallerStep -Label "Skill legacy repository alias migration" -InstallerArgs @(
+        "-Target", "claude", "-Type", "skill", "-Name", "terminal-ops", "-SourceDir", $repoRoot, "-InstallDir", $skillOwnershipRoot
+    )
+    Assert-Equal @($skillRepositoryMigration.Output | Where-Object { $_ -match '^OK\s+migrate-update Skill ' }).Count 1 "Skill legacy repository migration count"
+    Assert-OwnershipMetadata -Path $ownedSkillMeta -ExpectedRepo $expectedRepo -ExpectedComponent "skill" -ExpectedName "terminal-ops" -ExpectedTarget "claude" -Label "legacy-repository migrated Skill"
+
+    Write-Utf8NoBom -Path $ownedSkillMeta -Text $ownedSkillBaselineMeta
+    Set-MetadataString -Path $ownedSkillMeta -Field "repo" -Value $legacyRepo
+    Invoke-ExpectedFailure -Label "Skill explicit repository disables legacy alias" -ExpectedMessage "installed from '$legacyRepo'" -InstallerArgs @(
+        "-Target", "claude", "-Type", "skill", "-Name", "terminal-ops", "-Repo", $expectedRepo, "-SourceDir", $repoRoot, "-InstallDir", $skillOwnershipRoot
+    )
+    Assert-Equal (Get-Content -Raw -LiteralPath $ownedSkillMeta | ConvertFrom-Json).repo $legacyRepo "Skill explicit repository refusal preserved legacy owner"
+
     $skillMetadataCases = @(
         @{ Label = "repo mismatch"; Field = "repo"; Value = "foreign/repository"; Expected = "installed from" },
         @{ Label = "component mismatch"; Field = "component"; Value = "agent"; Expected = "ownership metadata does not match" },
@@ -501,7 +518,7 @@ try {
     }
 
     Write-Utf8NoBom -Path $ownedSkillMeta -Text "{`n"
-    Invoke-ExpectedFailure -Label "Skill malformed ownership metadata" -ExpectedMessage "Existing Autoverse metadata is invalid" -InstallerArgs @(
+    Invoke-ExpectedFailure -Label "Skill malformed ownership metadata" -ExpectedMessage "Existing CraftRoster metadata is invalid" -InstallerArgs @(
         "-Target", "claude", "-Type", "skill", "-Name", "terminal-ops", "-SourceDir", $repoRoot, "-InstallDir", $skillOwnershipRoot
     )
     Assert-Equal (Get-Sha256Hex -Path $ownedSkillFile) $ownedSkillBaselineHash "Skill malformed metadata content hash"
@@ -525,7 +542,7 @@ try {
     $driftFileHash = Get-Sha256Hex -Path $localDriftFile
     $driftSkillHash = Get-Sha256Hex -Path $ownedSkillFile
     $driftMetadataText = Get-Content -Raw -LiteralPath $ownedSkillMeta
-    Invoke-ExpectedFailure -Label "Skill local content drift refusal" -ExpectedMessage "installed Skill content has changed since the last Autoverse install" -InstallerArgs @(
+    Invoke-ExpectedFailure -Label "Skill local content drift refusal" -ExpectedMessage "installed Skill content has changed since the last CraftRoster install" -InstallerArgs @(
         "-Target", "claude", "-Type", "skill", "-Name", "terminal-ops", "-SourceDir", $repoRoot, "-InstallDir", $skillOwnershipRoot
     )
     Assert-Equal (Get-Sha256Hex -Path $localDriftFile) $driftFileHash "drift refusal local file hash"
@@ -723,6 +740,22 @@ try {
     $ownedAgentMeta = $ownedAgentFile + ".autoverse.json"
     $ownedAgentBaselineMeta = Get-Content -Raw -LiteralPath $ownedAgentMeta
     $ownedAgentBaselineHash = Get-Sha256Hex -Path $ownedAgentFile
+
+    Write-Utf8NoBom -Path $ownedAgentMeta -Text $ownedAgentBaselineMeta
+    Set-MetadataString -Path $ownedAgentMeta -Field "repo" -Value $legacyRepo
+    $agentRepositoryMigration = Invoke-InstallerStep -Label "Agent legacy repository alias migration" -InstallerArgs @(
+        "-Target", "claude", "-Type", "agent", "-Name", "code-reviewer", "-SourceDir", $repoRoot, "-InstallDir", $agentOwnershipRoot
+    )
+    Assert-Equal @($agentRepositoryMigration.Output | Where-Object { $_ -match '^OK\s+migrate-update Agent ' }).Count 1 "Agent legacy repository migration count"
+    Assert-OwnershipMetadata -Path $ownedAgentMeta -ExpectedRepo $expectedRepo -ExpectedComponent "agent" -ExpectedName "code-reviewer" -ExpectedTarget "claude" -ExpectedId "code-reviewer" -ExpectedAdapter "claude" -Label "legacy-repository migrated Agent"
+
+    Write-Utf8NoBom -Path $ownedAgentMeta -Text $ownedAgentBaselineMeta
+    Set-MetadataString -Path $ownedAgentMeta -Field "repo" -Value $legacyRepo
+    Invoke-ExpectedFailure -Label "Agent explicit repository disables legacy alias" -ExpectedMessage "installed from '$legacyRepo'" -InstallerArgs @(
+        "-Target", "claude", "-Type", "agent", "-Name", "code-reviewer", "-Repo", $expectedRepo, "-SourceDir", $repoRoot, "-InstallDir", $agentOwnershipRoot
+    )
+    Assert-Equal (Get-Content -Raw -LiteralPath $ownedAgentMeta | ConvertFrom-Json).repo $legacyRepo "Agent explicit repository refusal preserved legacy owner"
+
     foreach ($case in @(
         @{ Label = "id mismatch"; Field = "id"; Value = "debugger" },
         @{ Label = "adapter mismatch"; Field = "adapter"; Value = "codex" }

@@ -5,7 +5,7 @@ role: prompt-engineer
 description: "Engineers versioned prompt systems through task decomposition, structured outputs, injection defenses, evaluation datasets, and regression testing. Use for production prompts and multi-step model workflows."
 category: artificial-intelligence
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

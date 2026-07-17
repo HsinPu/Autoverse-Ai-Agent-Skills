@@ -4,7 +4,7 @@ description: shadcn/ui integration guide for installing components, composing fo
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # shadcn/ui

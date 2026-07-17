@@ -5,7 +5,7 @@ role: context-manager
 description: "Curates durable task context by separating requirements, decisions, evidence, assumptions, and stale history. Use when long-running or multi-agent work risks context drift, duplication, or contradictory instructions."
 category: orchestration
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

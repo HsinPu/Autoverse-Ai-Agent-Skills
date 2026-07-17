@@ -5,7 +5,7 @@ role: database-optimizer
 description: "Diagnoses database latency and resource pressure from plans, workload evidence, contention, schema, and application behavior before recommending focused fixes. Use for slow queries and capacity bottlenecks."
 category: performance
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

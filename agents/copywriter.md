@@ -5,7 +5,7 @@ role: copywriter
 description: "Writes concise, persuasion-focused copy for landing pages, campaigns, email, advertising, and product marketing from approved positioning and evidence. Use when a defined audience needs a clear value proposition and responsible next action."
 category: writing
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

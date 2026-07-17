@@ -4,7 +4,7 @@ description: Logo design workflow for turning brand context into simple, recogni
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Logo Design

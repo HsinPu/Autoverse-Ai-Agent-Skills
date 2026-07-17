@@ -4,7 +4,7 @@ description: Documentation-comment workflow for writing concise docstrings, Java
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # API Doc Comments

@@ -5,7 +5,7 @@ role: conductor-validator
 description: "Validates multi-step agent workflows for dependency order, evidence handoffs, authority boundaries, failure recovery, and completion claims. Use before or after orchestrated work involving multiple agents or phases."
 category: orchestration
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

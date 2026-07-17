@@ -5,7 +5,7 @@ role: sql-pro
 description: "Writes and reviews correct, performant SQL with explicit schemas, null semantics, transactions, access paths, and migration safety. Use for queries, reports, data changes, and relational database logic."
 category: data
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

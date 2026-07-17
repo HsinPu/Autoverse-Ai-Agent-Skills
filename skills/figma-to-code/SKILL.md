@@ -4,7 +4,7 @@ description: Structured Figma-to-frontend implementation workflow for translatin
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
   reference-source: "figma/mcp-server-guide"
   reference-license: "No repository-wide OSS license; governed by Figma Developer Terms"
   reference-revision: "07316dd2920d61303ca0e52812b31f5f341e7b15"

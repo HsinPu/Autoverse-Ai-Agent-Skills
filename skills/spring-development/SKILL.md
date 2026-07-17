@@ -4,7 +4,7 @@ description: Spring and Spring Boot development guide covering application layer
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Spring 開發（Spring Development）

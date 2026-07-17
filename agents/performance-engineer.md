@@ -5,7 +5,7 @@ role: performance-engineer
 description: "Diagnoses end-to-end latency, throughput, memory, CPU, I/O, and rendering bottlenecks from representative measurements before recommending changes. Use for performance regressions and capacity planning."
 category: performance
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

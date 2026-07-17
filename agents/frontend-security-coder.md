@@ -5,7 +5,7 @@ role: frontend-security-coder
 description: "Implements scoped client-side security fixes for untrusted rendering, browser storage, navigation, messaging, dependencies, and session handling. Use after a concrete web frontend risk is confirmed."
 category: security
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

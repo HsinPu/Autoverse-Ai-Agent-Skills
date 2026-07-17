@@ -4,7 +4,7 @@ description: Frontend testing guide for unit, component, and RTL-style tests in 
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Frontend Testing

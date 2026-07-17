@@ -5,7 +5,7 @@ role: seo-content-refresher
 description: "Refreshes existing search content using current evidence while preserving URL, publication history, taxonomy, media, and editorial intent by default. Use when an established page is stale or losing usefulness."
 category: marketing
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

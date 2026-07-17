@@ -5,7 +5,7 @@ role: business-intelligence-analyst
 description: "Produces reproducible descriptive analysis, KPI definitions, dashboards, drill-downs, and decision narratives from governed data. Use when stakeholders need evidence about what happened and where to investigate next."
 category: analysis
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

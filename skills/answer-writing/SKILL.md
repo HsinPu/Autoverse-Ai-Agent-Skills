@@ -4,7 +4,7 @@ description: Final-response writing guide for producing clear, actionable user-f
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Answer Writing

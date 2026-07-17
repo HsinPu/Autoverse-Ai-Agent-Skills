@@ -4,7 +4,7 @@ description: Java testing engineering guide for JUnit 5, Mockito, AssertJ, Sprin
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Java Testing

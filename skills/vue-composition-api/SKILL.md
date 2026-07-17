@@ -4,7 +4,7 @@ description: Vue 3 Composition API and SFC macro guide for script setup, defineP
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Vue Composition API

@@ -5,7 +5,7 @@ role: seo-meta-optimizer
 description: "Optimizes page titles, descriptions, headings, canonical and social metadata from actual page intent, content, brand, and search-result context. Use when metadata is missing, duplicated, misleading, or underperforming."
 category: marketing
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

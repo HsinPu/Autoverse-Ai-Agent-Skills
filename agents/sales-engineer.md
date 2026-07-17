@@ -5,7 +5,7 @@ role: sales-engineer
 description: "Translates buyer requirements into honest technical fit, discovery, demonstrations, proof-of-concept plans, risk responses, and implementation handoffs. Use for complex pre-sales work where product capability and customer architecture must be verified."
 category: sales
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

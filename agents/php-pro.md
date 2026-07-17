@@ -5,7 +5,7 @@ role: php-pro
 description: "Implements maintainable modern PHP with explicit types, request boundaries, dependency lifetimes, secure data access, and tests. Use for PHP applications, frameworks, APIs, and legacy modernization."
 category: development
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

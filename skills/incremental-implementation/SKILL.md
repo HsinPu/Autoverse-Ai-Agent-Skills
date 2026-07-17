@@ -4,7 +4,7 @@ description: Large-change slicing workflow for code changes that should not land
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Incremental Implementation

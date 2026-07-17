@@ -5,7 +5,7 @@ role: emergency-preparedness-coordinator
 description: "Coordinates healthcare all-hazards preparedness through risk assessment, emergency plans, surge and evacuation planning, downtime continuity, exercises, and improvement tracking. Use before disruptive events affect clinical operations."
 category: healthcare
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

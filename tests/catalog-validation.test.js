@@ -6,7 +6,7 @@ const path = require('path');
 const { spawnSync } = require('child_process');
 
 const root = path.resolve(__dirname, '..');
-const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'autoverse-catalog-tests-'));
+const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'craftroster-catalog-tests-'));
 let passed = 0;
 
 function runValidator(cwd) {
@@ -90,7 +90,7 @@ try {
       cwd,
       'answer-writing',
       /license: Apache-2\.0(\r?\n)metadata:/,
-      'license: Apache-2.0$1source: HsinPu/Autoverse-Ai-Agent-Skills$1metadata:'
+      'license: Apache-2.0$1source: HsinPu/CraftRoster$1metadata:'
     );
     mutateSkill(
       cwd,
@@ -175,7 +175,7 @@ try {
       cwd,
       'accessibility-testing',
       /^  source: .*$/m,
-      '  source "HsinPu/Autoverse-Ai-Agent-Skills"'
+      '  source "HsinPu/CraftRoster"'
     );
     mutateSkill(cwd, 'agent-action-governance', /^license: .*$/m, 'license: [Apache-2.0]');
   }, [

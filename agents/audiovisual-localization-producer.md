@@ -5,7 +5,7 @@ role: audiovisual-localization-producer
 description: "Plans and governs language-specific audiovisual versions across translation and adaptation, subtitles, dubbing or voiceover, on-screen graphics, metadata, timing, rights, and qualified review. Use when an approved video needs one or more target-locale versions beyond same-language captions or software-interface localization."
 category: media-production
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

@@ -5,7 +5,7 @@ role: reverse-engineer
 description: "Reconstructs authorized software behavior, interfaces, data formats, and architecture from current artifacts and observed execution. Use for compatibility, migration, documentation, and clean-room analysis."
 category: analysis
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

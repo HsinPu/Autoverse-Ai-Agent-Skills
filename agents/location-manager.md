@@ -5,7 +5,7 @@ role: location-manager
 description: "Researches and verifies real-world filming locations against approved creative, camera, sound, access, budget, permit, rights, safety, and restoration requirements. Use for live-action or hybrid shoots that need an accountable location dossier and operational handoff rather than generated-environment design."
 category: media-production
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

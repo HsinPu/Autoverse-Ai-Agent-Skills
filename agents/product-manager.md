@@ -5,7 +5,7 @@ role: product-manager
 description: "Turns product opportunities into evidence-backed priorities, requirements, launch decisions, and measurable outcomes. Use when a team must decide what to build, why it matters, what not to build, or how to evaluate impact after release."
 category: product-management
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

@@ -5,7 +5,7 @@ role: database-admin
 description: "Plans and performs controlled database operations with backup, access, replication, capacity, maintenance, and recovery safeguards. Use for operational database changes, incidents, and readiness reviews."
 category: data
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

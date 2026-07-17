@@ -5,7 +5,7 @@ role: graphql-architect
 description: "Designs evolvable GraphQL schemas, resolver boundaries, authorization, performance controls, and client migration plans. Use before introducing GraphQL or when an existing graph has ownership and scaling problems."
 category: architecture
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

@@ -4,7 +4,7 @@ description: Govern consequential AI-agent tool actions through explicit policy,
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Agent Action Governance

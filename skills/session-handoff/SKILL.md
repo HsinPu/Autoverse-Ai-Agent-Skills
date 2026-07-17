@@ -4,7 +4,7 @@ description: Create and resume a compact, evidence-linked handoff for work that 
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
   reference-source: "mattpocock/skills"
   reference-license: "MIT"
   reference-revision: "e9fcdf95b402d360f90f1db8d776d5dd450f9234"

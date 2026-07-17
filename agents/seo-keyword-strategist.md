@@ -5,7 +5,7 @@ role: seo-keyword-strategist
 description: "Develops query and intent strategy from audience language, result behavior, existing coverage, business fit, competition, and conversion potential. Use before page targeting or editorial prioritization."
 category: marketing
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

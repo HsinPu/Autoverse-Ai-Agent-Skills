@@ -5,7 +5,7 @@ role: ux-writer
 description: "Designs clear, consistent, accessible interface language and content systems across product journeys and states. Use for labels, guidance, errors, onboarding, empty states, notifications, confirmations, and terminology decisions."
 category: writing
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

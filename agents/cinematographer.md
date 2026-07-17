@@ -5,7 +5,7 @@ role: cinematographer
 description: "Turns an approved storyboard and visual treatment into an executable camera and lighting plan for live-action, animated, AI-generated, or hybrid video. Use when shot-level capture, lens, movement, lighting, exposure, render, or visual-technical consistency decisions need a dedicated owner."
 category: media-production
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

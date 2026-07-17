@@ -4,7 +4,7 @@ description: Project architecture review workflow for auditing existing reposito
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Project Architecture Review

@@ -6,6 +6,8 @@ fail() { printf 'FAIL %s\n' "$1" >&2; exit 1; }
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 INSTALLER="$REPO_ROOT/scripts/install.sh"
+EXPECTED_REPO="HsinPu/CraftRoster"
+LEGACY_REPO="HsinPu/Autoverse-Ai-Agent-Skills"
 EXPECTED_SKILLS="$(node -e "console.log(require(process.argv[1]).skills.length)" "$REPO_ROOT/skills.json")"
 EXPECTED_AGENTS="$(node -e "console.log(require(process.argv[1]).agents.length)" "$REPO_ROOT/agents.json")"
 
@@ -142,10 +144,10 @@ NODE
 assert_metadata() {
   local file="$1" component="$2" component_name="$3" ownership_target="$4" adapter="$5" label="$6"
   [[ -f "$file" && ! -L "$file" ]] || fail "$label metadata is missing or not a regular file: $file"
-  if ! node - "$file" "$component" "$component_name" "$ownership_target" "$adapter" <<'NODE'
+  if ! node - "$file" "$component" "$component_name" "$ownership_target" "$adapter" "$EXPECTED_REPO" <<'NODE'
 const fs = require('fs');
 
-const [file, component, componentName, target, adapter] = process.argv.slice(2);
+const [file, component, componentName, target, adapter, expectedRepo] = process.argv.slice(2);
 let metadata;
 try {
   metadata = JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -156,7 +158,7 @@ try {
 
 const expected = {
   source: 'local-checkout',
-  repo: 'HsinPu/Autoverse-Ai-Agent-Skills',
+  repo: expectedRepo,
   branch: 'main',
   component,
   name: componentName,
@@ -363,11 +365,11 @@ assert_equal "$(count_output_lines '^OK  update Agent ')" 4 "project unaffected 
 
 SKILL_COLLISION_ROOT="$SMOKE_ROOT/project-skill-collision"
 SKILL_COLLISION_FILE="$SKILL_COLLISION_ROOT/.claude/skills/python-development/SKILL.md"
-SKILL_SENTINEL='FOREIGN-SKILL-SENTINEL: this directory is not owned by Autoverse'
+SKILL_SENTINEL='FOREIGN-SKILL-SENTINEL: this directory is not owned by CraftRoster'
 mkdir -p "$(dirname "$SKILL_COLLISION_FILE")"
 printf '%s\n' "$SKILL_SENTINEL" > "$SKILL_COLLISION_FILE"
 SKILL_COLLISION_CHECKSUM="$(cksum < "$SKILL_COLLISION_FILE")"
-expect_failure "project Skill ownership collision" "no matching Autoverse metadata" \
+expect_failure "project Skill ownership collision" "no matching CraftRoster metadata" \
   --target project --type skill --name python-development --source-dir "$REPO_ROOT" --dir "$SKILL_COLLISION_ROOT"
 assert_equal "$(cksum < "$SKILL_COLLISION_FILE")" "$SKILL_COLLISION_CHECKSUM" "foreign Skill sentinel checksum"
 assert_equal "$(cat "$SKILL_COLLISION_FILE")" "$SKILL_SENTINEL" "foreign Skill sentinel content"
@@ -376,11 +378,11 @@ assert_equal "$(cat "$SKILL_COLLISION_FILE")" "$SKILL_SENTINEL" "foreign Skill s
 
 AGENT_COLLISION_ROOT="$SMOKE_ROOT/project-agent-collision"
 AGENT_COLLISION_FILE="$AGENT_COLLISION_ROOT/.opencode/agents/code-reviewer.md"
-AGENT_SENTINEL='FOREIGN-AGENT-SENTINEL: this file is not owned by Autoverse'
+AGENT_SENTINEL='FOREIGN-AGENT-SENTINEL: this file is not owned by CraftRoster'
 mkdir -p "$(dirname "$AGENT_COLLISION_FILE")"
 printf '%s\n' "$AGENT_SENTINEL" > "$AGENT_COLLISION_FILE"
 AGENT_COLLISION_CHECKSUM="$(cksum < "$AGENT_COLLISION_FILE")"
-expect_failure "project Agent ownership collision" "no matching Autoverse metadata" \
+expect_failure "project Agent ownership collision" "no matching CraftRoster metadata" \
   --target project --type agent --name code-reviewer --source-dir "$REPO_ROOT" --dir "$AGENT_COLLISION_ROOT"
 assert_equal "$(cksum < "$AGENT_COLLISION_FILE")" "$AGENT_COLLISION_CHECKSUM" "foreign Agent sentinel checksum"
 assert_equal "$(cat "$AGENT_COLLISION_FILE")" "$AGENT_SENTINEL" "foreign Agent sentinel content"
@@ -401,6 +403,20 @@ OWNED_SKILL_FILE="$OWNED_SKILL_ROOT/SKILL.md"
 OWNED_SKILL_META="$OWNED_SKILL_ROOT/.skill-meta.json"
 OWNED_SKILL_BASELINE_META="$(cat "$OWNED_SKILL_META")"
 OWNED_SKILL_BASELINE_CHECKSUM="$(cksum < "$OWNED_SKILL_FILE")"
+
+printf '%s\n' "$OWNED_SKILL_BASELINE_META" > "$OWNED_SKILL_META"
+mutate_json_string "$OWNED_SKILL_META" repo "$LEGACY_REPO"
+run_installer "Skill legacy repository alias migration" \
+  --target claude --type skill --name terminal-ops --source-dir "$REPO_ROOT" --dir "$SKILL_OWNERSHIP_ROOT"
+assert_equal "$(count_output_lines '^OK  migrate-update Skill ')" 1 "Skill legacy repository migration count"
+assert_skill_profile "$SKILL_OWNERSHIP_ROOT" terminal-ops claude "legacy-repository migrated Skill"
+
+printf '%s\n' "$OWNED_SKILL_BASELINE_META" > "$OWNED_SKILL_META"
+mutate_json_string "$OWNED_SKILL_META" repo "$LEGACY_REPO"
+expect_failure "Skill explicit repository disables legacy alias" "installed from '$LEGACY_REPO'" \
+  --target claude --type skill --name terminal-ops --repo "$EXPECTED_REPO" --source-dir "$REPO_ROOT" --dir "$SKILL_OWNERSHIP_ROOT"
+assert_equal "$(node -e 'console.log(JSON.parse(require("fs").readFileSync(process.argv[1], "utf8")).repo)' "$OWNED_SKILL_META")" "$LEGACY_REPO" "Skill explicit repository refusal preserved legacy owner"
+
 SKILL_METADATA_FIELDS=('repo' 'component' 'name' 'target')
 SKILL_METADATA_VALUES=('foreign/repository' 'agent' 'python-development' 'codex')
 SKILL_METADATA_MESSAGES=('installed from' 'ownership metadata does not match' 'ownership metadata does not match' 'ownership metadata does not match')
@@ -463,7 +479,7 @@ assert_skill_profile "$SKILL_OWNERSHIP_ROOT" terminal-ops claude "forced Skill"
 printf '\nLOCAL-DRIFT-SENTINEL\n' >> "$OWNED_SKILL_FILE"
 DRIFTED_SKILL_CHECKSUM="$(cksum < "$OWNED_SKILL_FILE")"
 DRIFTED_META_CHECKSUM="$(cksum < "$OWNED_SKILL_META")"
-expect_failure "Skill local content drift refusal" "installed Skill content has changed since the last Autoverse install" \
+expect_failure "Skill local content drift refusal" "installed Skill content has changed since the last CraftRoster install" \
   --target claude --type skill --name terminal-ops --source-dir "$REPO_ROOT" --dir "$SKILL_OWNERSHIP_ROOT"
 assert_equal "$(cksum < "$OWNED_SKILL_FILE")" "$DRIFTED_SKILL_CHECKSUM" "drift refusal Skill content checksum"
 assert_equal "$(cksum < "$OWNED_SKILL_META")" "$DRIFTED_META_CHECKSUM" "drift refusal metadata checksum"
@@ -647,6 +663,20 @@ OWNED_AGENT_FILE="$AGENT_OWNERSHIP_ROOT/code-reviewer.md"
 OWNED_AGENT_META="$OWNED_AGENT_FILE.autoverse.json"
 OWNED_AGENT_BASELINE_META="$(cat "$OWNED_AGENT_META")"
 OWNED_AGENT_BASELINE_CHECKSUM="$(cksum < "$OWNED_AGENT_FILE")"
+
+printf '%s\n' "$OWNED_AGENT_BASELINE_META" > "$OWNED_AGENT_META"
+mutate_json_string "$OWNED_AGENT_META" repo "$LEGACY_REPO"
+run_installer "Agent legacy repository alias migration" \
+  --target claude --type agent --name code-reviewer --source-dir "$REPO_ROOT" --dir "$AGENT_OWNERSHIP_ROOT"
+assert_equal "$(count_output_lines '^OK  migrate-update Agent ')" 1 "Agent legacy repository migration count"
+assert_agent_profile "$OWNED_AGENT_FILE" code-reviewer claude claude "legacy-repository migrated Agent"
+
+printf '%s\n' "$OWNED_AGENT_BASELINE_META" > "$OWNED_AGENT_META"
+mutate_json_string "$OWNED_AGENT_META" repo "$LEGACY_REPO"
+expect_failure "Agent explicit repository disables legacy alias" "installed from '$LEGACY_REPO'" \
+  --target claude --type agent --name code-reviewer --repo "$EXPECTED_REPO" --source-dir "$REPO_ROOT" --dir "$AGENT_OWNERSHIP_ROOT"
+assert_equal "$(node -e 'console.log(JSON.parse(require("fs").readFileSync(process.argv[1], "utf8")).repo)' "$OWNED_AGENT_META")" "$LEGACY_REPO" "Agent explicit repository refusal preserved legacy owner"
+
 AGENT_METADATA_FIELDS=('id' 'adapter')
 AGENT_METADATA_VALUES=('debugger' 'codex')
 for ((index = 0; index < ${#AGENT_METADATA_FIELDS[@]}; index++)); do

@@ -5,7 +5,7 @@ role: deploy-with-verification
 description: "Executes an authorized deployment through explicit preflight, staged rollout, health verification, abort thresholds, and rollback. Use when a prepared release must be deployed safely and its outcome proven."
 category: operations
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

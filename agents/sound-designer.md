@@ -5,7 +5,7 @@ role: sound-designer
 description: "Designs and verifies the complete sonic system for a video, including dialogue, narration, room tone, ambience, foley, effects, music relationships, transitions, stems, and mix requirements. Use when sound needs dedicated cue-level planning, asset ownership, picture-aware integration, rights tracking, or loudness and delivery QC."
 category: media-production
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

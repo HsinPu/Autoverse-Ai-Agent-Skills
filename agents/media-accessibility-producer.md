@@ -5,7 +5,7 @@ role: media-accessibility-producer
 description: "Plans and verifies accessible audiovisual alternatives across captions, descriptive transcripts, audio description, sign-language versions, sensory-safe presentation, and accessible playback requirements. Use from brief or script stage when a video needs an end-to-end accessibility plan beyond interface auditing or caption-file creation."
 category: media-production
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

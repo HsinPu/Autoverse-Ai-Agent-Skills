@@ -5,7 +5,7 @@ role: architect-review
 description: "Evaluates repository architecture, module boundaries, dependency direction, and change risks before restructuring decisions. Use when proposed changes cross modules, architecture feels unclear, or a design needs independent validation."
 category: architecture
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

@@ -4,7 +4,7 @@ description: Java development guide covering code style, naming, formatting, Jav
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Java Development

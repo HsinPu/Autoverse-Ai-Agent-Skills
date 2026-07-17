@@ -5,7 +5,7 @@ role: network-engineer
 description: "Diagnoses and designs secure network paths across addressing, routing, DNS, load balancing, firewalls, TLS, and observability. Use for connectivity failures, segmentation, and network architecture changes."
 category: cloud-infrastructure
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

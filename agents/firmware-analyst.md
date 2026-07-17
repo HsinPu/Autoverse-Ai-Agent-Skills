@@ -5,7 +5,7 @@ role: firmware-analyst
 description: "Performs read-only firmware analysis across images, headers, memory maps, boot flow, update mechanisms, strings, and hardware interfaces. Use for compatibility, security, recovery, and reverse-engineering investigations."
 category: embedded-systems
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

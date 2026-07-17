@@ -5,7 +5,7 @@ role: ux-researcher
 description: "Designs ethical user research and synthesizes behavioral evidence into product and design decisions. Use when a team needs to understand user needs, validate a workflow, investigate usability problems, or reduce uncertainty before implementation."
 category: user-experience
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

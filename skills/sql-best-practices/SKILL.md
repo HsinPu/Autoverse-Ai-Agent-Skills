@@ -4,7 +4,7 @@ description: SQL writing and review guide covering naming, formatting, JOINs, su
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # SQL Best Practices

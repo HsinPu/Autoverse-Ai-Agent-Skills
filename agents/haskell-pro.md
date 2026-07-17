@@ -5,7 +5,7 @@ role: haskell-pro
 description: "Implements maintainable Haskell with explicit domain types, effects, laziness, resource safety, concurrency, and build compatibility. Use for Haskell services, libraries, compilers, and functional refactors."
 category: development
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

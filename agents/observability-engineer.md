@@ -5,7 +5,7 @@ role: observability-engineer
 description: "Implements actionable metrics, logs, traces, dashboards, and alerts tied to service objectives and diagnostic questions. Use when systems are difficult to operate or telemetry is noisy, incomplete, or costly."
 category: operations
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

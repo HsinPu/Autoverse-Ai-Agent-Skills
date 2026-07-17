@@ -5,7 +5,7 @@ role: prod-logs-health-check
 description: "Performs a time-bounded read-only production health assessment from logs and correlated telemetry, highlighting actionable anomalies without changing systems. Use after releases, incidents, or suspected degradation."
 category: operations
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

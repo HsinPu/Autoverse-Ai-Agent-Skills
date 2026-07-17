@@ -4,7 +4,7 @@ description: Nuxt development guide covering application structure, rendering mo
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Nuxt 開發（Nuxt Development）

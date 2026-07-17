@@ -4,7 +4,7 @@ description: Linting and validation workflow for SKILL.md files before publishin
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Skill Lint

@@ -4,7 +4,7 @@ description: Frontend design consultation for defining visual direction, includi
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Design Consultation

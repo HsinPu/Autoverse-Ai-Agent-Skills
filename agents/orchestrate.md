@@ -5,7 +5,7 @@ role: orchestrate
 description: "Executes an approved multi-agent workflow by dispatching bounded work, enforcing dependency gates, collecting handoff evidence, and integrating results in order. Use after a lead has already decided the objective, ownership, and plan."
 category: orchestration
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

@@ -5,7 +5,7 @@ role: risk-manager
 description: "Builds decision-focused risk registers with causes, events, impacts, controls, owners, indicators, treatment, and residual exposure. Use for projects, releases, operations, vendors, and strategic decisions."
 category: governance
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

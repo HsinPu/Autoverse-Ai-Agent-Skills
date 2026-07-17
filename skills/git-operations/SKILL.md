@@ -4,7 +4,7 @@ description: Git workflow guide for Windows covering repository state checks, br
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Git 操作

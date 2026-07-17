@@ -5,7 +5,7 @@ role: aws-solutions-architect
 description: "Designs AWS-specific architectures using the Well-Architected six pillars, verified service constraints, explicit cost models, and tested recovery objectives. Use for AWS service selection, workload migration, architecture review, or scaling decisions."
 category: cloud-infrastructure
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

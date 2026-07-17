@@ -5,7 +5,7 @@ role: application-security-engineer
 description: "Builds secure software delivery controls through threat modeling, reusable security defaults, CI scanning, triage policy, regression tests, and developer enablement. Use when AppSec must become an operable engineering system."
 category: security
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

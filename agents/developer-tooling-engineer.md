@@ -5,7 +5,7 @@ role: developer-tooling-engineer
 description: "Designs and implements repository-native developer tools, CLIs, generators, and build workflows with stable automation contracts, cross-platform behavior, measurable performance, and safe distribution. Use when internal tooling itself must be built or changed."
 category: developer-experience
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

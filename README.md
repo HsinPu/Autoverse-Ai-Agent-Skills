@@ -1,6 +1,6 @@
-# Autoverse AI Agent Skills
+# CraftRoster
 
-[![Validate](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/actions/workflows/validate.yml/badge.svg)](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/actions/workflows/validate.yml)
+[![Validate](https://github.com/HsinPu/CraftRoster/actions/workflows/validate.yml/badge.svg)](https://github.com/HsinPu/CraftRoster/actions/workflows/validate.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 ![Skills](https://img.shields.io/badge/Skills-217-7c3aed)
 ![Agents](https://img.shields.io/badge/Agents-237-2563eb)
@@ -8,9 +8,11 @@
 
 由 **HsinPu** 維護的開源 AI Agent 與 Skill catalog，提供可直接安裝的 Codex、Claude Code、Cursor、VS Code／GitHub Copilot、OpenCode Agents 與 Skills，並包含安全更新機制及本機 catalog 查詢 CLI。
 
+**Cross-platform AI Agents, Skills & Workflows.**
+
 這個專案不是另一套 Agent runtime 或 orchestration framework；它專注在可攜、可查詢、可驗證的角色與能力定義，讓現有 coding agent 能直接使用。
 
-[快速開始](#快速開始) · [Agents](#agents) · [Skills](#skills) · [影片製作工作流](#影片製作工作流) · [Catalog CLI](#catalog-cli) · [開發與驗證](#開發與驗證) · [Release Checklist](docs/release-checklist.md) · [回報問題](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/issues)
+[快速開始](#快速開始) · [Agents](#agents) · [Skills](#skills) · [影片製作工作流](#影片製作工作流) · [Catalog CLI](#catalog-cli) · [開發與驗證](#開發與驗證) · [Release Checklist](docs/release-checklist.md) · [回報問題](https://github.com/HsinPu/CraftRoster/issues)
 
 ## 目錄
 
@@ -40,13 +42,13 @@
 Windows PowerShell：
 
 ```powershell
-powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; $installer = [scriptblock]::Create($s); & $installer -Target codex -Type skill; & $installer -Target codex -Type agent -EnableAutoDelegation'
+powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.ps1; $installer = [scriptblock]::Create($s); & $installer -Target codex -Type skill; & $installer -Target codex -Type agent -EnableAutoDelegation'
 ```
 
 Linux／macOS：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type skill && curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type agent --enable-auto-delegation
+curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh | bash -s -- --target codex --type skill && curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh | bash -s -- --target codex --type agent --enable-auto-delegation
 ```
 
 這組命令會安裝全部 217 個 Skills、237 個 Agents，並啟用不依賴專案 `AGENTS.md` 的全域主動委派。
@@ -56,13 +58,13 @@ curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/ma
 Windows PowerShell：
 
 ```powershell
-powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target codex -Type skill'
+powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target codex -Type skill'
 ```
 
 Linux／macOS：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type skill
+curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh | bash -s -- --target codex --type skill
 ```
 
 ### 只安裝全部 Agents
@@ -70,13 +72,13 @@ curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/ma
 Windows PowerShell：
 
 ```powershell
-powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target codex -Type agent'
+powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target codex -Type agent'
 ```
 
 Linux／macOS：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type agent
+curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh | bash -s -- --target codex --type agent
 ```
 
 任何平台的全量 Agent 安裝都會自動帶入該平台可讀取的 `subagent-architecture` Skill；單一 Agent 安裝則不會，除非同時啟用下一節的全域主動委派。
@@ -88,25 +90,25 @@ curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/ma
 Windows PowerShell（Codex）：
 
 ```powershell
-powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target codex -Type agent -EnableAutoDelegation'
+powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target codex -Type agent -EnableAutoDelegation'
 ```
 
 Linux／macOS（Codex）：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type agent --enable-auto-delegation
+curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh | bash -s -- --target codex --type agent --enable-auto-delegation
 ```
 
 Windows PowerShell（OpenCode）：
 
 ```powershell
-powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target opencode -Type agent -EnableAutoDelegation'
+powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target opencode -Type agent -EnableAutoDelegation'
 ```
 
 Linux／macOS（OpenCode）：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target opencode --type agent --enable-auto-delegation
+curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh | bash -s -- --target opencode --type agent --enable-auto-delegation
 ```
 
 > [!NOTE]
@@ -119,13 +121,13 @@ curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/ma
 Windows PowerShell：
 
 ```powershell
-powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; $installer = [scriptblock]::Create($s); & $installer -Target project -Type skill; & $installer -Target project -Type agent'
+powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.ps1; $installer = [scriptblock]::Create($s); & $installer -Target project -Type skill; & $installer -Target project -Type agent'
 ```
 
 Linux／macOS：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target project --type skill && curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target project --type agent
+curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh | bash -s -- --target project --type skill && curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh | bash -s -- --target project --type agent
 ```
 
 這會建立 `.agents/skills` 與 Claude 相容鏡像 `.claude/skills`，並把五種 Agent adapter 分別寫入 `.codex/agents`、`.claude/agents`、`.cursor/agents`、`.github/agents`、`.opencode/agents`。
@@ -193,11 +195,11 @@ Agent 可以引用一個或多個相關 Skills；Skill 也能由主 Agent 直接
 | `opencode` | `~/.config/opencode/skills/` | `~/.config/opencode/agents/` | `<role>.md` |
 | `project` | `<cwd>/.agents/skills/` + `<cwd>/.claude/skills/` | 五個平台各自的 project 目錄 | 依平台產生 |
 
-`vscode` 是 `copilot` 的等價 alias；兩者使用同一組路徑與 `copilot` ownership identity，所以可交替執行更新。OpenCode 會優先採用官方 [custom directory](https://opencode.ai/docs/config/#custom-directory) 環境變數 `OPENCODE_CONFIG_DIR`；未設定時依序使用 `XDG_CONFIG_HOME/opencode` 或 `~/.config/opencode`。全域 `codex` target 跟隨 Codex 內建 `$skill-installer`：config、Skills 與 Agents 都以 `CODEX_HOME` 為根目錄，新 Skill 安裝到 `$CODEX_HOME/skills`，未設定時即 `~/.codex/skills`。若同名元件已由 Autoverse 安全安裝在 `~/.agents/skills`，安裝器仍會原地更新，避免建立重複副本。
+`vscode` 是 `copilot` 的等價 alias；兩者使用同一組路徑與 `copilot` ownership identity，所以可交替執行更新。OpenCode 會優先採用官方 [custom directory](https://opencode.ai/docs/config/#custom-directory) 環境變數 `OPENCODE_CONFIG_DIR`；未設定時依序使用 `XDG_CONFIG_HOME/opencode` 或 `~/.config/opencode`。全域 `codex` target 跟隨 Codex 內建 `$skill-installer`：config、Skills 與 Agents 都以 `CODEX_HOME` 為根目錄，新 Skill 安裝到 `$CODEX_HOME/skills`，未設定時即 `~/.codex/skills`。若同名元件已由 CraftRoster 安全安裝在 `~/.agents/skills`，安裝器仍會原地更新，避免建立重複副本。
 
 ### `project` target 的實際位置
 
-`project` 是 Autoverse 提供的整合 scope，不是另一種 Agent 格式。預設 root 是安裝命令執行當下的工作目錄；請先 `cd` 到專案或 VS Code workspace 根目錄。若提供 `-InstallDir`／`--dir`，該值會被視為 project root，再附加以下目錄：
+`project` 是 CraftRoster 提供的整合 scope，不是另一種 Agent 格式。預設 root 是安裝命令執行當下的工作目錄；請先 `cd` 到專案或 VS Code workspace 根目錄。若提供 `-InstallDir`／`--dir`，該值會被視為 project root，再附加以下目錄：
 
 ```text
 <project-root>/
@@ -223,13 +225,13 @@ Skills 有可共用的 Agent Skills package 結構，但 custom Agent 並沒有�
 單一 Skill：
 
 ```powershell
-powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target codex -Type skill -Name python-development'
+powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target codex -Type skill -Name python-development'
 ```
 
 單一 Agent：
 
 ```powershell
-powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target codex -Type agent -Name code-reviewer'
+powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target codex -Type agent -Name code-reviewer'
 ```
 
 ### Linux／macOS
@@ -237,28 +239,28 @@ powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.git
 單一 Skill：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type skill --name python-development
+curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh | bash -s -- --target codex --type skill --name python-development
 ```
 
 單一 Agent：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/HsinPu/Autoverse-Ai-Agent-Skills/main/scripts/install.sh | bash -s -- --target codex --type agent --name code-reviewer
+curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh | bash -s -- --target codex --type agent --name code-reviewer
 ```
 
 ### 從本機 checkout 安裝
 
 ```powershell
-git clone https://github.com/HsinPu/Autoverse-Ai-Agent-Skills.git
-cd Autoverse-Ai-Agent-Skills
+git clone https://github.com/HsinPu/CraftRoster.git
+cd CraftRoster
 
 .\scripts\install.ps1 -Target codex -Type skill -SourceDir .
 .\scripts\install.ps1 -Target codex -Type agent -SourceDir . -EnableAutoDelegation
 ```
 
 ```bash
-git clone https://github.com/HsinPu/Autoverse-Ai-Agent-Skills.git
-cd Autoverse-Ai-Agent-Skills
+git clone https://github.com/HsinPu/CraftRoster.git
+cd CraftRoster
 
 bash scripts/install.sh --target codex --type skill --source-dir .
 bash scripts/install.sh --target codex --type agent --source-dir . --enable-auto-delegation
@@ -298,8 +300,8 @@ bash scripts/install.sh --target codex --type agent --source-dir . --enable-auto
 Ownership metadata：
 
 - Skill：`<skill>/.skill-meta.json`，比對 `repo + component + name + target`。
-- Agent：`<agent-file>.autoverse.json`，除上述欄位外再比對 `id + adapter`。
-- Skill metadata 另保存 canonical `contentSha256`。若安裝後內容被人工或其他工具修改，普通更新會拒絕覆蓋；只有明確使用 Force 才會重設為目前 Autoverse 版本。
+- Agent：`<agent-file>.autoverse.json`，除上述欄位外再比對 `id + adapter`。副檔名保留為既有安裝的 legacy compatibility identifier。
+- Skill metadata 另保存 canonical `contentSha256`。若安裝後內容被人工或其他工具修改，普通更新會拒絕覆蓋；只有明確使用 Force 才會重設為目前 CraftRoster 版本。
 - Skill 更新會在同一檔案系統建立完整 staged package、核對來源與 staged digest、於最後寫入前重新檢查目的地，再以目錄交換提交。失敗時只會回復可證明屬於本 transaction 的內容；若偵測到其他程序剛建立的 newcomer，會保留 newcomer 與 backup 並要求人工復原，不會刪除未知資料。
 - Agent 與 sidecar 會先寫入同目錄暫存檔，再以 atomic replace 更新；不會沿著 symbolic link 或 hard link 改寫安裝目錄外的檔案。
 - 全量 Skill 安裝也會先預檢整批目標；只要一個 ownership 衝突，就不會先更新前面的 Skill 再中途失敗。
@@ -309,9 +311,9 @@ Ownership metadata：
 
 啟用全域主動委派時：
 
-- Codex 只管理 `~/.codex/config.toml` 內的 `AUTOVERSE_AUTO_DELEGATION` marker 區塊；若已有區塊外的 `developer_instructions` 就停止。
+- Codex 只管理 `~/.codex/config.toml` 內的 `AUTOVERSE_AUTO_DELEGATION` marker 區塊；這是為了辨識既有設定而保留的 legacy compatibility identifier。若已有區塊外的 `developer_instructions` 就停止。
 - OpenCode 只對 strict UTF-8 JSON 的全域 `opencode.json` 合併一個 guidance 路徑；其根目錄依序採用 `OPENCODE_CONFIG_DIR`、`XDG_CONFIG_HOME/opencode` 或 `~/.config/opencode`。JSONC、無效型別、多份衝突 config 或重複 JSON key 會停止並要求手動合併。Bash 在既有自訂 config 上需要 Python 3 或 Node.js 做 strict validation；安裝器自己建立的最小 config 可在兩者皆無時安全重跑。
-- 修改既有全域 config 前會留下 `*.autoverse-backup-*` 備份；`Force` 不會繞過這些設定保護。
+- 修改既有全域 config 前會留下 `*.autoverse-backup-*` 備份；這個 legacy compatibility filename 會繼續保留，`Force` 不會繞過這些設定保護。
 - 安裝計畫完成後若全域 config 又被其他程式修改，安裝器會在 replace 前停止，避免用舊快照蓋掉新設定。
 
 先用 dry run 查看更新計畫：
@@ -325,7 +327,7 @@ bash scripts/install.sh --target codex --type agent --source-dir . --dry-run
 ```
 
 > [!WARNING]
-> `-Force`／`--force` 會繞過同名內容的 ownership 保護。只有在你已確認目標內容可以被 Autoverse 取代並完成必要備份後才使用。
+> `-Force`／`--force` 會繞過同名內容的 ownership 保護。只有在你已確認目標內容可以被 CraftRoster 取代並完成必要備份後才使用。
 
 ## 如何使用 Agent
 
@@ -334,20 +336,20 @@ bash scripts/install.sh --target codex --type agent --source-dir . --dry-run
 - 系統可依任務內容與 Agent 的 `description` 選擇是否委派。
 - 你也可以直接指定角色，例如：「請使用 `code-reviewer` 檢查目前變更」。
 - 安裝時使用全域主動委派選項後，AI 會在任務包含兩個以上可獨立處理的工作流時主動評估子代理，不需要每個專案另外提供 `AGENTS.md`。
-- 專案自己的 `AGENTS.md` 仍可選擇性補充該專案的限制，但不是 Autoverse Agents 的載入或委派前提。
+- 專案自己的 `AGENTS.md` 仍可選擇性補充該專案的限制，但不是 CraftRoster Agents 的載入或委派前提。
 - 若安裝後目前工作階段尚未出現新 Agent，請開啟新的工作階段或重新啟動對應工具。
 
 啟用全域主動委派後，平常直接描述任務即可，例如：「請重新設計登入流程，同時檢查安全與測試覆蓋，完成後整合結果。」主 Agent 會依角色描述判斷是否值得拆成子代理。需要固定角色時也可以明確指定：Codex 可說「請委派 `code-reviewer` 檢查目前變更」；OpenCode 可輸入 `@code-reviewer 檢查目前變更`。
 
-從本機 checkout 確認 Autoverse 已安裝的 Codex Agents：
+從本機 checkout 確認 CraftRoster 已安裝的 Codex Agents：
 
 ```bash
-node autoverse-cli.js list --installed --type agent --target codex
-node autoverse-cli.js list --installed --type agent --target opencode
-node autoverse-cli.js list --installed --type agent --target project
+node craftroster-cli.js list --installed --type agent --target codex
+node craftroster-cli.js list --installed --type agent --target opencode
+node craftroster-cli.js list --installed --type agent --target project
 ```
 
-CLI 只列出同時具有 adapter 與有效 Autoverse ownership sidecar 的檔案；它用來確認安裝結果，不等同於檢查目前已開啟的工具是否重新載入。
+CLI 只列出同時具有 adapter 與有效 CraftRoster ownership sidecar 的檔案；為了平順升級，它接受 canonical `HsinPu/CraftRoster` 與 legacy `HsinPu/Autoverse-Ai-Agent-Skills` repository ID，但不接受其他 repository。它用來確認安裝結果，不等同於檢查目前已開啟的工具是否重新載入。
 
 平台格式的官方連結集中在 [`project` target 的實際位置](#project-target-的實際位置)一節。
 
@@ -404,7 +406,7 @@ brief／media research → creative treatment → script → storyboard／shot l
 
 ## Catalog CLI
 
-`autoverse-cli.js` 提供離線 catalog 搜尋、安裝狀態與相近 Skill 路由查詢，需要 Node.js 22 或更新版本。目前請直接從 repository checkout 執行。
+`craftroster-cli.js` 提供離線 catalog 搜尋、安裝狀態與相近 Skill 路由查詢，需要 Node.js 22 或更新版本。目前請直接從 repository checkout 執行。`autoverse` npm command 與 `autoverse-cli.js` 會保留至少一個相容版本，既有腳本可繼續使用；新腳本請改用 `craftroster` 或 `craftroster-cli.js`。
 
 ### Commands
 
@@ -420,7 +422,7 @@ brief／media research → creative treatment → script → storyboard／shot l
 |---|---|
 | `--type skill\|agent` | 選擇 catalog 類型，預設 Skill |
 | `--category <category>` | 只顯示指定分類 |
-| `--installed` | 列出 target 安裝位置中具有有效 Autoverse ownership sidecar 的元件 |
+| `--installed` | 列出 target 安裝位置中具有有效 CraftRoster ownership sidecar 的元件 |
 | `--target <target>` | 指定安裝平台 |
 | `--all` | 搭配 `list --installed`，列出該類型所有支援 targets 的安裝結果 |
 | `--help` | 顯示說明 |
@@ -429,17 +431,17 @@ brief／media research → creative treatment → script → storyboard／shot l
 
 ```bash
 # Skills
-node autoverse-cli.js list
-node autoverse-cli.js search "python development"
-node autoverse-cli.js info python-development
-node autoverse-cli.js list --installed --type skill --target codex
-node autoverse-cli.js list --installed --type skill --all
+node craftroster-cli.js list
+node craftroster-cli.js search "python development"
+node craftroster-cli.js info python-development
+node craftroster-cli.js list --installed --type skill --target codex
+node craftroster-cli.js list --installed --type skill --all
 
 # Agents
-node autoverse-cli.js list --type agent --category quality-assurance
-node autoverse-cli.js search "incident debugger" --type agent
-node autoverse-cli.js info code-reviewer --type agent
-node autoverse-cli.js list --installed --type agent --target codex
+node craftroster-cli.js list --type agent --category quality-assurance
+node craftroster-cli.js search "incident debugger" --type agent
+node craftroster-cli.js info code-reviewer --type agent
+node craftroster-cli.js list --installed --type agent --target codex
 ```
 
 Catalog 來源分別是 [skills.json](skills.json) 與 [agents.json](agents.json)。
@@ -535,12 +537,12 @@ Catalog 來源分別是 [skills.json](skills.json) 與 [agents.json](agents.json
 
 當單頁或整站 Flow 已開啟 approval gate，它保留頂層 orchestration；design intelligence、Figma／image translation、design-system drift 與 machine visual gate 只回傳有版本的 receipt，不會自行關閉 gate、批准 baseline 或擴張範圍。
 
-請從 [skills.json](skills.json) 瀏覽 generated metadata，或直接查看 [skills/](skills/) 內的完整 package。執行 `node autoverse-cli.js info <skill-name>` 會列出所屬 routing group 的判斷原則、目前 Skill 與所有替代選項，方便在相近能力間做選擇。
+請從 [skills.json](skills.json) 瀏覽 generated metadata，或直接查看 [skills/](skills/) 內的完整 package。執行 `node craftroster-cli.js info <skill-name>` 會列出所屬 routing group 的判斷原則、目前 Skill 與所有替代選項，方便在相近能力間做選擇。
 
 ## 專案結構
 
 ```text
-Autoverse-Ai-Agent-Skills/
+CraftRoster/
 ├─ AGENTS.md                         # Repository 內的 Agent 路由與驗證規則
 ├─ agents/
 │  └─ <role>.md                     # Canonical Agent definitions
@@ -559,7 +561,8 @@ Autoverse-Ai-Agent-Skills/
 │     └─ evals/evals.json           # Optional deterministic eval package
 ├─ agents.json                      # Generated Agent catalog
 ├─ skills.json                      # Generated Skill catalog
-├─ autoverse-cli.js                 # Catalog CLI
+├─ craftroster-cli.js               # Canonical Catalog CLI entrypoint
+├─ autoverse-cli.js                 # Legacy CLI compatibility entrypoint
 ├─ scripts/
 │  ├─ install.cmd                   # Windows CMD wrapper
 │  ├─ install.ps1                   # Windows installer
@@ -671,10 +674,10 @@ npm pack --dry-run
 
 ## 來源、改寫與授權政策
 
-- 所有 Agents 與 Skills 的正式 `source` 都是 `HsinPu/Autoverse-Ai-Agent-Skills`，作者為 HsinPu。
+- 所有 Agents 與 Skills 的正式 `source` 都是 `HsinPu/CraftRoster`，作者為 HsinPu。安裝器與 CLI 只為升級既有安裝而接受 legacy repository ID `HsinPu/Autoverse-Ai-Agent-Skills`。
 - 外部專案只作為研究、coverage 與設計參考；Agents 使用 `reference-repo`、`reference-paths`、`reference-tree`，Skills 使用 `reference-source`、`reference-license` 與必要的 `reference-revision`。目前 33 個 referenced Skills 分布於 12 個 repositories，全部由 [`skill-reference-sources.json`](scripts/data/skill-reference-sources.json) 固定 commit、tree、逐 Skill reference path/blob 與 license evidence；[`skill-reference-lock.json`](scripts/data/skill-reference-lock.json) 另外鎖定完整 provenance evidence 的 canonical digest 與數量。[CODEOWNERS](.github/CODEOWNERS) 會把 manifest、lock、verifier 與 originality audit 指派給 HsinPu，發布政策要求取得 owner 明確覆核，避免單獨縮小或替換比對範圍。這些欄位不取代本專案的正式來源。
 - Matt Pocock 相關概念的 pinned revision、逐項 upgrade／add／skip 決策、改名策略與原創改寫邊界記錄在 [`matt-pocock-skill-adaptations.md`](docs/matt-pocock-skill-adaptations.md)。除保留業界通用能力名稱 `domain-modeling` 外，這批沒有沿用上游命令式或品牌化 Skill 名稱、slash commands、固定檔名、模板或 Claude 專用 metadata。
-- 視覺設計相關 Skills 以獨立 metadata 保存主要參考來源：`taste-skill`／`image-to-code` 對應 [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill)，`figma-to-code` 對應 [figma/mcp-server-guide](https://github.com/figma/mcp-server-guide)，`design-intelligence-search` 對應 [ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill)，`design-system` 對應 [DTCG](https://github.com/design-tokens/community-group)，`visual-regression-testing` 對應 [AgentVision](https://github.com/amitpatole/agent-vision)。其他比較來源包含 gstack、Impeccable、Argos、design-extract、Style Dictionary、Vercel Web Interface Guidelines、Addy Osmani Agent Skills、screenshot-to-code、Design2Code、UI2Code_N、Google Stitch Skills、canvas-to-code 與 Anthropic frontend-design。實際採用範圍、授權狀態、未移植項目與原創改寫邊界記錄在 [`visual-design-skill-sources.md`](docs/visual-design-skill-sources.md)，所有 canonical Skill 的正式 `source` 仍為 `HsinPu/Autoverse-Ai-Agent-Skills`。
+- 視覺設計相關 Skills 以獨立 metadata 保存主要參考來源：`taste-skill`／`image-to-code` 對應 [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill)，`figma-to-code` 對應 [figma/mcp-server-guide](https://github.com/figma/mcp-server-guide)，`design-intelligence-search` 對應 [ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill)，`design-system` 對應 [DTCG](https://github.com/design-tokens/community-group)，`visual-regression-testing` 對應 [AgentVision](https://github.com/amitpatole/agent-vision)。其他比較來源包含 gstack、Impeccable、Argos、design-extract、Style Dictionary、Vercel Web Interface Guidelines、Addy Osmani Agent Skills、screenshot-to-code、Design2Code、UI2Code_N、Google Stitch Skills、canvas-to-code 與 Anthropic frontend-design。實際採用範圍、授權狀態、未移植項目與原創改寫邊界記錄在 [`visual-design-skill-sources.md`](docs/visual-design-skill-sources.md)，所有 canonical Skill 的正式 `source` 仍為 `HsinPu/CraftRoster`。
 - Agent reference repository 的 pinned commit、實際 Git tree、license identifier 與 license path 集中保存在 [agent-reference-sources.json](scripts/data/agent-reference-sources.json)。CI 會向 GitHub 重新驗證 commit → tree 關係、每個 reference path，以及授權檔內容。
 - Skill source remote gate 同樣會核對 commit → tree、每個宣告 path 的 Git blob，以及 license file、terms 或 frontmatter evidence 的固定內容是否吻合宣告授權；任意「同 repository 但與參考內容無關」的有效 commit 不會通過。
 - Agent catalog 參考 [wshobson/agents](https://github.com/wshobson/agents)、[msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents)、[VoltAgent/awesome-claude-code-subagents](https://github.com/VoltAgent/awesome-claude-code-subagents)、[github/awesome-copilot](https://github.com/github/awesome-copilot)、[affaan-m/ECC](https://github.com/affaan-m/ECC)、[supatest-ai/awesome-claude-code-sub-agents](https://github.com/supatest-ai/awesome-claude-code-sub-agents)、[devsforge/marketplace](https://github.com/devsforge/marketplace)、[ajhcs/healthcare-agents](https://github.com/ajhcs/healthcare-agents)、[aws-samples/sample-claude-code-agent-team](https://github.com/aws-samples/sample-claude-code-agent-team)、[DojoCodingLabs/remotion-superpowers](https://github.com/DojoCodingLabs/remotion-superpowers)、[HKUDS/ViMax](https://github.com/HKUDS/ViMax)、[paperclipai/companies](https://github.com/paperclipai/companies)、[HITsz-TMG/VideoClaw](https://github.com/HITsz-TMG/VideoClaw)、[davila7/claude-code-templates](https://github.com/davila7/claude-code-templates)、[Donchitos/Claude-Code-Game-Studios](https://github.com/Donchitos/Claude-Code-Game-Studios)、[NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent)、[jacobcwright/open-animate](https://github.com/jacobcwright/open-animate)、[browser-use/video-use](https://github.com/browser-use/video-use)、[taylordrew4u2/Role-Call](https://github.com/taylordrew4u2/Role-Call)、[ImaniGomez/Scripty](https://github.com/ImaniGomez/Scripty)、[travisoberlander/film-production-manager](https://github.com/travisoberlander/film-production-manager)、[FusinX/DIT_Offload](https://github.com/FusinX/DIT_Offload)、[HKUDS/VideoAgent](https://github.com/HKUDS/VideoAgent) 與 [video-db/Director](https://github.com/video-db/Director) 的角色定位、路徑與高層責任；prompt 內容均由本專案重新設計與加強，不是原文完整複製。
@@ -698,7 +701,7 @@ npm pack --dry-run
 
 這表示同名路徑已存在，但 ownership metadata 缺失、無效、來自其他 repository，或 component／name／target／Agent identity 不一致。
 
-先檢查 Skill 內的 `.skill-meta.json`，或 Agent 旁的 `.autoverse.json` sidecar，確認現有內容的來源。不要直接刪除或覆蓋別人的安裝。只有在確定應由 Autoverse 取代並完成備份後，才使用 `-Force`／`--force`。
+先檢查 Skill 內的 `.skill-meta.json`，或 Agent 旁的 `.autoverse.json` legacy compatibility sidecar，確認現有內容的來源。不要直接刪除或覆蓋別人的安裝。只有在確定應由 CraftRoster 取代並完成備份後，才使用 `-Force`／`--force`。
 
 </details>
 
@@ -710,7 +713,7 @@ npm pack --dry-run
 也可以執行：
 
 ```bash
-node autoverse-cli.js list --installed --type agent --target codex
+node craftroster-cli.js list --installed --type agent --target codex
 ```
 
 其他工具請換成對應 target。若安裝的是 `project`，請在相同專案目錄執行 CLI 並使用 `--target project`；CLI 會分平台顯示五個 Agent 目的地。
@@ -742,12 +745,12 @@ node autoverse-cli.js list --installed --type agent --target codex
 
 歡迎提出新 Agent、Skill、平台 adapter 改善、文件修正與驗證規則。
 
-1. 先到 [Issues](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/issues) 說明需求或問題。
+1. 先到 [Issues](https://github.com/HsinPu/CraftRoster/issues) 說明需求或問題。
 2. Fork repository 並建立聚焦的 branch。
 3. 只修改 canonical source；Agent 變更不要直接編輯 generated adapters。
 4. Agent 有變更時執行 `npm run generate:agents`；Skill 或 taxonomy 有變更時執行 `npm run generate:skills`。
 5. 依 [Release Checklist](docs/release-checklist.md) 執行對應本機 gates，至少完成 `npm run validate`、相關 mutation tests 與 `git diff --check`。
-6. 建立 [Pull Request](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/pulls)，附上變更目的與驗證結果。
+6. 建立 [Pull Request](https://github.com/HsinPu/CraftRoster/pulls)，附上變更目的與驗證結果。
 
 ## License
 
@@ -755,4 +758,4 @@ Repository 以 [Apache License 2.0](LICENSE) 授權，Copyright © 2026 HsinPu�
 
 ---
 
-Maintained by [HsinPu](https://github.com/HsinPu) · [Issues](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/issues) · [Actions](https://github.com/HsinPu/Autoverse-Ai-Agent-Skills/actions)
+Maintained by [HsinPu](https://github.com/HsinPu) · [Issues](https://github.com/HsinPu/CraftRoster/issues) · [Actions](https://github.com/HsinPu/CraftRoster/actions)

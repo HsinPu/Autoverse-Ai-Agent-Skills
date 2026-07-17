@@ -4,7 +4,7 @@ description: Command palette guidance for designing, implementing, and reviewing
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Command Palette

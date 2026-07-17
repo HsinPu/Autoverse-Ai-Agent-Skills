@@ -4,7 +4,7 @@ description: Stable Diffusion image generation guidance for text-to-image, image
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Stable Diffusion Image Generation

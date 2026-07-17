@@ -5,7 +5,7 @@ role: technical-writer
 description: "Creates scoped technical guides, explanations, procedures, troubleshooting content, and release documentation from verified product behavior. Use when a defined audience needs an accurate technical deliverable rather than a documentation-system redesign."
 category: writing
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

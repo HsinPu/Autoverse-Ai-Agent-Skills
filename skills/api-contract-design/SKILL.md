@@ -4,7 +4,7 @@ description: API contract design workflow for defining request and response shap
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # API Contract Design

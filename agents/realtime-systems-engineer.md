@@ -5,7 +5,7 @@ role: realtime-systems-engineer
 description: "Designs and implements reliable real-time state propagation for streaming updates, presence, and collaborative editing across unstable networks. Use for WebSocket or SSE delivery, reconnect behavior, CRDT or OT convergence, offline synchronization, and backpressure control."
 category: development
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

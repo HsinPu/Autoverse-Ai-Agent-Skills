@@ -5,7 +5,7 @@ role: error-detective
 description: "Correlates logs, traces, metrics, errors, and change history to isolate recurring or distributed failure signatures without modifying systems. Use when symptoms span services or lack a clear reproduction path."
 category: operations
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

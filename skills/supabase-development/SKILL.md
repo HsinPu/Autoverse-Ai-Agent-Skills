@@ -4,7 +4,7 @@ description: Supabase development guide covering Postgres schema design, Row Lev
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Supabase Development

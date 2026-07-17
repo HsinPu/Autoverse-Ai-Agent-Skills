@@ -5,7 +5,7 @@ role: identity-access-engineer
 description: "Implements identity lifecycle, federation, SSO, provisioning, strong authentication, authorization models, tenant isolation, and access review controls. Use for workforce, customer, or workload identity systems spanning multiple applications."
 category: security
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

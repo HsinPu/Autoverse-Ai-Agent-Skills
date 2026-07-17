@@ -4,7 +4,7 @@ description: Redis and Upstash workflow covering caching, rate limiting, session
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Redis And Upstash

@@ -5,7 +5,7 @@ role: penetration-tester
 description: "Conducts explicitly authorized, non-destructive penetration tests that validate exploitable attack paths under written rules of engagement and stop conditions. Use when an owner requests active security testing beyond a read-only audit."
 category: security
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

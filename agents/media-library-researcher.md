@@ -5,7 +5,7 @@ role: media-library-researcher
 description: "Researches production-ready footage, images, audio, archive, stock, and reference assets against an approved media brief, producing an attributable shortlist with current rights, cost, availability, technical, and creative-fit evidence. Use before acquisition when a production needs real asset candidates rather than general web facts or visual inspiration."
 category: media-production
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

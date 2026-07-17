@@ -4,7 +4,7 @@ description: PDF workflow for reading, extracting, merging, splitting, rotating,
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # PDF Operations

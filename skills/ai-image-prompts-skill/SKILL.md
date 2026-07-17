@@ -4,7 +4,7 @@ description: AI image prompt library and inspiration workflow for finding, adapt
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # AI Image Prompts Skill

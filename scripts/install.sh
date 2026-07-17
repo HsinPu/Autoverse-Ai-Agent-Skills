@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-REPO="HsinPu/Autoverse-Ai-Agent-Skills"
+CANONICAL_REPO="HsinPu/CraftRoster"
+LEGACY_REPO="HsinPu/Autoverse-Ai-Agent-Skills"
+REPO="$CANONICAL_REPO"
+REPO_OPTION_EXPLICIT=0
 BRANCH="main"
 TARGET=""
 TYPE="skill"
@@ -35,7 +38,7 @@ EXACT_MOVE_PRESERVED_PATH=""
 
 usage() {
   cat <<'EOF'
-Autoverse AI Agent Skills installer
+CraftRoster installer
 
 Usage:
   scripts/install.sh --target <target> [--type skill] [--name <skill>] [--dir path] [--dry-run] [--force]
@@ -82,6 +85,17 @@ require_option_value() {
   fi
 }
 
+repo_matches_expected() {
+  local existing_repo="$1"
+  [[ "$existing_repo" == "$REPO" ]] && return 0
+  [[ "$REPO_OPTION_EXPLICIT" -eq 0 && "$REPO" == "$CANONICAL_REPO" && "$existing_repo" == "$LEGACY_REPO" ]]
+}
+
+repo_needs_migration() {
+  local existing_repo="$1"
+  [[ "$REPO_OPTION_EXPLICIT" -eq 0 && "$REPO" == "$CANONICAL_REPO" && "$existing_repo" == "$LEGACY_REPO" ]]
+}
+
 is_owned_codex_legacy_skill() {
   local root="$1" skill_name="$2" meta existing_repo existing_component existing_name existing_target existing_agent
   meta="${root%/}/$skill_name/.skill-meta.json"
@@ -92,7 +106,7 @@ is_owned_codex_legacy_skill() {
   existing_name="$(json_string_value "$meta" "name")"
   existing_target="$(json_string_value "$meta" "target")"
   existing_agent="$(json_string_value "$meta" "agent")"
-  [[ "$existing_repo" == "$REPO" && "$existing_name" == "$skill_name" ]] || return 1
+  repo_matches_expected "$existing_repo" && [[ "$existing_name" == "$skill_name" ]] || return 1
   if [[ "$existing_component" == "skill" && "$existing_target" == "codex" ]]; then return 0; fi
   [[ -z "$existing_component" && -z "$existing_target" && "$existing_agent" == "codex" ]]
 }
@@ -139,7 +153,7 @@ codex_skill_path() {
       printf '%s' "$found_root"
       return
     fi
-    log_error "Codex Skill '$skill_name' exists in alternate root '$found_root' without matching Autoverse ownership metadata. Refusing to create a duplicate in '$canonical_root'."
+    log_error "Codex Skill '$skill_name' exists in alternate root '$found_root' without matching CraftRoster ownership metadata. Refusing to create a duplicate in '$canonical_root'."
     return 2
   fi
   printf '%s' "$canonical_root"
@@ -161,7 +175,7 @@ while [[ $# -gt 0 ]]; do
     --skill) require_option_value "$1" "${2:-}"; TYPE="skill"; NAME="$2"; shift 2 ;;
     --agent-profile) require_option_value "$1" "${2:-}"; TYPE="agent"; NAME="$2"; shift 2 ;;
     --branch) require_option_value "$1" "${2:-}"; BRANCH="$2"; shift 2 ;;
-    --repo) require_option_value "$1" "${2:-}"; REPO="$2"; shift 2 ;;
+    --repo) require_option_value "$1" "${2:-}"; REPO="$2"; REPO_OPTION_EXPLICIT=1; shift 2 ;;
     --dir) require_option_value "$1" "${2:-}"; INSTALL_DIR="$2"; shift 2 ;;
     --source-dir) require_option_value "$1" "${2:-}"; SOURCE_DIR="$2"; shift 2 ;;
     --enable-auto-delegation) ENABLE_AUTO_DELEGATION=1; shift ;;
@@ -521,7 +535,7 @@ install_action() {
   local target="$1" meta="$2" label="$3" expected_component="$4" expected_name="$5" expected_target="$6" legacy_identity="${7:-}" incoming_identity="${8:-}" expected_id="${9:-}" expected_adapter="${10:-}" legacy_targets="${11:-}"
   local metadata_identity_before="" metadata_identity_after="" metadata_sha256_before="" metadata_sha256_after=""
   local target_identity_before="" target_identity_after=""
-  local existing_repo existing_component existing_name existing_target existing_agent existing_id existing_adapter existing_content_sha256 current_content_sha256 identity_matches
+  local existing_repo existing_component existing_name existing_target existing_agent existing_id existing_adapter existing_content_sha256 current_content_sha256 identity_matches repository_matches repository_needs_migration
   INSTALL_ACTION="install"
   EXISTING_INSTALLED_AT=""
   EXPECTED_SKILL_CURRENT_SHA256=""
@@ -557,12 +571,12 @@ install_action() {
   if [[ -f "$meta" ]]; then
     if [[ "$expected_component" == "skill" && "$EXPECTED_SKILL_META_STATE" == "invalid" ]]; then
       if [[ "$FORCE" -eq 1 ]]; then INSTALL_ACTION="force-replace"; return; fi
-      log_error "Refusing to replace '$label' because its Autoverse metadata is not a strict flat JSON object. Use --force to overwrite intentionally."
+      log_error "Refusing to replace '$label' because its CraftRoster metadata is not a strict flat JSON object. Use --force to overwrite intentionally."
       exit 1
     fi
     if [[ "$expected_component" != "skill" ]] && { [[ -L "$meta" ]] || ! validate_flat_metadata "$meta"; }; then
       if [[ "$FORCE" -eq 1 ]]; then INSTALL_ACTION="force-replace"; return; fi
-      log_error "Refusing to replace '$label' because its Autoverse metadata is not a strict flat JSON object. Use --force to overwrite intentionally."
+      log_error "Refusing to replace '$label' because its CraftRoster metadata is not a strict flat JSON object. Use --force to overwrite intentionally."
       exit 1
     fi
     existing_repo="$(json_string_value "$meta" "repo")"
@@ -574,6 +588,10 @@ install_action() {
     existing_adapter="$(json_string_value "$meta" "adapter")"
     existing_content_sha256="$(json_string_value "$meta" "contentSha256")"
     EXISTING_INSTALLED_AT="$(json_string_value "$meta" "installedAt")"
+    repository_matches=0
+    repository_needs_migration=0
+    if repo_matches_expected "$existing_repo"; then repository_matches=1; fi
+    if repo_needs_migration "$existing_repo"; then repository_needs_migration=1; fi
     if [[ "$expected_component" == "skill" ]]; then
       if ! validate_flat_metadata "$meta" ||
         ! metadata_identity_after="$(regular_file_identity "$meta")" ||
@@ -603,7 +621,7 @@ install_action() {
     fi
     identity_matches=1
     if [[ "$expected_component" == "agent" && ( -z "$expected_id" || "$existing_id" != "$expected_id" || -z "$expected_adapter" || "$existing_adapter" != "$expected_adapter" ) ]]; then identity_matches=0; fi
-    if [[ "$existing_repo" == "$REPO" && "$existing_component" == "$expected_component" && "$existing_name" == "$expected_name" && "$existing_target" == "$expected_target" && "$identity_matches" -eq 1 ]]; then
+    if [[ "$repository_matches" -eq 1 && "$existing_component" == "$expected_component" && "$existing_name" == "$expected_name" && "$existing_target" == "$expected_target" && "$identity_matches" -eq 1 ]]; then
       if [[ "$expected_component" == "skill" && -e "$target" ]]; then
         if [[ -z "$existing_content_sha256" ]]; then
           INSTALL_ACTION="migrate-update"
@@ -616,14 +634,20 @@ install_action() {
         fi
         if [[ "$current_content_sha256" != "$existing_content_sha256" ]]; then
           if [[ "$FORCE" -eq 1 ]]; then INSTALL_ACTION="force-replace"; return; fi
-          log_error "Refusing to replace '$label' because the installed Skill content has changed since the last Autoverse install. Use --force to reset it intentionally."
+          log_error "Refusing to replace '$label' because the installed Skill content has changed since the last CraftRoster install. Use --force to reset it intentionally."
           exit 1
         fi
       fi
-      if [[ -e "$target" ]]; then INSTALL_ACTION="update"; else INSTALL_ACTION="repair"; fi
+      if [[ "$repository_needs_migration" -eq 1 ]]; then
+        INSTALL_ACTION="migrate-update"
+      elif [[ -e "$target" ]]; then
+        INSTALL_ACTION="update"
+      else
+        INSTALL_ACTION="repair"
+      fi
       return
     fi
-    if [[ "$existing_repo" == "$REPO" && "$existing_component" == "$expected_component" && "$existing_name" == "$expected_name" && "$identity_matches" -eq 1 ]] && legacy_target_allowed "$existing_target" "$legacy_targets"; then
+    if [[ "$repository_matches" -eq 1 && "$existing_component" == "$expected_component" && "$existing_name" == "$expected_name" && "$identity_matches" -eq 1 ]] && legacy_target_allowed "$existing_target" "$legacy_targets"; then
       if [[ "$expected_component" == "skill" && -e "$target" && -n "$existing_content_sha256" ]]; then
         if [[ ! "$existing_content_sha256" =~ ^[0-9a-f]{64}$ ]]; then
           if [[ "$FORCE" -eq 1 ]]; then INSTALL_ACTION="force-replace"; return; fi
@@ -632,14 +656,14 @@ install_action() {
         fi
         if [[ "$current_content_sha256" != "$existing_content_sha256" ]]; then
           if [[ "$FORCE" -eq 1 ]]; then INSTALL_ACTION="force-replace"; return; fi
-          log_error "Refusing to replace '$label' because the installed Skill content has changed since the last Autoverse install. Use --force to reset it intentionally."
+          log_error "Refusing to replace '$label' because the installed Skill content has changed since the last CraftRoster install. Use --force to reset it intentionally."
           exit 1
         fi
       fi
       INSTALL_ACTION="migrate-update"
       return
     fi
-    if [[ "$existing_repo" == "$REPO" && "$expected_component" == "skill" && -z "$existing_component" && -z "$existing_target" && "$existing_name" == "$expected_name" && "$existing_agent" == "$expected_target" ]]; then
+    if [[ "$repository_matches" -eq 1 && "$expected_component" == "skill" && -z "$existing_component" && -z "$existing_target" && "$existing_name" == "$expected_name" && "$existing_agent" == "$expected_target" ]]; then
       local legacy_skill_name legacy_skill_source legacy_skill_license incoming_skill_name incoming_skill_source incoming_skill_reference_source incoming_skill_license incoming_skill_previous_license source_matches license_matches
       legacy_skill_name="$(yaml_frontmatter_value "$legacy_identity" "name")"
       legacy_skill_source="$(yaml_frontmatter_value "$legacy_identity" "source")"
@@ -652,6 +676,7 @@ install_action() {
       source_matches=0
       license_matches=0
       if [[ "$legacy_skill_source" == "$incoming_skill_source" || ( -n "$incoming_skill_reference_source" && "$legacy_skill_source" == "$incoming_skill_reference_source" ) ]]; then source_matches=1; fi
+      if [[ "$source_matches" -eq 0 && "$repository_needs_migration" -eq 1 && "$legacy_skill_source" == "$LEGACY_REPO" && "$incoming_skill_source" == "$CANONICAL_REPO" ]]; then source_matches=1; fi
       if [[ "$legacy_skill_license" == "$incoming_skill_license" || ( -n "$incoming_skill_previous_license" && "$legacy_skill_license" == "$incoming_skill_previous_license" ) ]]; then license_matches=1; fi
       if [[ "$legacy_skill_name" == "$expected_name" && "$incoming_skill_name" == "$expected_name" && -n "$legacy_skill_source" && "$source_matches" -eq 1 && -n "$legacy_skill_license" && "$license_matches" -eq 1 ]]; then
         INSTALL_ACTION="migrate-update"
@@ -659,20 +684,20 @@ install_action() {
       fi
     fi
     if [[ "$FORCE" -eq 1 ]]; then INSTALL_ACTION="force-replace"; return; fi
-    if [[ -n "$existing_repo" && "$existing_repo" != "$REPO" ]]; then
+    if [[ -n "$existing_repo" && "$repository_matches" -eq 0 ]]; then
       log_error "Refusing to replace '$label' because it was installed from '$existing_repo', not '$REPO'. Use --force to overwrite intentionally."
-    elif [[ "$existing_repo" == "$REPO" ]]; then
+    elif [[ "$repository_matches" -eq 1 ]]; then
       local agent_identity=""
       if [[ "$expected_component" == "agent" ]]; then agent_identity=", id='$expected_id', and adapter='$expected_adapter'"; fi
       log_error "Refusing to replace '$label' because its ownership metadata does not match component='$expected_component', name='$expected_name', target='$expected_target'$agent_identity. Use --force to overwrite intentionally."
     else
-      log_error "Refusing to replace '$label' because its Autoverse metadata is invalid. Use --force to overwrite intentionally."
+      log_error "Refusing to replace '$label' because its CraftRoster metadata is invalid. Use --force to overwrite intentionally."
     fi
     exit 1
   fi
 
   if [[ "$FORCE" -eq 1 ]]; then INSTALL_ACTION="force-replace"; return; fi
-  log_error "Refusing to replace '$label' because it has no matching Autoverse metadata. Use --force to overwrite intentionally."
+  log_error "Refusing to replace '$label' because it has no matching CraftRoster metadata. Use --force to overwrite intentionally."
   exit 1
 }
 
@@ -2451,4 +2476,4 @@ else
   done
 fi
 
-if [[ "$DRY_RUN" -eq 1 ]]; then log_success "Dry run complete."; else log_success "Autoverse $TYPE install complete."; fi
+if [[ "$DRY_RUN" -eq 1 ]]; then log_success "Dry run complete."; else log_success "CraftRoster $TYPE install complete."; fi

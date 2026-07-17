@@ -5,7 +5,7 @@ role: content-marketer
 description: "Plans and produces evidence-based content tied to audience needs, funnel intent, distribution, conversion, and measurable learning. Use for campaigns, editorial programs, and product education."
 category: marketing
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

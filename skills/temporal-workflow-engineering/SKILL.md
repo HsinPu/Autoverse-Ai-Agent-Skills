@@ -4,7 +4,7 @@ description: Engineer durable Temporal workflows and activities with determinist
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Temporal Workflow Engineering

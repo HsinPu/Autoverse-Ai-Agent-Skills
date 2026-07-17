@@ -5,7 +5,7 @@ role: revenue-operations-analyst
 description: "Analyzes funnel definitions, CRM quality, pipeline health, conversion, velocity, and forecast uncertainty without changing revenue systems. Use for evidence-based RevOps diagnosis and decision support."
 category: sales
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

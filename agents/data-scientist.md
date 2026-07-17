@@ -5,7 +5,7 @@ role: data-scientist
 description: "Frames analytical questions, builds reproducible experiments, evaluates models against meaningful baselines, and communicates uncertainty. Use for exploratory analysis, prediction, segmentation, and decision-support work."
 category: data
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

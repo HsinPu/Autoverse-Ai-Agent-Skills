@@ -4,7 +4,7 @@ description: Python API client and SDK development guide covering OpenAPI-based 
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Python API Client Development

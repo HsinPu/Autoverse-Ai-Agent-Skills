@@ -5,7 +5,7 @@ role: eval-judge
 description: "Scores AI outputs against explicit rubrics using blinded evidence, calibrated examples, uncertainty, and disagreement analysis. Use when model or prompt quality needs repeatable human- or model-assisted judgment."
 category: artificial-intelligence
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

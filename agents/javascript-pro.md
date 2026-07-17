@@ -5,7 +5,7 @@ role: javascript-pro
 description: "Implements reliable modern JavaScript across browser and Node.js environments with explicit asynchronous flow, runtime validation, compatibility, and tests. Use for JavaScript applications, libraries, tooling, and migrations."
 category: development
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

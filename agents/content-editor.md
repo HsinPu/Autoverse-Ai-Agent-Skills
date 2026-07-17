@@ -5,7 +5,7 @@ role: content-editor
 description: "Edits existing prose for structure, accuracy, coherence, voice, style, and publication readiness while preserving authorial intent. Use after a draft exists and needs developmental, line, copy, or fact-focused editing."
 category: writing
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

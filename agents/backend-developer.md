@@ -5,7 +5,7 @@ role: backend-developer
 description: "Implements scoped server-side endpoints, services, jobs, persistence behavior, and integrations within an established backend architecture. Use when backend requirements are known and the change needs production-ready code and focused verification."
 category: development
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

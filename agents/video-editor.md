@@ -5,7 +5,7 @@ role: video-editor
 description: "Builds and verifies a versioned video edit from approved story, shot, picture, audio, caption, and delivery inputs while preserving source media and director intent. Use when a project needs a dedicated owner for edit structure, selects, timeline decisions, pacing, sync, transitions, graphics placement, cut revisions, and picture-delivery QC."
 category: media-production
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

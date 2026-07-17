@@ -6,7 +6,7 @@ const path = require('path');
 const componentNamePattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const revisionPattern = /^[0-9a-f]{40}$/;
 const canonicalAuthor = 'HsinPu';
-const canonicalSource = 'HsinPu/Autoverse-Ai-Agent-Skills';
+const canonicalSource = 'HsinPu/CraftRoster';
 
 const unsafeMappingKeys = new Set(['__proto__', 'constructor', 'prototype']);
 

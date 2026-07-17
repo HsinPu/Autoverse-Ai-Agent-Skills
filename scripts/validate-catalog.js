@@ -15,7 +15,7 @@ const agentReferenceSourcesPath = path.join(root, 'scripts', 'data', 'agent-refe
 const readmePath = path.join(root, 'README.md');
 
 const errors = [];
-const canonicalSkillSource = 'HsinPu/Autoverse-Ai-Agent-Skills';
+const canonicalSkillSource = 'HsinPu/CraftRoster';
 const canonicalSkillAuthor = 'HsinPu';
 const componentNamePattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const officialSkillFrontmatterFields = new Set([
@@ -28,7 +28,7 @@ const officialSkillFrontmatterFields = new Set([
 ]);
 const canonicalAgentMetadata = {
   author: 'HsinPu',
-  source: 'HsinPu/Autoverse-Ai-Agent-Skills',
+  source: 'HsinPu/CraftRoster',
   license: 'Apache-2.0'
 };
 

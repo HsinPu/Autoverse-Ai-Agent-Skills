@@ -1,6 +1,6 @@
 # Agent Coverage Matrix
 
-這份矩陣定義 Autoverse 角色目錄目前承諾涵蓋的核心工作，不以現實世界職稱數量作為完成標準。機器可驗證的 canonical 資料位於 [`scripts/data/agent-coverage-matrix.json`](../scripts/data/agent-coverage-matrix.json)；`npm run validate:agent-coverage` 會確認分類完整、代表角色存在且分類一致、handoff 與權限邊界都有定義。
+這份矩陣定義 CraftRoster 角色目錄目前承諾涵蓋的核心工作，不以現實世界職稱數量作為完成標準。機器可驗證的 canonical 資料位於 [`scripts/data/agent-coverage-matrix.json`](../scripts/data/agent-coverage-matrix.json)；`npm run validate:agent-coverage` 會確認分類完整、代表角色存在且分類一致、handoff 與權限邊界都有定義。
 
 ## Coverage Criteria
 

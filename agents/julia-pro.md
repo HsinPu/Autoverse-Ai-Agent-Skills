@@ -5,7 +5,7 @@ role: julia-pro
 description: "Implements reproducible Julia code with type-stable numerical kernels, explicit data contracts, package environments, and scientific validation. Use for numerical computing, analysis, simulation, and Julia packages."
 category: development
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

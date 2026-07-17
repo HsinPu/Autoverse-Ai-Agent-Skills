@@ -4,7 +4,7 @@ description: Design and implement event-sourced domains, event stores, aggregate
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # Event Sourcing And CQRS

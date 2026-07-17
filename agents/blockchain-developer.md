@@ -5,7 +5,7 @@ role: blockchain-developer
 description: "Implements blockchain integrations and smart-contract systems with explicit invariants, authority, economic risk, upgradeability, and adversarial testing. Use for on-chain applications and wallet workflows."
 category: development
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

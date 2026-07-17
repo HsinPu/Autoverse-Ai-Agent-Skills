@@ -5,7 +5,7 @@ role: visual-continuity-supervisor
 description: "Maintains the visual continuity baseline for characters, wardrobe, props, products, environments, screen states, style, geography, time, and action across planned and generated shots. Use for multi-shot, multi-scene, iterative, or AI-assisted productions where continuity defects must be caught before edit lock."
 category: media-production
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

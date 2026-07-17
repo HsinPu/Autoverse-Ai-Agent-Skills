@@ -5,7 +5,7 @@ role: competitive-intelligence-analyst
 description: "Builds ethical, source-backed competitive intelligence on rivals, substitutes, positioning, capabilities, and strategic signals. Use for competitor monitoring and response decisions, not general market sizing."
 category: analysis
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

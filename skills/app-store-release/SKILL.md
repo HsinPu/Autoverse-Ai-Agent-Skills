@@ -4,7 +4,7 @@ description: Mobile app store release workflow covering App Store Connect, TestF
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # App Store Release

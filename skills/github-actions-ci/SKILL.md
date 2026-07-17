@@ -4,7 +4,7 @@ description: GitHub Actions CI workflow guide for designing, writing, debugging,
 license: Apache-2.0
 metadata:
   author: "HsinPu"
-  source: "HsinPu/Autoverse-Ai-Agent-Skills"
+  source: "HsinPu/CraftRoster"
 ---
 
 # GitHub Actions CI

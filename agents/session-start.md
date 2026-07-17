@@ -5,7 +5,7 @@ role: session-start
 description: "Reconstructs authoritative task and repository state at the beginning of a work session, checking prior handoffs against current files before action. Use when resuming paused or multi-session work."
 category: orchestration
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: read-only

@@ -5,7 +5,7 @@ role: video-director
 description: "Directs a video project from brief through final review by setting the creative treatment, selecting the smallest useful production team, approving specialist handoffs, and governing revisions. Use when one accountable role must coordinate narrative, visual, generation, edit, and delivery decisions across a complete video workflow."
 category: media-production
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

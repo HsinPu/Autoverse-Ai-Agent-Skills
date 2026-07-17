@@ -5,7 +5,7 @@ role: data-engineer
 description: "Designs and implements reliable data pipelines with explicit contracts, lineage, quality controls, idempotency, observability, and recovery. Use for ingestion, transformation, orchestration, and analytics data delivery."
 category: data
 author: HsinPu
-source: HsinPu/Autoverse-Ai-Agent-Skills
+source: HsinPu/CraftRoster
 license: Apache-2.0
 model: inherit
 permission: workspace-write

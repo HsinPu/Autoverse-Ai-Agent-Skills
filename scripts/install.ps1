@@ -1,4 +1,4 @@
-# Autoverse AI Agent Skills installer for Windows.
+# CraftRoster installer for Windows.
 
 param(
     [Alias("Agent")]
@@ -8,7 +8,7 @@ param(
     [Alias("Skill")]
     [string]$Name,
     [string]$Branch = "main",
-    [string]$Repo = "HsinPu/Autoverse-Ai-Agent-Skills",
+    [string]$Repo = "HsinPu/CraftRoster",
     [string]$SourceDir,
     [string]$InstallDir,
     [switch]$EnableAutoDelegation,
@@ -18,6 +18,9 @@ param(
 
 $ErrorActionPreference = "Stop"
 $ProgressPreference = "SilentlyContinue"
+$script:CanonicalRepository = "HsinPu/CraftRoster"
+$script:LegacyRepository = "HsinPu/Autoverse-Ai-Agent-Skills"
+$script:AllowLegacyRepositoryAlias = -not $PSBoundParameters.ContainsKey("Repo")
 
 try { [Console]::OutputEncoding = [System.Text.UTF8Encoding]::new() } catch {}
 
@@ -27,7 +30,7 @@ function Write-Fail { param([string]$Message) Write-Host "Error: $Message" -Fore
 
 function Show-Usage {
     Write-Host @"
-Autoverse AI Agent Skills installer
+CraftRoster installer
 
 Usage:
   .\scripts\install.ps1 -Target <target> [-Type skill] [-Name <skill>] [-InstallDir path] [-DryRun] [-Force]
@@ -67,6 +70,21 @@ Safety:
 function Get-HomeDir {
     if ($env:USERPROFILE) { return $env:USERPROFILE }
     return [Environment]::GetFolderPath("UserProfile")
+}
+
+function Test-OwnershipRepositoryMatch {
+    param([string]$ExistingRepo, [string]$ExpectedRepo)
+    if ($ExistingRepo -eq $ExpectedRepo) { return $true }
+    return $script:AllowLegacyRepositoryAlias `
+        -and $ExpectedRepo -ceq $script:CanonicalRepository `
+        -and $ExistingRepo -ceq $script:LegacyRepository
+}
+
+function Test-OwnershipRepositoryNeedsMigration {
+    param([string]$ExistingRepo, [string]$ExpectedRepo)
+    return $script:AllowLegacyRepositoryAlias `
+        -and $ExpectedRepo -ceq $script:CanonicalRepository `
+        -and $ExistingRepo -ceq $script:LegacyRepository
 }
 
 function Get-CodexHome {
@@ -120,7 +138,7 @@ function Get-CodexSkillRoot {
     }
     if ($ownedAlternateRoots.Count -eq 1) { return $ownedAlternateRoots[0] }
     if ($existingAlternateRoots.Count -gt 0) {
-        throw "Codex Skill '$SkillName' already exists in alternate root '$($existingAlternateRoots[0])' without matching Autoverse ownership. Refusing to create a duplicate in canonical root '$canonicalRoot'."
+        throw "Codex Skill '$SkillName' already exists in alternate root '$($existingAlternateRoots[0])' without matching CraftRoster ownership. Refusing to create a duplicate in canonical root '$canonicalRoot'."
     }
     return $canonicalRoot
 }
@@ -485,10 +503,10 @@ function Get-ExistingMeta {
     if (-not (Test-Path -LiteralPath $MetaPath -PathType Leaf)) { return $null }
     $metaItem = Get-Item -Force -LiteralPath $MetaPath
     if (($metaItem.Attributes -band [System.IO.FileAttributes]::ReparsePoint) -ne 0) {
-        throw "Refusing to read linked Autoverse metadata: $MetaPath"
+        throw "Refusing to read linked CraftRoster metadata: $MetaPath"
     }
     try {
-        $text = Read-StrictUtf8Text -Path $MetaPath -Label "Autoverse metadata" -AllowBom
+        $text = Read-StrictUtf8Text -Path $MetaPath -Label "CraftRoster metadata" -AllowBom
         $null = Assert-StrictJsonText -Text $text -Path $MetaPath
         $metadata = ConvertFrom-Json -InputObject $text
         if ($metadata -isnot [System.Management.Automation.PSCustomObject]) {
@@ -507,7 +525,7 @@ function Get-ExistingMeta {
         return $metadata
     } catch {
         if ($Force) { return $null }
-        throw "Existing Autoverse metadata is invalid: $MetaPath ($($_.Exception.Message))"
+        throw "Existing CraftRoster metadata is invalid: $MetaPath ($($_.Exception.Message))"
     }
 }
 
@@ -547,7 +565,7 @@ function Test-LegacySkillOwnership {
         [string]$ExpectedName,
         [string]$ExpectedTarget
     )
-    if (-not $ExistingMeta -or $ExistingMeta.repo -ne $RepoName) { return $false }
+    if (-not $ExistingMeta -or -not (Test-OwnershipRepositoryMatch -ExistingRepo $ExistingMeta.repo -ExpectedRepo $RepoName)) { return $false }
     if ($ExistingMeta.PSObject.Properties['component'] -or $ExistingMeta.PSObject.Properties['target']) { return $false }
     if ($ExistingMeta.name -ne $ExpectedName -or $ExistingMeta.agent -ne $ExpectedTarget) { return $false }
     $existingName = Get-SkillFrontmatterValue -SkillFile $ExistingSkillFile -FieldName 'name'
@@ -559,6 +577,12 @@ function Test-LegacySkillOwnership {
     $incomingLicense = Get-SkillFrontmatterValue -SkillFile $IncomingSkillFile -FieldName 'license'
     $incomingPreviousLicense = Get-SkillFrontmatterValue -SkillFile $IncomingSkillFile -FieldName 'previous-license'
     $sourceMatches = $existingSource -eq $incomingSource -or ($incomingReferenceSource -and $existingSource -eq $incomingReferenceSource)
+    if (-not $sourceMatches -and
+        (Test-OwnershipRepositoryNeedsMigration -ExistingRepo $ExistingMeta.repo -ExpectedRepo $RepoName) -and
+        $existingSource -ceq $script:LegacyRepository -and
+        $incomingSource -ceq $script:CanonicalRepository) {
+        $sourceMatches = $true
+    }
     $licenseMatches = $existingLicense -eq $incomingLicense -or ($incomingPreviousLicense -and $existingLicense -eq $incomingPreviousLicense)
     return $existingName -eq $ExpectedName `
         -and $incomingName -eq $ExpectedName `
@@ -587,8 +611,10 @@ function Get-InstallAction {
     $metaExists = Test-Path -LiteralPath $MetaPath -PathType Leaf
     if (-not $targetExists -and -not $metaExists) { return @{ Action = "install"; ExistingMeta = $null } }
     $existingMeta = Get-ExistingMeta -MetaPath $MetaPath
+    $repositoryMatches = $existingMeta -and (Test-OwnershipRepositoryMatch -ExistingRepo $existingMeta.repo -ExpectedRepo $RepoName)
+    $repositoryNeedsMigration = $existingMeta -and (Test-OwnershipRepositoryNeedsMigration -ExistingRepo $existingMeta.repo -ExpectedRepo $RepoName)
     $ownershipMatches = $existingMeta `
-        -and $existingMeta.repo -eq $RepoName `
+        -and $repositoryMatches `
         -and $existingMeta.component -eq $ExpectedComponent `
         -and $existingMeta.name -eq $ExpectedName `
         -and $existingMeta.target -eq $ExpectedTarget
@@ -600,7 +626,7 @@ function Get-InstallAction {
             -and $existingMeta.adapter -eq $ExpectedAdapter
     }
     if ($ownershipMatches) {
-        $ownedAction = if ($targetExists) { "update" } else { "repair" }
+        $ownedAction = if ($repositoryNeedsMigration) { "migrate-update" } elseif ($targetExists) { "update" } else { "repair" }
         $contentDigest = if ($existingMeta) {
             $existingMeta.PSObject.Properties | Where-Object { $_.Name -ceq 'contentSha256' } | Select-Object -First 1
         } else { $null }
@@ -610,7 +636,7 @@ function Get-InstallAction {
         return @{ Action = $ownedAction; ExistingMeta = $existingMeta }
     }
     $legacyTargetMatches = $existingMeta `
-        -and $existingMeta.repo -eq $RepoName `
+        -and $repositoryMatches `
         -and $existingMeta.component -eq $ExpectedComponent `
         -and $existingMeta.name -eq $ExpectedName `
         -and $LegacyTargets `
@@ -629,14 +655,14 @@ function Get-InstallAction {
         return @{ Action = "migrate-update"; ExistingMeta = $existingMeta }
     }
     if ($Force) { return @{ Action = "force-replace"; ExistingMeta = $existingMeta } }
-    if ($existingMeta -and $existingMeta.repo -and $existingMeta.repo -ne $RepoName) {
+    if ($existingMeta -and $existingMeta.repo -and -not $repositoryMatches) {
         throw "Refusing to replace '$Label' because it was installed from '$($existingMeta.repo)', not '$RepoName'. Use -Force to overwrite intentionally."
     }
-    if ($existingMeta -and $existingMeta.repo -eq $RepoName) {
+    if ($existingMeta -and $repositoryMatches) {
         $agentIdentity = if ($ExpectedComponent -eq 'agent') { ", id='$ExpectedId', and adapter='$ExpectedAdapter'" } else { "" }
         throw "Refusing to replace '$Label' because its ownership metadata does not match component='$ExpectedComponent', name='$ExpectedName', target='$ExpectedTarget'$agentIdentity. Use -Force to overwrite intentionally."
     }
-    throw "Refusing to replace '$Label' because it has no matching Autoverse metadata. Use -Force to overwrite intentionally."
+    throw "Refusing to replace '$Label' because it has no matching CraftRoster metadata. Use -Force to overwrite intentionally."
 }
 
 function Get-SkillInstallPlan {
@@ -671,7 +697,7 @@ function Get-SkillInstallPlan {
             if ($Force) {
                 $plan.Action = 'force-replace'
             } else {
-                throw "Refusing to update Skill '$($Source.Name)': installed Skill content has changed since the last Autoverse install. Use -Force to reset it intentionally."
+                throw "Refusing to update Skill '$($Source.Name)': installed Skill content has changed since the last CraftRoster install. Use -Force to reset it intentionally."
             }
         }
     }
@@ -1629,7 +1655,7 @@ function Get-OpenCodeAutoDelegationPlan {
     $hasJson = Test-Path -LiteralPath $jsonPath -PathType Leaf
     $hasJsonc = Test-Path -LiteralPath $jsoncPath -PathType Leaf
     if ($hasJson -and $hasJsonc) {
-        throw "Refusing to edit OpenCode config because both opencode.json and opencode.jsonc exist in $configRoot. Add the Autoverse instruction path manually."
+        throw "Refusing to edit OpenCode config because both opencode.json and opencode.jsonc exist in $configRoot. Add the CraftRoster instruction path manually."
     }
     if ($hasJsonc) {
         throw "Refusing to rewrite JSONC config $jsoncPath. Add '$InstructionPath' to its instructions array manually."
@@ -1849,7 +1875,7 @@ try {
             }
         }
 
-        if ($DryRun) { Write-Success "Dry run complete." } else { Write-Success "Autoverse $Type install complete." }
+        if ($DryRun) { Write-Success "Dry run complete." } else { Write-Success "CraftRoster $Type install complete." }
     } finally {
         if ($tempRoot -and (Test-Path -LiteralPath $tempRoot)) { Remove-Item -Recurse -Force -LiteralPath $tempRoot }
     }
