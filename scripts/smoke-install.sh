@@ -7,6 +7,8 @@ fail() { printf 'FAIL %s\n' "$1" >&2; exit 1; }
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 INSTALLER="$REPO_ROOT/scripts/install.sh"
 EXPECTED_REPO="HsinPu/CraftRoster"
+LEGACY_REPO="HsinPu/Autoverse-Ai-Agent-Skills"
+LEGACY_SKILL_FIXTURE="$REPO_ROOT/tests/fixtures/legacy-skills/terminal-ops"
 EXPECTED_SKILLS="$(node -e "console.log(require(process.argv[1]).skills.length)" "$REPO_ROOT/skills.json")"
 EXPECTED_AGENTS="$(node -e "console.log(require(process.argv[1]).agents.length)" "$REPO_ROOT/agents.json")"
 
@@ -137,6 +139,34 @@ const [file, field, value] = process.argv.slice(2);
 const metadata = JSON.parse(fs.readFileSync(file, 'utf8'));
 metadata[field] = value;
 fs.writeFileSync(file, `${JSON.stringify(metadata, null, 2)}\n`);
+NODE
+}
+
+delete_json_field() {
+  local file="$1" field="$2"
+  node - "$file" "$field" <<'NODE'
+const fs = require('fs');
+
+const [file, field] = process.argv.slice(2);
+const metadata = JSON.parse(fs.readFileSync(file, 'utf8'));
+delete metadata[field];
+fs.writeFileSync(file, `${JSON.stringify(metadata, null, 2)}\n`);
+NODE
+}
+
+single_file_skill_digest() {
+  local file="$1" digest_namespace="$2"
+  node - "$file" "$digest_namespace" <<'NODE'
+const crypto = require('crypto');
+const fs = require('fs');
+
+const [file, digestNamespace] = process.argv.slice(2);
+const content = fs.readFileSync(file);
+const hash = crypto.createHash('sha256');
+hash.update(Buffer.from(`${digestNamespace}\0SKILL.md\0${content.length}\0`));
+hash.update(content);
+hash.update(Buffer.from([0]));
+process.stdout.write(hash.digest('hex'));
 NODE
 }
 
@@ -404,7 +434,7 @@ OWNED_SKILL_BASELINE_META="$(cat "$OWNED_SKILL_META")"
 OWNED_SKILL_BASELINE_CHECKSUM="$(cksum < "$OWNED_SKILL_FILE")"
 
 SKILL_METADATA_FIELDS=('repo' 'component' 'name' 'target' 'contentSha256')
-SKILL_METADATA_VALUES=('foreign/repository' 'agent' 'python-development' 'codex' '')
+SKILL_METADATA_VALUES=('foreign/repository' 'agent' 'python-development' 'codex' 'invalid-digest')
 SKILL_METADATA_MESSAGES=('installed from' 'ownership metadata does not match' 'ownership metadata does not match' 'ownership metadata does not match' 'contentSha256 is not a valid lowercase 64-character SHA-256 digest')
 for ((index = 0; index < ${#SKILL_METADATA_FIELDS[@]}; index++)); do
   printf '%s\n' "$OWNED_SKILL_BASELINE_META" > "$OWNED_SKILL_META"
@@ -413,6 +443,67 @@ for ((index = 0; index < ${#SKILL_METADATA_FIELDS[@]}; index++)); do
     --target claude --type skill --name terminal-ops --source-dir "$REPO_ROOT" --dir "$SKILL_OWNERSHIP_ROOT"
   assert_equal "$(cksum < "$OWNED_SKILL_FILE")" "$OWNED_SKILL_BASELINE_CHECKSUM" "Skill ownership ${SKILL_METADATA_FIELDS[$index]} mismatch content checksum"
 done
+
+printf '%s\n' "$OWNED_SKILL_BASELINE_META" > "$OWNED_SKILL_META"
+delete_json_field "$OWNED_SKILL_META" contentSha256
+expect_failure "Skill unverified missing content digest refusal" "does not match a verified legacy Skill release" \
+  --target claude --type skill --name terminal-ops --source-dir "$REPO_ROOT" --dir "$SKILL_OWNERSHIP_ROOT"
+assert_equal "$(cksum < "$OWNED_SKILL_FILE")" "$OWNED_SKILL_BASELINE_CHECKSUM" "unverified missing digest preserved Skill content"
+
+LEGACY_SKILL_DIGEST="$(single_file_skill_digest "$OWNED_SKILL_FILE" 'autoverse-skill-content-v1')"
+printf '%s\n' "$OWNED_SKILL_BASELINE_META" > "$OWNED_SKILL_META"
+mutate_json_string "$OWNED_SKILL_META" contentSha256 "$LEGACY_SKILL_DIGEST"
+run_installer "Skill legacy digest namespace migration" \
+  --target claude --type skill --name terminal-ops --source-dir "$REPO_ROOT" --dir "$SKILL_OWNERSHIP_ROOT"
+assert_equal "$(count_output_lines '^OK  migrate-update Skill ')" 1 "Skill legacy digest migration count"
+assert_skill_profile "$SKILL_OWNERSHIP_ROOT" terminal-ops claude "legacy digest migrated Skill"
+
+printf '%s\n' "$OWNED_SKILL_BASELINE_META" > "$OWNED_SKILL_META"
+mutate_json_string "$OWNED_SKILL_META" repo "$LEGACY_REPO"
+mutate_json_string "$OWNED_SKILL_META" contentSha256 "$LEGACY_SKILL_DIGEST"
+run_installer "Skill legacy repository migration" \
+  --target claude --type skill --name terminal-ops --source-dir "$REPO_ROOT" --dir "$SKILL_OWNERSHIP_ROOT"
+assert_equal "$(count_output_lines '^OK  migrate-update Skill ')" 1 "Skill legacy repository migration count"
+assert_skill_profile "$SKILL_OWNERSHIP_ROOT" terminal-ops claude "legacy repository migrated Skill"
+
+printf '%s\n' "$OWNED_SKILL_BASELINE_META" > "$OWNED_SKILL_META"
+mutate_json_string "$OWNED_SKILL_META" repo "$LEGACY_REPO"
+expect_failure "Skill explicit repository disables transition" "installed from '$LEGACY_REPO'" \
+  --target claude --type skill --name terminal-ops --repo "$EXPECTED_REPO" --source-dir "$REPO_ROOT" --dir "$SKILL_OWNERSHIP_ROOT"
+assert_equal "$(node -e 'console.log(JSON.parse(require("fs").readFileSync(process.argv[1], "utf8")).repo)' "$OWNED_SKILL_META")" "$LEGACY_REPO" "explicit repository refusal preserved legacy Skill owner"
+
+LEGACY_SKILL_ROOT="$SMOKE_ROOT/legacy-skill-migration"
+mkdir -p "$LEGACY_SKILL_ROOT"
+cp -R "$LEGACY_SKILL_FIXTURE" "$LEGACY_SKILL_ROOT/"
+LEGACY_SKILL_TARGET="$LEGACY_SKILL_ROOT/terminal-ops"
+node - "$LEGACY_SKILL_TARGET/.skill-meta.json" "$LEGACY_REPO" <<'NODE'
+const fs = require('fs');
+const [file, repo] = process.argv.slice(2);
+fs.writeFileSync(file, `${JSON.stringify({
+  source: 'local-checkout',
+  repo,
+  branch: 'main',
+  name: 'terminal-ops',
+  agent: 'vscode',
+  installedAt: '2026-01-01T00:00:00Z',
+  updatedAt: '2026-01-01T00:00:00Z',
+}, null, 2)}\n`);
+NODE
+printf '\nLOCAL_DRIFT_SENTINEL\n' >> "$LEGACY_SKILL_TARGET/SKILL.md"
+expect_failure "legacy Skill schema local drift refusal" "does not match a verified legacy Skill release" \
+  --target copilot --type skill --name terminal-ops --source-dir "$REPO_ROOT" --dir "$LEGACY_SKILL_ROOT"
+grep -Fq LOCAL_DRIFT_SENTINEL "$LEGACY_SKILL_TARGET/SKILL.md" || fail "legacy Skill drift was not preserved"
+cp "$LEGACY_SKILL_FIXTURE/SKILL.md" "$LEGACY_SKILL_TARGET/SKILL.md"
+CRLF_SOURCE_ROOT="$SMOKE_ROOT/crlf-legacy-manifest-source"
+mkdir -p "$CRLF_SOURCE_ROOT/skills" "$CRLF_SOURCE_ROOT/scripts/data"
+cp -R "$REPO_ROOT/skills/terminal-ops" "$CRLF_SOURCE_ROOT/skills/"
+awk '{ sub(/\r$/, ""); printf "%s\r\n", $0 }' \
+  "$REPO_ROOT/scripts/data/legacy-skill-content-sha256.tsv" \
+  > "$CRLF_SOURCE_ROOT/scripts/data/legacy-skill-content-sha256.tsv"
+run_installer "legacy Skill schema migration with CRLF digest manifest" \
+  --target copilot --type skill --name terminal-ops --source-dir "$CRLF_SOURCE_ROOT" --dir "$LEGACY_SKILL_ROOT"
+assert_equal "$(count_output_lines '^OK  migrate-update Skill ')" 1 "legacy Skill schema CRLF manifest migration count"
+assert_skill_profile "$LEGACY_SKILL_ROOT" terminal-ops copilot "legacy schema migrated Skill"
 
 printf '{\n' > "$OWNED_SKILL_META"
 expect_failure "Skill malformed ownership metadata" "strict flat JSON object" \
@@ -637,6 +728,40 @@ for ((index = 0; index < ${#AGENT_METADATA_FIELDS[@]}; index++)); do
     --target claude --type agent --name code-reviewer --source-dir "$REPO_ROOT" --dir "$AGENT_OWNERSHIP_ROOT"
   assert_equal "$(cksum < "$OWNED_AGENT_FILE")" "$OWNED_AGENT_BASELINE_CHECKSUM" "Agent ownership ${AGENT_METADATA_FIELDS[$index]} mismatch content checksum"
 done
+
+printf '%s\n' "$OWNED_AGENT_BASELINE_META" > "$OWNED_AGENT_META"
+LEGACY_AGENT_META="$OWNED_AGENT_FILE.autoverse.json"
+mv "$OWNED_AGENT_META" "$LEGACY_AGENT_META"
+mutate_json_string "$LEGACY_AGENT_META" repo "$LEGACY_REPO"
+run_installer "Agent legacy repository and sidecar migration" \
+  --target claude --type agent --name code-reviewer --source-dir "$REPO_ROOT" --dir "$AGENT_OWNERSHIP_ROOT"
+assert_equal "$(count_output_lines '^OK  migrate-update Agent ')" 1 "Agent legacy repository migration count"
+assert_agent_profile "$OWNED_AGENT_FILE" code-reviewer claude claude "legacy sidecar migrated Agent"
+[[ ! -e "$LEGACY_AGENT_META" ]] || fail "Agent migration retained the legacy sidecar"
+
+mv "$OWNED_AGENT_META" "$LEGACY_AGENT_META"
+mutate_json_string "$LEGACY_AGENT_META" repo "$LEGACY_REPO"
+expect_failure "Agent explicit repository disables transition" "installed from '$LEGACY_REPO'" \
+  --target claude --type agent --name code-reviewer --repo "$EXPECTED_REPO" --source-dir "$REPO_ROOT" --dir "$AGENT_OWNERSHIP_ROOT"
+[[ -f "$LEGACY_AGENT_META" && ! -e "$OWNED_AGENT_META" ]] || fail "Agent explicit repository refusal changed the legacy sidecar layout"
+assert_equal "$(node -e 'console.log(JSON.parse(require("fs").readFileSync(process.argv[1], "utf8")).repo)' "$LEGACY_AGENT_META")" "$LEGACY_REPO" "Agent explicit repository refusal preserved legacy owner"
+
+run_installer "Agent transition after explicit repository refusal" \
+  --target claude --type agent --name code-reviewer --source-dir "$REPO_ROOT" --dir "$AGENT_OWNERSHIP_ROOT"
+[[ ! -e "$LEGACY_AGENT_META" ]] || fail "Agent transition after refusal retained the legacy sidecar"
+
+mv "$OWNED_AGENT_META" "$LEGACY_AGENT_META"
+run_installer "Agent canonical repository legacy sidecar migration" \
+  --target claude --type agent --name code-reviewer --source-dir "$REPO_ROOT" --dir "$AGENT_OWNERSHIP_ROOT"
+assert_equal "$(count_output_lines '^OK  migrate-update Agent ')" 1 "Agent canonical repository legacy sidecar migration count"
+[[ ! -e "$LEGACY_AGENT_META" ]] || fail "Agent canonical repository migration retained the legacy sidecar"
+assert_agent_profile "$OWNED_AGENT_FILE" code-reviewer claude claude "canonical repository legacy sidecar migrated Agent"
+
+cp "$OWNED_AGENT_META" "$LEGACY_AGENT_META"
+run_installer "Agent verified duplicate legacy sidecar cleanup" \
+  --target claude --type agent --name code-reviewer --source-dir "$REPO_ROOT" --dir "$AGENT_OWNERSHIP_ROOT"
+assert_equal "$(count_output_lines '^OK  migrate-update Agent ')" 1 "Agent duplicate sidecar cleanup count"
+[[ ! -e "$LEGACY_AGENT_META" ]] || fail "Agent duplicate sidecar recovery retained the verified legacy sidecar"
 log_pass "ownership metadata mismatch, malformed, digest, and force matrix"
 
 GLOBAL_TARGETS=('codex' 'claude' 'cursor' 'vscode' 'copilot' 'opencode')
@@ -698,6 +823,28 @@ for ((index = 0; index < ${#GLOBAL_TARGETS[@]}; index++)); do
 done
 log_pass "global Skill and Agent install/update target matrix"
 
+NORMAL_CODEX_HOME="$CODEX_HOME"
+export CODEX_HOME="$NORMAL_CODEX_HOME/"
+run_installer "Codex trailing-slash root update" \
+  --target codex --type skill --name terminal-ops --source-dir "$REPO_ROOT"
+assert_equal "$(count_output_lines '^OK  update Skill ')" 1 "Codex trailing-slash root update count"
+export CODEX_HOME="$NORMAL_CODEX_HOME"
+log_pass "Codex trailing-slash root normalization"
+
+ALTERNATE_CODEX_SKILL_ROOT="$HOME/.agents/skills"
+run_installer "Codex alternate-root transition fixture install" \
+  --target codex --type skill --name hotkey --source-dir "$REPO_ROOT" --dir "$ALTERNATE_CODEX_SKILL_ROOT"
+ALTERNATE_CODEX_SKILL="$ALTERNATE_CODEX_SKILL_ROOT/hotkey"
+ALTERNATE_CODEX_META="$ALTERNATE_CODEX_SKILL/.skill-meta.json"
+ALTERNATE_LEGACY_DIGEST="$(single_file_skill_digest "$ALTERNATE_CODEX_SKILL/SKILL.md" 'autoverse-skill-content-v1')"
+mutate_json_string "$ALTERNATE_CODEX_META" repo "$LEGACY_REPO"
+mutate_json_string "$ALTERNATE_CODEX_META" contentSha256 "$ALTERNATE_LEGACY_DIGEST"
+run_installer "Codex alternate-root Skill migration" \
+  --target codex --type skill --name hotkey --source-dir "$REPO_ROOT"
+assert_equal "$(count_output_lines '^OK  migrate-update Skill ')" 1 "Codex alternate-root migration count"
+assert_skill_profile "$ALTERNATE_CODEX_SKILL_ROOT" hotkey codex "Codex alternate-root migrated Skill"
+[[ ! -e "$CODEX_HOME/skills/hotkey" ]] || fail "Codex alternate-root migration created a duplicate in the canonical root"
+
 AUTO_NORMAL_CODEX_HOME="$CODEX_HOME"
 AUTO_CAPTURE_CODEX_HOME="$SMOKE_ROOT/auto-config-backup-capture-race"
 export CODEX_HOME="$AUTO_CAPTURE_CODEX_HOME"
@@ -740,8 +887,21 @@ rmdir "$CODEX_HOME/config.toml"
 mv "$AUTO_RESTORE_TEMP" "$CODEX_HOME/config.toml"
 
 export CODEX_HOME="$AUTO_NORMAL_CODEX_HOME"
-run_installer "Codex auto-delegation install" \
+mkdir -p "$CODEX_HOME"
+cat > "$CODEX_HOME/config.toml" <<'EOF'
+# AUTOVERSE_AUTO_DELEGATION_START
+developer_instructions = '''
+Legacy managed guidance that must be replaced.
+'''
+# AUTOVERSE_AUTO_DELEGATION_END
+model = "test-model"
+EOF
+run_installer "Codex legacy auto-delegation migration" \
   --target codex --type agent --name debugger --source-dir "$REPO_ROOT" --enable-auto-delegation
+assert_equal "$(count_output_lines '^OK  migrate-update Codex auto-delegation ')" 1 "Codex legacy auto-delegation migration count"
+assert_equal "$(grep -c '^# AUTOVERSE_AUTO_DELEGATION_START$' "$CODEX_HOME/config.toml" || true)" 0 "Codex legacy marker removal count"
+assert_equal "$(grep -c '^# CRAFTROSTER_AUTO_DELEGATION_START$' "$CODEX_HOME/config.toml")" 1 "Codex migrated marker count"
+grep -Fq 'model = "test-model"' "$CODEX_HOME/config.toml" || fail "Codex auto-delegation migration did not preserve the unmanaged config tail"
 run_installer "Codex auto-delegation update" \
   --target codex --type agent --name debugger --source-dir "$REPO_ROOT" --enable-auto-delegation
 assert_equal "$(count_output_lines '^OK  update Agent ')" 1 "Codex Agent update count"

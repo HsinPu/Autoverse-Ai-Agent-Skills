@@ -45,8 +45,29 @@ const OPTION_LABELS = {
   target: '--target/--agent',
 };
 
+function uniquePaths(values) {
+  const seen = new Set();
+  return values.filter((value) => {
+    const resolved = path.resolve(value);
+    const key = process.platform === 'win32' ? resolved.toLowerCase() : resolved;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+const codexSkillRoots = uniquePaths([
+  path.join(codexHome, 'skills'),
+  path.join(homeDir, '.agents', 'skills'),
+  path.join(homeDir, '.codex', 'skills'),
+]);
+
 const SKILL_PROFILE_PATHS = {
-  codex: [{ label: 'codex', dir: path.join(codexHome, 'skills'), target: 'codex' }],
+  codex: codexSkillRoots.map((dir, index) => ({
+    label: index === 0 ? 'codex' : 'codex (transition root)',
+    dir,
+    target: 'codex',
+  })),
   claude: [{ label: 'claude', dir: path.join(homeDir, '.claude', 'skills'), target: 'claude' }],
   cursor: [{ label: 'cursor', dir: path.join(homeDir, '.cursor', 'skills'), target: 'cursor' }],
   copilot: [{ label: 'copilot', dir: path.join(homeDir, '.copilot', 'skills'), target: 'copilot' }],

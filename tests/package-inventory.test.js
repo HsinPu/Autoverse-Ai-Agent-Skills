@@ -120,7 +120,7 @@ function declaredRuntimeEntrypoints(document) {
 
 function runtimeManifests() {
   return fs.readdirSync(path.join(root, 'scripts', 'data'), { withFileTypes: true })
-    .filter((entry) => entry.isFile() && entry.name.endsWith('.json'))
+    .filter((entry) => entry.isFile() && (entry.name.endsWith('.json') || entry.name.endsWith('.tsv')))
     .map((entry) => `scripts/data/${entry.name}`)
     .sort();
 }

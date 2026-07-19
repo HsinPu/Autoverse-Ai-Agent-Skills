@@ -5,3 +5,7 @@
 /scripts/audit-skill-originality.js @HsinPu
 /tests/skill-source-revisions.test.js @HsinPu
 /tests/skill-originality.test.js @HsinPu
+/scripts/data/legacy-skill-content-sha256.tsv @HsinPu
+/scripts/generate-legacy-skill-digests.js @HsinPu
+/scripts/validate-legacy-skill-digests.js @HsinPu
+/tests/fixtures/legacy-skills/ @HsinPu

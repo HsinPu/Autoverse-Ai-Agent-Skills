@@ -2,7 +2,11 @@
 set -euo pipefail
 
 CANONICAL_REPO="HsinPu/CraftRoster"
+LEGACY_REPO="HsinPu/Autoverse-Ai-Agent-Skills"
 REPO="$CANONICAL_REPO"
+REPO_OPTION_EXPLICIT=0
+LEGACY_SKILL_DIGEST_MANIFEST=""
+LEGACY_SKILL_DIGEST_MANIFEST_VALIDATED=0
 BRANCH="main"
 TARGET=""
 TYPE="skill"
@@ -85,16 +89,89 @@ require_option_value() {
 
 repo_matches_expected() {
   local existing_repo="$1"
-  [[ "$existing_repo" == "$REPO" ]]
+  [[ "$existing_repo" == "$REPO" ]] && return 0
+  [[ "$REPO_OPTION_EXPLICIT" -eq 0 && "$REPO" == "$CANONICAL_REPO" && "$existing_repo" == "$LEGACY_REPO" ]]
+}
+
+repo_needs_migration() {
+  local existing_repo="$1"
+  [[ "$REPO_OPTION_EXPLICIT" -eq 0 && "$REPO" == "$CANONICAL_REPO" && "$existing_repo" == "$LEGACY_REPO" ]]
+}
+
+path_identity_key() {
+  local candidate="$1"
+  while [[ "$candidate" != "/" && ! "$candidate" =~ ^[A-Za-z]:/$ && "$candidate" == */ ]]; do
+    candidate="${candidate%/}"
+  done
+  if [[ -d "$candidate" ]]; then
+    (cd "$candidate" 2>/dev/null && pwd -P)
+  else
+    printf '%s' "$candidate"
+  fi
 }
 
 codex_skill_path() {
-  local scope="$1"
-  if [[ "$scope" == "user" ]]; then
-    printf '%s/skills' "${CODEX_HOME:-$HOME/.codex}"
-  else
+  local scope="$1" skill_name="${2:-}" incoming_skill_file="${3:-}" canonical_root agents_alternate default_codex_alternate root target meta key existing_key duplicate
+  local found_count=0 found_root="" owned_root=""
+  local -a raw_roots=() candidate_roots=() candidate_keys=()
+  if [[ "$scope" != "user" ]]; then
     printf '%s' "$PWD/.agents/skills"
+    return
   fi
+
+  canonical_root="${CODEX_HOME:-$HOME/.codex}/skills"
+  [[ -n "$skill_name" ]] || { printf '%s' "$canonical_root"; return; }
+
+  agents_alternate="$HOME/.agents/skills"
+  default_codex_alternate="$HOME/.codex/skills"
+  raw_roots=("$canonical_root" "$agents_alternate" "$default_codex_alternate")
+  for root in "${raw_roots[@]}"; do
+    if ! key="$(path_identity_key "$root")"; then
+      log_error "Could not resolve Codex Skill root: $root"
+      return 2
+    fi
+    duplicate=0
+    for existing_key in "${candidate_keys[@]}"; do
+      if [[ "$existing_key" == "$key" ]]; then duplicate=1; break; fi
+    done
+    if [[ "$duplicate" -eq 0 ]]; then
+      candidate_roots+=("$root")
+      candidate_keys+=("$key")
+    fi
+  done
+
+  for root in "${candidate_roots[@]}"; do
+    target="${root%/}/$skill_name"
+    [[ -e "$target" || -L "$target" ]] || continue
+    found_count=$((found_count + 1))
+    found_root="$root"
+  done
+
+  if [[ "$found_count" -gt 1 ]]; then
+    log_error "Codex Skill '$skill_name' exists in more than one canonical or alternate root. Remove or reconcile the duplicates before installing."
+    return 2
+  fi
+  if [[ "$found_count" -eq 1 ]]; then
+    if [[ "$found_root" == "$canonical_root" ]]; then
+      printf '%s' "$canonical_root"
+      return
+    fi
+    target="${found_root%/}/$skill_name"
+    meta="$target/.skill-meta.json"
+    if (
+      FORCE=0
+      install_action "$target" "$meta" "$skill_name" "skill" "$skill_name" "codex" "$target/SKILL.md" "$incoming_skill_file"
+    ) >/dev/null 2>&1; then
+      owned_root="$found_root"
+    fi
+    if [[ -n "$owned_root" ]]; then
+      printf '%s' "$owned_root"
+      return
+    fi
+    log_error "Codex Skill '$skill_name' exists in alternate root '$found_root' without matching CraftRoster ownership metadata. Refusing to create a duplicate in '$canonical_root'."
+    return 2
+  fi
+  printf '%s' "$canonical_root"
 }
 
 opencode_config_root() {
@@ -113,7 +190,7 @@ while [[ $# -gt 0 ]]; do
     --skill) require_option_value "$1" "${2:-}"; TYPE="skill"; NAME="$2"; shift 2 ;;
     --agent-profile) require_option_value "$1" "${2:-}"; TYPE="agent"; NAME="$2"; shift 2 ;;
     --branch) require_option_value "$1" "${2:-}"; BRANCH="$2"; shift 2 ;;
-    --repo) require_option_value "$1" "${2:-}"; REPO="$2"; shift 2 ;;
+    --repo) require_option_value "$1" "${2:-}"; REPO="$2"; REPO_OPTION_EXPLICIT=1; shift 2 ;;
     --dir) require_option_value "$1" "${2:-}"; INSTALL_DIR="$2"; shift 2 ;;
     --source-dir) require_option_value "$1" "${2:-}"; SOURCE_DIR="$2"; shift 2 ;;
     --enable-auto-delegation) ENABLE_AUTO_DELEGATION=1; shift ;;
@@ -160,15 +237,19 @@ validate_target() {
 add_skill_profile() {
   SKILL_DESTINATIONS+=("$1")
   SKILL_OWNERSHIP_TARGETS+=("$2")
+  SKILL_LEGACY_TARGETS+=("${3:-}")
+  SKILL_CODEX_LEGACY_CHECKS+=("${4:-0}")
 }
 
 configure_skill_profiles() {
   local use_install_override="$1" destination
   SKILL_DESTINATIONS=()
   SKILL_OWNERSHIP_TARGETS=()
+  SKILL_LEGACY_TARGETS=()
+  SKILL_CODEX_LEGACY_CHECKS=()
   if [[ "$TARGET" == "project" ]]; then
-    add_skill_profile "$PROJECT_ROOT/.agents/skills" "project"
-    add_skill_profile "$PROJECT_ROOT/.claude/skills" "project"
+    add_skill_profile "$PROJECT_ROOT/.agents/skills" "project" "codex-project" 0
+    add_skill_profile "$PROJECT_ROOT/.claude/skills" "project" "claude-project" 0
     return
   fi
   if [[ "$use_install_override" -eq 1 && -n "$INSTALL_DIR" ]]; then
@@ -179,7 +260,22 @@ configure_skill_profiles() {
     log_error "Unsupported skill target: $TARGET"
     exit 1
   fi
-  add_skill_profile "$destination" "$TARGET"
+  if [[ "$TARGET" == "codex" && ! ( "$use_install_override" -eq 1 && -n "$INSTALL_DIR" ) ]]; then
+    add_skill_profile "$destination" "$TARGET" "" 1
+  elif [[ "$TARGET" == "copilot" ]]; then
+    add_skill_profile "$destination" "$TARGET" "vscode" 0
+  else
+    add_skill_profile "$destination" "$TARGET" "" 0
+  fi
+}
+
+resolve_skill_profile_destination() {
+  local destination_root="$1" skill_name="$2" check_codex_legacy="$3" incoming_skill_file="$4"
+  if [[ "$check_codex_legacy" -eq 1 ]]; then
+    codex_skill_path user "$skill_name" "$incoming_skill_file"
+  else
+    printf '%s' "$destination_root"
+  fi
 }
 
 add_agent_profile() {
@@ -187,6 +283,7 @@ add_agent_profile() {
   AGENT_SUFFIXES+=("$2")
   AGENT_DESTINATIONS+=("$3")
   AGENT_OWNERSHIP_TARGETS+=("$4")
+  AGENT_LEGACY_TARGETS+=("${5:-}")
 }
 
 configure_agent_profiles() {
@@ -195,12 +292,13 @@ configure_agent_profiles() {
   AGENT_SUFFIXES=()
   AGENT_DESTINATIONS=()
   AGENT_OWNERSHIP_TARGETS=()
+  AGENT_LEGACY_TARGETS=()
   if [[ "$TARGET" == "project" ]]; then
-    add_agent_profile "codex" ".toml" "$PROJECT_ROOT/.codex/agents" "project"
-    add_agent_profile "claude" ".md" "$PROJECT_ROOT/.claude/agents" "project"
-    add_agent_profile "cursor" ".md" "$PROJECT_ROOT/.cursor/agents" "project"
-    add_agent_profile "copilot" ".agent.md" "$PROJECT_ROOT/.github/agents" "project"
-    add_agent_profile "opencode" ".md" "$PROJECT_ROOT/.opencode/agents" "project"
+    add_agent_profile "codex" ".toml" "$PROJECT_ROOT/.codex/agents" "project" "codex-project"
+    add_agent_profile "claude" ".md" "$PROJECT_ROOT/.claude/agents" "project" "claude-project"
+    add_agent_profile "cursor" ".md" "$PROJECT_ROOT/.cursor/agents" "project" "cursor-project"
+    add_agent_profile "copilot" ".agent.md" "$PROJECT_ROOT/.github/agents" "project" "copilot-project,vscode-project,vscode"
+    add_agent_profile "opencode" ".md" "$PROJECT_ROOT/.opencode/agents" "project" "opencode-project"
     return
   fi
   if [[ -n "$INSTALL_DIR" ]]; then
@@ -215,7 +313,7 @@ configure_agent_profiles() {
     codex) add_agent_profile "codex" ".toml" "$destination" "$TARGET" ;;
     claude) add_agent_profile "claude" ".md" "$destination" "$TARGET" ;;
     cursor) add_agent_profile "cursor" ".md" "$destination" "$TARGET" ;;
-    copilot) add_agent_profile "copilot" ".agent.md" "$destination" "$TARGET" ;;
+    copilot) add_agent_profile "copilot" ".agent.md" "$destination" "$TARGET" "vscode" ;;
     opencode) add_agent_profile "opencode" ".md" "$destination" "$TARGET" ;;
     *) log_error "Unsupported agent target: $TARGET"; exit 1 ;;
   esac
@@ -247,6 +345,11 @@ require_command() {
 json_string_value() {
   local file="$1" key="$2"
   sed -n "s/^[[:space:]]*\"$key\"[[:space:]]*:[[:space:]]*\"\\([^\"]*\\)\".*/\\1/p" "$file" | head -n 1
+}
+
+json_string_key_present() {
+  local file="$1" key="$2"
+  grep -Eq "^[[:space:]]*\"$key\"[[:space:]]*:[[:space:]]*\"" "$file"
 }
 
 validate_flat_metadata() {
@@ -356,7 +459,7 @@ regular_file_identity() {
 }
 
 emit_skill_content_stream() {
-  local root="${1%/}" excluded_relative_path="${2:-}" path relative_path byte_length special_path
+  local root="${1%/}" excluded_relative_path="${2:-}" digest_namespace="${3:-craftroster-skill-content-v1}" path relative_path byte_length special_path
   local -a relative_paths=()
 
   if [[ ! -d "$root" || -L "$root" ]]; then
@@ -387,7 +490,7 @@ emit_skill_content_stream() {
     relative_paths+=("$relative_path")
   done < <(find "$root" -type f -print0)
 
-  printf 'craftroster-skill-content-v1\0'
+  printf '%s\0' "$digest_namespace"
   if [[ "${#relative_paths[@]}" -eq 0 ]]; then return; fi
   while IFS= read -r relative_path; do
     byte_length="$(wc -c < "$root/$relative_path" | tr -d '[:space:]')"
@@ -398,8 +501,8 @@ emit_skill_content_stream() {
 }
 
 skill_content_sha256() {
-  local root="$1" excluded_relative_path="${2:-}" digest
-  if ! digest="$(emit_skill_content_stream "$root" "$excluded_relative_path" | sha256_stream)"; then
+  local root="$1" excluded_relative_path="${2:-}" digest_namespace="${3:-craftroster-skill-content-v1}" digest
+  if ! digest="$(emit_skill_content_stream "$root" "$excluded_relative_path" "$digest_namespace" | sha256_stream)"; then
     return 1
   fi
   if [[ ! "$digest" =~ ^[0-9a-f]{64}$ ]]; then
@@ -409,11 +512,129 @@ skill_content_sha256() {
   printf '%s' "$digest"
 }
 
+validate_legacy_skill_digest_manifest() {
+  [[ "$LEGACY_SKILL_DIGEST_MANIFEST_VALIDATED" -eq 1 ]] && return
+  if [[ -z "$LEGACY_SKILL_DIGEST_MANIFEST" || ! -f "$LEGACY_SKILL_DIGEST_MANIFEST" || -L "$LEGACY_SKILL_DIGEST_MANIFEST" ]]; then
+    log_error "Verified legacy Skill digest manifest is missing or linked: $LEGACY_SKILL_DIGEST_MANIFEST"
+    exit 1
+  fi
+  if ! LC_ALL=C awk -F '\t' '
+    { sub(/\r$/, "", $0) }
+    NR == 1 { if ($0 != "# craftroster-verified-legacy-skill-content-v1") invalid = 1; next }
+    NR == 2 { if ($0 != "# digest-namespace: craftroster-skill-content-v1") invalid = 1; next }
+    NR == 3 { if ($0 !~ /^# history-range: [0-9a-f]+\^\.\.[0-9a-f]+$/) invalid = 1; next }
+    NR == 4 {
+      if ($0 !~ /^# skills: [1-9][0-9]*$/) invalid = 1
+      expected_skills = substr($0, length("# skills: ") + 1) + 0
+      next
+    }
+    NR == 5 {
+      if ($0 !~ /^# entries: [1-9][0-9]*$/) invalid = 1
+      expected_entries = substr($0, length("# entries: ") + 1) + 0
+      next
+    }
+    NR >= 6 {
+      if (NF != 2 || $1 !~ /^[a-z0-9]+(-[a-z0-9]+)*$/ || length($2) != 64 || $2 ~ /[^0-9a-f]/) invalid = 1
+      if (previous != "" && previous >= $0) invalid = 1
+      previous = $0
+      skills[$1] = 1
+      entries++
+    }
+    END {
+      for (skill in skills) skill_count++
+      if (NR < 6 || entries != expected_entries || skill_count != expected_skills) invalid = 1
+      exit invalid ? 1 : 0
+    }
+  ' "$LEGACY_SKILL_DIGEST_MANIFEST"; then
+    log_error "Verified legacy Skill digest manifest is invalid: $LEGACY_SKILL_DIGEST_MANIFEST"
+    exit 1
+  fi
+  LEGACY_SKILL_DIGEST_MANIFEST_VALIDATED=1
+}
+
+legacy_skill_digest_allowed() {
+  local skill_name="$1" digest="$2"
+  validate_legacy_skill_digest_manifest
+  LC_ALL=C awk -F '\t' -v skill="$skill_name" -v expected_digest="$digest" '
+    { sub(/\r$/, "", $0) }
+    $1 == skill && $2 == expected_digest { found = 1; exit }
+    END { exit found ? 0 : 1 }
+  ' "$LEGACY_SKILL_DIGEST_MANIFEST"
+}
+
+yaml_frontmatter_value() {
+  local file="$1" key="$2" allow_nested=0
+  [[ -f "$file" && ! -L "$file" ]] || return 0
+  case "$key" in source|reference-*|previous-license) allow_nested=1 ;; esac
+  awk -v key="$key" -v allow_nested="$allow_nested" '
+    function emit_value(line, prefix_length, value) {
+      value = substr(line, prefix_length + 1)
+      sub(/^[[:space:]]+/, "", value)
+      sub(/[[:space:]]+$/, "", value)
+      gsub(/^[\047\"]|[\047\"]$/, "", value)
+      print value
+      exit
+    }
+    NR == 1 { sub(/^\357\273\277/, "", $0) }
+    NR == 1 && $0 == "---" { inside = 1; next }
+    inside && $0 == "---" { exit }
+    !inside { next }
+    /^[^[:space:]]/ {
+      in_metadata = 0
+      if (index($0, key ":") == 1) emit_value($0, length(key) + 1)
+      if ($0 ~ /^metadata:[[:space:]]*(#.*)?$/) in_metadata = 1
+      next
+    }
+    in_metadata && allow_nested {
+      nested = $0
+      sub(/^[[:space:]]+/, "", nested)
+      if (index(nested, key ":") == 1) emit_value(nested, length(key) + 1)
+    }
+  ' "$file"
+}
+
+skill_frontmatter_identity_matches() {
+  local existing_file="$1" incoming_file="$2" expected_name="$3" existing_repo="$4"
+  local existing_name existing_source existing_license incoming_name incoming_source incoming_reference_source incoming_license incoming_previous_license
+  local source_matches=0 license_matches=0
+  existing_name="$(yaml_frontmatter_value "$existing_file" "name")"
+  existing_source="$(yaml_frontmatter_value "$existing_file" "source")"
+  existing_license="$(yaml_frontmatter_value "$existing_file" "license")"
+  incoming_name="$(yaml_frontmatter_value "$incoming_file" "name")"
+  incoming_source="$(yaml_frontmatter_value "$incoming_file" "source")"
+  incoming_reference_source="$(yaml_frontmatter_value "$incoming_file" "reference-source")"
+  incoming_license="$(yaml_frontmatter_value "$incoming_file" "license")"
+  incoming_previous_license="$(yaml_frontmatter_value "$incoming_file" "previous-license")"
+  if [[ "$existing_source" == "$incoming_source" || ( -n "$incoming_reference_source" && "$existing_source" == "$incoming_reference_source" ) ]]; then source_matches=1; fi
+  if [[ "$source_matches" -eq 0 ]] && repo_needs_migration "$existing_repo" && [[ "$existing_source" == "$LEGACY_REPO" && "$incoming_source" == "$CANONICAL_REPO" ]]; then
+    source_matches=1
+  fi
+  if [[ "$existing_license" == "$incoming_license" || ( -n "$incoming_previous_license" && "$existing_license" == "$incoming_previous_license" ) ]]; then license_matches=1; fi
+  [[ "$existing_name" == "$expected_name" && "$incoming_name" == "$expected_name" && -n "$existing_source" && "$source_matches" -eq 1 && -n "$existing_license" && "$license_matches" -eq 1 ]]
+}
+
+verified_legacy_skill_without_digest() {
+  local existing_file="$1" incoming_file="$2" expected_name="$3" existing_repo="$4" content_sha256="$5"
+  repo_needs_migration "$existing_repo" || return 1
+  skill_frontmatter_identity_matches "$existing_file" "$incoming_file" "$expected_name" "$existing_repo" || return 1
+  legacy_skill_digest_allowed "$expected_name" "$content_sha256"
+}
+
+legacy_target_allowed() {
+  local candidate="$1" allowed_targets="$2"
+  [[ -n "$candidate" && -n "$allowed_targets" ]] || return 1
+  case ",$allowed_targets," in
+    *",$candidate,"*) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
 install_action() {
-  local target="$1" meta="$2" label="$3" expected_component="$4" expected_name="$5" expected_target="$6" expected_id="${7:-}" expected_adapter="${8:-}"
+  local target="$1" meta="$2" label="$3" expected_component="$4" expected_name="$5" expected_target="$6" legacy_identity="${7:-}" incoming_identity="${8:-}" expected_id="${9:-}" expected_adapter="${10:-}" legacy_targets="${11:-}"
   local metadata_identity_before="" metadata_identity_after="" metadata_sha256_before="" metadata_sha256_after=""
   local target_identity_before="" target_identity_after=""
-  local existing_repo existing_component existing_name existing_target existing_id existing_adapter existing_content_sha256 current_content_sha256 identity_matches repository_matches
+  local existing_repo existing_component existing_name existing_target existing_agent existing_id existing_adapter existing_content_sha256 current_content_sha256 legacy_content_sha256 identity_matches repository_matches repository_needs_migration ownership_matches
+  local existing_content_sha256_present=0 unverified_missing_skill_digest=0
   INSTALL_ACTION="install"
   EXISTING_INSTALLED_AT=""
   EXPECTED_SKILL_CURRENT_SHA256=""
@@ -461,12 +682,16 @@ install_action() {
     existing_component="$(json_string_value "$meta" "component")"
     existing_name="$(json_string_value "$meta" "name")"
     existing_target="$(json_string_value "$meta" "target")"
+    existing_agent="$(json_string_value "$meta" "agent")"
     existing_id="$(json_string_value "$meta" "id")"
     existing_adapter="$(json_string_value "$meta" "adapter")"
     existing_content_sha256="$(json_string_value "$meta" "contentSha256")"
+    if json_string_key_present "$meta" "contentSha256"; then existing_content_sha256_present=1; fi
     EXISTING_INSTALLED_AT="$(json_string_value "$meta" "installedAt")"
     repository_matches=0
+    repository_needs_migration=0
     if repo_matches_expected "$existing_repo"; then repository_matches=1; fi
+    if repo_needs_migration "$existing_repo"; then repository_needs_migration=1; fi
     if [[ "$expected_component" == "skill" ]]; then
       if ! validate_flat_metadata "$meta" ||
         ! metadata_identity_after="$(regular_file_identity "$meta")" ||
@@ -481,9 +706,17 @@ install_action() {
     fi
     if [[ "$expected_component" == "skill" && -d "$target" && ! -L "$target" ]]; then
       if ! target_identity_before="$(skill_directory_identity "$target")" ||
-        ! current_content_sha256="$(skill_content_sha256 "$target")" ||
-        ! target_identity_after="$(skill_directory_identity "$target")" ||
-        [[ "$target_identity_after" != "$target_identity_before" ]]; then
+        ! current_content_sha256="$(skill_content_sha256 "$target")"; then
+        log_error "Refusing to replace '$label' because its Skill directory changed while ownership was being checked. Run the installer again."
+        exit 1
+      fi
+      legacy_content_sha256=""
+      if [[ "$existing_content_sha256_present" -eq 1 && "$existing_content_sha256" =~ ^[0-9a-f]{64}$ && "$current_content_sha256" != "$existing_content_sha256" ]] &&
+        ! legacy_content_sha256="$(skill_content_sha256 "$target" "" "autoverse-skill-content-v1")"; then
+        log_error "Refusing to replace '$label' because its Skill directory changed while ownership was being checked. Run the installer again."
+        exit 1
+      fi
+      if ! target_identity_after="$(skill_directory_identity "$target")" || [[ "$target_identity_after" != "$target_identity_before" ]]; then
         log_error "Refusing to replace '$label' because its Skill directory changed while ownership was being checked. Run the installer again."
         exit 1
       fi
@@ -496,27 +729,94 @@ install_action() {
     fi
     identity_matches=1
     if [[ "$expected_component" == "agent" && ( -z "$expected_id" || "$existing_id" != "$expected_id" || -z "$expected_adapter" || "$existing_adapter" != "$expected_adapter" ) ]]; then identity_matches=0; fi
-    if [[ "$repository_matches" -eq 1 && "$existing_component" == "$expected_component" && "$existing_name" == "$expected_name" && "$existing_target" == "$expected_target" && "$identity_matches" -eq 1 ]]; then
-      if [[ "$expected_component" == "skill" ]]; then
+    ownership_matches=0
+    if [[ "$repository_matches" -eq 1 && "$existing_component" == "$expected_component" && "$existing_name" == "$expected_name" && "$existing_target" == "$expected_target" && "$identity_matches" -eq 1 ]]; then ownership_matches=1; fi
+    if [[ "$ownership_matches" -eq 1 ]]; then
+      if [[ "$expected_component" == "skill" && -e "$target" ]]; then
+        if [[ "$existing_content_sha256_present" -eq 0 ]]; then
+          if ! verified_legacy_skill_without_digest "$legacy_identity" "$incoming_identity" "$expected_name" "$existing_repo" "$current_content_sha256"; then
+            ownership_matches=0
+            unverified_missing_skill_digest=1
+          else
+            repository_needs_migration=1
+          fi
+        elif [[ ! "$existing_content_sha256" =~ ^[0-9a-f]{64}$ ]]; then
+          if [[ "$FORCE" -eq 1 ]]; then INSTALL_ACTION="force-replace"; return; fi
+          log_error "Refusing to replace '$label' because its contentSha256 is not a valid lowercase 64-character SHA-256 digest. Use --force to reset it intentionally."
+          exit 1
+        elif [[ "$current_content_sha256" != "$existing_content_sha256" ]]; then
+          if [[ "$legacy_content_sha256" == "$existing_content_sha256" ]]; then
+            repository_needs_migration=1
+          elif [[ "$FORCE" -eq 1 ]]; then
+            INSTALL_ACTION="force-replace"
+            return
+          else
+            log_error "Refusing to replace '$label' because the installed Skill content has changed since the last CraftRoster install. Use --force to reset it intentionally."
+            exit 1
+          fi
+        fi
+      fi
+      if [[ "$ownership_matches" -eq 1 ]]; then
+        if [[ "$repository_needs_migration" -eq 1 ]]; then
+          INSTALL_ACTION="migrate-update"
+        elif [[ -e "$target" ]]; then
+          INSTALL_ACTION="update"
+        else
+          INSTALL_ACTION="repair"
+        fi
+        return
+      fi
+    fi
+    if [[ "$repository_matches" -eq 1 && "$existing_component" == "$expected_component" && "$existing_name" == "$expected_name" && "$identity_matches" -eq 1 ]] && legacy_target_allowed "$existing_target" "$legacy_targets"; then
+      if [[ "$expected_component" == "skill" && -e "$target" ]]; then
+        if ! skill_frontmatter_identity_matches "$legacy_identity" "$incoming_identity" "$expected_name" "$existing_repo"; then
+          ownership_matches=0
+        elif [[ "$existing_content_sha256_present" -eq 0 ]] && ! verified_legacy_skill_without_digest "$legacy_identity" "$incoming_identity" "$expected_name" "$existing_repo" "$current_content_sha256"; then
+          ownership_matches=0
+          unverified_missing_skill_digest=1
+        elif [[ "$existing_content_sha256_present" -eq 1 && ! "$existing_content_sha256" =~ ^[0-9a-f]{64}$ ]]; then
+          if [[ "$FORCE" -eq 1 ]]; then INSTALL_ACTION="force-replace"; return; fi
+          log_error "Refusing to replace '$label' because its contentSha256 is not a valid lowercase 64-character SHA-256 digest. Use --force to reset it intentionally."
+          exit 1
+        elif [[ "$existing_content_sha256_present" -eq 1 && "$current_content_sha256" != "$existing_content_sha256" && "$legacy_content_sha256" != "$existing_content_sha256" ]]; then
+          if [[ "$FORCE" -eq 1 ]]; then INSTALL_ACTION="force-replace"; return; fi
+          log_error "Refusing to replace '$label' because the installed Skill content has changed since the last CraftRoster install. Use --force to reset it intentionally."
+          exit 1
+        else
+          ownership_matches=1
+        fi
+      else
+        ownership_matches=1
+      fi
+      if [[ "$ownership_matches" -eq 1 ]]; then INSTALL_ACTION="migrate-update"; return; fi
+    fi
+    if [[ "$repository_matches" -eq 1 && "$expected_component" == "skill" && -z "$existing_component" && -z "$existing_target" && "$existing_name" == "$expected_name" ]] &&
+      { [[ "$existing_agent" == "$expected_target" ]] || legacy_target_allowed "$existing_agent" "$legacy_targets"; } &&
+      skill_frontmatter_identity_matches "$legacy_identity" "$incoming_identity" "$expected_name" "$existing_repo"; then
+      if [[ "$existing_content_sha256_present" -eq 1 ]]; then
         if [[ ! "$existing_content_sha256" =~ ^[0-9a-f]{64}$ ]]; then
           if [[ "$FORCE" -eq 1 ]]; then INSTALL_ACTION="force-replace"; return; fi
           log_error "Refusing to replace '$label' because its contentSha256 is not a valid lowercase 64-character SHA-256 digest. Use --force to reset it intentionally."
           exit 1
         fi
-        if [[ -e "$target" && "$current_content_sha256" != "$existing_content_sha256" ]]; then
+        if [[ "$current_content_sha256" != "$existing_content_sha256" && "$legacy_content_sha256" != "$existing_content_sha256" ]]; then
           if [[ "$FORCE" -eq 1 ]]; then INSTALL_ACTION="force-replace"; return; fi
           log_error "Refusing to replace '$label' because the installed Skill content has changed since the last CraftRoster install. Use --force to reset it intentionally."
           exit 1
         fi
-      fi
-      if [[ -e "$target" ]]; then
-        INSTALL_ACTION="update"
+      elif ! verified_legacy_skill_without_digest "$legacy_identity" "$incoming_identity" "$expected_name" "$existing_repo" "$current_content_sha256"; then
+        unverified_missing_skill_digest=1
       else
-        INSTALL_ACTION="repair"
+        INSTALL_ACTION="migrate-update"
+        return
       fi
-      return
+      if [[ "$existing_content_sha256_present" -eq 1 ]]; then INSTALL_ACTION="migrate-update"; return; fi
     fi
     if [[ "$FORCE" -eq 1 ]]; then INSTALL_ACTION="force-replace"; return; fi
+    if [[ "$unverified_missing_skill_digest" -eq 1 ]]; then
+      log_error "Refusing to migrate '$label' because its metadata has no contentSha256 and its installed content does not match a verified legacy Skill release. Use --force to overwrite intentionally."
+      exit 1
+    fi
     if [[ -n "$existing_repo" && "$repository_matches" -eq 0 ]]; then
       log_error "Refusing to replace '$label' because it was installed from '$existing_repo', not '$REPO'. Use --force to overwrite intentionally."
     elif [[ "$repository_matches" -eq 1 ]]; then
@@ -1092,14 +1392,14 @@ install_staged_exact() {
 }
 
 install_skill() {
-  local src="$1" destination_root="$2" ownership_target="$3" name target meta now installed_at
+  local src="$1" destination_root="$2" ownership_target="$3" legacy_targets="${4:-}" name target meta now installed_at
   local staged backup_container backup target_existed preflight_target_identity preflight_content_sha256 current_content_sha256 incoming_content_sha256 staged_content_sha256
   name="$(basename "$src")"
   target="${destination_root%/}/$name"
   meta="$target/.skill-meta.json"
   assert_within_destination "$target" "$destination_root"
   assert_regular_skill_root "$target"
-  install_action "$target" "$meta" "$name" "skill" "$name" "$ownership_target"
+  install_action "$target" "$meta" "$name" "skill" "$name" "$ownership_target" "$target/SKILL.md" "$src/SKILL.md" "" "" "$legacy_targets"
   target_existed=0
   backup=""
   backup_container=""
@@ -1327,23 +1627,44 @@ EOF
 }
 
 preflight_skill() {
-  local src="$1" destination_root="$2" ownership_target="$3" name target meta
+  local src="$1" destination_root="$2" ownership_target="$3" legacy_targets="${4:-}" name target meta
   name="$(basename "$src")"
   target="${destination_root%/}/$name"
   meta="$target/.skill-meta.json"
   assert_within_destination "$target" "$destination_root"
   assert_regular_skill_root "$target"
-  install_action "$target" "$meta" "$name" "skill" "$name" "$ownership_target"
+  install_action "$target" "$meta" "$name" "skill" "$name" "$ownership_target" "$target/SKILL.md" "$src/SKILL.md" "" "" "$legacy_targets"
 }
 
 install_agent_profile() {
-  local src="$1" runtime_name="$2" agent_id="$3" platform="$4" destination_root="$5" ownership_target="$6" suffix="$7" target meta now installed_at staged_agent staged_meta target_existed meta_existed
+  local src="$1" runtime_name="$2" agent_id="$3" platform="$4" destination_root="$5" ownership_target="$6" suffix="$7" legacy_targets="${8:-}"
+  local target meta legacy_meta ownership_meta now installed_at staged_agent staged_meta target_existed meta_existed
+  local legacy_meta_used=0 legacy_meta_identity="" legacy_meta_sha256=""
   target="${destination_root%/}/$runtime_name$suffix"
   meta="$target.craftroster.json"
+  legacy_meta="$target.autoverse.json"
+  ownership_meta="$meta"
   assert_within_destination "$target" "$destination_root"
   assert_regular_agent_leaf "$target" "Agent"
   assert_regular_agent_leaf "$meta" "Agent metadata"
-  install_action "$target" "$meta" "$agent_id" "agent" "$runtime_name" "$ownership_target" "$agent_id" "$platform"
+  assert_regular_agent_leaf "$legacy_meta" "legacy Agent metadata"
+  if [[ ! -f "$meta" && -f "$legacy_meta" ]]; then
+    ownership_meta="$legacy_meta"
+    legacy_meta_used=1
+  elif [[ -f "$meta" && -f "$legacy_meta" ]] && (
+    FORCE=0
+    install_action "$target" "$legacy_meta" "$agent_id" "agent" "$runtime_name" "$ownership_target" "" "" "$agent_id" "$platform" "$legacy_targets"
+  ) >/dev/null 2>&1; then
+    legacy_meta_used=1
+  fi
+  if [[ "$legacy_meta_used" -eq 1 ]]; then
+    if ! legacy_meta_identity="$(regular_file_identity "$legacy_meta")" || ! legacy_meta_sha256="$(regular_file_sha256 "$legacy_meta")"; then
+      log_error "Refusing to migrate Agent $agent_id because its legacy ownership sidecar could not be identified."
+      exit 1
+    fi
+  fi
+  install_action "$target" "$ownership_meta" "$agent_id" "agent" "$runtime_name" "$ownership_target" "" "" "$agent_id" "$platform" "$legacy_targets"
+  if [[ "$legacy_meta_used" -eq 1 && "$INSTALL_ACTION" != "force-replace" ]]; then INSTALL_ACTION="migrate-update"; fi
   target_existed=0
   meta_existed=0
   if [[ -f "$target" ]]; then target_existed=1; fi
@@ -1406,17 +1727,33 @@ EOF
       exit 1
     fi
   fi
+  if [[ "$legacy_meta_used" -eq 1 && "$INSTALL_ACTION" == "migrate-update" ]]; then
+    if [[ ! -f "$legacy_meta" || -L "$legacy_meta" ]] ||
+      [[ "$(regular_file_identity "$legacy_meta" 2>/dev/null || true)" != "$legacy_meta_identity" ]] ||
+      [[ "$(regular_file_sha256 "$legacy_meta" 2>/dev/null || true)" != "$legacy_meta_sha256" ]]; then
+      log_error "Agent $agent_id was installed, but its legacy ownership sidecar changed and was preserved for manual recovery: $legacy_meta"
+      exit 1
+    fi
+    if ! rm -f -- "$legacy_meta"; then
+      log_error "Agent $agent_id was installed, but its verified legacy ownership sidecar could not be removed: $legacy_meta"
+      exit 1
+    fi
+  fi
   log_success "$INSTALL_ACTION Agent $agent_id -> $target"
 }
 
 preflight_agent_profile() {
-  local src="$1" runtime_name="$2" agent_id="$3" platform="$4" destination_root="$5" ownership_target="$6" suffix="$7" target meta
+  local src="$1" runtime_name="$2" agent_id="$3" platform="$4" destination_root="$5" ownership_target="$6" suffix="$7" legacy_targets="${8:-}" target meta legacy_meta ownership_meta
   target="${destination_root%/}/$runtime_name$suffix"
   meta="$target.craftroster.json"
+  legacy_meta="$target.autoverse.json"
+  ownership_meta="$meta"
   assert_within_destination "$target" "$destination_root"
   assert_regular_agent_leaf "$target" "Agent"
   assert_regular_agent_leaf "$meta" "Agent metadata"
-  install_action "$target" "$meta" "$agent_id" "agent" "$runtime_name" "$ownership_target" "$agent_id" "$platform"
+  assert_regular_agent_leaf "$legacy_meta" "legacy Agent metadata"
+  if [[ ! -f "$meta" && -f "$legacy_meta" ]]; then ownership_meta="$legacy_meta"; fi
+  install_action "$target" "$ownership_meta" "$agent_id" "agent" "$runtime_name" "$ownership_target" "" "" "$agent_id" "$platform" "$legacy_targets"
 }
 
 has_codex_developer_instructions_conflict() {
@@ -1492,7 +1829,8 @@ has_codex_developer_instructions_conflict() {
 }
 
 plan_codex_auto_delegation() {
-  local guidance_file="$1" config_path start_count end_count end_line block_file remainder_file second_line closing_line literal_close_count bom
+  local guidance_file="$1" config_path start_count end_count legacy_start_count legacy_end_count end_line block_file remainder_file second_line closing_line literal_close_count bom
+  local managed_end_pattern managed_label is_legacy_migration=0
   config_path="${CODEX_HOME:-$HOME/.codex}/config.toml"
   AUTO_SIBLING_PATH=""
   if [[ -e "$config_path" || -L "$config_path" ]]; then
@@ -1531,17 +1869,40 @@ plan_codex_auto_delegation() {
   fi
   start_count="$(grep -c '^# CRAFTROSTER_AUTO_DELEGATION_START[[:space:]]*$' "$AUTO_ORIGINAL_FILE" || true)"
   end_count="$(grep -c '^# CRAFTROSTER_AUTO_DELEGATION_END[[:space:]]*$' "$AUTO_ORIGINAL_FILE" || true)"
+  legacy_start_count="$(grep -c '^# AUTOVERSE_AUTO_DELEGATION_START[[:space:]]*$' "$AUTO_ORIGINAL_FILE" || true)"
+  legacy_end_count="$(grep -c '^# AUTOVERSE_AUTO_DELEGATION_END[[:space:]]*$' "$AUTO_ORIGINAL_FILE" || true)"
   if [[ "$start_count" -ne "$end_count" || "$start_count" -gt 1 ]]; then
     log_error "Refusing to edit $config_path because its CraftRoster auto-delegation markers are incomplete or duplicated."
+    exit 1
+  fi
+  if [[ "$legacy_start_count" -ne "$legacy_end_count" || "$legacy_start_count" -gt 1 ]]; then
+    log_error "Refusing to edit $config_path because its legacy auto-delegation markers are incomplete or duplicated."
+    exit 1
+  fi
+  if [[ "$start_count" -eq 1 && "$legacy_start_count" -eq 1 ]]; then
+    log_error "Refusing to edit $config_path because it contains both CraftRoster and legacy auto-delegation blocks. Reconcile the duplicate guidance manually."
     exit 1
   fi
   if [[ "$start_count" -eq 1 && "$(head -n 1 "$AUTO_ORIGINAL_FILE" | tr -d '\r')" != "# CRAFTROSTER_AUTO_DELEGATION_START" ]]; then
     log_error "Refusing to edit $config_path because the CraftRoster marker is not a managed block at the start of the file."
     exit 1
   fi
+  if [[ "$legacy_start_count" -eq 1 && "$(head -n 1 "$AUTO_ORIGINAL_FILE" | tr -d '\r')" != "# AUTOVERSE_AUTO_DELEGATION_START" ]]; then
+    log_error "Refusing to edit $config_path because the legacy marker is not a managed block at the start of the file."
+    exit 1
+  fi
 
-  if [[ "$start_count" -eq 1 ]]; then
-    end_line="$(grep -n '^# CRAFTROSTER_AUTO_DELEGATION_END[[:space:]]*$' "$AUTO_ORIGINAL_FILE" | cut -d: -f1)"
+  if [[ "$legacy_start_count" -eq 1 ]]; then
+    is_legacy_migration=1
+    managed_end_pattern='^# AUTOVERSE_AUTO_DELEGATION_END[[:space:]]*$'
+    managed_label="legacy"
+  else
+    managed_end_pattern='^# CRAFTROSTER_AUTO_DELEGATION_END[[:space:]]*$'
+    managed_label="CraftRoster"
+  fi
+
+  if [[ "$start_count" -eq 1 || "$legacy_start_count" -eq 1 ]]; then
+    end_line="$(grep -n "$managed_end_pattern" "$AUTO_ORIGINAL_FILE" | cut -d: -f1)"
     second_line="$(sed -n '2p' "$AUTO_ORIGINAL_FILE" | tr -d '\r')"
     closing_line=""
     if [[ "$end_line" -gt 1 ]]; then closing_line="$(sed -n "$((end_line - 1))p" "$AUTO_ORIGINAL_FILE" | tr -d '\r')"; fi
@@ -1550,7 +1911,7 @@ plan_codex_auto_delegation() {
       literal_close_count="$(sed -n "3,$((end_line - 1))p" "$AUTO_ORIGINAL_FILE" | tr -d '\r' | grep -c "^'''[[:space:]]*$" || true)"
     fi
     if [[ "$end_line" -lt 4 || "$second_line" != "developer_instructions = '''" || "$closing_line" != "'''" || "$literal_close_count" -ne 1 ]]; then
-      log_error "Refusing to edit $config_path because its CraftRoster managed block has an unexpected structure."
+      log_error "Refusing to edit $config_path because its $managed_label managed block has an unexpected structure."
       exit 1
     fi
     remainder_file="$AUTO_PLAN_DIR/codex-remainder.toml"
@@ -1574,7 +1935,13 @@ plan_codex_auto_delegation() {
       cat "$AUTO_ORIGINAL_FILE"
     } > "$AUTO_NEW_TEXT"
   fi
-  if cmp -s "$AUTO_ORIGINAL_FILE" "$AUTO_NEW_TEXT"; then AUTO_ACTION="unchanged"; else AUTO_ACTION="update"; fi
+  if [[ "$is_legacy_migration" -eq 1 ]]; then
+    AUTO_ACTION="migrate-update"
+  elif cmp -s "$AUTO_ORIGINAL_FILE" "$AUTO_NEW_TEXT"; then
+    AUTO_ACTION="unchanged"
+  else
+    AUTO_ACTION="update"
+  fi
 }
 
 merge_opencode_config_with_python() {
@@ -2163,6 +2530,8 @@ else
   if [[ -z "$REPO_ROOT" ]]; then log_error "Could not find extracted repository root."; exit 1; fi
   SOURCE_KIND="github-archive"
 fi
+LEGACY_SKILL_DIGEST_MANIFEST="$REPO_ROOT/scripts/data/legacy-skill-content-sha256.tsv"
+LEGACY_SKILL_DIGEST_MANIFEST_VALIDATED=0
 
 if [[ "$TYPE" == "agent" ]]; then
   if [[ "$DRY_RUN" -eq 0 ]]; then
@@ -2175,11 +2544,13 @@ if [[ "$TYPE" == "agent" ]]; then
   AGENT_JOB_DESTINATIONS=()
   AGENT_JOB_OWNERSHIP_TARGETS=()
   AGENT_JOB_SUFFIXES=()
+  AGENT_JOB_LEGACY_TARGETS=()
   for ((profile_index = 0; profile_index < ${#AGENT_PLATFORMS[@]}; profile_index++)); do
     PLATFORM="${AGENT_PLATFORMS[$profile_index]}"
     SUFFIX="${AGENT_SUFFIXES[$profile_index]}"
     DESTINATION="${AGENT_DESTINATIONS[$profile_index]}"
     OWNERSHIP_TARGET="${AGENT_OWNERSHIP_TARGETS[$profile_index]}"
+    LEGACY_TARGETS="${AGENT_LEGACY_TARGETS[$profile_index]}"
     ADAPTER_ROOT="$REPO_ROOT/adapters/$PLATFORM"
     PROFILE_SOURCE_COUNT=0
     if [[ -n "$NAME" ]]; then
@@ -2192,6 +2563,7 @@ if [[ "$TYPE" == "agent" ]]; then
       AGENT_JOB_DESTINATIONS+=("$DESTINATION")
       AGENT_JOB_OWNERSHIP_TARGETS+=("$OWNERSHIP_TARGET")
       AGENT_JOB_SUFFIXES+=("$SUFFIX")
+      AGENT_JOB_LEGACY_TARGETS+=("$LEGACY_TARGETS")
       PROFILE_SOURCE_COUNT=1
     else
       for source in "$ADAPTER_ROOT"/*"$SUFFIX"; do
@@ -2204,6 +2576,7 @@ if [[ "$TYPE" == "agent" ]]; then
         AGENT_JOB_DESTINATIONS+=("$DESTINATION")
         AGENT_JOB_OWNERSHIP_TARGETS+=("$OWNERSHIP_TARGET")
         AGENT_JOB_SUFFIXES+=("$SUFFIX")
+        AGENT_JOB_LEGACY_TARGETS+=("$LEGACY_TARGETS")
         PROFILE_SOURCE_COUNT=$((PROFILE_SOURCE_COUNT + 1))
       done
     fi
@@ -2217,12 +2590,14 @@ if [[ "$TYPE" == "agent" ]]; then
       "${AGENT_JOB_PLATFORMS[$job_index]}" \
       "${AGENT_JOB_DESTINATIONS[$job_index]}" \
       "${AGENT_JOB_OWNERSHIP_TARGETS[$job_index]}" \
-      "${AGENT_JOB_SUFFIXES[$job_index]}"
+      "${AGENT_JOB_SUFFIXES[$job_index]}" \
+      "${AGENT_JOB_LEGACY_TARGETS[$job_index]}"
   done
 
   INSTALL_COMPANION_SKILL=0
   COMPANION_DESTINATIONS=()
   COMPANION_OWNERSHIP_TARGETS=()
+  COMPANION_LEGACY_TARGETS=()
   COMPANION_SOURCE=""
   if [[ -z "$NAME" || "$ENABLE_AUTO_DELEGATION" -eq 1 ]]; then
     INSTALL_COMPANION_SKILL=1
@@ -2230,10 +2605,11 @@ if [[ "$TYPE" == "agent" ]]; then
     if [[ ! -f "$COMPANION_SOURCE/SKILL.md" ]]; then log_error "Companion Skill not found in archive: subagent-architecture"; exit 1; fi
     configure_skill_profiles 0
     for ((profile_index = 0; profile_index < ${#SKILL_DESTINATIONS[@]}; profile_index++)); do
-      COMPANION_DESTINATION="${SKILL_DESTINATIONS[$profile_index]}"
+      COMPANION_DESTINATION="$(resolve_skill_profile_destination "${SKILL_DESTINATIONS[$profile_index]}" "subagent-architecture" "${SKILL_CODEX_LEGACY_CHECKS[$profile_index]}" "$COMPANION_SOURCE/SKILL.md")"
       COMPANION_DESTINATIONS+=("$COMPANION_DESTINATION")
       COMPANION_OWNERSHIP_TARGETS+=("${SKILL_OWNERSHIP_TARGETS[$profile_index]}")
-      preflight_skill "$COMPANION_SOURCE" "$COMPANION_DESTINATION" "${SKILL_OWNERSHIP_TARGETS[$profile_index]}"
+      COMPANION_LEGACY_TARGETS+=("${SKILL_LEGACY_TARGETS[$profile_index]}")
+      preflight_skill "$COMPANION_SOURCE" "$COMPANION_DESTINATION" "${SKILL_OWNERSHIP_TARGETS[$profile_index]}" "${SKILL_LEGACY_TARGETS[$profile_index]}"
       log_info "Companion Skill destination: $COMPANION_DESTINATION"
     done
   fi
@@ -2255,7 +2631,7 @@ if [[ "$TYPE" == "agent" ]]; then
 
   if [[ "$INSTALL_COMPANION_SKILL" -eq 1 ]]; then
     for ((profile_index = 0; profile_index < ${#COMPANION_DESTINATIONS[@]}; profile_index++)); do
-      install_skill "$COMPANION_SOURCE" "${COMPANION_DESTINATIONS[$profile_index]}" "${COMPANION_OWNERSHIP_TARGETS[$profile_index]}"
+      install_skill "$COMPANION_SOURCE" "${COMPANION_DESTINATIONS[$profile_index]}" "${COMPANION_OWNERSHIP_TARGETS[$profile_index]}" "${COMPANION_LEGACY_TARGETS[$profile_index]}"
     done
   fi
   log_info "$(if [[ "$DRY_RUN" -eq 1 ]]; then printf Planning; else printf Installing; fi) ${#AGENT_JOB_SOURCES[@]} Agent profile file(s) across ${#AGENT_PLATFORMS[@]} destination(s) for $TARGET"
@@ -2267,7 +2643,8 @@ if [[ "$TYPE" == "agent" ]]; then
       "${AGENT_JOB_PLATFORMS[$job_index]}" \
       "${AGENT_JOB_DESTINATIONS[$job_index]}" \
       "${AGENT_JOB_OWNERSHIP_TARGETS[$job_index]}" \
-      "${AGENT_JOB_SUFFIXES[$job_index]}"
+      "${AGENT_JOB_SUFFIXES[$job_index]}" \
+      "${AGENT_JOB_LEGACY_TARGETS[$job_index]}"
   done
   if [[ "$ENABLE_AUTO_DELEGATION" -eq 1 ]]; then apply_auto_delegation_plan; fi
 else
@@ -2287,16 +2664,16 @@ else
   for ((profile_index = 0; profile_index < ${#SKILL_DESTINATIONS[@]}; profile_index++)); do
     for src in "${SOURCES[@]}"; do
       SKILL_NAME="$(basename "$src")"
-      SKILL_DESTINATION="${SKILL_DESTINATIONS[$profile_index]}"
-      preflight_skill "$src" "$SKILL_DESTINATION" "${SKILL_OWNERSHIP_TARGETS[$profile_index]}"
+      SKILL_DESTINATION="$(resolve_skill_profile_destination "${SKILL_DESTINATIONS[$profile_index]}" "$SKILL_NAME" "${SKILL_CODEX_LEGACY_CHECKS[$profile_index]}" "$src/SKILL.md")"
+      preflight_skill "$src" "$SKILL_DESTINATION" "${SKILL_OWNERSHIP_TARGETS[$profile_index]}" "${SKILL_LEGACY_TARGETS[$profile_index]}"
     done
   done
   log_info "$(if [[ "$DRY_RUN" -eq 1 ]]; then printf Planning; else printf Installing; fi) ${#SOURCES[@]} Skill(s) across ${#SKILL_DESTINATIONS[@]} destination(s) for $TARGET"
   for ((profile_index = 0; profile_index < ${#SKILL_DESTINATIONS[@]}; profile_index++)); do
     for src in "${SOURCES[@]}"; do
       SKILL_NAME="$(basename "$src")"
-      SKILL_DESTINATION="${SKILL_DESTINATIONS[$profile_index]}"
-      install_skill "$src" "$SKILL_DESTINATION" "${SKILL_OWNERSHIP_TARGETS[$profile_index]}"
+      SKILL_DESTINATION="$(resolve_skill_profile_destination "${SKILL_DESTINATIONS[$profile_index]}" "$SKILL_NAME" "${SKILL_CODEX_LEGACY_CHECKS[$profile_index]}" "$src/SKILL.md")"
+      install_skill "$src" "$SKILL_DESTINATION" "${SKILL_OWNERSHIP_TARGETS[$profile_index]}" "${SKILL_LEGACY_TARGETS[$profile_index]}"
     done
   done
 fi

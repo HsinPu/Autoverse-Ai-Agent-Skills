@@ -195,7 +195,7 @@ Agent 可以引用一個或多個相關 Skills；Skill 也能由主 Agent 直接
 | `opencode` | `~/.config/opencode/skills/` | `~/.config/opencode/agents/` | `<role>.md` |
 | `project` | `<cwd>/.agents/skills/` + `<cwd>/.claude/skills/` | 五個平台各自的 project 目錄 | 依平台產生 |
 
-`vscode` 是 `copilot` 的等價 alias；兩者使用同一組路徑與 `copilot` ownership identity，所以可交替執行更新。OpenCode 會優先採用官方 [custom directory](https://opencode.ai/docs/config/#custom-directory) 環境變數 `OPENCODE_CONFIG_DIR`；未設定時依序使用 `XDG_CONFIG_HOME/opencode` 或 `~/.config/opencode`。全域 `codex` target 跟隨 Codex 內建 `$skill-installer`：config、Skills 與 Agents 都以 `CODEX_HOME` 為根目錄，新 Skill 安裝到 `$CODEX_HOME/skills`，未設定時即 `~/.codex/skills`。
+`vscode` 是 `copilot` 的等價 alias；兩者使用同一組路徑與 `copilot` ownership identity，所以可交替執行更新。OpenCode 會優先採用官方 [custom directory](https://opencode.ai/docs/config/#custom-directory) 環境變數 `OPENCODE_CONFIG_DIR`；未設定時依序使用 `XDG_CONFIG_HOME/opencode` 或 `~/.config/opencode`。全域 `codex` target 跟隨 Codex 內建 `$skill-installer`：config、Skills 與 Agents 都以 `CODEX_HOME` 為根目錄，新 Skill 安裝到 `$CODEX_HOME/skills`，未設定時即 `~/.codex/skills`。若同名的官方舊安裝只存在於 `~/.agents/skills`，過渡更新會在原位置完成，避免另外建立重複副本。
 
 ### `project` target 的實際位置
 
@@ -291,6 +291,7 @@ bash scripts/install.sh --target codex --type agent --source-dir . --enable-auto
 |---|---|
 | 目標不存在 | 正常安裝 |
 | metadata 與目前 repository、元件、名稱及 target 相符 | 安全更新 |
+| 可精確驗證的官方舊 metadata、digest、target 或 sidecar | 執行 `migrate-update`，改寫成目前格式 |
 | Agent 檔缺失，但 sidecar identity 完整吻合 | 執行 `repair` |
 | 同名內容沒有 metadata | 拒絕覆蓋 |
 | metadata 無效、來源不同或身份不符 | 拒絕覆蓋 |
@@ -306,9 +307,18 @@ Ownership metadata：
 - 全量 Skill 安裝也會先預檢整批目標；只要一個 ownership 衝突，就不會先更新前面的 Skill 再中途失敗。
 - 全量 Agent 安裝會先預檢整批目標；只要一個衝突，就會在開始寫入前停止。
 - 所有平台的全量 Agent 安裝都會先預檢並安裝 `subagent-architecture`；一般 target 的 `InstallDir`／`--dir` 只覆蓋 Agent 位置，companion Skill 仍使用該 runtime 的標準 Skill 位置。`project` 則以同一 project root 建立完整多目的地計畫。
+
+### 舊安裝的一次性過渡升級
+
+已安裝舊版本時，直接重新執行本 README 的 CraftRoster 安裝命令即可；不需要也不應繼續使用舊 CLI 或舊 repository 命令。安裝器只在使用預設 repository、且能精確證明既有內容屬於官方舊安裝時啟用過渡：舊 repository ID `HsinPu/Autoverse-Ai-Agent-Skills`、舊 Skill schema／target／digest namespace、Agent 的 `.autoverse.json` sidecar、Codex 的 `~/.agents/skills` 副路徑，以及舊的 auto-delegation marker 都在此範圍內。
+
+過渡時仍會核對元件名稱、Skill frontmatter 的來源與授權、Agent `id + adapter`，以及可用的內容 digest。早期沒有 `contentSha256` 的官方 Skill 只有在內容命中內建的歷史 digest allowlist 時才會自動升級；任意刪除 digest 或修改內容都不會因此繞過 drift 保護。內容被修改、metadata 模糊、同名副本超過一份或 sidecar 無法驗證時會停止，不會自動接管。成功結果會顯示 `migrate-update`，並只寫入目前的 `HsinPu/CraftRoster` ownership 與 `craftroster-skill-content-v1` digest；經驗證的舊 Agent sidecar 與舊 Codex marker 會移除，不保留雙份遷移狀態。
+
+明確傳入 `-Repo`／`--repo` 代表呼叫者自行選擇 repository，因此會停用舊 repository alias 的自動接手，即使值剛好是 `HsinPu/CraftRoster`。這可避免自訂來源在不知情下被當成品牌過渡。公開 npm command 仍只有 `craftroster`，不恢復舊命令名稱。
+
 啟用全域主動委派時：
 
-- Codex 只管理 `~/.codex/config.toml` 內的 `CRAFTROSTER_AUTO_DELEGATION` marker 區塊。若已有區塊外的 `developer_instructions` 就停止。
+- Codex 只管理 `~/.codex/config.toml` 內的 `CRAFTROSTER_AUTO_DELEGATION` marker 區塊；結構完整且位於檔案開頭的舊 marker 會一次性換成新區塊。若已有區塊外的 `developer_instructions` 就停止。
 - OpenCode 只對 strict UTF-8 JSON 的全域 `opencode.json` 合併一個 guidance 路徑；其根目錄依序採用 `OPENCODE_CONFIG_DIR`、`XDG_CONFIG_HOME/opencode` 或 `~/.config/opencode`。JSONC、無效型別、多份衝突 config 或重複 JSON key 會停止並要求手動合併。Bash 在既有自訂 config 上需要 Python 3 或 Node.js 做 strict validation；安裝器自己建立的最小 config 可在兩者皆無時安全重跑。
 - 修改既有全域 config 前會留下 `*.craftroster-backup-*` 備份；`Force` 不會繞過這些設定保護。
 - 安裝計畫完成後若全域 config 又被其他程式修改，安裝器會在 replace 前停止，避免用舊快照蓋掉新設定。
@@ -346,7 +356,7 @@ node craftroster-cli.js list --installed --type agent --target opencode
 node craftroster-cli.js list --installed --type agent --target project
 ```
 
-CLI 只列出同時具有 adapter 與有效 CraftRoster ownership sidecar 的檔案；ownership repository ID 必須是 `HsinPu/CraftRoster`，其他 repository 一律不列出。它用來確認安裝結果，不等同於檢查目前已開啟的工具是否重新載入。
+CLI 只列出同時具有 adapter 與有效 CraftRoster ownership sidecar 的檔案；ownership repository ID 必須是 `HsinPu/CraftRoster`，其他 repository 一律不列出。Codex Skill 查詢會同時檢查 canonical root 與受支援的過渡 root，但尚未完成遷移的舊 ownership 不會被列為 CraftRoster 安裝。CLI 用來確認安裝結果，不等同於檢查目前已開啟的工具是否重新載入。
 
 平台格式的官方連結集中在 [`project` target 的實際位置](#project-target-的實際位置)一節。
 
@@ -620,6 +630,12 @@ npm run update:skill-reference-lock
 # 執行全部本機 catalog、frontmatter、來源、eval、adapter、coverage 與 contract 驗證
 npm run validate
 
+# 單獨驗證無 digest 舊安裝使用的歷史內容 allowlist
+npm run validate:legacy-skill-digests
+
+# 使用完整 Git 歷史確認 allowlist 與所有官方舊版 Skill 快照一致
+node scripts/generate-legacy-skill-digests.js --check
+
 # 執行各項 mutation／regression tests
 npm run test:cli
 npm run test:catalog
@@ -648,7 +664,7 @@ npm run audit:skill-originality
 npm pack --dry-run
 ```
 
-`npm run validate`、本機 tests 與 installer smoke tests 都不需要網路。Catalog generator 使用共用的嚴格、zero-dependency YAML 子集 parser；未閉合引號、錯誤縮排、重複欄位或不支援語法會直接失敗，不會被當成普通字串。Skill eval validator 依 `skill-eval-coverage.json` 具名保護必要 eval packages，並檢查 prompt、expected output、files 與 assertions；新增 eval 可以自動納入統計，但刪除必要 package 會阻斷。Skill contract mutation matrix 會實際反轉權限、破壞 phase boundary、刪除 fallback 與改寫 machine receipt，確認 drift 一定被拒絕。
+`npm run validate`、本機 tests 與 installer smoke tests 都不需要網路。歷史 Skill digest 重建同樣不需要網路，但 checkout 必須包含完整 Git 歷史；CI 會以 `fetch-depth: 0` 執行重建比對。Catalog generator 使用共用的嚴格、zero-dependency YAML 子集 parser；未閉合引號、錯誤縮排、重複欄位或不支援語法會直接失敗，不會被當成普通字串。Skill eval validator 依 `skill-eval-coverage.json` 具名保護必要 eval packages，並檢查 prompt、expected output、files 與 assertions；新增 eval 可以自動納入統計，但刪除必要 package 會阻斷。Skill contract mutation matrix 會實際反轉權限、破壞 phase boundary、刪除 fallback 與改寫 machine receipt，確認 drift 一定被拒絕。
 
 兩個 installer smoke scripts 會建立獨立暫存 HOME，驗證 project／全域 targets、ownership、原子更新、digest drift、rollback、並行競爭與防覆寫，完成後自動清除，不會修改真正的使用者安裝。CI 在每個 PR 與 main push 以 Node.js 22／24 驗證本機 gates，Windows PowerShell 與 Ubuntu Bash 執行完整 installer smoke，macOS Bash 執行 quick smoke。需要 GitHub 的完整來源與原創性檢查也會在每個 PR、main push、手動觸發與每週排程以有界重試執行；GitHub Actions 權限維持 `contents: read`。
 

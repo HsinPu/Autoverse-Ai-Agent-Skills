@@ -27,6 +27,7 @@ npm run generate:skills
 
 ```bash
 npm run validate
+node scripts/generate-legacy-skill-digests.js --check
 npm run test:cli
 npm run test:catalog
 npm run test:skill-catalog
@@ -36,6 +37,8 @@ npm run test:skill-sources
 npm run test:skill-contracts
 npm run test:package
 ```
+
+歷史 Skill digest 重建需要完整 Git 歷史；若 checkout 是 shallow clone，先取得完整歷史再執行。CI 會以 `fetch-depth: 0` 執行這項 gate。manifest、generator、validator 與歷史 fixture 都受 CODEOWNERS 覆核。
 
 確認輸出至少符合目前 release baseline；若 catalog 有經核准的新增或刪除，先更新 baseline 與相關 manifest：
 

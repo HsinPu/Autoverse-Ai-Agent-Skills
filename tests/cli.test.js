@@ -321,8 +321,8 @@ const notFoundCases = [
 const tests = [...successCases, ...usageErrorCases, ...notFoundCases];
 let failures = 0;
 
-function writeInstalledSkill(codexHome, name, repo) {
-  const skillDir = path.join(codexHome, 'skills', name);
+function writeInstalledSkillRoot(skillRoot, name, repo) {
+  const skillDir = path.join(skillRoot, name);
   fs.mkdirSync(skillDir, { recursive: true });
   fs.writeFileSync(path.join(skillDir, 'SKILL.md'), `# ${name}\n`, 'utf8');
   fs.writeFileSync(path.join(skillDir, '.skill-meta.json'), JSON.stringify({
@@ -331,6 +331,10 @@ function writeInstalledSkill(codexHome, name, repo) {
     target: 'codex',
     name,
   }), 'utf8');
+}
+
+function writeInstalledSkill(codexHome, name, repo) {
+  writeInstalledSkillRoot(path.join(codexHome, 'skills'), name, repo);
 }
 
 function writeInstalledAgent(codexHome, name, repo) {
@@ -349,25 +353,36 @@ function writeInstalledAgent(codexHome, name, repo) {
 }
 
 function assertOwnershipFiltering() {
-  const codexHome = fs.mkdtempSync(path.join(os.tmpdir(), 'craftroster-cli-ownership-'));
+  const fixtureRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'craftroster-cli-ownership-'));
+  const codexHome = path.join(fixtureRoot, 'custom-codex-home');
+  const userHome = path.join(fixtureRoot, 'user-home');
   try {
     writeInstalledSkill(codexHome, 'canonical-skill', 'HsinPu/CraftRoster');
     writeInstalledSkill(codexHome, 'foreign-skill', 'SomeoneElse/CraftRoster');
     writeInstalledAgent(codexHome, 'canonical-agent', 'HsinPu/CraftRoster');
     writeInstalledAgent(codexHome, 'foreign-agent', 'SomeoneElse/CraftRoster');
+    writeInstalledSkillRoot(path.join(userHome, '.agents', 'skills'), 'transition-root-skill', 'HsinPu/CraftRoster');
+    writeInstalledSkillRoot(path.join(userHome, '.agents', 'skills'), 'unmigrated-legacy-skill', 'HsinPu/Autoverse-Ai-Agent-Skills');
 
-    const env = { ...process.env, CODEX_HOME: codexHome };
+    const env = {
+      ...process.env,
+      CODEX_HOME: codexHome,
+      HOME: userHome,
+      USERPROFILE: userHome,
+    };
     const skills = runCli(['list', '--installed', '--target', 'codex'], { env });
     assert.equal(skills.status, 0, combinedOutput(skills));
     assert.match(skills.stdout, /canonical-skill/);
+    assert.match(skills.stdout, /transition-root-skill/);
     assert.doesNotMatch(skills.stdout, /foreign-skill/);
+    assert.doesNotMatch(skills.stdout, /unmigrated-legacy-skill/);
 
     const agents = runCli(['list', '--installed', '--type', 'agent', '--target', 'codex'], { env });
     assert.equal(agents.status, 0, combinedOutput(agents));
     assert.match(agents.stdout, /canonical-agent/);
     assert.doesNotMatch(agents.stdout, /foreign-agent/);
   } finally {
-    fs.rmSync(codexHome, { recursive: true, force: true });
+    fs.rmSync(fixtureRoot, { recursive: true, force: true });
   }
 }
 
@@ -384,10 +399,10 @@ for (const testCase of tests) {
 
 try {
   assertOwnershipFiltering();
-  console.log('PASS accepts only CraftRoster ownership and rejects foreign repositories');
+  console.log('PASS scans the Codex transition root but accepts only CraftRoster ownership');
 } catch (error) {
   failures += 1;
-  console.error('FAIL accepts only CraftRoster ownership and rejects foreign repositories');
+  console.error('FAIL scans the Codex transition root but accepts only CraftRoster ownership');
   console.error(error.stack || error.message);
 }
 

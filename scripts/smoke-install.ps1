@@ -96,13 +96,17 @@ function Set-MetadataString {
 }
 
 function Get-CanonicalSingleFileSkillSha256 {
-    param([string]$Path, [string]$RelativePath)
+    param(
+        [string]$Path,
+        [string]$RelativePath,
+        [string]$DigestNamespace = 'craftroster-skill-content-v1'
+    )
     $utf8 = [System.Text.UTF8Encoding]::new($false)
     $fileBytes = [System.IO.File]::ReadAllBytes($Path)
     $stream = [System.IO.MemoryStream]::new()
     try {
         foreach ($bytes in @(
-            $utf8.GetBytes('craftroster-skill-content-v1'),
+            $utf8.GetBytes($DigestNamespace),
             [byte[]]@(0),
             $utf8.GetBytes($RelativePath.Replace('\', '/')),
             [byte[]]@(0),
@@ -189,6 +193,8 @@ function Assert-SafeSmokeRoot {
 $repoRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "..")).Path
 $script:Installer = Join-Path $repoRoot "scripts\install.ps1"
 $expectedRepo = "HsinPu/CraftRoster"
+$legacyRepo = "HsinPu/Autoverse-Ai-Agent-Skills"
+$legacySkillFixture = Join-Path $repoRoot "tests\fixtures\legacy-skills\terminal-ops"
 $expectedSkills = (Get-Content -Raw -LiteralPath (Join-Path $repoRoot "skills.json") | ConvertFrom-Json).skills.Count
 $expectedAgents = (Get-Content -Raw -LiteralPath (Join-Path $repoRoot "agents.json") | ConvertFrom-Json).agents.Count
 $smokeRoot = Assert-SafeSmokeRoot -Path (Join-Path ([System.IO.Path]::GetTempPath()) "craftroster-install-smoke-$([Guid]::NewGuid().ToString('N'))")
@@ -506,10 +512,38 @@ try {
     $missingDigestMetadata = $ownedSkillBaselineMeta | ConvertFrom-Json
     $missingDigestMetadata.PSObject.Properties.Remove("contentSha256")
     Write-Utf8NoBom -Path $ownedSkillMeta -Text (($missingDigestMetadata | ConvertTo-Json -Depth 5) + "`n")
-    Invoke-ExpectedFailure -Label "Skill missing content digest" -ExpectedMessage "ownership metadata does not match" -InstallerArgs @(
+    Invoke-ExpectedFailure -Label "Skill unverified missing content digest refusal" -ExpectedMessage "does not match a verified legacy Skill release" -InstallerArgs @(
         "-Target", "claude", "-Type", "skill", "-Name", "terminal-ops", "-SourceDir", $repoRoot, "-InstallDir", $skillOwnershipRoot
     )
-    Assert-Equal (Get-Sha256Hex -Path $ownedSkillFile) $ownedSkillBaselineHash "Skill missing content digest file hash"
+    Assert-Equal (Get-Sha256Hex -Path $ownedSkillFile) $ownedSkillBaselineHash "unverified missing digest preserved Skill content"
+
+    $legacyDigestMetadata = $ownedSkillBaselineMeta | ConvertFrom-Json
+    $legacyDigestMetadata.contentSha256 = Get-CanonicalSingleFileSkillSha256 `
+        -Path $ownedSkillFile `
+        -RelativePath "SKILL.md" `
+        -DigestNamespace 'autoverse-skill-content-v1'
+    Write-Utf8NoBom -Path $ownedSkillMeta -Text (($legacyDigestMetadata | ConvertTo-Json -Depth 5) + "`n")
+    $legacyDigestMigration = Invoke-InstallerStep -Label "Skill legacy digest namespace migration" -InstallerArgs @(
+        "-Target", "claude", "-Type", "skill", "-Name", "terminal-ops", "-SourceDir", $repoRoot, "-InstallDir", $skillOwnershipRoot
+    )
+    Assert-Equal @($legacyDigestMigration.Output | Where-Object { $_ -match '^OK\s+migrate-update Skill ' }).Count 1 "Skill legacy digest migration count"
+    Assert-OwnershipMetadata -Path $ownedSkillMeta -ExpectedRepo $expectedRepo -ExpectedComponent "skill" -ExpectedName "terminal-ops" -ExpectedTarget "claude" -Label "legacy digest migrated Skill"
+
+    Write-Utf8NoBom -Path $ownedSkillMeta -Text $ownedSkillBaselineMeta
+    Set-MetadataString -Path $ownedSkillMeta -Field "repo" -Value $legacyRepo
+    Set-MetadataString -Path $ownedSkillMeta -Field "contentSha256" -Value $legacyDigestMetadata.contentSha256
+    $skillRepositoryMigration = Invoke-InstallerStep -Label "Skill legacy repository migration" -InstallerArgs @(
+        "-Target", "claude", "-Type", "skill", "-Name", "terminal-ops", "-SourceDir", $repoRoot, "-InstallDir", $skillOwnershipRoot
+    )
+    Assert-Equal @($skillRepositoryMigration.Output | Where-Object { $_ -match '^OK\s+migrate-update Skill ' }).Count 1 "Skill legacy repository migration count"
+    Assert-OwnershipMetadata -Path $ownedSkillMeta -ExpectedRepo $expectedRepo -ExpectedComponent "skill" -ExpectedName "terminal-ops" -ExpectedTarget "claude" -Label "legacy repository migrated Skill"
+
+    Write-Utf8NoBom -Path $ownedSkillMeta -Text $ownedSkillBaselineMeta
+    Set-MetadataString -Path $ownedSkillMeta -Field "repo" -Value $legacyRepo
+    Invoke-ExpectedFailure -Label "Skill explicit repository disables transition" -ExpectedMessage "installed from '$legacyRepo'" -InstallerArgs @(
+        "-Target", "claude", "-Type", "skill", "-Name", "terminal-ops", "-Repo", $expectedRepo, "-SourceDir", $repoRoot, "-InstallDir", $skillOwnershipRoot
+    )
+    Assert-Equal (Get-Content -Raw -LiteralPath $ownedSkillMeta | ConvertFrom-Json).repo $legacyRepo "explicit repository refusal preserved legacy Skill owner"
 
     Write-Utf8NoBom -Path $ownedSkillMeta -Text "{`n"
     Invoke-ExpectedFailure -Label "Skill malformed ownership metadata" -ExpectedMessage "Existing CraftRoster metadata is invalid" -InstallerArgs @(
@@ -677,14 +711,77 @@ try {
     Assert-NoAtomicSkillArtifacts -DestinationRoot $skillOwnershipRoot -Label "atomic rollback"
     Write-Pass "Skill digest, local drift refusal, force reset, and atomic rollback"
 
+    $legacySkillRoot = Join-Path $smokeRoot "legacy-skill-migration"
+    New-Item -ItemType Directory -Force -Path $legacySkillRoot | Out-Null
+    Copy-Item -Recurse -LiteralPath $legacySkillFixture -Destination $legacySkillRoot
+    $legacySkillTarget = Join-Path $legacySkillRoot "terminal-ops"
+    $legacyTimestamp = "2026-01-01T00:00:00Z"
+    $legacySkillMetadata = @{
+        source = "local-checkout"
+        repo = $legacyRepo
+        branch = "main"
+        name = "terminal-ops"
+        agent = "vscode"
+        installedAt = $legacyTimestamp
+        updatedAt = $legacyTimestamp
+    } | ConvertTo-Json -Depth 3
+    Write-Utf8NoBom -Path (Join-Path $legacySkillTarget ".skill-meta.json") -Text ($legacySkillMetadata + "`n")
+    $legacySkillFile = Join-Path $legacySkillTarget "SKILL.md"
+    [System.IO.File]::AppendAllText($legacySkillFile, "`nLOCAL_DRIFT_SENTINEL`n", [System.Text.UTF8Encoding]::new($false))
+    Invoke-ExpectedFailure -Label "legacy Skill schema local drift refusal" -ExpectedMessage "does not match a verified legacy Skill release" -InstallerArgs @(
+        "-Target", "copilot", "-Type", "skill", "-Name", "terminal-ops", "-SourceDir", $repoRoot, "-InstallDir", $legacySkillRoot
+    )
+    Assert-Equal ([System.IO.File]::ReadAllText($legacySkillFile).Contains("LOCAL_DRIFT_SENTINEL")) $true "legacy Skill drift preservation"
+    Copy-Item -Force -LiteralPath (Join-Path $legacySkillFixture "SKILL.md") -Destination $legacySkillFile
+    $legacySkillMigration = Invoke-InstallerStep -Label "legacy Skill schema migration" -InstallerArgs @(
+        "-Target", "copilot", "-Type", "skill", "-Name", "terminal-ops", "-SourceDir", $repoRoot, "-InstallDir", $legacySkillRoot
+    )
+    Assert-Equal @($legacySkillMigration.Output | Where-Object { $_ -match '^OK\s+migrate-update Skill ' }).Count 1 "legacy Skill schema migration count"
+    Assert-OwnershipMetadata -Path (Join-Path $legacySkillTarget ".skill-meta.json") -ExpectedRepo $expectedRepo -ExpectedComponent "skill" -ExpectedName "terminal-ops" -ExpectedTarget "copilot" -Label "legacy schema migrated Skill"
+
     $agentOwnershipRoot = Join-Path $smokeRoot "agent-ownership-matrix"
     Invoke-InstallerStep -Label "Agent ownership matrix baseline install" -InstallerArgs @(
         "-Target", "claude", "-Type", "agent", "-Name", "code-reviewer", "-SourceDir", $repoRoot, "-InstallDir", $agentOwnershipRoot
     ) | Out-Null
     $ownedAgentFile = Join-Path $agentOwnershipRoot "code-reviewer.md"
     $ownedAgentMeta = $ownedAgentFile + ".craftroster.json"
+    $legacyAgentMeta = $ownedAgentFile + ".autoverse.json"
     $ownedAgentBaselineMeta = Get-Content -Raw -LiteralPath $ownedAgentMeta
     $ownedAgentBaselineHash = Get-Sha256Hex -Path $ownedAgentFile
+
+    Move-Item -LiteralPath $ownedAgentMeta -Destination $legacyAgentMeta
+    Set-MetadataString -Path $legacyAgentMeta -Field "repo" -Value $legacyRepo
+    $agentRepositoryMigration = Invoke-InstallerStep -Label "Agent legacy repository and sidecar migration" -InstallerArgs @(
+        "-Target", "claude", "-Type", "agent", "-Name", "code-reviewer", "-SourceDir", $repoRoot, "-InstallDir", $agentOwnershipRoot
+    )
+    Assert-Equal @($agentRepositoryMigration.Output | Where-Object { $_ -match '^OK\s+migrate-update Agent ' }).Count 1 "Agent legacy repository migration count"
+    Assert-OwnershipMetadata -Path $ownedAgentMeta -ExpectedRepo $expectedRepo -ExpectedComponent "agent" -ExpectedName "code-reviewer" -ExpectedTarget "claude" -ExpectedId "code-reviewer" -ExpectedAdapter "claude" -Label "legacy sidecar migrated Agent"
+    if (Test-Path -LiteralPath $legacyAgentMeta) { throw "Agent migration retained the legacy sidecar" }
+
+    Move-Item -LiteralPath $ownedAgentMeta -Destination $legacyAgentMeta
+    Set-MetadataString -Path $legacyAgentMeta -Field "repo" -Value $legacyRepo
+    Invoke-ExpectedFailure -Label "Agent explicit repository disables transition" -ExpectedMessage "installed from '$legacyRepo'" -InstallerArgs @(
+        "-Target", "claude", "-Type", "agent", "-Name", "code-reviewer", "-Repo", $expectedRepo, "-SourceDir", $repoRoot, "-InstallDir", $agentOwnershipRoot
+    )
+    if (Test-Path -LiteralPath $ownedAgentMeta) { throw "Agent explicit repository refusal created canonical metadata" }
+    Assert-Equal (Get-Content -Raw -LiteralPath $legacyAgentMeta | ConvertFrom-Json).repo $legacyRepo "Agent explicit repository refusal preserved legacy owner"
+    Invoke-InstallerStep -Label "Agent transition after explicit repository refusal" -InstallerArgs @(
+        "-Target", "claude", "-Type", "agent", "-Name", "code-reviewer", "-SourceDir", $repoRoot, "-InstallDir", $agentOwnershipRoot
+    ) | Out-Null
+
+    Move-Item -LiteralPath $ownedAgentMeta -Destination $legacyAgentMeta
+    $canonicalRepositorySidecarMigration = Invoke-InstallerStep -Label "Agent canonical repository legacy sidecar migration" -InstallerArgs @(
+        "-Target", "claude", "-Type", "agent", "-Name", "code-reviewer", "-SourceDir", $repoRoot, "-InstallDir", $agentOwnershipRoot
+    )
+    Assert-Equal @($canonicalRepositorySidecarMigration.Output | Where-Object { $_ -match '^OK\s+migrate-update Agent ' }).Count 1 "Agent canonical repository legacy sidecar migration count"
+    if (Test-Path -LiteralPath $legacyAgentMeta) { throw "Agent canonical repository migration retained the legacy sidecar" }
+
+    Copy-Item -LiteralPath $ownedAgentMeta -Destination $legacyAgentMeta
+    $duplicateSidecarRecovery = Invoke-InstallerStep -Label "Agent verified duplicate legacy sidecar cleanup" -InstallerArgs @(
+        "-Target", "claude", "-Type", "agent", "-Name", "code-reviewer", "-SourceDir", $repoRoot, "-InstallDir", $agentOwnershipRoot
+    )
+    Assert-Equal @($duplicateSidecarRecovery.Output | Where-Object { $_ -match '^OK\s+migrate-update Agent ' }).Count 1 "Agent duplicate sidecar cleanup count"
+    if (Test-Path -LiteralPath $legacyAgentMeta) { throw "Agent duplicate sidecar recovery retained the verified legacy sidecar" }
 
     foreach ($case in @(
         @{ Label = "repo mismatch"; Field = "repo"; Value = "foreign/repository"; Expected = "installed from" },
@@ -700,16 +797,51 @@ try {
         )
         Assert-Equal (Get-Sha256Hex -Path $ownedAgentFile) $ownedAgentBaselineHash ("Agent ownership " + $case.Label + " content hash")
     }
-    Write-Pass "ownership metadata mismatch, strict schema, malformed metadata, and force matrix"
+    Write-Pass "ownership metadata mismatch, strict schema, transition, malformed metadata, and force matrix"
 
-    Invoke-InstallerStep -Label "Codex auto-delegation install" -InstallerArgs @(
-        "-Target", "codex", "-Type", "agent", "-Name", "debugger", "-SourceDir", $repoRoot, "-EnableAutoDelegation"
+    $alternateCodexSkillRoot = Join-Path $env:USERPROFILE ".agents\skills"
+    Invoke-InstallerStep -Label "Codex alternate-root transition fixture install" -InstallerArgs @(
+        "-Target", "codex", "-Type", "skill", "-Name", "hotkey", "-SourceDir", $repoRoot, "-InstallDir", $alternateCodexSkillRoot
     ) | Out-Null
+    $alternateCodexSkill = Join-Path $alternateCodexSkillRoot "hotkey"
+    $alternateCodexMeta = Join-Path $alternateCodexSkill ".skill-meta.json"
+    $alternateLegacyDigest = Get-CanonicalSingleFileSkillSha256 `
+        -Path (Join-Path $alternateCodexSkill "SKILL.md") `
+        -RelativePath "SKILL.md" `
+        -DigestNamespace 'autoverse-skill-content-v1'
+    Set-MetadataString -Path $alternateCodexMeta -Field "repo" -Value $legacyRepo
+    Set-MetadataString -Path $alternateCodexMeta -Field "contentSha256" -Value $alternateLegacyDigest
+    $alternateCodexMigration = Invoke-InstallerStep -Label "Codex alternate-root Skill migration" -InstallerArgs @(
+        "-Target", "codex", "-Type", "skill", "-Name", "hotkey", "-SourceDir", $repoRoot
+    )
+    Assert-Equal @($alternateCodexMigration.Output | Where-Object { $_ -match '^OK\s+migrate-update Skill ' }).Count 1 "Codex alternate-root migration count"
+    Assert-OwnershipMetadata -Path $alternateCodexMeta -ExpectedRepo $expectedRepo -ExpectedComponent "skill" -ExpectedName "hotkey" -ExpectedTarget "codex" -Label "Codex alternate-root migrated Skill"
+    if (Test-Path -LiteralPath (Join-Path $env:CODEX_HOME "skills\hotkey")) {
+        throw "Codex alternate-root migration created a duplicate in the canonical root"
+    }
+
+    $configPath = Join-Path $env:CODEX_HOME "config.toml"
+    New-Item -ItemType Directory -Force -Path $env:CODEX_HOME | Out-Null
+    Write-Utf8NoBom -Path $configPath -Text @"
+# AUTOVERSE_AUTO_DELEGATION_START
+developer_instructions = '''
+Legacy managed guidance that must be replaced.
+'''
+# AUTOVERSE_AUTO_DELEGATION_END
+model = "test-model"
+"@
+    $codexMigration = Invoke-InstallerStep -Label "Codex legacy auto-delegation migration" -InstallerArgs @(
+        "-Target", "codex", "-Type", "agent", "-Name", "debugger", "-SourceDir", $repoRoot, "-EnableAutoDelegation"
+    )
+    Assert-Equal @($codexMigration.Output | Where-Object { $_ -match '^OK\s+migrate-update Codex auto-delegation ' }).Count 1 "Codex legacy auto-delegation migration count"
+    $migratedConfigText = Get-Content -Raw -LiteralPath $configPath
+    Assert-Equal ([regex]::Matches($migratedConfigText, '(?m)^# AUTOVERSE_AUTO_DELEGATION_START\s*$').Count) 0 "Codex legacy marker removal count"
+    Assert-Equal ([regex]::Matches($migratedConfigText, '(?m)^# CRAFTROSTER_AUTO_DELEGATION_START\s*$').Count) 1 "Codex migrated marker count"
+    if ($migratedConfigText -cnotmatch 'model = "test-model"') { throw "Codex auto-delegation migration did not preserve the unmanaged config tail" }
     $codexUpdate = Invoke-InstallerStep -Label "Codex auto-delegation update" -InstallerArgs @(
         "-Target", "codex", "-Type", "agent", "-Name", "debugger", "-SourceDir", $repoRoot, "-EnableAutoDelegation"
     )
     Assert-Equal @($codexUpdate.Output | Where-Object { $_ -match '^OK\s+update Agent ' }).Count 1 "Codex Agent update count"
-    $configPath = Join-Path $env:CODEX_HOME "config.toml"
     $configText = Get-Content -Raw -LiteralPath $configPath
     Assert-Equal ([regex]::Matches($configText, '(?m)^# CRAFTROSTER_AUTO_DELEGATION_START\s*$').Count) 1 "Codex auto-delegation block count"
     if (-not (Test-Path -LiteralPath (Join-Path $env:CODEX_HOME "agents\debugger.toml") -PathType Leaf)) {
