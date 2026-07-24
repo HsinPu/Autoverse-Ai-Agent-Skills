@@ -1,7 +1,7 @@
 {
   "version": "2.0.0",
   "updated": "2026-07-15T00:00:00Z",
-  "total": 217,
+  "total": 220,
   "categories": [
     {
       "id": "workflow-planning",
@@ -1455,6 +1455,33 @@
         "overflow",
         "ui"
       ]
+    },
+    {
+      "name": "ios-architecture",
+      "description": "iOS and Swift application architecture workflow for selecting, designing, reviewing, or incrementally migrating SwiftUI, UIKit, or mixed codebases. Use when deciding between MVVM, MVI, TCA, Clean Architecture, VIPER, MVP, Coordinator, or reactive patterns; defining feature and module boundaries, dependency injection, navigation ownership, state and effect flow, persistence boundaries, concurrency rules, or architecture-focused tests; or diagnosing architectural drift in an existing Xcode project.",
+      "category": "mobile-desktop",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "ios",
+        "swift",
+        "architecture",
+        "swiftui",
+        "uikit",
+        "mvvm",
+        "mvi",
+        "tca",
+        "clean-architecture",
+        "coordinator",
+        "dependency-injection",
+        "concurrency"
+      ],
+      "reference": {
+        "source": "efremidze/swift-architecture-skill",
+        "license": "MIT",
+        "revision": "4b9700786471acdda88fbe24adec69a1a17ceba4"
+      }
     },
     {
       "name": "java-architecture",
@@ -3073,6 +3100,62 @@
       ]
     },
     {
+      "name": "swift-concurrency",
+      "description": "Swift concurrency implementation, diagnosis, review, and migration workflow for async/await, structured tasks, actors, global actors, Sendable, cancellation, AsyncSequence, isolation diagnostics, data races, and Swift 6 strict-concurrency adoption. Use when Swift or Xcode reports actor-isolation, sending, or Sendable errors; when converting callbacks, queues, delegates, or reactive streams; when fixing task lifetime, cancellation, reentrancy, or flaky async behavior; or when reviewing concurrency correctness and performance. Use swiftui-development for primarily SwiftUI state and view-lifecycle work, and ios-architecture for app or module boundaries.",
+      "category": "mobile-desktop",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "swift",
+        "ios",
+        "concurrency",
+        "async-await",
+        "structured-concurrency",
+        "actors",
+        "main-actor",
+        "sendable",
+        "task-cancellation",
+        "async-sequence",
+        "swift-6",
+        "xcode",
+        "data-races",
+        "migration"
+      ],
+      "reference": {
+        "source": "AvdLee/Swift-Concurrency-Agent-Skill",
+        "license": "MIT",
+        "revision": "0d472de78225d2875283c35eaca1c060c493bdb3"
+      }
+    },
+    {
+      "name": "swiftui-development",
+      "description": "SwiftUI implementation and review workflow for native iOS interfaces, covering Observation and property-wrapper ownership, unidirectional data flow, view composition and identity, NavigationStack and presentation state, structured concurrency and lifecycle cancellation, accessibility, localization, previews, testing, API availability, and rendering performance. Use when building, debugging, reviewing, or refactoring SwiftUI views and features; use ios-architecture when the primary decision is app or module architecture.",
+      "category": "mobile-desktop",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "ios",
+        "swift",
+        "swiftui",
+        "observation",
+        "state-management",
+        "navigation",
+        "structured-concurrency",
+        "accessibility",
+        "localization",
+        "performance",
+        "testing",
+        "xcode"
+      ],
+      "reference": {
+        "source": "AvdLee/SwiftUI-Agent-Skill",
+        "license": "MIT",
+        "revision": "f06d1437a3fbec7df6cdce93f77004e5409b31ee"
+      }
+    },
+    {
       "name": "systematic-debugging",
       "description": "Evidence-first debugging workflow for reproducing failures, tracing root causes, testing competing hypotheses, and defining the smallest justified fix before editing. Use when a test, build, runtime behavior, integration, or intermittent failure has an unknown or disputed cause; do not use for straightforward implementation with an already-known owner and cause.",
       "category": "testing-quality",
@@ -3801,6 +3884,33 @@
         {
           "name": "visual-regression-testing",
           "when": "The result needs reproducible screenshots, approved baselines, measurable fidelity, or a CI-grade visual verdict."
+        }
+      ]
+    },
+    {
+      "id": "ios-native-development",
+      "title": "Native iOS Architecture and Delivery",
+      "decision": "Choose by concern: app and module boundaries, SwiftUI implementation, concurrency and isolation, device behavior, or release readiness.",
+      "skills": [
+        {
+          "name": "ios-architecture",
+          "when": "The task is selecting or reviewing Swift app architecture, feature and module boundaries, dependency direction, state and effect ownership, navigation ownership, or an incremental migration."
+        },
+        {
+          "name": "swiftui-development",
+          "when": "The task is implementing or reviewing SwiftUI state, views, identity, navigation, lifecycle-safe concurrency, accessibility, compatibility, or rendering performance."
+        },
+        {
+          "name": "swift-concurrency",
+          "when": "The task is diagnosing actor-isolation or Sendable diagnostics, designing task lifetime or cancellation, adopting async/await, actors, or AsyncSequence, or migrating targets to Swift 6 strict concurrency."
+        },
+        {
+          "name": "mobile-app-testing",
+          "when": "The task is proving behavior across devices, simulators, lifecycle events, permissions, offline states, deep links, push notifications, purchases, or mobile automation."
+        },
+        {
+          "name": "app-store-release",
+          "when": "The implementation is ready for signing, archive validation, privacy declarations, TestFlight, App Store metadata, review, or staged release."
         }
       ]
     },

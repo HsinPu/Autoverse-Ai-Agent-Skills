@@ -169,6 +169,73 @@
       "skills": {
         "visual-regression-testing": [{ "path": "skill/SKILL.md", "blob": "57bd7d735829f7038854a6f2b823c9de01047eba" }]
       }
+    },
+    {
+      "repo": "efremidze/swift-architecture-skill",
+      "commit": "4b9700786471acdda88fbe24adec69a1a17ceba4",
+      "tree": "ba7120981ab7f4390b5c21d19455995665758f3d",
+      "license": "MIT",
+      "licenseEvidence": { "kind": "license-file", "path": "LICENSE", "blob": "c4d10a911286a883a373f10ee5e9a4216367b0aa" },
+      "skills": {
+        "ios-architecture": [
+          { "path": "swift-architecture-skill/SKILL.md", "blob": "d65b42f65932020eaeac87c150abc885392238ae" },
+          { "path": "swift-architecture-skill/references/_index.md", "blob": "020a259e5e5df6171ae01710b59a4bbd09f1bc5c" },
+          { "path": "swift-architecture-skill/references/clean-architecture.md", "blob": "90c40bbc6add891fed30cec7a13452aa2830eb00" },
+          { "path": "swift-architecture-skill/references/coordinator.md", "blob": "78f34ea5d81723ceba2e0bb190ec6a4bd5068ed2" },
+          { "path": "swift-architecture-skill/references/mvi.md", "blob": "85fbb0e67ce7fca4c6af6e00acd8efd4f963c415" },
+          { "path": "swift-architecture-skill/references/mvp.md", "blob": "9410650478ade080da7bd36e5b36a2b40c70c02a" },
+          { "path": "swift-architecture-skill/references/mvvm.md", "blob": "011e5bf193f3aa9fa19479e78e80ab34c3413804" },
+          { "path": "swift-architecture-skill/references/reactive.md", "blob": "8284018424793b862c33df5240ab9476e2451afa" },
+          { "path": "swift-architecture-skill/references/selection-guide.md", "blob": "842558aa0a001c353d4f4d1e859ae4a5fc07cd3f" },
+          { "path": "swift-architecture-skill/references/tca.md", "blob": "67f9646ab999437adef37609fd19d8d135877c9f" },
+          { "path": "swift-architecture-skill/references/viper.md", "blob": "95ca94a08fd1e725e34ea96eeff4cfad01234e4d" }
+        ]
+      }
+    },
+    {
+      "repo": "AvdLee/SwiftUI-Agent-Skill",
+      "commit": "f06d1437a3fbec7df6cdce93f77004e5409b31ee",
+      "tree": "0e522f1b1361fb656f3047adafc0049714497768",
+      "license": "MIT",
+      "licenseEvidence": { "kind": "license-file", "path": "LICENSE", "blob": "cbf908dde987497fbba144909493e3a3e96f890b" },
+      "skills": {
+        "swiftui-development": [
+          { "path": "swiftui-expert-skill/SKILL.md", "blob": "52743c7c932977fa3a6bb94c54f866669caec1d7" },
+          { "path": "swiftui-expert-skill/references/accessibility-patterns.md", "blob": "6f0ea0c1275696c5fbddccbf1d7a07b13ee03dbf" },
+          { "path": "swiftui-expert-skill/references/latest-apis.md", "blob": "9feec03d4cccce8ea4bf38c8915a5c7145aa5de3" },
+          { "path": "swiftui-expert-skill/references/performance-patterns.md", "blob": "8a283c7fe87bf319c80a2723212173b5491abd0e" },
+          { "path": "swiftui-expert-skill/references/sheet-navigation-patterns.md", "blob": "d06b38782f587146718f14081284545b5ce6498e" },
+          { "path": "swiftui-expert-skill/references/state-management.md", "blob": "cd1de367b46f561c7e24343c3e90aa9a51870bf5" },
+          { "path": "swiftui-expert-skill/references/view-structure.md", "blob": "e3fe2cbf5c3a40802df03a068a39b233b889b449" }
+        ]
+      }
+    },
+    {
+      "repo": "AvdLee/Swift-Concurrency-Agent-Skill",
+      "commit": "0d472de78225d2875283c35eaca1c060c493bdb3",
+      "tree": "85ddc35a108abf030a0bf14241d7fcecf77e3058",
+      "license": "MIT",
+      "licenseEvidence": { "kind": "license-file", "path": "LICENSE", "blob": "cbf908dde987497fbba144909493e3a3e96f890b" },
+      "skills": {
+        "swift-concurrency": [
+          { "path": "swift-concurrency/SKILL.md", "blob": "f10d8e651b939d57f6bfdf58792d46787f95cae9" },
+          { "path": "swift-concurrency/references/_index.md", "blob": "e37c8dbb378d311216b6cc292b016b59570e539a" },
+          { "path": "swift-concurrency/references/actors.md", "blob": "0efaa4c3723c9ad56cef6c679dd6b406194e394d" },
+          { "path": "swift-concurrency/references/async-algorithms.md", "blob": "0dd545af772946da2679a5b663c336606ace3a64" },
+          { "path": "swift-concurrency/references/async-await-basics.md", "blob": "cd9c928286048e15804fc5e32e5db52f328f3249" },
+          { "path": "swift-concurrency/references/async-sequences.md", "blob": "24fdfdae26f14e670b6778fb9ca4a834fe521324" },
+          { "path": "swift-concurrency/references/core-data.md", "blob": "72840c6d9c53e1c66d916bf7208853ab1517e0b3" },
+          { "path": "swift-concurrency/references/glossary.md", "blob": "f38ed0d2d03b6a23d7d494b3ea15d808bddaaf2c" },
+          { "path": "swift-concurrency/references/linting.md", "blob": "e0129b2c1a817ff3f685e529a7c56b29912b74f9" },
+          { "path": "swift-concurrency/references/memory-management.md", "blob": "b33b99cd5390b6b5c157873e3f446de7143fb97d" },
+          { "path": "swift-concurrency/references/migration.md", "blob": "2416573cab9cfcfe49807a069f7435d1aaff5cc1" },
+          { "path": "swift-concurrency/references/performance.md", "blob": "76996336b8a2b4cc29e058a27e975766c409b85f" },
+          { "path": "swift-concurrency/references/sendable.md", "blob": "5a4414fcbf124ea043cd7f798029fe95ba6e9259" },
+          { "path": "swift-concurrency/references/tasks.md", "blob": "961d6182e02049029f535dc01bac7878b8d50510" },
+          { "path": "swift-concurrency/references/testing.md", "blob": "65d4ffa70d4fe59bf36699be2bbb7bfe7c72e92f" },
+          { "path": "swift-concurrency/references/threading.md", "blob": "06c520ff3a50575008c4364afa1bfb47c31539ed" }
+        ]
+      }
     }
   ]
 }

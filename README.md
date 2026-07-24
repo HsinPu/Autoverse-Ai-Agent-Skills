@@ -2,7 +2,7 @@
 
 [![Validate](https://github.com/HsinPu/CraftRoster/actions/workflows/validate.yml/badge.svg)](https://github.com/HsinPu/CraftRoster/actions/workflows/validate.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
-![Skills](https://img.shields.io/badge/Skills-217-7c3aed)
+![Skills](https://img.shields.io/badge/Skills-220-7c3aed)
 ![Agents](https://img.shields.io/badge/Agents-237-2563eb)
 ![Node.js](https://img.shields.io/badge/Node.js-%3E%3D22-339933?logo=nodedotjs&logoColor=white)
 
@@ -51,7 +51,7 @@ Linux／macOS：
 curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh | bash -s -- --target codex --type skill && curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh | bash -s -- --target codex --type agent --enable-auto-delegation
 ```
 
-這組命令會安裝全部 217 個 Skills、237 個 Agents，並啟用不依賴專案 `AGENTS.md` 的全域主動委派。
+這組命令會安裝全部 220 個 Skills、237 個 Agents，並啟用不依賴專案 `AGENTS.md` 的全域主動委派。
 
 ### 只安裝全部 Skills
 
@@ -148,7 +148,7 @@ curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/ins
 
 | 類型 | 數量 | 用途 | Canonical source |
 |---|---:|---|---|
-| Skills | **217 Skills**／15 類 | 可重複使用的工作流程、規範、工具指引與領域知識 | `skills/<name>/SKILL.md` |
+| Skills | **220 Skills**／15 類 | 可重複使用的工作流程、規範、工具指引與領域知識 | `skills/<name>/SKILL.md` |
 | Agents | 237／31 類 | 可委派的專業角色，包含任務、限制、權限與輸出契約 | `agents/<role>.md` |
 | Codex adapters | 237 | Codex custom Agent 的 TOML 設定 | `adapters/codex/<role>.toml` |
 | Claude adapters | 237 | Claude Code subagent 的 Markdown 設定 | `adapters/claude/<role>.md` |
@@ -500,7 +500,7 @@ Catalog 來源分別是 [skills.json](skills.json) 與 [agents.json](agents.json
 
 ## Skills
 
-217 個 Skills 分成 15 類。每個 package 以 `SKILL.md` 為入口，相關 references、scripts、assets 與 evals 保留在同一資料夾中。
+220 個 Skills 分成 15 類。每個 package 以 `SKILL.md` 為入口，相關 references、scripts、assets 與 evals 保留在同一資料夾中。
 
 <!-- SKILL_SUMMARY_START -->
 | Category | Count | 說明 |
@@ -510,7 +510,7 @@ Catalog 來源分別是 [skills.json](skills.json) 與 [agents.json](agents.json
 | `frontend-design` | 33 | Frontend、視覺方向、design system、互動、responsive 與 design-to-code |
 | `backend-data` | 26 | 後端服務、API、資料庫、持久層、資料工程與 migration |
 | `ai-llm` | 4 | LLM 應用、OpenAI API、RAG、eval 與 AI delivery |
-| `mobile-desktop` | 4 | 行動、跨平台、桌面應用與 app store release |
+| `mobile-desktop` | 7 | 行動、跨平台、桌面應用與 app store release |
 | `testing-quality` | 26 | 測試策略、review、debug、無障礙、相容性、回歸與完成證據 |
 | `security-governance` | 7 | 安全分析、hardening、scan、threat modeling、政策與審批 |
 | `cloud-devops` | 14 | 部署、CI、cloud、infrastructure、containers、observability 與 incident |
@@ -687,17 +687,18 @@ npm pack --dry-run
 ## 來源、改寫與授權政策
 
 - 所有 Agents 與 Skills 的正式 `source` 都是 `HsinPu/CraftRoster`，作者為 HsinPu；安裝器與 CLI 的 ownership repository ID 也必須是 `HsinPu/CraftRoster`。
-- 外部專案只作為研究、coverage 與設計參考；Agents 使用 `reference-repo`、`reference-paths`、`reference-tree`，Skills 使用 `reference-source`、`reference-license` 與必要的 `reference-revision`。目前 33 個 referenced Skills 分布於 12 個 repositories，全部由 [`skill-reference-sources.json`](scripts/data/skill-reference-sources.json) 固定 commit、tree、逐 Skill reference path/blob 與 license evidence；[`skill-reference-lock.json`](scripts/data/skill-reference-lock.json) 另外鎖定完整 provenance evidence 的 canonical digest 與數量。[CODEOWNERS](.github/CODEOWNERS) 會把 manifest、lock、verifier 與 originality audit 指派給 HsinPu，發布政策要求取得 owner 明確覆核，避免單獨縮小或替換比對範圍。這些欄位不取代本專案的正式來源。
+- 外部專案只作為研究、coverage 與設計參考；Agents 使用 `reference-repo`、`reference-paths`、`reference-tree`，Skills 使用 `reference-source`、`reference-license` 與必要的 `reference-revision`。目前 36 個 referenced Skills 分布於 15 個 repositories，全部由 [`skill-reference-sources.json`](scripts/data/skill-reference-sources.json) 固定 commit、tree、逐 Skill reference path/blob 與 license evidence；[`skill-reference-lock.json`](scripts/data/skill-reference-lock.json) 另外鎖定完整 provenance evidence 的 canonical digest 與數量。[CODEOWNERS](.github/CODEOWNERS) 會把 manifest、lock、verifier 與 originality audit 指派給 HsinPu，發布政策要求取得 owner 明確覆核，避免單獨縮小或替換比對範圍。這些欄位不取代本專案的正式來源。
 - Matt Pocock 相關概念的 pinned revision、逐項 upgrade／add／skip 決策、改名策略與原創改寫邊界記錄在 [`matt-pocock-skill-adaptations.md`](docs/matt-pocock-skill-adaptations.md)。除保留業界通用能力名稱 `domain-modeling` 外，這批沒有沿用上游命令式或品牌化 Skill 名稱、slash commands、固定檔名、模板或 Claude 專用 metadata。
 - 視覺設計相關 Skills 以獨立 metadata 保存主要參考來源：`taste-skill`／`image-to-code` 對應 [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill)，`figma-to-code` 對應 [figma/mcp-server-guide](https://github.com/figma/mcp-server-guide)，`design-intelligence-search` 對應 [ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill)，`design-system` 對應 [DTCG](https://github.com/design-tokens/community-group)，`visual-regression-testing` 對應 [AgentVision](https://github.com/amitpatole/agent-vision)。其他比較來源包含 gstack、Impeccable、Argos、design-extract、Style Dictionary、Vercel Web Interface Guidelines、Addy Osmani Agent Skills、screenshot-to-code、Design2Code、UI2Code_N、Google Stitch Skills、canvas-to-code 與 Anthropic frontend-design。實際採用範圍、授權狀態、未移植項目與原創改寫邊界記錄在 [`visual-design-skill-sources.md`](docs/visual-design-skill-sources.md)，所有 canonical Skill 的正式 `source` 仍為 `HsinPu/CraftRoster`。
+- 原生 iOS 相關 Skills 也保留獨立 provenance：`ios-architecture` 參考 [efremidze/swift-architecture-skill](https://github.com/efremidze/swift-architecture-skill)，`swiftui-development` 參考 [AvdLee/SwiftUI-Agent-Skill](https://github.com/AvdLee/SwiftUI-Agent-Skill)，`swift-concurrency` 參考 [AvdLee/Swift-Concurrency-Agent-Skill](https://github.com/AvdLee/Swift-Concurrency-Agent-Skill)；三者均依 CraftRoster 的 routing、驗證與漸進式揭露格式重新設計。
 - Agent reference repository 的 pinned commit、實際 Git tree、license identifier 與 license path 集中保存在 [agent-reference-sources.json](scripts/data/agent-reference-sources.json)。CI 會向 GitHub 重新驗證 commit → tree 關係、每個 reference path，以及授權檔內容。
 - Skill source remote gate 同樣會核對 commit → tree、每個宣告 path 的 Git blob，以及 license file、terms 或 frontmatter evidence 的固定內容是否吻合宣告授權；任意「同 repository 但與參考內容無關」的有效 commit 不會通過。
 - Agent catalog 參考 [wshobson/agents](https://github.com/wshobson/agents)、[msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents)、[VoltAgent/awesome-claude-code-subagents](https://github.com/VoltAgent/awesome-claude-code-subagents)、[github/awesome-copilot](https://github.com/github/awesome-copilot)、[affaan-m/ECC](https://github.com/affaan-m/ECC)、[supatest-ai/awesome-claude-code-sub-agents](https://github.com/supatest-ai/awesome-claude-code-sub-agents)、[devsforge/marketplace](https://github.com/devsforge/marketplace)、[ajhcs/healthcare-agents](https://github.com/ajhcs/healthcare-agents)、[aws-samples/sample-claude-code-agent-team](https://github.com/aws-samples/sample-claude-code-agent-team)、[DojoCodingLabs/remotion-superpowers](https://github.com/DojoCodingLabs/remotion-superpowers)、[HKUDS/ViMax](https://github.com/HKUDS/ViMax)、[paperclipai/companies](https://github.com/paperclipai/companies)、[HITsz-TMG/VideoClaw](https://github.com/HITsz-TMG/VideoClaw)、[davila7/claude-code-templates](https://github.com/davila7/claude-code-templates)、[Donchitos/Claude-Code-Game-Studios](https://github.com/Donchitos/Claude-Code-Game-Studios)、[NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent)、[jacobcwright/open-animate](https://github.com/jacobcwright/open-animate)、[browser-use/video-use](https://github.com/browser-use/video-use)、[taylordrew4u2/Role-Call](https://github.com/taylordrew4u2/Role-Call)、[ImaniGomez/Scripty](https://github.com/ImaniGomez/Scripty)、[travisoberlander/film-production-manager](https://github.com/travisoberlander/film-production-manager)、[FusinX/DIT_Offload](https://github.com/FusinX/DIT_Offload)、[HKUDS/VideoAgent](https://github.com/HKUDS/VideoAgent) 與 [video-db/Director](https://github.com/video-db/Director) 的角色定位、路徑與高層責任；prompt 內容均由本專案重新設計與加強，不是原文完整複製。
 - 影片工作流另研究 [calesthio/OpenMontage](https://github.com/calesthio/OpenMontage) 的階段化產物與人工核准概念、[showlab/MovieAgent](https://github.com/showlab/MovieAgent) 公開文件中的電影職責分工，以及 Hermes 的 renderer review／conditional role routing、Open Animate 的 motion-graphics lifecycle、video-use 的 overlay／timeline／media-QC 概念。OpenMontage 的 AGPL-3.0 reference metadata 已保留，但不作為 canonical Agent reference；MovieAgent 在採用的 revision 未找到 repository-wide license，因此兩者只使用公開的高層概念，沒有重用程式碼或 prompt 文字。詳細 revision 與改寫邊界記錄在 [`source-notes.md`](skills/video-production-workflow/references/source-notes.md)。
 - 同名或職責相近的上游定義會先依內容合併或排除。`wshobson/agents` 的 199 個 definitions、commit SHA、tree SHA、198 個 canonical mappings 與 1 個明確 exclusion 保存在 [wshobson-agent-inventory.json](scripts/data/wshobson-agent-inventory.json)；其他來源的 repository、path 與 tree SHA 則保存在各 canonical Agent frontmatter。
 - `npm run audit:agent-originality` 會針對 237 個 canonical Agent prompt 與 pinned upstream references 執行逐字重疊檢查；若出現至少 60 個字元的相同行，或 12 個單字的逐字片段，CI 會拒絕通過。這是保護改寫原創性的保守靜態閘門，不等同法律上的相似性判定。
-- `npm run audit:skill-originality` 會把 33 個有外部參考的 canonical Skill packages 逐一與 manifest 固定的 upstream paths 比較，使用相同的長行與 12-word overlap 門檻，並回報本地檔案、固定 commit、上游路徑與雙方證據；結構性 frontmatter 與 Markdown boilerplate 不列入內容重疊。
-- Repository 與全部 237 個 Agents 採 Apache-2.0。Skills 的個別授權以各自 `SKILL.md` 與 `skills.json` 為準；目前 216 個為 Apache-2.0，`karpathy-guidelines` 保留 MIT 授權與外部 reference metadata。
+- `npm run audit:skill-originality` 會把 36 個有外部參考的 canonical Skill packages 逐一與 manifest 固定的 upstream paths 比較，使用相同的長行與 12-word overlap 門檻，並回報本地檔案、固定 commit、上游路徑與雙方證據；結構性 frontmatter 與 Markdown boilerplate 不列入內容重疊。
+- Repository 與全部 237 個 Agents 採 Apache-2.0。Skills 的個別授權以各自 `SKILL.md` 與 `skills.json` 為準；目前 219 個為 Apache-2.0，`karpathy-guidelines` 保留 MIT 授權與外部 reference metadata。
 
 ## 疑難排解
 

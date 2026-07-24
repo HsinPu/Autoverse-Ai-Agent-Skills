@@ -980,6 +980,23 @@
         "ui"
       ]
     },
+    "ios-architecture": {
+      "category": "mobile-desktop",
+      "tags": [
+        "ios",
+        "swift",
+        "architecture",
+        "swiftui",
+        "uikit",
+        "mvvm",
+        "mvi",
+        "tca",
+        "clean-architecture",
+        "coordinator",
+        "dependency-injection",
+        "concurrency"
+      ]
+    },
     "java-architecture": {
       "category": "software-engineering",
       "tags": [
@@ -2056,6 +2073,42 @@
         "migrations"
       ]
     },
+    "swift-concurrency": {
+      "category": "mobile-desktop",
+      "tags": [
+        "swift",
+        "ios",
+        "concurrency",
+        "async-await",
+        "structured-concurrency",
+        "actors",
+        "main-actor",
+        "sendable",
+        "task-cancellation",
+        "async-sequence",
+        "swift-6",
+        "xcode",
+        "data-races",
+        "migration"
+      ]
+    },
+    "swiftui-development": {
+      "category": "mobile-desktop",
+      "tags": [
+        "ios",
+        "swift",
+        "swiftui",
+        "observation",
+        "state-management",
+        "navigation",
+        "structured-concurrency",
+        "accessibility",
+        "localization",
+        "performance",
+        "testing",
+        "xcode"
+      ]
+    },
     "systematic-debugging": {
       "category": "testing-quality",
       "tags": [
@@ -2550,6 +2603,33 @@
         {
           "name": "visual-regression-testing",
           "when": "The result needs reproducible screenshots, approved baselines, measurable fidelity, or a CI-grade visual verdict."
+        }
+      ]
+    },
+    {
+      "id": "ios-native-development",
+      "title": "Native iOS Architecture and Delivery",
+      "decision": "Choose by concern: app and module boundaries, SwiftUI implementation, concurrency and isolation, device behavior, or release readiness.",
+      "skills": [
+        {
+          "name": "ios-architecture",
+          "when": "The task is selecting or reviewing Swift app architecture, feature and module boundaries, dependency direction, state and effect ownership, navigation ownership, or an incremental migration."
+        },
+        {
+          "name": "swiftui-development",
+          "when": "The task is implementing or reviewing SwiftUI state, views, identity, navigation, lifecycle-safe concurrency, accessibility, compatibility, or rendering performance."
+        },
+        {
+          "name": "swift-concurrency",
+          "when": "The task is diagnosing actor-isolation or Sendable diagnostics, designing task lifetime or cancellation, adopting async/await, actors, or AsyncSequence, or migrating targets to Swift 6 strict concurrency."
+        },
+        {
+          "name": "mobile-app-testing",
+          "when": "The task is proving behavior across devices, simulators, lifecycle events, permissions, offline states, deep links, push notifications, purchases, or mobile automation."
+        },
+        {
+          "name": "app-store-release",
+          "when": "The implementation is ready for signing, archive validation, privacy declarations, TestFlight, App Store metadata, review, or staged release."
         }
       ]
     },
