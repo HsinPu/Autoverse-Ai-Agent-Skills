@@ -1,6 +1,6 @@
 ---
 name: threejs-development
-description: "End-to-end Three.js development routing and delivery workflow. Use when building, restructuring, reviewing, or debugging a complete Three.js experience that spans architecture, authoring, workers, frameworks, scene lifecycle, assets, rendering, interaction, simulation, performance, advanced graphics, accessibility, testing, or deployment."
+description: "End-to-end Three.js development routing and delivery workflow. Use when building, migrating, restructuring, reviewing, or debugging a complete Three.js experience that spans architecture, version upgrades, authoring, workers, frameworks, scene lifecycle, assets, geometry or CSG, rendering, interaction, rigid or deformable simulation, path tracing, capture, performance, accessibility, testing, or deployment."
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -25,11 +25,11 @@ Route a Three.js task to the smallest specialist set while preserving one cohere
 
 ## System Order
 
-1. Project, authoring, framework, worker, and scene ownership
+1. Project, version-migration, authoring, framework, worker, and scene ownership
 2. Renderer, camera, color, asset, and data contracts
-3. Geometry, materials, lighting, animation, input, and accessibility semantics
-4. Simulation, navigation, audio, environment, and advanced visual systems
-5. Post-processing and final-image treatment
+3. Geometry, CSG, materials, lighting, animation, input, and accessibility semantics
+4. Rigid and deformable simulation, navigation, audio, environment, and advanced visual systems
+5. Path tracing, post-processing, capture, and final-image treatment
 6. Testing, performance, security, deployment, and recovery
 
 ## Core Rules

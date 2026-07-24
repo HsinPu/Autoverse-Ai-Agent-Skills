@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-visual-validation",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Approve our new Three.js effect from one attractive screenshot with an unknown camera, seed, time, DPR, renderer, and exposure. Replace the baseline automatically because the image looks newer, skip no-post and diagnostic views, and ignore temporal, distance, browser, device, GPU, and memory checks.",
+      "expected_output": "A reproducible visual-validation contract that freezes all rendering inputs, preserves baseline authority, captures direct and diagnostic evidence, sweeps relevant scene and device dimensions, investigates differences, measures budgets, and issues a traceable verdict.",
+      "assertions": [
+        "Three.js and dependency versions, renderer, browser, GPU, viewport, DPR, camera, seed, time, quality, assets, exposure, and scene state are fixed.",
+        "Direct or no-post output plus relevant geometry, normals, UV, depth, mask, field, pass-only, overdraw, and timing diagnostics are captured.",
+        "Representative seeds, distances, angles, times, resize states, quality tiers, browsers, and devices are swept with stated tolerances.",
+        "Baseline changes require an identified reference, approved authority, investigated differences, and an explicit accept or reject action.",
+        "Temporal stability, reset behavior, CPU, GPU, draw calls, memory, loading, machine-readable metadata, privacy, licensing, verdict, and residual risk are reported."
+      ]
+    }
+  ]
+}

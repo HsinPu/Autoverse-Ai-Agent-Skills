@@ -108,6 +108,18 @@
         "Measurements and selections distinguish source values from display approximations and validate known reference cases.",
         "Semantic tables or details, keyboard operation, non-color cues, screen-reader checks, corrupt chunks, low memory, security, and rollback are covered."
       ]
+    },
+    {
+      "id": 10,
+      "prompt": "Modernize an old Three.js furniture configurator to the latest release, add an editor for Boolean cutouts, simulate flexible upholstery, render progressive path-traced product images, and export deterministic videos with labels and audio. Keep mobile raster interaction and existing saved designs working.",
+      "expected_output": "A dependency-ordered route through version migration, CSG modeling, deformable simulation, path tracing, capture and recording, plus the necessary architecture, authoring, rendering, image, performance, validation, accessibility, and compatibility owners.",
+      "assertions": [
+        "The response selects threejs-version-migration, threejs-csg-modeling, threejs-deformable-simulation, threejs-path-tracing, and threejs-capture-recording as distinct owners.",
+        "Saved-design migration, release slices, editor operands, solver state, raster interaction, path-tracing accumulation, and encoded artifacts have separate contracts.",
+        "The interactive raster renderer remains a tested fallback rather than being hidden inside path tracing or capture.",
+        "DOM labels, audio, deterministic time, color output, mobile budgets, unsupported materials, and deformable coupling are explicitly routed and validated.",
+        "The work proceeds through recoverable vertical slices with fixed baselines, asset and data compatibility, lifecycle cleanup, performance evidence, and rollback."
+      ]
     }
   ]
 }

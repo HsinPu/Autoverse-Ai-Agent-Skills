@@ -31,3 +31,8 @@ Build an editor around versioned domain commands and publishable assets instead 
 ## Evidence
 
 Return the document schema, command and history model, editor/runtime boundary, migration policy, import/export loss matrix, recovery behavior, and round-trip tests.
+
+## Handoff
+
+- Use `threejs-csg-modeling` when Boolean operands, operation stacks, topology repair, cut-face materials, or Boolean export become a distinct authoring subsystem.
+- Keep canonical operands and commands in the editor document; keep evaluated render geometry derived.

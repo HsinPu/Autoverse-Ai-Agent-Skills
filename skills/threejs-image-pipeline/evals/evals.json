@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-image-pipeline",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Combine atmosphere, shadows, GTAO, bloom, motion blur, exposure, LUT grading, and TAA by letting each system render its own depth and normals, use mixed color spaces and depth conventions, share history without reset, tone-map twice, and allocate new render targets after every resize.",
+      "expected_output": "A single owned frame graph that defines scene signals, formats, spaces, histories, pass ordering, output conversion, resize and disposal, shares only validated inputs, provides bypass diagnostics, and proves temporal, visual, GPU, and memory behavior.",
+      "assertions": [
+        "All required depth, normal, albedo, motion, shadow, atmosphere, exposure, transparency, history, and final-output signals are inventoried with meaning and format.",
+        "One frame graph assigns owners for shared signals, tone mapping, output conversion, resize, history reset, and disposal.",
+        "Signal spaces, ranges, alpha, depth conventions, resolution, and temporal validity are compatible before reuse.",
+        "Camera cuts, teleports, resize, DPR, backend fallback, quality changes, and surface transitions reset only invalid histories.",
+        "Direct and no-post baselines, pass bypasses, diagnostic outputs, per-pass timings, target memory, transparency, capture, XR where applicable, and production builds are verified."
+      ]
+    }
+  ]
+}

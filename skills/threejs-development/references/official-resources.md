@@ -16,6 +16,11 @@ Use documentation matching the installed Three.js revision. Examples and addon A
 - Post-processing: https://threejs.org/manual/en/post-processing.html
 - WebXR basics: https://threejs.org/manual/en/webxr-basics.html
 - Migration guide: https://github.com/mrdoob/three.js/wiki/Migration-Guide
+- Path-tracing example: https://threejs.org/examples/webgl_renderer_pathtracer.html
+- CSG example: https://threejs.org/examples/webgl_geometry_csg.html
+- Ammo cloth example: https://threejs.org/examples/physics_ammo_cloth
+- WebGPU volume-fire example: https://threejs.org/examples/webgpu_volume_fire.html
+- WebGPU compute-water example: https://threejs.org/examples/webgpu_compute_water.html
 - WebGLRenderer API: https://threejs.org/docs/pages/WebGLRenderer.html
 - WebGPURenderer API: https://threejs.org/docs/pages/WebGPURenderer.html
 - TSL specification: https://threejs.org/docs/TSL.html
@@ -47,6 +52,9 @@ Use documentation matching the installed Three.js revision. Examples and addon A
 - OffscreenCanvas API: https://developer.mozilla.org/docs/Web/API/OffscreenCanvas
 - Web Workers API: https://developer.mozilla.org/docs/Web/API/Web_Workers_API
 - Web Audio API: https://developer.mozilla.org/docs/Web/API/Web_Audio_API
+- Canvas captureStream API: https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement/captureStream
+- MediaRecorder API: https://developer.mozilla.org/docs/Web/API/MediaRecorder
+- WebCodecs API: https://developer.mozilla.org/docs/Web/API/WebCodecs_API
 - WAI accessibility standards and guidance: https://www.w3.org/WAI/standards-guidelines/
 
 ## Verification Rule

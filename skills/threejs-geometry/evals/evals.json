@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-geometry",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Fix our custom BufferGeometry by adding position, normal, UV, color, and skin attributes with different counts, merging all material groups, applying a mirrored transform, recomputing normals, and updating positions every frame without bounds or update ranges.",
+      "expected_output": "A geometry contract that fixes topology and compatible attribute layouts first, preserves groups and deformation semantics, handles mirrored transforms and dynamic updates deliberately, recomputes affected bounds, and validates rendering, picking, culling, seams, and memory.",
+      "assertions": [
+        "Primitive type, winding, indices, coordinate space, vertex counts, attribute types, normalization, groups, and deformation needs are declared and made compatible.",
+        "Invalid topology is repaired rather than hidden by normal recomputation.",
+        "Mirrored or negative-determinant transforms, front and back faces, normals, tangents, UV seams, and non-uniform scale are checked.",
+        "Dynamic attributes use narrow update ranges and changed positions trigger the required bounding-volume updates.",
+        "Material groups, skinning, morphs, picking, culling, draw strategy, vertex and triangle counts, memory, and disposal are verified."
+      ]
+    }
+  ]
+}

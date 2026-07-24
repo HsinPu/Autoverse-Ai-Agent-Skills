@@ -2310,6 +2310,28 @@
         "quaternions"
       ]
     },
+    "threejs-capture-recording": {
+      "category": "threejs-graphics",
+      "tags": [
+        "threejs",
+        "capture",
+        "recording",
+        "mediarecorder",
+        "webcodecs",
+        "deterministic-frames"
+      ]
+    },
+    "threejs-csg-modeling": {
+      "category": "threejs-graphics",
+      "tags": [
+        "threejs",
+        "csg",
+        "boolean-modeling",
+        "topology",
+        "manifold",
+        "authoring"
+      ]
+    },
     "threejs-data-visualization": {
       "category": "threejs-graphics",
       "tags": [
@@ -2319,6 +2341,17 @@
         "scientific-visualization",
         "spatial-data",
         "accessibility"
+      ]
+    },
+    "threejs-deformable-simulation": {
+      "category": "threejs-graphics",
+      "tags": [
+        "threejs",
+        "deformable",
+        "cloth",
+        "soft-body",
+        "fluid-simulation",
+        "xpbd"
       ]
     },
     "threejs-development": {
@@ -2485,6 +2518,17 @@
         "relief",
         "shaders",
         "tsl"
+      ]
+    },
+    "threejs-path-tracing": {
+      "category": "threejs-graphics",
+      "tags": [
+        "threejs",
+        "path-tracing",
+        "ray-tracing",
+        "bvh",
+        "light-transport",
+        "convergence"
       ]
     },
     "threejs-performance-memory": {
@@ -2800,6 +2844,17 @@
         "labels",
         "text",
         "accessibility"
+      ]
+    },
+    "threejs-version-migration": {
+      "category": "threejs-graphics",
+      "tags": [
+        "threejs",
+        "migration",
+        "upgrade",
+        "compatibility",
+        "deprecations",
+        "rollback"
       ]
     },
     "threejs-visual-validation": {
@@ -3259,6 +3314,10 @@
           "when": "A complete or ambiguous Three.js request spans architecture, authoring, frameworks, workers, rendering, assets, interaction, simulation, advanced graphics, quality, or production delivery and needs coordinated routing."
         },
         {
+          "name": "threejs-version-migration",
+          "when": "The task moves between Three.js releases, resolves deprecations or breaking changes, aligns addons or framework adapters, migrates persisted behavior, or needs upgrade evidence and rollback."
+        },
+        {
           "name": "threejs-project-architecture",
           "when": "The task concerns feature modules, dependency direction, scene ownership, update phases, simulation boundaries, or migration from a monolithic scene script."
         },
@@ -3291,6 +3350,10 @@
           "when": "The task concerns BufferGeometry attributes, topology, indices, normals, tangents, UVs, morphs, skin data, bounds, instancing, or merging."
         },
         {
+          "name": "threejs-csg-modeling",
+          "when": "The task concerns union, subtraction, intersection, cutaways, procedural solid editing, Boolean stacks, manifold repair, CSG attributes or materials, performance, or export."
+        },
+        {
           "name": "threejs-materials-lighting",
           "when": "The task concerns built-in PBR materials, texture channels, VideoTexture, CanvasTexture, webcam or 360 media, color management, light rigs, environment maps, transparency, transmission, or shading defects."
         },
@@ -3311,6 +3374,10 @@
           "when": "The task concerns rigid bodies, colliders, triggers, joints, character controllers, vehicles, fixed timesteps, interpolation, physics workers, determinism, or contact events."
         },
         {
+          "name": "threejs-deformable-simulation",
+          "when": "The task concerns cloth, ropes, cables, soft bodies, strands, PBD or XPBD, particle fluids, grid or volume fluids, deformable collision, tearing, or solver-to-render mapping."
+        },
+        {
           "name": "threejs-spatial-audio",
           "when": "The task concerns AudioListener, PositionalAudio, HRTF, attenuation, ambient zones, audio occlusion, collision or gameplay cues, autoplay restrictions, captions, mixing, or audio-context lifecycle."
         },
@@ -3329,6 +3396,10 @@
         {
           "name": "threejs-postprocessing",
           "when": "The task concerns a general pass graph, EffectComposer, depth or normal inputs, anti-aliasing, outline, depth of field, motion blur, or custom full-screen effects."
+        },
+        {
+          "name": "threejs-capture-recording",
+          "when": "The task concerns screenshots, deterministic frame sequences, canvas captureStream, MediaRecorder, WebCodecs, audio-video recording, tiled output, codecs, CORS, or capture lifecycle."
         },
         {
           "name": "threejs-react-three-fiber",
@@ -3449,6 +3520,10 @@
         {
           "name": "threejs-raymarched-space-effects",
           "when": "The task concerns black holes, wormholes, accretion disks, curved rays, bounded nebulae, signed-distance structures, or space-effect numerical integration."
+        },
+        {
+          "name": "threejs-path-tracing",
+          "when": "The task concerns progressive path tracing, accumulated ray transport, BVH integration, material or environment support, convergence, denoising, tiled output, or a raster fallback."
         },
         {
           "name": "threejs-procedural-vfx",

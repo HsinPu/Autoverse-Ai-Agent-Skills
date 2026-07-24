@@ -38,3 +38,8 @@ Validate the authored system, not one favorable screenshot.
 - Reset temporal history before fixed-time captures.
 - Keep secret, personal, and licensed source assets out of unrestricted artifacts.
 - Preserve machine-readable capture metadata with each result.
+
+## Handoff
+
+- Use `threejs-capture-recording` when the output is a user-facing still, frame sequence, video, audio-video file, or live stream rather than validation evidence alone.
+- Keep baseline authority and approval in visual validation even when capture tooling produces the pixels.

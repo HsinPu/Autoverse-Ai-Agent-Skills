@@ -16,6 +16,7 @@ Use `threejs-development` when a request spans several systems or starts from an
 | Concern | Skill |
 |---|---|
 | Modules, ownership, update phases, migration | `threejs-project-architecture` |
+| Three.js release upgrades, breaking changes, deprecations, compatibility | `threejs-version-migration` |
 | Runtime editors, undo, serialization, import, export, publishing | `threejs-editor-authoring` |
 | OffscreenCanvas, renderer workers, message and transfer protocols | `threejs-offscreen-workers` |
 | Loop, resize, visibility, teardown, context recovery | `threejs-scene-lifecycle` |
@@ -23,16 +24,19 @@ Use `threejs-development` when a request spans several systems or starts from an
 | Keyframes, mixers, blending, skeletons, morphs, retargeting, IK | `threejs-animation-system` |
 | Vectors, matrices, quaternions, transforms, projections | `threejs-math-transforms` |
 | BufferGeometry, attributes, topology, instancing | `threejs-geometry` |
+| Solid Boolean modeling, CSG topology, tolerances, cut faces | `threejs-csg-modeling` |
 | PBR materials, static or media textures, environments, lights | `threejs-materials-lighting` |
 | GLSL, ShaderMaterial, uniforms, GPU computation | `threejs-shaders` |
 | Picking, pointer, touch, keyboard, controls, spatial indexes | `threejs-interaction-input` |
 | Rigid bodies, colliders, fixed-step simulation, physics workers | `threejs-physics-simulation` |
 | Listener ownership, positional audio, activation, captions | `threejs-spatial-audio` |
 | Legacy or explicitly combined physics-and-audio routing | `threejs-physics-audio` |
+| Cloth, ropes, soft bodies, strands, particles, and fluids | `threejs-deformable-simulation` |
 | Navmeshes, pathfinding, agents, avoidance, crowds | `threejs-navigation-crowds` |
 | WebGLRenderer, WebGPURenderer, capability fallback | `threejs-rendering-platforms` |
 | WebGPU, TSL node materials, compute, storage, WGSL | `threejs-webgpu-tsl` |
 | Pass graphs and screen-space effects | `threejs-postprocessing` |
+| Stills, deterministic frames, video, codecs, and audio-video recording | `threejs-capture-recording` |
 | React Three Fiber and Drei integration | `threejs-react-three-fiber` |
 | Vue/TresJS, Svelte/Threlte, and other framework integration | `threejs-framework-integrations` |
 | HUDs, labels, text, DOM and world-space UI | `threejs-ui-overlays` |
@@ -68,6 +72,7 @@ Use `threejs-development` when a request spans several systems or starts from an
 | Planetary sky and aerial perspective | `threejs-atmosphere-aerial-perspective` |
 | Raymarched clouds and cloud shadows | `threejs-volumetric-clouds` |
 | Black holes, wormholes, bounded space raymarching | `threejs-raymarched-space-effects` |
+| Progressive path tracing, BVH light transport, convergence | `threejs-path-tracing` |
 | Particles, debris, wakes, dissolves, effect pools | `threejs-procedural-vfx` |
 | History-driven frost, droplets, wet glass | `threejs-temporal-surfaces` |
 | Cascades, clipmaps, stable large-world shadows | `threejs-shadow-systems` |

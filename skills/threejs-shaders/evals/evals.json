@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-shaders",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Copy a WebGL GLSL ShaderMaterial directly into our WebGPU build, patch undocumented shader chunks, recreate every uniform object each frame, use an unbounded raymarch loop, ignore coordinate spaces and precision, and ship without compiler diagnostics or fallback.",
+      "expected_output": "A version- and backend-aware shader implementation that specifies signal spaces and types, chooses GLSL or TSL deliberately, minimizes the effect, bounds work and uniforms, exposes diagnostics, verifies numerical and compiler behavior, measures GPU cost, and defines a fallback.",
+      "assertions": [
+        "Installed Three.js revision, renderer backend, GLSL or TSL path, browser and GPU targets, integration point, and fallback are confirmed.",
+        "Inputs, coordinate spaces, texture semantics, varyings or nodes, outputs, blending, depth, precision, and update frequency are explicit.",
+        "Shader chunk dependencies are pinned or replaced and uniform containers remain stable across frames.",
+        "Loops and branches are bounded and NaN, infinity, derivative, precision, edge-UV, resize, and context-recovery behavior is tested.",
+        "Compiler output, intermediate diagnostic views, GPU cost, numerical limits, and WebGL, reduced-quality, or no-effect fallback are reported."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-project-architecture",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Refactor our monolithic Three.js app by putting the renderer, scene, assets, physics, UI state, network messages, and callbacks into one global store. Use Object3D.userData as the domain database and let every feature update transforms from its own requestAnimationFrame loop.",
+      "expected_output": "An incremental architecture migration that maps current entry points, separates domain and render state, establishes one frame coordinator and explicit feature lifecycles, assigns dependency and resource ownership, and migrates one observable boundary at a time.",
+      "assertions": [
+        "Entry points, renderer and loop ownership, scene factories, state, loaders, UI, workers, and disposal paths are mapped before editing.",
+        "Domain or simulation truth remains separate from Object3D, GPU resources, userData, and transient UI state.",
+        "Each feature has explicit create, update, render contribution, resize, suspend, resume, and dispose ownership under one update sequence.",
+        "Time, input, randomness, assets, physics, networking, audio, and telemetry flow through declared dependency directions.",
+        "The monolith is migrated in verified slices with module maps, ownership tables, behavior tests, route remounts, and cleanup evidence."
+      ]
+    }
+  ]
+}

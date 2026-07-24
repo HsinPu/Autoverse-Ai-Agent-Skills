@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-networked-experiences",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Build multiplayer by sending every Object3D matrix, bone, and particle from each client every frame. Trust client positions and rewards, use no entity IDs or tick numbers, apply packets in arrival order, and skip interpolation, reconciliation, rate limits, reconnect, and version handling.",
+      "expected_output": "An authoritative network architecture with stable identity and schemas, declared ticks and transport semantics, compact replicated simulation state, separate interpolated rendering, prediction and reconciliation where justified, bounded inputs, and adverse-network and abuse testing.",
+      "assertions": [
+        "Identity, movement, physics, inventory, rewards, world changes, effects, time, and persistence receive explicit server or client authority.",
+        "Transport, ticks, snapshots, ordering, reliability, serialization, clocks, stable entity and event IDs, lifecycle, versions, and bandwidth are defined.",
+        "Authoritative or predicted simulation remains separate from smoothed Three.js transforms, interpolation buffers, and local visual effects.",
+        "Client-reported outcomes are validated, inbound size, frequency, and entity counts are bounded, and duplicate creation or deletion is idempotent.",
+        "Latency, jitter, loss, duplication, reordering, clock skew, malicious input, teleports, ownership changes, late join, reconnect, replay, and version mismatch are tested."
+      ]
+    }
+  ]
+}

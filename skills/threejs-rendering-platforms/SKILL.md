@@ -30,3 +30,8 @@ Choose the renderer from verified feature, device, fallback, and delivery requir
 ## Evidence
 
 Return the backend matrix, selected renderer, fallback policy, capability probes, render-target formats, known parity gaps, and device results.
+
+## Handoff
+
+- Use `threejs-version-migration` when the primary change is moving between Three.js releases rather than changing graphics backends.
+- Use `threejs-webgpu-tsl` for native WebGPU, TSL, storage, compute, readback, and WGSL implementation details.

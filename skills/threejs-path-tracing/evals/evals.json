@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-path-tracing",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Replace our animated product configurator with path tracing. Keep accumulating while the camera, materials, lights, and skinned model change, average the tone-mapped canvas frames, silently ignore unsupported custom shaders, and call the result physically correct on every mobile device.",
+      "expected_output": "A feature- and device-bounded path-tracing design with explicit scene support, immutable accumulation epochs, scene-linear sampling, reset events, BVH and memory ownership, convergence evidence, and an honest raster or reduced-quality fallback.",
+      "assertions": [
+        "Geometry, skinning, materials, custom shaders, lights, environment, dynamics, and composition are classified as native, approximated, baked, composited, or unsupported.",
+        "Camera, geometry, material, light, environment, animation, resize, and quality changes invalidate the affected accumulation epoch.",
+        "Samples accumulate scene-linear radiance before tone mapping, grading, output conversion, and encoding.",
+        "BVH build or refit cost, texture and geometry memory, sample throughput, convergence, fireflies, and named-device budgets are measured.",
+        "Unsupported features and devices receive an explicit raster, lower-resolution, lower-bounce, or unavailable path rather than a false physical-correctness claim."
+      ]
+    }
+  ]
+}

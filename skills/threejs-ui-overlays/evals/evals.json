@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-ui-overlays",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create 500 CSS labels and update every DOM node every frame, keep labels visible behind geometry and offscreen, let labels block OrbitControls unpredictably, render essential controls only as TextGeometry, use fixed English widths, and ignore notches, zoom, keyboard, and screen readers.",
+      "expected_output": "A layered UI design that selects DOM, texture, SDF, or geometry per need, defines projection, occlusion, culling, clustering and event ownership, preserves semantic accessible controls, handles localization and responsive safe areas, and measures update and rendering cost.",
+      "assertions": [
+        "HUD, menu, label, tooltip, caption, editor, interaction, localization, and accessibility requirements are inventoried before selecting a rendering layer.",
+        "World-to-screen projection, anchors, depth or visibility occlusion, clamping, overlap, culling, clustering, z-order, and offscreen behavior are explicit.",
+        "DOM updates are bounded and scene controls and overlay pointer events have one arbitration policy.",
+        "Essential actions and information remain semantic, focusable, keyboard-operable, screen-reader-usable, and available through non-color cues.",
+        "Text expansion, RTL, fonts, zoom, DPR, rotation, notches, safe areas, touch targets, overlap, occlusion, responsive captures, sanitization, and performance are tested."
+      ]
+    }
+  ]
+}

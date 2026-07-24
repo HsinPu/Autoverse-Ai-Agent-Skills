@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-capture-recording",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Record a deterministic 4K video of our Three.js scene with DOM labels, captions, music, and microphone audio. Use canvas.captureStream at whatever requestAnimationFrame rate occurs, assume every browser supports the same MediaRecorder codec, and keep cross-origin textures without CORS headers.",
+      "expected_output": "An artifact-first capture plan that distinguishes real-time and deterministic output, defines explicit DOM composition and audio routing, proves origin cleanliness and codec support, controls timestamps and backpressure, and validates decoded media plus complete teardown.",
+      "assertions": [
+        "Still, real-time, deterministic frame, stream, dimensions, frame rate, duration, alpha, color, overlay, audio, codec, and browser requirements are declared.",
+        "Deterministic output advances an exact frame step and awaits required simulation, render, readback, and encode completion instead of trusting requestAnimationFrame.",
+        "DOM labels and captions are explicitly rendered or composited because canvas capture alone does not include arbitrary DOM.",
+        "Cross-origin assets must keep the canvas origin-clean and codec or container support is probed with a tested fallback or unsupported boundary.",
+        "Audio graph, timestamps, backpressure, decoded frame count and duration, color, sync, cancellation, stopped tracks, closed encoders, revoked URLs, and memory plateau are verified."
+      ]
+    }
+  ]
+}

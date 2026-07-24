@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-interaction-input",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "On every pointermove, raycast every object using window coordinates even though the canvas is CSS-scaled and scrolled. Let OrbitControls and dragging consume the same gesture, ignore pointer capture and cancellation, trust commands stored in userData, and provide no keyboard path.",
+      "expected_output": "A normalized and bounded interaction system with an explicit input state machine, correct canvas coordinates, measured picking acceleration and invalidation, gesture arbitration, safe data handling, accessible alternatives, and resize, DPR, overlap, focus, and mobile tests.",
+      "assertions": [
+        "Pointer coordinates are normalized from the actual canvas rectangle and drawing layout across scroll, resize, CSS scale, and DPR.",
+        "CPU raycasting, layers, colliders, BVH, Octree, spatial index, or GPU picking is chosen from measured object, update, precision, build, and query costs.",
+        "Hover, press, capture, drag, cancel, release, focus, selection, and multi-touch transitions form an explicit state machine.",
+        "Camera controls and object manipulation have gesture arbitration, while userData remains inert validated data rather than executable commands.",
+        "Overlaps, transparency, instancing, skinned meshes, lost focus, pointer capture, mobile gestures, keyboard alternatives, index invalidation, and latency are tested."
+      ]
+    }
+  ]
+}

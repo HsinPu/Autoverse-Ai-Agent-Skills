@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-csg-modeling",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Add live Boolean subtraction to our browser editor. Run it on every pointermove against open and self-intersecting meshes, use epsilon 0.001 for all model scales, discard the operands, recompute normals, and promise that UVs, skinning, morph targets, material groups, undo, and GLB export remain lossless.",
+      "expected_output": "A robust CSG authoring boundary that validates solid operands, derives tolerances from scale, selects an appropriate representation, preserves canonical operands and operation history, explicitly remaps supported attributes, bounds interactive evaluation, and verifies topology and export failure cases.",
+      "assertions": [
+        "Operands are preflighted for units, transforms, winding, manifoldness, boundaries, degeneracy, coplanarity, and self-intersection.",
+        "Algorithm and tolerance are selected from robustness, scale, precision, mesh size, update cadence, and attribute needs.",
+        "Canonical operands and ordered Boolean parameters remain recoverable for regeneration, undo, and auditing.",
+        "Cut faces, normals, tangents, UVs, colors, morphs, skinning, groups, and metadata each have an explicit preserve, remap, regenerate, or unsupported decision.",
+        "Pointer-rate work is coalesced or delegated and transformed, mirrored, touching, near-coplanar, repeated-edit, export, latency, and memory cases are tested."
+      ]
+    }
+  ]
+}

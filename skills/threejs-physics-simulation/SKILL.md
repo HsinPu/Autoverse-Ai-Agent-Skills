@@ -31,3 +31,8 @@ Keep simulation state authoritative and make rendering a time-interpolated view 
 ## Evidence
 
 Return the engine decision, simulation contract, fixed-step policy, collider and layer matrix, authority order, performance trace, failure tests, and stable teardown counts.
+
+## Handoff
+
+- Use `threejs-deformable-simulation` for cloth, ropes, soft bodies, strands, particle fluids, or grid and volume fluids.
+- Keep rigid and deformable ownership separate even when their collision coupling is two-way.

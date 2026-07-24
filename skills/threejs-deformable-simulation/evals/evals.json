@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-deformable-simulation",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Simulate cloth, jelly enemies, ropes, and smoke with one rigid-body engine. Step everything from render delta, use unlimited substeps after stalls, let animation and every solver write the same vertices, read GPU particle buffers back every frame, and claim deterministic two-way coupling.",
+      "expected_output": "A behavior-specific solver plan that separates deformable models and rigid authority, defines fixed-step stability and bounded degradation, declares coupling direction, maps solver data to rendering without frame-critical readback, and proves error, performance, failure, and lifecycle limits.",
+      "assertions": [
+        "Cloth, soft body, rope, and smoke requirements are mapped to suitable mass-spring, PBD or XPBD, FEM, particle, grid, volume, or baked representations.",
+        "Units, fixed timestep, substeps, iterations, compliance or stiffness, damping, velocity or CFL limits, boundaries, and reset behavior are explicit and bounded.",
+        "Rigid-body, deformable, animation, gameplay, and render interpolation have one authority and coupling order with measured one-way or two-way semantics.",
+        "GPU or worker buffers, synchronization, topology changes, normals, bounds, quality tiers, and readback limits are defined.",
+        "Stretch, volume or density error, penetration, tunneling, rest drift, explosions, stalls, frame rates, resolutions, target devices, reset, and stable teardown are tested."
+      ]
+    }
+  ]
+}

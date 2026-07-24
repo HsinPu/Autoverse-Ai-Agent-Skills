@@ -30,3 +30,8 @@ Build geometry with explicit topology, attribute semantics, bounds, and update f
 ## Evidence
 
 Report vertex and triangle counts, attribute layout, draw-call strategy, bounds, deformation behavior, memory estimate, and visual checks for normals, UVs, seams, and culling.
+
+## Handoff
+
+- Use `threejs-csg-modeling` when union, subtraction, intersection, cut faces, solid validity, Boolean tolerance, or authoring-time operation stacks own the problem.
+- Use `threejs-procedural-geometry` when deterministic generated forms and semantic construction rules own the mesh.

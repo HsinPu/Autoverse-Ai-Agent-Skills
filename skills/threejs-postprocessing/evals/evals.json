@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-postprocessing",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Stack SSAO, bloom, motion blur, depth of field, outlines, antialiasing, and LUT grading in arbitrary order. Let several passes tone-map and encode, sample whatever depth and normals happen to exist, keep full-resolution targets forever, and skip resize, camera-cut, transparency, UI, and no-post testing.",
+      "expected_output": "An ordered post-processing signal graph with one output owner, valid depth, normal, velocity and history inputs, isolated pass diagnostics, explicit formats and resolutions, bounded quality tiers, reset and resize behavior, no-post readability, and measured GPU and memory cost.",
+      "assertions": [
+        "Renderer backend, HDR range, color and tone-map owner, depth convention, transparency, UI composition, and device targets are confirmed.",
+        "Every pass input, output, format, scale, ordering dependency, and history buffer is drawn before integration.",
+        "Tone mapping and output encoding happen exactly once and effects never consume invalid depth, normal, velocity, or history signals.",
+        "Each pass has bypass, diagnostic, resolution, quality, resize, DPR, camera-cut, temporal-reset, and disposal behavior.",
+        "No-post comparison, transparent and UI cases, screenshots, GPU timings, render-target memory, fallback tier, and production behavior are verified."
+      ]
+    }
+  ]
+}

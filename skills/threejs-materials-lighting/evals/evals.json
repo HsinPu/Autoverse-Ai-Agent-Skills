@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-materials-lighting",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Make our model brighter by marking every texture as sRGB, increasing all light intensities until the normal map looks right, adding one unique material and shader variant per mesh, enabling transparent transmission everywhere, and disposing VideoTexture without stopping its webcam stream.",
+      "expected_output": "A material and lighting correction that establishes color and output ownership, classifies each texture channel, uses physically suitable materials and light units, treats transparency and transmission as pipeline choices, controls shader variants, and owns media lifecycle completely.",
+      "assertions": [
+        "Working color space, output conversion, tone mapping, exposure, environment, physical scale, and light ownership are established before visual tuning.",
+        "Color, non-color data, normal, depth, HDR, lookup, canvas, and media textures receive correct color-space, sampling, mip, and lifetime treatment.",
+        "Normal-map or shading defects are diagnosed from channel semantics, tangent space, geometry, and lighting rather than arbitrary brightness compensation.",
+        "Material program permutations, blended transparency, transmission, sorting, shadows, instancing, and target-device cost are measured.",
+        "Video or webcam activation, readiness, pause, errors, fallback, element ownership, media-track shutdown, texture disposal, rights, and compression are verified."
+      ]
+    }
+  ]
+}

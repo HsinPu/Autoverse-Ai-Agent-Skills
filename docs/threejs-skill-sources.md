@@ -67,18 +67,23 @@ This exclusion is required because the package contains GPL-3.0 material, third-
 The referenced pack focuses on advanced visual systems. CraftRoster adds the product-development areas needed to design, build, operate, and ship a complete Three.js application:
 
 - project architecture and scene lifecycle;
+- bounded Three.js release migration with intermediate-version and rollback evidence;
 - asset and glTF delivery;
 - clip, mixer, skeletal, morph, and root-motion animation;
 - vectors, matrices, quaternions, coordinate spaces, and transform diagnostics;
 - general geometry, material, lighting, and shader work;
+- robust CSG and Boolean solid modeling with topology, tolerance, attribute, and export validation;
 - pointer, touch, keyboard, gamepad, spatial indexing, and input integration;
 - independent physics-simulation and spatial-audio ownership with a compatibility route for the former combined Skill;
+- deformable cloth, rope, soft-body, strand, particle-fluid, and grid-fluid simulation;
 - navmeshes, pathfinding, agents, local avoidance, and crowds;
 - OffscreenCanvas, worker-owned rendering, transfer boundaries, and versioned worker protocols;
 - runtime editors, commands, undo and redo, serialization, import, export, and publishing;
 - WebGL and WebGPU renderer selection;
 - WebGPU, TSL node materials, compute, storage, readback, and WGSL interop;
 - general post-processing;
+- progressive path tracing with feature-support, accumulation, convergence, and raster-fallback contracts;
+- deterministic still, frame-sequence, video, codec, and audio-video capture;
 - React Three Fiber;
 - Vue/TresJS, Svelte/Threlte, and other framework integration;
 - HUDs, labels, text, overlays, and accessible UI;
@@ -98,7 +103,7 @@ The coverage audit reviewed these public inventories at fixed revisions on 2026-
 
 | Repository | Audited revision | Use |
 |---|---|---|
-| `linegel/threejs-complete-set-of-skill` | `62a9bc59330c44827824665323823883e88f100c` | Capability names and specialized procedural-character coverage |
+| `linegel/threejs-complete-set-of-skill` | `62a9bc59330c44827824665323823883e88f100c` | Capability names plus procedural-character, object-authoring, compatibility, and renderer-migration boundaries |
 | `dgreenheck/webgpu-claude-skill` | `af2319bd01bb7cc881267a9ef42cafdaf5e9029d` | WebGPU depth, progressive disclosure, and reusable reference structure |
 | `emalorenzo/three-agent-skills` | `f950f95ae3b13581546e6d6d8b2f88a08eb3e577` | General Three.js and framework rule coverage |
 | `majidmanzarpour/threejs-game-skills` | `7221c1f4a6d2ae189a4d85d058d24f3228499d46` | Game-production, QA, navigation, and content-pipeline coverage |
@@ -114,7 +119,7 @@ Version-sensitive implementation claims should be checked against:
 - React Three Fiber documentation: https://r3f.docs.pmnd.rs/
 - TresJS documentation: https://docs.tresjs.org/
 - Threlte documentation: https://threlte.xyz/
-- Web platform standards and browser compatibility data for WebGL, WebGPU, WebXR, workers, audio, and input APIs
+- Web platform standards and browser compatibility data for WebGL, WebGPU, WebXR, workers, audio, capture, media encoding, and input APIs
 
 An upstream example is not authority for compatibility with the project's installed Three.js revision.
 

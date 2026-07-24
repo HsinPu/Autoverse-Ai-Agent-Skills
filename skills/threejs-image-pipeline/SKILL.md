@@ -33,3 +33,8 @@ Integrate advanced effects through an explicit frame graph with declared signal 
 ## Evidence
 
 Return the frame graph, ownership table, formats, diagnostics, bypass comparisons, per-pass timing, memory budget, and compatibility limits.
+
+## Handoff
+
+- Use `threejs-path-tracing` for progressive radiance accumulation, BVH-backed light transport, convergence, and path-traced feature support.
+- Use `threejs-capture-recording` when screenshots, frame sequences, codecs, timestamps, audio, or exported media artifacts own the acceptance contract.

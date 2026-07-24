@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-version-migration",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Upgrade our old Three.js application straight to the latest release in one dependency update. Delete the old lockfile, fix only compiler errors, regenerate visual baselines automatically, and migrate from WebGLRenderer to WebGPURenderer at the same time. We also persist scene JSON and export GLB files.",
+      "expected_output": "A bounded release migration that inventories the complete dependency and data graph, freezes source behavior, reads every intermediate migration interval, separates backend migration, moves in recoverable slices, and validates runtime, visual, asset, data, lifecycle, and performance behavior before retiring the prior checkpoint.",
+      "assertions": [
+        "The source and target revisions, lockfile, addons, renderer, loaders, exporters, adapters, browsers, and persisted formats are inventoried.",
+        "Every intermediate migration-guide interval is reviewed and the upgrade is split into slices of no more than ten Three.js releases.",
+        "WebGL-to-WebGPU work is separated and routed to the renderer and WebGPU owners instead of being assumed by the release upgrade.",
+        "Compiler success is supplemented with deterministic visual, asset round-trip, scene-data, interaction, lifecycle, memory, and device checks.",
+        "Each accepted slice preserves a pinned rollback point and visual baselines are changed only after differences are reviewed."
+      ]
+    }
+  ]
+}
