@@ -1,7 +1,7 @@
 {
   "version": "2.0.0",
   "updated": "2026-07-15T00:00:00Z",
-  "total": 220,
+  "total": 221,
   "categories": [
     {
       "id": "workflow-planning",
@@ -3129,6 +3129,33 @@
       }
     },
     {
+      "name": "swift-testing",
+      "description": "Native Swift test design, implementation, review, debugging, and migration workflow for the Swift Testing framework and XCTest. Use when adding unit or integration tests, choosing #expect or #require, organizing suites, creating parameterized tests, applying traits and tags, testing async or actor-isolated code, fixing parallel-test flakiness, configuring Xcode test plans, or incrementally migrating XCTest. Use mobile-app-testing for device and end-to-end behavior, and swift-concurrency when the production isolation model is the primary problem.",
+      "category": "testing-quality",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "swift",
+        "ios",
+        "testing",
+        "swift-testing",
+        "xctest",
+        "unit-testing",
+        "integration-testing",
+        "async-testing",
+        "parameterized-tests",
+        "traits",
+        "parallel-testing",
+        "xcode"
+      ],
+      "reference": {
+        "source": "AvdLee/Swift-Testing-Agent-Skill",
+        "license": "MIT",
+        "revision": "798e9b1a2bcac164d4f0c781908199e754f0bab6"
+      }
+    },
+    {
       "name": "swiftui-development",
       "description": "SwiftUI implementation and review workflow for native iOS interfaces, covering Observation and property-wrapper ownership, unidirectional data flow, view composition and identity, NavigationStack and presentation state, structured concurrency and lifecycle cancellation, accessibility, localization, previews, testing, API availability, and rendering performance. Use when building, debugging, reviewing, or refactoring SwiftUI views and features; use ios-architecture when the primary decision is app or module architecture.",
       "category": "mobile-desktop",
@@ -3890,7 +3917,7 @@
     {
       "id": "ios-native-development",
       "title": "Native iOS Architecture and Delivery",
-      "decision": "Choose by concern: app and module boundaries, SwiftUI implementation, concurrency and isolation, device behavior, or release readiness.",
+      "decision": "Choose by concern: app and module boundaries, SwiftUI implementation, concurrency and isolation, code-level testing, device behavior, or release readiness.",
       "skills": [
         {
           "name": "ios-architecture",
@@ -3903,6 +3930,10 @@
         {
           "name": "swift-concurrency",
           "when": "The task is diagnosing actor-isolation or Sendable diagnostics, designing task lifetime or cancellation, adopting async/await, actors, or AsyncSequence, or migrating targets to Swift 6 strict concurrency."
+        },
+        {
+          "name": "swift-testing",
+          "when": "The task is writing or reviewing native Swift unit and integration tests, using Swift Testing APIs, testing async or actor-isolated code, fixing parallel-test flakiness, or migrating XCTest."
         },
         {
           "name": "mobile-app-testing",
@@ -3926,6 +3957,10 @@
         {
           "name": "test-driven-development",
           "when": "New or changed behavior should be implemented through a strict red-green-refactor cycle."
+        },
+        {
+          "name": "swift-testing",
+          "when": "The task is native Swift unit or integration testing with Swift Testing or XCTest, including parameterized cases, traits, async behavior, parallel isolation, or framework migration."
         },
         {
           "name": "frontend-testing",

@@ -2092,6 +2092,23 @@
         "migration"
       ]
     },
+    "swift-testing": {
+      "category": "testing-quality",
+      "tags": [
+        "swift",
+        "ios",
+        "testing",
+        "swift-testing",
+        "xctest",
+        "unit-testing",
+        "integration-testing",
+        "async-testing",
+        "parameterized-tests",
+        "traits",
+        "parallel-testing",
+        "xcode"
+      ]
+    },
     "swiftui-development": {
       "category": "mobile-desktop",
       "tags": [
@@ -2609,7 +2626,7 @@
     {
       "id": "ios-native-development",
       "title": "Native iOS Architecture and Delivery",
-      "decision": "Choose by concern: app and module boundaries, SwiftUI implementation, concurrency and isolation, device behavior, or release readiness.",
+      "decision": "Choose by concern: app and module boundaries, SwiftUI implementation, concurrency and isolation, code-level testing, device behavior, or release readiness.",
       "skills": [
         {
           "name": "ios-architecture",
@@ -2622,6 +2639,10 @@
         {
           "name": "swift-concurrency",
           "when": "The task is diagnosing actor-isolation or Sendable diagnostics, designing task lifetime or cancellation, adopting async/await, actors, or AsyncSequence, or migrating targets to Swift 6 strict concurrency."
+        },
+        {
+          "name": "swift-testing",
+          "when": "The task is writing or reviewing native Swift unit and integration tests, using Swift Testing APIs, testing async or actor-isolated code, fixing parallel-test flakiness, or migrating XCTest."
         },
         {
           "name": "mobile-app-testing",
@@ -2645,6 +2666,10 @@
         {
           "name": "test-driven-development",
           "when": "New or changed behavior should be implemented through a strict red-green-refactor cycle."
+        },
+        {
+          "name": "swift-testing",
+          "when": "The task is native Swift unit or integration testing with Swift Testing or XCTest, including parameterized cases, traits, async behavior, parallel isolation, or framework migration."
         },
         {
           "name": "frontend-testing",

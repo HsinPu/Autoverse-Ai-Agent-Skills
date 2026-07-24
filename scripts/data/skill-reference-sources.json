@@ -236,6 +236,28 @@
           { "path": "swift-concurrency/references/threading.md", "blob": "06c520ff3a50575008c4364afa1bfb47c31539ed" }
         ]
       }
+    },
+    {
+      "repo": "AvdLee/Swift-Testing-Agent-Skill",
+      "commit": "798e9b1a2bcac164d4f0c781908199e754f0bab6",
+      "tree": "dcaa4cdc482b886f48819d779ba96cc90e59481d",
+      "license": "MIT",
+      "licenseEvidence": { "kind": "license-file", "path": "LICENSE", "blob": "cbf908dde987497fbba144909493e3a3e96f890b" },
+      "skills": {
+        "swift-testing": [
+          { "path": "swift-testing-expert/SKILL.md", "blob": "a5c7d8cf59ee6ba5f13ffaef951127a94cb17bd1" },
+          { "path": "swift-testing-expert/references/_index.md", "blob": "8ef1d7fc0f5e4f2aabaafcffa6e1e4cf918733ae" },
+          { "path": "swift-testing-expert/references/async-testing-and-waiting.md", "blob": "077399a0b5461ef08c678957eb075ac7982a678c" },
+          { "path": "swift-testing-expert/references/expectations.md", "blob": "5227706f8edecc19406edb98bdf4cc1a1eedb8f5" },
+          { "path": "swift-testing-expert/references/fundamentals.md", "blob": "f8fc55895ddbe7adb11424355b95a3a6a93e7ee4" },
+          { "path": "swift-testing-expert/references/migration-from-xctest.md", "blob": "d831f4eb2092965c89482a9149d1f8347f42d940" },
+          { "path": "swift-testing-expert/references/parallelization-and-isolation.md", "blob": "d25a39e149530b87709724c578467b2047d77969" },
+          { "path": "swift-testing-expert/references/parameterized-testing.md", "blob": "4ac34fea171a8485af4d3604b49b8921a4f1ec3c" },
+          { "path": "swift-testing-expert/references/performance-and-best-practices.md", "blob": "13c7fddb8e5a8fb4a6dd07c0f9c0d5bbaef3a658" },
+          { "path": "swift-testing-expert/references/traits-and-tags.md", "blob": "5ab1eb8b7281ff4b802a286df49b51fc992c915a" },
+          { "path": "swift-testing-expert/references/xcode-workflows.md", "blob": "fb5fe2018d616a29125dde2830a0ce8174a0474c" }
+        ]
+      }
     }
   ]
 }

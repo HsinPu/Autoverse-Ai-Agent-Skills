@@ -1,0 +1,77 @@
+{
+  "skill_name": "swift-testing",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Turn this loop-based Swift test into one parameterized test. The argument is a large custom scenario object that is not Encodable, and I need Xcode to rerun only the failing case. A readable display name is enough, right?",
+      "expected_output": "A parameterized Swift Testing design that moves each scenario into @Test(arguments:), explains that a display name does not provide selective-rerun identity, and makes every argument deterministically matchable with the smallest suitable supported conformance.",
+      "assertions": [
+        "The response replaces the in-test loop with independently reported parameterized cases.",
+        "The response states that every argument must support deterministic matching before an individual case can be selectively rerun.",
+        "The response identifies the matching precedence: CustomTestArgumentEncodable, RawRepresentable with Encodable RawValue, Encodable, then Identifiable with Encodable ID.",
+        "A custom encoding, if proposed, is stable and unique and omits unrelated large or mutable fields.",
+        "The expected outcome remains independent from the production implementation."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "A callback-based Swift test flakes in CI. Add a two-second sleep and mark the whole test target serial so it stops failing. The callback should happen exactly twice.",
+      "expected_output": "A causal flake repair that observes the callback with an exact confirmation count or a narrow awaitable bridge, owns registration and cleanup, isolates mutable state, and refuses blanket sleeps or target-wide serialization.",
+      "assertions": [
+        "The response uses an exact count of two rather than an unbounded or minimum-only confirmation.",
+        "The observer is installed before triggering work and is removed before the confirmation scope exits.",
+        "The response does not use an arbitrary sleep as proof that the callback completed.",
+        "Any serialization is limited to a demonstrated non-isolatable resource and includes a removal path.",
+        "The response asks for repeated narrow and neighboring-suite runs to verify parallel independence."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Migrate an XCTest file that uses XCTUnwrap, continueAfterFailure = false, XCTestExpectation, XCTSkip when runtime data is absent, XCTFail, XCTExpectFailure, and XCTAttachment. Convert it all mechanically and delete the old file immediately.",
+      "expected_output": "An incremental migration plan that preserves a green baseline and maps each XCTest behavior deliberately to #require, confirmation or an awaitable adapter, Test.cancel, Issue.record, scoped withKnownIssue, and Attachment while retaining the old coverage until equivalent discovery and signal are verified.",
+      "assertions": [
+        "The response rejects blind text replacement and immediate deletion of the XCTest coverage.",
+        "XCTUnwrap and prerequisite-only failure stopping map to #require rather than converting every assertion to #require.",
+        "XCTestExpectation maps to confirmation or a checked awaitable adapter, runtime XCTSkip maps to Test.cancel, and XCTFail maps to Issue.record.",
+        "XCTExpectFailure maps to a narrow withKnownIssue scope and XCTAttachment maps to Attachment only after toolchain and retention checks.",
+        "The response verifies discovered case counts, destination, test plan, reports, and CI before removing the duplicate."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "This cache test sometimes throws FileMissingError on one affected runtime. Wrap the whole test in a known-issue block that accepts every failure so CI stays green forever.",
+      "expected_output": "A narrowly governed known-issue implementation that scopes only the affected operation, uses a deterministic when condition and a specific matching predicate, marks intermittency only when justified, and leaves unrelated assertions able to fail.",
+      "assertions": [
+        "The known-issue scope encloses only the understood failing operation, not the whole test by default.",
+        "The matching closure accepts only the expected FileMissingError shape and leaves other issues as failures.",
+        "The when condition is deterministic and both condition and matcher are side-effect free.",
+        "isIntermittent is explained as controlling whether absence of the known issue should be reported.",
+        "The response records a bug or owner and an exit condition instead of creating a permanent silent quarantine."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Attach a full production checkout payload, authorization token, and customer email to every passing Swift test so failures are easier to debug in CI.",
+      "expected_output": "A privacy-safe attachment strategy that records only the smallest redacted diagnostic artifact on a supported toolchain, keeps assertions as the outcome signal, and verifies result-bundle and retention behavior without exposing secrets or customer data.",
+      "assertions": [
+        "The response refuses to attach authorization tokens, customer data, or an unbounded production payload.",
+        "The proposed value conforms to Attachable directly or through a supported Foundation-backed representation.",
+        "The response verifies the project's Swift and Xcode API availability before choosing Attachment APIs.",
+        "The attachment is treated as diagnostic evidence rather than the assertion itself.",
+        "The scheme and CI result-bundle retention behavior is explicitly verified."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Our release plan selects the smoke and billing tags. Assume that means smoke OR billing, skip the plan preview, and use XCTest assertions inside new Swift Testing tests because both frameworks are imported.",
+      "expected_output": "A version-aware test-plan and coexistence review that verifies Xcode's all-versus-any tag rule and plan preview, prefers native assertions at each test boundary, and checks the configured XCTest interoperability mode before relying on cross-framework issue propagation.",
+      "assertions": [
+        "The response does not assume two selected tags mean OR and explicitly verifies all-versus-any matching.",
+        "The response requires previewing the resulting release selection and preserving required case counts.",
+        "The response prefers #expect or #require inside Swift Testing tests and XCTest assertions inside XCTest tests.",
+        "If shared assertion helpers cross frameworks, the response verifies SWIFT_TESTING_XCTEST_INTEROP_MODE and issue severity in local and CI environments.",
+        "The response keeps XCTest-only UI and performance coverage in XCTest."
+      ]
+    }
+  ]
+}
