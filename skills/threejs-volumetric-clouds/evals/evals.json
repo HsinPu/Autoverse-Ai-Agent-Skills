@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-volumetric-clouds",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Render volumetric clouds by marching the full camera ray for every pixel, sampling detail noise even in empty space, moving density in camera UV coordinates, rebuilding maximum-resolution 3D textures for every weather change, preserving temporal history through cuts, and enabling the same tier on mobile.",
+      "expected_output": "A staged weather, density, lighting, shadow and temporal cloud system with bounded volumes, empty-space skipping, world-stable motion, valid history rejection, measured stage and memory budgets, scalable quality modes, and low-end fallbacks.",
+      "assertions": [
+        "Cloud layers, coverage, type, weather map, wind, density profile, lighting, shadow receivers, camera envelope, backend, and performance tiers are declared.",
+        "Low-frequency shape and vertical profile precede detail erosion while raymarching is restricted to analytic cloud bounds with empty-space skipping and early termination.",
+        "Cloud and weather motion stay in world or weather coordinates and lighting, ambient, multi-scatter approximation, and cloud shadows are introduced as measurable stages.",
+        "Temporal reconstruction rejects invalid history after cuts, teleports, entry, weather changes, incompatible parameters, or resolution changes.",
+        "Horizon, cloud entry, sunrise, sunset, transitions, density and lighting diagnostics, GPU time by stage, texture memory, quality tiers, and billboard or disabled fallback are verified."
+      ]
+    }
+  ]
+}

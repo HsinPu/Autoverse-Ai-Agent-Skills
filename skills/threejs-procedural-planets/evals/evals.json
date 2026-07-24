@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-procedural-planets",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create a procedural planet with latitude-longitude geometry and UV noise at one fixed resolution. Use different random functions for elevation, normals, biomes, coastlines, clouds, and vegetation, place Earth-scale positions directly in float transforms, load every patch permanently, and tune only from orbit.",
+      "expected_output": "A deterministic planetary contract that shares world-space fields across geometry and shading, uses precision-safe coordinates and continuous patch LOD, couples atmosphere and lighting scales, bounds resources, and validates orbit-to-ground transitions.",
+      "assertions": [
+        "Radius, elevation units, coordinate system, seed, terrain fields, ocean level, biome causes, camera envelope, precision strategy, and target devices are defined.",
+        "Continents, basins, ridges, craters, geometry, normals, coastlines, materials, vegetation, clouds, and effects derive from continuous shared world-space fields.",
+        "Cube-sphere, icosphere, clipmap, quadtree, or patch LOD is selected from traversal needs and proves seam, normal, and identity continuity.",
+        "Floating-origin behavior, cache limits, patch counts, texture budgets, atmosphere radius, shadow scale, horizon, and polar distortion are handled explicitly.",
+        "Seed extremes, orbit, approach, surface proximity, origin shifts, LOD transitions, day and night, performance, cleanup, and fallback evidence are returned."
+      ]
+    }
+  ]
+}

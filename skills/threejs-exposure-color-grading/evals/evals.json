@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-exposure-color-grading",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Fix a dark Three.js scene by tone mapping in the renderer and again in a post pass, sample one bright pixel with synchronous GPU readback for auto exposure, apply an unknown LUT before tone mapping, mark every texture as sRGB, and carry adaptation through camera cuts.",
+      "expected_output": "A single-owner color pipeline with declared scene and display spaces, bounded luminance metering and adaptation, one tone-map and output conversion, a documented LUT stage, deterministic reset controls, diagnostics, and neutral baselines.",
+      "assertions": [
+        "Working space, texture annotations, HDR range, renderer path, output space, display assumptions, tone-map owner, grading target, and screenshot behavior are declared.",
+        "Metering defines exclusions, percentile or log-average policy, asynchronous or GPU-resident reduction, clamps, and separate brighten and darken rates.",
+        "Tone mapping and output encoding occur exactly once while data and non-color textures remain outside display transforms.",
+        "LUT domain, interpolation, dimensions, provenance, scene- versus display-referred placement, and neutral-grade behavior are explicit.",
+        "Black, midtone, highlight, sky, dark-bright cuts, resize, post-disabled output, adaptation reset, readback cost, and captures are verified."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-large-worlds-geospatial",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Render a globe-scale GIS scene by copying latitude, longitude, altitude, and ECEF values directly into Three.js float transforms. Guess axis order and units, shift only visible meshes when precision degrades, request every high-detail tile, keep all caches forever, and ignore poles and the antimeridian.",
+      "expected_output": "A geospatial coordinate and streaming architecture with authoritative double-precision data, explicit CRS and datum conversions, precision-safe local rendering, atomic origin shifts, bounded prioritized tiles and caches, seam handling, and geographic reference tests.",
+      "assertions": [
+        "CRS, ellipsoid or projection, axis order, horizontal and vertical datum, units, altitude convention, accuracy target, camera envelope, and source licensing are recorded.",
+        "Authoritative geographic coordinates remain separate from local tangent or camera-relative Three.js render coordinates.",
+        "Origin-shift thresholds and ordering include scene objects, cameras, physics, particles, audio, networking, velocity, and temporal histories.",
+        "Terrain, imagery, vectors, buildings, and point data use versioned LOD with priority, cancellation, eviction, cache limits, seams, and parent-child transitions.",
+        "Poles, antimeridian, projection limits, extreme altitude, origin shifts, tile churn, slow or offline networks, long paths, and reference points are tested."
+      ]
+    }
+  ]
+}

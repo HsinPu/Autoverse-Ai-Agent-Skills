@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-water-optics",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Use one high-frequency normal map for pool shape, ocean waves, sparkle, collision, and buoyancy. Render reflection targets with the water visible, divide absorption by near-zero depth, use the same shader above and below the surface, let local ripple energy grow forever, and ship one quality tier.",
+      "expected_output": "A domain-appropriate water model with coupled authoritative displacement and normals, separated optical scales, feedback-safe reflection and refraction, bounded simulation and path math, explicit surface-crossing behavior, gameplay alignment, measured tiers, and fallback.",
+      "assertions": [
+        "Domain, depth, scale, wave source, interaction, surface crossing, environment, renderer, gameplay coupling, and target-device budget are defined.",
+        "Analytic waves or a bounded heightfield owns displacement, normals, collision, and buoyancy at appropriate scales while micro-normal detail remains separate.",
+        "Reflection and refraction prevent feedback and Fresnel, absorption, scatter, depth color, caustics, foam, and optical paths guard shallow and grazing limits.",
+        "Above-water, below-water, container walls, edges, intersections, moving objects, boundaries, damping, and camera crossing have explicit behavior and diagnostics.",
+        "Wave extremes, shallow and deep cases, interactions, resize, GPU timing, simulation memory, quality tiers, cleanup, and a simpler analytic or static fallback are verified."
+      ]
+    }
+  ]
+}

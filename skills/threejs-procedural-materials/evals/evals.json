@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-procedural-materials",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Make a procedural terrain material by generating independent noise for color, roughness, normals, displacement, wetness, and emission. Mark every texture as sRGB, let displacement ignore shadows and bounds, compile a shader variant per instance, normalize zero derivatives, and tune only under production lighting.",
+      "expected_output": "A correlated PBR material graph based on declared physical causes and scale, correct color and data handling, coupled displacement and depth behavior, stable derivatives and variants, neutral diagnostics, measured shader cost, and a bounded fallback.",
+      "assertions": [
+        "Surface identity, physical scale, coordinate space, inputs, causal fields, renderer backend, lighting model, and camera envelope are declared.",
+        "Height, slope, moisture, curvature, exposure, age, and instance state drive correlated base color, roughness, metalness, normal, displacement, opacity, and emission.",
+        "Color textures use the intended color transform while numeric and data textures remain linear and derivatives or normalization guard degenerate values.",
+        "Displacement stays consistent with normals, bounds, shadow depth, collision, filtering, instancing, and environment response.",
+        "Channel diagnostics, neutral and production lighting, near and far views, moving lights, shader-program counts, GPU timing, quality tiers, and fallback are verified."
+      ]
+    }
+  ]
+}

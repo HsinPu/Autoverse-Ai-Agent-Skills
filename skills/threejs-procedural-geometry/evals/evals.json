@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-procedural-geometry",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Generate a configurable shell, rail, and aperture mesh in one opaque vertex loop. Ignore zero dimensions and winding, call computeVertexNormals after every change, hide missing caps and inverted faces with DoubleSide, rebuild random topology for each seed, and use the full render mesh for picking and collision.",
+      "expected_output": "A semantic procedural-mesh pipeline with bounded parameters, explicit topology and joins, coordinated indices and attributes, invalid-triangle rejection, stable deterministic variation, proportional operational meshes, diagnostics, LOD, and generation measurements.",
+      "assertions": [
+        "Shape grammar, units, frames, profiles, parameter bounds, topology, UV ownership, material groups, deformation, identity, and LOD requirements are defined.",
+        "Semantic parts and joins produce indices, normals, tangents, UVs, bounds, caps, seams, and groups as one coordinated contract.",
+        "Zero-area, non-finite, inverted, degenerate, intersecting, and optionally non-watertight geometry is rejected or repaired before GPU upload.",
+        "Deterministic variants preserve topology when morphing or caching requires identity and instancing is chosen only where semantics survive.",
+        "Wireframe, normals, UVs, close views, shadow silhouettes, degenerate inputs, LODs, picking, collision, topology statistics, and generation time are verified."
+      ]
+    }
+  ]
+}

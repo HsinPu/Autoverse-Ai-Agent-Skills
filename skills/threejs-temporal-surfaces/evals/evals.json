@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-temporal-surfaces",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Implement frost, wet glass, and touch trails by sampling and writing one render target in the same pass. Accumulate unbounded values at display resolution, stamp screen coordinates into moving surface UVs, keep history through resize and camera cuts, run blur every frame while paused, and provide no static mode.",
+      "expected_output": "An explicitly owned ping-pong history system with declared channels and coordinates, bounded accumulation and cadence, valid interaction projection, separate diagnostic derivations, reset or reprojection policy, measured memory and GPU tiers, and a static fallback.",
+      "assertions": [
+        "Surface domain, history channels, coordinate mapping, interaction inputs, accumulation, decay, diffusion, refraction, resolution, cadence, and camera relationship are defined.",
+        "Read and write targets are distinct under an explicit ping-pong owner with deterministic initialization, finite bounds, resize, disposal, and pause behavior.",
+        "Interaction stamps are transformed into the same stable surface space and invalid mappings after surface motion, camera cuts, or UV changes reset or reproject history.",
+        "Masks, normals, refraction, blur, roughness, opacity, and crystalline growth are derived in observable stages with bounded energy.",
+        "Rapid input, seams, motion, cuts, resize, pause, long runtime, reset, memory, GPU timing, reduced resolution, and static fallback are verified."
+      ]
+    }
+  ]
+}

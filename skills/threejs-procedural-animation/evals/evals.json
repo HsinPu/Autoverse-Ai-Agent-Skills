@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-procedural-animation",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Animate a staged launch and docking sequence by adding velocity and rotation directly to transforms every render frame. Let timeline callbacks, camera code, and physics mutate the same objects, use Date.now for phase timing, lerp Euler angles, and keep cached spring velocity after seeking or replay.",
+      "expected_output": "A deterministic phase and reference-frame model that derives transforms from authoritative time or fixed state, preserves required continuity, uses quaternion handoffs and time-based response, resets discontinuities, and proves boundary and replay behavior.",
+      "assertions": [
+        "Timeline phases, reference frames, control parameters, events, continuity requirements, ownership, reset, seek, and replay contracts are tabulated.",
+        "Position, velocity, orientation, scale, and effect envelopes are computed from simulation time or fixed state rather than accumulated render-frame edits.",
+        "Quaternion and explicit local or world-frame operations control alignment, rotating frames, docking, staging, and arbitrary orientation changes.",
+        "Damping and easing use time-based units while discontinuities reset cached velocity, spring state, and temporal rendering history.",
+        "Phase boundaries, large timesteps, pause, resume, replay, optional reverse or seek, camera coupling, and fixed-time captures are verified."
+      ]
+    }
+  ]
+}

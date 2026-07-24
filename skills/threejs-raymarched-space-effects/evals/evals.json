@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-raymarched-space-effects",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create a black-hole and nebula shader by marching every screen pixel from the camera to infinity with a while loop. Divide by distance near the singularity, ignore ray entry bounds and opacity termination, hide NaNs with color clamps, sample the environment in the wrong color space, and offer no reduced mode.",
+      "expected_output": "A bounded numerical-integration design with declared artistic or physical contract, analytic entry and exit, guarded stable fields, explicit termination, diagnostic reasons, projected-work reduction, camera-path artifact tests, measured tiers, and a fallback.",
+      "assertions": [
+        "Phenomenon, coordinate space, camera relationship, units, physical versus artistic intent, integration domain, emission, absorption, background, and step budget are declared.",
+        "Analytic projected bounds and ray entry or exit reduce work before field, distance, curvature, disk, star, volume, or lensing integration begins.",
+        "All loops and denominators are bounded with distance, opacity, escape, miss, error, and non-finite termination policies.",
+        "Step count, path, density, field magnitude, hit reason, invalid values, texture sampling, and color handling are observable in diagnostics.",
+        "Singularities, misses, grazing views, motion, large coordinates, resize, long runtime, GPU cost, artifacts, quality tiers, and mesh or sprite fallback are verified."
+      ]
+    }
+  ]
+}

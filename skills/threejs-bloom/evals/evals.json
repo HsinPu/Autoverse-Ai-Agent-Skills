@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-bloom",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Make every bright object glow by applying bloom after tone mapping, raise exposure until the effect appears, replace non-selected materials during each selective pass without guaranteed restoration, keep all mip targets full resolution, and skip disabled-effect and resize tests.",
+      "expected_output": "A scene-referred HDR bloom pipeline with deliberate emissive hierarchy, pre-tone-map placement, deterministic selection and restoration, bounded multi-scale targets, diagnostic composites, exposure tests, lifecycle handling, and a readable no-bloom fallback.",
+      "assertions": [
+        "HDR target range, exposure, tone-map owner, output transform, backend, emitter hierarchy, and target devices are confirmed.",
+        "Threshold, soft knee, radius, mip levels, intensity, and resolution are selected from measured scene luminance rather than compensating for color errors.",
+        "Selective bloom uses explicit masks or layers and proves every temporarily changed material is restored after success, failure, and teardown.",
+        "Bloom-only, threshold, composite, transparent-object, UI, resize, exposure-sweep, and disabled-effect views are verified.",
+        "Render-target memory, GPU timing, quality tiers, disposal, and the readable no-bloom baseline are reported."
+      ]
+    }
+  ]
+}

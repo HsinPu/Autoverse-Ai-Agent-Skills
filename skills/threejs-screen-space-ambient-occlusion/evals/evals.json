@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-screen-space-ambient-occlusion",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Add SSAO by reconstructing view position with a copied projection formula, using random screen-space radius, blurring across all depth edges, accumulating history before the raw AO is correct, and multiplying the final color so direct lights and emissive materials become darker.",
+      "expected_output": "A depth-scale-aware AO pipeline with verified reconstruction and normals, scene-unit sampling, edge-aware filtering and optional valid history, correct ambient-term composition, diagnostics, halo tests, tiered cost, and a no-AO comparison.",
+      "assertions": [
+        "Depth convention, projection, reversed-depth state, normal source, world scale, resolution, backend, and ambient or environment-light owner are confirmed.",
+        "Known view positions and normals validate reconstruction before horizon or hemisphere sampling is introduced.",
+        "Radius, thickness, sample count, resolution, and horizon policy use scene units and bounded quality tiers.",
+        "Denoising, bilateral upsampling, and optional temporal history reject foreground-background discontinuities and reset after cuts, resize, or depth changes.",
+        "Raw AO, depth, normals, filtered AO, halos, direct and emissive preservation, no-AO composite, GPU timing, and fallback tiers are verified."
+      ]
+    }
+  ]
+}

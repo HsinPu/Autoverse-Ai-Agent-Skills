@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-spectral-ocean",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Build an FFT ocean by giving every cascade the same wavelength band and random phase each frame. Recompute the spectrum separately for displacement, normals, foam, and velocity, keep temporal foam through teleports, allocate maximum-resolution float textures on every device, and ignore underwater transitions.",
+      "expected_output": "A phase-stable spectral ocean contract with distinct cascades, validated transforms and derivatives, shared displacement and velocity signals, bounded temporal foam, staged optics and underwater behavior, measured memory tiers, and an analytic fallback.",
+      "assertions": [
+        "Scale, wind and swell, spectrum, cascade bands, tile sizes, resolution, choppiness, camera envelope, backend, and quality tiers are declared.",
+        "Phase evolution, inverse transform, normalization, sign conventions, displacement, derivatives, normals, velocity, and compression are independently validated.",
+        "Cascade bands remain distinct, blend without duplicate energy, and shared simulation outputs avoid redundant high-cost spectrum sampling.",
+        "Foam history resets or reprojects after discontinuities while reflection, refraction, Fresnel, absorption, scatter, caustics, horizon, and surface crossing are staged.",
+        "Calm and storm states, seams, long runtime, camera translation, above and below water, GPU timings, texture memory, cleanup, and analytic fallback are verified."
+      ]
+    }
+  ]
+}

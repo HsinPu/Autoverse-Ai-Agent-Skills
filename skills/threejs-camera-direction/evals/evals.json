@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-camera-direction",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Build one camera that chase logic, pointer input, cutscenes, and collision all mutate directly. Smooth position and Euler angles with a fixed per-frame lerp, keep the same near and far planes for every mode, and preserve temporal history through teleports and hard cuts.",
+      "expected_output": "A stateful camera rig with explicit intent and final transforms, stable coordinate frames, frame-rate-independent damping, quaternion handoffs, bounded collision correction, precision-aware projection, cut resets, and lifecycle tests.",
+      "assertions": [
+        "Camera modes, subject and world frames, composition targets, input ownership, obstacles, projection rules, and comfort limits are mapped.",
+        "Desired position, aim, up, FOV, and clipping remain separate from the final smoothed camera transform.",
+        "Damping uses time-based units and arbitrary orientation transitions use quaternions rather than Euler-component interpolation.",
+        "Teleports, origin shifts, mode changes, and hard cuts reset smoothing, velocity, motion vectors, and temporal post-processing history.",
+        "Collision, visibility, fast motion, vertical travel, resize, extreme coordinates, teardown, and fixed-path captures are verified."
+      ]
+    }
+  ]
+}

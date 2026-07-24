@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-procedural-vfx",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Implement sparks, trails, debris, and impact bursts by allocating a Mesh and material for every particle. Spawn without a maximum, splice arrays during iteration, reuse pooled effects without resetting them, simulate offscreen forever, stack transparent quads until they fill the screen, and tune emission by raising exposure.",
+      "expected_output": "A bounded VFX lifecycle with explicit event and emitter contracts, suitable CPU or GPU representation, normalized lifetime signals, deterministic pooling and dense reclamation, overdraw and emission controls, stress tests, quality tiers, and cleanup evidence.",
+      "assertions": [
+        "Semantic event, emitter space, spawn envelope, lifetime, motion, collision, curves, sorting, pooling, offscreen policy, and quality budget are defined.",
+        "CPU arrays, instancing, points, transform feedback, compute, or texture simulation is selected from measured count and behavior without hot-loop object allocation.",
+        "Shape, motion, opacity, size, emission, and secondary effects derive from normalized lifetime and authoritative event state.",
+        "Maximum active counts, spawn rates, dense removal, complete pool reset, deterministic seeds, transparent overdraw, and HDR hierarchy are enforced.",
+        "Burst storms, low FPS, pause, camera cuts, origin shifts, long sessions, bloom, counts, overdraw views, CPU and GPU timings, teardown, and tiers are verified."
+      ]
+    }
+  ]
+}

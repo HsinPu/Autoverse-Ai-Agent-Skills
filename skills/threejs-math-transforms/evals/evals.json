@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-math-transforms",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Fix an aiming and projection bug by mixing local positions, world directions, screen pixels, and NDC in one Vector3. Apply translation to normals, invert matrices without checking scale, interpolate Euler components, normalize every vector including zero-length values, and use one absolute epsilon everywhere.",
+      "expected_output": "A named-space transform solution with correct point, direction and normal semantics, stable matrix and quaternion composition, guarded degeneracies, scale-relative tolerances, representative equations, and numeric tests.",
+      "assertions": [
+        "Source and destination spaces, axes, handedness, units, hierarchy, scale, precision range, and mutation owner are stated before operations.",
+        "Points include translation, directions exclude it, normals use the inverse-transpose under non-uniform scale, and projection stages are not conflated.",
+        "Matrix and quaternion composition replaces arbitrary Euler interpolation and inverse operations guard singular or near-singular transforms.",
+        "Normalization, basis construction, ray, plane, bounds, and collinearity logic handle zero and degenerate inputs with scale-relative tolerances.",
+        "Identity, translation, rotation, negative and non-uniform scale, parent transforms, extreme coordinates, equations, and before-after examples are tested."
+      ]
+    }
+  ]
+}

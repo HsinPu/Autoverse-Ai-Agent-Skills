@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-gameplay-systems",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Implement combat, spawning, win conditions, and saved progress directly in Three.js object names and animation callbacks. Advance everything with render delta, use Math.random, remove entities from arbitrary listeners, add effects without limits, and treat page reload as restart testing.",
+      "expected_output": "An authoritative gameplay architecture with explicit rules and system order, fixed-step or deterministic state, idempotent entities and events, a complete playable slice, bounded presentation effects, lifecycle coverage, and measurable playtest evidence.",
+      "assertions": [
+        "Player fantasy, core loop, controls, camera, entities, success and failure states, level structure, session target, and playability criteria are defined.",
+        "Authoritative gameplay state is separated from Three.js objects, animation callbacks, UI, particles, and audio presentation.",
+        "Input, AI, abilities, physics, damage, spawning, objectives, networking, events, and rendering have an explicit fixed-step order and ownership.",
+        "Randomness is seeded where replay or tests require it, while entity creation, removal, pause, restart, save, and load remain idempotent.",
+        "Win, loss, low FPS, focus loss, alternate controls, bot paths, long sessions, bounded effects, and performance evidence are returned."
+      ]
+    }
+  ]
+}

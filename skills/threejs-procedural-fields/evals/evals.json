@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-procedural-fields",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Build terrain, biome, water, wear, and vegetation masks by stacking unrelated noise functions until each channel looks acceptable. Seed randomness from traversal order, mix object and world coordinates, change octave amplitudes per quality tier, estimate normals with arbitrary offsets, and accept CPU and GPU disagreement.",
+      "expected_output": "A deterministic field contract with declared domain, units, seed, bands and derivatives, shared causal outputs, diagnostics, continuity and origin tests, bounded sampling tiers, and explicit CPU/GPU consistency.",
+      "assertions": [
+        "Domain coordinates, units, seed, periodicity, frequency bands, amplitude ranges, derivative needs, temporal behavior, and CPU or GPU ownership are specified.",
+        "Low-frequency structure precedes detail and dependent displacement, normals, materials, wetness, vegetation, and VFX derive from shared causes.",
+        "Randomness is deterministic and independent of traversal order, while origin shifts, negative coordinates, seams, scale, and precision are handled.",
+        "Analytic or consistently scaled finite-difference derivatives support normals and flow without arbitrary offsets or non-finite results.",
+        "Field, gradient, bands and thresholds, seed sweeps, CPU/GPU parity, continuity, sample count, quality tiers, and cost are reported."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-parallax-occlusion-mapping",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Add deep relief to every material with parallax occlusion mapping. Assume tangents always exist, invert the height texture until it looks right, use an unbounded loop at grazing angles, let corrected UVs sample outside the texture, keep the original normals and shadows, and use the result for collision.",
+      "expected_output": "A bounded height-field intersection design with a verified tangent basis and height convention, coupled UV, normal, silhouette and shadow behavior, grazing and boundary controls, measured quality tiers, and a true-geometry decision boundary.",
+      "assertions": [
+        "Tangent basis, mirrored UV behavior, height convention, physical relief scale, topology, backend, silhouette need, and viewing range are confirmed.",
+        "Ray marching has bounded angle-aware steps, guarded denominators, explicit entry and exit behavior, and intersection refinement.",
+        "Corrected UVs, normals, self-shadowing, optional depth, and silhouette clipping derive from the same height definition.",
+        "UV boundaries, seams, texture filtering, curved surfaces, grazing angles, animated lights, and shadow comparisons are tested.",
+        "Collision and large silhouette changes route to geometry while GPU timing, fallback thresholds, and normal-map or flat tiers are reported."
+      ]
+    }
+  ]
+}

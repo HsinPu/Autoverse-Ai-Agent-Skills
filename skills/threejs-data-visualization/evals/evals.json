@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-data-visualization",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Turn a tabular dataset into a perspective 3D chart because it looks impressive. Encode the same magnitude with sphere volume and depth, replace missing values with zero, use red and green without labels, omit units and uncertainty, and render every record with individual meshes and raycasts.",
+      "expected_output": "An analytical visualization contract that justifies 3D, preserves schema, units, uncertainty and missingness, documents perceptually valid encodings, supplies query and accessible paths, bounds large-data work, and validates known records reproducibly.",
+      "assertions": [
+        "The analytical question, audience, schema, units, time, coordinate reference, uncertainty, interactions, and non-visual output are defined.",
+        "A 2D comparison determines whether 3D contributes meaningful spatial or structural information rather than decoration.",
+        "Every position, size, color, opacity, shape, motion, and grouping encoding has a documented scale that does not misrepresent magnitude.",
+        "Missingness, uncertainty, labels, legends, filters, selection, color-independent cues, and accessible table or text summaries are preserved.",
+        "Known-record tests, extrema, conversions, occlusion, aggregation or indexing, picking latency, visible-mark limits, and screenshots are reported."
+      ]
+    }
+  ]
+}

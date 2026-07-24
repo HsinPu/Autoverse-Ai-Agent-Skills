@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-precipitation-surfaces",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create a rain and snow system where every particle raycasts the whole scene each frame, all drops respawn at the same camera-relative boundary, puddle and snow textures accumulate forever, wet materials use unrelated noise, transparent streaks remain full density on mobile, and weather changes instantly.",
+      "expected_output": "A shared weather-state architecture that bounds precipitation, impacts and accumulation, drives coherent surface response, handles exposure and shelter, measures overdraw, supports transitions and long runtimes, and provides reduced tiers.",
+      "assertions": [
+        "Precipitation type, intensity, wind, temperature, coverage, camera volume, impact needs, accumulation, melt or evaporation, and device budget are defined.",
+        "Camera-aware or partitioned spawning avoids visible repetition and impact work uses bounded fields, batches, proxies, or selective queries instead of per-drop full-scene raycasts.",
+        "Wetness, puddles, ripples, snow, roughness, normals, reflection, color, displacement, and VFX share coherent exposure and coverage signals.",
+        "Accumulation, decay, feedback textures, particle counts, transparent overdraw, and transition rates have explicit bounds and quality tiers.",
+        "Shelter, slopes, moving objects, ground intersections, camera motion, storm transitions, long runtimes, diagnostics, timings, and fallback behavior are verified."
+      ]
+    }
+  ]
+}

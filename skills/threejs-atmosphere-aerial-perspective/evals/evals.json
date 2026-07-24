@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-atmosphere-aerial-perspective",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Add a physically based atmosphere by stacking arbitrary exponential fog over a raymarched sky, use unitless planet radii, reconstruct depth with the default formula regardless of backend, update every LUT every frame, and tune until one sunset screenshot looks good.",
+      "expected_output": "A tiered atmosphere and aerial-perspective design with declared units, shared transmittance and inscattering, backend-correct depth, bounded LUT or raymarch work, diagnostic signals, representative altitude and lighting tests, and a low-cost fallback.",
+      "assertions": [
+        "Planet and atmosphere radii, density profiles, scattering coefficients, camera altitude range, sun direction, exposure coupling, and physical units are declared.",
+        "Sky, terrain, objects, sun, clouds, and environment lighting consume a consistent transmittance and inscattering contract.",
+        "Depth reconstruction is verified against the active projection, renderer backend, reversed-depth state, and large-coordinate strategy.",
+        "LUT formats, ray steps, update triggers, GPU cost, and memory are bounded by explicit quality tiers.",
+        "Ground, horizon, orbit, sunrise, sunset, camera-cut, no-atmosphere, and reduced-haze evidence is returned."
+      ]
+    }
+  ]
+}

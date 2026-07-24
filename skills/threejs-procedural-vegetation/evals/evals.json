@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-procedural-vegetation",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Fill a terrain with millions of uniformly random grass and tree instances. Animate every vertex with the same world-space sine so roots slide, regenerate random wind phases whenever chunks reorder, keep dense alpha cards and full shadows at all distances, and use one mesh detail level for every device.",
+      "expected_output": "A deterministic vegetation system with species and biome structure, constrained scattering and attachment, rooted multi-frequency motion, stable per-instance phases, measured overdraw and shadows, bounded LOD and density tiers, and lifecycle evidence.",
+      "assertions": [
+        "Biome, species silhouettes, growth rules, density fields, surfaces, seed, scale distribution, interaction, camera range, wind, and device budgets are defined.",
+        "Deterministic clustering, exclusion, slope, height, visibility, and ecological constraints replace uniform random scattering.",
+        "Attachment frames keep bases rooted while trunks, branches, blades, tips, and leaves respond at appropriate frequencies after host transforms change.",
+        "Chunking, instancing, impostors, LOD, culling, adaptive density, alpha overdraw, shadows, depth, picking, and motion vectors are budgeted and tested.",
+        "Seed sweeps, wind diagnostics, LOD transitions, long traversal, draw calls, overdraw, GPU timing, memory, teardown, and fallbacks are reported."
+      ]
+    }
+  ]
+}

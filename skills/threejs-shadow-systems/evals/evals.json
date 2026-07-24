@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-shadow-systems",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Fix unstable outdoor shadows by raising every map to 8192, using one arbitrary bias, updating all cascades and clipmaps every frame, fitting them to the entire world, and letting displaced, alpha-tested, skinned, instanced, and morphed casters use unrelated depth materials.",
+      "expected_output": "A scale-aware shadow architecture with a correct baseline, fitted and stabilized projections, relative bias tests, coherent caster depth paths, targeted updates, bounded memory and timing, representative artifact tests, and constrained-device fallbacks.",
+      "assertions": [
+        "Lights, camera envelope, receivers, caster classes, scene scale, softness, alpha and displacement needs, backend, and GPU budget are defined.",
+        "A correct single-map baseline proves projection fit and bias before cascades, clipmaps, filtering, caching, or contact enhancements are added.",
+        "Cascade or clipmap coverage is stabilized and resolution, update cadence, invalidation, and cache ownership follow visible scale and motion.",
+        "Custom displacement, alpha test, skinning, instancing, morphing, materials, and depth or shadow paths remain geometrically consistent.",
+        "Acne, Peter Panning, thin geometry, vegetation, terrain, moving lights and cameras, origin shifts, GPU timing, memory, disposal, and fallback captures are verified."
+      ]
+    }
+  ]
+}

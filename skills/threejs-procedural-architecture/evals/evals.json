@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-procedural-architecture",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Generate a city by randomizing windows, arches, roofs, and ornaments independently on every wall before defining floor or bay dimensions. Build shared walls twice, layer facade meshes coplanarly, merge everything into one anonymous mesh, and reuse render geometry for collision and navigation.",
+      "expected_output": "A deterministic architectural grammar that resolves massing and exposed edges first, preserves dimensions and semantic identities, compiles repeated modules efficiently, separates operational representations, validates joins and interiors, and reports city-scale cost.",
+      "assertions": [
+        "Plot, massing, floors, bays, structural constraints, openings, roofs, materials, interiors, seed, style vocabulary, and LOD envelope are defined.",
+        "Shared and exposed edges are resolved before facades, trim, cornices, roofs, ornaments, collision, or navigation geometry are generated.",
+        "Repeated modules use instancing or merging without losing stable building, facade, material, selection, editing, networking, and regeneration identifiers.",
+        "Deterministic variation remains inside bounded style rules and avoids coplanar layers, inconsistent dimensions, invalid openings, and duplicate shared walls.",
+        "Corners, roof joins, ground contact, interiors, navigation, shadows, culling, topology, draw counts, LOD transitions, seeds, and captures are verified."
+      ]
+    }
+  ]
+}
