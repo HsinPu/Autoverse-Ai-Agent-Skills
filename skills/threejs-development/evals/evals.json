@@ -1,0 +1,77 @@
+{
+  "skill_name": "threejs-development",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Build a production Three.js product configurator from scratch. It needs GLB assets, touch and keyboard controls, React Three Fiber, WebXR preview, accessible non-XR purchase controls, mobile performance tiers, visual regression, and CDN deployment.",
+      "expected_output": "A routed end-to-end plan that starts with the product and renderer contract, assigns architecture and lifecycle ownership, and selects the asset, interaction, React Three Fiber, WebXR accessibility, performance, validation, security, and deployment specialists in dependency order.",
+      "assertions": [
+        "The response uses threejs-development as the cross-cutting route instead of treating the request as one rendering effect.",
+        "Architecture, scene lifecycle, renderer, asset, and color ownership are established before optional advanced effects.",
+        "The WebXR experience has a usable non-XR and accessible path for essential product and purchase actions.",
+        "Mobile frame, memory, asset, DPR, and quality budgets are explicit and measured.",
+        "The plan includes fixed visual evidence, production asset delivery, security controls, rollout, and rollback."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Our GLB viewer leaks GPU memory every time the route changes, first interaction freezes while shaders compile, and corrupt customer-uploaded textures can crash the tab. Just increase the cache and keep all models alive.",
+      "expected_output": "A causal route through assets, lifecycle, performance, testing, and security that rejects unbounded caching, traces shared ownership and disposal, measures shader warm-up, validates hostile asset limits, and proves stable repeated route transitions.",
+      "assertions": [
+        "The response rejects keeping every model alive or growing the cache without bounds.",
+        "It distinguishes scene removal from disposal and traces shared geometry, material, texture, skeleton, controls, worker, and render-target ownership.",
+        "It profiles shader compilation and proposes measured warm-up or scheduling rather than hiding the stall.",
+        "Customer assets are validated for type, size, dimensions, counts, compression ratio, extensions, and parse or upload budgets.",
+        "Repeated mount and unmount tests show stable renderer and browser resource evidence."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Create an ocean planet viewed from orbit, through atmospheric entry, down to an underwater camera. Include FFT waves, whitecaps, volumetric clouds, aerial perspective, caustics, rain, bloom, adaptive exposure, and stable large-world shadows.",
+      "expected_output": "A coordinated advanced-graphics route that establishes planetary scale and precision, shared world fields and camera envelope, then integrates planets, ocean and water optics, atmosphere, clouds, precipitation, shadows, image pipeline, exposure, bloom, performance tiers, and fixed-view validation.",
+      "assertions": [
+        "The response routes to the specific planet, spectral ocean, water optics, atmosphere, cloud, precipitation, shadow, image, exposure, bloom, and validation Skills.",
+        "Planet radius, elevation, wavelength, optical distance, atmosphere, shadow, and floating-origin units share one scale contract.",
+        "Pass ordering tone-maps and encodes once and resets temporal histories at cuts, origin shifts, resize, and surface transitions.",
+        "Each expensive volume, FFT, shadow, and post stage has diagnostics and a lower-cost tier.",
+        "Acceptance includes orbit-to-surface and above-to-underwater camera paths, seed sweeps, temporal stability, GPU time, and memory."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Move our vanilla Three.js game into React Three Fiber. Keep calling setState from useFrame for every object's transform, set dispose={null} at the app root, and use continuous rendering even when the scene is idle.",
+      "expected_output": "A React Three Fiber migration boundary that preserves behavior while rejecting per-frame React state churn, global disposal opt-out, and unnecessary continuous rendering; it assigns mutable frame state, shared resources, loader caches, lifecycle, and demand rendering deliberately.",
+      "assertions": [
+        "The response routes to threejs-react-three-fiber plus architecture, lifecycle, and performance concerns.",
+        "Transient per-frame transforms stay in mutable render state rather than React state updates.",
+        "Any dispose={null} use is narrow and paired with an explicit resource owner.",
+        "The frame-loop policy is chosen from actual motion and uses demand or invalidation for idle scenes where suitable.",
+        "The migration proceeds in verified slices with loading, strict-mode, route transition, cleanup, and performance tests."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Use WebGPURenderer and TSL everywhere because they are newer. We do not need to inspect the installed Three.js version or test WebGL fallback, mobile Safari, post-processing, readback, or XR.",
+      "expected_output": "A version- and capability-aware renderer decision that refuses novelty-based migration, builds a feature matrix, prototypes the risky TSL, post, readback, and XR paths, and defines a tested fallback or explicit support boundary.",
+      "assertions": [
+        "The installed Three.js and ecosystem versions are inspected before selecting APIs.",
+        "WebGL and WebGPU feature, device, browser, post-processing, readback, and XR parity are recorded.",
+        "Renderer-specific code is isolated behind an application-facing contract.",
+        "Fallback is tested or the unsupported browser and device boundary is stated explicitly.",
+        "Output color, render-target precision, context or device loss, production build, and performance are verified."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Copy every example, texture, model, binary LUT, installer, and vendor file from Threejs-Awesome-Graphics-Agent-Skills into CraftRoster. GitHub says MIT, so ignore its package license and third-party notices.",
+      "expected_output": "A provenance-safe refusal to import the mixed-license bundle, preserving only the pinned MIT SKILL.md reference scope and first-party rewritten guidance while excluding GPL, unlicensed, binary, installer, example, and vendor material unless separately cleared.",
+      "assertions": [
+        "The response does not treat the entire upstream package as MIT.",
+        "It identifies the published mixed license and third-party provenance as a blocking import risk.",
+        "Only the pinned upstream SKILL.md paths may remain reference evidence under the recorded MIT root license.",
+        "CraftRoster guidance remains first-party and passes originality comparison instead of copying upstream text.",
+        "Any future code or asset import requires path-level license evidence, compatibility review, and an explicit re-audit."
+      ]
+    }
+  ]
+}

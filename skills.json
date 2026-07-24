@@ -1,7 +1,7 @@
 {
   "version": "2.0.0",
-  "updated": "2026-07-15T00:00:00Z",
-  "total": 221,
+  "updated": "2026-07-24T00:00:00Z",
+  "total": 268,
   "categories": [
     {
       "id": "workflow-planning",
@@ -17,6 +17,11 @@
       "id": "frontend-design",
       "name": "Frontend & Design",
       "description": "Web frontend development, visual direction, design systems, responsive UI, interaction patterns, and design-to-code."
+    },
+    {
+      "id": "threejs-graphics",
+      "name": "Three.js & 3D Graphics",
+      "description": "Three.js application architecture, rendering, assets, interaction, simulation, advanced graphics, validation, performance, accessibility, and production delivery."
     },
     {
       "id": "backend-data",
@@ -3367,6 +3372,869 @@
       ]
     },
     {
+      "name": "threejs-animation-system",
+      "description": "Three.js keyframe and character animation systems. Use for AnimationClip, AnimationMixer, AnimationAction, tracks, blending, crossfades, additive layers, skeletal animation, morph targets, root motion, retargeting, synchronization, animation events, clip optimization, and mixer lifecycle.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "animation",
+        "animation-mixer",
+        "skeletal-animation",
+        "morph-targets",
+        "blending"
+      ]
+    },
+    {
+      "name": "threejs-assets-gltf",
+      "description": "Three.js asset and glTF pipeline design, implementation, and debugging. Use for GLB or glTF loading, Blender export contracts, textures and HDR environments, Draco, Meshopt, KTX2, caching, progress, cancellation, validation, LOD delivery, asset licensing, and production CDN behavior.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "gltf",
+        "assets",
+        "loaders",
+        "compression",
+        "textures"
+      ]
+    },
+    {
+      "name": "threejs-atmosphere-aerial-perspective",
+      "description": "Planetary atmosphere and aerial-perspective systems in Three.js. Use for Rayleigh and Mie scattering, sky domes, precomputed lookup textures, sun or moon discs, ground-to-space transitions, depth-based transmittance and inscattering, atmosphere-aware lighting, and large-scale distance cues.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "atmosphere",
+        "aerial-perspective",
+        "scattering",
+        "sky",
+        "lut"
+      ],
+      "reference": {
+        "source": "scottstts/Threejs-Awesome-Graphics-Agent-Skills",
+        "license": "MIT",
+        "revision": "e43dcb03020cae5b08983a828bc1817dd6c0c40a"
+      }
+    },
+    {
+      "name": "threejs-bloom",
+      "description": "Production HDR bloom in Three.js. Use for emissive hierarchy, threshold and knee tuning, multi-scale blur, renderer-native or composer bloom, selective bloom, material restoration, effect isolation, exposure coupling, resolution scaling, and diagnosing washed-out or missing glow.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "bloom",
+        "hdr",
+        "emissive",
+        "postprocessing"
+      ],
+      "reference": {
+        "source": "scottstts/Threejs-Awesome-Graphics-Agent-Skills",
+        "license": "MIT",
+        "revision": "e43dcb03020cae5b08983a828bc1817dd6c0c40a"
+      }
+    },
+    {
+      "name": "threejs-camera-direction",
+      "description": "Advanced Three.js camera direction and rigging. Use for chase, orbit, side, cockpit, cinematic, or scale-aware cameras; damping and look-ahead; quaternion handoffs; floating origins; collision; pointer look; projection ownership; and stable framing across large or fast-moving scenes.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "camera",
+        "cinematography",
+        "controls",
+        "quaternions"
+      ],
+      "reference": {
+        "source": "scottstts/Threejs-Awesome-Graphics-Agent-Skills",
+        "license": "MIT",
+        "revision": "e43dcb03020cae5b08983a828bc1817dd6c0c40a"
+      }
+    },
+    {
+      "name": "threejs-data-visualization",
+      "description": "Three.js data and scientific visualization. Use for 3D charts, point clouds, networks, volumes, trajectories, digital twins, temporal or spatial datasets, encodings, axes, legends, labels, filtering, picking, uncertainty, large datasets, accessible summaries, and reproducible visual analysis.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "data-visualization",
+        "point-clouds",
+        "scientific-visualization",
+        "spatial-data",
+        "accessibility"
+      ]
+    },
+    {
+      "name": "threejs-development",
+      "description": "End-to-end Three.js development routing and delivery workflow. Use when building, restructuring, reviewing, or debugging a complete Three.js experience that spans architecture, scene lifecycle, assets, rendering, interaction, performance, advanced graphics, testing, accessibility, or deployment.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "webgl",
+        "webgpu",
+        "3d",
+        "architecture",
+        "routing"
+      ],
+      "reference": {
+        "source": "scottstts/Threejs-Awesome-Graphics-Agent-Skills",
+        "license": "MIT",
+        "revision": "e43dcb03020cae5b08983a828bc1817dd6c0c40a"
+      }
+    },
+    {
+      "name": "threejs-exposure-color-grading",
+      "description": "Exposure, tone mapping, and color grading for Three.js. Use for luminance metering, eye adaptation, manual or automatic exposure, tone-map ownership, output transforms, LUT generation or application, scene-referred versus display-referred ordering, and diagnosing crushed, clipped, dark, or double-encoded output.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "exposure",
+        "tone-mapping",
+        "color-grading",
+        "lut",
+        "hdr"
+      ],
+      "reference": {
+        "source": "scottstts/Threejs-Awesome-Graphics-Agent-Skills",
+        "license": "MIT",
+        "revision": "e43dcb03020cae5b08983a828bc1817dd6c0c40a"
+      }
+    },
+    {
+      "name": "threejs-gameplay-systems",
+      "description": "Gameplay architecture for Three.js browser games. Use for core loops, entities, abilities, combat, vehicles, character controllers, AI, levels, spawning, cameras, game feel, pause and restart, save state, deterministic replay, progression, bot playtests, and coordination with physics, audio, UI, networking, and rendering.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "gameplay",
+        "games",
+        "entities",
+        "game-loop",
+        "playtesting"
+      ]
+    },
+    {
+      "name": "threejs-geometry",
+      "description": "Three.js BufferGeometry construction, review, and optimization. Use for custom attributes and indices, topology, normals, tangents, UVs, groups, morph targets, skinning data, bounds, instancing, merging, line or point geometry, picking geometry, and geometry-related rendering defects.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "buffergeometry",
+        "topology",
+        "attributes",
+        "instancing"
+      ]
+    },
+    {
+      "name": "threejs-image-pipeline",
+      "description": "Integrated final-image pipeline for advanced Three.js scenes. Use when coordinating depth, normals, albedo, motion, history, ambient occlusion, shadows, atmosphere, bloom, exposure, tone mapping, grading, antialiasing, transparency, diagnostics, and effect-local render targets.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "rendering",
+        "frame-graph",
+        "postprocessing",
+        "hdr",
+        "diagnostics"
+      ],
+      "reference": {
+        "source": "scottstts/Threejs-Awesome-Graphics-Agent-Skills",
+        "license": "MIT",
+        "revision": "e43dcb03020cae5b08983a828bc1817dd6c0c40a"
+      }
+    },
+    {
+      "name": "threejs-interaction-input",
+      "description": "Three.js interaction and input implementation. Use for raycasting, GPU picking, pointer, touch, pen, keyboard, gamepad, gestures, drag and transform tools, camera controls, selection, hover, focus, occlusion, event routing, or synchronization between DOM UI and a 3D scene.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "interaction",
+        "raycasting",
+        "pointer",
+        "touch",
+        "gamepad"
+      ]
+    },
+    {
+      "name": "threejs-large-worlds-geospatial",
+      "description": "Large-world and geospatial Three.js engineering. Use for geographic coordinates, ellipsoids, map projections, local tangent frames, floating origins, globe or terrain tiles, geospatial precision, quadtree or clipmap streaming, camera-relative rendering, level of detail, horizon culling, and GIS data integration.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "geospatial",
+        "large-worlds",
+        "floating-origin",
+        "terrain",
+        "tiling"
+      ]
+    },
+    {
+      "name": "threejs-materials-lighting",
+      "description": "Three.js material, texture, environment, and lighting workflow. Use for PBR material selection, texture channels, color management, tone and exposure interactions, environment maps, light rigs, baked lighting, transparency, transmission, material variants, and lighting or shading defects.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "materials",
+        "lighting",
+        "pbr",
+        "textures",
+        "environment"
+      ]
+    },
+    {
+      "name": "threejs-math-transforms",
+      "description": "Three.js math, transforms, and coordinate-space problem solving. Use for vectors, matrices, quaternions, Euler angles, local and world transforms, basis construction, projections, rays, planes, bounds, interpolation, numerical precision, handedness, axes, and conversion between object, camera, clip, NDC, screen, and geographic spaces.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "math",
+        "transforms",
+        "vectors",
+        "matrices",
+        "quaternions"
+      ]
+    },
+    {
+      "name": "threejs-networked-experiences",
+      "description": "Networked and multiplayer Three.js architecture. Use for authoritative simulation, entity replication, snapshots, interpolation, prediction, reconciliation, interest management, presence, shared world state, replay, anti-cheat boundaries, bandwidth budgets, disconnect recovery, and synchronized visual effects.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "multiplayer",
+        "networking",
+        "interpolation",
+        "prediction",
+        "replication"
+      ]
+    },
+    {
+      "name": "threejs-parallax-occlusion-mapping",
+      "description": "Parallax occlusion mapping for Three.js GLSL or TSL. Use for height-field ray marching, relief UVs, view-angle adaptive steps, self-shadowing, height-derived normals, curved shells, silhouette clipping, relief-aware depth or shadows, and quality scaling.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "pom",
+        "parallax",
+        "relief",
+        "shaders",
+        "tsl"
+      ],
+      "reference": {
+        "source": "scottstts/Threejs-Awesome-Graphics-Agent-Skills",
+        "license": "MIT",
+        "revision": "e43dcb03020cae5b08983a828bc1817dd6c0c40a"
+      }
+    },
+    {
+      "name": "threejs-performance-memory",
+      "description": "Three.js performance and memory diagnosis and optimization. Use for low FPS, frame spikes, excessive draw calls, shader compilation stalls, overdraw, fill-rate pressure, large textures, asset decode cost, garbage collection, GPU leaks, mobile thermal limits, LOD, instancing, batching, workers, or adaptive quality.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "performance",
+        "gpu",
+        "memory",
+        "profiling",
+        "adaptive-quality"
+      ]
+    },
+    {
+      "name": "threejs-physics-audio",
+      "description": "Physics and spatial-audio integration for Three.js. Use for rigid bodies, colliders, triggers, character movement, fixed timesteps, interpolation, physics workers, collision-driven effects, positional audio, listener ownership, autoplay restrictions, and synchronized audiovisual simulation.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "physics",
+        "collision",
+        "fixed-timestep",
+        "spatial-audio"
+      ]
+    },
+    {
+      "name": "threejs-postprocessing",
+      "description": "Three.js post-processing pipeline design and implementation. Use for EffectComposer or renderer-native effects, render passes, multisampling, depth and normal ownership, outline, depth of field, motion blur, anti-aliasing, custom full-screen passes, effect ordering, resolution scaling, and no-post fallbacks.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "postprocessing",
+        "effect-composer",
+        "render-targets",
+        "screen-space"
+      ]
+    },
+    {
+      "name": "threejs-precipitation-surfaces",
+      "description": "Coupled weather precipitation and affected surfaces in Three.js. Use for rain, snow, sleet, streaks, flakes, splashes, puddles, ripples, wetness, snow accumulation, material transitions, model snow caps, shared storm envelopes, and weather-driven surface response.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "rain",
+        "snow",
+        "wetness",
+        "accumulation",
+        "weather"
+      ],
+      "reference": {
+        "source": "scottstts/Threejs-Awesome-Graphics-Agent-Skills",
+        "license": "MIT",
+        "revision": "e43dcb03020cae5b08983a828bc1817dd6c0c40a"
+      }
+    },
+    {
+      "name": "threejs-procedural-animation",
+      "description": "Advanced procedural animation for Three.js. Use for analytic transform timelines, launch or flight motion, gravity turns, staging, docking, spring-follow systems, rotating frames, debris motion, quaternion control, deterministic time, and frame-rate-independent secondary response.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "animation",
+        "procedural",
+        "quaternions",
+        "deterministic-time"
+      ],
+      "reference": {
+        "source": "scottstts/Threejs-Awesome-Graphics-Agent-Skills",
+        "license": "MIT",
+        "revision": "e43dcb03020cae5b08983a828bc1817dd6c0c40a"
+      }
+    },
+    {
+      "name": "threejs-procedural-architecture",
+      "description": "Procedural architecture and city generation in Three.js. Use for massing grammars, façade bays, exposed-edge analysis, profiles, arches, cornices, roofs, ornaments, modular kits, deterministic building variants, material-slot compilation, interiors, and scalable urban scenes.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "procedural",
+        "architecture",
+        "buildings",
+        "cities",
+        "instancing"
+      ],
+      "reference": {
+        "source": "scottstts/Threejs-Awesome-Graphics-Agent-Skills",
+        "license": "MIT",
+        "revision": "e43dcb03020cae5b08983a828bc1817dd6c0c40a"
+      }
+    },
+    {
+      "name": "threejs-procedural-fields",
+      "description": "Coherent procedural scalar and vector fields for Three.js. Use for terrain, biomes, clouds, water masks, wear, displacement, roughness, normals, flow, density, domain warping, and any system where geometry and material channels must share deterministic spatial causes.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "procedural",
+        "noise",
+        "fields",
+        "domain-warping",
+        "determinism"
+      ],
+      "reference": {
+        "source": "scottstts/Threejs-Awesome-Graphics-Agent-Skills",
+        "license": "MIT",
+        "revision": "e43dcb03020cae5b08983a828bc1817dd6c0c40a"
+      }
+    },
+    {
+      "name": "threejs-procedural-geometry",
+      "description": "Production procedural mesh generation in Three.js. Use for lofts, shells, profiles, branches, rails, frames, fins, caps, apertures, semantic mesh writers, material slots, custom normals, deterministic variants, and generated objects that must survive close inspection.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "procedural",
+        "geometry",
+        "mesh-generation",
+        "topology"
+      ],
+      "reference": {
+        "source": "scottstts/Threejs-Awesome-Graphics-Agent-Skills",
+        "license": "MIT",
+        "revision": "e43dcb03020cae5b08983a828bc1817dd6c0c40a"
+      }
+    },
+    {
+      "name": "threejs-procedural-materials",
+      "description": "Production procedural materials in Three.js. Use for terrain, soil, moss, rock, lava, planets, wetness, wear, dissolve, per-instance variation, texture-procedural hybrids, derivative normals, PBR channel generation, relief, and custom lighting or shadow modulation.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "procedural",
+        "materials",
+        "pbr",
+        "shaders",
+        "terrain"
+      ],
+      "reference": {
+        "source": "scottstts/Threejs-Awesome-Graphics-Agent-Skills",
+        "license": "MIT",
+        "revision": "e43dcb03020cae5b08983a828bc1817dd6c0c40a"
+      }
+    },
+    {
+      "name": "threejs-procedural-planets",
+      "description": "Procedural planetary bodies in Three.js. Use for spherical terrain, continents, oceans, ridges, craters, biome masks, coastlines, analytic normals, atmosphere coupling, orbital-to-surface LOD, floating origins, and deterministic worlds that must hold up across large scale changes.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "procedural",
+        "planets",
+        "terrain",
+        "lod",
+        "large-worlds"
+      ],
+      "reference": {
+        "source": "scottstts/Threejs-Awesome-Graphics-Agent-Skills",
+        "license": "MIT",
+        "revision": "e43dcb03020cae5b08983a828bc1817dd6c0c40a"
+      }
+    },
+    {
+      "name": "threejs-procedural-vegetation",
+      "description": "Procedural vegetation systems for Three.js. Use for grass, trees, branches, roots, ivy, vines, canopies, leaf cards, flowers, species presets, surface growth, deterministic scattering, rooted wind, LOD, instancing, and large vegetation fields.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "procedural",
+        "vegetation",
+        "grass",
+        "trees",
+        "lod"
+      ],
+      "reference": {
+        "source": "scottstts/Threejs-Awesome-Graphics-Agent-Skills",
+        "license": "MIT",
+        "revision": "e43dcb03020cae5b08983a828bc1817dd6c0c40a"
+      }
+    },
+    {
+      "name": "threejs-procedural-vfx",
+      "description": "Production real-time VFX in Three.js. Use for particles, sparks, plasma, trails, wakes, debris, dissolves, impact bursts, effect pools, instanced quads or meshes, GPU simulation, HDR emission hierarchy, and lifecycle-safe timed effects.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "vfx",
+        "particles",
+        "gpu-simulation",
+        "pooling",
+        "emissive"
+      ],
+      "reference": {
+        "source": "scottstts/Threejs-Awesome-Graphics-Agent-Skills",
+        "license": "MIT",
+        "revision": "e43dcb03020cae5b08983a828bc1817dd6c0c40a"
+      }
+    },
+    {
+      "name": "threejs-project-architecture",
+      "description": "Architecture design and review for maintainable Three.js applications. Use when defining feature modules, scene ownership, dependency direction, simulation boundaries, update phases, state flow, editor/runtime separation, or an incremental migration from a monolithic scene script.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "architecture",
+        "modules",
+        "scene-graph",
+        "state-management"
+      ]
+    },
+    {
+      "name": "threejs-raymarched-space-effects",
+      "description": "Raymarched space phenomena in Three.js. Use for black holes, accretion disks, wormholes, curved-ray integration, procedural star fields, gravitational-looking lensing, bounded nebulae, signed-distance structures, and GPU effects requiring controlled numerical integration.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "raymarching",
+        "space",
+        "black-hole",
+        "wormhole",
+        "shaders"
+      ],
+      "reference": {
+        "source": "scottstts/Threejs-Awesome-Graphics-Agent-Skills",
+        "license": "MIT",
+        "revision": "e43dcb03020cae5b08983a828bc1817dd6c0c40a"
+      }
+    },
+    {
+      "name": "threejs-react-three-fiber",
+      "description": "React Three Fiber architecture, implementation, review, and debugging. Use for Canvas setup, declarative scene components, hooks, render-loop ownership, Suspense asset loading, Drei integrations, event handling, shared resources, disposal, state stores, adaptive quality, or migration between vanilla Three.js and React.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "react",
+        "react-three-fiber",
+        "drei",
+        "r3f",
+        "suspense"
+      ]
+    },
+    {
+      "name": "threejs-rendering-platforms",
+      "description": "Three.js renderer and graphics-platform selection. Use when choosing or migrating between WebGLRenderer and WebGPURenderer, defining WebGPU and WebGL fallbacks, configuring canvas and context options, render targets, antialiasing, depth precision, HDR output buffers, backend capability checks, or context recovery.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "webgl",
+        "webgpu",
+        "renderer",
+        "fallback",
+        "capabilities"
+      ]
+    },
+    {
+      "name": "threejs-scene-lifecycle",
+      "description": "Three.js scene, renderer, and resource lifecycle implementation. Use for bootstrap, animation-loop ownership, resize and DPR handling, page visibility, pause and resume, route or level transitions, WebGL context loss, hot reload, teardown, and leak-free disposal.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "lifecycle",
+        "render-loop",
+        "resize",
+        "disposal",
+        "context-loss"
+      ]
+    },
+    {
+      "name": "threejs-screen-space-ambient-occlusion",
+      "description": "Screen-space ambient occlusion for Three.js. Use for SSAO or GTAO, half-resolution horizon sampling, depth and normal reconstruction, reversed depth, bent normals, temporal filtering, bilateral upsampling, contact grounding, halo diagnosis, and environment-light occlusion.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "ssao",
+        "gtao",
+        "ambient-occlusion",
+        "depth",
+        "postprocessing"
+      ],
+      "reference": {
+        "source": "scottstts/Threejs-Awesome-Graphics-Agent-Skills",
+        "license": "MIT",
+        "revision": "e43dcb03020cae5b08983a828bc1817dd6c0c40a"
+      }
+    },
+    {
+      "name": "threejs-security-deployment",
+      "description": "Security and production deployment workflow for Three.js applications. Use for untrusted 3D assets, remote URLs, shader or script injection risk, CORS and CSP, credentials, multiplayer input, privacy, build optimization, CDN caching, compression, HTTPS, source maps, observability, rollout, and rollback.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "security",
+        "deployment",
+        "csp",
+        "assets",
+        "cdn"
+      ]
+    },
+    {
+      "name": "threejs-shaders",
+      "description": "Custom Three.js shader design, implementation, review, and debugging. Use for ShaderMaterial, RawShaderMaterial, material hooks, GLSL, uniforms, varyings, derivatives, texture sampling, GPU simulation, precision issues, shader compilation failures, or deciding between classic shaders and TSL node materials.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "shaders",
+        "glsl",
+        "tsl",
+        "uniforms",
+        "gpu"
+      ]
+    },
+    {
+      "name": "threejs-shadow-systems",
+      "description": "Stable and scalable Three.js shadow systems. Use for directional cascades, clipmaps, large worlds, terrain, cities, moving cameras, texel stabilization, cached shadows, custom depth materials, alpha-tested casters, WebGPU or TSL shadow paths, update budgets, and targeted invalidation.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "shadows",
+        "cascades",
+        "clipmaps",
+        "large-worlds",
+        "webgpu"
+      ],
+      "reference": {
+        "source": "scottstts/Threejs-Awesome-Graphics-Agent-Skills",
+        "license": "MIT",
+        "revision": "e43dcb03020cae5b08983a828bc1817dd6c0c40a"
+      }
+    },
+    {
+      "name": "threejs-spectral-ocean",
+      "description": "Large spectral ocean systems in Three.js. Use for directional wave spectra, FFT or hybrid FFT and Gerstner displacement, multi-cascade wavelengths, choppiness, derivative normals, Jacobian whitecaps, temporal foam, sky reflection, underwater absorption, caustics, Snell windows, and above/below-water transitions.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "ocean",
+        "fft",
+        "waves",
+        "water",
+        "webgpu"
+      ],
+      "reference": {
+        "source": "scottstts/Threejs-Awesome-Graphics-Agent-Skills",
+        "license": "MIT",
+        "revision": "e43dcb03020cae5b08983a828bc1817dd6c0c40a"
+      }
+    },
+    {
+      "name": "threejs-temporal-surfaces",
+      "description": "History-driven surface effects in Three.js. Use for touch frost and thaw, wet glass, rain droplets, accumulation masks, ping-pong simulation, reduced-resolution blur, crystalline growth, two-scale refraction, history reprojection, and interactive screen- or surface-space state.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "temporal",
+        "history-buffer",
+        "wet-glass",
+        "frost",
+        "refraction"
+      ],
+      "reference": {
+        "source": "scottstts/Threejs-Awesome-Graphics-Agent-Skills",
+        "license": "MIT",
+        "revision": "e43dcb03020cae5b08983a828bc1817dd6c0c40a"
+      }
+    },
+    {
+      "name": "threejs-testing-debugging",
+      "description": "Three.js testing, diagnostics, and root-cause workflow. Use for scene regressions, rendering defects, nondeterministic animation, loader failures, browser or GPU differences, shader errors, interaction bugs, visual baselines, context loss, performance regressions, or building automated confidence around 3D behavior.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "testing",
+        "debugging",
+        "visual-regression",
+        "gpu",
+        "diagnostics"
+      ]
+    },
+    {
+      "name": "threejs-ui-overlays",
+      "description": "User interfaces and text for Three.js experiences. Use for HUDs, menus, labels, annotations, tooltips, CSS2D or CSS3D overlays, HTML portals, sprites, SDF or MSDF text, TextGeometry, world-to-screen projection, occlusion, responsive safe areas, touch targets, focus, localization, and accessible DOM equivalents.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "ui",
+        "hud",
+        "labels",
+        "text",
+        "accessibility"
+      ]
+    },
+    {
+      "name": "threejs-visual-validation",
+      "description": "Reproducible validation for advanced Three.js graphics. Use for fixed-view visual contracts, deterministic seed sweeps, no-post baselines, geometry and field diagnostics, pass isolation, distance and scale envelopes, temporal stability, GPU budgets, browser or device matrices, and visual regression evidence.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "visual-validation",
+        "determinism",
+        "baselines",
+        "gpu-budget",
+        "regression"
+      ],
+      "reference": {
+        "source": "scottstts/Threejs-Awesome-Graphics-Agent-Skills",
+        "license": "MIT",
+        "revision": "e43dcb03020cae5b08983a828bc1817dd6c0c40a"
+      }
+    },
+    {
+      "name": "threejs-volumetric-clouds",
+      "description": "Volumetric cloud systems in Three.js. Use for weather-driven density, layered cloud volumes, shape and detail erosion, vertical profiles, bounded raymarching, light cones, silver lining, temporal reconstruction, cloud shadows, local weather maps, and scalable quality modes.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "volumetric-clouds",
+        "raymarching",
+        "weather",
+        "temporal-reconstruction"
+      ],
+      "reference": {
+        "source": "scottstts/Threejs-Awesome-Graphics-Agent-Skills",
+        "license": "MIT",
+        "revision": "e43dcb03020cae5b08983a828bc1817dd6c0c40a"
+      }
+    },
+    {
+      "name": "threejs-water-optics",
+      "description": "Analytic and bounded water optics in Three.js. Use for Gerstner or multi-wave surfaces, heightfield pools, ripples, refraction, Fresnel reflection, Beer-Lambert absorption, caustics, underwater volumes, crest foam, derivative-filtered normals, and interactive object-driven disturbances.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "water",
+        "refraction",
+        "fresnel",
+        "caustics",
+        "heightfield"
+      ],
+      "reference": {
+        "source": "scottstts/Threejs-Awesome-Graphics-Agent-Skills",
+        "license": "MIT",
+        "revision": "e43dcb03020cae5b08983a828bc1817dd6c0c40a"
+      }
+    },
+    {
+      "name": "threejs-webgpu-tsl",
+      "description": "Three.js WebGPU and TSL implementation, review, and migration. Use for WebGPURenderer, node materials, Three.js Shading Language, storage buffers or textures, compute nodes, indirect workloads, renderer-native post-processing, WGSL interop, async readback, bind-group limits, and WebGL fallback.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "webgpu",
+        "tsl",
+        "compute",
+        "node-materials",
+        "wgsl"
+      ]
+    },
+    {
+      "name": "threejs-webxr-accessibility",
+      "description": "WebXR and inclusive Three.js experience design. Use for immersive VR or AR sessions, reference spaces, controllers, hands, locomotion, hit testing, anchors, XR performance, motion comfort, session lifecycle, keyboard or screen alternatives, reduced motion, captions, focus, and non-visual access to essential 3D content.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "webxr",
+        "vr",
+        "ar",
+        "accessibility",
+        "motion-comfort"
+      ]
+    },
+    {
       "name": "throwaway-prototyping",
       "description": "Build a deliberately disposable experiment that answers one product, interaction, visual, logic, architecture, or integration question with the minimum necessary fidelity. Use during solution discovery when evidence requires executable behavior or a tangible comparison, but production quality, persistence, migration, security hardening, and long-term maintainability would obscure the learning goal.",
       "category": "workflow-planning",
@@ -3911,6 +4779,201 @@
         {
           "name": "visual-regression-testing",
           "when": "The result needs reproducible screenshots, approved baselines, measurable fidelity, or a CI-grade visual verdict."
+        }
+      ]
+    },
+    {
+      "id": "threejs-development",
+      "title": "Three.js Application and Graphics Development",
+      "decision": "Use the umbrella route for cross-cutting work; otherwise select the narrowest specialist by ownership boundary, visual system, platform, or acceptance evidence.",
+      "skills": [
+        {
+          "name": "threejs-development",
+          "when": "A complete or ambiguous Three.js request spans architecture, rendering, assets, interaction, advanced graphics, quality, or production delivery and needs coordinated routing."
+        },
+        {
+          "name": "threejs-project-architecture",
+          "when": "The task concerns feature modules, dependency direction, scene ownership, update phases, simulation boundaries, or migration from a monolithic scene script."
+        },
+        {
+          "name": "threejs-scene-lifecycle",
+          "when": "The task concerns bootstrap, loop ownership, resize, DPR, visibility, pause and resume, context loss, route transitions, teardown, or resource cleanup."
+        },
+        {
+          "name": "threejs-assets-gltf",
+          "when": "The task concerns glTF or GLB, loaders, Blender export, textures, compression, progress, cancellation, caching, CDN delivery, or asset licensing."
+        },
+        {
+          "name": "threejs-animation-system",
+          "when": "The task concerns AnimationClip, AnimationMixer, tracks, blending, crossfades, skeletal or morph animation, root motion, retargeting, events, or mixer lifecycle."
+        },
+        {
+          "name": "threejs-math-transforms",
+          "when": "The task concerns vectors, matrices, quaternions, coordinate spaces, local or world transforms, projections, rays, planes, bounds, or numerical precision."
+        },
+        {
+          "name": "threejs-geometry",
+          "when": "The task concerns BufferGeometry attributes, topology, indices, normals, tangents, UVs, morphs, skin data, bounds, instancing, or merging."
+        },
+        {
+          "name": "threejs-materials-lighting",
+          "when": "The task concerns built-in PBR materials, texture channels, color management, light rigs, environment maps, transparency, transmission, or shading defects."
+        },
+        {
+          "name": "threejs-shaders",
+          "when": "The task concerns ShaderMaterial, RawShaderMaterial, GLSL, uniforms, varyings, GPU simulation, precision, compilation, or custom material integration."
+        },
+        {
+          "name": "threejs-interaction-input",
+          "when": "The task concerns raycasting, GPU picking, pointer, touch, keyboard, gamepad, gestures, selection, drag tools, focus, or DOM-to-scene event routing."
+        },
+        {
+          "name": "threejs-physics-audio",
+          "when": "The task concerns rigid bodies, collision, triggers, character movement, fixed timesteps, physics workers, listener ownership, or positional audio."
+        },
+        {
+          "name": "threejs-rendering-platforms",
+          "when": "The task is choosing or migrating WebGLRenderer or WebGPURenderer, defining capability fallbacks, context options, output formats, or backend recovery."
+        },
+        {
+          "name": "threejs-webgpu-tsl",
+          "when": "The task specifically concerns WebGPURenderer, TSL node materials, compute nodes, storage buffers or textures, WGSL interop, readback, or backend parity."
+        },
+        {
+          "name": "threejs-postprocessing",
+          "when": "The task concerns a general pass graph, EffectComposer, depth or normal inputs, anti-aliasing, outline, depth of field, motion blur, or custom full-screen effects."
+        },
+        {
+          "name": "threejs-react-three-fiber",
+          "when": "React owns the Three.js scene through React Three Fiber, Canvas, hooks, Suspense, Drei, declarative resources, events, or adaptive frame loops."
+        },
+        {
+          "name": "threejs-ui-overlays",
+          "when": "The task concerns HUDs, menus, labels, annotations, tooltips, DOM overlays, SDF or 3D text, projection, occlusion, safe areas, text fit, or accessible UI."
+        },
+        {
+          "name": "threejs-gameplay-systems",
+          "when": "The task concerns a browser game's core loop, entities, abilities, combat, vehicles, AI, levels, game feel, restart, persistence, replay, or bot playtests."
+        },
+        {
+          "name": "threejs-data-visualization",
+          "when": "The task concerns 3D charts, point clouds, networks, volumes, trajectories, digital twins, scientific data, encodings, uncertainty, filtering, or accessible analysis."
+        },
+        {
+          "name": "threejs-large-worlds-geospatial",
+          "when": "The task concerns geographic coordinates, ellipsoids, projections, local tangent frames, floating origins, tiled terrain, GIS data, geospatial precision, or horizon culling."
+        },
+        {
+          "name": "threejs-webxr-accessibility",
+          "when": "The task concerns VR or AR sessions, reference spaces, controllers, hands, locomotion, comfort, inclusive input, reduced motion, or a non-XR fallback."
+        },
+        {
+          "name": "threejs-performance-memory",
+          "when": "The task concerns FPS, frame spikes, draw calls, fill rate, compilation stalls, textures, leaks, mobile limits, LOD, batching, workers, or adaptive quality."
+        },
+        {
+          "name": "threejs-testing-debugging",
+          "when": "The task is reproducing or testing math, scene, loader, shader, browser, GPU, interaction, lifecycle, visual, or performance failures."
+        },
+        {
+          "name": "threejs-security-deployment",
+          "when": "The task concerns untrusted assets or URLs, shader injection, CORS, CSP, credentials, privacy, production builds, CDNs, caching, rollout, or rollback."
+        },
+        {
+          "name": "threejs-networked-experiences",
+          "when": "The task concerns multiplayer authority, entity replication, snapshots, interpolation, prediction, reconciliation, presence, replay, bandwidth, or disconnect recovery."
+        },
+        {
+          "name": "threejs-camera-direction",
+          "when": "The task concerns advanced chase, orbit, cockpit, side, or cinematic rigs, scale-aware framing, damping, quaternion handoffs, floating origins, or camera collision."
+        },
+        {
+          "name": "threejs-procedural-animation",
+          "when": "The task concerns analytic timelines, staged motion, launch or flight paths, docking, spring response, rotating frames, deterministic time, or quaternion animation."
+        },
+        {
+          "name": "threejs-procedural-fields",
+          "when": "Several geometry, material, density, biome, weather, wear, or flow channels must derive from coherent seeded scalar or vector fields."
+        },
+        {
+          "name": "threejs-procedural-materials",
+          "when": "The task concerns generated PBR terrain, soil, moss, rock, lava, wetness, wear, dissolve, per-instance variation, or correlated material channels."
+        },
+        {
+          "name": "threejs-parallax-occlusion-mapping",
+          "when": "The task specifically needs height-field relief ray marching, view-adaptive POM, silhouette clipping, self-shadowing, or relief-aware depth."
+        },
+        {
+          "name": "threejs-procedural-geometry",
+          "when": "The task concerns production generated meshes such as lofts, shells, branches, profiles, apertures, caps, semantic parts, material groups, or deterministic variants."
+        },
+        {
+          "name": "threejs-procedural-vegetation",
+          "when": "The task concerns generated grass, trees, branches, roots, ivy, vines, canopies, leaf cards, rooted wind, species presets, scattering, or vegetation LOD."
+        },
+        {
+          "name": "threejs-procedural-architecture",
+          "when": "The task concerns procedural massing, building grammars, façades, bays, roofs, trim, modular kits, deterministic variants, or scalable city assets."
+        },
+        {
+          "name": "threejs-procedural-planets",
+          "when": "The task concerns spherical terrain, continents, oceans, biomes, craters, orbital-to-ground LOD, atmosphere coupling, or planetary precision."
+        },
+        {
+          "name": "threejs-spectral-ocean",
+          "when": "The task requires directional wave spectra, FFT or hybrid ocean cascades, choppiness, derivative normals, temporal foam, or large above-and-below-water views."
+        },
+        {
+          "name": "threejs-water-optics",
+          "when": "The task concerns analytic waves or bounded pools, ripples, Fresnel, reflection, refraction, absorption, caustics, interactive disturbances, or water volumes."
+        },
+        {
+          "name": "threejs-precipitation-surfaces",
+          "when": "The task couples rain, snow, streaks, flakes, splashes, puddles, ripples, wetness, accumulation, melt, or weather-driven material changes."
+        },
+        {
+          "name": "threejs-atmosphere-aerial-perspective",
+          "when": "The task concerns planetary sky, Rayleigh or Mie scattering, atmosphere LUTs, sun or moon discs, aerial perspective, or ground-to-space transitions."
+        },
+        {
+          "name": "threejs-volumetric-clouds",
+          "when": "The task concerns weather-driven volume clouds, shape and detail density, raymarching, silver lining, temporal reconstruction, multiple layers, or cloud shadows."
+        },
+        {
+          "name": "threejs-raymarched-space-effects",
+          "when": "The task concerns black holes, wormholes, accretion disks, curved rays, bounded nebulae, signed-distance structures, or space-effect numerical integration."
+        },
+        {
+          "name": "threejs-procedural-vfx",
+          "when": "The task concerns particles, plasma, sparks, wakes, trails, debris, dissolves, impact bursts, GPU simulation, pooling, or HDR effect emission."
+        },
+        {
+          "name": "threejs-temporal-surfaces",
+          "when": "The task concerns history-driven frost, thaw, wet glass, droplets, accumulation masks, ping-pong simulation, blur, refraction, or interactive surface state."
+        },
+        {
+          "name": "threejs-shadow-systems",
+          "when": "The task concerns stable directional shadows, cascades, clipmaps, large worlds, texel stabilization, cached updates, custom depth materials, or invalidation."
+        },
+        {
+          "name": "threejs-screen-space-ambient-occlusion",
+          "when": "The task specifically concerns SSAO or GTAO, depth and normal reconstruction, horizon sampling, bent normals, bilateral upsampling, contact grounding, or halos."
+        },
+        {
+          "name": "threejs-bloom",
+          "when": "The task specifically concerns HDR bloom, emissive hierarchy, threshold and knee tuning, multi-scale blur, selective bloom, restoration, or exposure coupling."
+        },
+        {
+          "name": "threejs-exposure-color-grading",
+          "when": "The task concerns luminance metering, eye adaptation, exposure, tone mapping, output conversion, LUT grading, or crushed, clipped, or double-encoded output."
+        },
+        {
+          "name": "threejs-image-pipeline",
+          "when": "Several advanced passes must share depth, normals, motion, history, atmosphere, bloom, exposure, tone mapping, grading, antialiasing, and final output ownership."
+        },
+        {
+          "name": "threejs-visual-validation",
+          "when": "The result needs fixed cameras, seeds, times, no-post baselines, diagnostic captures, distance and temporal sweeps, GPU budgets, or visual regression evidence."
         }
       ]
     },
