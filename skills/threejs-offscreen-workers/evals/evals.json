@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-offscreen-workers",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Move our renderer to OffscreenCanvas immediately. Post raw DOM events to the worker, assume WebGPU and every loader work there, copy a full scene snapshot each frame, queue every resize and pointer event, and provide no fallback or shutdown protocol.",
+      "expected_output": "A measurement- and capability-led worker design that defines ownership and a versioned bounded message protocol, forwards semantic input and layout state, chooses transfer strategies, prototypes renderer and addon support, and tests fallback, failure, context loss, and termination.",
+      "assertions": [
+        "Main-thread traces establish that a worker boundary addresses the measured bottleneck.",
+        "DOM, semantics, layout, and permissions stay on the main thread while semantic intents are forwarded.",
+        "The protocol includes version, sequence or generation IDs, resize and DPR, errors, metrics, lifecycle, and shutdown.",
+        "Queues are bounded and transferables or shared memory are selected with explicit synchronization and isolation constraints.",
+        "Unsupported capability, worker crash, context or device loss, route remount, fallback, and stable cleanup are verified."
+      ]
+    }
+  ]
+}

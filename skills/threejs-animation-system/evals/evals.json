@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-animation-system",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Retarget a humanoid run cycle to several differently proportioned characters, add foot IK and ragdoll recovery, and let clips, IK, physics, networking, and root motion all update the skeleton and world transform without an arbitration order.",
+      "expected_output": "A character-animation contract that validates skeleton and retarget data, defines separate body and facial layers, assigns clip, root-motion, IK, network, and ragdoll authority by state, resets discontinuity history, and tests contacts, transitions, clones, and teardown.",
+      "assertions": [
+        "Bone maps, hierarchy, rest pose, bind matrices, scale, root, missing bones, and morph identity are inspected.",
+        "The response defines one arbitration order for clips, root motion, IK, physics, networking, and rendering.",
+        "Retarget validation includes hips, feet, shoulders, twist, scale, and contact behavior rather than exception-free playback.",
+        "IK has bounded constraints and resets after teleport, origin shift, rig swap, or ragdoll handoff.",
+        "Abrupt transitions, low FPS, foot sliding, cloned skeleton independence, mixer cost, and uncache or disposal behavior are tested."
+      ]
+    }
+  ]
+}

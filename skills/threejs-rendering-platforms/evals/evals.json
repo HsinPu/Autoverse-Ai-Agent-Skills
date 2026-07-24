@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-rendering-platforms",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Replace WebGLRenderer with WebGPURenderer because it is newer. Keep renderer-specific calls throughout every feature, skip installed-version inspection, assume post-processing, readback, XR, workers, and mobile Safari have parity, and remove the WebGL path immediately.",
+      "expected_output": "A capability- and version-led renderer decision with an application-facing boundary, feature and browser matrix, prototypes for risky paths, measured quality and performance, and a tested fallback or explicit unsupported boundary before migration.",
+      "assertions": [
+        "Installed Three.js, addons, frameworks, and renderer-dependent package versions are inspected.",
+        "WebGL and WebGPU support is compared for target browsers, devices, post-processing, readback, XR, workers, output, and recovery.",
+        "Renderer-specific code is isolated behind explicit application contracts.",
+        "Risky features are prototyped and fallback behavior is tested before removing the old backend.",
+        "Color, precision, context or device loss, production build, performance, quality, rollout, and rollback are verified."
+      ]
+    }
+  ]
+}

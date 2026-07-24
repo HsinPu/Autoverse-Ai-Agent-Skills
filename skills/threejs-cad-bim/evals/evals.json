@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-cad-bim",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Convert a client IFC building into one low-poly mesh, discard IDs and metadata, and let users make exact millimeter measurements directly from the simplified triangles. It also needs section cuts and revision comparison.",
+      "expected_output": "A CAD/BIM pipeline that preserves source IDs, units, hierarchy, metadata and revision lineage, declares conversion and measurement tolerance, separates analytical values from display meshes, and validates clipping, streaming, security, and known dimensions.",
+      "assertions": [
+        "Stable element IDs, assembly hierarchy, units, axes, schema version, and metadata survive conversion.",
+        "The response refuses exact engineering claims from an unqualified simplified display mesh.",
+        "Source precision, runtime error, measurement tolerance, and known reference dimensions are explicit.",
+        "Sectioning, selection, metadata queries, revision comparison, streaming, and low-memory behavior are tested.",
+        "Client files and embedded metadata are treated as sensitive, untrusted inputs."
+      ]
+    }
+  ]
+}

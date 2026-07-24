@@ -1,6 +1,6 @@
 ---
 name: threejs-assets-gltf
-description: "Three.js asset and glTF pipeline design, implementation, and debugging. Use for GLB or glTF loading, Blender export contracts, textures and HDR environments, Draco, Meshopt, KTX2, caching, progress, cancellation, validation, LOD delivery, asset licensing, and production CDN behavior."
+description: "Three.js asset and glTF pipeline design, implementation, and debugging. Use for GLB or glTF loading, Blender export contracts, runtime asset imports, textures and HDR environments, Draco, Meshopt, KTX2, caching, progress, cancellation, validation, LOD delivery, asset licensing, and production CDN behavior."
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -27,6 +27,11 @@ Treat assets as versioned runtime inputs with measurable size, decode cost, GPU 
 - Avoid cloning loaded scenes blindly when resources should be shared or skinned meshes need specialized cloning.
 - Bound cache growth and define who may evict and dispose shared assets.
 - Test cold cache, slow network, corrupt input, decoder failure, and unsupported compression.
+
+## Handoff
+
+- Use `threejs-editor-authoring` plus [authoring-export.md](../threejs-development/references/authoring-export.md) for runtime editing, serialization, GLTFExporter, round trips, and publishing.
+- Use `threejs-cad-bim` or `threejs-point-clouds-splats` plus [specialized-data-formats.md](../threejs-development/references/specialized-data-formats.md) when engineering metadata, dense spatial data, or streaming needs exceed a conventional glTF asset boundary.
 
 ## Evidence
 

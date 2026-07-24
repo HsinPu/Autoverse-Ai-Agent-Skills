@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-testing-debugging",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "A transparent animated model sometimes disappears on mobile after route changes. Compare one ad hoc screenshot on desktop, add random waits until the test passes, mock GLTFLoader completely, and skip device, lifecycle, shader, context-loss, and memory evidence.",
+      "expected_output": "A layered reproduction that fixes versions, device, viewport, camera, time, route sequence, cache and renderer state; narrows loader, material, sort, lifecycle and GPU hypotheses; adds the cheapest truthful tests; and captures deterministic visual, runtime, and resource evidence.",
+      "assertions": [
+        "The failure is reproduced with fixed device, browser, Three.js version, viewport, camera, time, asset, cache, and route sequence.",
+        "Transparent sorting, bounds, animation, shader compile, color or alpha state, lifecycle ownership, and context behavior are investigated separately.",
+        "Loader or renderer mocking does not remove the boundary that can cause the defect.",
+        "Deterministic waits use observable readiness rather than arbitrary timeouts.",
+        "Automated behavior, representative mobile runtime, fixed visual evidence, repeated route transitions, and stable memory or resource counts prove the fix."
+      ]
+    }
+  ]
+}

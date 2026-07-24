@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-assets-gltf",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Accept customer GLBs and texture URLs, enable every decoder, cache all results forever, clone every scene with Object3D.clone(), and consider the asset ready when GLTFLoader resolves. Ignore licenses, cancellation, corrupt files, GPU upload time, and production CDN behavior.",
+      "expected_output": "A bounded and provenance-aware asset pipeline that validates inputs and rights, configures only compatible decoders, models network through GPU readiness and failure states, handles skinned clones correctly, and proves cache ownership, production URLs, timing, and disposal.",
+      "assertions": [
+        "Source rights, attribution, input type, size, dimensions, counts, extensions, compression, and parse budgets are checked.",
+        "Only required loaders and decoder versions and paths are configured for the installed dependency graph.",
+        "Progress, timeout, cancellation, retry, corrupt input, decoder failure, unsupported compression, and fallback states are explicit.",
+        "Hierarchy, bounds, transforms, materials, color spaces, animation, skeleton cloning, decode, and GPU upload are validated.",
+        "Caches have limits, eviction, shared ownership, disposal, CDN path, cold-cache, and production-build evidence."
+      ]
+    }
+  ]
+}

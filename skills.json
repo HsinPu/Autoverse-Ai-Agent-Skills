@@ -1,7 +1,7 @@
 {
   "version": "2.0.0",
   "updated": "2026-07-24T00:00:00Z",
-  "total": 268,
+  "total": 278,
   "categories": [
     {
       "id": "workflow-planning",
@@ -3372,8 +3372,24 @@
       ]
     },
     {
+      "name": "threejs-accessibility",
+      "description": "Accessible non-XR Three.js experience design and verification. Use for keyboard and switch access, focus, screen-reader semantics, reduced motion, captions, high contrast, color-independent cues, canvas alternatives, accessible 3D controls, or equivalent text and data views.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "accessibility",
+        "keyboard",
+        "screen-reader",
+        "reduced-motion",
+        "semantic-ui"
+      ]
+    },
+    {
       "name": "threejs-animation-system",
-      "description": "Three.js keyframe and character animation systems. Use for AnimationClip, AnimationMixer, AnimationAction, tracks, blending, crossfades, additive layers, skeletal animation, morph targets, root motion, retargeting, synchronization, animation events, clip optimization, and mixer lifecycle.",
+      "description": "Three.js keyframe and character animation systems. Use for AnimationClip, AnimationMixer, AnimationAction, tracks, blending, crossfades, additive layers, skeletal or facial animation, morph targets, root motion, locomotion, inverse kinematics, CCDIKSolver, ragdoll handoff, retargeting, events, and mixer lifecycle.",
       "category": "threejs-graphics",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -3384,12 +3400,12 @@
         "animation-mixer",
         "skeletal-animation",
         "morph-targets",
-        "blending"
+        "inverse-kinematics"
       ]
     },
     {
       "name": "threejs-assets-gltf",
-      "description": "Three.js asset and glTF pipeline design, implementation, and debugging. Use for GLB or glTF loading, Blender export contracts, textures and HDR environments, Draco, Meshopt, KTX2, caching, progress, cancellation, validation, LOD delivery, asset licensing, and production CDN behavior.",
+      "description": "Three.js asset and glTF pipeline design, implementation, and debugging. Use for GLB or glTF loading, Blender export contracts, runtime asset imports, textures and HDR environments, Draco, Meshopt, KTX2, caching, progress, cancellation, validation, LOD delivery, asset licensing, and production CDN behavior.",
       "category": "threejs-graphics",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -3445,6 +3461,22 @@
       }
     },
     {
+      "name": "threejs-cad-bim",
+      "description": "Three.js CAD, BIM, and technical-model viewing workflows. Use for IFC or CAD conversion, assemblies, parts, model hierarchy, engineering metadata, units, measurement, clipping planes, exploded views, selection, large technical models, digital construction, or revision comparison.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "cad",
+        "bim",
+        "ifc",
+        "measurement",
+        "technical-models"
+      ]
+    },
+    {
       "name": "threejs-camera-direction",
       "description": "Advanced Three.js camera direction and rigging. Use for chase, orbit, side, cockpit, cinematic, or scale-aware cameras; damping and look-ahead; quaternion handoffs; floating origins; collision; pointer look; projection ownership; and stable framing across large or fast-moving scenes.",
       "category": "threejs-graphics",
@@ -3466,7 +3498,7 @@
     },
     {
       "name": "threejs-data-visualization",
-      "description": "Three.js data and scientific visualization. Use for 3D charts, point clouds, networks, volumes, trajectories, digital twins, temporal or spatial datasets, encodings, axes, legends, labels, filtering, picking, uncertainty, large datasets, accessible summaries, and reproducible visual analysis.",
+      "description": "Three.js data and scientific visualization. Use for 3D charts, networks, volumes, trajectories, digital twins, temporal or spatial datasets, encodings, axes, legends, labels, filtering, picking, uncertainty, large datasets, accessible summaries, and reproducible visual analysis.",
       "category": "threejs-graphics",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -3482,7 +3514,7 @@
     },
     {
       "name": "threejs-development",
-      "description": "End-to-end Three.js development routing and delivery workflow. Use when building, restructuring, reviewing, or debugging a complete Three.js experience that spans architecture, scene lifecycle, assets, rendering, interaction, performance, advanced graphics, testing, accessibility, or deployment.",
+      "description": "End-to-end Three.js development routing and delivery workflow. Use when building, restructuring, reviewing, or debugging a complete Three.js experience that spans architecture, authoring, workers, frameworks, scene lifecycle, assets, rendering, interaction, simulation, performance, advanced graphics, accessibility, testing, or deployment.",
       "category": "threejs-graphics",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -3500,6 +3532,22 @@
         "license": "MIT",
         "revision": "e43dcb03020cae5b08983a828bc1817dd6c0c40a"
       }
+    },
+    {
+      "name": "threejs-editor-authoring",
+      "description": "Three.js runtime editor and authoring-tool architecture. Use for scene editors, object outliners, inspectors, gizmos, TransformControls, selection, undo and redo, serialization, autosave, import and export, GLTFExporter, presets, plugins, or editor-to-runtime publishing.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "editor",
+        "authoring",
+        "undo-redo",
+        "serialization",
+        "export"
+      ]
     },
     {
       "name": "threejs-exposure-color-grading",
@@ -3521,6 +3569,22 @@
         "license": "MIT",
         "revision": "e43dcb03020cae5b08983a828bc1817dd6c0c40a"
       }
+    },
+    {
+      "name": "threejs-framework-integrations",
+      "description": "Three.js integration with non-React UI frameworks and custom component layers. Use for Vue and TresJS, Svelte and Threlte, Angular, Solid, web components, reactive scene graphs, SSR, hydration, framework lifecycle, ecosystem packages, or migration between imperative and declarative ownership.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "vue",
+        "tresjs",
+        "svelte",
+        "threlte",
+        "frameworks"
+      ]
     },
     {
       "name": "threejs-gameplay-systems",
@@ -3576,7 +3640,7 @@
     },
     {
       "name": "threejs-interaction-input",
-      "description": "Three.js interaction and input implementation. Use for raycasting, GPU picking, pointer, touch, pen, keyboard, gamepad, gestures, drag and transform tools, camera controls, selection, hover, focus, occlusion, event routing, or synchronization between DOM UI and a 3D scene.",
+      "description": "Three.js interaction and input implementation. Use for raycasting, GPU picking, BVH or Octree acceleration, spatial indexes, pointer, touch, pen, keyboard, gamepad, gestures, drag and transform tools, camera controls, selection, hover, focus, occlusion, event routing, or DOM-to-scene synchronization.",
       "category": "threejs-graphics",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -3585,6 +3649,7 @@
         "threejs",
         "interaction",
         "raycasting",
+        "spatial-indexing",
         "pointer",
         "touch",
         "gamepad"
@@ -3608,7 +3673,7 @@
     },
     {
       "name": "threejs-materials-lighting",
-      "description": "Three.js material, texture, environment, and lighting workflow. Use for PBR material selection, texture channels, color management, tone and exposure interactions, environment maps, light rigs, baked lighting, transparency, transmission, material variants, and lighting or shading defects.",
+      "description": "Three.js material, texture, media, environment, and lighting workflow. Use for PBR materials, texture channels, VideoTexture, CanvasTexture, webcam or media streams, 360 video, color management, environment maps, light rigs, baked lighting, transparency, transmission, variants, and shading defects.",
       "category": "threejs-graphics",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -3619,6 +3684,7 @@
         "lighting",
         "pbr",
         "textures",
+        "media-textures",
         "environment"
       ]
     },
@@ -3639,6 +3705,22 @@
       ]
     },
     {
+      "name": "threejs-navigation-crowds",
+      "description": "Three.js navigation, pathfinding, and crowd-simulation integration. Use for navmeshes, A-star paths, waypoints, path smoothing, off-mesh links, character agents, local avoidance, crowds, dynamic obstacles, replanning, navigation workers, or synchronization with animation and physics.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "navigation",
+        "navmesh",
+        "pathfinding",
+        "crowds",
+        "avoidance"
+      ]
+    },
+    {
       "name": "threejs-networked-experiences",
       "description": "Networked and multiplayer Three.js architecture. Use for authoritative simulation, entity replication, snapshots, interpolation, prediction, reconciliation, interest management, presence, shared world state, replay, anti-cheat boundaries, bandwidth budgets, disconnect recovery, and synchronized visual effects.",
       "category": "threejs-graphics",
@@ -3652,6 +3734,22 @@
         "interpolation",
         "prediction",
         "replication"
+      ]
+    },
+    {
+      "name": "threejs-offscreen-workers",
+      "description": "Three.js rendering and heavy-work offloading with OffscreenCanvas and Web Workers. Use for worker-owned renderers, transferable canvases, message protocols, input and resize forwarding, background asset processing, shared buffers, worker lifecycle, main-thread responsiveness, or fallback rendering.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "offscreencanvas",
+        "web-workers",
+        "worker-rendering",
+        "transferables",
+        "responsiveness"
       ]
     },
     {
@@ -3677,7 +3775,7 @@
     },
     {
       "name": "threejs-performance-memory",
-      "description": "Three.js performance and memory diagnosis and optimization. Use for low FPS, frame spikes, excessive draw calls, shader compilation stalls, overdraw, fill-rate pressure, large textures, asset decode cost, garbage collection, GPU leaks, mobile thermal limits, LOD, instancing, batching, workers, or adaptive quality.",
+      "description": "Three.js performance and memory diagnosis and optimization. Use for low FPS, frame spikes, draw calls, shader stalls, overdraw, fill rate, large textures, decode cost, garbage collection, GPU leaks, mobile thermal limits, LOD, instancing, batching, BVH, Octree, spatial acceleration, occlusion culling, workers, or adaptive quality.",
       "category": "threejs-graphics",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -3688,12 +3786,28 @@
         "gpu",
         "memory",
         "profiling",
+        "spatial-acceleration",
         "adaptive-quality"
       ]
     },
     {
       "name": "threejs-physics-audio",
-      "description": "Physics and spatial-audio integration for Three.js. Use for rigid bodies, colliders, triggers, character movement, fixed timesteps, interpolation, physics workers, collision-driven effects, positional audio, listener ownership, autoplay restrictions, and synchronized audiovisual simulation.",
+      "description": "Compatibility router for combined or legacy Three.js physics-and-audio requests. Use when a request explicitly couples collision or simulation events with positional sound, or still names the former combined boundary; route physics-only work to threejs-physics-simulation and audio-only work to threejs-spatial-audio.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "compatibility-routing",
+        "physics",
+        "spatial-audio",
+        "collision-events"
+      ]
+    },
+    {
+      "name": "threejs-physics-simulation",
+      "description": "Three.js physics-simulation integration. Use for rigid bodies, colliders, triggers, joints, constraints, character controllers, vehicles, fixed timesteps, interpolation, collision layers, physics workers, determinism, contact events, or synchronization between simulation and render transforms.",
       "category": "threejs-graphics",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -3703,7 +3817,24 @@
         "physics",
         "collision",
         "fixed-timestep",
-        "spatial-audio"
+        "rigid-bodies",
+        "character-controller"
+      ]
+    },
+    {
+      "name": "threejs-point-clouds-splats",
+      "description": "Three.js point-cloud and 3D Gaussian-splat delivery. Use for PLY, LAS or LAZ conversion, dense scans, photogrammetry, point attributes, splat data, progressive streaming, LOD, frustum or hierarchy traversal, depth sorting, picking, classification, annotations, or large spatial datasets.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "point-clouds",
+        "gaussian-splats",
+        "ply",
+        "streaming",
+        "spatial-data"
       ]
     },
     {
@@ -3782,6 +3913,22 @@
         "license": "MIT",
         "revision": "e43dcb03020cae5b08983a828bc1817dd6c0c40a"
       }
+    },
+    {
+      "name": "threejs-procedural-characters",
+      "description": "Procedural character and creature generation for Three.js. Use for seeded body plans, configurable anatomy, modular characters, runtime rigs, skinning, morphologies, procedural locomotion, inverse kinematics, facial variation, equipment attachment, character LOD, or reproducible crowds.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "procedural",
+        "characters",
+        "rigging",
+        "morphology",
+        "inverse-kinematics"
+      ]
     },
     {
       "name": "threejs-procedural-fields",
@@ -4067,6 +4214,22 @@
       }
     },
     {
+      "name": "threejs-spatial-audio",
+      "description": "Three.js and Web Audio spatial-sound integration. Use for AudioListener, PositionalAudio, HRTF panning, attenuation, cones, ambient zones, occlusion, reverberation, collision or gameplay cues, autoplay restrictions, captions, audio-context lifecycle, mixing, or synchronized audiovisual playback.",
+      "category": "threejs-graphics",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "threejs",
+        "spatial-audio",
+        "web-audio",
+        "hrtf",
+        "audio-listener",
+        "captions"
+      ]
+    },
+    {
       "name": "threejs-spectral-ocean",
       "description": "Large spectral ocean systems in Three.js. Use for directional wave spectra, FFT or hybrid FFT and Gerstner displacement, multi-cascade wavelengths, choppiness, derivative normals, Jacobian whitecaps, temporal foam, sky reflection, underwater absorption, caustics, Snell windows, and above/below-water transitions.",
       "category": "threejs-graphics",
@@ -4220,7 +4383,7 @@
     },
     {
       "name": "threejs-webxr-accessibility",
-      "description": "WebXR and inclusive Three.js experience design. Use for immersive VR or AR sessions, reference spaces, controllers, hands, locomotion, hit testing, anchors, XR performance, motion comfort, session lifecycle, keyboard or screen alternatives, reduced motion, captions, focus, and non-visual access to essential 3D content.",
+      "description": "WebXR and immersive-accessibility design for Three.js. Use for VR or AR sessions, reference spaces, controllers, hands, locomotion, hit testing, anchors, XR performance, motion comfort, session lifecycle, seated or standing modes, inclusive immersive input, and coordinated non-XR fallback.",
       "category": "threejs-graphics",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -4789,11 +4952,19 @@
       "skills": [
         {
           "name": "threejs-development",
-          "when": "A complete or ambiguous Three.js request spans architecture, rendering, assets, interaction, advanced graphics, quality, or production delivery and needs coordinated routing."
+          "when": "A complete or ambiguous Three.js request spans architecture, authoring, frameworks, workers, rendering, assets, interaction, simulation, advanced graphics, quality, or production delivery and needs coordinated routing."
         },
         {
           "name": "threejs-project-architecture",
           "when": "The task concerns feature modules, dependency direction, scene ownership, update phases, simulation boundaries, or migration from a monolithic scene script."
+        },
+        {
+          "name": "threejs-editor-authoring",
+          "when": "The task concerns a runtime scene editor, outliner, inspector, gizmos, commands, undo and redo, serialization, autosave, import, GLTFExporter, or editor-to-runtime publishing."
+        },
+        {
+          "name": "threejs-offscreen-workers",
+          "when": "The task concerns OffscreenCanvas, a worker-owned renderer, transferables, rendering or simulation workers, message protocols, forwarded input or resize, responsiveness, or a main-thread fallback."
         },
         {
           "name": "threejs-scene-lifecycle",
@@ -4805,7 +4976,7 @@
         },
         {
           "name": "threejs-animation-system",
-          "when": "The task concerns AnimationClip, AnimationMixer, tracks, blending, crossfades, skeletal or morph animation, root motion, retargeting, events, or mixer lifecycle."
+          "when": "The task concerns AnimationClip, AnimationMixer, tracks, blending, skeletal or facial animation, morph targets, root motion, locomotion, IK, ragdoll handoff, retargeting, events, or mixer lifecycle."
         },
         {
           "name": "threejs-math-transforms",
@@ -4817,7 +4988,7 @@
         },
         {
           "name": "threejs-materials-lighting",
-          "when": "The task concerns built-in PBR materials, texture channels, color management, light rigs, environment maps, transparency, transmission, or shading defects."
+          "when": "The task concerns built-in PBR materials, texture channels, VideoTexture, CanvasTexture, webcam or 360 media, color management, light rigs, environment maps, transparency, transmission, or shading defects."
         },
         {
           "name": "threejs-shaders",
@@ -4825,11 +4996,23 @@
         },
         {
           "name": "threejs-interaction-input",
-          "when": "The task concerns raycasting, GPU picking, pointer, touch, keyboard, gamepad, gestures, selection, drag tools, focus, or DOM-to-scene event routing."
+          "when": "The task concerns raycasting, GPU picking, BVH or Octree acceleration, pointer, touch, keyboard, gamepad, gestures, selection, drag tools, focus, or DOM-to-scene event routing."
         },
         {
           "name": "threejs-physics-audio",
-          "when": "The task concerns rigid bodies, collision, triggers, character movement, fixed timesteps, physics workers, listener ownership, or positional audio."
+          "when": "A legacy or explicitly combined request couples physics or collision events with positional sound and needs routing to independent simulation and audio owners."
+        },
+        {
+          "name": "threejs-physics-simulation",
+          "when": "The task concerns rigid bodies, colliders, triggers, joints, character controllers, vehicles, fixed timesteps, interpolation, physics workers, determinism, or contact events."
+        },
+        {
+          "name": "threejs-spatial-audio",
+          "when": "The task concerns AudioListener, PositionalAudio, HRTF, attenuation, ambient zones, audio occlusion, collision or gameplay cues, autoplay restrictions, captions, mixing, or audio-context lifecycle."
+        },
+        {
+          "name": "threejs-navigation-crowds",
+          "when": "The task concerns navmeshes, pathfinding, path following, off-mesh links, local avoidance, crowds, dynamic obstacles, replanning, or synchronization with animation and physics."
         },
         {
           "name": "threejs-rendering-platforms",
@@ -4848,6 +5031,10 @@
           "when": "React owns the Three.js scene through React Three Fiber, Canvas, hooks, Suspense, Drei, declarative resources, events, or adaptive frame loops."
         },
         {
+          "name": "threejs-framework-integrations",
+          "when": "Vue and TresJS, Svelte and Threlte, Angular, Solid, web components, or another non-React framework owns or hosts the Three.js scene and its reactive lifecycle."
+        },
+        {
           "name": "threejs-ui-overlays",
           "when": "The task concerns HUDs, menus, labels, annotations, tooltips, DOM overlays, SDF or 3D text, projection, occlusion, safe areas, text fit, or accessible UI."
         },
@@ -4857,19 +5044,31 @@
         },
         {
           "name": "threejs-data-visualization",
-          "when": "The task concerns 3D charts, point clouds, networks, volumes, trajectories, digital twins, scientific data, encodings, uncertainty, filtering, or accessible analysis."
+          "when": "The task concerns 3D charts, networks, volumes, trajectories, digital twins, scientific data, encodings, uncertainty, filtering, or accessible analysis."
+        },
+        {
+          "name": "threejs-point-clouds-splats",
+          "when": "The task concerns dense point clouds, PLY, LAS or LAZ conversion, Gaussian splats, scans, progressive spatial streaming, LOD, splat sorting, classification, or large-dataset picking."
+        },
+        {
+          "name": "threejs-cad-bim",
+          "when": "The task concerns CAD or IFC conversion, BIM assemblies, technical-model hierarchy, engineering metadata, units, measurement, clipping, exploded views, large models, or revision comparison."
         },
         {
           "name": "threejs-large-worlds-geospatial",
           "when": "The task concerns geographic coordinates, ellipsoids, projections, local tangent frames, floating origins, tiled terrain, GIS data, geospatial precision, or horizon culling."
         },
         {
+          "name": "threejs-accessibility",
+          "when": "The task concerns non-XR keyboard or switch access, focus, screen-reader semantics, reduced motion, captions, high contrast, color-independent cues, canvas alternatives, or equivalent data views."
+        },
+        {
           "name": "threejs-webxr-accessibility",
-          "when": "The task concerns VR or AR sessions, reference spaces, controllers, hands, locomotion, comfort, inclusive input, reduced motion, or a non-XR fallback."
+          "when": "The task concerns VR or AR sessions, reference spaces, controllers, hands, locomotion, hit testing, comfort, inclusive immersive input, or a coordinated non-XR fallback."
         },
         {
           "name": "threejs-performance-memory",
-          "when": "The task concerns FPS, frame spikes, draw calls, fill rate, compilation stalls, textures, leaks, mobile limits, LOD, batching, workers, or adaptive quality."
+          "when": "The task concerns FPS, frame spikes, draw calls, fill rate, compilation stalls, textures, leaks, mobile limits, LOD, batching, BVH, Octree, occlusion culling, workers, or adaptive quality."
         },
         {
           "name": "threejs-testing-debugging",
@@ -4890,6 +5089,10 @@
         {
           "name": "threejs-procedural-animation",
           "when": "The task concerns analytic timelines, staged motion, launch or flight paths, docking, spring response, rotating frames, deterministic time, or quaternion animation."
+        },
+        {
+          "name": "threejs-procedural-characters",
+          "when": "The task concerns seeded characters or creatures, body plans, configurable anatomy, runtime rigs, skinning, procedural locomotion, IK, facial variation, equipment attachment, or character LOD."
         },
         {
           "name": "threejs-procedural-fields",

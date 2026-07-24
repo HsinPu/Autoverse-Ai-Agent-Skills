@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-point-clouds-splats",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Load a 6 GB geospatial scan and Gaussian-splat capture in one request, discard CRS and scale metadata, render both with the same unsorted Points material, and keep all GPU chunks forever. Selection and measurement must remain exact.",
+      "expected_output": "A format-aware pipeline that distinguishes point clouds from splats, preserves coordinates and provenance, converts into bounded streaming hierarchies, budgets loading through GPU memory, implements correct visibility and sorting behavior, and quantifies analytical error.",
+      "assertions": [
+        "Point-cloud and Gaussian-splat representations, blending, visibility, and sorting needs are distinguished.",
+        "Coordinate reference, origin, units, scale, stable IDs, source rights, and privacy are preserved.",
+        "Network, decode, CPU staging, GPU upload, visible point or splat, cache, eviction, and cancellation budgets are explicit.",
+        "Measurement and selection use known reference cases and disclose conversion, LOD, and culling error.",
+        "Cold load, missing or corrupt chunks, memory pressure, density transitions, and representative GPUs are tested."
+      ]
+    }
+  ]
+}

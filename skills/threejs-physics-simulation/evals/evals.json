@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-physics-simulation",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Use render-frame delta directly for physics, generate exact colliders from every display triangle, let animation and physics both write character transforms, and run unlimited catch-up steps after a background-tab stall.",
+      "expected_output": "A physics integration with declared units and authority, bounded fixed steps, render interpolation, simplified validated colliders, explicit character ownership, idempotent contacts, engine and worker criteria, and stall, tunneling, constraint, and cleanup tests.",
+      "assertions": [
+        "Simulation uses a bounded fixed-step policy rather than variable visual delta.",
+        "Rendered interpolation is not fed back into authoritative physics state.",
+        "Collider design is independent from display-mesh complexity and follows a collision-layer matrix.",
+        "Animation, navigation, networking, and physics transform authority is explicit.",
+        "Low FPS, stalls, tunneling, stacking, teleports, worker failure, and stable resource teardown are tested."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-framework-integrations",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Move a Vue Three.js viewer to TresJS and a Svelte viewer to Threlte using the same copied lifecycle recipe. Put every object transform in a deep reactive global store, mutate declaratively owned objects directly, and assume unmount disposes all shared resources.",
+      "expected_output": "A version-specific framework integration plan that treats TresJS and Threlte separately, maps lifecycle and ownership for each, keeps per-frame state scoped and mutable, adapts imperative code explicitly, and verifies SSR, remount, disposal, idle rendering, and production builds.",
+      "assertions": [
+        "Exact Three.js, framework, integration-library, renderer, and ecosystem versions are inspected.",
+        "TresJS and Threlte lifecycle assumptions are not copied across ecosystems without verification.",
+        "Structural state is separated from high-frequency transforms and GPU data.",
+        "Direct imperative mutation does not compete with declarative ownership for the same object.",
+        "SSR guards, route transitions, hot reload, shared-resource cleanup, and production behavior are tested."
+      ]
+    }
+  ]
+}

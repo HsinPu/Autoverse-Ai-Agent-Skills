@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-accessibility",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Our Three.js product configurator keeps every control inside the canvas. Add aria-label to the canvas and call it accessible; keyboard users can use the mouse if needed, and color alone shows which option is selected.",
+      "expected_output": "An accessibility contract that rejects a canvas label as sufficient, identifies essential product actions and state, creates a shared semantic model with equivalent DOM controls and keyboard focus, adds non-color selection cues, and verifies assistive paths.",
+      "assertions": [
+        "Essential actions and information receive operable semantic paths outside scene-only hit testing.",
+        "The scene and DOM consume shared application state rather than becoming competing sources of truth.",
+        "Keyboard order, visible focus, screen-reader names and state, and touch or switch-like operation are specified.",
+        "Selection is not conveyed by color alone and motion or audio meaning has alternatives.",
+        "Verification includes keyboard-only, a screen reader, zoom or reflow, high contrast, reduced motion, and canvas failure."
+      ]
+    }
+  ]
+}

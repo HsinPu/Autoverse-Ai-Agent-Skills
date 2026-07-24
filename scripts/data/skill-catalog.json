@@ -2235,6 +2235,17 @@
         "narration"
       ]
     },
+    "threejs-accessibility": {
+      "category": "threejs-graphics",
+      "tags": [
+        "threejs",
+        "accessibility",
+        "keyboard",
+        "screen-reader",
+        "reduced-motion",
+        "semantic-ui"
+      ]
+    },
     "threejs-animation-system": {
       "category": "threejs-graphics",
       "tags": [
@@ -2243,7 +2254,7 @@
         "animation-mixer",
         "skeletal-animation",
         "morph-targets",
-        "blending"
+        "inverse-kinematics"
       ]
     },
     "threejs-assets-gltf": {
@@ -2255,6 +2266,17 @@
         "loaders",
         "compression",
         "textures"
+      ]
+    },
+    "threejs-cad-bim": {
+      "category": "threejs-graphics",
+      "tags": [
+        "threejs",
+        "cad",
+        "bim",
+        "ifc",
+        "measurement",
+        "technical-models"
       ]
     },
     "threejs-atmosphere-aerial-perspective": {
@@ -2310,6 +2332,17 @@
         "routing"
       ]
     },
+    "threejs-editor-authoring": {
+      "category": "threejs-graphics",
+      "tags": [
+        "threejs",
+        "editor",
+        "authoring",
+        "undo-redo",
+        "serialization",
+        "export"
+      ]
+    },
     "threejs-exposure-color-grading": {
       "category": "threejs-graphics",
       "tags": [
@@ -2319,6 +2352,17 @@
         "color-grading",
         "lut",
         "hdr"
+      ]
+    },
+    "threejs-framework-integrations": {
+      "category": "threejs-graphics",
+      "tags": [
+        "threejs",
+        "vue",
+        "tresjs",
+        "svelte",
+        "threlte",
+        "frameworks"
       ]
     },
     "threejs-gameplay-systems": {
@@ -2359,6 +2403,7 @@
         "threejs",
         "interaction",
         "raycasting",
+        "spatial-indexing",
         "pointer",
         "touch",
         "gamepad"
@@ -2383,6 +2428,7 @@
         "lighting",
         "pbr",
         "textures",
+        "media-textures",
         "environment"
       ]
     },
@@ -2397,6 +2443,17 @@
         "quaternions"
       ]
     },
+    "threejs-navigation-crowds": {
+      "category": "threejs-graphics",
+      "tags": [
+        "threejs",
+        "navigation",
+        "navmesh",
+        "pathfinding",
+        "crowds",
+        "avoidance"
+      ]
+    },
     "threejs-networked-experiences": {
       "category": "threejs-graphics",
       "tags": [
@@ -2406,6 +2463,17 @@
         "interpolation",
         "prediction",
         "replication"
+      ]
+    },
+    "threejs-offscreen-workers": {
+      "category": "threejs-graphics",
+      "tags": [
+        "threejs",
+        "offscreencanvas",
+        "web-workers",
+        "worker-rendering",
+        "transferables",
+        "responsiveness"
       ]
     },
     "threejs-parallax-occlusion-mapping": {
@@ -2427,6 +2495,7 @@
         "gpu",
         "memory",
         "profiling",
+        "spatial-acceleration",
         "adaptive-quality"
       ]
     },
@@ -2434,10 +2503,32 @@
       "category": "threejs-graphics",
       "tags": [
         "threejs",
+        "compatibility-routing",
+        "physics",
+        "spatial-audio",
+        "collision-events"
+      ]
+    },
+    "threejs-physics-simulation": {
+      "category": "threejs-graphics",
+      "tags": [
+        "threejs",
         "physics",
         "collision",
         "fixed-timestep",
-        "spatial-audio"
+        "rigid-bodies",
+        "character-controller"
+      ]
+    },
+    "threejs-point-clouds-splats": {
+      "category": "threejs-graphics",
+      "tags": [
+        "threejs",
+        "point-clouds",
+        "gaussian-splats",
+        "ply",
+        "streaming",
+        "spatial-data"
       ]
     },
     "threejs-postprocessing": {
@@ -2480,6 +2571,17 @@
         "buildings",
         "cities",
         "instancing"
+      ]
+    },
+    "threejs-procedural-characters": {
+      "category": "threejs-graphics",
+      "tags": [
+        "threejs",
+        "procedural",
+        "characters",
+        "rigging",
+        "morphology",
+        "inverse-kinematics"
       ]
     },
     "threejs-procedural-fields": {
@@ -2643,6 +2745,17 @@
         "clipmaps",
         "large-worlds",
         "webgpu"
+      ]
+    },
+    "threejs-spatial-audio": {
+      "category": "threejs-graphics",
+      "tags": [
+        "threejs",
+        "spatial-audio",
+        "web-audio",
+        "hrtf",
+        "audio-listener",
+        "captions"
       ]
     },
     "threejs-spectral-ocean": {
@@ -3143,11 +3256,19 @@
       "skills": [
         {
           "name": "threejs-development",
-          "when": "A complete or ambiguous Three.js request spans architecture, rendering, assets, interaction, advanced graphics, quality, or production delivery and needs coordinated routing."
+          "when": "A complete or ambiguous Three.js request spans architecture, authoring, frameworks, workers, rendering, assets, interaction, simulation, advanced graphics, quality, or production delivery and needs coordinated routing."
         },
         {
           "name": "threejs-project-architecture",
           "when": "The task concerns feature modules, dependency direction, scene ownership, update phases, simulation boundaries, or migration from a monolithic scene script."
+        },
+        {
+          "name": "threejs-editor-authoring",
+          "when": "The task concerns a runtime scene editor, outliner, inspector, gizmos, commands, undo and redo, serialization, autosave, import, GLTFExporter, or editor-to-runtime publishing."
+        },
+        {
+          "name": "threejs-offscreen-workers",
+          "when": "The task concerns OffscreenCanvas, a worker-owned renderer, transferables, rendering or simulation workers, message protocols, forwarded input or resize, responsiveness, or a main-thread fallback."
         },
         {
           "name": "threejs-scene-lifecycle",
@@ -3159,7 +3280,7 @@
         },
         {
           "name": "threejs-animation-system",
-          "when": "The task concerns AnimationClip, AnimationMixer, tracks, blending, crossfades, skeletal or morph animation, root motion, retargeting, events, or mixer lifecycle."
+          "when": "The task concerns AnimationClip, AnimationMixer, tracks, blending, skeletal or facial animation, morph targets, root motion, locomotion, IK, ragdoll handoff, retargeting, events, or mixer lifecycle."
         },
         {
           "name": "threejs-math-transforms",
@@ -3171,7 +3292,7 @@
         },
         {
           "name": "threejs-materials-lighting",
-          "when": "The task concerns built-in PBR materials, texture channels, color management, light rigs, environment maps, transparency, transmission, or shading defects."
+          "when": "The task concerns built-in PBR materials, texture channels, VideoTexture, CanvasTexture, webcam or 360 media, color management, light rigs, environment maps, transparency, transmission, or shading defects."
         },
         {
           "name": "threejs-shaders",
@@ -3179,11 +3300,23 @@
         },
         {
           "name": "threejs-interaction-input",
-          "when": "The task concerns raycasting, GPU picking, pointer, touch, keyboard, gamepad, gestures, selection, drag tools, focus, or DOM-to-scene event routing."
+          "when": "The task concerns raycasting, GPU picking, BVH or Octree acceleration, pointer, touch, keyboard, gamepad, gestures, selection, drag tools, focus, or DOM-to-scene event routing."
         },
         {
           "name": "threejs-physics-audio",
-          "when": "The task concerns rigid bodies, collision, triggers, character movement, fixed timesteps, physics workers, listener ownership, or positional audio."
+          "when": "A legacy or explicitly combined request couples physics or collision events with positional sound and needs routing to independent simulation and audio owners."
+        },
+        {
+          "name": "threejs-physics-simulation",
+          "when": "The task concerns rigid bodies, colliders, triggers, joints, character controllers, vehicles, fixed timesteps, interpolation, physics workers, determinism, or contact events."
+        },
+        {
+          "name": "threejs-spatial-audio",
+          "when": "The task concerns AudioListener, PositionalAudio, HRTF, attenuation, ambient zones, audio occlusion, collision or gameplay cues, autoplay restrictions, captions, mixing, or audio-context lifecycle."
+        },
+        {
+          "name": "threejs-navigation-crowds",
+          "when": "The task concerns navmeshes, pathfinding, path following, off-mesh links, local avoidance, crowds, dynamic obstacles, replanning, or synchronization with animation and physics."
         },
         {
           "name": "threejs-rendering-platforms",
@@ -3202,6 +3335,10 @@
           "when": "React owns the Three.js scene through React Three Fiber, Canvas, hooks, Suspense, Drei, declarative resources, events, or adaptive frame loops."
         },
         {
+          "name": "threejs-framework-integrations",
+          "when": "Vue and TresJS, Svelte and Threlte, Angular, Solid, web components, or another non-React framework owns or hosts the Three.js scene and its reactive lifecycle."
+        },
+        {
           "name": "threejs-ui-overlays",
           "when": "The task concerns HUDs, menus, labels, annotations, tooltips, DOM overlays, SDF or 3D text, projection, occlusion, safe areas, text fit, or accessible UI."
         },
@@ -3211,19 +3348,31 @@
         },
         {
           "name": "threejs-data-visualization",
-          "when": "The task concerns 3D charts, point clouds, networks, volumes, trajectories, digital twins, scientific data, encodings, uncertainty, filtering, or accessible analysis."
+          "when": "The task concerns 3D charts, networks, volumes, trajectories, digital twins, scientific data, encodings, uncertainty, filtering, or accessible analysis."
+        },
+        {
+          "name": "threejs-point-clouds-splats",
+          "when": "The task concerns dense point clouds, PLY, LAS or LAZ conversion, Gaussian splats, scans, progressive spatial streaming, LOD, splat sorting, classification, or large-dataset picking."
+        },
+        {
+          "name": "threejs-cad-bim",
+          "when": "The task concerns CAD or IFC conversion, BIM assemblies, technical-model hierarchy, engineering metadata, units, measurement, clipping, exploded views, large models, or revision comparison."
         },
         {
           "name": "threejs-large-worlds-geospatial",
           "when": "The task concerns geographic coordinates, ellipsoids, projections, local tangent frames, floating origins, tiled terrain, GIS data, geospatial precision, or horizon culling."
         },
         {
+          "name": "threejs-accessibility",
+          "when": "The task concerns non-XR keyboard or switch access, focus, screen-reader semantics, reduced motion, captions, high contrast, color-independent cues, canvas alternatives, or equivalent data views."
+        },
+        {
           "name": "threejs-webxr-accessibility",
-          "when": "The task concerns VR or AR sessions, reference spaces, controllers, hands, locomotion, comfort, inclusive input, reduced motion, or a non-XR fallback."
+          "when": "The task concerns VR or AR sessions, reference spaces, controllers, hands, locomotion, hit testing, comfort, inclusive immersive input, or a coordinated non-XR fallback."
         },
         {
           "name": "threejs-performance-memory",
-          "when": "The task concerns FPS, frame spikes, draw calls, fill rate, compilation stalls, textures, leaks, mobile limits, LOD, batching, workers, or adaptive quality."
+          "when": "The task concerns FPS, frame spikes, draw calls, fill rate, compilation stalls, textures, leaks, mobile limits, LOD, batching, BVH, Octree, occlusion culling, workers, or adaptive quality."
         },
         {
           "name": "threejs-testing-debugging",
@@ -3244,6 +3393,10 @@
         {
           "name": "threejs-procedural-animation",
           "when": "The task concerns analytic timelines, staged motion, launch or flight paths, docking, spring response, rotating frames, deterministic time, or quaternion animation."
+        },
+        {
+          "name": "threejs-procedural-characters",
+          "when": "The task concerns seeded characters or creatures, body plans, configurable anatomy, runtime rigs, skinning, procedural locomotion, IK, facial variation, equipment attachment, or character LOD."
         },
         {
           "name": "threejs-procedural-fields",

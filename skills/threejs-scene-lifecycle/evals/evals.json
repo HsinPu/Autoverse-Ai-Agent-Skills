@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-scene-lifecycle",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Every route mount can start another requestAnimationFrame loop, add global resize and input listeners, create controls and render targets, and remove the canvas on unmount. scene.clear() should free everything; context loss and background tabs can be ignored.",
+      "expected_output": "A lifecycle contract with one loop owner, idempotent mount and teardown, explicit feature and shared-resource disposal, resize and visibility policies, context recovery, cancellation, and repeated transition tests that prove stable browser and renderer counts.",
+      "assertions": [
+        "Renderer, loop, scene, camera, listeners, controls, observers, assets, workers, and subscriptions have named owners.",
+        "Scene removal is distinguished from disposal of geometry, materials, textures, targets, skeletons, and shared resources.",
+        "Resize, DPR, visibility, pause or resume, route transition, pending loads, and background throttling are defined.",
+        "Context loss and recovery behavior is tested or an explicit failure boundary is documented.",
+        "Repeated mount, unmount, remount, and failure cycles return loops, listeners, workers, resources, and memory to stable baselines."
+      ]
+    }
+  ]
+}

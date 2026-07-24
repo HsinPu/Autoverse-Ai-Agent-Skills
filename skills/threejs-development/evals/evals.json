@@ -72,6 +72,42 @@
         "CraftRoster guidance remains first-party and passes originality comparison instead of copying upstream text.",
         "Any future code or asset import requires path-level license evidence, compatibility review, and an explicit re-audit."
       ]
+    },
+    {
+      "id": 7,
+      "prompt": "Build a Vue/TresJS browser scene editor that renders through OffscreenCanvas. It needs gizmos, undo and redo, autosave, GLB export, SSR for the surrounding page, mobile fallback, and stable route remounts.",
+      "expected_output": "A routed plan using project architecture, editor authoring, framework integration, offscreen workers, scene lifecycle, assets, rendering platforms, performance, testing, accessibility, security, and deployment in an order that establishes document, renderer, framework, protocol, and fallback ownership first.",
+      "assertions": [
+        "The response routes to threejs-editor-authoring, threejs-framework-integrations, and threejs-offscreen-workers rather than hiding those boundaries in generic architecture.",
+        "Document, editor-session, framework, renderer-worker, DOM, asset, and shared-resource ownership are explicit.",
+        "Undo, migration, autosave recovery, exporter loss, worker protocol, SSR guards, and mobile fallback are independently defined.",
+        "Semantic non-canvas controls remain usable before, without, and after the worker renderer.",
+        "Round trips, worker failure, route remount, production asset URLs, performance, stable cleanup, rollout, and rollback are verified."
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "Create 800 seeded creatures that navigate a changing level, blend retargeted locomotion with foot IK, collide through a physics worker, and emit spatial collision sounds. Make every subsystem write character transforms directly.",
+      "expected_output": "A coordinated character route through procedural characters, animation, navigation and crowds, physics simulation, spatial audio, workers, performance, and validation with one authority order, versioned recipes and data, typed events, quality tiers, and density and discontinuity tests.",
+      "assertions": [
+        "The response selects threejs-procedural-characters, threejs-animation-system, threejs-navigation-crowds, threejs-physics-simulation, and threejs-spatial-audio.",
+        "Gameplay intent, global path, avoidance, physics, animation, IK, render interpolation, and audio consumption have one declared authority sequence.",
+        "Character recipes, rigs, retarget maps, nav data, agent profiles, worker requests, and collision-to-cue events are versioned.",
+        "Stale paths, predicted or replayed contacts, teleports, origin shifts, blocked goals, and ragdoll or locomotion handoffs have explicit behavior.",
+        "Seed, pose, route, obstacle, crowd-density, frame-rate, device, audio, CPU, GPU, and memory sweeps define acceptance."
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "Ship one technical viewer for IFC buildings, dense geospatial point clouds, and Gaussian splats. Users need measurements, metadata search, clipping, annotations, screen-reader access, progressive streaming, and exact source traceability on mobile.",
+      "expected_output": "A specialized-data route through CAD/BIM, point clouds and splats, data visualization, geospatial coordinates, interaction, accessibility, assets, workers, performance, security, testing, and deployment that preserves source semantics and quantifies display error.",
+      "assertions": [
+        "The response selects threejs-cad-bim and threejs-point-clouds-splats instead of forcing every source into generic glTF or points.",
+        "Formats, schema versions, CRS, origin, units, IDs, hierarchy, metadata, provenance, privacy, and tolerances are preserved.",
+        "Network, decode, staging, upload, visible-data, cache, eviction, query, and mobile budgets are explicit.",
+        "Measurements and selections distinguish source values from display approximations and validate known reference cases.",
+        "Semantic tables or details, keyboard operation, non-color cues, screen-reader checks, corrupt chunks, low memory, security, and rollback are covered."
+      ]
     }
   ]
 }

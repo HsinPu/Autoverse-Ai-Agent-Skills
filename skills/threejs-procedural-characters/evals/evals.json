@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-procedural-characters",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Generate unlimited creatures by randomizing limb lengths, skeleton hierarchy, bind pose, skin weights, animations, equipment sockets, and IK targets independently. We do not need seeds, provenance, extreme-case tests, or consistent identity across LODs.",
+      "expected_output": "A deterministic procedural-character pipeline with a versioned recipe, correlated constrained morphology, stable rig and retarget contracts, validated skinning and IK, coordinated LOD, provenance, and seed and pose sweeps.",
+      "assertions": [
+        "Generation uses an explicit seed and versioned recipe with semantic parameter bounds.",
+        "Morphology, skeleton, bind pose, skinning, animation, IK, and attachments are generated or selected as a compatible system.",
+        "Bone maps, bind matrices, weights, joint limits, bounds, and retargeted contact behavior are validated.",
+        "Mesh, skeleton, materials, animation, shadows, and simulation LOD preserve character identity.",
+        "Extreme seeds, pose ranges, transitions, equipment, cloning, disposal, performance, and source provenance are tested."
+      ]
+    }
+  ]
+}

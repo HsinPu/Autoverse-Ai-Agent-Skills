@@ -1,32 +1,31 @@
 ---
 name: threejs-physics-audio
-description: "Physics and spatial-audio integration for Three.js. Use for rigid bodies, colliders, triggers, character movement, fixed timesteps, interpolation, physics workers, collision-driven effects, positional audio, listener ownership, autoplay restrictions, and synchronized audiovisual simulation."
+description: "Compatibility router for combined or legacy Three.js physics-and-audio requests. Use when a request explicitly couples collision or simulation events with positional sound, or still names the former combined boundary; route physics-only work to threejs-physics-simulation and audio-only work to threejs-spatial-audio."
 license: Apache-2.0
 metadata:
   author: "HsinPu"
   source: "HsinPu/CraftRoster"
 ---
 
-# Three.js Physics and Audio
+# Three.js Physics and Audio Compatibility Route
 
-Integrate simulation and sound without making render transforms the authoritative state.
+Preserve the former combined entry point while assigning simulation and audio to independent owners.
 
-## Workflow
+## Routing
 
-1. Define world units, axes, gravity, collision layers, authority, timestep, determinism needs, and audio activation policy.
-2. Select a physics engine and integration boundary from required shapes, joints, character behavior, worker support, bundle cost, and platform compatibility.
-3. Keep fixed-step physics state authoritative and interpolate visual transforms for rendering.
-4. Map collision and gameplay events to bounded visual and audio cues with deduplication and lifecycle cleanup.
-5. Configure the audio listener from camera ownership, unlock audio through user intent, and spatialize only sources that benefit from it.
+1. Use `threejs-physics-simulation` for bodies, colliders, triggers, joints, character controllers, fixed timesteps, workers, contacts, and transform synchronization.
+2. Use `threejs-spatial-audio` for listener ownership, positional sources, attenuation, HRTF, zones, mixing, autoplay restrictions, captions, and audio lifecycle.
+3. Use both only when authoritative simulation or gameplay events produce synchronized sound.
+4. Define a typed event boundary carrying semantic cue identity, position, intensity, material or surface, source ID, simulation tick, and deduplication key.
+5. Let audio consume events without becoming simulation authority or delaying the physics step.
 
 ## Rules
 
-- Do not derive physics from frame-rate-dependent visual deltas.
-- Keep collider complexity independent from display-mesh complexity.
-- Bound catch-up steps after stalls.
-- Never start audible playback before required browser consent or user interaction.
-- Dispose audio nodes, buffers, workers, bodies, shapes, and subscriptions with their owning feature.
+- Do not place physics-engine and Web Audio lifecycle in one monolithic service.
+- Do not trigger duplicate cues from predicted, reconciled, replayed, and confirmed contacts without an explicit policy.
+- Keep simulation time, render interpolation, and audio scheduling distinguishable.
+- Preserve this Skill for compatibility; make the two focused Skills primary in new architecture.
 
 ## Evidence
 
-Report engine and audio choices, fixed-step policy, transform synchronization, collision matrix, worker boundary, activation behavior, performance budget, and teardown tests.
+Return the selected route, event contract, timing and deduplication policy, physics and audio owners, activation behavior, synchronization tests, and independent teardown proof.

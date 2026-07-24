@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-navigation-crowds",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Use the detailed visible level mesh directly as a navmesh for 500 agents. Let pathfinding, animation, and physics all write position every frame; local avoidance can replace global planning, and stale worker paths can be applied whenever they arrive.",
+      "expected_output": "A layered navigation and crowd design with validated versioned nav data, separate global planning and local avoidance, one transform authority, bounded worker and neighbor work, stale-result rejection, and tests for congestion, dynamic obstacles, unreachable goals, and low frame rates.",
+      "assertions": [
+        "The visible mesh is not accepted as an unvalidated navigation surface.",
+        "Global planning, path following, local avoidance, physics resolution, animation, and rendering have explicit boundaries.",
+        "One authority writes movement and request generations reject stale worker results.",
+        "Nav data is versioned with source geometry and agent profiles including radius, slope, step, and traversal rules.",
+        "Performance and behavior are measured across crowd densities, blocked routes, narrow passages, moving obstacles, and teleports."
+      ]
+    }
+  ]
+}

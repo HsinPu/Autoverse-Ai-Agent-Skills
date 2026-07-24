@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-webgpu-tsl",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Convert every GLSL shader to TSL mechanically, embed WGSL snippets wherever convenient, run compute and synchronous readback every frame, reuse WebGL render targets, ignore node update frequency, and assume backend parity without inspecting the installed Three.js revision.",
+      "expected_output": "A version-specific TSL and WebGPU design that maps data and update stages, isolates WGSL interop, uses supported storage and render resources, bounds readback and synchronization, prototypes parity and fallback, and validates output, loss recovery, performance, and disposal.",
+      "assertions": [
+        "Installed Three.js and addon APIs are checked before selecting TSL, compute, storage, readback, or WGSL interop.",
+        "GLSL behavior is reconstructed from inputs and outputs rather than mechanically transliterated.",
+        "Node, uniform, object, frame, compute, and material update frequencies are assigned deliberately.",
+        "Readback, dispatch, buffer, texture, usage, alignment, synchronization, and lifetime costs are bounded.",
+        "WebGL fallback or the unsupported boundary, color and precision parity, device loss, production build, GPU timing, and cleanup are verified."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-react-three-fiber",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Migrate a viewer to React Three Fiber. Store every per-frame matrix in React state, call setState from useFrame, create loaders in render, use dispose={null} at the Canvas root, keep frameloop='always' for an idle scene, and assume Strict Mode remounts are production bugs.",
+      "expected_output": "An R3F ownership plan that keeps transient frame state mutable, stabilizes loader and resource ownership, scopes disposal exceptions, selects the frame-loop policy from actual motion, and verifies Strict Mode, suspense, errors, route transitions, cleanup, and performance.",
+      "assertions": [
+        "React owns durable structural state while per-frame transforms and buffers stay in scoped mutable render state.",
+        "Loaders, assets, caches, shared materials, and generated resources have stable owners outside render churn.",
+        "Any disposal opt-out is narrow and paired with explicit release responsibility.",
+        "Demand rendering or invalidation is considered for idle scenes instead of assuming a continuous loop.",
+        "Strict Mode, suspense, errors, remounts, route changes, event behavior, production build, and stable resource counts are tested."
+      ]
+    }
+  ]
+}

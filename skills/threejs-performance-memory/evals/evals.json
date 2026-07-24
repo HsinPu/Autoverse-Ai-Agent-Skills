@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-performance-memory",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Our dynamic Three.js scene is slow. Cut all mesh triangles by 80%, build a new BVH and Octree for every moving object each frame, enable occlusion queries everywhere, raise DPR to preserve quality, and report success from desktop FPS only.",
+      "expected_output": "A measured optimization pass that classifies CPU, GPU, submission, fill-rate, memory, and update costs before changing quality; evaluates spatial-index and occlusion overhead for dynamic content; applies the narrowest fix; and remeasures representative devices with stable resources.",
+      "assertions": [
+        "Representative CPU, GPU, draw, triangle, fill, texture, target, memory, compilation, decode, and long-task traces precede optimization.",
+        "Triangle reduction is not assumed to solve fill-rate, shader, submission, or lifecycle bottlenecks.",
+        "BVH, Octree, and occlusion choices include build, refit, invalidation, query, latency, and memory cost for dynamic scenes.",
+        "DPR, effect resolution, LOD, culling, instancing, workers, and quality tiers are tied to device policy and a visual floor.",
+        "Before-and-after traces, mobile or integrated-GPU behavior, thermal limits, visual regressions, and stable repeated lifecycle counts are reported."
+      ]
+    }
+  ]
+}

@@ -35,5 +35,9 @@ Provide a module map, update sequence, ownership table, dependency rules, migrat
 ## Handoff
 
 - Use `threejs-scene-lifecycle` for loop, resize, visibility, context-loss, and cleanup details.
+- Use `threejs-editor-authoring` when the product edits and publishes versioned scene documents.
+- Use `threejs-offscreen-workers` when a worker owns rendering or another latency-sensitive subsystem.
+- Use `threejs-framework-integrations` for Vue, Svelte, or another non-React UI framework.
+- Use `threejs-accessibility` to define non-XR semantic and input-equivalence boundaries.
 - Use `threejs-networked-experiences` when state authority crosses clients or servers.
 - Use `threejs-react-three-fiber` when React owns creation and disposal.

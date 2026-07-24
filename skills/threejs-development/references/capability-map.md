@@ -16,25 +16,34 @@ Use `threejs-development` when a request spans several systems or starts from an
 | Concern | Skill |
 |---|---|
 | Modules, ownership, update phases, migration | `threejs-project-architecture` |
+| Runtime editors, undo, serialization, import, export, publishing | `threejs-editor-authoring` |
+| OffscreenCanvas, renderer workers, message and transfer protocols | `threejs-offscreen-workers` |
 | Loop, resize, visibility, teardown, context recovery | `threejs-scene-lifecycle` |
 | glTF, textures, compression, loading, asset rights | `threejs-assets-gltf` |
-| Keyframes, mixers, clips, blending, skeletal and morph animation | `threejs-animation-system` |
+| Keyframes, mixers, blending, skeletons, morphs, retargeting, IK | `threejs-animation-system` |
 | Vectors, matrices, quaternions, transforms, projections | `threejs-math-transforms` |
 | BufferGeometry, attributes, topology, instancing | `threejs-geometry` |
-| PBR materials, textures, environments, lights | `threejs-materials-lighting` |
+| PBR materials, static or media textures, environments, lights | `threejs-materials-lighting` |
 | GLSL, ShaderMaterial, uniforms, GPU computation | `threejs-shaders` |
-| Picking, pointer, touch, keyboard, controls | `threejs-interaction-input` |
-| Fixed-step physics and positional audio | `threejs-physics-audio` |
+| Picking, pointer, touch, keyboard, controls, spatial indexes | `threejs-interaction-input` |
+| Rigid bodies, colliders, fixed-step simulation, physics workers | `threejs-physics-simulation` |
+| Listener ownership, positional audio, activation, captions | `threejs-spatial-audio` |
+| Legacy or explicitly combined physics-and-audio routing | `threejs-physics-audio` |
+| Navmeshes, pathfinding, agents, avoidance, crowds | `threejs-navigation-crowds` |
 | WebGLRenderer, WebGPURenderer, capability fallback | `threejs-rendering-platforms` |
 | WebGPU, TSL node materials, compute, storage, WGSL | `threejs-webgpu-tsl` |
 | Pass graphs and screen-space effects | `threejs-postprocessing` |
 | React Three Fiber and Drei integration | `threejs-react-three-fiber` |
+| Vue/TresJS, Svelte/Threlte, and other framework integration | `threejs-framework-integrations` |
 | HUDs, labels, text, DOM and world-space UI | `threejs-ui-overlays` |
 | Core loops, entities, levels, game feel, replay | `threejs-gameplay-systems` |
-| 3D charts, point clouds, networks, scientific data | `threejs-data-visualization` |
+| 3D charts, networks, volumes, and scientific analysis | `threejs-data-visualization` |
+| Dense point clouds, scans, Gaussian splats, streaming LOD | `threejs-point-clouds-splats` |
+| CAD/BIM conversion, assemblies, metadata, measurement | `threejs-cad-bim` |
 | Geographic coordinates, floating origins, tiled worlds | `threejs-large-worlds-geospatial` |
-| WebXR, comfort, and inclusive fallback | `threejs-webxr-accessibility` |
-| Profiling, optimization, adaptive quality, cleanup | `threejs-performance-memory` |
+| Non-XR semantics, equivalent input, sensory alternatives | `threejs-accessibility` |
+| WebXR sessions, immersive input, comfort, inclusive fallback | `threejs-webxr-accessibility` |
+| Profiling, spatial acceleration, adaptive quality, cleanup | `threejs-performance-memory` |
 | Reproduction, diagnostics, automated and visual tests | `threejs-testing-debugging` |
 | Untrusted assets, policies, production delivery | `threejs-security-deployment` |
 | Replication, interpolation, prediction, authority | `threejs-networked-experiences` |
@@ -45,6 +54,7 @@ Use `threejs-development` when a request spans several systems or starts from an
 |---|---|
 | Camera rigs, cinematic composition, floating origins | `threejs-camera-direction` |
 | Analytic timelines, springs, quaternions, staging | `threejs-procedural-animation` |
+| Seeded characters, body plans, rigs, IK, character LOD | `threejs-procedural-characters` |
 | Shared scalar and vector fields | `threejs-procedural-fields` |
 | Procedural PBR surfaces and masks | `threejs-procedural-materials` |
 | Height-field relief and silhouette POM | `threejs-parallax-occlusion-mapping` |

@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-editor-authoring",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Build a browser scene editor. Save scene.toJSON() on every pointermove, put renderer objects and event callbacks in the document, keep an unlimited full snapshot for every undo step, and promise lossless GLB round trips.",
+      "expected_output": "A versioned editor architecture that separates document, editor-session, and runtime state; uses coalesced semantic commands and bounded history; excludes runtime handles; validates migrations and recovery; and proves exporter capabilities with an explicit loss matrix.",
+      "assertions": [
+        "The canonical document contains stable application entities and references, not GPU handles or executable callbacks.",
+        "Continuous transforms are coalesced into bounded reversible transactions rather than full snapshots per event.",
+        "Schema migration, autosave recovery, corrupt import handling, and last-known-good preservation are defined.",
+        "GLTFExporter support is verified for the installed version and unsupported round-trip properties are disclosed.",
+        "Publishing produces a validated runtime package without editor-only helpers or session state."
+      ]
+    }
+  ]
+}

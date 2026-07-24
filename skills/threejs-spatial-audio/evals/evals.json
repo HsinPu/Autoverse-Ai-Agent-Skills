@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-spatial-audio",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create a new AudioContext and AudioListener for every positional source, autoplay all sounds on mount, use HRTF for UI alerts, fire a sound for every repeated collision event, and assume disposing PositionalAudio stops webcam or media resources.",
+      "expected_output": "An owned Web Audio graph with one listener policy, user-activation state machine, useful spatialization, bounded voices and deduplicated events, captions for essential cues, explicit media ownership, and interruption and cleanup tests.",
+      "assertions": [
+        "Audio contexts, listeners, buses, buffers, and sources have bounded explicit ownership.",
+        "Playback waits for eligible user intent and handles suspended, interrupted, denied, and background states.",
+        "Critical UI audio remains intelligible and spatialization is used only when location is meaningful.",
+        "Gameplay or collision cues use priority, concurrency, cooldown, pooling, timing, and deduplication rules.",
+        "Captions or equivalent cues, device checks, route changes, source cleanup, node disconnection, and media-track ownership are verified."
+      ]
+    }
+  ]
+}

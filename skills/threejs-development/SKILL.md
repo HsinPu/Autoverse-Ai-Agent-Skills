@@ -1,6 +1,6 @@
 ---
 name: threejs-development
-description: "End-to-end Three.js development routing and delivery workflow. Use when building, restructuring, reviewing, or debugging a complete Three.js experience that spans architecture, scene lifecycle, assets, rendering, interaction, performance, advanced graphics, testing, accessibility, or deployment."
+description: "End-to-end Three.js development routing and delivery workflow. Use when building, restructuring, reviewing, or debugging a complete Three.js experience that spans architecture, authoring, workers, frameworks, scene lifecycle, assets, rendering, interaction, simulation, performance, advanced graphics, accessibility, testing, or deployment."
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -16,7 +16,7 @@ Route a Three.js task to the smallest specialist set while preserving one cohere
 
 ## Workflow
 
-1. Inspect the installed Three.js version, package manager, bundler, renderer, framework integration, browser targets, asset pipeline, and existing test commands.
+1. Inspect the installed Three.js version, package manager, bundler, renderer, framework integration, browser targets, worker or authoring boundaries, asset pipeline, and existing test commands.
 2. Define the experience contract: camera and input, scene scale, visual target, supported devices, accessibility fallback, loading behavior, frame-time and memory budgets, and deployment constraints.
 3. Read [capability-map.md](references/capability-map.md) and select only the Skills that own the affected systems.
 4. Establish architecture, lifecycle, renderer, color, asset, and resource ownership before adding advanced effects.
@@ -25,12 +25,12 @@ Route a Three.js task to the smallest specialist set while preserving one cohere
 
 ## System Order
 
-1. Project and scene ownership
-2. Renderer, camera, color, and asset contracts
-3. Geometry, materials, lighting, animation, and input
-4. Simulation, environment, and advanced visual systems
+1. Project, authoring, framework, worker, and scene ownership
+2. Renderer, camera, color, asset, and data contracts
+3. Geometry, materials, lighting, animation, input, and accessibility semantics
+4. Simulation, navigation, audio, environment, and advanced visual systems
 5. Post-processing and final-image treatment
-6. Accessibility, testing, performance, security, and deployment
+6. Testing, performance, security, deployment, and recovery
 
 ## Core Rules
 
@@ -39,9 +39,10 @@ Route a Three.js task to the smallest specialist set while preserving one cohere
 - Use one declared world scale and coordinate convention.
 - Keep time, randomness, input, and external data injectable when deterministic testing matters.
 - Add quality tiers and fallbacks before expensive effects become release dependencies.
+- Keep worker protocols, editor documents, and specialized data formats versioned independently from incidental runtime objects.
 - Treat screenshots as evidence only when the camera, seed, viewport, renderer, color pipeline, and scene state are fixed.
 - Verify APIs against the installed Three.js version and [official-resources.md](references/official-resources.md); do not rely on examples from a different release without checking compatibility.
 
 ## Required Deliverable
 
-Return the selected specialist route, confirmed versions and targets, ownership boundaries, scene and render flow, quality budgets, implementation slices, diagnostics, validation evidence, compatibility limits, and remaining risks.
+Return the selected specialist route, confirmed versions and targets, ownership and data boundaries, scene and render flow, quality budgets, implementation slices, diagnostics, validation evidence, compatibility limits, and remaining risks.

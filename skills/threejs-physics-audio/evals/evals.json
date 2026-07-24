@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-physics-audio",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Update our old threejs-physics-audio integration. Keep physics, listener setup, Web Audio nodes, collision subscriptions, and all teardown in one singleton. Every predicted and reconciled contact should play the same sound.",
+      "expected_output": "A compatibility route that preserves the old entry point but assigns simulation to threejs-physics-simulation and sound to threejs-spatial-audio, defines a typed collision-to-cue event contract, deduplicates prediction and reconciliation, and keeps lifecycle independent.",
+      "assertions": [
+        "The response preserves threejs-physics-audio as a compatibility route rather than deleting it.",
+        "Physics-only ownership is delegated to threejs-physics-simulation.",
+        "Audio-only ownership is delegated to threejs-spatial-audio.",
+        "The cross-system boundary carries semantic event identity, tick or timing, position, and a deduplication key.",
+        "Physics and audio can initialize, fail, and tear down independently."
+      ]
+    }
+  ]
+}

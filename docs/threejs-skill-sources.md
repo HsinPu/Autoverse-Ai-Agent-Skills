@@ -71,29 +71,39 @@ The referenced pack focuses on advanced visual systems. CraftRoster adds the pro
 - clip, mixer, skeletal, morph, and root-motion animation;
 - vectors, matrices, quaternions, coordinate spaces, and transform diagnostics;
 - general geometry, material, lighting, and shader work;
-- pointer, touch, keyboard, gamepad, physics, and spatial audio integration;
+- pointer, touch, keyboard, gamepad, spatial indexing, and input integration;
+- independent physics-simulation and spatial-audio ownership with a compatibility route for the former combined Skill;
+- navmeshes, pathfinding, agents, local avoidance, and crowds;
+- OffscreenCanvas, worker-owned rendering, transfer boundaries, and versioned worker protocols;
+- runtime editors, commands, undo and redo, serialization, import, export, and publishing;
 - WebGL and WebGPU renderer selection;
 - WebGPU, TSL node materials, compute, storage, readback, and WGSL interop;
 - general post-processing;
 - React Three Fiber;
+- Vue/TresJS, Svelte/Threlte, and other framework integration;
 - HUDs, labels, text, overlays, and accessible UI;
+- non-XR semantic accessibility plus focused WebXR accessibility and comfort;
 - gameplay, entities, levels, game feel, replay, and bot playtests;
 - data and scientific visualization;
+- point-cloud and Gaussian-splat streaming;
+- CAD/BIM conversion, hierarchy, metadata, measurement, and revision behavior;
+- procedural characters, morphology, rigs, retargeting, inverse kinematics, and character LOD;
 - large-world and geospatial coordinate, tiling, and precision systems;
-- WebXR and accessibility;
-- performance, memory, testing, and debugging;
+- media textures, spatial acceleration, performance, memory, testing, and debugging;
 - untrusted-content security, production deployment, and networked experiences.
 
 ## Gap Comparison Sources
 
-The coverage audit also reviewed the public capability inventories of:
+The coverage audit reviewed these public inventories at fixed revisions on 2026-07-24:
 
-- `linegel/threejs-complete-set-of-skill`
-- `dgreenheck/webgpu-claude-skill`
-- `emalorenzo/three-agent-skills`
-- `majidmanzarpour/threejs-game-skills`
+| Repository | Audited revision | Use |
+|---|---|---|
+| `linegel/threejs-complete-set-of-skill` | `62a9bc59330c44827824665323823883e88f100c` | Capability names and specialized procedural-character coverage |
+| `dgreenheck/webgpu-claude-skill` | `af2319bd01bb7cc881267a9ef42cafdaf5e9029d` | WebGPU depth, progressive disclosure, and reusable reference structure |
+| `emalorenzo/three-agent-skills` | `f950f95ae3b13581546e6d6d8b2f88a08eb3e577` | General Three.js and framework rule coverage |
+| `majidmanzarpour/threejs-game-skills` | `7221c1f4a6d2ae189a4d85d058d24f3228499d46` | Game-production, QA, navigation, and content-pipeline coverage |
 
-These repositories were used only to identify missing catalog boundaries such as general animation, WebGPU and TSL, game UI, gameplay, and explicit fallback behavior. No text, scripts, examples, scaffolds, images, scorecards, provider integrations, or assets from those repositories are included. The resulting CraftRoster Skills are first-party workflows grounded in official Three.js and browser-platform documentation.
+These repositories were used only to identify catalog gaps and acceptance boundaries. No text, scripts, examples, scaffolds, images, scorecards, provider integrations, templates, or assets from them are included. New and expanded Skills remain first-party, do not declare those repositories as `reference-source`, and are grounded in official Three.js, framework, and browser-platform documentation.
 
 ## Official Technical Authority
 
@@ -102,6 +112,8 @@ Version-sensitive implementation claims should be checked against:
 - Three.js manual and API documentation: https://threejs.org/docs/
 - Three.js examples and repository for the installed revision: https://github.com/mrdoob/three.js
 - React Three Fiber documentation: https://r3f.docs.pmnd.rs/
+- TresJS documentation: https://docs.tresjs.org/
+- Threlte documentation: https://threlte.xyz/
 - Web platform standards and browser compatibility data for WebGL, WebGPU, WebXR, workers, audio, and input APIs
 
 An upstream example is not authority for compatibility with the project's installed Three.js revision.
@@ -124,7 +136,8 @@ Executable and external-action surface: none added by this suite
 
 Residual risk:
 
-- Three.js, WebGPU, TSL, WebXR, and React Three Fiber APIs evolve quickly;
+- Three.js, WebGPU, TSL, WebXR, React Three Fiber, TresJS, and Threlte APIs evolve quickly;
+- third-party physics, navigation, CAD/BIM, point-cloud, and splat adapters have independent compatibility and provenance;
 - visual techniques can exceed mobile GPU budgets without project-specific measurement;
 - upstream licensing or provenance can change after the pinned revision.
 

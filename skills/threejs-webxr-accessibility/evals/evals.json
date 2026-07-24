@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-webxr-accessibility",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Make checkout available only inside VR. Force smooth locomotion and camera acceleration, use tiny world-locked text, require standing and two tracked controllers, ignore seated users and session interruption, and show a blank page when XR is unavailable.",
+      "expected_output": "A progressive WebXR design with capability detection, XR-owned pose and explicit world or locomotion policy, seated and standing options, reachable and readable interaction, comfort controls, inclusive input, general-accessibility handoff, non-XR checkout, and lifecycle and device tests.",
+      "assertions": [
+        "Essential information and transactions remain available through a non-XR accessible web path.",
+        "Reference spaces, session features, XR camera ownership, world origin, recentering, and locomotion are explicit.",
+        "Seated and standing modes, reach, readable UI, teleport or smooth options, reduced motion, and alternative input are designed.",
+        "General DOM semantics, keyboard, screen-reader, captions, and sensory alternatives route to threejs-accessibility.",
+        "Permission denial, interruption, controller changes, device removal, frame pressure, exit cleanup, and non-XR continuation are tested."
+      ]
+    }
+  ]
+}

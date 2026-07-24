@@ -1,0 +1,17 @@
+{
+  "skill_name": "threejs-security-deployment",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Let customers paste any model, texture, shader, worker, and media URL into our Three.js app. Render returned HTML metadata in tooltips, forward credentials to every origin, use eval for shader presets, disable CSP, and deploy without size limits or rollback.",
+      "expected_output": "A production threat and delivery boundary that validates untrusted assets and metadata, allowlists destinations, separates data from executable content, constrains credentials, workers, media and shaders, defines CSP and CORS behavior, budgets resources, and verifies staged rollout and rollback.",
+      "assertions": [
+        "Untrusted URLs, models, textures, metadata, archives, decoders, media, workers, and shader-like input are enumerated as separate attack surfaces.",
+        "Type, scheme, origin, size, dimensions, counts, compression, parse, decode, GPU, and timeout limits are enforced.",
+        "Metadata is rendered as text or sanitized through an approved boundary and executable evaluation is rejected.",
+        "Credential forwarding, CORS, CSP, worker-src, media-src, connect-src, privacy, cache, and CDN policies are explicit.",
+        "Production build, hostile fixtures, monitoring, staged rollout, abort thresholds, and rollback are verified."
+      ]
+    }
+  ]
+}
