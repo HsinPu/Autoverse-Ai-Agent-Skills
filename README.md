@@ -1,43 +1,48 @@
 # CraftRoster
 
-[![Validate](https://github.com/HsinPu/CraftRoster/actions/workflows/validate.yml/badge.svg)](https://github.com/HsinPu/CraftRoster/actions/workflows/validate.yml)
+[![Validate](https://github.com/HsinPu/CraftRoster/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/HsinPu/CraftRoster/actions/workflows/validate.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 ![Skills](https://img.shields.io/badge/Skills-283-7c3aed)
 ![Agents](https://img.shields.io/badge/Agents-237-2563eb)
 ![Node.js](https://img.shields.io/badge/Node.js-%3E%3D22-339933?logo=nodedotjs&logoColor=white)
 
-由 **HsinPu** 維護的開源 AI Agent 與 Skill catalog，提供可直接安裝的 Codex、Claude Code、Cursor、VS Code／GitHub Copilot、OpenCode Agents 與 Skills，並包含安全更新機制及本機 catalog 查詢 CLI。
+**可跨工具安裝、查詢與驗證的 AI Agent／Skill catalog。**
 
-**Cross-platform AI Agents, Skills & Workflows.**
+CraftRoster 收錄 237 個專業 Agents 與 283 個可重用 Skills，可安裝到 Codex、Claude Code、Cursor、VS Code／GitHub Copilot 與 OpenCode。專案同時提供免 Node.js 安裝器、五平台 Agent adapters、ownership-aware 更新機制，以及離線 catalog CLI。
 
-這個專案不是另一套 Agent runtime 或 orchestration framework；它專注在可攜、可查詢、可驗證的角色與能力定義，讓現有 coding agent 能直接使用。
+CraftRoster 是 catalog 與 distribution layer，**不是**另一套 Agent runtime 或 orchestration framework；它讓現有 coding agent 直接取得可攜、可追溯、可驗證的角色與工作流程。
 
-[快速開始](#快速開始) · [Agents](#agents) · [Skills](#skills) · [影片製作工作流](#影片製作工作流) · [Catalog CLI](#catalog-cli) · [開發與驗證](#開發與驗證) · [Release Checklist](docs/release-checklist.md) · [回報問題](https://github.com/HsinPu/CraftRoster/issues)
+[快速開始](#快速開始) · [支援平台](#支援平台與安裝位置) · [Catalog CLI](#catalog-cli) · [Agents](#agents) · [Skills](#skills) · [開發與驗證](#開發與驗證) · [Issues](https://github.com/HsinPu/CraftRoster/issues)
 
-## 目錄
+## 專案內容
 
-- [快速開始](#快速開始)
-- [專案內容](#專案內容)
-- [安裝目標](#安裝目標)
-- [安裝單一元件](#安裝單一元件)
-- [安全更新與覆蓋保護](#安全更新與覆蓋保護)
-- [如何使用 Agent](#如何使用-agent)
-- [影片製作工作流](#影片製作工作流)
-- [Catalog CLI](#catalog-cli)
-- [Agents](#agents)
-- [Skills](#skills)
-- [專案結構](#專案結構)
-- [開發與驗證](#開發與驗證)
-- [來源、改寫與授權政策](#來源改寫與授權政策)
-- [疑難排解](#疑難排解)
-- [參與貢獻](#參與貢獻)
-- [License](#license)
+| 類型 | 數量 | 用途 | Source of truth |
+|---|---:|---|---|
+| Skills | **283 Skills**／16 類 | 可重用的工作流程、規範、工具指引與領域知識 | [`skills/<name>/SKILL.md`](skills/) |
+| Agents | 237／31 類 | 可委派的專業角色，包含權限、限制與輸出契約 | [`agents/<role>.md`](agents/) |
+| Codex adapters | 237 | Codex custom Agent TOML | [`adapters/codex/`](adapters/codex/) |
+| Claude adapters | 237 | Claude Code subagent Markdown | [`adapters/claude/`](adapters/claude/) |
+| Cursor adapters | 237 | Cursor subagent Markdown | [`adapters/cursor/`](adapters/cursor/) |
+| Copilot adapters | 237 | VS Code／GitHub Copilot `.agent.md` | [`adapters/copilot/`](adapters/copilot/) |
+| OpenCode adapters | 237 | OpenCode subagent Markdown | [`adapters/opencode/`](adapters/opencode/) |
+| All pinned Agent references | 329 paths／24 repositories | 固定 commit、tree、路徑與授權證據 | [`agent-reference-sources.json`](scripts/data/agent-reference-sources.json) |
+| Additional Agent references | 131 paths／23 repositories | 非 `wshobson/agents` 的逐角色 reference metadata | [`agents/`](agents/) |
+
+| | Agent | Skill |
+|---|---|---|
+| 核心概念 | 可被委派任務的專業角色 | 套用到任務的操作知識或工作流程 |
+| 典型例子 | [`code-reviewer`](agents/code-reviewer.md)、[`debugger`](agents/debugger.md)、[`ios-developer`](agents/ios-developer.md) | [`code-review`](skills/code-review/)、[`python-development`](skills/python-development/)、[`ios-architecture`](skills/ios-architecture/) |
+| 安裝單位 | 平台專用 adapter 與 ownership sidecar | 含 `SKILL.md` 及選用 references、scripts、assets 的資料夾 |
+| 權限 | 明確標示 `read-only` 或 `workspace-write` | 由使用它的主 Agent／runtime 決定 |
+
+> [!NOTE]
+> Agents 與 Skills 可以獨立使用。Agent 可引用多個相關 Skills；主 Agent 也能直接套用 Skill，不必先建立 subagent。
 
 ## 快速開始
 
-下列命令已明確預填 Codex target。安裝器本身仍要求提供 Target，不會在未指定時自行猜測平台。
+以下範例以 **Codex 使用者層級全域安裝**為預設，不需要管理員／`sudo`，一般安裝也不需要 Node.js。
 
-### 一次安裝全部 Skills 與 Agents
+### 一次安裝全部 Skills、Agents 與主動委派
 
 Windows PowerShell：
 
@@ -51,72 +56,38 @@ Linux／macOS：
 curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh | bash -s -- --target codex --type skill && curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh | bash -s -- --target codex --type agent --enable-auto-delegation
 ```
 
-這組命令會安裝全部 283 個 Skills、237 個 Agents，並啟用不依賴專案 `AGENTS.md` 的全域主動委派。
+這會安裝全部 283 個 Skills、237 個 Agents，並為 Codex 啟用全域主動委派。安裝完成後請開啟新的 Codex 工作階段，讓 runtime 重新載入內容。
 
-### 只安裝全部 Skills
+> [!TIP]
+> 上述 one-liner 會取用 `main` 當下的 script 與 archive，不是固定且簽章的 release artifact。若需要先審核或固定版本，請 clone 指定 commit、檢查 [`install.ps1`](scripts/install.ps1) 或 [`install.sh`](scripts/install.sh)，再使用[本機 checkout](#從本機-checkout-安裝)。
+
+### 只安裝單一元件
 
 Windows PowerShell：
 
 ```powershell
-powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target codex -Type skill'
+# Skill
+powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target codex -Type skill -Name python-development'
+
+# Agent
+powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target codex -Type agent -Name code-reviewer'
 ```
 
 Linux／macOS：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh | bash -s -- --target codex --type skill
+# Skill
+curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh | bash -s -- --target codex --type skill --name python-development
+
+# Agent
+curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh | bash -s -- --target codex --type agent --name code-reviewer
 ```
 
-### 只安裝全部 Agents
+省略 `Name`／`--name` 會安裝該 Type 的全部元件。全量 Agent 安裝會一起安裝 `subagent-architecture`；普通的單一 Agent 安裝不會。
 
-Windows PowerShell：
+### 安裝到目前專案
 
-```powershell
-powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target codex -Type agent'
-```
-
-Linux／macOS：
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh | bash -s -- --target codex --type agent
-```
-
-任何平台的全量 Agent 安裝都會自動帶入該平台可讀取的 `subagent-architecture` Skill；單一 Agent 安裝則不會，除非同時啟用下一節的全域主動委派。
-
-### 安裝全部 Agents 並啟用全域主動委派
-
-這是選用功能，不依賴每個專案的 `AGENTS.md`。Codex 會安全合併全域 `developer_instructions`；OpenCode 會把已安裝的 routing guidance 加入全域 `instructions`。
-
-Windows PowerShell（Codex）：
-
-```powershell
-powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target codex -Type agent -EnableAutoDelegation'
-```
-
-Linux／macOS（Codex）：
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh | bash -s -- --target codex --type agent --enable-auto-delegation
-```
-
-Windows PowerShell（OpenCode）：
-
-```powershell
-powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target opencode -Type agent -EnableAutoDelegation'
-```
-
-Linux／macOS（OpenCode）：
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh | bash -s -- --target opencode --type agent --enable-auto-delegation
-```
-
-> [!NOTE]
-> `-EnableAutoDelegation`／`--enable-auto-delegation` 只接受全域 `codex` 或 `opencode` Agent target。若偵測到使用者自行管理的衝突設定，安裝器會拒絕修改並提示手動合併，不會讓 Force 覆蓋它。
-
-### 安裝到目前專案的所有工具
-
-先切換到要安裝的專案／workspace 根目錄，再執行下列命令。`project` 不會尋找 Git root；它直接使用執行命令當下的工作目錄。
+先切換到專案／workspace root。`project` target 直接使用目前工作目錄，不會自行尋找 Git root。
 
 Windows PowerShell：
 
@@ -130,76 +101,47 @@ Linux／macOS：
 curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh | bash -s -- --target project --type skill && curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh | bash -s -- --target project --type agent
 ```
 
-這會建立 `.agents/skills` 與 Claude 相容鏡像 `.claude/skills`，並把五種 Agent adapter 分別寫入 `.codex/agents`、`.claude/agents`、`.cursor/agents`、`.github/agents`、`.opencode/agents`。
+<details>
+<summary><strong>從本機 checkout 安裝</strong></summary>
 
-### 執行需求
+```bash
+git clone https://github.com/HsinPu/CraftRoster.git
+cd CraftRoster
+```
 
-| 功能 | 需求 |
-|---|---|
-| PowerShell 安裝器 | Windows PowerShell／PowerShell；只有遠端安裝需要網路連線 |
-| Bash 安裝器 | 本機安裝與 smoke 需要 Bash、`mktemp`、`cksum`，以及 `sha256sum` 或 `shasum`；遠端安裝另需 `curl`、`tar` 與網路連線，安全合併既有 OpenCode JSON 時另需 Python 3 或 Node.js |
-| Catalog CLI | Node.js 22 或更新版本 |
-| 專案開發與驗證 | Node.js 22 或更新版本；CI 驗證 Node.js 22 與 24 |
-| Agent 原創性稽核 | Git CLI 與 GitHub 網路連線 |
+Windows PowerShell：
 
-一般安裝 Skills 或 Agents **不需要 Node.js**；只有 Bash 要安全合併既有、自訂的 OpenCode JSON 時，需有 Python 3 或 Node.js 其中之一。如果不想直接執行遠端腳本，請先 clone repository、檢查 `scripts/install.ps1` 或 `scripts/install.sh`，再依照[本機安裝](#從本機-checkout-安裝)執行。
+```powershell
+.\scripts\install.ps1 -Target codex -Type skill -SourceDir .
+.\scripts\install.ps1 -Target codex -Type agent -SourceDir . -EnableAutoDelegation
+```
 
-## 專案內容
+Linux／macOS：
 
-| 類型 | 數量 | 用途 | Canonical source |
-|---|---:|---|---|
-| Skills | **283 Skills**／16 類 | 可重複使用的工作流程、規範、工具指引與領域知識 | `skills/<name>/SKILL.md` |
-| Agents | 237／31 類 | 可委派的專業角色，包含任務、限制、權限與輸出契約 | `agents/<role>.md` |
-| Codex adapters | 237 | Codex custom Agent 的 TOML 設定 | `adapters/codex/<role>.toml` |
-| Claude adapters | 237 | Claude Code subagent 的 Markdown 設定 | `adapters/claude/<role>.md` |
-| Cursor adapters | 237 | Cursor subagent 的 Markdown 設定 | `adapters/cursor/<role>.md` |
-| Copilot adapters | 237 | VS Code／GitHub Copilot custom Agent 設定 | `adapters/copilot/<role>.agent.md` |
-| OpenCode adapters | 237 | OpenCode `mode: subagent` 的 Markdown 設定 | `adapters/opencode/<role>.md` |
-| wshobson reference ledger | 199 definitions | 保存原始角色集合的 reference path 與合併追蹤資料 | `scripts/data/wshobson-agent-inventory.json` |
-| All pinned Agent references | 329 paths／24 repositories | 由 manifest 與原創性審計核對固定 commit、tree、路徑與內容 | `scripts/data/agent-reference-sources.json` |
-| Additional Agent references | 131 paths／23 repositories | 保存在各 canonical Agent 的 `reference-*` metadata | `agents/<role>.md` |
+```bash
+bash scripts/install.sh --target codex --type skill --source-dir .
+bash scripts/install.sh --target codex --type agent --source-dir . --enable-auto-delegation
+```
 
-各 adapter 會把 canonical `read-only`／`workspace-write` 權限轉成平台可理解的設定。例如 OpenCode 的唯讀角色會設定 `edit: deny` 與 `bash: deny`；Copilot 的唯讀角色只開放 `read`、`search`、`web`、`agent` tools。
+</details>
 
-<!-- AGENT_COUNT_START -->
-目前共收錄 **237** 個不重複 Agents。
-<!-- AGENT_COUNT_END -->
+## 支援平台與安裝位置
 
-`wshobson/agents` ledger 的 199 份 definitions 內含 65 份同名角色變體，共形成 134 個上游角色名稱。內容級覆核後，198 份通用 definitions 對應 132 個 independently rewritten canonical Agents；RunAPI 的產品專屬 `task-executor` 則保留在 ledger 並明確標記為 `excluded`。另外 105 個 Agents 來自其餘 23 個 reference repositories，加入前同樣會先比對名稱、職責邊界與 prompt 內容。
-
-> [!NOTE]
-> 角色目錄已依 [Agent Coverage Matrix](docs/agent-coverage-matrix.md) 在本專案宣告的通用 AI、軟體、商務、營運、內容與媒體製作 scope 內完成 31／31 類核心責任鏈覆蓋；`npm run validate` 會確認每一類的核心工作、代表 Agent、handoff 與權限邊界仍完整。這代表常見工作都有可路由的責任 owner，不代表收錄現實世界的每個職稱。後續只有在真實需求同時具有獨立 routing trigger、決策權與 durable artifact，且不能由現有 Agent 搭配 Skill 安全完成時，才新增角色；provider、工具、格式步驟與依法必須由合格真人承擔的工作不為了數量轉成 Agent。
-
-### Agent 與 Skill 的差別
-
-| | Agent | Skill |
-|---|---|---|
-| 核心概念 | 一個可被委派任務的專業角色 | 一套可套用到任務的操作知識或工作流程 |
-| 典型例子 | `code-reviewer`、`debugger`、`security-auditor` | `code-review`、`python-development`、`threat-modeling` |
-| 安裝位置 | 各工具的 `agents/` 目錄；格式依平台不同 | 各工具支援的 `skills/<name>/SKILL.md` 目錄 |
-| 安裝單位 | 單一 adapter 檔案與 ownership sidecar | 含 `SKILL.md`、references、scripts、assets 的資料夾 |
-
-Agent 可以引用一個或多個相關 Skills；Skill 也能由主 Agent 直接使用，不必先建立 subagent。
-
-## 安裝目標
-
-安裝器只接受以下 targets；除了 `project` 之外都安裝到使用者層級。
+安裝器接受 `codex`、`claude`、`cursor`、`vscode`、`copilot`、`opencode` 與 `project`。除了 `project` 之外，預設都是使用者層級安裝。
 
 | Target | Skill 預設位置 | Agent 預設位置 | Agent 格式 |
 |---|---|---|---|
-| `codex` | `$CODEX_HOME/skills/`（預設 `~/.codex/skills/`） | `$CODEX_HOME/agents/`（預設 `~/.codex/agents/`） | `<role>.toml` |
+| `codex` | `$CODEX_HOME/skills/`，預設 `~/.codex/skills/` | `$CODEX_HOME/agents/`，預設 `~/.codex/agents/` | `<role>.toml` |
 | `claude` | `~/.claude/skills/` | `~/.claude/agents/` | `<role>.md` |
 | `cursor` | `~/.cursor/skills/` | `~/.cursor/agents/` | `<role>.md` |
 | `vscode` | `~/.copilot/skills/` | `~/.copilot/agents/` | `<role>.agent.md` |
 | `copilot` | `~/.copilot/skills/` | `~/.copilot/agents/` | `<role>.agent.md` |
-| `opencode` | `~/.config/opencode/skills/` | `~/.config/opencode/agents/` | `<role>.md` |
-| `project` | `<cwd>/.agents/skills/` + `<cwd>/.claude/skills/` | 五個平台各自的 project 目錄 | 依平台產生 |
+| `opencode` | `<OpenCode config>/skills/` | `<OpenCode config>/agents/` | `<role>.md` |
+| `project` | `.agents/skills/` + `.claude/skills/` | 五個平台各自的 project 目錄 | 依平台產生 |
 
-`vscode` 是 `copilot` 的等價 alias；兩者使用同一組路徑與 `copilot` ownership identity，所以可交替執行更新。OpenCode 會優先採用官方 [custom directory](https://opencode.ai/docs/config/#custom-directory) 環境變數 `OPENCODE_CONFIG_DIR`；未設定時依序使用 `XDG_CONFIG_HOME/opencode` 或 `~/.config/opencode`。全域 `codex` target 跟隨 Codex 內建 `$skill-installer`：config、Skills 與 Agents 都以 `CODEX_HOME` 為根目錄，新 Skill 安裝到 `$CODEX_HOME/skills`，未設定時即 `~/.codex/skills`。若同名的官方舊安裝只存在於 `~/.agents/skills`，過渡更新會在原位置完成，避免另外建立重複副本。
+`vscode` 是 `copilot` alias，兩者共用路徑與 ownership identity。OpenCode 依序使用 `OPENCODE_CONFIG_DIR`、`XDG_CONFIG_HOME/opencode` 或 `~/.config/opencode`。
 
-### `project` target 的實際位置
-
-`project` 是 CraftRoster 提供的整合 scope，不是另一種 Agent 格式。預設 root 是安裝命令執行當下的工作目錄；請先 `cd` 到專案或 VS Code workspace 根目錄。若提供 `-InstallDir`／`--dir`，該值會被視為 project root，再附加以下目錄：
+`project` target 會建立：
 
 ```text
 <project-root>/
@@ -212,250 +154,118 @@ Agent 可以引用一個或多個相關 Skills；Skill 也能由主 Agent 直接
 └─ .opencode/agents/     # OpenCode Markdown
 ```
 
-Skills 有可共用的 Agent Skills package 結構，但 custom Agent 並沒有跨工具通用格式；因此 project Agent 安裝會從同一份 canonical source 產生五種 adapter。安裝器會先預檢所有目的地，任一重名或 ownership 衝突都會在開始寫入前停止。
-
-`project` 的 `.agents/skills` 依據 [Codex Skills](https://learn.chatgpt.com/docs/build-skills) 所列 repository discovery 位置；全域 `codex` target 則跟隨內建 `$skill-installer` 的 `$CODEX_HOME/skills` 安裝行為。其餘路徑與格式依據各平台官方文件：[Codex Subagents](https://learn.chatgpt.com/docs/agent-configuration/subagents)、[Claude Skills](https://code.claude.com/docs/en/skills)、[Claude Subagents](https://code.claude.com/docs/en/sub-agents)、[Cursor Skills](https://cursor.com/docs/skills.md)、[Cursor Subagents](https://cursor.com/docs/subagents.md)、[VS Code Agent Skills](https://code.visualstudio.com/docs/agent-customization/agent-skills)、[VS Code Custom Agents](https://code.visualstudio.com/docs/agent-customization/custom-agents)、[GitHub Copilot Custom Agents](https://docs.github.com/en/copilot/reference/custom-agents-configuration)、[OpenCode Skills](https://opencode.ai/docs/skills)、[OpenCode Agents](https://opencode.ai/docs/agents/)。
-
-## 安裝單一元件
-
-省略 Name 會安裝指定 Type 的全部元件；提供 Name 則只安裝一個。
-
-### Windows PowerShell
-
-單一 Skill：
-
-```powershell
-powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target codex -Type skill -Name python-development'
-```
-
-單一 Agent：
-
-```powershell
-powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target codex -Type agent -Name code-reviewer'
-```
-
-### Linux／macOS
-
-單一 Skill：
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh | bash -s -- --target codex --type skill --name python-development
-```
-
-單一 Agent：
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh | bash -s -- --target codex --type agent --name code-reviewer
-```
-
-### 從本機 checkout 安裝
-
-```powershell
-git clone https://github.com/HsinPu/CraftRoster.git
-cd CraftRoster
-
-.\scripts\install.ps1 -Target codex -Type skill -SourceDir .
-.\scripts\install.ps1 -Target codex -Type agent -SourceDir . -EnableAutoDelegation
-```
-
-```bash
-git clone https://github.com/HsinPu/CraftRoster.git
-cd CraftRoster
-
-bash scripts/install.sh --target codex --type skill --source-dir .
-bash scripts/install.sh --target codex --type agent --source-dir . --enable-auto-delegation
-```
-
 ### 安裝器選項
 
 | 用途 | PowerShell | Bash | 說明 |
 |---|---|---|---|
-| 目標平台 | `-Target` | `--target` | 必填 |
-| 元件類型 | `-Type skill\|agent` | `--type skill\|agent` | 預設為 Skill，建議明確填寫 |
+| 目標 | `-Target` | `--target` | 必填 |
+| 類型 | `-Type skill\|agent` | `--type skill\|agent` | 預設 `skill` |
 | 單一元件 | `-Name` | `--name` | 省略即安裝該類型全部內容 |
-| Git branch | `-Branch` | `--branch` | 預設 `main` |
-| GitHub repository | `-Repo` | `--repo` | 預設本 repository |
-| 自訂安裝位置 | `-InstallDir` | `--dir` | 一般 target：直接目的地；`project`：project root |
+| 遠端 branch | `-Branch` | `--branch` | 預設 `main` |
+| Ownership repository | `-Repo` | `--repo` | 預設 `HsinPu/CraftRoster` |
+| 自訂位置 | `-InstallDir` | `--dir` | 一般 target 是直接目的地；`project` 是 project root |
 | 本機來源 | `-SourceDir` | `--source-dir` | 從 checkout 安裝，不下載 archive |
-| 全域主動委派 | `-EnableAutoDelegation` | `--enable-auto-delegation` | 僅全域 Codex／OpenCode Agent target；同時安裝 companion Skill |
+| 主動委派 | `-EnableAutoDelegation` | `--enable-auto-delegation` | 僅全域 Codex／OpenCode Agent target |
 | 預演 | `-DryRun` | `--dry-run` | 只顯示計畫，不寫入 |
-| 強制覆蓋 | `-Force` | `--force` | 明確略過 ownership 保護 |
+| 強制接管 | `-Force` | `--force` | 略過 ownership／digest 保護 |
 
-安裝參數以 `Target + Type + Name` 為主。PowerShell 也接受 `-Agent` 作為 `-Target` alias、`-Skill` 作為 `-Name` alias；Bash 也接受 `--agent`、`--skill` 與 `--agent-profile`。
+PowerShell 也接受 `-Agent`＝`-Target`、`-Skill`＝`-Name`；Bash 另接受 `--agent`、`--skill` 與 `--agent-profile` aliases。
 
-## 安全更新與覆蓋保護
+`SourceDir`／`--source-dir` 會直接使用指定 checkout 的內容，不會切換或驗證 `Branch`。`Repo` 仍會寫入 ownership metadata，並影響舊版 migration identity。
 
-更新不需要先刪除舊版本；重新執行同一條安裝命令即可。安裝器會依 ownership metadata 判斷是否能安全更新。
+### 執行需求
 
-| 狀態 | 安裝器行為 |
+| 功能 | 需求 |
 |---|---|
-| 目標不存在 | 正常安裝 |
-| metadata 與目前 repository、元件、名稱及 target 相符 | 安全更新 |
-| 可精確驗證的官方舊 metadata、digest、target 或 sidecar | 執行 `migrate-update`，改寫成目前格式 |
-| Agent 檔缺失，但 sidecar identity 完整吻合 | 執行 `repair` |
-| 同名內容沒有 metadata | 拒絕覆蓋 |
-| metadata 無效、來源不同或身份不符 | 拒絕覆蓋 |
-| 明確使用 Force | 執行 `force-replace` |
+| PowerShell installer | Windows PowerShell／PowerShell；只有遠端安裝需要網路 |
+| Bash installer | Bash、`mktemp`、`cksum`、`sha256sum` 或 `shasum`；遠端安裝另需 `curl` 與 `tar` |
+| OpenCode 既有 JSON 合併 | Python 3 或 Node.js 擇一；新建最小 config 不需要 |
+| Catalog CLI、產生器與驗證 | Node.js 22 或更新版本 |
+| Installer smoke tests | Node.js 22 或更新版本及對應 shell |
+
+## 安全更新與舊版升級
+
+重新執行相同命令就是更新，不需要先刪除舊版本。安裝器會先檢查 ownership，再逐元件以 staged／atomic 寫入方式更新。
+
+| 既有狀態 | 行為 |
+|---|---|
+| 目標不存在 | `install` |
+| Repository、component、name、target 與 metadata 相符 | `update` |
+| 可精確驗證的官方舊 metadata、digest、target 或 sidecar | `migrate-update` |
+| Agent 檔缺失，但 sidecar identity 完整吻合 | `repair` |
+| 同名內容沒有 metadata、來源不同或已被修改 | 拒絕覆蓋 |
+| 明確使用 Force | `force-replace` |
 
 Ownership metadata：
 
-- Skill：`<skill>/.skill-meta.json`，比對 `repo + component + name + target`。
-- Agent：`<agent-file>.craftroster.json`，除上述欄位外再比對 `id + adapter`。
-- Skill metadata 另保存 canonical `contentSha256`。若安裝後內容被人工或其他工具修改，普通更新會拒絕覆蓋；只有明確使用 Force 才會重設為目前 CraftRoster 版本。
-- Skill 更新會在同一檔案系統建立完整 staged package、核對來源與 staged digest、於最後寫入前重新檢查目的地，再以目錄交換提交。失敗時只會回復可證明屬於本 transaction 的內容；若偵測到其他程序剛建立的 newcomer，會保留 newcomer 與 backup 並要求人工復原，不會刪除未知資料。
-- Agent 與 sidecar 會先寫入同目錄暫存檔，再以 atomic replace 更新；不會沿著 symbolic link 或 hard link 改寫安裝目錄外的檔案。
-- 全量 Skill 安裝也會先預檢整批目標；只要一個 ownership 衝突，就不會先更新前面的 Skill 再中途失敗。
-- 全量 Agent 安裝會先預檢整批目標；只要一個衝突，就會在開始寫入前停止。
-- 所有平台的全量 Agent 安裝都會先預檢並安裝 `subagent-architecture`；一般 target 的 `InstallDir`／`--dir` 只覆蓋 Agent 位置，companion Skill 仍使用該 runtime 的標準 Skill 位置。`project` 則以同一 project root 建立完整多目的地計畫。
-
-### 舊安裝的一次性過渡升級
-
-已安裝舊版本時，直接重新執行本 README 的 CraftRoster 安裝命令即可；不需要也不應繼續使用舊 CLI 或舊 repository 命令。安裝器只在使用預設 repository、且能精確證明既有內容屬於官方舊安裝時啟用過渡：舊 repository ID `HsinPu/Autoverse-Ai-Agent-Skills`、舊 Skill schema／target／digest namespace、Agent 的 `.autoverse.json` sidecar、Codex 的 `~/.agents/skills` 副路徑，以及舊的 auto-delegation marker 都在此範圍內。
-
-過渡時仍會核對元件名稱、Skill frontmatter 的來源與授權、Agent `id + adapter`，以及可用的內容 digest。早期沒有 `contentSha256` 的官方 Skill 只有在內容命中內建的歷史 digest allowlist 時才會自動升級；任意刪除 digest 或修改內容都不會因此繞過 drift 保護。內容被修改、metadata 模糊、同名副本超過一份或 sidecar 無法驗證時會停止，不會自動接管。成功結果會顯示 `migrate-update`，並只寫入目前的 `HsinPu/CraftRoster` ownership 與 `craftroster-skill-content-v1` digest；經驗證的舊 Agent sidecar 與舊 Codex marker 會移除，不保留雙份遷移狀態。
-
-明確傳入 `-Repo`／`--repo` 代表呼叫者自行選擇 repository，因此會停用舊 repository alias 的自動接手，即使值剛好是 `HsinPu/CraftRoster`。這可避免自訂來源在不知情下被當成品牌過渡。公開 npm command 仍只有 `craftroster`，不恢復舊命令名稱。
-
-啟用全域主動委派時：
-
-- Codex 只管理 `~/.codex/config.toml` 內的 `CRAFTROSTER_AUTO_DELEGATION` marker 區塊；結構完整且位於檔案開頭的舊 marker 會一次性換成新區塊。若已有區塊外的 `developer_instructions` 就停止。
-- OpenCode 只對 strict UTF-8 JSON 的全域 `opencode.json` 合併一個 guidance 路徑；其根目錄依序採用 `OPENCODE_CONFIG_DIR`、`XDG_CONFIG_HOME/opencode` 或 `~/.config/opencode`。JSONC、無效型別、多份衝突 config 或重複 JSON key 會停止並要求手動合併。Bash 在既有自訂 config 上需要 Python 3 或 Node.js 做 strict validation；安裝器自己建立的最小 config 可在兩者皆無時安全重跑。
-- 修改既有全域 config 前會留下 `*.craftroster-backup-*` 備份；`Force` 不會繞過這些設定保護。
-- 安裝計畫完成後若全域 config 又被其他程式修改，安裝器會在 replace 前停止，避免用舊快照蓋掉新設定。
-
-先用 dry run 查看更新計畫：
-
-```powershell
-.\scripts\install.ps1 -Target codex -Type agent -SourceDir . -DryRun
-```
-
-```bash
-bash scripts/install.sh --target codex --type agent --source-dir . --dry-run
-```
+- Skill：`<skill>/.skill-meta.json`，並保存 canonical `contentSha256`。
+- Agent：`<agent-file>.craftroster.json`，另外核對 `id + adapter`。
+- 全量安裝會先預檢所有目的地；每個元件再個別 atomic commit。它不是整批 rollback transaction。
 
 > [!WARNING]
-> `-Force`／`--force` 會繞過同名內容的 ownership 保護。只有在你已確認目標內容可以被 CraftRoster 取代並完成必要備份後才使用。
+> `-Force`／`--force` 會略過同名內容的 ownership／digest 保護。它不會繞過 symbolic link、非一般檔案、競爭變更或 auto-delegation config 合併保護。請先備份並確認目標確實可由 CraftRoster 接管。
 
-## 如何使用 Agent
+### 舊品牌安裝的過渡升級
 
-安裝完成後，各工具會從上方表格列出的使用者目錄讀取 Agents；`project` 則寫入各工具自己的 project discovery 目錄。Cursor 不會直接使用 Codex TOML，Copilot 也不會直接使用 OpenCode frontmatter；這正是 repository 保留 generated adapters 的原因。
+若電腦已安裝舊版，直接重新執行本 README 的 CraftRoster 命令。只有在使用預設 repository，且安裝器能精確證明既有內容屬於官方舊 `HsinPu/Autoverse-Ai-Agent-Skills` 安裝時，才會接受舊 metadata、digest、target、`.autoverse.json` sidecar、Codex alternate root 或舊 auto-delegation marker。
 
-- 系統可依任務內容與 Agent 的 `description` 選擇是否委派。
-- 你也可以直接指定角色，例如：「請使用 `code-reviewer` 檢查目前變更」。
-- 安裝時使用全域主動委派選項後，AI 會在任務包含兩個以上可獨立處理的工作流時主動評估子代理，不需要每個專案另外提供 `AGENTS.md`。
-- 專案自己的 `AGENTS.md` 仍可選擇性補充該專案的限制，但不是 CraftRoster Agents 的載入或委派前提。
-- 若安裝後目前工作階段尚未出現新 Agent，請開啟新的工作階段或重新啟動對應工具。
+內容被修改、identity 模糊、digest 不符或出現多份同名副本時會停止，不會自動接管。成功後只保留新的 `HsinPu/CraftRoster` ownership 與目前 digest namespace；經驗證的舊 sidecar／marker 會移除，不保留雙份遷移狀態。
 
-啟用全域主動委派後，平常直接描述任務即可，例如：「請重新設計登入流程，同時檢查安全與測試覆蓋，完成後整合結果。」主 Agent 會依角色描述判斷是否值得拆成子代理。需要固定角色時也可以明確指定：Codex 可說「請委派 `code-reviewer` 檢查目前變更」；OpenCode 可輸入 `@code-reviewer 檢查目前變更`。
+請使用 README 的預設命令並省略 `Repo`／`--repo`；顯式指定 repository 會停用舊 repository alias migration。
 
-從本機 checkout 確認 CraftRoster 已安裝的 Codex Agents：
+### 全域主動委派
 
-```bash
-node craftroster-cli.js list --installed --type agent --target codex
-node craftroster-cli.js list --installed --type agent --target opencode
-node craftroster-cli.js list --installed --type agent --target project
-```
-
-CLI 只列出同時具有 adapter 與有效 CraftRoster ownership sidecar 的檔案；ownership repository ID 必須是 `HsinPu/CraftRoster`，其他 repository 一律不列出。Codex Skill 查詢會同時檢查 canonical root 與受支援的過渡 root，但尚未完成遷移的舊 ownership 不會被列為 CraftRoster 安裝。CLI 用來確認安裝結果，不等同於檢查目前已開啟的工具是否重新載入。
-
-平台格式的官方連結集中在 [`project` target 的實際位置](#project-target-的實際位置)一節。
-
-## 影片製作工作流
-
-`video-production-workflow` 是一套工具中立、具審批閘門且可恢復執行的完整影片流程。它不綁定特定生成模型或剪輯器；可以由一個 Agent 依序執行，也可以由 `video-director` 統籌多個專業角色。
-
-```text
-brief／media research → creative treatment → script → storyboard／shot list
-      → casting／location → production design／camera-lighting／sound／continuity／shooting plan
-      → capture／take log／ingest → edit／picture lock → VFX／graphics／music／sound／color
-      → localization／accessibility → review／mastering／delivery manifest
-```
-
-| 角色 | 主要責任 | 何時加入 |
-|---|---|---|
-| `video-director` | 統籌創意、角色路由、階段閘門、修改仲裁與最終審查 | 完整影片專案的預設入口 |
-| `video-producer` | 排程、預算、權利、供應商、素材與 checkpoint 狀態 | 有外部素材、付費生成、多人或交期限制時 |
-| `creative-director` | 跨媒介創意願景、品牌一致性與設計到製作的交接 | 網站、品牌、活動與影片需要共用創意方向時 |
-| `media-library-researcher` | 具來源、權利、成本、可用性與技術證據的可製作素材候選；不採購或下載 | 需要 stock、archive、既有素材庫或多來源選材時 |
-| `screenwriter` | 故事結構、可拍攝場景、動作、對白／旁白與改稿 | 需要敘事腳本或長短篇改編時 |
-| `storyboard-artist` | 分鏡、shot list、鏡位、運鏡、節奏與場面調度 | 腳本核准後、產生或拍攝素材前 |
-| `casting-director` | 角色 breakdown、授權 audition 證據、公平評估、shortlist、consent 與 likeness rights 狀態 | 真人、配音、avatar 或表演導向製作；最終聘用與合約由人類決定 |
-| `location-manager` | 實景候選、recce、permit／access、物流、限制、condition 與 restoration | live-action 或 hybrid 製作需要真實場地時 |
-| `production-designer` | 場景、環境、道具、服裝、材質、標示與可製作的視覺世界規格 | 世界觀、品牌場景或大量資產需要一致設計時 |
-| `cinematographer` | 鏡頭、焦段、運鏡、對焦、燈光、曝光、拍攝／render 規格與影像技術審查 | 攝影、燈光、renderer 或多 setup 執行複雜時 |
-| `first-assistant-director` | shooting schedule、call package、部門 readiness、coverage progress 與 daily report | live-action、多部門或拍攝日程複雜時；現場安全權限仍屬合格真人 |
-| `script-supervisor` | take-level 劇本、對白、動作、slate、偏離與實際 coverage 記錄 | 需要精確銜接拍攝與剪輯，或生成版本很多時 |
-| `production-sound-mixer` | 現場對白、room tone、wild track、sync、channel／take metadata 與收音品質證據 | 真人對白、同期錄音或 hybrid capture 時 |
-| `media-ingest-manager` | source custody、verified copies、checksum、proxy／dailies lineage、quarantine 與 handoff | 大量實拍、錄音、生成素材或來源不可遺失時 |
-| `visual-continuity-supervisor` | 角色、服裝、產品、道具、場景、時間與畫面狀態連續性 | 多鏡頭、跨場景或生成內容容易漂移時 |
-| `vfx-supervisor` | VFX shot breakdown、plates／camera data、tracking、roto、keying、cleanup、CG／simulation、compositing 與 final-pixel QC | 畫面需要融合、追蹤、移除、延伸、模擬或多層合成時 |
-| `motion-graphics-designer` | 標題、lower thirds、callouts、圖表、diagram、UI 動畫、kinetic type、元件與 graphics render contract | 品牌動畫、資訊圖形、跨比例圖卡或大量動態文字時 |
-| `music-supervisor` | 音樂 brief、spotting、選曲／委託／生成路線、beat map、版本與 clearance 證據 | 音樂主導敘事、多 cue、自製配樂或授權風險高時 |
-| `sound-designer` | 對白、旁白、環境、foley、音效、音樂關係、cue、stem、mix 與聲音 QC | 聲音來源多、需生成／錄製、混音或 loudness 管理時 |
-| `video-editor` | 素材選擇、timeline、節奏、音畫同步、字幕／圖卡、版本化 cut 與交付 QC | 多素材、反覆修改、長篇或交付規格複雜時 |
-| `colorist` | conform、color management、look、shot matching、HDR／SDR trims、scopes 與 color QC | picture lock 後需要一致調色、品牌／產品色準或多顯示目標時 |
-| `audiovisual-localization-producer` | locale matrix、翻譯 context、字幕、配音／voiceover、圖形、metadata、權利與 qualified linguistic review | 多語版本、dubbing 或語系專屬交付時 |
-| `media-accessibility-producer` | captions、descriptive transcript、audio description、sign-language、sensory-safe 與 accessible playback 的整體規劃與驗證 | 需要超出單一字幕檔的媒體無障礙責任時 |
-| `delivery-mastering-specialist` | 鎖版來源的 delivery matrix、variants、transcode、音軌／字幕 mapping、metadata、checksum 與技術 QC | 多平台、多語言、正式母版或客戶規格複雜時；不負責發布 |
-
-執行模式依專案大小調整：短片可由 `video-director` 單獨依序完成；一般專案由導演搭配製片，再按需要加入編劇、分鏡、continuity、聲音與剪輯。`media-production` 目前有 23 個不重複角色；casting、location、assistant direction、script supervision、production sound 與 ingest 只在 live-action 或 source-heavy 製作加入，localization 與 accessibility 則依語系與受眾要求加入。VFX、motion graphics、music supervision、color 與 delivery mastering 仍是按需求加入的 finishing specialists，不應為了湊齊團隊而全開。只有品牌活動或跨媒介創意系統才額外加入 `creative-director`。若目前工具不支援 subagent，主 Agent 仍會依相同階段、產物與審批點逐步執行，不會跳過治理要求。
-
-新專案可從 [`skills/video-production-workflow/assets/project-template`](skills/video-production-workflow/assets/project-template) 複製完整模板，預設工作目錄為 `video-projects/<project-id>/`。模板涵蓋 brief、treatment、script、shot、casting、location、production design、camera-lighting、shooting、take log、production sound、ingest、media shortlist、sound、music、VFX、motion graphics、素材、edit、color、localization、accessibility、review 與 delivery manifest；每份 artifact 都有版本、owner、輸入、決策與核准狀態，方便中斷後從第一個未驗證階段繼續。
-
-以下節點必須明確核准：creative treatment、script、storyboard、casting 與真人最終選擇、location／permit、適用的 production-design／camera-lighting／production-sound／sound／music／VFX／motion-graphics／continuity／shooting／ingest／production plans、付費或大量生成、外部聯絡、source erasure、會改變成本／權利／隱私的 provider 替換、picture lock、音樂承諾與 clearance、每個 locale 的 qualified review、accessible alternatives、finishing lock、delivery manifest，以及最終 render／發布。前一階段的核准不會自動授權後續外部操作。
-
-可直接這樣要求主 Agent：
-
-```text
-使用 video-production-workflow 規劃這支影片，由 video-director 統籌。
-先建立專案模板並完成 brief 與 creative treatment；在我核准 treatment 前不要開始腳本或素材生成。
-```
+`-EnableAutoDelegation`／`--enable-auto-delegation` 只適用於全域 `codex` 或 `opencode` Agent target。安裝器只管理自己的 marker／instruction entry；若偵測到使用者自行管理且衝突的設定，會停止並要求手動合併，即使使用 Force 也不會覆蓋。修改既有 config 前會建立備份。
 
 ## Catalog CLI
 
-`craftroster-cli.js` 提供離線 catalog 搜尋、安裝狀態與相近 Skill 路由查詢，需要 Node.js 22 或更新版本。目前請直接從 repository checkout 執行，或透過 npm package 提供的 `craftroster` command 使用。
-
-### Commands
-
-| Command | Alias | 用途 |
-|---|---|---|
-| `list` | `ls` | 列出 Skills 或 Agents |
-| `search <query>` | `s` | 搜尋名稱、描述與 tags |
-| `info <name>` | — | 顯示單一項目的完整資訊 |
-
-### Options
-
-| Option | 用途 |
-|---|---|
-| `--type skill\|agent` | 選擇 catalog 類型，預設 Skill |
-| `--category <category>` | 只顯示指定分類 |
-| `--installed` | 列出 target 安裝位置中具有有效 CraftRoster ownership sidecar 的元件 |
-| `--target <target>` | 指定安裝平台 |
-| `--all` | 搭配 `list --installed`，列出該類型所有支援 targets 的安裝結果 |
-| `--help` | 顯示說明 |
-
-### Examples
+CLI 可離線搜尋 catalog、查看相近 Skill routing，並核對帶有有效 CraftRoster ownership sidecar 的已安裝元件。CLI 需要 Node.js 22+；目前公開 npm registry 尚未發布此 package，請從 repository checkout 執行。
 
 ```bash
-# Skills
+git clone https://github.com/HsinPu/CraftRoster.git
+cd CraftRoster
+
 node craftroster-cli.js list
 node craftroster-cli.js search "python development"
-node craftroster-cli.js info python-development
-node craftroster-cli.js list --installed --type skill --target codex
-node craftroster-cli.js list --installed --type skill --all
-
-# Agents
+node craftroster-cli.js info ios-architecture
 node craftroster-cli.js list --type agent --category quality-assurance
-node craftroster-cli.js search "incident debugger" --type agent
-node craftroster-cli.js info code-reviewer --type agent
 node craftroster-cli.js list --installed --type agent --target codex
 ```
 
-Catalog 來源分別是 [skills.json](skills.json) 與 [agents.json](agents.json)。
+若要從 checkout 建立本機全域 command：
+
+```bash
+npm install -g .
+craftroster list
+```
+
+| Command | Alias | 用途 |
+|---|---|---|
+| `list` | `ls` | 依分類列出 Skills 或 Agents |
+| `search <query>` | `s` | 搜尋名稱、描述與 tags |
+| `info <name>` | — | 顯示 metadata、授權、routing 與安裝命令 |
+
+| Option | 用途 |
+|---|---|
+| `--type skill\|agent` | 選擇 catalog，預設 Skill |
+| `--category <category>` | 篩選一般 `list` |
+| `--installed` | 只搭配 `list`，核對已安裝元件 |
+| `--target <target>` | 搭配 `list --installed`，預設 `codex` |
+| `--all` | 搭配 `list --installed`，掃描所有 canonical targets |
+
+Catalog 來源是 [`skills.json`](skills.json) 與 [`agents.json`](agents.json)。CLI exit code：成功為 `0`、查無項目為 `1`、參數或用法錯誤為 `2`。
 
 ## Agents
 
-每個 Agent 都有唯一 role、清楚的使用時機、權限模式、相關 Skills，以及固定的 `Role → Task → Constraints → Output` prompt 結構。完整 metadata 以 [agents.json](agents.json) 為準。
+每個 Agent 都有唯一 role、明確使用時機、權限模式、相關 Skills，以及一致的 `Role → Task → Constraints → Output` 結構。
+
+<!-- AGENT_COUNT_START -->
+目前共收錄 **237** 個不重複 Agents。
+<!-- AGENT_COUNT_END -->
+
+角色目錄依 [Agent Coverage Matrix](docs/agent-coverage-matrix.md) 在本專案宣告的 scope 內完成 31／31 類核心責任鏈覆蓋。這表示常見工作都有責任 owner、handoff 與 authority boundary，不表示收錄現實世界的每個職稱。
+
+另外 105 個 Agents 來自其餘 23 個 reference repositories；所有正式 prompt 都以 CraftRoster 的角色、權限與輸出契約重新設計。
 
 <details>
 <summary><strong>展開 31 類、237 個 Agents 的完整索引</strong></summary>
@@ -498,280 +308,187 @@ Catalog 來源分別是 [skills.json](skills.json) 與 [agents.json](agents.json
 
 </details>
 
+完整 metadata 以 [`agents.json`](agents.json) 為準。
+
 ## Skills
 
-283 個 Skills 分成 16 類。每個 package 以 `SKILL.md` 為入口，相關 references、scripts、assets 與 evals 保留在同一資料夾中。
+283 個 Skills 分成 16 類。完整 package 位於 [`skills/`](skills/)，generated metadata 與 routing groups 位於 [`skills.json`](skills.json)。
 
-<!-- SKILL_SUMMARY_START -->
-| Category | Count | 說明 |
+| Category | Count | 範圍 |
 |---|---:|---|
-| `workflow-planning` | 12 | 任務規劃、需求釐清、分段實作、handoff 與交付協作 |
-| `software-engineering` | 21 | 核心程式設計、架構、語言、重構、版本控制與維護性 |
-| `frontend-design` | 33 | Frontend、視覺方向、design system、互動、responsive 與 design-to-code |
-| `threejs-graphics` | 62 | Three.js 架構、版本遷移、編輯器、workers、框架、資產、CSG、剛體與可變形模擬、渲染、Path Tracing、錄製、互動、專業資料、程序化圖形、驗證、效能、無障礙與 production delivery |
-| `backend-data` | 26 | 後端服務、API、資料庫、持久層、資料工程與 migration |
+| `workflow-planning` | 12 | 需求、規劃、分段實作、handoff 與交付 |
+| `software-engineering` | 21 | 程式設計、架構、語言、重構與版本控制 |
+| `frontend-design` | 33 | Frontend、design system、互動、responsive 與 design-to-code |
+| `threejs-graphics` | 62 | Three.js 架構、渲染、模擬、程序化圖形、效能、驗證與部署 |
+| `backend-data` | 26 | 後端、API、資料庫、資料工程與 migration |
 | `ai-llm` | 4 | LLM 應用、OpenAI API、RAG、eval 與 AI delivery |
-| `mobile-desktop` | 7 | 行動、跨平台、桌面應用與 app store release |
-| `testing-quality` | 27 | 測試策略、review、debug、無障礙、相容性、回歸與完成證據 |
-| `security-governance` | 7 | 安全分析、hardening、scan、threat modeling、政策與審批 |
-| `cloud-devops` | 14 | 部署、CI、cloud、infrastructure、containers、observability 與 incident |
-| `agent-skill-tooling` | 17 | Agent、Skill 與 MCP 的建立、探索、驗證、執行、治理與發布 |
-| `browser-automation` | 4 | 靜態 web 擷取、browser control、Playwright 與可重複 web 操作 |
-| `media-creative` | 20 | 圖像、音訊、影片、動畫、prompt、剪輯與製作流程 |
-| `writing-content` | 11 | 回覆、技術文件、品牌語氣、長文、編輯與內容再利用 |
-| `research-product` | 7 | 證據蒐集、市場研究、solution discovery、設計情報與實驗 |
-| `documents-productivity` | 11 | 檔案整理、Office 文件、試算表、簡報、PDF、圖表與 workspace |
-<!-- SKILL_SUMMARY_END -->
+| `mobile-desktop` | 7 | iOS、跨平台、桌面應用與 app store release |
+| `testing-quality` | 27 | 測試、review、debug、無障礙、相容性與完成證據 |
+| `security-governance` | 7 | 安全分析、hardening、scan、threat modeling 與治理 |
+| `cloud-devops` | 14 | 部署、CI、cloud、containers、observability 與 incident |
+| `agent-skill-tooling` | 17 | Agent、Skill、MCP、執行、治理與發布 |
+| `browser-automation` | 4 | Web 擷取、browser control 與 Playwright |
+| `media-creative` | 20 | 圖像、音訊、影片、動畫、prompt 與製作流程 |
+| `writing-content` | 11 | 回覆、文件、品牌語氣、長文、編輯與內容再利用 |
+| `research-product` | 7 | 證據蒐集、市場研究、solution discovery 與實驗 |
+| `documents-productivity` | 11 | 檔案、Office、試算表、簡報、PDF 與圖表 |
 
-### 主要 Flow 入口
+常用入口：
 
-| Flow | 入口或順序 | 適用情境 |
-|---|---|---|
-| Verified software delivery | [`verified-software-delivery`](skills/verified-software-delivery/) | 方案、規格、TDD、分批實作、獨立 review、修正與完成證據 |
-| Research to publication | [`market-research`](skills/market-research/) → [`brand-voice`](skills/brand-voice/) → [`article-writing`](skills/article-writing/) → [`content-repurposing`](skills/content-repurposing/) | 從市場證據到品牌化長文與跨通路衍生內容 |
-| LLM application delivery | [`llm-application-delivery-workflow`](skills/llm-application-delivery-workflow/) | API、Agent、RAG、eval、安全、成本、觀測與部署的階段式交付 |
-| Database migration | [`database-migration-workflow`](skills/database-migration-workflow/) | Expand、backfill、cutover、validate、contract 與 recovery gate |
-| WordPress engineering | [`wordpress-development`](skills/wordpress-development/) | Plugin、theme、hook、REST、WP-CLI、資料遷移與 production-safe 維護；先備份並證明 restore，再進行 staging 與受核准的正式變更 |
-| Security variant analysis | [`threat-modeling`](skills/threat-modeling/)／[`security-code-review`](skills/security-code-review/) → [`vulnerability-variant-analysis`](skills/vulnerability-variant-analysis/) → [`security-scanning`](skills/security-scanning/) | 從風險或已知漏洞根因建立 predicate、搜尋同家族變體、分級、修復與回歸 detector；只限已授權範圍 |
-| Product evidence | [`ux-research`](skills/ux-research/) → [`product-experimentation`](skills/product-experimentation/) | 先用真實使用者證據找出需求與阻礙，再以預先宣告指標、instrumentation、SRM 與停止規則驗證可量化的因果產品決策 |
-| Skill lifecycle | [`skill-gap-analyzer`](skills/skill-gap-analyzer/) → `skill-creator-design` → `skill-lint` → `skill-executor` → `skill-audit` → `skillforge` → `skillctl` | 缺口判斷、設計、執行驗證、稽核、認證與安裝 |
-| Requirements to execution | [`requirements-deep-dive`](skills/requirements-deep-dive/) → [`domain-modeling`](skills/domain-modeling/) → [`solution-discovery`](skills/solution-discovery/) → [`spec-flow`](skills/spec-flow/) | 以深入決策訪談與 repository 證據釐清需求、語言、規則與方案，再拆成可驗證工作 |
-| Long-running work | [`multi-session-planning`](skills/multi-session-planning/) → [`incremental-implementation`](skills/incremental-implementation/) → [`session-handoff`](skills/session-handoff/) | 管理跨 session／agent 的依賴、owner、checkpoint、下一個安全切片與續接驗證 |
-| Evidence prototype | [`solution-discovery`](skills/solution-discovery/) → [`throwaway-prototyping`](skills/throwaway-prototyping/) → [`spec-flow`](skills/spec-flow/) | 用隔離、可丟棄的最小實驗回答一個決策問題，再重新設計 production 工作 |
-| Video production | [`video-production-workflow`](skills/video-production-workflow/) | Brief、腳本、分鏡、素材、拍攝、後製、審核與交付 |
-| Design intelligence and direction | [`design-intelligence-search`](skills/design-intelligence-search/) → [`taste-skill`](skills/taste-skill/) → [`design-system`](skills/design-system/) | 先以本地可稽核資料找候選方向，再結合產品情境決策，最後固化成 DTCG-compatible tokens、元件與 drift 契約 |
-| Visual source to code | [`figma-to-code`](skills/figma-to-code/)（Figma 結構化資料為 authority）或 [`image-to-code`](skills/image-to-code/)（圖片／錄影為 authority）作為 orchestrator，按需載入 [`frontend-design`](skills/frontend-design/) → [`visual-regression-testing`](skills/visual-regression-testing/) | 由視覺來源 workflow 持續擁有 evidence contract、實作與驗收路由，將 Figma node、參考圖或錄影關鍵幀轉為可編輯前端，再用 screenshot／DOM／OCR／contrast／runtime 證據完成驗收 |
-| Approval-gated design to code | [`web-page-design-to-code`](skills/web-page-design-to-code/)／[`website-redesign-to-code`](skills/website-redesign-to-code/) | 單頁或整站需要版本化設計決策、mockup 核准、保留契約、component/data map、pilot 與 rollout gate 時使用 |
-| Three.js application and graphics | [`threejs-development`](skills/threejs-development/) | 依實際需求路由到 61 個 specialists，涵蓋架構、版本遷移、編輯器、OffscreenCanvas／workers、glTF、動畫／IK、Geometry／CSG、材質與媒體、Shader、互動、剛體與可變形模擬、空間音訊、導航、WebGL／WebGPU／TSL、Path Tracing、錄製輸出、R3F／TresJS／Threlte、一般與 WebXR 無障礙、UI、遊戲、資料視覺化、點雲／splats、CAD／BIM、地理空間、程序化視覺、效能、驗證與部署 |
+| 需求 | 建議入口 |
+|---|---|
+| 完整軟體交付 | [`verified-software-delivery`](skills/verified-software-delivery/) |
+| Python 開發 | [`python-development`](skills/python-development/) |
+| iOS 架構 | [`ios-architecture`](skills/ios-architecture/) |
+| Three.js 全流程 | [`threejs-development`](skills/threejs-development/)；路由至 61 個 specialists |
+| 多 Agent 協作 | [`subagent-architecture`](skills/subagent-architecture/) |
+| 影片製作 | [`video-production-workflow`](skills/video-production-workflow/) |
 
-當單頁或整站 Flow 已開啟 approval gate，它保留頂層 orchestration；design intelligence、Figma／image translation、design-system drift 與 machine visual gate 只回傳有版本的 receipt，不會自行關閉 gate、批准 baseline 或擴張範圍。
+使用 `node craftroster-cli.js info <skill-name>` 可查看相近能力的選擇原則與替代 Skills。
 
-請從 [skills.json](skills.json) 瀏覽 generated metadata，或直接查看 [skills/](skills/) 內的完整 package。執行 `node craftroster-cli.js info <skill-name>` 會列出所屬 routing group 的判斷原則、目前 Skill 與所有替代選項，方便在相近能力間做選擇。
+## 專案架構
 
-## 專案結構
+```text
+Canonical Agent: agents/<role>.md
+        └─ generate:agents
+           ├─ adapters/{codex,claude,cursor,copilot,opencode}/
+           └─ agents.json
+
+Canonical Skill: skills/<name>/SKILL.md
+Taxonomy:        scripts/data/skill-catalog.json
+        └─ generate:skills
+           └─ skills.json
+```
 
 ```text
 CraftRoster/
-├─ AGENTS.md                         # Repository 內的 Agent 路由與驗證規則
-├─ agents/
-│  └─ <role>.md                     # Canonical Agent definitions
-├─ adapters/
-│  ├─ codex/<role>.toml             # Generated Codex adapters
-│  ├─ claude/<role>.md              # Generated Claude Code adapters
-│  ├─ cursor/<role>.md              # Generated Cursor subagents
-│  ├─ copilot/<role>.agent.md       # Generated VS Code/Copilot agents
-│  └─ opencode/<role>.md            # Generated OpenCode subagents
-├─ skills/
-│  └─ <name>/
-│     ├─ SKILL.md                   # Skill entrypoint
-│     ├─ references/                # Optional
-│     ├─ scripts/                   # Optional
-│     ├─ assets/                    # Optional
-│     └─ evals/evals.json           # Optional deterministic eval package
-├─ agents.json                      # Generated Agent catalog
-├─ skills.json                      # Generated Skill catalog
-├─ craftroster-cli.js               # Canonical Catalog CLI entrypoint
+├─ agents/                    # Canonical Agent definitions
+├─ skills/                    # Canonical Skill packages
+├─ adapters/                  # Generated platform adapters
+├─ agents.json                # Generated Agent catalog
+├─ skills.json                # Generated Skill catalog
+├─ craftroster-cli.js         # Offline query CLI
 ├─ scripts/
-│  ├─ install.cmd                   # Windows CMD wrapper
-│  ├─ install.ps1                   # Windows installer
-│  ├─ install.sh                    # Linux／macOS installer
-│  ├─ smoke-install.ps1             # Isolated Windows installer smoke test
-│  ├─ smoke-install.sh              # Isolated Linux／macOS installer smoke test
-│  ├─ generate-agent-adapters.js
-│  ├─ generate-agent-catalog.js
-│  ├─ generate-skill-catalog.js
-│  ├─ sync-agent-reference.js
-│  ├─ verify-agent-references.js
-│  ├─ verify-skill-sources.js
-│  ├─ audit-agent-originality.js
-│  ├─ audit-skill-originality.js
-│  ├─ validate-agent-coverage.js
-│  ├─ validate-catalog.js
-│  ├─ validate-skill-evals.js
-│  ├─ validate-skill-contracts.js   # Markdown 與跨 Skill contract validator
-│  └─ data/
-│     ├─ agent-coverage-matrix.json  # Canonical Agent responsibility coverage
-│     ├─ agent-reference-sources.json
-│     ├─ skill-catalog.json          # Canonical categories, tags and routing
-│     ├─ skill-eval-coverage.json    # Required eval package baseline
-│     ├─ skill-reference-lock.json   # Review-controlled provenance evidence lock
-│     ├─ skill-reference-sources.json # Pinned Skill tree/path/blob evidence
-│     └─ wshobson-agent-inventory.json
-├─ tests/
-│  ├─ cli.test.js                   # Zero-dependency CLI argument tests
-│  ├─ catalog-validation.test.js    # Catalog metadata mutation guards
-│  ├─ skill-catalog-generation.test.js
-│  ├─ skill-evals.test.js
-│  ├─ skill-originality.test.js
-│  ├─ skill-source-revisions.test.js
-│  ├─ skill-contracts.test.js       # Contract validator mutation matrix
-│  └─ package-inventory.test.js
-├─ docs/release-checklist.md        # Release gates and evidence receipt
-└─ .github/workflows/validate.yml   # Catalog, CLI, source and installer CI
+│  ├─ install.ps1             # Windows installer
+│  ├─ install.sh              # Linux／macOS installer
+│  ├─ generate-*.js           # Catalog／adapter generators
+│  ├─ validate-*.js           # Local validation gates
+│  ├─ verify-*.js             # Provenance verification
+│  └─ data/                   # Taxonomy、coverage、source manifests、locks
+├─ tests/                     # CLI、catalog、contract、eval、source tests
+├─ docs/                      # Coverage、source notes、release guidance
+└─ .github/workflows/         # CI
 ```
 
-`agents/<role>.md` 是 Agent 的唯一人工維護來源。請勿直接修改 `adapters/`；五套平台 adapter 與 `agents.json` 都由 scripts 產生。Skill 的正式內容在 `skills/<name>/`，分類、tags 與相近能力 routing 則由 `scripts/data/skill-catalog.json` 維護；`skills.json` 必須用 generator 重建，不可手動修改。
+> [!IMPORTANT]
+> `agents/<role>.md` 是 Agent 的唯一人工維護來源，不要直接修改 `adapters/` 或 `agents.json`。Skill 本文在 `skills/<name>/SKILL.md`；分類、tags 與 routing 維護於 `scripts/data/skill-catalog.json`，不要直接修改 generated `skills.json`。
 
 ## 開發與驗證
 
-需要 Node.js 22 或更新版本。提交前請依 [Release Checklist](docs/release-checklist.md) 留下完整驗證紀錄。
+需要 Node.js 22+。Repository 沒有外部 npm dependencies，也沒有 aggregate `npm test` script。
 
 ```bash
-# 從 canonical Agents 重建五平台 adapters 與 agents.json
+# 重建 generated artifacts
 npm run generate:agents
-
-# 從 Skill frontmatter 與 canonical taxonomy 重建 skills.json
 npm run generate:skills
 
-# 更新 wshobson/agents reference tree 與逐項 ledger
-npm run sync:agent-reference
-
-# 外部 Skill provenance 經 owner 核准變更後，重建 review-controlled evidence lock
-npm run update:skill-reference-lock
-
-# 執行全部本機 catalog、frontmatter、來源、eval、adapter、coverage 與 contract 驗證
+# Catalog、contracts、evals、來源、coverage 與 legacy gates
 npm run validate
 
-# 單獨驗證無 digest 舊安裝使用的歷史內容 allowlist
-npm run validate:legacy-skill-digests
-
-# 使用完整 Git 歷史確認 allowlist 與所有官方舊版 Skill 快照一致
-node scripts/generate-legacy-skill-digests.js --check
-
-# 執行各項 mutation／regression tests
+# Regression tests
 npm run test:cli
 npm run test:catalog
 npm run test:skill-catalog
+npm run test:skill-contracts
 npm run test:skill-evals
 npm run test:skill-originality
 npm run test:skill-sources
-npm run test:skill-contracts
 npm run test:package
 
-# 在隔離暫存目錄實測安裝、更新、修復、metadata 與同名保護
-npm run smoke:install:powershell   # Windows
-npm run smoke:install:bash         # Linux／macOS 或 Git Bash
-
-# Git Bash／macOS 本機快速模式；Windows／Ubuntu CI 仍執行完整 smoke
+# Installer smoke tests
+npm run smoke:install:powershell
+npm run smoke:install:bash
 npm run smoke:install:bash:quick
-
-# 下列四項需要網路：驗證 Agent 與 Skill 的 pinned source，以及兩類原創性
-npm run verify:agent-references:remote
-npm run verify:skill-sources:remote
-
-npm run audit:agent-originality
-npm run audit:skill-originality
-
-# 預覽 npm package 會包含的檔案
-npm pack --dry-run
 ```
 
-`npm run validate`、本機 tests 與 installer smoke tests 都不需要網路。歷史 Skill digest 重建同樣不需要網路，但 checkout 必須包含完整 Git 歷史；CI 會以 `fetch-depth: 0` 執行重建比對。Catalog generator 使用共用的嚴格、zero-dependency YAML 子集 parser；未閉合引號、錯誤縮排、重複欄位或不支援語法會直接失敗，不會被當成普通字串。Skill eval validator 依 `skill-eval-coverage.json` 具名保護必要 eval packages，並檢查 prompt、expected output、files 與 assertions；新增 eval 可以自動納入統計，但刪除必要 package 會阻斷。Skill contract mutation matrix 會實際反轉權限、破壞 phase boundary、刪除 fallback 與改寫 machine receipt，確認 drift 一定被拒絕。
+需要 GitHub 網路的完整 provenance／originality gates：
 
-兩個 installer smoke scripts 會建立獨立暫存 HOME，驗證 project／全域 targets、ownership、原子更新、digest drift、rollback、並行競爭與防覆寫，完成後自動清除，不會修改真正的使用者安裝。CI 在每個 PR 與 main push 以 Node.js 22／24 驗證本機 gates，Windows PowerShell 與 Ubuntu Bash 執行完整 installer smoke，macOS Bash 執行 quick smoke，並驗證失敗退出碼不會被清理流程掩蓋；main 的非 PR macOS job 另以 README 使用的 `curl | bash` 流程，在隔離 HOME 完成全部 Skills、全部 Agents 與全域主動委派安裝。需要 GitHub 的完整來源與原創性檢查也會在每個 PR、main push、手動觸發與每週排程以有界重試執行；GitHub Actions 權限維持 `contents: read`。
+```bash
+npm run verify:agent-references:remote
+npm run verify:skill-sources:remote
+npm run audit:agent-originality
+npm run audit:skill-originality
+```
 
-### 新增或修改 Agent
+[`Validate`](.github/workflows/validate.yml) workflow 在 main push、pull request、手動觸發與每週排程執行。CI 涵蓋 Node 22／24 相容性子集、完整 catalog validation、歷史 digest、remote integrity、Windows PowerShell smoke、Ubuntu Bash smoke、macOS quick smoke，以及 main branch 的隔離 macOS Codex 遠端全量安裝。
 
-1. 編輯 `agents/<role>.md`；role 與檔名必須唯一且使用 lowercase hyphen-case。
-2. 保留所需 frontmatter，以及 `# Role`、`# Task`、`# Constraints`、`# Output` 四個頂層章節。
-3. 執行 `npm run generate:agents` 產生 adapters 與 catalog。
-4. 執行 `npm run validate`。
+## 來源、品質與授權
 
-### 新增或修改 Skill
+所有正式 Agent／Skill metadata 與 installer ownership 都以 `HsinPu/CraftRoster` 為 canonical source。外部專案只作為固定 revision 的研究與 coverage reference，不是整個複製進來的 prompt 集合。
 
-1. 編輯 `skills/<name>/SKILL.md`，並將所需 references、scripts、assets 放在同一 package。
-2. 依 [Agent Skills specification](https://agentskills.io/specification) 將 `name`、`description`、`license` 放在 top-level frontmatter；本專案的 `author`、`source` 與外部 reference 欄位放在 `metadata` mapping，正式作者與來源保持 HsinPu／本 repository。
-3. 在 `scripts/data/skill-catalog.json` 維護 category、tags 與需要的 routing group；不要直接修改 generated `skills.json`。
-4. 依 [Agent Skills eval guidance](https://agentskills.io/skill-creation/evaluating-skills) 視需要新增 `evals/evals.json`。若它應屬於 release 必要基線，同步更新 `scripts/data/skill-eval-coverage.json`。
-5. 若有外部參考，將固定 commit、tree、逐 Skill reference path/blob 與 license evidence 寫入 `scripts/data/skill-reference-sources.json`，再執行 `npm run update:skill-reference-lock`；lock 與 manifest 變更都需要 repository owner 明確覆核。
-6. 執行 `npm run generate:skills`、`npm run validate` 與相關 tests。
+- Agent references 固定 commit、tree、paths 與 license evidence；Skill references 另外固定逐檔 blob 與 review-controlled lock。
+- `npm run audit:agent-originality` 會針對 237 個 canonical Agent prompt 與 pinned upstream references 檢查長行及逐字片段重疊。
+- Skill originality audit 會逐一比對有 reference 的 canonical packages 與固定 upstream files。
+- Eval gate 目前具名保護 77／283 個 Skill packages、94 個 evals 與 467 個 assertions；不宣稱所有 Skills 都有 eval。
+- Workflow contract gate 目前涵蓋 7 組跨 Skill contracts；Agent responsibility coverage 由 [31 類 matrix](docs/agent-coverage-matrix.md) 驗證。
 
-## 來源、改寫與授權政策
+詳細來源與改寫紀錄：
 
-- 所有 Agents 與 Skills 的正式 `source` 都是 `HsinPu/CraftRoster`，作者為 HsinPu；安裝器與 CLI 的 ownership repository ID 也必須是 `HsinPu/CraftRoster`。
-- 外部專案只作為研究、coverage 與設計參考；Agents 使用 `reference-repo`、`reference-paths`、`reference-tree`，Skills 使用 `reference-source`、`reference-license` 與必要的 `reference-revision`。目前 61 個 referenced Skills 分布於 17 個 repositories，全部由 [`skill-reference-sources.json`](scripts/data/skill-reference-sources.json) 固定 commit、tree、逐 Skill reference path/blob 與 license evidence；[`skill-reference-lock.json`](scripts/data/skill-reference-lock.json) 另外鎖定完整 provenance evidence 的 canonical digest 與數量。[CODEOWNERS](.github/CODEOWNERS) 會把 manifest、lock、verifier 與 originality audit 指派給 HsinPu，發布政策要求取得 owner 明確覆核，避免單獨縮小或替換比對範圍。這些欄位不取代本專案的正式來源。
-- Matt Pocock 相關概念的 pinned revision、逐項 upgrade／add／skip 決策、改名策略與原創改寫邊界記錄在 [`matt-pocock-skill-adaptations.md`](docs/matt-pocock-skill-adaptations.md)。除保留業界通用能力名稱 `domain-modeling` 外，這批沒有沿用上游命令式或品牌化 Skill 名稱、slash commands、固定檔名、模板或 Claude 專用 metadata。
-- 視覺設計相關 Skills 以獨立 metadata 保存主要參考來源：`taste-skill`／`image-to-code` 對應 [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill)，`figma-to-code` 對應 [figma/mcp-server-guide](https://github.com/figma/mcp-server-guide)，`design-intelligence-search` 對應 [ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill)，`design-system` 對應 [DTCG](https://github.com/design-tokens/community-group)，`visual-regression-testing` 對應 [AgentVision](https://github.com/amitpatole/agent-vision)。其他比較來源包含 gstack、Impeccable、Argos、design-extract、Style Dictionary、Vercel Web Interface Guidelines、Addy Osmani Agent Skills、screenshot-to-code、Design2Code、UI2Code_N、Google Stitch Skills、canvas-to-code 與 Anthropic frontend-design。實際採用範圍、授權狀態、未移植項目與原創改寫邊界記錄在 [`visual-design-skill-sources.md`](docs/visual-design-skill-sources.md)，所有 canonical Skill 的正式 `source` 仍為 `HsinPu/CraftRoster`。
-- 原生 iOS 相關 Skills 也保留獨立 provenance：`ios-architecture` 參考 [efremidze/swift-architecture-skill](https://github.com/efremidze/swift-architecture-skill)，`swiftui-development` 參考 [AvdLee/SwiftUI-Agent-Skill](https://github.com/AvdLee/SwiftUI-Agent-Skill)，`swift-concurrency` 參考 [AvdLee/Swift-Concurrency-Agent-Skill](https://github.com/AvdLee/Swift-Concurrency-Agent-Skill)，`swift-testing` 參考 [AvdLee/Swift-Testing-Agent-Skill](https://github.com/AvdLee/Swift-Testing-Agent-Skill)；四者均依 CraftRoster 的 routing、驗證與漸進式揭露格式重新設計。
-- Three.js 相關 Skills 以 `threejs-development` 作為跨領域入口，並以 61 個 `threejs-*` specialists 涵蓋產品架構、版本遷移、編輯器與輸出、OffscreenCanvas／workers、生命週期、資產、動畫／IK、Geometry／CSG、互動、剛體與可變形模擬、空間音訊、導航、渲染平台、高階視覺、Path Tracing、錄製輸出、WebGPU／TSL、R3F／TresJS／Threlte、一般與 WebXR 無障礙、UI、遊戲、資料視覺化、點雲／splats、CAD／BIM、地理空間、效能、驗證與部署。24 個圖形領域參考 [scottstts/Threejs-Awesome-Graphics-Agent-Skills](https://github.com/scottstts/Threejs-Awesome-Graphics-Agent-Skills) 的固定 MIT `SKILL.md` 範圍；GPL、授權不明的範例、資產、installer 與 vendor code 均未移植。完整 mapping、額外比較來源的固定 revision 與稽核邊界記錄於 [`threejs-skill-sources.md`](docs/threejs-skill-sources.md)。
-- Agent reference repository 的 pinned commit、實際 Git tree、license identifier 與 license path 集中保存在 [agent-reference-sources.json](scripts/data/agent-reference-sources.json)。CI 會向 GitHub 重新驗證 commit → tree 關係、每個 reference path，以及授權檔內容。
-- Skill source remote gate 同樣會核對 commit → tree、每個宣告 path 的 Git blob，以及 license file、terms 或 frontmatter evidence 的固定內容是否吻合宣告授權；任意「同 repository 但與參考內容無關」的有效 commit 不會通過。
-- Agent catalog 參考 [wshobson/agents](https://github.com/wshobson/agents)、[msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents)、[VoltAgent/awesome-claude-code-subagents](https://github.com/VoltAgent/awesome-claude-code-subagents)、[github/awesome-copilot](https://github.com/github/awesome-copilot)、[affaan-m/ECC](https://github.com/affaan-m/ECC)、[supatest-ai/awesome-claude-code-sub-agents](https://github.com/supatest-ai/awesome-claude-code-sub-agents)、[devsforge/marketplace](https://github.com/devsforge/marketplace)、[ajhcs/healthcare-agents](https://github.com/ajhcs/healthcare-agents)、[aws-samples/sample-claude-code-agent-team](https://github.com/aws-samples/sample-claude-code-agent-team)、[DojoCodingLabs/remotion-superpowers](https://github.com/DojoCodingLabs/remotion-superpowers)、[HKUDS/ViMax](https://github.com/HKUDS/ViMax)、[paperclipai/companies](https://github.com/paperclipai/companies)、[HITsz-TMG/VideoClaw](https://github.com/HITsz-TMG/VideoClaw)、[davila7/claude-code-templates](https://github.com/davila7/claude-code-templates)、[Donchitos/Claude-Code-Game-Studios](https://github.com/Donchitos/Claude-Code-Game-Studios)、[NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent)、[jacobcwright/open-animate](https://github.com/jacobcwright/open-animate)、[browser-use/video-use](https://github.com/browser-use/video-use)、[taylordrew4u2/Role-Call](https://github.com/taylordrew4u2/Role-Call)、[ImaniGomez/Scripty](https://github.com/ImaniGomez/Scripty)、[travisoberlander/film-production-manager](https://github.com/travisoberlander/film-production-manager)、[FusinX/DIT_Offload](https://github.com/FusinX/DIT_Offload)、[HKUDS/VideoAgent](https://github.com/HKUDS/VideoAgent) 與 [video-db/Director](https://github.com/video-db/Director) 的角色定位、路徑與高層責任；prompt 內容均由本專案重新設計與加強，不是原文完整複製。
-- 影片工作流另研究 [calesthio/OpenMontage](https://github.com/calesthio/OpenMontage) 的階段化產物與人工核准概念、[showlab/MovieAgent](https://github.com/showlab/MovieAgent) 公開文件中的電影職責分工，以及 Hermes 的 renderer review／conditional role routing、Open Animate 的 motion-graphics lifecycle、video-use 的 overlay／timeline／media-QC 概念。OpenMontage 的 AGPL-3.0 reference metadata 已保留，但不作為 canonical Agent reference；MovieAgent 在採用的 revision 未找到 repository-wide license，因此兩者只使用公開的高層概念，沒有重用程式碼或 prompt 文字。詳細 revision 與改寫邊界記錄在 [`source-notes.md`](skills/video-production-workflow/references/source-notes.md)。
-- 同名或職責相近的上游定義會先依內容合併或排除。`wshobson/agents` 的 199 個 definitions、commit SHA、tree SHA、198 個 canonical mappings 與 1 個明確 exclusion 保存在 [wshobson-agent-inventory.json](scripts/data/wshobson-agent-inventory.json)；其他來源的 repository、path 與 tree SHA 則保存在各 canonical Agent frontmatter。
-- `npm run audit:agent-originality` 會針對 237 個 canonical Agent prompt 與 pinned upstream references 執行逐字重疊檢查；若出現至少 60 個字元的相同行，或 12 個單字的逐字片段，CI 會拒絕通過。這是保護改寫原創性的保守靜態閘門，不等同法律上的相似性判定。
-- `npm run audit:skill-originality` 會把 61 個有外部參考的 canonical Skill packages 逐一與 manifest 固定的 upstream paths 比較，使用相同的長行與 12-word overlap 門檻，並回報本地檔案、固定 commit、上游路徑與雙方證據；結構性 frontmatter 與 Markdown boilerplate 不列入內容重疊。
-- Repository 與全部 237 個 Agents 採 Apache-2.0。Skills 的個別授權以各自 `SKILL.md` 與 `skills.json` 為準；目前 282 個為 Apache-2.0，`karpathy-guidelines` 保留 MIT 授權與外部 reference metadata。
+- [Three.js Skill sources](docs/threejs-skill-sources.md)
+- [Visual design Skill sources](docs/visual-design-skill-sources.md)
+- [Matt Pocock Skill adaptations](docs/matt-pocock-skill-adaptations.md)
+- [Agent reference manifest](scripts/data/agent-reference-sources.json)
+- [Skill reference manifest](scripts/data/skill-reference-sources.json)
+
+Repository 與全部 237 個 Agents 採 Apache-2.0。Skills 以個別 package metadata 宣告為準；目前 282 個為 Apache-2.0，[`karpathy-guidelines`](skills/karpathy-guidelines/) 保留 MIT。
 
 ## 疑難排解
 
 <details>
 <summary><strong>出現 Target is required</strong></summary>
 
-安裝器不使用隱性平台預設。請加入 `-Target codex` 或 `--target codex`；若要安裝到目前 workspace 的所有支援工具，使用 `project`。
+安裝器不猜測平台。請明確提供 `-Target codex` 或 `--target codex`；其他可用值請見[支援平台](#支援平台與安裝位置)。
 
 </details>
 
 <details>
-<summary><strong>出現 Refusing to replace ... ownership metadata does not match</strong></summary>
+<summary><strong>安裝後看不到新的 Agent／Skill</strong></summary>
 
-這表示同名路徑已存在，但 ownership metadata 缺失、無效、來自其他 repository，或 component／name／target／Agent identity 不一致。
-
-先檢查 Skill 內的 `.skill-meta.json`，或 Agent 旁的 `.craftroster.json` sidecar，確認現有內容的來源。不要直接刪除或覆蓋別人的安裝。只有在確定應由 CraftRoster 取代並完成備份後，才使用 `-Force`／`--force`。
-
-</details>
-
-<details>
-<summary><strong>安裝後工具沒有顯示新 Agent</strong></summary>
-
-確認 target 與實際使用的平台、scope 相符，再檢查 adapter 是否位於對應的 `agents/` 目錄。已開啟的工作階段可能尚未重新載入設定，請開新工作階段或重新啟動工具。
-
-也可以執行：
+先開啟新的工作階段或重新啟動對應工具，再使用：
 
 ```bash
 node craftroster-cli.js list --installed --type agent --target codex
+node craftroster-cli.js list --installed --type skill --target codex
 ```
 
-其他工具請換成對應 target。若安裝的是 `project`，請在相同專案目錄執行 CLI 並使用 `--target project`；CLI 會分平台顯示五個 Agent 目的地。
+CLI 只確認檔案與 CraftRoster ownership，不代表已開啟的 runtime 已重新載入。
 
 </details>
 
 <details>
-<summary><strong>全域主動委派設定被拒絕</strong></summary>
+<summary><strong>同名內容被拒絕覆蓋</strong></summary>
 
-這表示安裝器偵測到不能安全自動合併的使用者設定，例如 Codex 已有自訂 `developer_instructions`，或 OpenCode 使用 JSONC／非陣列 `instructions`。Agent 與 companion Skill 會在寫入前停止；請依錯誤訊息手動合併 [global-auto-delegation.md](skills/subagent-architecture/references/global-auto-delegation.md)，不要用 Force 覆蓋原設定。
-
-</details>
-
-<details>
-<summary><strong>沒有 Node.js，還能安裝嗎？</strong></summary>
-
-可以。一般安裝不需要 Node.js；只有 Bash 要合併既有、自訂的 OpenCode JSON 時，需要 Python 3 或 Node.js 其中之一。Catalog CLI、產生 catalogs／adapters、驗證與 package 預覽則需要 Node.js 22 或更新版本。
+先使用 `-DryRun`／`--dry-run` 查看計畫，確認既有內容與 sidecar。未知來源、人工修改或 identity 不符的內容預設不會被接管。只有完成備份並確認可取代時才使用 Force。
 
 </details>
 
 <details>
-<summary><strong>Bash 安裝器回報缺少 command</strong></summary>
+<summary><strong>舊版是否可以直接升級</strong></summary>
 
-本機 checkout 安裝與 smoke 請確認已有 Bash、`mktemp`、`cksum`，以及 `sha256sum` 或 `shasum`；遠端安裝才另外需要 `curl`、`tar` 與網路連線。若要把 guidance 合併進既有的 OpenCode `opencode.json`，還需要 Python 3 或 Node.js；兩者皆無時仍可建立並重跑安裝器自己的最小 config，但不會冒險改寫自訂 JSON。
+可以，請直接重跑目前的 CraftRoster 命令。安裝器只會遷移可精確驗證的官方舊安裝；不明或已修改內容會停止，成功後只留下新的 CraftRoster ownership。
 
 </details>
 
 ## 參與貢獻
 
-歡迎提出新 Agent、Skill、平台 adapter 改善、文件修正與驗證規則。
+1. Fork repository 並建立 feature branch。
+2. Agent 只修改 `agents/<role>.md`，再執行 `npm run generate:agents`。
+3. Skill 修改 `skills/<name>/SKILL.md`；分類與 routing 同步修改 `scripts/data/skill-catalog.json`，再執行 `npm run generate:skills`。
+4. 執行 `npm run validate`、相關 tests、`git diff --check`。
+5. 建立 [Pull Request](https://github.com/HsinPu/CraftRoster/pulls)，說明需求、來源、權限邊界與驗證證據。
 
-1. 先到 [Issues](https://github.com/HsinPu/CraftRoster/issues) 說明需求或問題。
-2. Fork repository 並建立聚焦的 branch。
-3. 只修改 canonical source；Agent 變更不要直接編輯 generated adapters。
-4. Agent 有變更時執行 `npm run generate:agents`；Skill 或 taxonomy 有變更時執行 `npm run generate:skills`。
-5. 依 [Release Checklist](docs/release-checklist.md) 執行對應本機 gates，至少完成 `npm run validate`、相關 mutation tests 與 `git diff --check`。
-6. 建立 [Pull Request](https://github.com/HsinPu/CraftRoster/pulls)，附上變更目的與驗證結果。
+發現問題或缺少能力時，請先建立 [Issue](https://github.com/HsinPu/CraftRoster/issues)。
 
 ## License
 
-Repository 以 [Apache License 2.0](LICENSE) 授權，Copyright © 2026 HsinPu。個別 Skill 若保留不同授權，會在該 package 的 metadata 中明確標示。
-
----
-
-Maintained by [HsinPu](https://github.com/HsinPu) · [Issues](https://github.com/HsinPu/CraftRoster/issues) · [Actions](https://github.com/HsinPu/CraftRoster/actions)
+[Apache License 2.0](LICENSE) © HsinPu。個別 Skill 若宣告其他相容授權，以該 Skill 的 `SKILL.md` 與 [`skills.json`](skills.json) 為準。
