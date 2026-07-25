@@ -260,7 +260,7 @@ jobs:
           test_home="$(mktemp -d "$RUNNER_TEMP/craftroster-macos-global.XXXXXXXX")"
           cleanup_remote_install() {
             case "$test_home" in
-              "$RUNNER_TEMP"/craftroster-macos-global-*) rm -rf -- "$test_home" ;;
+              "$RUNNER_TEMP"/craftroster-macos-global.*) rm -rf -- "$test_home" ;;
               *) printf 'Refusing to clean unexpected remote install root: %s\n' "$test_home" >&2; return 1 ;;
             esac
           }
