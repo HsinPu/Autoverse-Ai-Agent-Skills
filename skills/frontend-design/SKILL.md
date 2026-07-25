@@ -1,6 +1,6 @@
 ---
 name: frontend-design
-description: Production frontend implementation guide for turning an approved visual direction, design system, or image contract into semantic, responsive, accessible UI in the existing stack. Use when building or restyling components, pages, and applications after the visual direction is clear; use taste-skill or design-consultation first when art direction is unresolved.
+description: Production frontend implementation for semantic, responsive, accessible components, pages, and applications, including HTML pages that host Three.js or threejs, WebGL or WebGPU 3D, canvas scenes, and interactive 3D experiences. Use after visual direction is clear. When Three.js, a three dependency, or 3D HTML is present, load the sibling threejs-development Skill as the scene owner instead of treating the request as frontend-only.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -10,6 +10,17 @@ metadata:
 # Frontend Design
 
 Turn an approved visual direction into production UI without losing product behavior, accessibility, responsiveness, or maintainability. This Skill owns implementation craft; it does not reopen art direction that has already been selected.
+
+## Three.js Routing Gate
+
+If the request, repository, dependency manifest, script import, or supplied code mentions `Three.js`, `threejs`, the `three` package, WebGL or WebGPU 3D, a 3D canvas, or an interactive 3D webpage:
+
+1. Read the sibling [`../threejs-development/SKILL.md`](../threejs-development/SKILL.md) before planning, even when it was omitted from the runtime's initial Skill metadata.
+2. Keep `threejs-development` responsible for the renderer, scene, camera, render loop, 3D interaction, resources, effects, performance, and Three.js verification.
+3. Keep this Skill responsible for the semantic page shell, DOM content, navigation, responsive composition, controls, design tokens, state presentation, and accessible non-canvas fallback.
+4. Use `css-development` and `javascript-development` only for their supporting boundaries; let the Three.js umbrella select the smallest required `threejs-*` specialists.
+
+Do not implement a Three.js HTML request using only generic frontend, CSS, and JavaScript guidance.
 
 ## Inputs
 
@@ -107,6 +118,7 @@ Report the implemented direction, changed files, reused or extended tokens and c
 
 ## Handoff
 
+- Use `threejs-development` as the primary scene and rendering owner whenever Three.js, the Three.js package, WebGL or WebGPU 3D, a 3D canvas, or an interactive 3D webpage is present.
 - Use `design-consultation` for a lightweight aesthetic plan when only palette, typography, spacing, or component tone is unresolved.
 - Use `taste-skill` for deeper contextual art direction, design calibration, or anti-generic preflight; once its direction is locked, return here without reopening exploration.
 - Use `image-to-code` when screenshots or recordings are the primary authority, and use `figma-to-code` when structured Figma evidence is the primary authority. Keep that source workflow as the orchestrator after its evidence contract is locked; load this Skill only as supporting production-implementation guidance and return verification evidence to the owning workflow.

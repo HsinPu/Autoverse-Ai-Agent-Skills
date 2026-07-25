@@ -1,6 +1,6 @@
 ---
 name: css-development
-description: CSS development guide covering cascade management, selectors, responsive design, layout systems, tokens, and maintainable styling architecture. Use when writing, reviewing, or refactoring CSS for production interfaces.
+description: CSS development for cascade, selectors, responsive layout, tokens, canvas shells, and DOM overlays, including pages around Three.js or threejs, WebGL or WebGPU 3D, and interactive canvases. Use when writing, reviewing, or refactoring production CSS. When a 3D scene is present, load the sibling threejs-development Skill and keep CSS ownership limited to document, canvas, and overlay presentation.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -10,6 +10,15 @@ metadata:
 # CSS Development
 
 Use this skill when the work directly changes CSS, style architecture, selectors, layout, responsive behavior, or design tokens.
+
+## Three.js Routing Gate
+
+When the page uses `Three.js`, `threejs`, the `three` package, WebGL or WebGPU 3D, or an interactive 3D canvas:
+
+1. Read the sibling [`../threejs-development/SKILL.md`](../threejs-development/SKILL.md) before proposing a complete solution, even if the runtime did not list that Skill initially.
+2. Keep this Skill responsible for document flow, canvas dimensions, aspect-ratio containers, stacking contexts, pointer-event boundaries, responsive overlays, labels, controls, and accessible DOM alternatives.
+3. Leave renderer sizing, DPR policy, camera, scene lifecycle, raycasting, occlusion, CSS2D or CSS3D integration, resources, and visual effects to `threejs-development` and its selected specialists.
+4. Coordinate CSS breakpoints with the scene's resize contract; do not conceal a renderer or lifecycle defect with styling alone.
 
 ## Workflow
 
@@ -36,6 +45,7 @@ Use this skill when the work directly changes CSS, style architecture, selectors
 
 ## Handoff
 
+- For any Three.js or 3D canvas page, use `threejs-development` as the scene owner; use `threejs-ui-overlays` when labels, annotations, CSS2D, CSS3D, HTML portals, projection, or occlusion are central.
 - For unresolved art direction or page composition, use `taste-skill` or `design-consultation`; use `frontend-design` for production implementation after the direction is approved.
 - For Tailwind-specific work, use `tailwind-development` or `tailwind-patterns`.
 - For system-wide token extraction or audit, use `design-system`.

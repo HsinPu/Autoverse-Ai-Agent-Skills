@@ -1,6 +1,6 @@
 ---
 name: javascript-development
-description: JavaScript development guide covering code style, module structure, async and error handling, security, and testing in modern Node.js and browser code. Use when writing, reviewing, or refactoring JavaScript.
+description: JavaScript development for browser and Node.js modules, async flow, errors, security, and testing, including HTML applications that import Three.js or threejs, the three package, WebGL or WebGPU 3D, or interactive canvas code. Use when writing, reviewing, refactoring, or debugging JavaScript. For any Three.js scene, load the sibling threejs-development Skill as the 3D owner.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -10,6 +10,15 @@ metadata:
 # JavaScript Development
 
 Use this skill for JavaScript implementation, review, refactoring, and debugging in Node.js or browser projects.
+
+## Three.js Routing Gate
+
+If JavaScript imports `three`, references `THREE`, initializes a Three.js renderer, or the request asks for a Three.js, WebGL or WebGPU 3D, canvas, website, or HTML experience:
+
+1. Read the sibling [`../threejs-development/SKILL.md`](../threejs-development/SKILL.md) before planning, even when that Skill was not included in the runtime's initial metadata list.
+2. Keep this Skill responsible for generic module structure, application boundaries, input validation, asynchronous I/O, cancellation, error propagation, and non-Three.js tests.
+3. Keep `threejs-development` responsible for Three.js versions and addons, renderer, scene, camera, frame loop, loaders, resources, interaction, visual systems, disposal, performance, and browser rendering evidence.
+4. Do not replace a requested Three.js implementation with a generic canvas, CSS imitation, unrelated framework, or raw WebGL unless the user explicitly asks for that change.
 
 ## Workflow
 
@@ -35,6 +44,7 @@ Use this skill for JavaScript implementation, review, refactoring, and debugging
 
 ## Handoff
 
+- For Three.js, the Three.js package, WebGL or WebGPU 3D, and interactive 3D HTML, use `threejs-development` as the primary implementation and routing Skill.
 - For TypeScript-heavy code, use `typescript-development`.
 - For React UI behavior, use `react-ui-patterns` or `react-perf`.
 - For browser automation or UI verification, use `webapp-testing` or `playwright-automation`.

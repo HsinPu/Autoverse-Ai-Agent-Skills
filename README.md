@@ -58,6 +58,9 @@ curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/ins
 
 這會安裝全部 284 個 Skills、237 個 Agents，並為 Codex 啟用全域主動委派。安裝完成後請開啟新的 Codex 工作階段，讓 runtime 重新載入內容。
 
+> [!NOTE]
+> Codex 的初始 Skill metadata 清單最多使用 context window 的 2%，context 大小未知時上限為 8,000 字元；大量全域 Skills 可能先被縮短描述，再有部分項目被省略。檔案仍會保留在安裝目錄，但若需要保證載入，請明確使用 `$skill-name`。例如 Three.js 網頁工作可輸入 `$threejs-development 請用 Three.js 建立單檔 HTML`。CraftRoster 的 `frontend-design`、`css-development` 與 `javascript-development` 也會在偵測到 Three.js 後讀取相鄰的 umbrella Skill。詳見 [OpenAI Build skills](https://learn.chatgpt.com/docs/build-skills.md)。
+
 > [!TIP]
 > 上述 one-liner 會取用 `main` 當下的 script 與 archive，不是固定且簽章的 release artifact。若需要先審核或固定版本，請 clone 指定 commit、檢查 [`install.ps1`](scripts/install.ps1) 或 [`install.sh`](scripts/install.sh)，再使用[本機 checkout](#從本機-checkout-安裝)。
 
@@ -429,7 +432,7 @@ npm run audit:skill-originality
 - Agent references 固定 commit、tree、paths 與 license evidence；Skill references 另外固定逐檔 blob 與 review-controlled lock。
 - `npm run audit:agent-originality` 會針對 237 個 canonical Agent prompt 與 pinned upstream references 檢查長行及逐字片段重疊。
 - Skill originality audit 會逐一比對有 reference 的 canonical packages 與固定 upstream files。
-- Eval gate 目前具名保護 78／284 個 Skill packages、97 個 evals 與 482 個 assertions；不宣稱所有 Skills 都有 eval。
+- Eval gate 目前具名保護 81／284 個 Skill packages、101 個 evals 與 502 個 assertions；不宣稱所有 Skills 都有 eval。
 - Workflow contract gate 目前涵蓋 7 組跨 Skill contracts；Agent responsibility coverage 由 [31 類 matrix](docs/agent-coverage-matrix.md) 驗證。
 
 詳細來源與改寫紀錄：

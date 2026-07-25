@@ -502,6 +502,9 @@
       "tags": [
         "css",
         "frontend",
+        "threejs",
+        "canvas",
+        "html-overlays",
         "responsive",
         "flexbox",
         "grid",
@@ -782,6 +785,9 @@
       "tags": [
         "frontend",
         "design",
+        "threejs",
+        "3d-web",
+        "html",
         "react",
         "css",
         "ui",
@@ -1041,6 +1047,9 @@
       "tags": [
         "javascript",
         "nodejs",
+        "browser",
+        "threejs",
+        "canvas",
         "code-style",
         "async",
         "security",
@@ -2373,6 +2382,9 @@
         "webgl",
         "webgpu",
         "3d",
+        "html",
+        "web-page",
+        "single-file",
         "architecture",
         "routing"
       ]
@@ -3352,13 +3364,36 @@
       ]
     },
     {
+      "id": "threejs-html-frontend-entry",
+      "title": "Three.js HTML and Frontend Ownership",
+      "decision": "Three.js owns the 3D scene and browser rendering contract; frontend, CSS, and JavaScript Skills support their own DOM and language boundaries and must load the sibling Three.js umbrella when it was omitted from initial metadata.",
+      "skills": [
+        {
+          "name": "threejs-development",
+          "when": "The request mentions Three.js, threejs, the three package, WebGL or WebGPU 3D, a canvas scene, a 3D webpage, or a single-file HTML or JavaScript demo."
+        },
+        {
+          "name": "frontend-design",
+          "when": "The page also needs semantic HTML, content hierarchy, responsive DOM composition, controls, design tokens, state presentation, or an accessible non-canvas fallback."
+        },
+        {
+          "name": "css-development",
+          "when": "The Three.js page also needs document flow, canvas sizing, stacking, pointer boundaries, responsive overlays, labels, or CSS2D and CSS3D presentation."
+        },
+        {
+          "name": "javascript-development",
+          "when": "The Three.js page also needs generic module structure, application boundaries, asynchronous I/O, validation, cancellation, error handling, or non-rendering JavaScript tests."
+        }
+      ]
+    },
+    {
       "id": "threejs-development",
       "title": "Three.js Application and Graphics Development",
       "decision": "Use the umbrella route for cross-cutting work; otherwise select the narrowest specialist by ownership boundary, visual system, platform, or acceptance evidence.",
       "skills": [
         {
           "name": "threejs-development",
-          "when": "A complete or ambiguous Three.js request spans architecture, authoring, frameworks, workers, rendering, assets, interaction, simulation, advanced graphics, quality, or production delivery and needs coordinated routing."
+          "when": "A request mentions Three.js, threejs, the three package, a WebGL or WebGPU 3D page, a canvas scene, a 3D website, or a single-file HTML or JavaScript demo, or spans architecture, rendering, assets, interaction, simulation, quality, or production delivery."
         },
         {
           "name": "threejs-version-migration",

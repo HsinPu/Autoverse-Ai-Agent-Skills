@@ -1,6 +1,6 @@
 ---
 name: threejs-development
-description: "End-to-end Three.js development routing and delivery workflow. Use when building, migrating, restructuring, reviewing, or debugging a complete Three.js experience that spans architecture, version upgrades, authoring, workers, frameworks, scene lifecycle, assets, geometry or CSG, rendering, interaction, rigid or deformable simulation, path tracing, capture, performance, accessibility, testing, or deployment."
+description: "Build and route Three.js or threejs browser experiences, interactive 3D webpages, canvas scenes, websites, and single-file HTML or JavaScript demos. Use whenever a request mentions Three.js, threejs, a three package or import, WebGL or WebGPU 3D, 3D HTML, or an existing Three.js application; also use for architecture, migration, assets, rendering, interaction, simulation, performance, accessibility, testing, and deployment."
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -13,6 +13,19 @@ metadata:
 # Three.js Development
 
 Route a Three.js task to the smallest specialist set while preserving one coherent scene, renderer, resource, and verification contract.
+
+## HTML and Web Page Entry
+
+Treat any request to use Three.js or `three` in an HTML page, website, browser demo, canvas experience, or frontend application as a Three.js task even when `frontend-design`, `css-development`, or `javascript-development` was the initial entry point.
+
+1. Determine whether the deliverable is an existing project, a bundled application, or a standalone HTML file. Preserve the existing stack; when none exists, choose the smallest browser setup that satisfies the request and state how Three.js is loaded.
+2. Keep this Skill responsible for renderer, scene, camera, render loop, resize, resources, interaction, visual systems, performance, and Three.js version compatibility.
+3. Use `frontend-design` only for the semantic page shell, content hierarchy, responsive DOM, controls, and accessible fallback; use `css-development` for document layout, canvas sizing, stacking, and overlays; use `javascript-development` for generic module, I/O, and error boundaries.
+4. Read [capability-map.md](references/capability-map.md) and load only the Three.js specialists required by the requested scene.
+5. For a standalone file, pin one compatible Three.js release across core and addons, keep import and asset behavior browser-valid, provide an intentional canvas and DOM fallback, and avoid silently converting the task into a framework project.
+6. Verify the rendered scene in a browser, not only the HTML or JavaScript syntax. Check startup, resize, device pixel ratio, input, console errors, cleanup, narrow viewports, reduced motion, and the requested visual behavior.
+
+Do not let a generic frontend-only workflow replace the Three.js scene and rendering contract.
 
 ## Workflow
 

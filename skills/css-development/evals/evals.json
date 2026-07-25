@@ -1,0 +1,17 @@
+{
+  "skill_name": "css-development",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Build an HTML page with a full-viewport Three.js scene, a responsive HUD, projected labels, clickable DOM controls, and a mobile information panel. Make the CSS solve canvas sizing, stacking, pointer events, safe areas, and reduced motion.",
+      "expected_output": "A bounded CSS plan that loads threejs-development as the scene owner, keeps CSS responsible for document and overlay presentation, coordinates resize and pointer contracts, and routes projected or occluded labels to the Three.js UI overlay specialist.",
+      "assertions": [
+        "The response loads or routes through threejs-development instead of treating the 3D canvas as an ordinary background element.",
+        "CSS owns document flow, canvas container sizing, stacking contexts, pointer-event boundaries, responsive overlays, safe areas, controls, and accessible DOM alternatives.",
+        "Renderer dimensions, DPR, camera, raycasting, scene lifecycle, resources, and visual effects are not assigned to CSS.",
+        "Projected labels, CSS2D or CSS3D behavior, and occlusion are routed to threejs-ui-overlays when required.",
+        "Verification checks viewport changes, zoom, touch targets, keyboard focus, reduced motion, DOM-to-canvas interaction, and browser rendering."
+      ]
+    }
+  ]
+}

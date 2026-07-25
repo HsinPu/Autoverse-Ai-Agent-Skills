@@ -120,6 +120,18 @@
         "DOM labels, audio, deterministic time, color output, mobile budgets, unsupported materials, and deformable coupling are explicitly routed and validated.",
         "The work proceeds through recoverable vertical slices with fixed baselines, asset and data compatibility, lifecycle cleanup, performance evidence, and rollback."
       ]
+    },
+    {
+      "id": 11,
+      "prompt": "Use Three.js to build a polished interactive 3D webpage as one HTML file with CSS and vanilla JavaScript. Include responsive canvas sizing, orbit and keyboard input, loading feedback, reduced motion, a semantic fallback, and browser verification.",
+      "expected_output": "A Three.js-first route that preserves the single-file HTML requirement, assigns renderer and scene ownership to threejs-development, uses frontend-design, css-development, and javascript-development only for their supporting boundaries, selects the minimum scene specialists, and verifies the rendered browser experience.",
+      "assertions": [
+        "The response treats the explicit Three.js request as a threejs-development task rather than a generic frontend-only implementation.",
+        "Renderer, scene, camera, lifecycle, input, resources, performance, and Three.js compatibility have one 3D owner.",
+        "Frontend, CSS, and JavaScript responsibilities are limited to semantic DOM, presentation, modules, I/O, and error boundaries.",
+        "The dependency-loading approach pins compatible Three.js core and addon versions and preserves the requested single-file artifact.",
+        "Acceptance includes rendered browser evidence, resize and DPR behavior, input, loading failure, reduced motion, accessibility fallback, cleanup, and console checks."
+      ]
     }
   ]
 }

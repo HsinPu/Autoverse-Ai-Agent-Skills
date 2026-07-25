@@ -1,0 +1,17 @@
+{
+  "skill_name": "frontend-design",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Use Three.js to make a responsive single-file HTML landing page with an animated 3D product hero, headline, call-to-action, keyboard-accessible controls, and a mobile fallback. Use CSS and vanilla JavaScript and verify it in a browser.",
+      "expected_output": "A coordinated implementation that loads threejs-development as the scene owner while frontend-design owns the semantic page shell, responsive DOM composition, controls, content hierarchy, and accessible fallback; CSS and JavaScript remain supporting boundaries.",
+      "assertions": [
+        "The response does not treat the request as an ordinary frontend-only page after Three.js is explicitly named.",
+        "It loads or routes through threejs-development before defining renderer, scene, camera, animation, resources, or 3D verification.",
+        "Frontend ownership remains limited to semantic HTML, content hierarchy, responsive DOM, controls, state presentation, and accessible fallback.",
+        "The implementation preserves the requested single-file delivery unless a different setup is explicitly justified.",
+        "Browser verification covers the rendered scene, resize, narrow viewport, keyboard path, reduced motion, console errors, and fallback behavior."
+      ]
+    }
+  ]
+}

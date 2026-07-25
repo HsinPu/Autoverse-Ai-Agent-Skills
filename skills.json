@@ -725,7 +725,7 @@
     },
     {
       "name": "css-development",
-      "description": "CSS development guide covering cascade management, selectors, responsive design, layout systems, tokens, and maintainable styling architecture. Use when writing, reviewing, or refactoring CSS for production interfaces.",
+      "description": "CSS development for cascade, selectors, responsive layout, tokens, canvas shells, and DOM overlays, including pages around Three.js or threejs, WebGL or WebGPU 3D, and interactive canvases. Use when writing, reviewing, or refactoring production CSS. When a 3D scene is present, load the sibling threejs-development Skill and keep CSS ownership limited to document, canvas, and overlay presentation.",
       "category": "frontend-design",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -733,6 +733,9 @@
       "tags": [
         "css",
         "frontend",
+        "threejs",
+        "canvas",
+        "html-overlays",
         "responsive",
         "flexbox",
         "grid",
@@ -1155,7 +1158,7 @@
     },
     {
       "name": "frontend-design",
-      "description": "Production frontend implementation guide for turning an approved visual direction, design system, or image contract into semantic, responsive, accessible UI in the existing stack. Use when building or restyling components, pages, and applications after the visual direction is clear; use taste-skill or design-consultation first when art direction is unresolved.",
+      "description": "Production frontend implementation for semantic, responsive, accessible components, pages, and applications, including HTML pages that host Three.js or threejs, WebGL or WebGPU 3D, canvas scenes, and interactive 3D experiences. Use after visual direction is clear. When Three.js, a three dependency, or 3D HTML is present, load the sibling threejs-development Skill as the scene owner instead of treating the request as frontend-only.",
       "category": "frontend-design",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -1163,6 +1166,9 @@
       "tags": [
         "frontend",
         "design",
+        "threejs",
+        "3d-web",
+        "html",
         "react",
         "css",
         "ui",
@@ -1539,7 +1545,7 @@
     },
     {
       "name": "javascript-development",
-      "description": "JavaScript development guide covering code style, module structure, async and error handling, security, and testing in modern Node.js and browser code. Use when writing, reviewing, or refactoring JavaScript.",
+      "description": "JavaScript development for browser and Node.js modules, async flow, errors, security, and testing, including HTML applications that import Three.js or threejs, the three package, WebGL or WebGPU 3D, or interactive canvas code. Use when writing, reviewing, refactoring, or debugging JavaScript. For any Three.js scene, load the sibling threejs-development Skill as the 3D owner.",
       "category": "software-engineering",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -1547,6 +1553,9 @@
       "tags": [
         "javascript",
         "nodejs",
+        "browser",
+        "threejs",
+        "canvas",
         "code-style",
         "async",
         "security",
@@ -3584,7 +3593,7 @@
     },
     {
       "name": "threejs-development",
-      "description": "End-to-end Three.js development routing and delivery workflow. Use when building, migrating, restructuring, reviewing, or debugging a complete Three.js experience that spans architecture, version upgrades, authoring, workers, frameworks, scene lifecycle, assets, geometry or CSG, rendering, interaction, rigid or deformable simulation, path tracing, capture, performance, accessibility, testing, or deployment.",
+      "description": "Build and route Three.js or threejs browser experiences, interactive 3D webpages, canvas scenes, websites, and single-file HTML or JavaScript demos. Use whenever a request mentions Three.js, threejs, a three package or import, WebGL or WebGPU 3D, 3D HTML, or an existing Three.js application; also use for architecture, migration, assets, rendering, interaction, simulation, performance, accessibility, testing, and deployment.",
       "category": "threejs-graphics",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -3594,6 +3603,9 @@
         "webgl",
         "webgpu",
         "3d",
+        "html",
+        "web-page",
+        "single-file",
         "architecture",
         "routing"
       ],
@@ -5083,13 +5095,36 @@
       ]
     },
     {
+      "id": "threejs-html-frontend-entry",
+      "title": "Three.js HTML and Frontend Ownership",
+      "decision": "Three.js owns the 3D scene and browser rendering contract; frontend, CSS, and JavaScript Skills support their own DOM and language boundaries and must load the sibling Three.js umbrella when it was omitted from initial metadata.",
+      "skills": [
+        {
+          "name": "threejs-development",
+          "when": "The request mentions Three.js, threejs, the three package, WebGL or WebGPU 3D, a canvas scene, a 3D webpage, or a single-file HTML or JavaScript demo."
+        },
+        {
+          "name": "frontend-design",
+          "when": "The page also needs semantic HTML, content hierarchy, responsive DOM composition, controls, design tokens, state presentation, or an accessible non-canvas fallback."
+        },
+        {
+          "name": "css-development",
+          "when": "The Three.js page also needs document flow, canvas sizing, stacking, pointer boundaries, responsive overlays, labels, or CSS2D and CSS3D presentation."
+        },
+        {
+          "name": "javascript-development",
+          "when": "The Three.js page also needs generic module structure, application boundaries, asynchronous I/O, validation, cancellation, error handling, or non-rendering JavaScript tests."
+        }
+      ]
+    },
+    {
       "id": "threejs-development",
       "title": "Three.js Application and Graphics Development",
       "decision": "Use the umbrella route for cross-cutting work; otherwise select the narrowest specialist by ownership boundary, visual system, platform, or acceptance evidence.",
       "skills": [
         {
           "name": "threejs-development",
-          "when": "A complete or ambiguous Three.js request spans architecture, authoring, frameworks, workers, rendering, assets, interaction, simulation, advanced graphics, quality, or production delivery and needs coordinated routing."
+          "when": "A request mentions Three.js, threejs, the three package, a WebGL or WebGPU 3D page, a canvas scene, a 3D website, or a single-file HTML or JavaScript demo, or spans architecture, rendering, assets, interaction, simulation, quality, or production delivery."
         },
         {
           "name": "threejs-version-migration",

@@ -1,0 +1,17 @@
+{
+  "skill_name": "javascript-development",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Write one HTML file with vanilla JavaScript and Three.js that creates an interactive 3D scene, loads a model, handles resize and pointer input, shows loading and error UI, and cleans up correctly when restarted.",
+      "expected_output": "A Three.js-owned implementation route in which javascript-development supports browser modules, asynchronous loading, input validation, errors, cancellation, and restart boundaries without replacing the requested Three.js scene with generic canvas or raw WebGL.",
+      "assertions": [
+        "The response loads or routes through threejs-development before selecting renderer, scene, camera, loaders, interaction, or disposal behavior.",
+        "Generic JavaScript ownership is limited to modules, application boundaries, asynchronous I/O, validation, cancellation, error propagation, and non-rendering tests.",
+        "The requested Three.js implementation is not replaced with a generic canvas, CSS imitation, unrelated framework, or raw WebGL.",
+        "The single-file module and dependency-loading approach is browser-valid and pins compatible Three.js core and addon versions.",
+        "Verification covers model success and failure, resize, pointer input, repeated restart, cleanup, console errors, and the rendered browser result."
+      ]
+    }
+  ]
+}
