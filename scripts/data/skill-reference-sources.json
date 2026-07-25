@@ -291,6 +291,16 @@
         "threejs-volumetric-clouds": [{ "path": "skills/threejs-volumetric-clouds/SKILL.md", "blob": "93a16ad8232bf44c344bbadf4d6b44ef650515ca" }],
         "threejs-water-optics": [{ "path": "skills/threejs-water-optics/SKILL.md", "blob": "be4adabc8d7a342adcdabf266546be54ef1ec17b" }]
       }
+    },
+    {
+      "repo": "nidhinjs/prompt-master",
+      "commit": "d15eabbe5d2122eedc060bae8a771381e9873d1b",
+      "tree": "bcecd8f8d43f899e58d5eb94c7e8ad06f3c4b02a",
+      "license": "MIT",
+      "licenseEvidence": { "kind": "license-file", "path": "LICENSE", "blob": "03fd69c267451c91f3e02715247c3e9e91af41d6" },
+      "skills": {
+        "prompt-engineering": [{ "path": "SKILL.md", "blob": "85225a687af3745ef5a1fdb0a0d669400dbc73cd" }]
+      }
     }
   ]
 }

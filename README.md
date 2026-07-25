@@ -2,13 +2,13 @@
 
 [![Validate](https://github.com/HsinPu/CraftRoster/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/HsinPu/CraftRoster/actions/workflows/validate.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
-![Skills](https://img.shields.io/badge/Skills-283-7c3aed)
+![Skills](https://img.shields.io/badge/Skills-284-7c3aed)
 ![Agents](https://img.shields.io/badge/Agents-237-2563eb)
 ![Node.js](https://img.shields.io/badge/Node.js-%3E%3D22-339933?logo=nodedotjs&logoColor=white)
 
 **可跨工具安裝、查詢與驗證的 AI Agent／Skill catalog。**
 
-CraftRoster 收錄 237 個專業 Agents 與 283 個可重用 Skills，可安裝到 Codex、Claude Code、Cursor、VS Code／GitHub Copilot 與 OpenCode。專案同時提供免 Node.js 安裝器、五平台 Agent adapters、ownership-aware 更新機制，以及離線 catalog CLI。
+CraftRoster 收錄 237 個專業 Agents 與 284 個可重用 Skills，可安裝到 Codex、Claude Code、Cursor、VS Code／GitHub Copilot 與 OpenCode。專案同時提供免 Node.js 安裝器、五平台 Agent adapters、ownership-aware 更新機制，以及離線 catalog CLI。
 
 CraftRoster 是 catalog 與 distribution layer，**不是**另一套 Agent runtime 或 orchestration framework；它讓現有 coding agent 直接取得可攜、可追溯、可驗證的角色與工作流程。
 
@@ -18,7 +18,7 @@ CraftRoster 是 catalog 與 distribution layer，**不是**另一套 Agent runti
 
 | 類型 | 數量 | 用途 | Source of truth |
 |---|---:|---|---|
-| Skills | **283 Skills**／16 類 | 可重用的工作流程、規範、工具指引與領域知識 | [`skills/<name>/SKILL.md`](skills/) |
+| Skills | **284 Skills**／16 類 | 可重用的工作流程、規範、工具指引與領域知識 | [`skills/<name>/SKILL.md`](skills/) |
 | Agents | 237／31 類 | 可委派的專業角色，包含權限、限制與輸出契約 | [`agents/<role>.md`](agents/) |
 | Codex adapters | 237 | Codex custom Agent TOML | [`adapters/codex/`](adapters/codex/) |
 | Claude adapters | 237 | Claude Code subagent Markdown | [`adapters/claude/`](adapters/claude/) |
@@ -56,7 +56,7 @@ Linux／macOS：
 curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh | bash -s -- --target codex --type skill && curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh | bash -s -- --target codex --type agent --enable-auto-delegation
 ```
 
-這會安裝全部 283 個 Skills、237 個 Agents，並為 Codex 啟用全域主動委派。安裝完成後請開啟新的 Codex 工作階段，讓 runtime 重新載入內容。
+這會安裝全部 284 個 Skills、237 個 Agents，並為 Codex 啟用全域主動委派。安裝完成後請開啟新的 Codex 工作階段，讓 runtime 重新載入內容。
 
 > [!TIP]
 > 上述 one-liner 會取用 `main` 當下的 script 與 archive，不是固定且簽章的 release artifact。若需要先審核或固定版本，請 clone 指定 commit、檢查 [`install.ps1`](scripts/install.ps1) 或 [`install.sh`](scripts/install.sh)，再使用[本機 checkout](#從本機-checkout-安裝)。
@@ -312,7 +312,7 @@ Catalog 來源是 [`skills.json`](skills.json) 與 [`agents.json`](agents.json)�
 
 ## Skills
 
-283 個 Skills 分成 16 類。完整 package 位於 [`skills/`](skills/)，generated metadata 與 routing groups 位於 [`skills.json`](skills.json)。
+284 個 Skills 分成 16 類。完整 package 位於 [`skills/`](skills/)，generated metadata 與 routing groups 位於 [`skills.json`](skills.json)。
 
 | Category | Count | 範圍 |
 |---|---:|---|
@@ -321,7 +321,7 @@ Catalog 來源是 [`skills.json`](skills.json) 與 [`agents.json`](agents.json)�
 | `frontend-design` | 33 | Frontend、design system、互動、responsive 與 design-to-code |
 | `threejs-graphics` | 62 | Three.js 架構、渲染、模擬、程序化圖形、效能、驗證與部署 |
 | `backend-data` | 26 | 後端、API、資料庫、資料工程與 migration |
-| `ai-llm` | 4 | LLM 應用、OpenAI API、RAG、eval 與 AI delivery |
+| `ai-llm` | 5 | LLM 應用、OpenAI API、prompt engineering、RAG、eval 與 AI delivery |
 | `mobile-desktop` | 7 | iOS、跨平台、桌面應用與 app store release |
 | `testing-quality` | 27 | 測試、review、debug、無障礙、相容性與完成證據 |
 | `security-governance` | 7 | 安全分析、hardening、scan、threat modeling 與治理 |
@@ -429,7 +429,7 @@ npm run audit:skill-originality
 - Agent references 固定 commit、tree、paths 與 license evidence；Skill references 另外固定逐檔 blob 與 review-controlled lock。
 - `npm run audit:agent-originality` 會針對 237 個 canonical Agent prompt 與 pinned upstream references 檢查長行及逐字片段重疊。
 - Skill originality audit 會逐一比對有 reference 的 canonical packages 與固定 upstream files。
-- Eval gate 目前具名保護 77／283 個 Skill packages、94 個 evals 與 467 個 assertions；不宣稱所有 Skills 都有 eval。
+- Eval gate 目前具名保護 78／284 個 Skill packages、97 個 evals 與 482 個 assertions；不宣稱所有 Skills 都有 eval。
 - Workflow contract gate 目前涵蓋 7 組跨 Skill contracts；Agent responsibility coverage 由 [31 類 matrix](docs/agent-coverage-matrix.md) 驗證。
 
 詳細來源與改寫紀錄：
@@ -440,7 +440,7 @@ npm run audit:skill-originality
 - [Agent reference manifest](scripts/data/agent-reference-sources.json)
 - [Skill reference manifest](scripts/data/skill-reference-sources.json)
 
-Repository 與全部 237 個 Agents 採 Apache-2.0。Skills 以個別 package metadata 宣告為準；目前 282 個為 Apache-2.0，[`karpathy-guidelines`](skills/karpathy-guidelines/) 保留 MIT。
+Repository 與全部 237 個 Agents 採 Apache-2.0。Skills 以個別 package metadata 宣告為準；目前 283 個為 Apache-2.0，[`karpathy-guidelines`](skills/karpathy-guidelines/) 保留 MIT。
 
 ## 疑難排解
 

@@ -1,7 +1,7 @@
 {
   "version": "2.0.0",
-  "updated": "2026-07-24T00:00:00Z",
-  "total": 283,
+  "updated": "2026-07-25T00:00:00Z",
+  "total": 284,
   "categories": [
     {
       "id": "workflow-planning",
@@ -2163,6 +2163,28 @@
         "refactoring",
         "code-quality"
       ]
+    },
+    {
+      "name": "prompt-engineering",
+      "description": "Create, diagnose, rewrite, adapt, and version text prompts or reusable prompt templates for chat, reasoning, coding, research, extraction, content, and tool-using AI systems. Use when the deliverable is a prompt and the receiver, context boundary, constraints, output contract, safety behavior, or regression evidence must be made explicit. Do not use merely because an ordinary task happens to involve an AI model.",
+      "category": "ai-llm",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "prompt",
+        "prompt-engineering",
+        "prompt-template",
+        "instruction-design",
+        "structured-output",
+        "prompt-evals",
+        "injection-resistance"
+      ],
+      "reference": {
+        "source": "nidhinjs/prompt-master",
+        "license": "MIT",
+        "revision": "d15eabbe5d2122eedc060bae8a771381e9873d1b"
+      }
     },
     {
       "name": "python-api-client-development",
@@ -4974,6 +4996,41 @@
     }
   ],
   "routingGroups": [
+    {
+      "id": "prompt-design",
+      "title": "Prompt Design by Artifact and Lifecycle",
+      "decision": "Choose the owner by the artifact being produced; use the general prompt workflow only when a narrower Agent, repository-instruction, media, integration, or evaluation workflow does not own the result.",
+      "skills": [
+        {
+          "name": "prompt-engineering",
+          "when": "A text prompt or reusable prompt template must be created, diagnosed, rewritten, adapted, secured, versioned, or prepared for regression testing."
+        },
+        {
+          "name": "agent-creator-design",
+          "when": "The artifact is a reusable Agent identity with role boundaries, permissions, workflow stages, metadata, and handoff behavior."
+        },
+        {
+          "name": "agent-instructions-authoring",
+          "when": "The artifact is repository-wide coding-agent guidance such as AGENTS.md or equivalent harness instructions."
+        },
+        {
+          "name": "ai-image-prompt-design",
+          "when": "The prompt primarily controls still-image composition, style, lighting, camera, typography, or generation parameters."
+        },
+        {
+          "name": "ai-video-prompting",
+          "when": "The prompt primarily controls shots, motion, continuity, timing, camera movement, or video-generation behavior."
+        },
+        {
+          "name": "llm-evals",
+          "when": "The main task is building datasets, graders, metrics, experiments, or release gates for prompts and AI behavior."
+        },
+        {
+          "name": "openai-api-development",
+          "when": "The main task is implementing prompts, structured outputs, tools, or model configuration in an OpenAI API application."
+        }
+      ]
+    },
     {
       "id": "frontend-design-source",
       "title": "Frontend Design Source and Stage",
