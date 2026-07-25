@@ -236,5 +236,50 @@ jobs:
         with:
           node-version: 24
 
+      - name: Report Bash runtime
+        run: bash --version | head -n 1
+
+      - name: Verify smoke failure propagation
+        run: |
+          set -euo pipefail
+          if output="$(CRAFTROSTER_SMOKE_TEST_FAIL_AFTER_SETUP=enabled bash scripts/smoke-install.sh --quick 2>&1)"; then
+            printf '%s\n' "$output"
+            echo "Smoke failure injection unexpectedly returned success." >&2
+            exit 1
+          fi
+          printf '%s\n' "$output"
+          [[ "$output" == *"FAIL injected smoke failure after setup"* ]]
+
       - name: Run isolated Bash installer smoke test
         run: npm run smoke:install:bash:quick
+
+      - name: Run remote macOS Codex global install
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: |
+          set -euo pipefail
+          test_home="$(mktemp -d "$RUNNER_TEMP/craftroster-macos-global.XXXXXXXX")"
+          cleanup_remote_install() {
+            case "$test_home" in
+              "$RUNNER_TEMP"/craftroster-macos-global-*) rm -rf -- "$test_home" ;;
+              *) printf 'Refusing to clean unexpected remote install root: %s\n' "$test_home" >&2; return 1 ;;
+            esac
+          }
+          trap cleanup_remote_install EXIT
+          export HOME="$test_home"
+          export CODEX_HOME="$HOME/.codex"
+
+          curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh |
+            bash -s -- --target codex --type skill
+          curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh |
+            bash -s -- --target codex --type agent --enable-auto-delegation
+
+          expected_skills="$(node -e "console.log(require('./skills.json').skills.length)")"
+          expected_agents="$(node -e "console.log(require('./agents.json').agents.length)")"
+          actual_skills="$(find "$CODEX_HOME/skills" -mindepth 1 -maxdepth 1 -type d | wc -l | tr -d '[:space:]')"
+          actual_agents="$(find "$CODEX_HOME/agents" -mindepth 1 -maxdepth 1 -type f -name '*.toml' | wc -l | tr -d '[:space:]')"
+
+          [[ "$actual_skills" == "$expected_skills" ]]
+          [[ "$actual_agents" == "$expected_agents" ]]
+          grep -Fq '# CRAFTROSTER_AUTO_DELEGATION_START' "$CODEX_HOME/config.toml"
+          printf 'Verified remote macOS global install: %s Skills, %s Agents, auto-delegation enabled.\n' \
+            "$actual_skills" "$actual_agents"

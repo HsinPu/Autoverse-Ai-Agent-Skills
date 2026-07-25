@@ -25,14 +25,10 @@ esac
 
 case "$SMOKE_MODE" in
   full)
-    PROJECT_SKILL_ARGS=()
-    PROJECT_AGENT_ARGS=()
     EXPECTED_PROJECT_SKILLS="$EXPECTED_SKILLS"
     EXPECTED_PROJECT_AGENTS="$EXPECTED_AGENTS"
     ;;
   quick)
-    PROJECT_SKILL_ARGS=(--name terminal-ops)
-    PROJECT_AGENT_ARGS=(--name code-reviewer)
     EXPECTED_PROJECT_SKILLS=1
     EXPECTED_PROJECT_AGENTS=1
     ;;
@@ -85,8 +81,7 @@ cleanup() {
 }
 
 on_exit() {
-  local exit_status cleanup_status
-  exit_status=$?
+  local exit_status="$1" cleanup_status
   trap - EXIT
   set +e
   cleanup
@@ -98,7 +93,11 @@ on_exit() {
   fi
   exit "$exit_status"
 }
-trap on_exit EXIT
+trap 'on_exit "$?"' EXIT
+
+if [[ "${CRAFTROSTER_SMOKE_TEST_FAIL_AFTER_SETUP:-}" == "enabled" ]]; then
+  fail "injected smoke failure after setup"
+fi
 
 run_installer() {
   local label="$1"
@@ -344,10 +343,17 @@ CANONICAL_DIGEST_ACTUAL="$(node -e 'const fs=require("fs"); console.log(JSON.par
 assert_equal "$CANONICAL_DIGEST_ACTUAL" "$CANONICAL_DIGEST_EXPECTED" "canonical nested/binary/non-ASCII Skill digest"
 log_pass "canonical nested, binary, and non-ASCII Skill digest"
 
-run_installer "project all Skills install" \
-  --target project --type skill "${PROJECT_SKILL_ARGS[@]}" --source-dir "$REPO_ROOT" --dir "$PROJECT_ROOT"
-run_installer "project all Agents install" \
-  --target project --type agent "${PROJECT_AGENT_ARGS[@]}" --source-dir "$REPO_ROOT" --dir "$PROJECT_ROOT"
+if [[ "$SMOKE_MODE" == "quick" ]]; then
+  run_installer "project all Skills install" \
+    --target project --type skill --name terminal-ops --source-dir "$REPO_ROOT" --dir "$PROJECT_ROOT"
+  run_installer "project all Agents install" \
+    --target project --type agent --name code-reviewer --source-dir "$REPO_ROOT" --dir "$PROJECT_ROOT"
+else
+  run_installer "project all Skills install" \
+    --target project --type skill --source-dir "$REPO_ROOT" --dir "$PROJECT_ROOT"
+  run_installer "project all Agents install" \
+    --target project --type agent --source-dir "$REPO_ROOT" --dir "$PROJECT_ROOT"
+fi
 
 for root in "$PROJECT_ROOT/.agents/skills" "$PROJECT_ROOT/.claude/skills"; do
   assert_equal "$(count_skill_dirs "$root")" "$EXPECTED_PROJECT_SKILLS" "$root Skill count"

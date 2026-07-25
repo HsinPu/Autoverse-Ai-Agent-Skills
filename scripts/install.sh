@@ -112,7 +112,7 @@ path_identity_key() {
 
 codex_skill_path() {
   local scope="$1" skill_name="${2:-}" incoming_skill_file="${3:-}" canonical_root agents_alternate default_codex_alternate root target meta key existing_key duplicate
-  local found_count=0 found_root="" owned_root=""
+  local found_count=0 found_root="" owned_root="" candidate_count=0
   local -a raw_roots=() candidate_roots=() candidate_keys=()
   if [[ "$scope" != "user" ]]; then
     printf '%s' "$PWD/.agents/skills"
@@ -131,12 +131,15 @@ codex_skill_path() {
       return 2
     fi
     duplicate=0
-    for existing_key in "${candidate_keys[@]}"; do
-      if [[ "$existing_key" == "$key" ]]; then duplicate=1; break; fi
-    done
+    if [[ "$candidate_count" -gt 0 ]]; then
+      for existing_key in "${candidate_keys[@]}"; do
+        if [[ "$existing_key" == "$key" ]]; then duplicate=1; break; fi
+      done
+    fi
     if [[ "$duplicate" -eq 0 ]]; then
       candidate_roots+=("$root")
       candidate_keys+=("$key")
+      candidate_count=$((candidate_count + 1))
     fi
   done
 

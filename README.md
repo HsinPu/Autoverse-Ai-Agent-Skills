@@ -668,7 +668,7 @@ npm pack --dry-run
 
 `npm run validate`、本機 tests 與 installer smoke tests 都不需要網路。歷史 Skill digest 重建同樣不需要網路，但 checkout 必須包含完整 Git 歷史；CI 會以 `fetch-depth: 0` 執行重建比對。Catalog generator 使用共用的嚴格、zero-dependency YAML 子集 parser；未閉合引號、錯誤縮排、重複欄位或不支援語法會直接失敗，不會被當成普通字串。Skill eval validator 依 `skill-eval-coverage.json` 具名保護必要 eval packages，並檢查 prompt、expected output、files 與 assertions；新增 eval 可以自動納入統計，但刪除必要 package 會阻斷。Skill contract mutation matrix 會實際反轉權限、破壞 phase boundary、刪除 fallback 與改寫 machine receipt，確認 drift 一定被拒絕。
 
-兩個 installer smoke scripts 會建立獨立暫存 HOME，驗證 project／全域 targets、ownership、原子更新、digest drift、rollback、並行競爭與防覆寫，完成後自動清除，不會修改真正的使用者安裝。CI 在每個 PR 與 main push 以 Node.js 22／24 驗證本機 gates，Windows PowerShell 與 Ubuntu Bash 執行完整 installer smoke，macOS Bash 執行 quick smoke。需要 GitHub 的完整來源與原創性檢查也會在每個 PR、main push、手動觸發與每週排程以有界重試執行；GitHub Actions 權限維持 `contents: read`。
+兩個 installer smoke scripts 會建立獨立暫存 HOME，驗證 project／全域 targets、ownership、原子更新、digest drift、rollback、並行競爭與防覆寫，完成後自動清除，不會修改真正的使用者安裝。CI 在每個 PR 與 main push 以 Node.js 22／24 驗證本機 gates，Windows PowerShell 與 Ubuntu Bash 執行完整 installer smoke，macOS Bash 執行 quick smoke，並驗證失敗退出碼不會被清理流程掩蓋；main 的非 PR macOS job 另以 README 使用的 `curl | bash` 流程，在隔離 HOME 完成全部 Skills、全部 Agents 與全域主動委派安裝。需要 GitHub 的完整來源與原創性檢查也會在每個 PR、main push、手動觸發與每週排程以有界重試執行；GitHub Actions 權限維持 `contents: read`。
 
 ### 新增或修改 Agent
 
