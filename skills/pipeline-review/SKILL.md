@@ -14,6 +14,12 @@ metadata:
 
 Use this workflow to separate implementation from acceptance. Keep the reviewer read-only: the reviewer reports defects and evidence but never repairs, stages, commits, or publishes the reviewed change.
 
+## Umbrella Contract
+
+1. Read the sibling [`../code-review/SKILL.md`](../code-review/SKILL.md) before running the gate.
+2. Keep this Skill responsible for stage identity, reviewer independence, stable finding IDs, report persistence, re-review rounds, and risk exceptions.
+3. Keep `code-review` responsible for review depth, intent and implementation passes, finding evidence, severity, confidence, coverage, and the cross-domain verdict.
+
 ## Roles
 
 - **Implementer:** supplies the completed change, intent, test evidence, and known limitations; fixes accepted findings in a later turn.
@@ -37,13 +43,14 @@ If material inputs are missing, record a verification gap instead of guessing.
 
 1. Freeze the review baseline and identify the current stage and next gate.
 2. Read the implementation directly; do not rely only on the implementer's summary.
-3. Trace changed behavior through callers, data, errors, permissions, compatibility, tests, deployment, and rollback where relevant.
-4. Report only reproducible or well-supported findings. Group repeated symptoms under one root cause.
-5. Classify every finding using the three levels below and assign a stable ID.
-6. Return the structured report. Have the coordinator persist it as the agreed `review-report` artifact.
-7. Route accepted findings to an implementer. Do not let the reviewer apply fixes.
-8. Re-review the updated baseline, verify each prior finding, inspect remediation regressions, and append a new review round.
-9. Pass the gate only when blocking findings are resolved or the decision owner records an explicit risk exception.
+3. Classify review depth and perform separate intent/specification and implementation-safety passes through the sibling `code-review` contract.
+4. Trace changed behavior through callers, data, errors, permissions, compatibility, tests, deployment, and rollback where relevant.
+5. Report only reproducible or well-supported findings. Group repeated symptoms under one root cause.
+6. Classify every finding using the three levels below and assign a stable ID.
+7. Return the structured report with a coverage ledger. Have the coordinator persist it as the agreed `review-report` artifact.
+8. Route accepted findings to an implementer. Do not let the reviewer apply fixes.
+9. Re-review the updated baseline, verify each prior finding, inspect remediation regressions, and append a new review round.
+10. Pass the gate only when blocking findings are resolved or the decision owner records an explicit risk exception.
 
 ## Finding levels
 
@@ -65,6 +72,7 @@ Use this stable structure in the response or in a coordinator-owned file:
 - Baseline:
 - Scope:
 - Intended behavior:
+- Review profile:
 - Checks reviewed or run:
 
 ## Findings
@@ -73,6 +81,8 @@ Use this stable structure in the response or in a coordinator-owned file:
 |---|---|---|---|---|---|
 
 ## Verification gaps
+
+## Review coverage
 
 ## Resolved findings
 

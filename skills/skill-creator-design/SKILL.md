@@ -1,6 +1,6 @@
 ---
 name: skill-creator-design
-description: Design and refine reusable cross-tool Skills by defining invocation, scope, workflow branches, completion evidence, no-op behavior, context budget, and package resources. Use when creating or materially redesigning a SKILL.md package, deciding whether to split or route overlapping skills, or improving trigger precision and task completion across Codex, Claude, Cursor, Copilot, and OpenCode.
+description: Design the cross-tool contract and architecture of a reusable Skill by defining ownership, invocation modes, workflow branches, completion evidence, no-op and residue behavior, context budget, and package resources. Use before materially redesigning a SKILL.md package, splitting or routing overlapping Skills, or making behavior portable across Codex, Claude, Cursor, Copilot, and OpenCode; pair with the target platform's official Skill creator for scaffolding, UI metadata, validation helpers, and forward testing.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -20,6 +20,8 @@ Create Skills that change agent behavior at the right time, finish with evidence
 - Use `subagent-architecture` for agent delegation and ownership.
 - Use `skill-gap-analyzer` before adding a capability that may already exist.
 - Use this Skill for the package contract: invocation, instructions, resources, outputs, and validation.
+- When Codex's official `skill-creator` is available, use it for `init_skill.py`, `agents/openai.yaml`, `quick_validate.py`, packaging conventions, and fresh-agent forward tests. Do not duplicate those platform mechanics here.
+- For another platform, use its native scaffold and validation rules after this cross-tool contract is defined.
 
 ## Design Contract
 
@@ -68,6 +70,7 @@ Do not depend on one vendor-specific metadata flag unless the Skill is deliberat
    - State what happens when inputs are missing, the capability is unavailable, no change is needed, or authority is insufficient.
 8. **Test and reduce**
    - Run positive, negative, boundary, missing-tool, stale-context, and recovery cases.
+   - Compare revised behavior with a no-Skill or prior-revision baseline when effectiveness is the claim.
    - Remove duplicated or inert guidance after behavior is proven.
 
 ## Trigger Design
@@ -138,6 +141,7 @@ Before release, verify:
 - **Residue**: temporary artifacts and external side effects match the declared contract.
 - **Context**: removing a paragraph does not reduce required behavior; if it does not, remove it.
 - **Portability**: tool-specific assumptions are explicit and do not masquerade as universal behavior.
+- **Platform metadata**: target-platform UI metadata and validation helpers match the final Skill body.
 
 ## Output
 

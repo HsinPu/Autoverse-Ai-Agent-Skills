@@ -14,14 +14,15 @@ Decide whether a third-party Skill can be installed or executed within an explic
 ## Workflow
 
 1. Freeze repository, revision, release artifact, author, license, install path, file inventory, and hashes.
-2. Establish the trust boundary: target tool, user identity, workspace, credentials, network, external systems, and allowed mutations.
-3. Inspect frontmatter, instructions, references, scripts, binaries, archives, generated files, dependencies, hooks, and installers.
-4. Trace inputs through parsing, command construction, subprocesses, filesystem paths, network requests, logs, outputs, deletion, and cleanup.
-5. Trace dependency and download provenance. Flag mutable URLs, unpinned packages, install-time scripts, hidden payloads, obfuscation, and checksum gaps.
-6. Test untrusted repository, web, document, filename, and tool-output content for instruction injection and authority expansion.
-7. Run representative behavior only in an isolated environment with synthetic data, least privilege, blocked secrets, and observable network and file activity.
-8. Compare observed behavior with declared capability and permissions.
-9. Classify findings, define required controls, and recommend approve, approve with restrictions, quarantine, or reject.
+2. Run or consume `skill-scan`; inspect every high and medium signal and preserve the inventory hashes.
+3. Establish the trust boundary: target tool, user identity, workspace, credentials, network, external systems, and allowed mutations.
+4. Inspect frontmatter, instructions, references, scripts, binaries, archives, generated files, dependencies, hooks, and installers.
+5. Trace inputs through parsing, command construction, subprocesses, filesystem paths, network requests, logs, outputs, deletion, and cleanup.
+6. Trace dependency and download provenance. Flag mutable URLs, unpinned packages, install-time scripts, hidden payloads, obfuscation, and checksum gaps.
+7. Test untrusted repository, web, document, filename, and tool-output content for instruction injection and authority expansion.
+8. Use `skill-executor` for representative behavior only in an isolated environment with synthetic data, least privilege, blocked secrets, explicit network policy, timeout, and observable file and process activity.
+9. Compare observed behavior with declared capability, permissions, completion, and residue contracts.
+10. Classify findings, define required controls, and recommend approve, approve with restrictions, quarantine, or reject.
 
 ## Security Review Areas
 
@@ -46,6 +47,7 @@ Decide whether a third-party Skill can be installed or executed within an explic
 - Require revision pins, integrity verification, least privilege, domain allowlists, sandboxing, or disabled features where those controls reduce a specific risk.
 - Do not treat popularity, stars, install count, or a clean static scan as proof of safety.
 - Do not install globally or expose real secrets merely to complete the review.
+- Mark runtime, network, binary, or dependency behavior as unverified when it was not observed; do not infer a pass from source inspection.
 
 ## Output
 

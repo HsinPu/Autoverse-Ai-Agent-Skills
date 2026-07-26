@@ -17,13 +17,15 @@ Audit both whether a Skill is safe to trust and whether it changes behavior usef
 ## Workflow
 
 1. Freeze the package identity: source, revision, author, license, inventory, claimed purpose, target tools, and update history.
-2. Map its capability, invocation, completion, and residue contracts from frontmatter, instructions, resources, and scripts.
-3. Compare positive, negative, and near-match requests against neighboring Skills to test selection precision.
-4. Trace every workflow branch through prerequisites, actions, outputs, no-op cases, failure states, cleanup, and handoff.
-5. Trace data access, network use, subprocesses, filesystem writes, credentials, external mutations, approvals, and logs.
-6. Test untrusted inputs for prompt injection, scope expansion, secret disclosure, unauthorized installation, contact with third parties, and exfiltration.
-7. Evaluate context cost, duplicated rules, inert instructions, negative-only guidance, portability, ownership, and dependency drift.
-8. Rank findings and choose keep, improve, merge, route, quarantine, reject, or accept with explicit controls.
+2. Run or consume a current `skill-scan` report when the package is unfamiliar, third-party, or executable. Resolve high and medium signals in source context.
+3. Run `skill-lint` and separate deterministic failures from semantic findings.
+4. Map capability, invocation, completion, and residue contracts from frontmatter, instructions, resources, and scripts.
+5. Compare positive, negative, and near-match requests against neighboring Skills to test selection precision.
+6. Trace every workflow branch through prerequisites, authority, actions, outputs, no-op cases, failure states, cleanup, and handoff.
+7. Trace data access, network use, subprocesses, filesystem writes, credentials, external mutations, approvals, and logs.
+8. Test untrusted inputs for prompt injection, scope expansion, secret disclosure, unauthorized installation, contact with third parties, and exfiltration.
+9. Evaluate context cost, duplicated rules, inert instructions, negative-only guidance, portability, ownership, dependency drift, and platform-specific assumptions.
+10. Rank findings and choose keep, improve, merge, route, quarantine, reject, or accept with explicit controls.
 
 ## Semantic Quality Tests
 
@@ -53,6 +55,7 @@ Audit both whether a Skill is safe to trust and whether it changes behavior usef
 - Prefer merge or routing when separate descriptions would create ambiguous invocation.
 - Treat context waste, premature completion, and persistent unwanted artifacts as functional defects, not style comments.
 - Re-audit when source revision, scripts, dependencies, target-tool behavior, or permissions change.
+- Do not convert an unavailable runtime or external check into a pass; record it as residual uncertainty.
 
 ## Output
 
@@ -64,6 +67,7 @@ Report:
 - missing workflow, completion, no-op, failure, or cleanup behavior;
 - required controls and exact remediation;
 - verified provenance, license, executable surface, and residual risk.
+- evidence used, checks not run, re-audit triggers, and the exact next owner.
 
 ## References
 

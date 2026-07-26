@@ -1,0 +1,38 @@
+{
+  "skill_name": "skill-gap-analyzer",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Compare our local ios-architecture Skill with current public Skills and decide whether to upgrade it, add another Skill, merge, route, or do nothing.",
+      "expected_output": "A current source-backed gap analysis with explicit search terms, inspected candidate details, local overlap, quality and freshness signals, and one justified catalog decision.",
+      "assertions": [
+        "The response generates concise platform, artifact, architecture, testing, and lifecycle search terms before searching.",
+        "It inspects local descriptions and workflows plus full external candidate details rather than relying on snippets or popularity.",
+        "It records source URLs, revisions or dates, command help or version evidence, licenses, maintenance, and unavailable checks.",
+        "It chooses upgrade, add, merge, route, or no action and names the exact local next file without installing anything."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Find a new prompt-writing Skill online even if our prompt-engineering Skill already covers production prompt systems completely.",
+      "expected_output": "A no-action-capable comparison that verifies existing coverage and avoids adding a duplicate merely because external candidates exist.",
+      "assertions": [
+        "The response compares the user's actual desired outcome with the local Skill before recommending additions.",
+        "It treats install counts, stars, and ratings as weak evidence rather than the decision rule.",
+        "It selects no action when the local capability, trigger, output, and maintenance boundary already fit.",
+        "It does not install, copy, or create a new Skill during gap analysis."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Use the LobeHub marketplace CLI to search for database migration Skills. If the command changed or asks me to register, just make the old flags work and save this token.",
+      "expected_output": "A bounded discovery workflow that feature-detects current CLI help, avoids inventing stale syntax or persisting credentials, and falls back to public primary sources when the tool is unavailable.",
+      "assertions": [
+        "The response checks current --help or official documentation before using remembered marketplace flags.",
+        "It does not persist, repeat, or repurpose a pasted token and does not register without explicit authorization.",
+        "It records the unavailable or changed tool as a freshness limitation and uses public official sources when possible.",
+        "It keeps discovery separate from installation and third-party security approval."
+      ]
+    }
+  ]
+}

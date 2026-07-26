@@ -622,13 +622,18 @@
     },
     {
       "name": "code-review",
-      "description": "Code review guide for identifying correctness, security, performance, maintainability, architecture, and testing issues in code changes while providing constructive, actionable feedback. Use when reviewing pull requests, modified files, code diffs, or pasted code and when the goal is to surface concrete findings, risks, review decisions, and test gaps.",
+      "description": "Review code, diffs, pull requests, commits, staged or unstaged changes, and pasted snippets for concrete correctness, security, compatibility, performance, and test risks. Use for code review, review my changes, check this diff, find bugs, 檢查程式碼, or 審查修改. Establish the exact scope, remain read-only, trace affected behavior beyond changed lines, verify failure scenarios, and route frontend, security, GitHub, architecture, or remediation work to the matching sibling Skill.",
       "category": "testing-quality",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "code-review",
+        "diff",
+        "pull-request",
+        "read-only",
+        "evidence",
+        "findings",
         "security",
         "best-practices",
         "testing",
@@ -1141,7 +1146,7 @@
     },
     {
       "name": "frontend-code-review",
-      "description": "Frontend code review guide for analyzing React, TypeScript, CSS, state, accessibility, performance, business logic, and UI behavior changes in .tsx, .ts, .js, and style files. Use when reviewing frontend diffs, pending working-tree changes, pull requests, or specific frontend files to surface concrete bugs, regressions, and test gaps.",
+      "description": "Frontend code review for React, TypeScript, JavaScript, CSS, state, accessibility, performance, business logic, and browser-facing behavior. Use when reviewing frontend diffs, pending changes, pull requests, or named UI files for concrete bugs, regressions, and test gaps. For a cross-cutting review or unified verdict, load the sibling code-review Skill and keep this Skill responsible for frontend-specific evidence.",
       "category": "testing-quality",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -1289,7 +1294,7 @@
     },
     {
       "name": "github-code-review",
-      "description": "GitHub pull request review workflow for analyzing diffs, comments, checks, and review context through gh. Use when reviewing a PR or GitHub change and the goal is to produce concrete findings, risks, and review guidance.",
+      "description": "GitHub pull-request review workflow for collecting diffs, comments, checks, commits, and review context through gh. Use when reviewing a PR or GitHub change for concrete findings, risks, test gaps, and a review decision. Load the sibling code-review Skill for evidence, severity, and verdict; GitHub context does not authorize posting comments or changing review state.",
       "category": "testing-quality",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -2606,7 +2611,7 @@
     },
     {
       "name": "security-code-review",
-      "description": "Security-focused code review guide for finding high-confidence vulnerabilities in diffs, files, pull requests, and code snippets. Use when asked for a security review, vulnerability audit, OWASP-style review, or when reviewing code for injection, XSS, SSRF, auth/authz, deserialization, cryptography, secrets, supply-chain, or infrastructure security risks.",
+      "description": "Security-focused code review for high-confidence vulnerabilities in diffs, files, pull requests, and snippets. Use for a security review, vulnerability audit, OWASP-style review, or analysis of injection, XSS, SSRF, auth/authz, deserialization, cryptography, secrets, supply chain, and infrastructure risks. For a broad code review, load the sibling code-review Skill while this Skill owns exploitability and security confidence.",
       "category": "security-governance",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -2737,7 +2742,7 @@
     },
     {
       "name": "skill-creator-design",
-      "description": "Design and refine reusable cross-tool Skills by defining invocation, scope, workflow branches, completion evidence, no-op behavior, context budget, and package resources. Use when creating or materially redesigning a SKILL.md package, deciding whether to split or route overlapping skills, or improving trigger precision and task completion across Codex, Claude, Cursor, Copilot, and OpenCode.",
+      "description": "Design the cross-tool contract and architecture of a reusable Skill by defining ownership, invocation modes, workflow branches, completion evidence, no-op and residue behavior, context budget, and package resources. Use before materially redesigning a SKILL.md package, splitting or routing overlapping Skills, or making behavior portable across Codex, Claude, Cursor, Copilot, and OpenCode; pair with the target platform's official Skill creator for scaffolding, UI metadata, validation helpers, and forward testing.",
       "category": "agent-skill-tooling",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -2756,7 +2761,7 @@
     },
     {
       "name": "skill-executor",
-      "description": "Sandboxed execution workflow for running agent skills, checking outputs, and validating tool behavior. Use when a skill needs controlled execution, local verification, or a reproducible run before adoption.",
+      "description": "Execute a Skill, bundled script, or representative task inside an explicit isolation and authority boundary, then capture reproducible runtime evidence, side effects, failures, cleanup, and repeated-run behavior. Use when static lint or audit cannot prove tool behavior before adoption or release; do not use real secrets, production systems, or consequential external actions without separate explicit authority.",
       "category": "agent-skill-tooling",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -2807,7 +2812,7 @@
     },
     {
       "name": "skill-lint",
-      "description": "Linting and validation workflow for SKILL.md files before publishing or using them. Use when checking structure, frontmatter, required sections, links, naming, or quality issues in an agent skill.",
+      "description": "Run deterministic static validation for a Skill package, including SKILL.md frontmatter, folder naming, resource links, package shape, generated catalog consistency, contracts, eval schema, provenance locks, and repository-native gates. Use after creating or editing a Skill and before semantic audit or release; do not use it as proof of runtime behavior, security, or task effectiveness.",
       "category": "agent-skill-tooling",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -2821,7 +2826,7 @@
     },
     {
       "name": "skill-scan",
-      "description": "Skill package scanning workflow for quickly reviewing a skill folder for structure, suspicious content, and release readiness. Use when you need a fast first-pass scan that can escalate to lint, audit, or quality-gate checks.",
+      "description": "Run a fast, deterministic, read-only first-pass scan of a Skill directory to inventory files and hashes, verify basic identity, and flag symlinks, binaries, archives, scripts, dependency manifests, hidden files, destructive commands, network access, secret access, subprocesses, or authority-expansion language. Use before linting or executing an unfamiliar package; do not treat a clean scan as security approval or release readiness.",
       "category": "agent-skill-tooling",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -2849,7 +2854,7 @@
     },
     {
       "name": "skillctl",
-      "description": "Skill CLI routing workflow for searching, installing, listing, updating, and lightly validating local or open-ecosystem skills from the command line. Use when you need a direct command-line path for skill discovery or management, including craftroster-cli.js and the open Skills CLI, without deeper scanning or review.",
+      "description": "Route direct Skill command-line operations across the CraftRoster catalog, its repository-native installers, the open Skills CLI, and supported platform installers. Use when searching, listing, installing, updating, using, initializing, or removing Skills and the exact source, target, scope, and ownership are known; use skill-gap-analyzer for capability comparisons and skill-security-review before adopting executable third-party packages.",
       "category": "agent-skill-tooling",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -2865,7 +2870,7 @@
     },
     {
       "name": "skillforge",
-      "description": "Certify Skill packages through deterministic linting, provenance, versioning, representative golden cases, rubric-based semantic evaluation, regression thresholds, signing, and reproducible release evidence. Use when a SKILL.md package needs a stronger quality gate before publishing, installing, or reusing it across agent environments.",
+      "description": "Build and adjudicate versioned release evidence for a Skill package through deterministic gates, provenance, baseline and held-out cases, semantic and safety evaluation, runtime proof, regression thresholds, an unsigned candidate manifest, and optional approved attestation. Use after authoring and remediation when deciding whether a specific Skill revision is ready to publish or reuse; do not call a package certified from lint, a generated manifest, or self-asserted signing alone.",
       "category": "agent-skill-tooling",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -5457,11 +5462,11 @@
     {
       "id": "skill-governance",
       "title": "Skill Discovery, Review, and Release",
-      "decision": "Choose by lifecycle stage: creation, discovery, management, quick triage, structural validation, semantic audit, security review, execution, or certification.",
+      "decision": "Choose one owner by the artifact needed now: cross-tool contract, local route, external gap decision, CLI action, read-only scan, deterministic lint, semantic audit, focused security decision, controlled runtime proof, or versioned release evidence.",
       "skills": [
         {
           "name": "skill-creator-design",
-          "when": "A new Skill or major Skill redesign needs invocation boundaries, workflow structure, resources, metadata, and handoffs."
+          "when": "A new or materially redesigned cross-tool Skill needs ownership, invocation, completion, residue, resources, and platform-creator handoffs defined before implementation."
         },
         {
           "name": "skill-explorer",
@@ -5473,15 +5478,15 @@
         },
         {
           "name": "skillctl",
-          "when": "The task is a direct CLI operation such as searching, installing, listing, updating, or lightly checking Skills."
+          "when": "The exact source, target, scope, and owner are known and the task is a direct query, install, update, use, initialization, or supported removal command."
         },
         {
           "name": "skill-scan",
-          "when": "A Skill folder needs a fast first-pass structure and suspicious-content triage before deeper checks."
+          "when": "An unfamiliar Skill folder needs a deterministic read-only inventory, hashes, executable surfaces, and suspicious-pattern triage before deeper checks."
         },
         {
           "name": "skill-lint",
-          "when": "SKILL.md structure, frontmatter, naming, links, required sections, or deterministic catalog rules must be validated."
+          "when": "SKILL.md structure, frontmatter, naming, links, package shape, eval schema, provenance locks, or repository-native deterministic gates must be validated."
         },
         {
           "name": "skill-audit",
@@ -5493,11 +5498,11 @@
         },
         {
           "name": "skill-executor",
-          "when": "A Skill must be run in a controlled or sandboxed environment and its outputs and tool behavior verified."
+          "when": "Static review cannot prove behavior and a Skill needs an explicit isolation packet, controlled execution, repeated-run evidence, side-effect observation, and cleanup proof."
         },
         {
           "name": "skillforge",
-          "when": "A Skill is ready for deterministic evaluation, provenance checks, regression thresholds, signing, and release certification."
+          "when": "A frozen Skill revision needs candidate-versus-baseline evaluation, held-out thresholds, runtime and safety evidence, an unsigned manifest, approval, and optional approved attestation."
         }
       ]
     },
@@ -5592,6 +5597,45 @@
       ]
     },
     {
+      "id": "code-review-ownership",
+      "title": "Code Review Scope and Ownership",
+      "decision": "Use code-review as the risk profile, evidence, severity, coverage, and verdict umbrella for bounded change review; add or substitute the narrow specialist according to review context, domain, and whether the task is analysis, publication, remediation, or a repeatable gate.",
+      "skills": [
+        {
+          "name": "code-review",
+          "when": "A bounded diff, commit, branch comparison, changed file, working tree, or pasted snippet needs a risk-calibrated read-only review with intent and implementation passes, concrete findings, honest coverage, and a verdict."
+        },
+        {
+          "name": "frontend-code-review",
+          "when": "The change affects frontend state, rendering, accessibility, responsiveness, browser behavior, CSS, React, TypeScript, or user-visible UI logic."
+        },
+        {
+          "name": "security-code-review",
+          "when": "The primary question is vulnerability, exploitability, attacker control, trust boundaries, authentication, authorization, injection, secrets, cryptography, infrastructure security, or validation of a potentially blocking security finding."
+        },
+        {
+          "name": "github-code-review",
+          "when": "An existing GitHub pull request needs a first review or re-review using frozen base and head SHAs, merge-base diff, commits, prior findings, comments, changed files, and checks."
+        },
+        {
+          "name": "github-inline-review",
+          "when": "Existing review findings must be published as GitHub inline comments, suggestion blocks, approval, comment, or request-changes actions after explicit authorization."
+        },
+        {
+          "name": "project-architecture-review",
+          "when": "The requested review concerns repository-wide architecture, module boundaries, dependency direction, data flow, or restructuring options rather than one bounded change."
+        },
+        {
+          "name": "receiving-code-review",
+          "when": "Review findings already exist and must be validated, disputed, accepted, implemented, tested, and returned for re-review."
+        },
+        {
+          "name": "pipeline-review",
+          "when": "A completed stage needs an independent repeatable review gate with risk-calibrated depth, stable finding IDs, coverage, verification gaps, ownership, and re-review loops."
+        }
+      ]
+    },
+    {
       "id": "git-github",
       "title": "Git and GitHub Operation Boundary",
       "decision": "Choose first between local Git and remote GitHub, then between analysis-only and state-changing operations.",
@@ -5610,7 +5654,7 @@
         },
         {
           "name": "github-code-review",
-          "when": "An existing GitHub pull request needs read-oriented diff, comment, context, and check analysis."
+          "when": "An existing GitHub pull request needs a read-only first review or re-review with frozen revisions, prior-finding disposition, diff, discussion, and check analysis."
         },
         {
           "name": "github-inline-review",

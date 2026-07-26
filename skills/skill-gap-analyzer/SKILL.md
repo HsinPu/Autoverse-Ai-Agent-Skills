@@ -19,10 +19,11 @@ Use this skill to decide whether the catalog needs an upgrade or a new skill.
    - Include both English and Chinese terms when helpful.
    - Turn them into 3 to 5 short queries.
 3. Search external skill sources for candidate skills using the keyword set.
-   - Use the marketplace CLI when available: `npx.cmd -y @lobehub/market-cli skills search --q "<keywords>" --page-size 10 --locale en-US --output json` on Windows, or `npx -y @lobehub/market-cli skills search --q "<keywords>" --page-size 10 --locale en-US --output json` elsewhere.
+   - Feature-detect an external CLI with its current `--help` output before relying on remembered subcommands or flags.
+   - When supported, use the marketplace CLI: `npx.cmd -y @lobehub/market-cli skills search --q "<keywords>" --page-size 10 --locale en-US --output json` on Windows, or `npx -y @lobehub/market-cli skills search --q "<keywords>" --page-size 10 --locale en-US --output json` elsewhere.
    - Use the open Skills CLI when the user is asking about installable agent skills broadly: `npx skills find <query>`.
    - Check `https://skills.sh/` when leaderboard, install count, or package page metadata would materially change the recommendation.
-   - If credentials are missing, inspect `register --help`; register only when marketplace search is needed and the user goal justifies a local credential.
+   - If a marketplace requires credentials, stop at public or already-authorized sources unless the user explicitly asks to register or authenticate. Never persist a pasted token through this workflow.
    - Start with the most specific query, then broaden if needed.
 4. Open likely matches with the available detail view or repository link; do not compare from search snippets only.
 5. Compare the external candidates against the local catalog for overlap, trigger fit, coverage, and maintenance cost.
@@ -33,6 +34,7 @@ Use this skill to decide whether the catalog needs an upgrade or a new skill.
    - Route distinct skills through a parent when a shared decision must choose the correct child workflow.
    - Keep the catalog unchanged when the current skill already fits.
 7. Return the decision with the local skill(s), candidate skill(s), keywords used, quality signals, and the reason.
+8. Record the source URL, inspected revision or date, command help used, and any unavailable source so the comparison can be refreshed.
 
 ## Boundaries
 
@@ -58,6 +60,7 @@ Use this skill to decide whether the catalog needs an upgrade or a new skill.
 - Prefer merging when two packages would compete for the same requests and neither owns a distinct completion artifact.
 - Prefer routing when child capabilities remain independently useful but require the same prerequisite decision, approval, or evidence contract.
 - Use marketplace metadata as evidence, not as the only signal.
+- Prefer official repositories and current primary documentation for command syntax and platform behavior.
 - Treat install counts, stars, and ratings as weak signals; prioritize instruction quality and fit with the local catalog.
 - Prefer well-known or official sources when two candidates have similar fit.
 - Be cautious with skills that have very low install counts, unclear provenance, no license, or repositories with little maintenance evidence.
@@ -71,6 +74,7 @@ Use this skill to decide whether the catalog needs an upgrade or a new skill.
 - `Keywords`: the query set used for LobeHub search
 - `Candidates`: external skills reviewed, including source and quality signals when available
 - `Why`: short evidence summary, including overlap with the local catalog
+- `Freshness`: source revision or access date, command version or help evidence, and unavailable checks
 - `Next step`: the exact file or skill to change
 
 ## Handoff

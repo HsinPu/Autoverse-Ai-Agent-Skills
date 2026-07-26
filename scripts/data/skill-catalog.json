@@ -433,6 +433,11 @@
       "category": "testing-quality",
       "tags": [
         "code-review",
+        "diff",
+        "pull-request",
+        "read-only",
+        "evidence",
+        "findings",
         "security",
         "best-practices",
         "testing",
@@ -3726,11 +3731,11 @@
     {
       "id": "skill-governance",
       "title": "Skill Discovery, Review, and Release",
-      "decision": "Choose by lifecycle stage: creation, discovery, management, quick triage, structural validation, semantic audit, security review, execution, or certification.",
+      "decision": "Choose one owner by the artifact needed now: cross-tool contract, local route, external gap decision, CLI action, read-only scan, deterministic lint, semantic audit, focused security decision, controlled runtime proof, or versioned release evidence.",
       "skills": [
         {
           "name": "skill-creator-design",
-          "when": "A new Skill or major Skill redesign needs invocation boundaries, workflow structure, resources, metadata, and handoffs."
+          "when": "A new or materially redesigned cross-tool Skill needs ownership, invocation, completion, residue, resources, and platform-creator handoffs defined before implementation."
         },
         {
           "name": "skill-explorer",
@@ -3742,15 +3747,15 @@
         },
         {
           "name": "skillctl",
-          "when": "The task is a direct CLI operation such as searching, installing, listing, updating, or lightly checking Skills."
+          "when": "The exact source, target, scope, and owner are known and the task is a direct query, install, update, use, initialization, or supported removal command."
         },
         {
           "name": "skill-scan",
-          "when": "A Skill folder needs a fast first-pass structure and suspicious-content triage before deeper checks."
+          "when": "An unfamiliar Skill folder needs a deterministic read-only inventory, hashes, executable surfaces, and suspicious-pattern triage before deeper checks."
         },
         {
           "name": "skill-lint",
-          "when": "SKILL.md structure, frontmatter, naming, links, required sections, or deterministic catalog rules must be validated."
+          "when": "SKILL.md structure, frontmatter, naming, links, package shape, eval schema, provenance locks, or repository-native deterministic gates must be validated."
         },
         {
           "name": "skill-audit",
@@ -3762,11 +3767,11 @@
         },
         {
           "name": "skill-executor",
-          "when": "A Skill must be run in a controlled or sandboxed environment and its outputs and tool behavior verified."
+          "when": "Static review cannot prove behavior and a Skill needs an explicit isolation packet, controlled execution, repeated-run evidence, side-effect observation, and cleanup proof."
         },
         {
           "name": "skillforge",
-          "when": "A Skill is ready for deterministic evaluation, provenance checks, regression thresholds, signing, and release certification."
+          "when": "A frozen Skill revision needs candidate-versus-baseline evaluation, held-out thresholds, runtime and safety evidence, an unsigned manifest, approval, and optional approved attestation."
         }
       ]
     },
@@ -3861,6 +3866,45 @@
       ]
     },
     {
+      "id": "code-review-ownership",
+      "title": "Code Review Scope and Ownership",
+      "decision": "Use code-review as the risk profile, evidence, severity, coverage, and verdict umbrella for bounded change review; add or substitute the narrow specialist according to review context, domain, and whether the task is analysis, publication, remediation, or a repeatable gate.",
+      "skills": [
+        {
+          "name": "code-review",
+          "when": "A bounded diff, commit, branch comparison, changed file, working tree, or pasted snippet needs a risk-calibrated read-only review with intent and implementation passes, concrete findings, honest coverage, and a verdict."
+        },
+        {
+          "name": "frontend-code-review",
+          "when": "The change affects frontend state, rendering, accessibility, responsiveness, browser behavior, CSS, React, TypeScript, or user-visible UI logic."
+        },
+        {
+          "name": "security-code-review",
+          "when": "The primary question is vulnerability, exploitability, attacker control, trust boundaries, authentication, authorization, injection, secrets, cryptography, infrastructure security, or validation of a potentially blocking security finding."
+        },
+        {
+          "name": "github-code-review",
+          "when": "An existing GitHub pull request needs a first review or re-review using frozen base and head SHAs, merge-base diff, commits, prior findings, comments, changed files, and checks."
+        },
+        {
+          "name": "github-inline-review",
+          "when": "Existing review findings must be published as GitHub inline comments, suggestion blocks, approval, comment, or request-changes actions after explicit authorization."
+        },
+        {
+          "name": "project-architecture-review",
+          "when": "The requested review concerns repository-wide architecture, module boundaries, dependency direction, data flow, or restructuring options rather than one bounded change."
+        },
+        {
+          "name": "receiving-code-review",
+          "when": "Review findings already exist and must be validated, disputed, accepted, implemented, tested, and returned for re-review."
+        },
+        {
+          "name": "pipeline-review",
+          "when": "A completed stage needs an independent repeatable review gate with risk-calibrated depth, stable finding IDs, coverage, verification gaps, ownership, and re-review loops."
+        }
+      ]
+    },
+    {
       "id": "git-github",
       "title": "Git and GitHub Operation Boundary",
       "decision": "Choose first between local Git and remote GitHub, then between analysis-only and state-changing operations.",
@@ -3879,7 +3923,7 @@
         },
         {
           "name": "github-code-review",
-          "when": "An existing GitHub pull request needs read-oriented diff, comment, context, and check analysis."
+          "when": "An existing GitHub pull request needs a read-only first review or re-review with frozen revisions, prior-finding disposition, diff, discussion, and check analysis."
         },
         {
           "name": "github-inline-review",

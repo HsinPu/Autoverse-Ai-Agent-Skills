@@ -432,7 +432,7 @@ npm run audit:skill-originality
 - Agent references 固定 commit、tree、paths 與 license evidence；Skill references 另外固定逐檔 blob 與 review-controlled lock。
 - `npm run audit:agent-originality` 會針對 237 個 canonical Agent prompt 與 pinned upstream references 檢查長行及逐字片段重疊。
 - Skill originality audit 會逐一比對有 reference 的 canonical packages 與固定 upstream files。
-- Eval gate 目前具名保護 81／284 個 Skill packages、101 個 evals 與 502 個 assertions；不宣稱所有 Skills 都有 eval。
+- Eval gate 目前具名保護 91／284 個 Skill packages、145 個 evals 與 692 個 assertions；不宣稱所有 Skills 都有 eval。
 - Workflow contract gate 目前涵蓋 7 組跨 Skill contracts；Agent responsibility coverage 由 [31 類 matrix](docs/agent-coverage-matrix.md) 驗證。
 
 詳細來源與改寫紀錄：

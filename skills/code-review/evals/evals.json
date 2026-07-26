@@ -1,0 +1,173 @@
+{
+  "skill_name": "code-review",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Review all current working-tree changes in this repository before I commit. Include staged, unstaged, and new files, follow AGENTS.md, and focus on bugs that could ship rather than style.",
+      "expected_output": "A read-only evidence-first review that establishes the repository baseline and full working-tree scope, traces changed behavior beyond the diff, reports only concrete findings, and ends with verification gaps and a verdict.",
+      "assertions": [
+        "The review establishes repository guidance and distinguishes staged, unstaged, untracked, and unrelated pre-existing changes.",
+        "Changed behavior is traced through relevant callers, consumers, contracts, side effects, and tests rather than reviewing changed lines in isolation.",
+        "Every reported finding contains a precise location, reachable failure scenario, impact, focused remediation direction, and confidence.",
+        "Style preferences and theoretical risks are omitted or clearly separated from actionable defects.",
+        "The response remains read-only and ends with block, needs follow-up, or no actionable findings."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Review this small validated refactor. The tests and behavior are unchanged; if you cannot find a real defect, say so instead of inventing suggestions.",
+      "expected_output": "A concise review that checks the affected contract and evidence, explicitly reports no actionable findings when none qualify, and identifies only material verification limits.",
+      "assertions": [
+        "The response does not manufacture a finding merely to make the review appear useful.",
+        "It verifies the claimed behavior-preserving boundary against the available diff, callers, and tests.",
+        "Cosmetic preferences, generic best practices, and speculative future risks are not reported as defects.",
+        "Any unavailable runtime path or missing evidence is listed as a verification gap rather than a confirmed issue.",
+        "The final verdict is no actionable findings when no concrete defect is supported."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Perform a broad code review of an authentication redirect change. There is a suspicious user-controlled URL, but framework validation and an allowlist may make it safe. Determine whether this blocks the change.",
+      "expected_output": "A coordinated broad and security-focused review that loads security-code-review, traces attacker control through validation to the redirect sink, separates confirmed exploitability from needs-verification evidence, and avoids severity by keyword.",
+      "assertions": [
+        "The response routes vulnerability analysis through security-code-review while code-review retains the cross-domain verdict.",
+        "It verifies source, sink, allowlist, framework protections, reachability, and deployment context before calling the redirect exploitable.",
+        "A medium-confidence suspicion is placed under needs verification rather than reported as a confirmed blocker.",
+        "Any confirmed finding explains attacker outcome, affected trust boundary, evidence path, impact, and confidence.",
+        "The verdict follows verified exploitability and impact instead of treating every security-related pattern as Critical."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Review a React checkout diff that changes loading, retry, keyboard focus, responsive CSS, and stale-request handling. Include browser-facing regression risks and test gaps.",
+      "expected_output": "A unified review that loads frontend-code-review for UI-specific evidence, keeps code-review responsible for finding quality and the verdict, and distinguishes code-supported defects from behavior that requires browser verification.",
+      "assertions": [
+        "The response loads or routes through frontend-code-review for state UX, accessibility, responsive, rendering, and browser behavior.",
+        "It examines loading, error, retry, cancellation, stale state, focus, keyboard, narrow viewport, and relevant business behavior.",
+        "Findings that depend on runtime layout or interaction require browser evidence or are disclosed as unverified.",
+        "Frontend findings return to the common evidence, severity, deduplication, and verdict contract.",
+        "Missing browser or E2E coverage is reported as a test gap unless a concrete regression is demonstrated."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Review a zero-downtime database migration that renames a column while old and new application versions may run together. Check deploy order, existing rows, backfill, rollback, retries, and public API compatibility.",
+      "expected_output": "An evidence-first compatibility review that loads the relevant migration and API specialists, traces mixed-version producers and consumers, and reports concrete rollout or data failures with deployment-aware remediation.",
+      "assertions": [
+        "The response loads the narrow database migration and API contract Skills needed by the changed surfaces.",
+        "It checks expand-and-contract order, mixed-version reads and writes, defaults, existing data, backfill, indexes, retries, and rollback.",
+        "Public API, schema, serialization, and deployment compatibility are traced through known producers and consumers.",
+        "A finding names the exact rollout sequence or data state that fails rather than stating that migrations are generally risky.",
+        "Unverified production scale or operational assumptions remain verification gaps and are not promoted into defects."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Review this pasted asynchronous JavaScript function for bugs. You do not have its callers, package versions, configuration, tests, or repository.",
+      "expected_output": "A bounded snippet review that analyzes what the supplied code proves, loads JavaScript guidance when useful, avoids invented repository context, and states which conclusions require callers or runtime evidence.",
+      "assertions": [
+        "The response treats the pasted snippet as the full authorized scope and uses a supplied symbol, quoted expression, or clearly labeled snippet-relative location instead of inventing a repository path.",
+        "It distinguishes defects visible in the function from behavior that depends on callers, configuration, versions, or tests.",
+        "JavaScript async, cancellation, error, cleanup, and concurrency behavior is checked when relevant.",
+        "Speculative integration concerns are listed as questions or scope limitations instead of confirmed findings.",
+        "The output still uses concrete failure scenarios, impact, direction, confidence, and a clear verdict."
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "Review GitHub pull request 42 using its commits, comments, changed files, and failing checks. Do not post anything to GitHub; just give me the findings and verdict.",
+      "expected_output": "A read-only PR review that loads github-code-review for exact GitHub context and code-review for evidence and verdict, without publishing comments or changing review state.",
+      "assertions": [
+        "The response resolves the exact repository and PR and inspects base, head, merge-base diff, commits, comments, files, and checks.",
+        "GitHub context is used to understand intent and failures, while the common code-review contract governs findings and verdict.",
+        "The response does not post comments, approve, request changes, or mutate the pull request.",
+        "Failing checks are investigated and correlated with the changed behavior instead of merely repeated.",
+        "Findings remain precise, deduplicated, confidence-rated, and ordered by severity."
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "A reviewer left six comments on my pull request. Validate each comment, reject false positives, implement the accepted fixes, and prepare evidence for re-review.",
+      "expected_output": "A route to receiving-code-review rather than an original independent review, with each incoming finding validated before remediation and implementation kept separate from reviewer ownership.",
+      "assertions": [
+        "The response recognizes that findings already exist and routes ownership to receiving-code-review.",
+        "Each comment is validated against current code and requirements before being accepted, rejected, or deferred.",
+        "The original code-review role is not used to both author and independently approve its own fixes.",
+        "Accepted fixes require focused implementation and regression evidence before re-review.",
+        "The handoff preserves finding identity, resolution status, remaining uncertainty, and an independent re-review step."
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "Review a change containing one small package manifest edit, a regenerated 20,000-line dependency artifact, and passing package tests. Decide the review depth from actual behavior and risk instead of diff size.",
+      "expected_output": "A proportionate review that identifies the manifest as canonical, treats generated output as derived evidence, and does not escalate the review merely because the mechanical diff is large.",
+      "assertions": [
+        "The response classifies review depth from trust boundaries, contracts, reversibility, blast radius, and evidence rather than line count.",
+        "The generated artifact is traced to its canonical manifest or generator and is not reviewed line by line.",
+        "Packaging, dependency, compatibility, and reproducibility effects are checked where relevant.",
+        "Passing tests inform confidence but do not replace review of the changed package contract.",
+        "The coverage ledger marks the manifest as reviewed and the generated artifact as derived."
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "Review a three-line change that removes an authorization guard from a public administrator endpoint. The author calls it cleanup, one reviewer says the framework already protects it, and another says it is a privilege escalation.",
+      "expected_output": "An elevated broad and security-focused review that verifies the current authorization path and negative evidence, resolves reviewer disagreement from code rather than votes, and blocks only if exploitability is confirmed.",
+      "assertions": [
+        "The small diff is classified as elevated because it changes a public authorization boundary.",
+        "The response routes exploitability analysis through security-code-review and checks route, middleware, framework, resource ownership, and deployment protections.",
+        "Independent validation is used when available and permitted; otherwise the missing cross-validation is disclosed.",
+        "Reviewer agreement or disagreement does not determine severity or whether the finding survives.",
+        "The final finding is confirmed, rejected, or placed under needs verification from concrete reachability and impact evidence."
+      ]
+    },
+    {
+      "id": 11,
+      "prompt": "Review a change that deletes input normalization which looks redundant. Current unit tests pass, but an earlier commit may have added it after a production compatibility incident. Use history only if it can clarify the invariant.",
+      "expected_output": "A selective history-assisted review that examines the relevant prior change and base-versus-head behavior without blanket blame or treating commit text as proof.",
+      "assertions": [
+        "The response identifies safeguard removal and unclear intent as reasons for selective git history inspection.",
+        "Only relevant log, show, or blame context is inspected rather than blaming every changed line.",
+        "The earlier invariant and affected consumers are checked against current code and conditions.",
+        "Commit messages and authorship are treated as context that must be corroborated by behavior or tests.",
+        "A compatibility finding requires a concrete input, consumer, failure path, and current impact."
+      ]
+    },
+    {
+      "id": 12,
+      "prompt": "Review a retry feature whose implementation passes its new tests but violates the acceptance requirement that payment submissions must never be duplicated after a timeout.",
+      "expected_output": "A two-pass elevated review that first detects the specification mismatch and then traces idempotency, retries, side effects, persistence, and tests to establish the implementation failure.",
+      "assertions": [
+        "The intent and specification pass compares behavior with the explicit no-duplicate acceptance criterion before judging code quality.",
+        "The implementation-safety pass traces timeout, retry, idempotency key, persistence, and external side effects.",
+        "Passing tests do not override an authoritative acceptance criterion they fail to represent.",
+        "Any finding gives the exact timeout and retry sequence that creates a duplicate payment and its impact.",
+        "The review profile is elevated because value transfer, retries, and irreversible side effects are involved."
+      ]
+    },
+    {
+      "id": 13,
+      "prompt": "Review a medium-sized cross-platform change spanning a shared API contract, generated clients, a web implementation, and an iOS binary behavior that cannot be run in this environment. Show exactly what the verdict covers.",
+      "expected_output": "A standard or elevated review with an honest behavior-surface coverage ledger that separates reviewed, derived, skipped, and unavailable evidence without claiming repository-wide completeness.",
+      "assertions": [
+        "The shared contract and reachable source implementations are marked reviewed with concrete evidence.",
+        "Generated clients are marked derived and traced to their schema or generator.",
+        "Any intentionally excluded area is marked skipped with a scope reason rather than silently omitted.",
+        "The unavailable iOS runtime path is identified with its effect on confidence and verdict.",
+        "The response does not claim complete platform coverage beyond the frozen baseline and available evidence."
+      ]
+    },
+    {
+      "id": 14,
+      "prompt": "Re-review GitHub pull request 42 after a new push. A prior finding was fixed, one was dismissed as a false positive, and a third appears to have returned under the same root cause. Do not post comments.",
+      "expected_output": "A read-only GitHub re-review that freezes the new head, preserves review-round and finding identity, verifies prior acceptance criteria, and avoids duplicate comments while reopening a genuinely regressed issue.",
+      "assertions": [
+        "The response records repository, PR state, base SHA, new head SHA, merge base, and review-round identity.",
+        "Prior findings are classified as resolved, rejected, regressed, superseded, or unchanged against the current head.",
+        "Stable finding IDs are preserved when the root cause remains the same.",
+        "The dismissed finding is not repeated unless new evidence shows the current head still violates its acceptance criterion.",
+        "The response remains read-only and emits one deduplicated verdict without posting or changing GitHub state."
+      ]
+    }
+  ]
+}

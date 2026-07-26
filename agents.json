@@ -1,6 +1,6 @@
 {
   "version": "3.0.0",
-  "updated": "2026-07-17T09:58:56.759Z",
+  "updated": "2026-07-25T15:06:01.586Z",
   "total": 237,
   "categories": 31,
   "uniqueRoles": 237,
@@ -1340,7 +1340,7 @@
       "id": "code-reviewer",
       "name": "code-reviewer",
       "role": "code-reviewer",
-      "description": "Performs evidence-first review of completed repository changes by tracing affected behavior and contracts before ranking actionable findings. Use after implementation, before merging, or when a diff needs an independent quality gate.",
+      "description": "Performs risk-calibrated, evidence-first review of completed repository changes by checking intent and implementation separately, tracing affected behavior, and validating actionable findings. Use after implementation, before merging, or when a diff needs an independent quality gate.",
       "category": "quality-assurance",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",

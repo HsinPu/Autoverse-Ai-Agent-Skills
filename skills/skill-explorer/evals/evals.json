@@ -1,0 +1,38 @@
+{
+  "skill_name": "skill-explorer",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Which local Skill should I use to inspect an unfamiliar third-party Skill folder before I run it?",
+      "expected_output": "A compact local route that selects skill-scan now, names the scan report as its output, and only routes to lint, audit, or security review according to observed signals.",
+      "assertions": [
+        "The response selects skill-scan from actual ownership and trigger evidence rather than keyword similarity.",
+        "It identifies the package directory as input and a read-only inventory and signal report as output.",
+        "It does not prescribe execution, installation, certification, or the entire governance lifecycle by default.",
+        "It gives the exact condition that would unlock skill-lint, skill-audit, or skill-security-review."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Rename one heading in a local Markdown note. Do I need a specialized Skill?",
+      "expected_output": "A direct no-specialized-Skill route that names the ordinary edit and stops at the requested outcome.",
+      "assertions": [
+        "The response explicitly says no specialized Skill is needed.",
+        "It does not construct a multi-Skill governance or writing workflow for a trivial edit.",
+        "It identifies the available note and renamed heading as input and completion evidence.",
+        "It stops after the requested local change and does not append optional lifecycle stages."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "I want to find whether an iOS architecture Skill exists online, compare it with our local catalog, and install the best one if needed.",
+      "expected_output": "A minimal staged route from external gap analysis to security review when required and then command management, with a clear decision artifact between each stage.",
+      "assertions": [
+        "The first Skill is skill-gap-analyzer because an external add-versus-upgrade comparison is required.",
+        "The route names the candidate decision and pinned source as the artifact that may unlock security review.",
+        "It routes to skillctl only after an adopt or install decision and any executable-content review.",
+        "It does not assume a new install is necessary before comparing the local Skill."
+      ]
+    }
+  ]
+}

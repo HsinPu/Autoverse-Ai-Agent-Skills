@@ -1,0 +1,38 @@
+{
+  "skill_name": "skill-audit",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Audit this third-party Skill before we adopt it. It has a SKILL.md, two shell scripts, a package lock, and instructions that upload generated reports. I need an adopt, adapt, quarantine, or reject decision.",
+      "expected_output": "An evidence-based package audit that freezes identity and provenance, consumes scan and lint evidence, traces semantic and security contracts, and returns a bounded adoption decision with unresolved checks.",
+      "assertions": [
+        "The response records source revision, license, inventory, executable surface, target tools, and update assumptions.",
+        "It separates deterministic scan or lint failures from invocation, workflow, completion, residue, and maintenance findings.",
+        "It traces scripts, network uploads, credentials, external actions, prompt injection, failure behavior, and cleanup without executing unsafe content.",
+        "The final decision includes exact controls, evidence not obtained, residual risk, and re-audit triggers."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "We have two local Skills that both activate for 'create a reusable prompt workflow.' Decide whether they should stay separate, merge, or be routed through a parent.",
+      "expected_output": "A semantic overlap audit based on positive, near-match, and negative requests plus distinct ownership, outputs, and stop conditions rather than name similarity.",
+      "assertions": [
+        "The audit compares frontmatter descriptions and actual workflows for both Skills.",
+        "It tests at least two positive requests, one near-match, and one negative request against the candidates.",
+        "It distinguishes merge from routing using capability ownership, required inputs, completion artifacts, and independent usefulness.",
+        "The decision identifies the smallest exact metadata or workflow remediation and does not create a third Skill without evidence."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Audit this small first-party Skill after lint and tests passed. If it already has precise triggers, complete failure branches, and no unsafe behavior, do not invent work.",
+      "expected_output": "A no-op-capable semantic audit that verifies the available evidence, reports no material change when justified, and names only genuine residual uncertainty.",
+      "assertions": [
+        "The response treats a valid keep or no-change decision as a complete result.",
+        "It does not manufacture style findings, files, or remediation merely to appear productive.",
+        "It verifies invocation, completion, no-op, failure, cleanup, provenance, and maintenance evidence before accepting the package.",
+        "Any unrun runtime or external check is reported as uncertainty rather than silently treated as passed."
+      ]
+    }
+  ]
+}

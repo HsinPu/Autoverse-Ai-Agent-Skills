@@ -1,0 +1,38 @@
+{
+  "skill_name": "skill-creator-design",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Design a cross-tool Skill for reviewing database migrations in Codex, Claude, Cursor, Copilot, and OpenCode. I need clear triggering, outputs, failure behavior, and a package plan before implementation.",
+      "expected_output": "A cross-tool Skill contract with positive and negative triggers, ownership, invocation mode, completion and residue evidence, progressive disclosure, validation cases, and platform-specific handoffs.",
+      "assertions": [
+        "The design defines capability, invocation, completion, and residue contracts before proposing files.",
+        "It includes at least two positive requests, one near-miss, one negative request, and a justified invocation mode.",
+        "It assigns only necessary content to SKILL.md, references, scripts, assets, and target-platform metadata.",
+        "It hands Codex scaffolding, openai.yaml generation, quick validation, and fresh-agent forward testing to the official platform Skill creator when available."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Create a new skill called code-helper. We may already have code-review, code-refactoring, and coding-standards, but skip comparison and just add it.",
+      "expected_output": "A bounded design response that refuses premature package creation, routes through overlap analysis, and requests or derives concrete examples before choosing add, upgrade, merge, route, or no action.",
+      "assertions": [
+        "The response does not create a vague generic Skill whose trigger collides with existing packages.",
+        "It routes existing-catalog comparison through skill-gap-analyzer or an equivalent overlap decision.",
+        "It asks for or supplies concrete positive, near-match, and negative requests that distinguish ownership.",
+        "It returns add, upgrade, merge, route, or no action with a completion artifact instead of assuming add."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Update an existing Codex Skill so its UI chip and default prompt match the new workflow, then validate and forward-test it.",
+      "expected_output": "A paired route in which the cross-tool contract is updated here while Codex-native metadata generation, quick validation, and fresh-context forward testing follow the official Skill creator workflow.",
+      "assertions": [
+        "The response keeps portable capability and workflow design separate from Codex-specific packaging mechanics.",
+        "It requires agents/openai.yaml to be regenerated from the final Skill body rather than edited from stale assumptions.",
+        "It requires actual package validation and reports unavailable validators as gaps.",
+        "It defines forward tests that do not leak the intended fix or expected answer to the evaluating agent."
+      ]
+    }
+  ]
+}

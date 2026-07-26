@@ -1,0 +1,38 @@
+{
+  "skill_name": "skill-lint",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Lint the Skill files I just changed in CraftRoster. Do not fix anything; tell me exactly which project checks pass or fail.",
+      "expected_output": "A read-only deterministic lint that follows repository guidance, checks package structure and links, runs CraftRoster-native validators, records command evidence, and returns pass, fail, or incomplete.",
+      "assertions": [
+        "The response checks frontmatter, kebab-case folder identity, resource links, package shape, and description trigger surface.",
+        "It runs or names validate:skill-catalog, validate:skill-contracts, validate:skill-evals, verify:skill-sources, audit:skill-originality, validate, and git diff --check.",
+        "It does not regenerate catalogs or edit the Skill during a read-only lint request.",
+        "Every failed or unavailable gate includes the exact file or command, invariant, observed result, and smallest correction."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Check this standalone Skill package before publishing. Its SKILL.md name differs from the folder and one reference points to ../shared/policy.md.",
+      "expected_output": "A portable deterministic failure report for identity mismatch and escaping reference, without turning lint into semantic or security approval.",
+      "assertions": [
+        "The folder-to-frontmatter name mismatch is reported as a deterministic failure.",
+        "The parent-directory reference is flagged because it escapes the Skill package boundary.",
+        "The response applies only portable required fields unless the package repository declares additional metadata rules.",
+        "It does not call the package unsafe, ineffective, or certified solely from lint findings."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "The official quick_validate.py helper fails because PyYAML is unavailable, but the repository validators passed. Mark every check green.",
+      "expected_output": "An incomplete lint verdict that reports the unavailable official helper accurately while preserving the successful repository-native evidence.",
+      "assertions": [
+        "The missing dependency is reported as an unrun check rather than a pass.",
+        "The response does not install dependencies unless that action is authorized.",
+        "It preserves the exact successful repository commands and separates their scope from quick validation.",
+        "The final verdict is incomplete unless an equivalent required check is demonstrably covered."
+      ]
+    }
+  ]
+}

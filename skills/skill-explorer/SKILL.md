@@ -32,6 +32,23 @@ Route through the local catalog without turning a simple task into an unnecessar
 - Do not select a Skill merely because its name shares a keyword with the request.
 - Do not invent a new Skill during local navigation; use `skill-gap-analyzer` for that decision.
 
+## Governance Route
+
+Choose by the artifact needed now:
+
+- package contract or overlap design: `skill-creator-design`;
+- local catalog route: `skill-explorer`;
+- external add-versus-upgrade decision: `skill-gap-analyzer`;
+- direct command execution: `skillctl`;
+- read-only package inventory: `skill-scan`;
+- deterministic structural verdict: `skill-lint`;
+- semantic adoption decision: `skill-audit`;
+- focused third-party security decision: `skill-security-review`;
+- controlled runtime proof: `skill-executor`;
+- versioned release evidence and approval: `skillforge`.
+
+Do not prescribe the full lifecycle when the user requested only one of these artifacts.
+
 ## Output
 
 Return a compact route:
@@ -44,6 +61,7 @@ Produces: <artifact or state>
 Then: <next skill only if required>
 Stop when: <requested outcome and evidence>
 Alternative: <only when a real unresolved branch exists>
+Checks not run: <only when they limit the route decision>
 ```
 
 If no specialized Skill is needed, say so directly and identify the ordinary action that should proceed.

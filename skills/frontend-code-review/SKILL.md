@@ -1,6 +1,6 @@
 ---
 name: frontend-code-review
-description: Frontend code review guide for analyzing React, TypeScript, CSS, state, accessibility, performance, business logic, and UI behavior changes in .tsx, .ts, .js, and style files. Use when reviewing frontend diffs, pending working-tree changes, pull requests, or specific frontend files to surface concrete bugs, regressions, and test gaps.
+description: Frontend code review for React, TypeScript, JavaScript, CSS, state, accessibility, performance, business logic, and browser-facing behavior. Use when reviewing frontend diffs, pending changes, pull requests, or named UI files for concrete bugs, regressions, and test gaps. For a cross-cutting review or unified verdict, load the sibling code-review Skill and keep this Skill responsible for frontend-specific evidence.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -10,6 +10,15 @@ metadata:
 # Frontend Code Review
 
 Use this skill to review frontend changes with a bug-hunting mindset. Support both pending-change review and focused file review.
+
+## Umbrella Contract
+
+When frontend work is part of a broader code review:
+
+1. Read the sibling [`../code-review/SKILL.md`](../code-review/SKILL.md) before producing the final review.
+2. Let `code-review` own the baseline, read-only boundary, finding standard, severity, deduplication, and verdict.
+3. Keep this Skill responsible for frontend correctness, state UX, accessibility, responsive behavior, rendering, performance, browser behavior, and frontend test gaps.
+4. Use browser evidence when a finding depends on layout, focus, events, hydration, timing, or runtime rendering; otherwise disclose that the behavior was not verified.
 
 ## Workflow
 
@@ -57,6 +66,6 @@ Use this skill to review frontend changes with a bug-hunting mindset. Support bo
 
 ## Handoff
 
-- For deeper general code review, use `code-review`.
+- For a cross-cutting review, load `code-review` and return frontend findings to its unified verdict.
 - For visual design-system and UI craft review, use `frontend-design-review`.
 - For local browser verification, use `webapp-testing`.

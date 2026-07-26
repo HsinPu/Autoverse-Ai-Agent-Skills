@@ -1,6 +1,6 @@
 ---
 name: security-code-review
-description: Security-focused code review guide for finding high-confidence vulnerabilities in diffs, files, pull requests, and code snippets. Use when asked for a security review, vulnerability audit, OWASP-style review, or when reviewing code for injection, XSS, SSRF, auth/authz, deserialization, cryptography, secrets, supply-chain, or infrastructure security risks.
+description: Security-focused code review for high-confidence vulnerabilities in diffs, files, pull requests, and snippets. Use for a security review, vulnerability audit, OWASP-style review, or analysis of injection, XSS, SSRF, auth/authz, deserialization, cryptography, secrets, supply chain, and infrastructure risks. For a broad code review, load the sibling code-review Skill while this Skill owns exploitability and security confidence.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -10,6 +10,15 @@ metadata:
 # Security Code Review
 
 Use this skill for vulnerability-focused review. Use `code-review` for broad correctness/quality review and `python-security-hardening` or `spring-security` when implementing security fixes.
+
+## Umbrella Contract
+
+When security analysis is one dimension of a broader diff or pull-request review:
+
+1. Read the sibling [`../code-review/SKILL.md`](../code-review/SKILL.md).
+2. Let `code-review` own scope, read-only boundaries, cross-domain deduplication, and the final verdict.
+3. Keep this Skill responsible for trust boundaries, attacker control, source-to-sink evidence, exploitability, framework protections, and security confidence.
+4. Return confirmed vulnerabilities as findings and unresolved reachability or control questions as needs-verification evidence. Do not let a generic checklist upgrade suspicion into a blocker or downgrade a confirmed exploit.
 
 ## Review Principle
 
@@ -23,6 +32,17 @@ Use this skill for vulnerability-focused review. Use `code-review` for broad cor
 - **High**: vulnerable sink plus attacker-controlled input or exploitable misconfiguration confirmed. Report with severity.
 - **Medium**: suspicious pattern but source, validation, or reachability unclear. Put in `Needs Verification`.
 - **Low**: theoretical, defense-in-depth, test-only, dead/commented code, or server-controlled value. Do not report as a finding.
+
+## High-Impact Validation Gate
+
+Before returning a security finding that would block a broad review:
+
+1. Recheck the exact reviewed baseline, source, trust-boundary transition, sink, validation, authorization, framework behavior, and deployment condition.
+2. Look for negative evidence that disproves attacker control, reachability, or impact.
+3. For snippets and partial context, keep the candidate under verification when an unavailable route mount, caller, middleware, framework guard, or deployment control could fully prevent exploitation. Confirm only when the supplied context is explicitly complete or the vulnerability survives that missing layer.
+4. Use a narrow non-destructive reproduction, negative control, or concrete code path when safe. Do not run exploitative, production, or externally mutating tests without separate authorization.
+5. For elevated reviews, use an independent security pass when available and permitted, but resolve disagreement from evidence rather than votes.
+6. Mark the candidate confirmed, rejected, or needs verification; return rejected candidates only when explaining a material false-positive decision.
 
 ## Security Areas
 
@@ -45,6 +65,8 @@ Use this skill for vulnerability-focused review. Use `code-review` for broad cor
 - Verify whether auth is required and whether the authenticated user can influence the input or target resource.
 
 ## Output
+
+For a broad review, return confirmed vulnerabilities and needs-verification evidence to the sibling `code-review` output instead of emitting a second summary or verdict. For a standalone vulnerability audit, use:
 
 ```markdown
 ## Security Review
