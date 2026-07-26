@@ -58,6 +58,7 @@ Record:
 
 - Use `market-research` when audience, positioning, or competitor context is not yet supported by evidence.
 - Use `article-writing` to apply the approved profile to sourced long-form content.
+- Use `product-pitch-writing` to apply the approved profile to an evidence-grounded product pitch, demo talk, keynote, or presentation speech.
 - Use `content-repurposing` to preserve the profile across channel-specific derivatives.
 - Use `ux-writing` for interface microcopy that must apply the voice under usability constraints.
 - Use `humanizer` only after brand traits are preserved and the draft still sounds formulaic.

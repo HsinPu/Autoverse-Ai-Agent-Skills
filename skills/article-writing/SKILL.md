@@ -51,4 +51,5 @@ Build a long-form narrative whose claims, structure, and voice survive editorial
 - Use `humanizer` for a final naturalness pass that preserves approved voice and evidence.
 - Use `markdown-writer` for GFM structure and formatting after editorial content is approved.
 - Use `content-repurposing` to derive channel-specific content from the approved article.
+- Use `product-pitch-writing` when the requested artifact is an audience-specific product or system presentation speech rather than an article.
 - Use `short-video-script` when the requested artifact is a short-form video script rather than an article.

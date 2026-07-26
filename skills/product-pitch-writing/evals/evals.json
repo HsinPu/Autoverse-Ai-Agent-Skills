@@ -1,0 +1,52 @@
+{
+  "skill_name": "product-pitch-writing",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "幫我查看這套軟體系統有哪些特色和賣點，根據 repository、README 與測試證據，寫成給非技術客戶聽的五分鐘演講稿。沒有證據的功能不要自行補上。",
+      "expected_output": "An evidence-grounded five-minute customer pitch that identifies the audience and desired action, separates verified capability from benefit and differentiation, prioritizes a small set of supported selling points, provides a timed narrative and speakable full script, and flags unsupported or uncertain claims.",
+      "assertions": [
+        "The response treats the Chinese request for 系統特色, 賣點, and 演講稿 as a product-pitch-writing task.",
+        "It establishes the repository, README, tests, and user-approved statements as the claim authority before drafting.",
+        "It maps each primary capability to a nontechnical customer problem, benefit, proof, limitation, and confidence.",
+        "It produces a coherent timed five-minute speech with an opening, transitions, evidence, and a specific close rather than a feature list.",
+        "It excludes or clearly flags capabilities and outcomes that the supplied evidence does not support."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Write a ten-minute live demo pitch for our developer platform. Call it the fastest, safest, and only complete solution even though the supplied docs contain no benchmarks, certifications, competitor research, or customer results. Include slide and demo cues.",
+      "expected_output": "A timed developer-platform demo pitch that refuses unsupported superlatives, distinguishes product truth from comparative or external claims, builds supported feature-to-value messages, includes useful slide and demo cues with a fallback, and ends with a claim-risk ledger.",
+      "assertions": [
+        "The response does not repeat fastest, safest, only complete, or equivalent comparative claims as facts.",
+        "It identifies benchmarks, security evidence, competitor research, and customer outcomes as missing claim support.",
+        "The pitch uses supported mechanisms, developer benefits, proof, and limitations instead of replacing evidence with promotional adjectives.",
+        "The ten-minute outline reserves explicit time for the demonstration and includes a verbal recovery path for demo failure.",
+        "The delivery includes unsupported-claim and approval notes without letting them overwhelm the spoken narrative."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "The product speech is already approved. I only need you to place it into our existing PowerPoint template, preserve the master layouts, and fix overflowing speaker notes.",
+      "expected_output": "A narrow handoff to presentation-ops because the approved narrative is no longer being authored and the primary deliverable is an editable PowerPoint deck with preserved layouts and speaker notes.",
+      "assertions": [
+        "The response identifies presentation-ops as the primary Skill for the requested PowerPoint work.",
+        "It does not rewrite the approved product positioning or speech without a concrete content defect.",
+        "It preserves editable slides, master layouts, and speaker notes as presentation requirements.",
+        "It stops after deck construction and validation rather than adding market research or a new pitch workflow."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Turn our system architecture review into a twelve-minute technical conference talk for senior iOS engineers. Explain the tradeoffs and limitations, keep the approved brand voice, and make the talk useful even without the slides.",
+      "expected_output": "A twelve-minute technical talk derived from approved architecture evidence, with an expert audience brief, one controlling idea, design tradeoffs and limitations, a timed structure, a self-sufficient spoken script, and brand-consistent but non-promotional language.",
+      "assertions": [
+        "The response uses the approved architecture review as evidence and does not reopen architecture decisions without cause.",
+        "It adapts depth, terminology, examples, and objections to senior iOS engineers.",
+        "The talk distinguishes design decisions, demonstrated effects, tradeoffs, and limitations instead of calling complexity a selling point.",
+        "The spoken narrative remains comprehensible without reading slide text or seeing diagrams.",
+        "The final script fits a twelve-minute allocation and preserves the approved voice without promotional filler."
+      ]
+    }
+  ]
+}

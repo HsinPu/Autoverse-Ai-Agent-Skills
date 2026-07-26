@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "updated": "2026-07-25T00:00:00Z",
+  "updated": "2026-07-26T00:00:00Z",
   "categories": [
     {
       "id": "workflow-planning",
@@ -1453,6 +1453,18 @@
         "guardrails",
         "instrumentation",
         "decision"
+      ]
+    },
+    "product-pitch-writing": {
+      "category": "writing-content",
+      "tags": [
+        "product-pitch",
+        "speech-writing",
+        "presentation-script",
+        "selling-points",
+        "value-proposition",
+        "demo-talk",
+        "claim-evidence"
       ]
     },
     "project-architecture-review": {
@@ -3838,6 +3850,10 @@
         {
           "name": "brand-voice",
           "when": "Writing must extract, document, or consistently apply a specific organization, publication, product, or creator voice."
+        },
+        {
+          "name": "product-pitch-writing",
+          "when": "Verified product or system truth must become audience-specific selling points, a timed presentation speech, demo narrative, keynote, or speaker notes."
         },
         {
           "name": "article-writing",

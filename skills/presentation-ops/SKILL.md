@@ -40,5 +40,6 @@ Use this skill when a deck is the source or the deliverable.
 
 ## Handoff
 
+- For product or system selling points, timed narrative, full speech, and claim integrity before deck construction, use `product-pitch-writing`.
 - For PDF export or distribution, use `pdf-operations`.
 - For accompanying notes or summaries, use `markdown-writer`.

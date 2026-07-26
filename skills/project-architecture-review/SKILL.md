@@ -48,5 +48,6 @@ Use this skill before implementation when the user wants to understand whether a
 - Use `database-design` for schema ownership, persistence boundaries, or data migration design.
 - Use `api-contract-design` for public API boundaries, versioning, pagination, idempotency, and compatibility.
 - Use `spec-flow` or `specification-authoring` when the recommendation should become a formal implementation spec.
+- Use `product-pitch-writing` when verified system capabilities, tradeoffs, and limitations should become an audience-facing presentation speech or product pitch.
 
 For deeper checklists and architecture options, read [reference/architecture-review.md](reference/architecture-review.md).

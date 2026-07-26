@@ -30,5 +30,6 @@ Use this skill when text sounds machine-made.
 
 - For extracting and applying a specific organization or creator voice, use `brand-voice` before this final naturalness pass.
 - For evidence-led long-form drafting and editorial checks, use `article-writing`.
+- For product or system selling points, timed talks, demo narratives, or presentation speeches, use `product-pitch-writing` before this final naturalness pass.
 - For final-answer polish, use `answer-writing`.
 - For Markdown-heavy docs, use `markdown-writer`.

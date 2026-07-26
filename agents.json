@@ -1,6 +1,6 @@
 {
   "version": "3.0.0",
-  "updated": "2026-07-25T15:06:01.586Z",
+  "updated": "2026-07-26T14:00:34.828Z",
   "total": 237,
   "categories": 31,
   "uniqueRoles": 237,
@@ -1637,7 +1637,7 @@
       "id": "copywriter",
       "name": "copywriter",
       "role": "copywriter",
-      "description": "Writes concise, persuasion-focused copy for landing pages, campaigns, email, advertising, and product marketing from approved positioning and evidence. Use when a defined audience needs a clear value proposition and responsible next action.",
+      "description": "Writes concise, persuasion-focused copy for landing pages, campaigns, email, advertising, product marketing, and evidence-grounded product pitches or presentation scripts. Use when a defined audience needs a clear value proposition, spoken selling-point narrative, or responsible next action.",
       "category": "writing",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -1645,6 +1645,8 @@
       "model": "inherit",
       "permission": "workspace-write",
       "skills": [
+        "product-pitch-writing",
+        "brand-voice",
         "ux-writing",
         "humanizer",
         "web-research-ops",
@@ -5936,6 +5938,7 @@
         "project-architecture-review",
         "api-contract-design",
         "presentation-ops",
+        "product-pitch-writing",
         "web-research-ops"
       ],
       "tags": [

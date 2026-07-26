@@ -1,7 +1,7 @@
 {
   "version": "2.0.0",
-  "updated": "2026-07-25T00:00:00Z",
-  "total": 284,
+  "updated": "2026-07-26T00:00:00Z",
+  "total": 285,
   "categories": [
     {
       "id": "workflow-planning",
@@ -2159,6 +2159,23 @@
         "guardrails",
         "instrumentation",
         "decision"
+      ]
+    },
+    {
+      "name": "product-pitch-writing",
+      "description": "Evidence-grounded product and system pitch writing workflow for inspecting supplied repositories, documentation, demos, and approved product truth, then converting verified capabilities into audience-specific selling points, value propositions, timed presentation speeches, demo narratives, keynote talks, and speaker notes. Use when the user asks for a product pitch, sales presentation script, system introduction, demo talk, launch speech, 演講稿, 系統特色, 產品賣點, 產品介紹, or 簡報講稿. Do not use when the primary task is only slide-file layout, a generic article, or market-positioning research.",
+      "category": "writing-content",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "product-pitch",
+        "speech-writing",
+        "presentation-script",
+        "selling-points",
+        "value-proposition",
+        "demo-talk",
+        "claim-evidence"
       ]
     },
     {
@@ -5569,6 +5586,10 @@
         {
           "name": "brand-voice",
           "when": "Writing must extract, document, or consistently apply a specific organization, publication, product, or creator voice."
+        },
+        {
+          "name": "product-pitch-writing",
+          "when": "Verified product or system truth must become audience-specific selling points, a timed presentation speech, demo narrative, keynote, or speaker notes."
         },
         {
           "name": "article-writing",

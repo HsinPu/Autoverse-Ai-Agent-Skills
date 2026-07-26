@@ -48,6 +48,7 @@ Adapt approved source content without breaking its evidence, message, or voice.
 - Use `agent-reach-ops` when platform-specific social, video, or RSS evidence must be collected from its native channel.
 - Use `article-writing` when the source must first become an approved long-form article.
 - Use `brand-voice` when derivatives require a stable reusable voice profile.
+- Use `product-pitch-writing` when the derivative is a product or system pitch that needs a selling-point hierarchy, timed spoken arc, proof, and claim-risk review.
 - Use `short-video-script` for short-form spoken scripts, visual beats, and retention pacing.
 - Use `storyboard-creation` when a derivative requires shot-level visual planning.
 - Use `ai-image-prompt-design` or `ai-video-prompting` for approved visual asset prompts.
