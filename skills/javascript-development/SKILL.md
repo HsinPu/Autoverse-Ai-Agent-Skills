@@ -1,6 +1,6 @@
 ---
 name: javascript-development
-description: JavaScript development for browser and Node.js modules, async flow, errors, security, and testing, including HTML applications that import Three.js or threejs, the three package, WebGL or WebGPU 3D, or interactive canvas code. Use when writing, reviewing, refactoring, or debugging JavaScript. For any Three.js scene, load the sibling threejs-development Skill as the 3D owner.
+description: Visible browser UI or interaction changes require frontend-design plus this JavaScript specialist. Use for writing, modifying, fixing, reviewing, refactoring, debugging, or testing browser and Node.js JavaScript; Node.js-only work does not require frontend-design. For Three.js code, also load threejs-development.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -10,6 +10,10 @@ metadata:
 # JavaScript Development
 
 Use this skill for JavaScript implementation, review, refactoring, and debugging in Node.js or browser projects.
+
+## Frontend Baseline Gate
+
+When browser JavaScript creates or changes visible DOM, controls, navigation, forms, feedback, loading, errors, animation, or responsive behavior, read frontend-design before planning. Keep this Skill responsible for JavaScript runtime mechanics while frontend-design owns the complete user-visible UI contract. Do not add the frontend baseline for Node.js-only, build-tool-only, or non-visual library work.
 
 ## TypeScript Routing Gate
 

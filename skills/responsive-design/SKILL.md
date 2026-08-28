@@ -1,6 +1,6 @@
 ---
 name: responsive-design
-description: Responsive frontend layout guidance for breakpoints, fluid typography, container queries, and adaptive component behavior. Use when building or restyling web UI that must work well on mobile, tablet, and desktop, or when fixing layout issues across screen sizes.
+description: Visible responsive UI changes require frontend-design plus this responsive specialist. Use for building, modifying, or fixing mobile, tablet, and desktop layouts with breakpoints, fluid sizing, container queries, adaptive components, touch targets, and intentional reflow.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -9,7 +9,7 @@ metadata:
 
 # Responsive Design
 
-Use this skill to make layouts adapt cleanly across viewports.
+Use this skill to make layouts adapt cleanly across viewports. Read frontend-design first for any visible production UI change.
 
 ## Workflow
 
@@ -30,4 +30,4 @@ Use this skill to make layouts adapt cleanly across viewports.
 
 - For Tailwind layout work, use `tailwind-patterns`.
 - For CSS-level implementation, use `css-development`.
-- For unresolved visual direction, use `taste-skill` or `design-consultation`; use `frontend-design` after the direction is approved and production UI must be implemented.
+- Use `frontend-design` as the implementation baseline. Use `taste-skill` or `design-consultation` only when direction itself is the requested deliverable or blocks implementation.

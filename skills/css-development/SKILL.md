@@ -1,6 +1,6 @@
 ---
 name: css-development
-description: CSS development for cascade, selectors, responsive layout, tokens, canvas shells, and DOM overlays, including pages around Three.js or threejs, WebGL or WebGPU 3D, and interactive canvases. Use when writing, reviewing, or refactoring production CSS. When a 3D scene is present, load the sibling threejs-development Skill and keep CSS ownership limited to document, canvas, and overlay presentation.
+description: Visible CSS or UI changes require frontend-design plus this CSS specialist. Use for writing, modifying, fixing, reviewing, or refactoring cascade, selectors, layout, responsiveness, tokens, themes, states, canvas shells, and DOM overlays. For Three.js pages, also load threejs-development.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -10,6 +10,10 @@ metadata:
 # CSS Development
 
 Use this skill when the work directly changes CSS, style architecture, selectors, layout, responsive behavior, or design tokens.
+
+## Frontend Baseline Gate
+
+When CSS work changes a rendered page, component, visual state, theme, responsive layout, or interaction presentation, read frontend-design before planning. Keep this Skill responsible for CSS mechanics while frontend-design owns the complete visible UI, product-state, accessibility, and verification contract. CSS-only library tooling with no visible interface change does not require that baseline.
 
 ## Three.js Routing Gate
 
@@ -46,6 +50,6 @@ When the page uses `Three.js`, `threejs`, the `three` package, WebGL or WebGPU 3
 ## Handoff
 
 - For any Three.js or 3D canvas page, use `threejs-development` as the scene owner; use `threejs-ui-overlays` when labels, annotations, CSS2D, CSS3D, HTML portals, projection, or occlusion are central.
-- For unresolved art direction or page composition, use `taste-skill` or `design-consultation`; use `frontend-design` for production implementation after the direction is approved.
+- For any visible production UI change, load `frontend-design` as the baseline. Use `taste-skill` or `design-consultation` only when direction itself is the requested deliverable or blocks implementation.
 - For Tailwind-specific work, use `tailwind-development` or `tailwind-patterns`.
 - For system-wide token extraction or audit, use `design-system`.

@@ -1,6 +1,6 @@
 ---
 name: animation-best-practices
-description: UI animation and motion guidance for hover states, button feedback, transitions, loading motion, and interaction polish in web interfaces. Use when a frontend task needs motion that improves clarity, responsiveness, or visual feel, or when fixing awkward, jittery, or excessive animation behavior.
+description: Visible frontend motion changes require frontend-design plus this animation specialist. Use for building, modifying, or fixing hover, press, loading, transitions, feedback, reduced-motion behavior, and interaction polish.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -9,7 +9,7 @@ metadata:
 
 # Animation Best Practices
 
-Use this skill to make motion feel deliberate.
+Use this skill to make motion feel deliberate. Read frontend-design first when applying motion to visible production UI.
 
 ## Workflow
 
@@ -28,6 +28,6 @@ Use this skill to make motion feel deliberate.
 
 ## Handoff
 
-- For larger UI builds, use `frontend-design`.
+- For any visible production UI implementation, use `frontend-design` as the baseline.
 - For Tailwind implementation, use `tailwind-patterns`.
 - For layout polish, use `responsive-design`.

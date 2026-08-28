@@ -267,7 +267,7 @@
     },
     {
       "name": "animation-best-practices",
-      "description": "UI animation and motion guidance for hover states, button feedback, transitions, loading motion, and interaction polish in web interfaces. Use when a frontend task needs motion that improves clarity, responsiveness, or visual feel, or when fixing awkward, jittery, or excessive animation behavior.",
+      "description": "Visible frontend motion changes require frontend-design plus this animation specialist. Use for building, modifying, or fixing hover, press, loading, transitions, feedback, reduced-motion behavior, and interaction polish.",
       "category": "frontend-design",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -668,7 +668,7 @@
     },
     {
       "name": "color-font-skill",
-      "description": "Color and typography guidance for choosing palettes, font pairings, and visual theme directions in frontend and design tasks. Use when a UI needs stronger color balance, brand-safe palettes, readable font pairing, or a deliberate visual identity before implementation.",
+      "description": "Applying color or typography to visible UI requires frontend-design plus this visual specialist. Use for choosing or modifying palettes, font pairing, contrast, typography, and visual themes; direction-only work may use this Skill alone.",
       "category": "frontend-design",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -733,7 +733,7 @@
     },
     {
       "name": "css-development",
-      "description": "CSS development for cascade, selectors, responsive layout, tokens, canvas shells, and DOM overlays, including pages around Three.js or threejs, WebGL or WebGPU 3D, and interactive canvases. Use when writing, reviewing, or refactoring production CSS. When a 3D scene is present, load the sibling threejs-development Skill and keep CSS ownership limited to document, canvas, and overlay presentation.",
+      "description": "Visible CSS or UI changes require frontend-design plus this CSS specialist. Use for writing, modifying, fixing, reviewing, or refactoring cascade, selectors, layout, responsiveness, tokens, themes, states, canvas shells, and DOM overlays. For Three.js pages, also load threejs-development.",
       "category": "frontend-design",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -753,7 +753,7 @@
     },
     {
       "name": "dashboard-design",
-      "description": "Design decision-focused product, analytics, executive, and operational dashboards through metric ownership, KPI hierarchy, comparison baselines, freshness, visual encoding, drill-down, anomaly context, and responsive layout. Use when planning or reviewing dashboard information architecture, KPI panels, monitoring views, reporting surfaces, or card-based overview screens.",
+      "description": "Visible dashboard UI changes require frontend-design plus this dashboard specialist. Use for planning, building, modifying, or reviewing KPI hierarchy, comparisons, freshness, visual encoding, drill-down, anomaly context, states, and responsive layout.",
       "category": "frontend-design",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -1166,7 +1166,7 @@
     },
     {
       "name": "frontend-design",
-      "description": "Production frontend implementation for semantic, responsive, accessible components, pages, and applications, including HTML pages that host Three.js or threejs, WebGL or WebGPU 3D, canvas scenes, and interactive 3D experiences. Use after visual direction is clear. When Three.js, a three dependency, or 3D HTML is present, load the sibling threejs-development Skill as the scene owner instead of treating the request as frontend-only.",
+      "description": "Mandatory baseline for any request to create, modify, fix, restyle, redesign, or polish visible web UI or frontend code, including HTML, CSS, browser JavaScript, React, Vue, Next.js, Tailwind, pages, components, forms, navigation, responsive layouts, interaction states, and visual bugs. Specialists supplement rather than replace it. Exclude backend-only, data-only, and prose-only work.",
       "category": "frontend-design",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -1590,7 +1590,7 @@
     },
     {
       "name": "javascript-development",
-      "description": "JavaScript development for browser and Node.js modules, async flow, errors, security, and testing, including HTML applications that import Three.js or threejs, the three package, WebGL or WebGPU 3D, or interactive canvas code. Use when writing, reviewing, refactoring, or debugging JavaScript. For any Three.js scene, load the sibling threejs-development Skill as the 3D owner.",
+      "description": "Visible browser UI or interaction changes require frontend-design plus this JavaScript specialist. Use for writing, modifying, fixing, reviewing, refactoring, debugging, or testing browser and Node.js JavaScript; Node.js-only work does not require frontend-design. For Three.js code, also load threejs-development.",
       "category": "software-engineering",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -1995,7 +1995,7 @@
     },
     {
       "name": "nextjs-development",
-      "description": "Next.js development guide covering App Router, Server and Client Components, data fetching, caching, Server Actions, route handlers, metadata, performance, security, and deployment. Use when building, reviewing, or refactoring Next.js applications.",
+      "description": "Visible Next.js page or client UI changes require frontend-design plus this Next.js specialist. Use for building, modifying, fixing, reviewing, or refactoring App Router, Server and Client Components, data fetching, caching, actions, handlers, metadata, performance, security, and deployment.",
       "category": "frontend-design",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -2553,7 +2553,7 @@
     },
     {
       "name": "react-ui-patterns",
-      "description": "React UI state patterns for loading, error, empty, optimistic update, Suspense, and transition flows. Use when building or reviewing React components that fetch data, submit mutations, or need predictable async UX and state handling.",
+      "description": "Visible React UI changes require frontend-design plus this React state specialist. Use for building, modifying, fixing, or reviewing loading, error, empty, optimistic updates, Suspense, transitions, forms, mutations, and other user-visible component states.",
       "category": "frontend-design",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -2658,7 +2658,7 @@
     },
     {
       "name": "responsive-design",
-      "description": "Responsive frontend layout guidance for breakpoints, fluid typography, container queries, and adaptive component behavior. Use when building or restyling web UI that must work well on mobile, tablet, and desktop, or when fixing layout issues across screen sizes.",
+      "description": "Visible responsive UI changes require frontend-design plus this responsive specialist. Use for building, modifying, or fixing mobile, tablet, and desktop layouts with breakpoints, fluid sizing, container queries, adaptive components, touch targets, and intentional reflow.",
       "category": "frontend-design",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -3326,7 +3326,7 @@
     },
     {
       "name": "tailwind-development",
-      "description": "Tailwind CSS development guide covering utility-first architecture, theme variables, class composition, custom layers and directives, dark mode, Preflight, and build output-size concerns. Use when building, reviewing, or refactoring Tailwind-based interfaces.",
+      "description": "Visible Tailwind UI changes require frontend-design plus this Tailwind specialist. Use for building, modifying, fixing, reviewing, or refactoring utilities, theme variables, class composition, layers, directives, dark mode, Preflight, and generated output.",
       "category": "frontend-design",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -4634,7 +4634,7 @@
     },
     {
       "name": "typescript-development",
-      "description": "Write, modify, fix, review, refactor, and type-check TypeScript code, modules, libraries, services, and applications. Use as the primary TypeScript implementation and routing skill whenever work mentions TypeScript, .ts, .tsx, tsconfig, strict mode, tsc or vue-tsc errors, generics, interfaces, unions, or typed public APIs; then load only the framework, testing, debugging, or refactoring skill that materially owns the remaining work.",
+      "description": "Visible .tsx or browser UI changes require frontend-design plus this TypeScript specialist. Use for writing, modifying, fixing, reviewing, refactoring, or type-checking TypeScript, .ts, .tsx, tsconfig, tsc, vue-tsc, strict mode, or typed APIs; server, CLI, and library-only work does not require frontend-design.",
       "category": "software-engineering",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -4690,7 +4690,7 @@
     },
     {
       "name": "ui-styling",
-      "description": "UI styling guide for composing shadcn/ui, Radix, and Tailwind components with polished color, button, form, and layout patterns. Use when building or restyling React UI components that need consistent spacing, theme-aware colors, and accessible visual polish.",
+      "description": "Visible shadcn, Radix, or Tailwind React UI changes require frontend-design plus this styling specialist. Use for polished colors, buttons, forms, layouts, states, spacing, themes, and accessible visual treatment.",
       "category": "frontend-design",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -4928,7 +4928,7 @@
     },
     {
       "name": "vue-development",
-      "description": "Vue 3 development guide covering SFC structure, Composition API, component design, Pinia state management, Vue Router, TypeScript, testing, performance, and security. Use when building, reviewing, or refactoring Vue applications.",
+      "description": "Visible Vue UI changes require frontend-design plus this Vue specialist. Use for building, modifying, fixing, reviewing, or refactoring Vue 3 applications and SFCs across Composition API, components, Pinia, Vue Router, TypeScript, testing, performance, and security.",
       "category": "frontend-design",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -5164,7 +5164,7 @@
     {
       "id": "frontend-design-source",
       "title": "Frontend Design Source and Stage",
-      "decision": "Choose by authoritative design source, scope, and lifecycle stage; do not run multiple direction or implementation workflows by default.",
+      "decision": "Any task that creates or changes visible production web UI starts with frontend-design as the implementation baseline; add only the source, direction, framework, styling, responsive, motion, or review specialists that materially own part of the work.",
       "skills": [
         {
           "name": "taste-skill",
@@ -5200,7 +5200,7 @@
         },
         {
           "name": "frontend-design",
-          "when": "The visual direction or implementation contract is already approved and production frontend implementation should begin."
+          "when": "Any request creates, modifies, restyles, redesigns, polishes, repairs, or reproduces visible web UI, including HTML, CSS, browser JavaScript, React, Vue, Next.js, Tailwind, components, pages, forms, navigation, responsive layouts, interaction states, and visual bugs. Specialists supplement rather than replace this baseline."
         },
         {
           "name": "frontend-design-review",

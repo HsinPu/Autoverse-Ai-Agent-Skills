@@ -1,6 +1,6 @@
 ---
 name: tailwind-development
-description: Tailwind CSS development guide covering utility-first architecture, theme variables, class composition, custom layers and directives, dark mode, Preflight, and build output-size concerns. Use when building, reviewing, or refactoring Tailwind-based interfaces.
+description: Visible Tailwind UI changes require frontend-design plus this Tailwind specialist. Use for building, modifying, fixing, reviewing, or refactoring utilities, theme variables, class composition, layers, directives, dark mode, Preflight, and generated output.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -8,6 +8,10 @@ metadata:
 ---
 
 # Tailwind CSS 開發（Tailwind Development）
+
+## Frontend Baseline Gate
+
+When Tailwind work creates or changes a visible page, component, layout, form, navigation, responsive state, theme, or visual treatment, read frontend-design before planning. Keep this Skill responsible for Tailwind mechanics and generated CSS.
 
 **在使用 Tailwind CSS（以 v4+ 為主）撰寫 UI 時請讀取本 skill。**
 
@@ -38,7 +42,7 @@ Use this skill when the task is about Tailwind CSS itself: configuration, theme 
 
 - Use `tailwind-patterns` for ready-to-apply layout/component composition patterns in Tailwind.
 - Use `ui-styling` when the task is broader React/shadcn/Radix visual polish.
-- Use `taste-skill` or `design-consultation` when visual direction is unresolved, and `color-font-skill` when palette or typography is the main decision. Use `frontend-design` after the direction is approved and production UI implementation is required.
+- Use `frontend-design` as the baseline for visible production UI. Use `taste-skill` or `design-consultation` only when direction itself is the requested deliverable or blocks implementation, and `color-font-skill` when palette or typography is the main decision.
 - Use `css-development` when the project is not primarily Tailwind or needs cascade/layout architecture outside Tailwind.
 
 ## 進階與參考（Bundled resources）

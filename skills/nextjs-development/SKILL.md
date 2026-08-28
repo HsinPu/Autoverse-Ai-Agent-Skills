@@ -1,6 +1,6 @@
 ---
 name: nextjs-development
-description: Next.js development guide covering App Router, Server and Client Components, data fetching, caching, Server Actions, route handlers, metadata, performance, security, and deployment. Use when building, reviewing, or refactoring Next.js applications.
+description: Visible Next.js page or client UI changes require frontend-design plus this Next.js specialist. Use for building, modifying, fixing, reviewing, or refactoring App Router, Server and Client Components, data fetching, caching, actions, handlers, metadata, performance, security, and deployment.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -10,6 +10,10 @@ metadata:
 # Next.js Development
 
 Use this skill when working on a Next.js app, especially App Router projects with React Server Components, server actions, route handlers, caching, and deployment concerns.
+
+## Frontend Baseline Gate
+
+When a Next.js task creates or changes a visible page, layout, component, form, navigation, responsive surface, interaction state, or visual treatment, read frontend-design before planning. Keep server-only route handlers, caching, metadata, and deployment work within this Skill unless they also change visible UI.
 
 ## TypeScript Baseline Gate
 

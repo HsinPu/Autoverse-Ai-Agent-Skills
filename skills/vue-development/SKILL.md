@@ -1,6 +1,6 @@
 ---
 name: vue-development
-description: Vue 3 development guide covering SFC structure, Composition API, component design, Pinia state management, Vue Router, TypeScript, testing, performance, and security. Use when building, reviewing, or refactoring Vue applications.
+description: Visible Vue UI changes require frontend-design plus this Vue specialist. Use for building, modifying, fixing, reviewing, or refactoring Vue 3 applications and SFCs across Composition API, components, Pinia, Vue Router, TypeScript, testing, performance, and security.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -8,6 +8,10 @@ metadata:
 ---
 
 # Vue 開發（Vue Development）
+
+## Frontend Baseline Gate
+
+When a Vue task creates or changes a visible page, component, layout, form, navigation, interaction state, responsive behavior, or visual treatment, read frontend-design before planning. Keep this Skill responsible for Vue structure and reactivity while frontend-design owns the complete visible UI contract.
 
 **在使用 Vue（以 Vue 3 + SFC 為主）撰寫前端時請讀取本 skill。**
 

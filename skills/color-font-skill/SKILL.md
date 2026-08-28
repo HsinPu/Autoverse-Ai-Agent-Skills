@@ -1,6 +1,6 @@
 ---
 name: color-font-skill
-description: Color and typography guidance for choosing palettes, font pairings, and visual theme directions in frontend and design tasks. Use when a UI needs stronger color balance, brand-safe palettes, readable font pairing, or a deliberate visual identity before implementation.
+description: Applying color or typography to visible UI requires frontend-design plus this visual specialist. Use for choosing or modifying palettes, font pairing, contrast, typography, and visual themes; direction-only work may use this Skill alone.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -9,7 +9,7 @@ metadata:
 
 # Color Font Skill
 
-Use this skill to choose the palette and type direction first.
+Use this skill to choose the palette and type direction. Read frontend-design when the same task applies those decisions to visible production UI.
 
 ## Workflow
 
@@ -28,5 +28,5 @@ Use this skill to choose the palette and type direction first.
 
 ## Handoff
 
-- For implementation, use `frontend-design` or `design-consultation`.
+- For visible implementation, use `frontend-design` as the baseline. Use `design-consultation` only for direction-only work.
 - For system-level token work, use `design-system-patterns`.

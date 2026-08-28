@@ -3428,7 +3428,7 @@
     {
       "id": "frontend-design-source",
       "title": "Frontend Design Source and Stage",
-      "decision": "Choose by authoritative design source, scope, and lifecycle stage; do not run multiple direction or implementation workflows by default.",
+      "decision": "Any task that creates or changes visible production web UI starts with frontend-design as the implementation baseline; add only the source, direction, framework, styling, responsive, motion, or review specialists that materially own part of the work.",
       "skills": [
         {
           "name": "taste-skill",
@@ -3464,7 +3464,7 @@
         },
         {
           "name": "frontend-design",
-          "when": "The visual direction or implementation contract is already approved and production frontend implementation should begin."
+          "when": "Any request creates, modifies, restyles, redesigns, polishes, repairs, or reproduces visible web UI, including HTML, CSS, browser JavaScript, React, Vue, Next.js, Tailwind, components, pages, forms, navigation, responsive layouts, interaction states, and visual bugs. Specialists supplement rather than replace this baseline."
         },
         {
           "name": "frontend-design-review",

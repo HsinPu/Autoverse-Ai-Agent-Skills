@@ -12,6 +12,60 @@
         "The implementation preserves the requested single-file delivery unless a different setup is explicitly justified.",
         "Browser verification covers the rendered scene, resize, narrow viewport, keyboard path, reduced motion, console errors, and fallback behavior."
       ]
+    },
+    {
+      "id": 2,
+      "prompt": "This website looks generic. Modify the existing frontend so it feels polished and professional without changing product behavior.",
+      "expected_output": "A frontend-design-led implementation that inspects the existing surface, preserves behavior, makes bounded visual decisions, changes the visible UI, and verifies representative states and viewports without requiring a separate design-direction phase.",
+      "assertions": [
+        "The response treats frontend-design as the baseline even though the request uses vague language such as polished and professional.",
+        "It does not block implementation merely because a separate visual direction was not supplied.",
+        "It preserves existing behavior and design-system evidence before making bounded visual changes.",
+        "It verifies the rendered interface rather than relying only on compilation."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Fix the CSS spacing, typography, card alignment, and mobile overflow on this page while preserving its HTML and behavior.",
+      "expected_output": "A coordinated visible-UI fix in which frontend-design owns the complete page contract and css-development owns CSS mechanics, with responsive and rendered-state verification.",
+      "assertions": [
+        "The response loads frontend-design as the visible UI baseline.",
+        "It uses css-development as an additive specialist rather than a replacement.",
+        "It preserves HTML and product behavior.",
+        "It verifies layout at narrow and desktop viewports."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Restyle this React settings page and improve its forms, buttons, spacing, loading, error, disabled, and focus states.",
+      "expected_output": "A frontend-design-led React UI implementation that adds only the required React state, styling, and accessibility specialists while preserving component and data behavior.",
+      "assertions": [
+        "The response loads frontend-design as the baseline for the visible React UI change.",
+        "React or styling specialists supplement rather than replace frontend-design.",
+        "Loading, error, disabled, and focus states are implemented and verified.",
+        "The response preserves existing data and event contracts."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Fix this frontend table so it no longer overflows on mobile, its filters reflow cleanly, and controls remain usable without reducing desktop information density.",
+      "expected_output": "A frontend-design-led responsive implementation that uses responsive-design and CSS support for intentional reflow, touch targets, overflow, and representative viewport verification.",
+      "assertions": [
+        "The response loads frontend-design as the visible UI baseline.",
+        "Responsive specialists remain additive.",
+        "The solution reflows content instead of merely shrinking the desktop UI.",
+        "Verification covers narrow, intermediate, and desktop widths."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Implement a FastAPI endpoint that validates a request, writes one database record transactionally, and returns a typed response. No frontend is involved.",
+      "expected_output": "A backend-only implementation route that does not load or claim frontend-design ownership.",
+      "assertions": [
+        "The response does not load frontend-design.",
+        "It keeps ownership within Python backend, validation, persistence, and testing boundaries.",
+        "It does not invent a web interface."
+      ]
     }
   ]
 }

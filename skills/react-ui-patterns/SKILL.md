@@ -1,6 +1,6 @@
 ---
 name: react-ui-patterns
-description: React UI state patterns for loading, error, empty, optimistic update, Suspense, and transition flows. Use when building or reviewing React components that fetch data, submit mutations, or need predictable async UX and state handling.
+description: Visible React UI changes require frontend-design plus this React state specialist. Use for building, modifying, fixing, or reviewing loading, error, empty, optimistic updates, Suspense, transitions, forms, mutations, and other user-visible component states.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -10,6 +10,10 @@ metadata:
 # React UI Patterns
 
 Use this skill when the work is about React UI state behavior, not visual styling.
+
+## Frontend Baseline Gate
+
+For any visible React component or page creation, modification, redesign, polish, responsive change, or user-facing state repair, read frontend-design before planning. Keep this Skill focused on React state behavior.
 
 ## TypeScript Baseline Gate
 

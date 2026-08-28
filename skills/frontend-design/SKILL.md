@@ -1,6 +1,6 @@
 ---
 name: frontend-design
-description: Production frontend implementation for semantic, responsive, accessible components, pages, and applications, including HTML pages that host Three.js or threejs, WebGL or WebGPU 3D, canvas scenes, and interactive 3D experiences. Use after visual direction is clear. When Three.js, a three dependency, or 3D HTML is present, load the sibling threejs-development Skill as the scene owner instead of treating the request as frontend-only.
+description: Mandatory baseline for any request to create, modify, fix, restyle, redesign, or polish visible web UI or frontend code, including HTML, CSS, browser JavaScript, React, Vue, Next.js, Tailwind, pages, components, forms, navigation, responsive layouts, interaction states, and visual bugs. Specialists supplement rather than replace it. Exclude backend-only, data-only, and prose-only work.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -9,7 +9,15 @@ metadata:
 
 # Frontend Design
 
-Turn an approved visual direction into production UI without losing product behavior, accessibility, responsiveness, or maintainability. This Skill owns implementation craft; it does not reopen art direction that has already been selected.
+Create or change production UI without losing product behavior, accessibility, responsiveness, or maintainability. Use this Skill as the implementation baseline whenever the requested work changes what users see or operate in a web interface.
+
+## Frontend Baseline Gate
+
+Read this Skill before planning or editing when a request creates, modifies, restyles, redesigns, polishes, repairs, or reproduces visible frontend UI. This includes vague but actionable requests such as “make the website look better,” “clean up this page,” “fix the mobile layout,” or “improve the form,” as well as explicit framework and CSS tasks.
+
+Do not require a separately approved visual direction before using this Skill. When direction is not supplied, preserve the existing product system and make bounded contextual decisions. Use design-consultation or taste-skill first only when visual direction itself is the requested deliverable or unresolved direction materially blocks implementation.
+
+Framework, language, styling, accessibility, motion, responsive, design-system, image, and Three.js Skills are additive specialists. They do not replace this baseline when visible frontend implementation changes.
 
 ## Three.js Routing Gate
 
@@ -31,7 +39,7 @@ Start from the strongest available design authority:
 - an implementation contract derived from a screenshot or mockup;
 - repository behavior, content, and component conventions.
 
-If the visual direction is unresolved, route to a design-direction Skill before writing substantial UI. Do not invent a second design system inside one page.
+If direction is not supplied, infer the smallest coherent implementation from the existing product, content, and design system. Do not invent a second design system inside one page.
 
 ## Bundled Resources
 

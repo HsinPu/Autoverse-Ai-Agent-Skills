@@ -1,6 +1,6 @@
 ---
 name: ui-styling
-description: UI styling guide for composing shadcn/ui, Radix, and Tailwind components with polished color, button, form, and layout patterns. Use when building or restyling React UI components that need consistent spacing, theme-aware colors, and accessible visual polish.
+description: Visible shadcn, Radix, or Tailwind React UI changes require frontend-design plus this styling specialist. Use for polished colors, buttons, forms, layouts, states, spacing, themes, and accessible visual treatment.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -9,7 +9,7 @@ metadata:
 
 # UI Styling
 
-Use this skill when refining React UI components.
+Use this skill when refining React UI components. Read frontend-design first whenever the task creates or changes visible production UI.
 
 ## Workflow
 
@@ -30,4 +30,4 @@ Use this skill when refining React UI components.
 
 - For shadcn-specific composition, use `shadcn-ui`.
 - For broader Tailwind utilities, use `tailwind-patterns` or `tailwind-development`.
-- For unresolved higher-level visual direction, use `taste-skill` or `design-consultation`; use `frontend-design` after approval for production implementation.
+- Use `frontend-design` as the baseline for visible production UI. Use `taste-skill` or `design-consultation` only when direction itself is the requested deliverable or blocks implementation.

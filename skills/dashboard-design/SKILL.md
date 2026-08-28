@@ -1,6 +1,6 @@
 ---
 name: dashboard-design
-description: Design decision-focused product, analytics, executive, and operational dashboards through metric ownership, KPI hierarchy, comparison baselines, freshness, visual encoding, drill-down, anomaly context, and responsive layout. Use when planning or reviewing dashboard information architecture, KPI panels, monitoring views, reporting surfaces, or card-based overview screens.
+description: Visible dashboard UI changes require frontend-design plus this dashboard specialist. Use for planning, building, modifying, or reviewing KPI hierarchy, comparisons, freshness, visual encoding, drill-down, anomaly context, states, and responsive layout.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -8,6 +8,8 @@ metadata:
 ---
 
 # Dashboard Design
+
+For visible dashboard implementation or modification, read frontend-design before planning. Use this Skill for dashboard decision structure and visual encoding; use it alone for direction or review that does not change production UI.
 
 ## Workflow
 

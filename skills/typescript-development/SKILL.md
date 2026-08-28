@@ -1,6 +1,6 @@
 ---
 name: typescript-development
-description: Write, modify, fix, review, refactor, and type-check TypeScript code, modules, libraries, services, and applications. Use as the primary TypeScript implementation and routing skill whenever work mentions TypeScript, .ts, .tsx, tsconfig, strict mode, tsc or vue-tsc errors, generics, interfaces, unions, or typed public APIs; then load only the framework, testing, debugging, or refactoring skill that materially owns the remaining work.
+description: Visible .tsx or browser UI changes require frontend-design plus this TypeScript specialist. Use for writing, modifying, fixing, reviewing, refactoring, or type-checking TypeScript, .ts, .tsx, tsconfig, tsc, vue-tsc, strict mode, or typed APIs; server, CLI, and library-only work does not require frontend-design.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -29,6 +29,8 @@ Keep this skill responsible for supported TypeScript versions, compiler configur
 - A required RED-GREEN-REFACTOR cycle: `test-driven-development`.
 
 Do not load every related skill. Keep TypeScript as the shared implementation baseline and select the smallest specialist set justified by the request.
+
+For visible browser UI, components, styling, layout, controls, or interaction presentation, always add frontend-design as the UI implementation baseline.
 
 ## When To Use
 
