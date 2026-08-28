@@ -16,12 +16,12 @@ Turn current market evidence into a decision-ready recommendation.
 
 ## Workflow
 
-1. Define the decision, target audience, geography, time horizon, market boundary, and excluded questions.
+1. Define the decision, target audience, geography, language, units or currency, as-of date, time horizon, market boundary, and excluded questions.
 2. Convert the decision into falsifiable research questions and evidence requirements.
 3. Collect primary and current sources before relying on commentary, aggregators, or vendor claims.
-4. Build a claim-to-source ledger. Separate observed facts, estimates, interpretations, and recommendations.
+4. Build a claim-to-source ledger with canonical locators, evidence-family lineage, relevant dates, support or contradiction status, and a limitation for every material claim. Separate observed facts, estimates, interpretations, and recommendations.
 5. Compare customer signals, alternatives, competitors, switching constraints, and evidence against the status quo.
-6. Resolve conflicts by checking definitions, dates, methodology, sample, incentives, and market boundary.
+6. Resolve conflicts by checking definitions, publication, update, observation, measurement, and requested as-of dates, methodology, sample, source lineage, incentives, and market boundary.
 7. Produce a decision memo with confidence, missing evidence, downside risks, and the next reversible action.
 
 ## Decision Memo
@@ -37,11 +37,13 @@ Include:
 
 ## Evidence Rules
 
-- Preserve URLs, publication dates, measurement periods, definitions, and material methodology limits.
+- Preserve canonical URLs, publishers, precise locators, publication and update dates, observation and measurement periods, requested as-of dates, definitions, source lineage, and material methodology limits.
 - Prefer direct customer, regulatory, company, transaction, or first-party product evidence when available.
+- Treat syndications, press rewrites, and summaries of the same announcement, dataset, or study as one evidence family, not independent corroboration.
 - Do not convert a vendor estimate into a verified fact.
 - Do not hide evidence that weakens the preferred recommendation.
 - Recheck time-sensitive claims immediately before a consequential decision.
+- Record a paid, private, blocked, or unavailable source with its reason, allowed fallback, and confidence cap. Do not treat an inaccessible source as proof that the missing fact does not exist.
 
 ## References
 
@@ -52,7 +54,7 @@ Include:
 - Do not perform broad web-search mechanics here; route current-source collection to `web-research-ops`.
 - Do not present TAM, SAM, or SOM without an explicit sizing method and defensible inputs.
 - Do not write campaign copy, a brand voice profile, or an implementation specification inside the research memo.
-- Stop when a required paid source, private customer record, or legal interpretation is unavailable or unauthorized.
+- Stop when a required paid source, private customer record, or legal interpretation is unavailable or unauthorized; report the gap and the smallest reversible next step rather than bypassing access controls.
 
 ## Handoff
 

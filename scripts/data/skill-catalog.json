@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "updated": "2026-07-26T00:00:00Z",
+  "updated": "2026-07-31T00:00:00Z",
   "categories": [
     {
       "id": "workflow-planning",
@@ -143,7 +143,10 @@
         "search",
         "transcript",
         "social",
-        "rss"
+        "rss",
+        "platform-evidence",
+        "provenance",
+        "source-lineage"
       ]
     },
     "agents-sdk-development": {
@@ -3228,7 +3231,11 @@
         "search",
         "research",
         "verification",
-        "sources"
+        "sources",
+        "content-extraction",
+        "query-planning",
+        "freshness",
+        "research-safety"
       ]
     },
     "webapp-testing": {
@@ -3987,6 +3994,10 @@
         {
           "name": "visual-regression-testing",
           "when": "The browser output must be compared against approved visual baselines or machine-readable fidelity criteria."
+        },
+        {
+          "name": "agent-reach-ops",
+          "when": "Evidence must retain native social, video, podcast, code-hosting, or RSS authorship, timestamps, transcript provenance, revision state, and source lineage."
         },
         {
           "name": "web-research-ops",

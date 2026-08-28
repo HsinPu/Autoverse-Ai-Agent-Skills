@@ -2,11 +2,13 @@
   "schema_version": 1,
   "required_skills": [
     "agent-action-governance",
+    "agent-reach-ops",
     "code-review",
     "css-development",
     "frontend-design",
     "image-to-code",
     "javascript-development",
+    "market-research",
     "product-experimentation",
     "product-pitch-writing",
     "prompt-engineering",

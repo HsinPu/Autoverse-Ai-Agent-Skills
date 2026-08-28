@@ -1,0 +1,38 @@
+{
+  "skill_name": "market-research",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Recommend whether to launch a regional SaaS plan after comparing a monthly price in one currency with an annual bundle in another. The decision concerns small businesses in Taiwan and Japan as of this quarter.",
+      "expected_output": "A decision-ready research brief that declares the target segments, geographies, currencies, price basis, requested as-of date, market boundary, decision-changing questions, and stop condition before comparing the offers.",
+      "assertions": [
+        "The response does not compare monthly and annual prices or currencies without an explicit normalization method and assumptions.",
+        "It separates a regional pricing observation from a general demand or willingness-to-pay claim.",
+        "It identifies the primary evidence needed for the launch decision and the status quo alternatives.",
+        "It gives a reversible next validation step rather than inventing a market recommendation."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Assess the claim that three trade articles prove demand for a new workflow product. All three articles repeat a vendor press release, while one independent public dataset reports lower adoption for the relevant customer segment.",
+      "expected_output": "A claim-to-source ledger that groups the three trade articles and the press release into one evidence family, records the independent dataset separately, preserves the counter-evidence, and gives a confidence-labeled demand assessment.",
+      "assertions": [
+        "The response does not count syndicated or repeated press coverage as independent corroboration.",
+        "It records source lineage, relevant dates, scope, methodology, and limitations for the material demand claims.",
+        "It keeps observed adoption data separate from estimates and recommendations.",
+        "It compares the proposed product with the status quo or alternative workflows."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Write a market decision memo when a crucial analyst report is paywalled, its search snippet conflicts with accessible regulatory data, and buying the report has not been authorized.",
+      "expected_output": "A confidence-labeled memo that records the analyst report as unavailable, does not treat a snippet as proof or bypass access control, uses accessible primary evidence within its scope, and names the smallest authorized action that could reduce uncertainty.",
+      "assertions": [
+        "The response records the unavailable evidence, reason, fallback, and confidence cap.",
+        "It does not claim the paywalled report supports or contradicts the decision without access to its actual content.",
+        "It preserves the conflict with accessible evidence rather than smoothing it over.",
+        "It ends with a reversible validation step and does not make an unauthorized purchase, contact, or market commitment."
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "updated": "2026-07-26T00:00:00Z",
+  "updated": "2026-07-31T00:00:00Z",
   "total": 285,
   "categories": [
     {
@@ -169,7 +169,7 @@
     },
     {
       "name": "agent-reach-ops",
-      "description": "Cross-platform web research workflow for searching and reading current content across social, video, code, and RSS sources. Use when the task needs multi-source research, transcripts, or platform-specific web extraction.",
+      "description": "Platform-aware evidence collection for social posts, video and podcast transcripts, code-hosting records, and RSS feeds. Use when research depends on platform-specific authorship, timestamps, revisions, transcripts, mirrors, or access state; hand qualified source records to web-research-ops for cross-source synthesis.",
       "category": "browser-automation",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -179,7 +179,10 @@
         "search",
         "transcript",
         "social",
-        "rss"
+        "rss",
+        "platform-evidence",
+        "provenance",
+        "source-lineage"
       ]
     },
     {
@@ -4930,7 +4933,7 @@
     },
     {
       "name": "web-research-ops",
-      "description": "Web research workflow for finding, checking, and synthesizing current information from the web. Use when a task needs fresh facts, source comparison, or evidence-backed answers from URLs and search results.",
+      "description": "Evidence-first web research workflow for turning a current question into a query plan, direct-source retrieval or page extraction, contradiction checks, and an auditable cited answer. Use when a task needs fresh facts from URLs or search results, multi-source comparison, page or document reading beyond snippets, provider-neutral parallel research, or source-quality and freshness checks; do not use only to summarize supplied text or make a market decision.",
       "category": "research-product",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -4939,7 +4942,11 @@
         "search",
         "research",
         "verification",
-        "sources"
+        "sources",
+        "content-extraction",
+        "query-planning",
+        "freshness",
+        "research-safety"
       ]
     },
     {
@@ -5723,6 +5730,10 @@
         {
           "name": "visual-regression-testing",
           "when": "The browser output must be compared against approved visual baselines or machine-readable fidelity criteria."
+        },
+        {
+          "name": "agent-reach-ops",
+          "when": "Evidence must retain native social, video, podcast, code-hosting, or RSS authorship, timestamps, transcript provenance, revision state, and source lineage."
         },
         {
           "name": "web-research-ops",
