@@ -1,6 +1,6 @@
 ---
 name: python-automation-scripting
-description: Python automation and scripting guide covering command-line tools, filesystem automation, subprocess orchestration, scheduling, and utility scripts. Use when building or refactoring scripts that automate local files, shell commands, batch jobs, or small operational workflows rather than data analysis or web scraping.
+description: Write, modify, fix, and review Python scripts, command-line tools, filesystem automation, subprocess orchestration, scheduled jobs, and small utilities. Use when a Python program automates local files, shell commands, batch work, argparse, Click, Typer, or pathlib rather than data analysis or web scraping; pair with python-development.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -10,6 +10,10 @@ metadata:
 # Python Automation and Scripting
 
 Use this skill when the task is a practical script or CLI that automates repetitive work.
+
+## Python Baseline Gate
+
+Before planning or editing a Python script or CLI, read the sibling [`../python-development/SKILL.md`](../python-development/SKILL.md), even when the runtime omitted it from the initial Skill list. Keep this skill responsible for CLI inputs, filesystem and subprocess side effects, dry-run behavior, and operational safety; keep `python-development` responsible for Python language, module, typing, error, and general implementation decisions.
 
 ## When To Use
 

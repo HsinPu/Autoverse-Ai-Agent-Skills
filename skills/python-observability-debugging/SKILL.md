@@ -1,6 +1,6 @@
 ---
 name: python-observability-debugging
-description: Python observability and debugging guide covering traceback triage, logging investigation, profiling, memory diagnosis, performance troubleshooting, and runtime failure analysis. Use when a Python system is failing, slow, memory-heavy, or hard to diagnose, and the task is to isolate root cause rather than design application code.
+description: Diagnose Python exceptions, tracebacks, failing programs, logging problems, slow code, memory growth, profiling results, and environment-specific runtime behavior. Use when the cause of a Python failure or performance problem is unknown and must be isolated before changing code; hand the confirmed fix to python-development.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -10,6 +10,10 @@ metadata:
 # Python Observability and Debugging
 
 Use this skill when Python code is failing, slow, noisy, or hard to understand in runtime.
+
+## Python Baseline Gate
+
+Read the sibling [`../python-development/SKILL.md`](../python-development/SKILL.md) before planning a Python code fix, even when the runtime omitted it from the initial Skill list. Keep this skill responsible for reproduction, traceback and runtime evidence, profiling, memory, and root-cause isolation; keep `python-development` responsible for the justified production-code change after the cause is confirmed.
 
 ## When To Use
 

@@ -1,6 +1,6 @@
 ---
 name: python-concurrency-patterns
-description: Python concurrency patterns guide covering asyncio coordination, TaskGroup usage, cancellation, backpressure, worker orchestration, and safe parallelism. Use when a Python system needs coordinated concurrent work, controlled fan-out/fan-in, or cancellation-aware task flow rather than general async I/O basics.
+description: Design, implement, fix, and review concurrent Python code using asyncio, TaskGroup, cancellation, timeouts, queues, backpressure, workers, or controlled fan-out and fan-in. Use when coordination and task lifetime are the primary Python concern rather than general async I/O basics; pair with python-development.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -10,6 +10,10 @@ metadata:
 # Python Concurrency Patterns
 
 Use this skill when you need to coordinate concurrent Python work safely.
+
+## Python Baseline Gate
+
+Before planning or editing concurrent Python code, read the sibling [`../python-development/SKILL.md`](../python-development/SKILL.md), even when the runtime omitted it from the initial Skill list. Keep this skill responsible for task lifetime, cancellation, queues, backpressure, and concurrency ownership; keep `python-development` responsible for general async I/O, modules, typing, errors, resources, and implementation conventions.
 
 ## When To Use
 

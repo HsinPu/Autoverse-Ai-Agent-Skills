@@ -41,7 +41,8 @@ Let an observable behavior and its failing test lead each implementation increme
 ## Handoff
 
 - Use `testing-strategy` to choose the appropriate test level, fixtures, and overall test mix.
-- Use the relevant language or framework testing skill for implementation details.
+- Use `python-testing-engineering` for Python RED-GREEN test implementation and `python-development` for the corresponding production-code increment.
+- Use the relevant language or framework testing skill for other implementation details.
 - Use `code-change-workflow` to identify the owner path and affected boundaries before the first cycle.
 - Use `incremental-implementation` when the work requires several independently verified slices.
 - Use `systematic-debugging` when a test fails for an unknown reason or the implementation does not produce the predicted result.

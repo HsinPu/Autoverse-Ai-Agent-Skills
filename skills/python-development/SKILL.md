@@ -1,6 +1,6 @@
 ---
 name: python-development
-description: Python development guide covering project architecture, package layout, PEP 8, typing, docstrings, design patterns, and modern Python tooling such as uv, ruff, pytest, pydantic, async I/O, and FastAPI. Use when designing, writing, reviewing, or refactoring general Python code, choosing package boundaries, or setting up packaging, testing, and toolchain conventions. For dataframe, ETL, notebook, file-based analytics, web page extraction, local automation, backend framework, testing implementation, debugging workflows, package release workflows, concurrency coordination, security hardening, or API client development, use the more specialized Python skills.
+description: Write, modify, fix, review, refactor, and run Python code, modules, packages, and applications. Use as the primary Python implementation and routing skill whenever code work mentions Python, `.py`, `pyproject.toml`, requirements files, or a Python repository; then load only the specialized Python skill needed for backend, automation, tests, debugging, data, scraping, packaging, concurrency, security, or API clients.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -15,6 +15,25 @@ metadata:
 
 若使用者是在問整個 repo 的架構是否合理、要比較目標架構，或需要跨語言/跨框架的遷移計畫，先使用 `project-architecture-review`；再回到本 skill 處理 Python package layout、typing、tooling 與實作細節。
 
+## Python Routing Gate
+
+When the request, repository, or supplied artifact contains Python code, `.py` files, `pyproject.toml`, `requirements*.txt`, `setup.py`, `setup.cfg`, `tox.ini`, `pytest.ini`, or a Python traceback:
+
+1. Read this skill before planning or editing, even when it was omitted from the runtime's initial Skill metadata.
+2. Keep this skill responsible for Python language conventions, package and module boundaries, typing, resource lifetime, errors, general implementation, and toolchain fit.
+3. Add only the specialists that own material concerns in the request; start with the primary concern and avoid unrelated Python skills:
+   - scripts, CLIs, filesystem, subprocess, or batch jobs: `python-automation-scripting`;
+   - Django, Flask, FastAPI, ASGI/WSGI, ORM, migrations, or workers: `python-backend-development`;
+   - pytest, unittest, fixtures, mocks, or test harnesses: `python-testing-engineering`;
+   - tracebacks, runtime failures, profiling, slowness, or memory: `python-observability-debugging`;
+   - pandas, Polars, DuckDB, notebooks, ETL, or file-based datasets: `python-data-engineering`;
+   - requests/httpx scraping, HTML parsing, feeds, or crawling: `python-web-scraping`;
+   - wheels, sdists, build metadata, console entry points, or PyPI: `python-packaging-release`;
+   - asyncio coordination, TaskGroup, cancellation, queues, or backpressure: `python-concurrency-patterns`;
+   - secrets, subprocess or path trust, unsafe deserialization, or dependency hardening: `python-security-hardening`;
+   - HTTP API clients, SDKs, OpenAPI, auth, pagination, retries, or error mapping: `python-api-client-development`.
+4. Do not substitute generic coding guidance for Python-specific implementation decisions, and do not load every Python specialist when one or two owners are sufficient.
+
 ## When To Use
 
 Use this skill when the task is general Python code design, implementation, review, or refactoring.
@@ -25,7 +44,7 @@ Use this skill when the task is general Python code design, implementation, revi
 
 ## Workflow
 
-1. Identify whether the task is general Python or belongs to a more specific Python sub-skill.
+1. Confirm the supported Python versions and select the smallest required specialist through the routing gate.
 2. Inspect project layout, `pyproject.toml`, entry points, tests, and local conventions before editing.
 3. Keep code simple, typed where useful, and consistent with existing package boundaries.
 4. Prefer focused tests and repo-local tools such as pytest, ruff, mypy, or pyright when available.

@@ -1,6 +1,6 @@
 ---
 name: python-testing-engineering
-description: Python testing implementation guide covering pytest fixtures, parametrization, monkeypatching, mocks, async tests, temp paths, capture helpers, and framework-specific adapters. Use when writing, refactoring, or debugging Python tests and test harnesses, or when the task is about how to implement tests rather than choosing the test level.
+description: Write, fix, refactor, and debug Python tests and test harnesses using pytest or unittest, fixtures, parametrization, monkeypatching, mocks, async tests, temp paths, and capture helpers. Use when implementing Python test behavior rather than choosing the overall test level; pair with python-development for production-code changes.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -10,6 +10,10 @@ metadata:
 # Python Testing Engineering
 
 Use this skill when you need to write or improve Python tests.
+
+## Python Baseline Gate
+
+Before planning Python test implementation, read the sibling [`../python-development/SKILL.md`](../python-development/SKILL.md), even when the runtime omitted it from the initial Skill list. Keep this skill responsible for pytest or unittest structure, fixtures, doubles, isolation, and determinism; keep `python-development` responsible for production Python interfaces, package boundaries, typing, and the implementation being exercised.
 
 ## When To Use
 

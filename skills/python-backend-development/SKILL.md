@@ -1,6 +1,6 @@
 ---
 name: python-backend-development
-description: Python backend development guide covering Django, Flask, ASGI/WSGI apps, routers, middleware, settings, ORM, migrations, background workers, and server-side web app structure. Use when building or refactoring Python web backends or DB-backed services, and when the task is framework structure or application flow rather than API contract design.
+description: Build, modify, fix, and review Python web backends and services using Django, Flask, FastAPI, ASGI/WSGI, routers, middleware, ORM, migrations, settings, or background workers. Use when Python server-side application flow or framework structure is the primary concern; pair with python-development for general Python implementation.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -10,6 +10,10 @@ metadata:
 # Python Backend Development
 
 Use this skill when the task is a Python web backend, service, or server-side application.
+
+## Python Baseline Gate
+
+Before planning or editing Python backend code, read the sibling [`../python-development/SKILL.md`](../python-development/SKILL.md), even when the runtime omitted it from the initial Skill list. Keep this skill responsible for server framework structure and request flow; keep `python-development` responsible for Python language, package, typing, error, resource, and general implementation decisions. Add `python-testing-engineering` when Python test implementation is a material part of the request.
 
 ## When To Use
 

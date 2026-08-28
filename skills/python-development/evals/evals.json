@@ -1,0 +1,71 @@
+{
+  "skill_name": "python-development",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Write a Python program that reads a JSON configuration file, validates two required fields, and prints a concise summary. Add a focused test and keep it compatible with the Python version already declared by the project.",
+      "expected_output": "A repository-aware Python implementation that inspects the supported runtime and existing layout, uses python-development as the implementation baseline, preserves explicit validation and error behavior, and adds the smallest focused test.",
+      "assertions": [
+        "The response treats the request as Python implementation work even though no framework or specialist domain is named.",
+        "It inspects or asks for the supported Python version, project layout, and existing test conventions before choosing structure or dependencies.",
+        "It does not replace Python-specific decisions with generic coding advice or another language.",
+        "It does not load unrelated Python specialists merely because they are available."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Create a Python script that recursively renames matching files, supports --dry-run, reports failures, and never follows paths outside the requested root.",
+      "expected_output": "A Python implementation routed through python-development and python-automation-scripting, with explicit CLI inputs, pathlib-based path handling, bounded side effects, dry-run behavior, exit semantics, and focused tests.",
+      "assertions": [
+        "The response selects python-automation-scripting for the CLI and filesystem behavior while retaining python-development for general Python implementation.",
+        "It defines the root boundary, dry-run semantics, collision handling, error reporting, and non-zero failure behavior.",
+        "It does not route the task to python-data-engineering merely because files are processed in a batch.",
+        "It proposes focused tests for path escape, collisions, dry-run, and normal renames."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Add a FastAPI endpoint to an existing Python service, including Pydantic validation, dependency wiring, one failure response, and an integration test.",
+      "expected_output": "A Python backend change routed through python-development and python-backend-development, grounded in the existing application factory or entry point, router structure, Pydantic models, dependency boundary, error contract, and integration-test conventions.",
+      "assertions": [
+        "The response selects python-backend-development because FastAPI and server-side request flow are primary.",
+        "It retains python-development for Python typing, package boundaries, errors, and implementation conventions.",
+        "It inspects the existing app entry point, routers, dependencies, models, and tests before adding a parallel structure.",
+        "It distinguishes backend implementation from any separate public API contract decision."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "A Python pytest case intermittently fails with a traceback from an asyncio task. Diagnose the cause, add a regression test, and then fix it.",
+      "expected_output": "A staged Python debugging and remediation flow that uses python-observability-debugging to establish the cause, python-testing-engineering for the deterministic regression test, and python-development for the justified production-code fix.",
+      "assertions": [
+        "The response does not immediately patch the traceback without reproducing and isolating the asynchronous failure.",
+        "It selects python-observability-debugging for diagnosis and python-testing-engineering for pytest implementation details.",
+        "It returns to python-development only after the owner path and smallest justified code change are known.",
+        "It verifies the original failing case and the nearest affected Python test suite."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Refactor a Python notebook workflow into a repeatable pipeline that joins CSV data, validates key uniqueness, and writes partitioned Parquet output.",
+      "expected_output": "A maintainable Python data workflow routed through python-development and python-data-engineering, with explicit schema, keys, I/O boundaries, deterministic transformations, validation, engine choice, and focused fixtures.",
+      "assertions": [
+        "The response selects python-data-engineering for dataframe, join, validation, and Parquet decisions.",
+        "It retains python-development for module boundaries, typing, packaging, and testable structure.",
+        "It validates uniqueness, row counts, nulls, and output schema instead of only translating notebook cells.",
+        "It does not route the task to spreadsheet-ops because the deliverable is a Python data pipeline rather than a workbook."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Build a reusable Python SDK for an HTTP API with token authentication, pagination, retry limits, timeout configuration, and stable exceptions.",
+      "expected_output": "A Python client library routed through python-development and python-api-client-development, with an explicit transport boundary, typed request and response models, secure token handling, bounded retries, timeout ownership, error mapping, and representative tests.",
+      "assertions": [
+        "The response selects python-api-client-development because the deliverable is a reusable external API client rather than a server.",
+        "It retains python-development for package layout, typing, resource lifetime, and public Python interfaces.",
+        "It treats token handling as a security boundary without loading every Python specialist or exposing a real secret.",
+        "It verifies pagination, retry exhaustion, timeouts, remote error mapping, and normal responses."
+      ]
+    }
+  ]
+}

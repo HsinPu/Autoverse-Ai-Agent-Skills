@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "updated": "2026-07-31T00:00:00Z",
+  "updated": "2026-08-28T00:00:00Z",
   "total": 285,
   "categories": [
     {
@@ -2222,7 +2222,7 @@
     },
     {
       "name": "python-api-client-development",
-      "description": "Python API client and SDK development guide covering OpenAPI-based clients, auth handling, pagination, retries, error mapping, transport setup, and generated client maintenance. Use when building or refactoring a Python client library or SDK that talks to an external HTTP API, including LobeHub OpenAPI-style integrations.",
+      "description": "Build, modify, fix, and review Python HTTP API clients and SDKs with OpenAPI, authentication, pagination, retries, timeouts, error mapping, transport setup, or generated client code. Use when Python code consumes an external API rather than implements the server; pair with python-development.",
       "category": "backend-data",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -2242,7 +2242,7 @@
     },
     {
       "name": "python-automation-scripting",
-      "description": "Python automation and scripting guide covering command-line tools, filesystem automation, subprocess orchestration, scheduling, and utility scripts. Use when building or refactoring scripts that automate local files, shell commands, batch jobs, or small operational workflows rather than data analysis or web scraping.",
+      "description": "Write, modify, fix, and review Python scripts, command-line tools, filesystem automation, subprocess orchestration, scheduled jobs, and small utilities. Use when a Python program automates local files, shell commands, batch work, argparse, Click, Typer, or pathlib rather than data analysis or web scraping; pair with python-development.",
       "category": "software-engineering",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -2262,7 +2262,7 @@
     },
     {
       "name": "python-backend-development",
-      "description": "Python backend development guide covering Django, Flask, ASGI/WSGI apps, routers, middleware, settings, ORM, migrations, background workers, and server-side web app structure. Use when building or refactoring Python web backends or DB-backed services, and when the task is framework structure or application flow rather than API contract design.",
+      "description": "Build, modify, fix, and review Python web backends and services using Django, Flask, FastAPI, ASGI/WSGI, routers, middleware, ORM, migrations, settings, or background workers. Use when Python server-side application flow or framework structure is the primary concern; pair with python-development for general Python implementation.",
       "category": "backend-data",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -2282,7 +2282,7 @@
     },
     {
       "name": "python-concurrency-patterns",
-      "description": "Python concurrency patterns guide covering asyncio coordination, TaskGroup usage, cancellation, backpressure, worker orchestration, and safe parallelism. Use when a Python system needs coordinated concurrent work, controlled fan-out/fan-in, or cancellation-aware task flow rather than general async I/O basics.",
+      "description": "Design, implement, fix, and review concurrent Python code using asyncio, TaskGroup, cancellation, timeouts, queues, backpressure, workers, or controlled fan-out and fan-in. Use when coordination and task lifetime are the primary Python concern rather than general async I/O basics; pair with python-development.",
       "category": "software-engineering",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -2302,7 +2302,7 @@
     },
     {
       "name": "python-data-engineering",
-      "description": "Python data engineering and analytics guide covering dataframe workflows, ETL/ELT pipelines, notebook-to-script promotion, and file formats such as CSV, Parquet, and JSON/NDJSON. Use when the task centers on tabular datasets, cleaning, joins, aggregations, validation, or reproducible data pipelines rather than spreadsheet editing or database schema design.",
+      "description": "Build, modify, fix, and review Python data workflows using pandas, Polars, DuckDB, PyArrow, Jupyter, ETL/ELT, CSV, Parquet, or JSON/NDJSON. Use when Python code centers on datasets, cleaning, joins, aggregations, validation, or reproducible file-based pipelines rather than spreadsheet editing or database schema design; pair with python-development.",
       "category": "backend-data",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -2322,13 +2322,21 @@
     },
     {
       "name": "python-development",
-      "description": "Python development guide covering project architecture, package layout, PEP 8, typing, docstrings, design patterns, and modern Python tooling such as uv, ruff, pytest, pydantic, async I/O, and FastAPI. Use when designing, writing, reviewing, or refactoring general Python code, choosing package boundaries, or setting up packaging, testing, and toolchain conventions. For dataframe, ETL, notebook, file-based analytics, web page extraction, local automation, backend framework, testing implementation, debugging workflows, package release workflows, concurrency coordination, security hardening, or API client development, use the more specialized Python skills.",
+      "description": "Write, modify, fix, review, refactor, and run Python code, modules, packages, and applications. Use as the primary Python implementation and routing skill whenever code work mentions Python, `.py`, `pyproject.toml`, requirements files, or a Python repository; then load only the specialized Python skill needed for backend, automation, tests, debugging, data, scraping, packaging, concurrency, security, or API clients.",
       "category": "software-engineering",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
       "license": "Apache-2.0",
       "tags": [
         "python",
+        "code",
+        "write",
+        "modify",
+        "fix",
+        "program",
+        "script",
+        "implementation",
+        "refactoring",
         "architecture",
         "src-layout",
         "code-style",
@@ -2346,7 +2354,7 @@
     },
     {
       "name": "python-observability-debugging",
-      "description": "Python observability and debugging guide covering traceback triage, logging investigation, profiling, memory diagnosis, performance troubleshooting, and runtime failure analysis. Use when a Python system is failing, slow, memory-heavy, or hard to diagnose, and the task is to isolate root cause rather than design application code.",
+      "description": "Diagnose Python exceptions, tracebacks, failing programs, logging problems, slow code, memory growth, profiling results, and environment-specific runtime behavior. Use when the cause of a Python failure or performance problem is unknown and must be isolated before changing code; hand the confirmed fix to python-development.",
       "category": "testing-quality",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -2366,7 +2374,7 @@
     },
     {
       "name": "python-packaging-release",
-      "description": "Python packaging and release engineering guide covering build backends, wheels, sdists, versioning, console scripts, publishing, and release workflows. Use when packaging a Python project for installation or distribution, choosing build metadata, or preparing a release to PyPI or another artifact target.",
+      "description": "Package, install, version, build, and release Python projects using pyproject.toml, build backends, wheels, sdists, console scripts, PyPI, or internal artifact targets. Use when Python distribution metadata, installability, artifacts, publishing, or release verification is the primary concern; pair with python-development.",
       "category": "software-engineering",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -2386,7 +2394,7 @@
     },
     {
       "name": "python-security-hardening",
-      "description": "Python security hardening guide covering secrets handling, unsafe deserialization, subprocess and filesystem boundaries, network trust boundaries, and supply-chain hygiene. Use when writing or reviewing Python code with security-sensitive inputs, dependencies, or execution boundaries, and when the task is to harden implementation details rather than review a diff for security findings.",
+      "description": "Harden Python code that handles secrets, untrusted input, deserialization, subprocesses, filesystem paths, network boundaries, or dependencies. Use when writing or changing security-sensitive Python implementation details rather than performing a findings-only security review; pair with python-development and the owning Python specialist.",
       "category": "security-governance",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -2406,7 +2414,7 @@
     },
     {
       "name": "python-testing-engineering",
-      "description": "Python testing implementation guide covering pytest fixtures, parametrization, monkeypatching, mocks, async tests, temp paths, capture helpers, and framework-specific adapters. Use when writing, refactoring, or debugging Python tests and test harnesses, or when the task is about how to implement tests rather than choosing the test level.",
+      "description": "Write, fix, refactor, and debug Python tests and test harnesses using pytest or unittest, fixtures, parametrization, monkeypatching, mocks, async tests, temp paths, and capture helpers. Use when implementing Python test behavior rather than choosing the overall test level; pair with python-development for production-code changes.",
       "category": "testing-quality",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -2426,7 +2434,7 @@
     },
     {
       "name": "python-web-scraping",
-      "description": "Python web scraping and HTML extraction guide covering requests/httpx, HTML parsing, pagination, normalization, retries, and polite crawling of static or lightly dynamic sites. Use when collecting data from web pages, feeds, or HTML documents, and when the task is extraction rather than browser UI testing or general Python architecture.",
+      "description": "Build, modify, fix, and review Python web scrapers and extractors using requests, httpx, BeautifulSoup, lxml, XPath, pagination, feeds, normalization, retries, or polite crawling. Use when Python code collects structured data from static or lightly dynamic HTML rather than driving a browser; pair with python-development.",
       "category": "browser-automation",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -5398,6 +5406,57 @@
         {
           "name": "threejs-visual-validation",
           "when": "The result needs fixed cameras, seeds, times, no-post baselines, diagnostic captures, distance and temporal sweeps, GPU budgets, or visual regression evidence."
+        }
+      ]
+    },
+    {
+      "id": "python-development",
+      "title": "Python Implementation and Specialist Routing",
+      "decision": "Use python-development as the baseline for Python code work, then add only the specialist that owns the primary backend, automation, testing, debugging, data, scraping, packaging, concurrency, security, or API-client concern.",
+      "skills": [
+        {
+          "name": "python-development",
+          "when": "The task creates, modifies, fixes, reviews, refactors, or runs general Python code, modules, packages, applications, .py files, or Python project configuration."
+        },
+        {
+          "name": "python-automation-scripting",
+          "when": "The Python deliverable is a script, CLI, filesystem utility, subprocess wrapper, scheduled job, or small batch automation."
+        },
+        {
+          "name": "python-backend-development",
+          "when": "The Python code is a Django, Flask, FastAPI, ASGI/WSGI, ORM-backed, migration-aware, worker, or other server-side application."
+        },
+        {
+          "name": "python-testing-engineering",
+          "when": "The task writes or fixes Python tests, pytest or unittest fixtures, parametrization, mocks, async tests, temporary paths, or test harnesses."
+        },
+        {
+          "name": "python-observability-debugging",
+          "when": "A Python exception, traceback, failing runtime, logging problem, performance regression, memory growth, or environment-specific symptom needs diagnosis."
+        },
+        {
+          "name": "python-data-engineering",
+          "when": "The Python work centers on pandas, Polars, DuckDB, PyArrow, notebooks, ETL/ELT, tabular data, CSV, Parquet, or file-based data pipelines."
+        },
+        {
+          "name": "python-web-scraping",
+          "when": "The Python work collects structured data through requests, httpx, BeautifulSoup, lxml, XPath, feeds, pagination, or static HTML crawling."
+        },
+        {
+          "name": "python-packaging-release",
+          "when": "The task concerns Python build metadata, pyproject.toml, wheels, sdists, console entry points, installation, versioning, PyPI, or release artifacts."
+        },
+        {
+          "name": "python-concurrency-patterns",
+          "when": "The Python code coordinates asyncio tasks, TaskGroup, cancellation, timeouts, queues, backpressure, workers, or bounded parallelism."
+        },
+        {
+          "name": "python-security-hardening",
+          "when": "The Python implementation handles secrets, untrusted deserialization, subprocesses, filesystem paths, network boundaries, or dependency and supply-chain risk."
+        },
+        {
+          "name": "python-api-client-development",
+          "when": "The Python deliverable is an HTTP API client or SDK with OpenAPI, auth, pagination, retries, timeouts, transport configuration, or error mapping."
         }
       ]
     },

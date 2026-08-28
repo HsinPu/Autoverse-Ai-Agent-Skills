@@ -24,6 +24,7 @@ Use this as the default first skill for existing-code changes. It answers: what 
 - Start here for existing-code edits before choosing language, framework, refactoring, or testing details.
 - If the inspection shows the change is broad, risky, or multi-step, add `incremental-implementation` to split the work into verified slices.
 - If the requested change is behavior-preserving cleanup, use `code-refactoring` for the refactor rules after the current behavior and verification path are known.
+- When the target contains Python code, `.py`, `pyproject.toml`, requirements files, Python package metadata, or a Python traceback, read `python-development` before planning the implementation and let its routing gate select the smallest required Python specialist.
 - Use stack-specific skills only after the owner code path is understood.
 - Use `code-review` or `security-code-review` instead when the task is only to review an existing diff.
 

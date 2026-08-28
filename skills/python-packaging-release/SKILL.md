@@ -1,6 +1,6 @@
 ---
 name: python-packaging-release
-description: Python packaging and release engineering guide covering build backends, wheels, sdists, versioning, console scripts, publishing, and release workflows. Use when packaging a Python project for installation or distribution, choosing build metadata, or preparing a release to PyPI or another artifact target.
+description: Package, install, version, build, and release Python projects using pyproject.toml, build backends, wheels, sdists, console scripts, PyPI, or internal artifact targets. Use when Python distribution metadata, installability, artifacts, publishing, or release verification is the primary concern; pair with python-development.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -10,6 +10,10 @@ metadata:
 # Python Packaging and Release
 
 Use this skill when a Python project needs to be packaged, versioned, or released.
+
+## Python Baseline Gate
+
+Before changing Python packaging or release configuration, read the sibling [`../python-development/SKILL.md`](../python-development/SKILL.md), even when the runtime omitted it from the initial Skill list. Keep this skill responsible for build metadata, distribution artifacts, entry points, versioning, publishing, and installed-artifact proof; keep `python-development` responsible for package and import structure, supported runtimes, and implementation compatibility.
 
 ## When To Use
 

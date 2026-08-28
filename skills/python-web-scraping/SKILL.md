@@ -1,6 +1,6 @@
 ---
 name: python-web-scraping
-description: Python web scraping and HTML extraction guide covering requests/httpx, HTML parsing, pagination, normalization, retries, and polite crawling of static or lightly dynamic sites. Use when collecting data from web pages, feeds, or HTML documents, and when the task is extraction rather than browser UI testing or general Python architecture.
+description: Build, modify, fix, and review Python web scrapers and extractors using requests, httpx, BeautifulSoup, lxml, XPath, pagination, feeds, normalization, retries, or polite crawling. Use when Python code collects structured data from static or lightly dynamic HTML rather than driving a browser; pair with python-development.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -10,6 +10,10 @@ metadata:
 # Python Web Scraping
 
 Use this skill when the goal is to extract structured data from web pages, feeds, or HTML documents.
+
+## Python Baseline Gate
+
+Before planning or editing a Python scraper, read the sibling [`../python-development/SKILL.md`](../python-development/SKILL.md), even when the runtime omitted it from the initial Skill list. Keep this skill responsible for fetch, parse, pagination, normalization, retry, deduplication, and crawl behavior; keep `python-development` responsible for Python modules, typing, errors, resource lifetime, package boundaries, and general implementation.
 
 ## When To Use
 

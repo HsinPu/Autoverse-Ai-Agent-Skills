@@ -1,6 +1,6 @@
 ---
 name: python-security-hardening
-description: Python security hardening guide covering secrets handling, unsafe deserialization, subprocess and filesystem boundaries, network trust boundaries, and supply-chain hygiene. Use when writing or reviewing Python code with security-sensitive inputs, dependencies, or execution boundaries, and when the task is to harden implementation details rather than review a diff for security findings.
+description: Harden Python code that handles secrets, untrusted input, deserialization, subprocesses, filesystem paths, network boundaries, or dependencies. Use when writing or changing security-sensitive Python implementation details rather than performing a findings-only security review; pair with python-development and the owning Python specialist.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -10,6 +10,10 @@ metadata:
 # Python Security Hardening
 
 Use this skill when Python code needs secure-by-default implementation choices.
+
+## Python Baseline Gate
+
+Before planning or editing security-sensitive Python code, read the sibling [`../python-development/SKILL.md`](../python-development/SKILL.md), even when the runtime omitted it from the initial Skill list. Keep this skill responsible for trust boundaries, dangerous primitives, secrets, paths, subprocesses, dependencies, and secure defaults; keep `python-development` responsible for the surrounding Python design and implementation.
 
 ## When To Use
 

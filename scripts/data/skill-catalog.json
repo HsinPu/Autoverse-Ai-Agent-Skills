@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "updated": "2026-07-31T00:00:00Z",
+  "updated": "2026-08-28T00:00:00Z",
   "categories": [
     {
       "id": "workflow-planning",
@@ -1573,6 +1573,14 @@
       "category": "software-engineering",
       "tags": [
         "python",
+        "code",
+        "write",
+        "modify",
+        "fix",
+        "program",
+        "script",
+        "implementation",
+        "refactoring",
         "architecture",
         "src-layout",
         "code-style",
@@ -3662,6 +3670,57 @@
         {
           "name": "threejs-visual-validation",
           "when": "The result needs fixed cameras, seeds, times, no-post baselines, diagnostic captures, distance and temporal sweeps, GPU budgets, or visual regression evidence."
+        }
+      ]
+    },
+    {
+      "id": "python-development",
+      "title": "Python Implementation and Specialist Routing",
+      "decision": "Use python-development as the baseline for Python code work, then add only the specialist that owns the primary backend, automation, testing, debugging, data, scraping, packaging, concurrency, security, or API-client concern.",
+      "skills": [
+        {
+          "name": "python-development",
+          "when": "The task creates, modifies, fixes, reviews, refactors, or runs general Python code, modules, packages, applications, .py files, or Python project configuration."
+        },
+        {
+          "name": "python-automation-scripting",
+          "when": "The Python deliverable is a script, CLI, filesystem utility, subprocess wrapper, scheduled job, or small batch automation."
+        },
+        {
+          "name": "python-backend-development",
+          "when": "The Python code is a Django, Flask, FastAPI, ASGI/WSGI, ORM-backed, migration-aware, worker, or other server-side application."
+        },
+        {
+          "name": "python-testing-engineering",
+          "when": "The task writes or fixes Python tests, pytest or unittest fixtures, parametrization, mocks, async tests, temporary paths, or test harnesses."
+        },
+        {
+          "name": "python-observability-debugging",
+          "when": "A Python exception, traceback, failing runtime, logging problem, performance regression, memory growth, or environment-specific symptom needs diagnosis."
+        },
+        {
+          "name": "python-data-engineering",
+          "when": "The Python work centers on pandas, Polars, DuckDB, PyArrow, notebooks, ETL/ELT, tabular data, CSV, Parquet, or file-based data pipelines."
+        },
+        {
+          "name": "python-web-scraping",
+          "when": "The Python work collects structured data through requests, httpx, BeautifulSoup, lxml, XPath, feeds, pagination, or static HTML crawling."
+        },
+        {
+          "name": "python-packaging-release",
+          "when": "The task concerns Python build metadata, pyproject.toml, wheels, sdists, console entry points, installation, versioning, PyPI, or release artifacts."
+        },
+        {
+          "name": "python-concurrency-patterns",
+          "when": "The Python code coordinates asyncio tasks, TaskGroup, cancellation, timeouts, queues, backpressure, workers, or bounded parallelism."
+        },
+        {
+          "name": "python-security-hardening",
+          "when": "The Python implementation handles secrets, untrusted deserialization, subprocesses, filesystem paths, network boundaries, or dependency and supply-chain risk."
+        },
+        {
+          "name": "python-api-client-development",
+          "when": "The Python deliverable is an HTTP API client or SDK with OpenAPI, auth, pagination, retries, timeouts, transport configuration, or error mapping."
         }
       ]
     },

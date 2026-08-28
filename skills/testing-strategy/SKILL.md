@@ -34,4 +34,5 @@ Use this skill when deciding what to test and at which level.
 - For an independent gate over completed implementation and test evidence, use `pipeline-review`.
 - For fresh proof immediately before a completion claim, use `verification-before-completion`.
 - For team-wide code conventions, use `coding-standards`.
-- For language-specific test practices, use the relevant language skill.
+- For Python test implementation, fixtures, mocks, async tests, and pytest or unittest details, use `python-testing-engineering`; pair it with `python-development` when production Python code also changes.
+- For other language-specific test practices, use the relevant language skill.

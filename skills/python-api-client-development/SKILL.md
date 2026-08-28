@@ -1,6 +1,6 @@
 ---
 name: python-api-client-development
-description: Python API client and SDK development guide covering OpenAPI-based clients, auth handling, pagination, retries, error mapping, transport setup, and generated client maintenance. Use when building or refactoring a Python client library or SDK that talks to an external HTTP API, including LobeHub OpenAPI-style integrations.
+description: Build, modify, fix, and review Python HTTP API clients and SDKs with OpenAPI, authentication, pagination, retries, timeouts, error mapping, transport setup, or generated client code. Use when Python code consumes an external API rather than implements the server; pair with python-development.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -10,6 +10,10 @@ metadata:
 # Python API Client Development
 
 Use this skill when the task is to build or maintain a Python SDK or HTTP API client.
+
+## Python Baseline Gate
+
+Before planning or editing a Python client or SDK, read the sibling [`../python-development/SKILL.md`](../python-development/SKILL.md), even when the runtime omitted it from the initial Skill list. Keep this skill responsible for transport, auth, pagination, retries, timeouts, serialization, and remote error mapping; keep `python-development` responsible for package layout, typing, public Python interfaces, resource lifetime, and general implementation.
 
 ## When To Use
 

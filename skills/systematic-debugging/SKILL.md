@@ -43,7 +43,8 @@ Establish the causal failure before changing production behavior.
 
 - Use `terminal-ops` to run commands and preserve exact repository evidence.
 - Use `agent-introspection-debugging` when the failing system is an agent run and model, tool, handoff, guardrail, retrieval, or context traces must be reconstructed.
-- Use the relevant stack-specific debugging skill for framework or runtime techniques.
+- Use `python-observability-debugging` for Python tracebacks, runtime diagnostics, profiling, memory, and performance techniques; after confirming the cause, use `python-development` for the implementation fix.
+- Use the relevant stack-specific debugging skill for other framework or runtime techniques.
 - Use `code-change-workflow` after the owner path and justified fix are known.
 - Use `test-driven-development` to add the regression test and implement the fix in a red-green cycle.
 - Use `verification-before-completion` after remediation to prove the original failure and adjacent checks now pass.
