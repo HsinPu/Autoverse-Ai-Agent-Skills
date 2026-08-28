@@ -823,6 +823,33 @@ try {
     $configPath = Join-Path $env:CODEX_HOME "config.toml"
     New-Item -ItemType Directory -Force -Path $env:CODEX_HOME | Out-Null
     Write-Utf8NoBom -Path $configPath -Text @"
+# CRAFTROSTER_AUTO_DELEGATION_END
+model = "test-model"
+
+developer_instructions = '''
+Existing instructions that must remain untouched.
+'''
+"@
+    $malformedMarkerHash = Get-Sha256Hex -Path $configPath
+    Invoke-ExpectedFailure -Label "Codex malformed auto-delegation marker diagnostics" -ExpectedMessage "START=0 at lines none; END=1 at lines 1" -InstallerArgs @(
+        "-Target", "codex", "-Type", "agent", "-Name", "debugger", "-SourceDir", $repoRoot, "-EnableAutoDelegation", "-Force"
+    )
+    Assert-Equal (Get-Sha256Hex -Path $configPath) $malformedMarkerHash "Codex malformed marker refusal config hash"
+
+    Write-Utf8NoBom -Path $configPath -Text @"
+model = "test-model"
+
+developer_instructions = '''
+Existing instructions that must remain untouched.
+'''
+"@
+    $existingInstructionsHash = Get-Sha256Hex -Path $configPath
+    Invoke-ExpectedFailure -Label "Codex existing developer instructions recovery guidance" -ExpectedMessage "rerun without -EnableAutoDelegation" -InstallerArgs @(
+        "-Target", "codex", "-Type", "agent", "-Name", "debugger", "-SourceDir", $repoRoot, "-EnableAutoDelegation", "-Force"
+    )
+    Assert-Equal (Get-Sha256Hex -Path $configPath) $existingInstructionsHash "Codex existing instructions refusal config hash"
+
+    Write-Utf8NoBom -Path $configPath -Text @"
 # AUTOVERSE_AUTO_DELEGATION_START
 developer_instructions = '''
 Legacy managed guidance that must be replaced.

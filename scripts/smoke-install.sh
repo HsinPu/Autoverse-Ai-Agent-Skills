@@ -895,6 +895,31 @@ mv "$AUTO_RESTORE_TEMP" "$CODEX_HOME/config.toml"
 export CODEX_HOME="$AUTO_NORMAL_CODEX_HOME"
 mkdir -p "$CODEX_HOME"
 cat > "$CODEX_HOME/config.toml" <<'EOF'
+# CRAFTROSTER_AUTO_DELEGATION_END
+model = "test-model"
+
+developer_instructions = '''
+Existing instructions that must remain untouched.
+'''
+EOF
+MALFORMED_MARKER_CHECKSUM="$(cksum < "$CODEX_HOME/config.toml")"
+expect_failure "Codex malformed auto-delegation marker diagnostics" "START=0 at lines none; END=1 at lines 1" \
+  --target codex --type agent --name debugger --source-dir "$REPO_ROOT" --enable-auto-delegation --force
+assert_equal "$(cksum < "$CODEX_HOME/config.toml")" "$MALFORMED_MARKER_CHECKSUM" "Codex malformed marker refusal config checksum"
+
+cat > "$CODEX_HOME/config.toml" <<'EOF'
+model = "test-model"
+
+developer_instructions = '''
+Existing instructions that must remain untouched.
+'''
+EOF
+EXISTING_INSTRUCTIONS_CHECKSUM="$(cksum < "$CODEX_HOME/config.toml")"
+expect_failure "Codex existing developer instructions recovery guidance" "rerun without --enable-auto-delegation" \
+  --target codex --type agent --name debugger --source-dir "$REPO_ROOT" --enable-auto-delegation --force
+assert_equal "$(cksum < "$CODEX_HOME/config.toml")" "$EXISTING_INSTRUCTIONS_CHECKSUM" "Codex existing instructions refusal config checksum"
+
+cat > "$CODEX_HOME/config.toml" <<'EOF'
 # AUTOVERSE_AUTO_DELEGATION_START
 developer_instructions = '''
 Legacy managed guidance that must be replaced.

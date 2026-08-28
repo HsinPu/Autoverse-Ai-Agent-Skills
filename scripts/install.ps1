@@ -1908,6 +1908,16 @@ function Test-CodexDeveloperInstructionsConflict {
     return $false
 }
 
+function Get-RegexMatchLineNumbersText {
+    param([string]$Text, [string]$Pattern)
+    $lineNumbers = @()
+    foreach ($match in [regex]::Matches($Text, $Pattern)) {
+        $lineNumbers += 1 + [regex]::Matches($Text.Substring(0, $match.Index), "`n").Count
+    }
+    if ($lineNumbers.Count -eq 0) { return "none" }
+    return ($lineNumbers -join ",")
+}
+
 function Get-CodexAutoDelegationPlan {
     param([string]$Guidance)
     $configPath = Join-Path (Get-CodexHome) "config.toml"
@@ -1926,20 +1936,24 @@ function Get-CodexAutoDelegationPlan {
     $endCount = [regex]::Matches($text, $endPattern).Count
     $legacyStartCount = [regex]::Matches($text, $legacyStartPattern).Count
     $legacyEndCount = [regex]::Matches($text, $legacyEndPattern).Count
+    $startLines = Get-RegexMatchLineNumbersText -Text $text -Pattern $startPattern
+    $endLines = Get-RegexMatchLineNumbersText -Text $text -Pattern $endPattern
+    $legacyStartLines = Get-RegexMatchLineNumbersText -Text $text -Pattern $legacyStartPattern
+    $legacyEndLines = Get-RegexMatchLineNumbersText -Text $text -Pattern $legacyEndPattern
     if ($startCount -ne $endCount -or $startCount -gt 1) {
-        throw "Refusing to edit $configPath because its CraftRoster auto-delegation markers are incomplete or duplicated."
+        throw "Refusing to edit $configPath because its CraftRoster auto-delegation markers are incomplete or duplicated (START=$startCount at lines $startLines; END=$endCount at lines $endLines). Back up config.toml and reconcile only these reserved marker lines. If the file contains developer_instructions you need to preserve, rerun without -EnableAutoDelegation. -Force does not bypass this config safety check."
     }
     if ($legacyStartCount -ne $legacyEndCount -or $legacyStartCount -gt 1) {
-        throw "Refusing to edit $configPath because its legacy auto-delegation markers are incomplete or duplicated."
+        throw "Refusing to edit $configPath because its legacy auto-delegation markers are incomplete or duplicated (START=$legacyStartCount at lines $legacyStartLines; END=$legacyEndCount at lines $legacyEndLines). Back up config.toml and reconcile only these reserved marker lines. If the file contains developer_instructions you need to preserve, rerun without -EnableAutoDelegation. -Force does not bypass this config safety check."
     }
     if ($startCount -eq 1 -and $legacyStartCount -eq 1) {
-        throw "Refusing to edit $configPath because it contains both CraftRoster and legacy auto-delegation blocks. Reconcile the duplicate guidance manually."
+        throw "Refusing to edit $configPath because it contains both CraftRoster and legacy auto-delegation blocks (CraftRoster START/END lines $startLines/$endLines; legacy START/END lines $legacyStartLines/$legacyEndLines). Back up config.toml and reconcile the duplicate guidance manually, or rerun without -EnableAutoDelegation. -Force does not bypass this config safety check."
     }
     if ($startCount -eq 1 -and -not [regex]::IsMatch($text, '\A# CRAFTROSTER_AUTO_DELEGATION_START\s*\r?\n')) {
-        throw "Refusing to edit $configPath because the CraftRoster marker is not a managed block at the start of the file."
+        throw "Refusing to edit $configPath because the CraftRoster marker is at line $startLines instead of the start of the file. Back up config.toml and reconcile the managed block manually, or rerun without -EnableAutoDelegation. -Force does not bypass this config safety check."
     }
     if ($legacyStartCount -eq 1 -and -not [regex]::IsMatch($text, '\A# AUTOVERSE_AUTO_DELEGATION_START\s*\r?\n')) {
-        throw "Refusing to edit $configPath because the legacy marker is not a managed block at the start of the file."
+        throw "Refusing to edit $configPath because the legacy marker is at line $legacyStartLines instead of the start of the file. Back up config.toml and reconcile the managed block manually, or rerun without -EnableAutoDelegation. -Force does not bypass this config safety check."
     }
 
     $newLine = if ($text.Contains("`r`n")) { "`r`n" } else { "`n" }
@@ -1962,20 +1976,20 @@ function Get-CodexAutoDelegationPlan {
         $managedMatch = [regex]::Match($text, $managedPattern)
         if (-not $managedMatch.Success) {
             $managedLabel = if ($isLegacyMigration) { "legacy" } else { "CraftRoster" }
-            throw "Refusing to edit $configPath because its $managedLabel managed block has an unexpected structure."
+            throw "Refusing to edit $configPath because its $managedLabel managed block has an unexpected structure. Back up config.toml and reconcile the block manually, or rerun without -EnableAutoDelegation. -Force does not bypass this config safety check."
         }
         if ([regex]::Matches($managedMatch.Value, "(?m)^'''[^\S\r\n]*$").Count -ne 1) {
             $managedLabel = if ($isLegacyMigration) { "legacy" } else { "CraftRoster" }
-            throw "Refusing to edit $configPath because its $managedLabel managed block has an unexpected structure."
+            throw "Refusing to edit $configPath because its $managedLabel managed block has an unexpected structure. Back up config.toml and reconcile the block manually, or rerun without -EnableAutoDelegation. -Force does not bypass this config safety check."
         }
         $remainder = $text.Substring($managedMatch.Length)
         if (Test-CodexDeveloperInstructionsConflict -Text $remainder) {
-            throw "Refusing to edit $configPath because it also defines developer_instructions outside the CraftRoster managed block. Merge the guidance manually."
+            throw "Refusing to edit $configPath because it also defines developer_instructions outside the CraftRoster managed block. Merge the guidance manually, or rerun without -EnableAutoDelegation to preserve the existing instructions. -Force does not bypass this config safety check."
         }
         $newText = $block + $newLine + $remainder
     } else {
         if (Test-CodexDeveloperInstructionsConflict -Text $text) {
-            throw "Refusing to edit $configPath because it already defines developer_instructions outside the CraftRoster managed block. Merge the guidance manually."
+            throw "Refusing to edit $configPath because it already defines developer_instructions outside the CraftRoster managed block. Merge the guidance manually, or rerun without -EnableAutoDelegation to preserve the existing instructions. -Force does not bypass this config safety check."
         }
         $newText = if ($text) { $block + $newLine + $newLine + $text } else { $block + $newLine }
     }

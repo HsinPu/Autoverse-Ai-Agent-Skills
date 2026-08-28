@@ -1831,8 +1831,21 @@ has_codex_developer_instructions_conflict() {
   ' "$file"
 }
 
+marker_line_numbers() {
+  local file="$1" marker="$2"
+  awk -v marker="$marker" '
+    {
+      line = $0
+      sub(/\r$/, "", line)
+      sub(/[ \t]+$/, "", line)
+      if (line == marker) lines = lines (lines ? "," : "") NR
+    }
+    END { print(lines ? lines : "none") }
+  ' "$file"
+}
+
 plan_codex_auto_delegation() {
-  local guidance_file="$1" config_path start_count end_count legacy_start_count legacy_end_count end_line block_file remainder_file second_line closing_line literal_close_count bom
+  local guidance_file="$1" config_path start_count end_count legacy_start_count legacy_end_count start_lines end_lines legacy_start_lines legacy_end_lines end_line block_file remainder_file second_line closing_line literal_close_count bom
   local managed_end_pattern managed_label is_legacy_migration=0
   config_path="${CODEX_HOME:-$HOME/.codex}/config.toml"
   AUTO_SIBLING_PATH=""
@@ -1874,24 +1887,28 @@ plan_codex_auto_delegation() {
   end_count="$(grep -c '^# CRAFTROSTER_AUTO_DELEGATION_END[[:space:]]*$' "$AUTO_ORIGINAL_FILE" || true)"
   legacy_start_count="$(grep -c '^# AUTOVERSE_AUTO_DELEGATION_START[[:space:]]*$' "$AUTO_ORIGINAL_FILE" || true)"
   legacy_end_count="$(grep -c '^# AUTOVERSE_AUTO_DELEGATION_END[[:space:]]*$' "$AUTO_ORIGINAL_FILE" || true)"
+  start_lines="$(marker_line_numbers "$AUTO_ORIGINAL_FILE" '# CRAFTROSTER_AUTO_DELEGATION_START')"
+  end_lines="$(marker_line_numbers "$AUTO_ORIGINAL_FILE" '# CRAFTROSTER_AUTO_DELEGATION_END')"
+  legacy_start_lines="$(marker_line_numbers "$AUTO_ORIGINAL_FILE" '# AUTOVERSE_AUTO_DELEGATION_START')"
+  legacy_end_lines="$(marker_line_numbers "$AUTO_ORIGINAL_FILE" '# AUTOVERSE_AUTO_DELEGATION_END')"
   if [[ "$start_count" -ne "$end_count" || "$start_count" -gt 1 ]]; then
-    log_error "Refusing to edit $config_path because its CraftRoster auto-delegation markers are incomplete or duplicated."
+    log_error "Refusing to edit $config_path because its CraftRoster auto-delegation markers are incomplete or duplicated (START=$start_count at lines $start_lines; END=$end_count at lines $end_lines). Back up config.toml and reconcile only these reserved marker lines. If the file contains developer_instructions you need to preserve, rerun without --enable-auto-delegation. --force does not bypass this config safety check."
     exit 1
   fi
   if [[ "$legacy_start_count" -ne "$legacy_end_count" || "$legacy_start_count" -gt 1 ]]; then
-    log_error "Refusing to edit $config_path because its legacy auto-delegation markers are incomplete or duplicated."
+    log_error "Refusing to edit $config_path because its legacy auto-delegation markers are incomplete or duplicated (START=$legacy_start_count at lines $legacy_start_lines; END=$legacy_end_count at lines $legacy_end_lines). Back up config.toml and reconcile only these reserved marker lines. If the file contains developer_instructions you need to preserve, rerun without --enable-auto-delegation. --force does not bypass this config safety check."
     exit 1
   fi
   if [[ "$start_count" -eq 1 && "$legacy_start_count" -eq 1 ]]; then
-    log_error "Refusing to edit $config_path because it contains both CraftRoster and legacy auto-delegation blocks. Reconcile the duplicate guidance manually."
+    log_error "Refusing to edit $config_path because it contains both CraftRoster and legacy auto-delegation blocks (CraftRoster START/END lines $start_lines/$end_lines; legacy START/END lines $legacy_start_lines/$legacy_end_lines). Back up config.toml and reconcile the duplicate guidance manually, or rerun without --enable-auto-delegation. --force does not bypass this config safety check."
     exit 1
   fi
   if [[ "$start_count" -eq 1 && "$(head -n 1 "$AUTO_ORIGINAL_FILE" | tr -d '\r')" != "# CRAFTROSTER_AUTO_DELEGATION_START" ]]; then
-    log_error "Refusing to edit $config_path because the CraftRoster marker is not a managed block at the start of the file."
+    log_error "Refusing to edit $config_path because the CraftRoster marker is at line $start_lines instead of the start of the file. Back up config.toml and reconcile the managed block manually, or rerun without --enable-auto-delegation. --force does not bypass this config safety check."
     exit 1
   fi
   if [[ "$legacy_start_count" -eq 1 && "$(head -n 1 "$AUTO_ORIGINAL_FILE" | tr -d '\r')" != "# AUTOVERSE_AUTO_DELEGATION_START" ]]; then
-    log_error "Refusing to edit $config_path because the legacy marker is not a managed block at the start of the file."
+    log_error "Refusing to edit $config_path because the legacy marker is at line $legacy_start_lines instead of the start of the file. Back up config.toml and reconcile the managed block manually, or rerun without --enable-auto-delegation. --force does not bypass this config safety check."
     exit 1
   fi
 
@@ -1914,13 +1931,13 @@ plan_codex_auto_delegation() {
       literal_close_count="$(sed -n "3,$((end_line - 1))p" "$AUTO_ORIGINAL_FILE" | tr -d '\r' | grep -c "^'''[[:space:]]*$" || true)"
     fi
     if [[ "$end_line" -lt 4 || "$second_line" != "developer_instructions = '''" || "$closing_line" != "'''" || "$literal_close_count" -ne 1 ]]; then
-      log_error "Refusing to edit $config_path because its $managed_label managed block has an unexpected structure."
+      log_error "Refusing to edit $config_path because its $managed_label managed block has an unexpected structure. Back up config.toml and reconcile the block manually, or rerun without --enable-auto-delegation. --force does not bypass this config safety check."
       exit 1
     fi
     remainder_file="$AUTO_PLAN_DIR/codex-remainder.toml"
     tail -n "+$((end_line + 1))" "$AUTO_ORIGINAL_FILE" > "$remainder_file"
     if has_codex_developer_instructions_conflict "$remainder_file"; then
-      log_error "Refusing to edit $config_path because it also defines developer_instructions outside the CraftRoster managed block. Merge the guidance manually."
+      log_error "Refusing to edit $config_path because it also defines developer_instructions outside the CraftRoster managed block. Merge the guidance manually, or rerun without --enable-auto-delegation to preserve the existing instructions. --force does not bypass this config safety check."
       exit 1
     fi
     {
@@ -1929,7 +1946,7 @@ plan_codex_auto_delegation() {
     } > "$AUTO_NEW_TEXT"
   else
     if has_codex_developer_instructions_conflict "$AUTO_ORIGINAL_FILE"; then
-      log_error "Refusing to edit $config_path because it already defines developer_instructions outside the CraftRoster managed block. Merge the guidance manually."
+      log_error "Refusing to edit $config_path because it already defines developer_instructions outside the CraftRoster managed block. Merge the guidance manually, or rerun without --enable-auto-delegation to preserve the existing instructions. --force does not bypass this config safety check."
       exit 1
     fi
     {
