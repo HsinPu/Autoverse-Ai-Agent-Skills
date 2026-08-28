@@ -1,0 +1,71 @@
+{
+  "skill_name": "typescript-development",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Write a strict TypeScript module that accepts unknown JSON, validates it into a discriminated union, exposes one stable public function, and includes focused Vitest tests.",
+      "expected_output": "A repository-aware TypeScript implementation routed through typescript-development, with runtime validation at the unknown boundary, precise union narrowing, a stable exported API, and focused non-UI tests selected through testing-strategy.",
+      "assertions": [
+        "The response treats the request as TypeScript implementation work even though no framework is named.",
+        "It inspects the supported TypeScript version, tsconfig, module conventions, package scripts, and test setup before choosing syntax or dependencies.",
+        "It distinguishes runtime validation of unknown input from compile-time type guarantees.",
+        "It does not load React, Next.js, Vue, or unrelated TypeScript specialists."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Build a strict TypeScript Node.js CLI that reads files asynchronously, supports flags and cancellation, maps expected failures to exit codes, and adds Vitest coverage.",
+      "expected_output": "A TypeScript and Node.js implementation routed through typescript-development and javascript-development, with explicit CLI inputs, async ownership, cancellation, error and exit semantics, resource cleanup, and focused tests guided by testing-strategy.",
+      "assertions": [
+        "The response keeps typescript-development as the language baseline and adds javascript-development for Node.js runtime, async, cancellation, and errors.",
+        "It inspects the existing CLI entry point, runtime target, module format, scripts, and test conventions before adding parallel structure.",
+        "It defines signal or cancellation behavior, expected versus unexpected failures, exit codes, and cleanup.",
+        "It includes focused tests without routing the non-UI CLI to frontend-testing."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Create a React TypeScript component with typed props that covers loading, empty, error, retry, optimistic update, and rollback states, then add React Testing Library tests.",
+      "expected_output": "A React TypeScript implementation routed through typescript-development, react-ui-patterns, and frontend-testing, with an explicit user-visible state machine, stable typed contracts, recoverable failure behavior, and behavior-focused component tests.",
+      "assertions": [
+        "The response retains typescript-development for typed props and module contracts while selecting react-ui-patterns for UI state behavior.",
+        "It selects frontend-testing for React Testing Library behavior and does not substitute browser E2E without a reason.",
+        "It covers loading, empty, error, retry, optimistic success, and rollback as observable states.",
+        "It avoids testing private component internals as the primary signal."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Add a typed Next.js App Router route handler and Server Action with Zod validation, authorization, explicit caching behavior, stable errors, and focused tests.",
+      "expected_output": "A Next.js TypeScript change routed through typescript-development and nextjs-development, with runtime validation, server-only authorization, explicit cache ownership, stable typed boundaries, and the smallest appropriate test coverage.",
+      "assertions": [
+        "The response retains typescript-development for TypeScript contracts and selects nextjs-development for App Router, server, and cache boundaries.",
+        "It treats Zod as runtime validation rather than evidence that untrusted input is already type-safe.",
+        "It checks authorization and resource ownership on the server and keeps secrets out of client code.",
+        "It states whether frontend-testing, an integration test, or another level is appropriate instead of loading every testing skill."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Build a Vue 3 SFC with script setup lang=ts, typed props and emits, a reusable composable, Pinia state, and Vitest plus Vue Test Utils coverage.",
+      "expected_output": "A Vue TypeScript implementation routed through typescript-development, vue-development, pinia-state-management where store architecture is material, and vue-testing, with explicit state ownership and behavior-focused tests.",
+      "assertions": [
+        "The response keeps typescript-development as the TypeScript baseline and selects vue-development for SFC and reactivity behavior.",
+        "It selects vue-testing for Vitest and Vue Test Utils details and adds Pinia guidance only because store behavior is material.",
+        "It defines typed props, emits, composable boundaries, and store ownership without duplicating state.",
+        "It verifies visible DOM, emitted events, and store effects rather than private refs."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "A strict TypeScript build now fails in a conditional type after an API response shape changed. Diagnose the cause, preserve the public API, remove an unsafe any workaround, add a regression test, and refactor only what is justified.",
+      "expected_output": "An evidence-first TypeScript diagnosis routed through systematic-debugging and typescript-development, followed by the smallest behavior-preserving code change, a focused regression test, and code-refactoring only after the root cause and public contract are established.",
+      "assertions": [
+        "The response reproduces and traces the compiler failure before proposing a type-level rewrite.",
+        "It uses typescript-development for inference, conditional types, narrowing, and public API decisions.",
+        "It preserves the public contract and replaces any with an explicit validated or narrowed boundary rather than hiding the diagnostic.",
+        "It adds a regression test and limits refactoring to the proven causal path."
+      ]
+    }
+  ]
+}

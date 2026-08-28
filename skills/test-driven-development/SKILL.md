@@ -42,6 +42,7 @@ Let an observable behavior and its failing test lead each implementation increme
 
 - Use `testing-strategy` to choose the appropriate test level, fixtures, and overall test mix.
 - Use `python-testing-engineering` for Python RED-GREEN test implementation and `python-development` for the corresponding production-code increment.
+- Use `typescript-development` for TypeScript RED-GREEN production increments and typed test boundaries; add `frontend-testing` for React or browser-component tests and `vue-testing` for Vue tests.
 - Use the relevant language or framework testing skill for other implementation details.
 - Use `code-change-workflow` to identify the owner path and affected boundaries before the first cycle.
 - Use `incremental-implementation` when the work requires several independently verified slices.

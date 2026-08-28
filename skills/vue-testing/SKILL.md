@@ -11,6 +11,10 @@ metadata:
 
 Use this skill when Vue behavior needs test coverage or a Vue test is failing. Pair with `testing-strategy` for test-level choices, `pinia-state-management` for store design, and `webapp-testing` for local browser verification.
 
+## TypeScript Baseline Gate
+
+When Vue tests or production targets use `<script setup lang="ts">`, `.ts`, typed props or emits, typed stores, typed mocks, `vue-tsc`, or TypeScript diagnostics, read `typescript-development` before planning. Keep this skill responsible for Vue test behavior and runner details while `typescript-development` owns type-safe contracts and production TypeScript changes.
+
 ## Workflow
 
 1. Identify the behavior under test and the smallest useful level: composable, component, store, route, or browser flow.

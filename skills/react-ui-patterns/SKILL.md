@@ -11,6 +11,10 @@ metadata:
 
 Use this skill when the work is about React UI state behavior, not visual styling.
 
+## TypeScript Baseline Gate
+
+When the component, hook, or test uses `.ts`, `.tsx`, TypeScript generics, typed props, or typed public APIs, read `typescript-development` before planning. Keep this skill responsible for React state and user-visible behavior while `typescript-development` owns the type and module contracts.
+
 ## When To Use
 
 - Build or review components that fetch data, submit mutations, or refresh in the background

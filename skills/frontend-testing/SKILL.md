@@ -11,6 +11,10 @@ metadata:
 
 Use this skill to test frontend logic close to the component.
 
+## TypeScript Baseline Gate
+
+When tests or production targets use `.ts`, `.tsx`, typed props, typed hooks, typed mocks, or TypeScript diagnostics, read `typescript-development` before planning. Keep this skill responsible for frontend test behavior and runner choices while `typescript-development` owns type-safe fixtures, contracts, and production TypeScript changes.
+
 ## Workflow
 
 1. Identify the component, hook, or UI behavior that needs proof.
@@ -30,3 +34,4 @@ Use this skill to test frontend logic close to the component.
 
 - For browser-level validation, use `webapp-testing`.
 - For async UI state patterns, use `react-ui-patterns`.
+- For TypeScript implementation, compiler configuration, and typed public boundaries, use `typescript-development`.

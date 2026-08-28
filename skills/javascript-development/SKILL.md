@@ -11,6 +11,10 @@ metadata:
 
 Use this skill for JavaScript implementation, review, refactoring, and debugging in Node.js or browser projects.
 
+## TypeScript Routing Gate
+
+If the target includes `.ts`, `.tsx`, `tsconfig*.json`, a `typescript` dependency, or a `tsc` or `vue-tsc` diagnostic, read the sibling [`../typescript-development/SKILL.md`](../typescript-development/SKILL.md) before planning, even when that skill was not included in the runtime's initial metadata list. Keep this skill responsible for runtime behavior, async I/O, cancellation, error propagation, security, and JavaScript interop; keep `typescript-development` responsible for compiler configuration, type design, narrowing, module contracts, and typed public APIs.
+
 ## Three.js Routing Gate
 
 If JavaScript imports `three`, references `THREE`, initializes a Three.js renderer, or the request asks for a Three.js, WebGL or WebGPU 3D, canvas, website, or HTML experience:

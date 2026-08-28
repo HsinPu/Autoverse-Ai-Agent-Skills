@@ -11,6 +11,10 @@ metadata:
 
 Use this skill when working on a Next.js app, especially App Router projects with React Server Components, server actions, route handlers, caching, and deployment concerns.
 
+## TypeScript Baseline Gate
+
+When the Next.js target uses `.ts`, `.tsx`, typed route parameters, typed Server Actions, Route Handlers, or TypeScript diagnostics, read `typescript-development` before planning. Keep this skill responsible for Next.js runtime boundaries and caching while `typescript-development` owns the type, module, and public API contracts.
+
 ## Core Scope
 
 - App Router structure, layouts, pages, loading, error, and not-found boundaries

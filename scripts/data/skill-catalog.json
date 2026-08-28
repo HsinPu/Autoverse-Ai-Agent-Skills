@@ -2997,8 +2997,35 @@
       "tags": [
         "typescript",
         "javascript",
+        "code",
+        "write",
+        "modify",
+        "fix",
+        "function",
+        "program",
+        "implementation",
+        "refactoring",
         "code-style",
-        "types"
+        "types",
+        "strict",
+        "generics",
+        "interfaces",
+        "unions",
+        "tsconfig",
+        "tsc",
+        "tsx",
+        "type-error",
+        "node",
+        "cli",
+        "react",
+        "component",
+        "nextjs",
+        "route",
+        "handler",
+        "vue",
+        "vitest",
+        "test",
+        "api-client"
       ]
     },
     "ugc-video-ads": {
@@ -3721,6 +3748,53 @@
         {
           "name": "python-api-client-development",
           "when": "The Python deliverable is an HTTP API client or SDK with OpenAPI, auth, pagination, retries, timeouts, transport configuration, or error mapping."
+        }
+      ]
+    },
+    {
+      "id": "typescript-development",
+      "title": "TypeScript Implementation and Framework Routing",
+      "decision": "Use typescript-development as the baseline for TypeScript code work, then add only the specialist that owns the primary runtime, React, Next.js, Vue, testing, debugging, or refactoring concern.",
+      "skills": [
+        {
+          "name": "typescript-development",
+          "when": "The task creates, modifies, fixes, reviews, refactors, tests, or type-checks TypeScript code, .ts or .tsx files, tsconfig settings, strict types, or typed public APIs."
+        },
+        {
+          "name": "javascript-development",
+          "when": "The TypeScript task materially involves Node.js or browser runtime behavior, asynchronous I/O, cancellation, error propagation, security, or JavaScript interoperability."
+        },
+        {
+          "name": "react-ui-patterns",
+          "when": "The TypeScript task builds or reviews React UI state, loading, empty, error, retry, optimistic update, Suspense, or transition behavior."
+        },
+        {
+          "name": "nextjs-development",
+          "when": "The TypeScript task concerns Next.js routing, Server or Client Components, Server Actions, route handlers, caching, metadata, or deployment boundaries."
+        },
+        {
+          "name": "vue-development",
+          "when": "The TypeScript task concerns Vue SFCs, script setup, typed props or emits, composables, Pinia, Vue Router, or vue-tsc."
+        },
+        {
+          "name": "frontend-testing",
+          "when": "The TypeScript work writes or fixes React or general frontend component and hook tests with Vitest, Jest, RTL-style queries, typed fixtures, or typed mocks."
+        },
+        {
+          "name": "vue-testing",
+          "when": "The TypeScript work writes or fixes Vue component, composable, route, or Pinia tests with Vitest or Vue Test Utils."
+        },
+        {
+          "name": "systematic-debugging",
+          "when": "A TypeScript compiler, build, module-resolution, inference, narrowing, declaration, or runtime failure has an unknown or disputed cause."
+        },
+        {
+          "name": "code-refactoring",
+          "when": "The TypeScript change must preserve behavior and public contracts while improving structure or removing unsafe type workarounds."
+        },
+        {
+          "name": "test-driven-development",
+          "when": "The TypeScript implementation must proceed through an explicit RED-GREEN-REFACTOR cycle with a focused regression or contract test."
         }
       ]
     },

@@ -27,6 +27,10 @@ Use this skill when the task is about Vue 3 application or component code rather
 - Improve Vue component structure, TypeScript usage, performance, security, or testability.
 - Diagnose Vue application behavior when the issue is not primarily Nuxt SSR/Nitro/runtime config.
 
+## TypeScript Baseline Gate
+
+When a Vue target uses `<script setup lang="ts">`, `.ts`, typed props or emits, TypeScript composables, `vue-tsc`, or strict compiler diagnostics, read `typescript-development` before planning. Keep this skill responsible for Vue SFC and reactivity behavior while `typescript-development` owns compiler, type, module, and public API contracts.
+
 ## Workflow
 
 1. Identify the component, composable, store, route, or test surface being changed.
@@ -43,6 +47,7 @@ Use this skill when the task is about Vue 3 application or component code rather
 - Use `vue-router-patterns` for route records, guards, params/query, and navigation lifecycle.
 - Use `vue-testing` when the main task is writing or improving Vue tests.
 - Use `vue-debug-guides` for runtime warnings, hydration mismatches, and reactivity debugging.
+- Use `typescript-development` as the baseline for Vue TypeScript contracts, compiler configuration, and type errors.
 
 ## 進階與參考（Bundled resources）
 

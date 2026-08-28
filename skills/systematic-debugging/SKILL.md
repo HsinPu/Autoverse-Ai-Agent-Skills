@@ -44,6 +44,7 @@ Establish the causal failure before changing production behavior.
 - Use `terminal-ops` to run commands and preserve exact repository evidence.
 - Use `agent-introspection-debugging` when the failing system is an agent run and model, tool, handoff, guardrail, retrieval, or context traces must be reconstructed.
 - Use `python-observability-debugging` for Python tracebacks, runtime diagnostics, profiling, memory, and performance techniques; after confirming the cause, use `python-development` for the implementation fix.
+- Use `typescript-development` for TypeScript compiler, inference, narrowing, module-resolution, declaration, or typed public-API failures; retain this evidence-first workflow until the cause is proven, then add the relevant framework or testing skill only when that surface is involved.
 - Use the relevant stack-specific debugging skill for other framework or runtime techniques.
 - Use `code-change-workflow` after the owner path and justified fix are known.
 - Use `test-driven-development` to add the regression test and implement the fix in a red-green cycle.
