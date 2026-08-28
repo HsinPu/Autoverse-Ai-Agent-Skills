@@ -1,0 +1,115 @@
+{
+  "skill_name": "java-development",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Implement a Java 21 service that accepts unknown JSON, validates it into a sealed domain result, exposes one stable public method, and includes focused JUnit 5 tests.",
+      "expected_output": "A repository-aware Java implementation routed through java-development and java-testing, with a verified Java and toolchain baseline, runtime validation at the untrusted boundary, precise domain modeling, stable public contracts, explicit errors and resources, and focused tests.",
+      "assertions": [
+        "The response treats the request as Java implementation work even though no framework is named.",
+        "It inspects the declared Java version, build wrapper, package layout, public compatibility needs, and test conventions before choosing language features.",
+        "It distinguishes runtime validation of unknown JSON from compile-time Java types.",
+        "It selects java-testing for JUnit details without loading unrelated Spring or persistence specialists."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Add a Spring Boot 3 REST endpoint with Bean Validation, authorization, a transactional JPA write, stable error responses, and focused security plus PostgreSQL persistence tests.",
+      "expected_output": "A Java Spring change routed through java-development, spring-development, spring-security, jpa-hibernate-development, and java-testing, with validated boundaries, server-side authorization, explicit transaction ownership, stable errors, and focused slice or integration tests.",
+      "assertions": [
+        "The response retains java-development as the Java language and public-contract baseline.",
+        "It selects spring-development for Spring application boundaries, spring-security for authorization, and jpa-hibernate-development for ORM behavior.",
+        "It selects java-testing for the smallest useful security and persistence tests rather than loading every Java specialist.",
+        "It validates input and authorization before persistence and does not expose raw exceptions or secrets."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Fix a Java 21 Maven multi-module build with a dependency conflict, compiler plugin mismatch, and failing verify phase. No application Java source or runtime behavior changes are requested.",
+      "expected_output": "A build-focused diagnosis routed through jvm-build-tooling and systematic-debugging when needed, using the Maven wrapper, dependency and plugin evidence, module-scoped verification, and no forced java-development baseline because Java source and runtime behavior are unchanged.",
+      "assertions": [
+        "The response selects jvm-build-tooling as the primary owner for the Maven, dependency, plugin, and verify-phase problem.",
+        "It does not force java-development merely because the build belongs to a Java project.",
+        "It diagnoses the failing phase and dependency graph before changing versions or application code.",
+        "It verifies through the wrapper and the narrowest affected module before the full build."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Refactor one vertical slice of a Spring monolith from controller-service-repository coupling into hexagonal architecture while preserving behavior and adding package-boundary tests.",
+      "expected_output": "An incremental Java architecture change routed through java-development, java-architecture, spring-development, java-testing, and code-refactoring, with current behavior protected, inward dependency direction, one vertical slice, and explicit package-boundary evidence.",
+      "assertions": [
+        "The response retains java-development for Java APIs and implementation while selecting java-architecture for ports, adapters, and package direction.",
+        "It selects spring-development for framework boundaries and java-testing for characterization and ArchUnit-style checks.",
+        "It avoids a big-bang rewrite and migrates one behavior-preserving vertical slice.",
+        "It uses code-refactoring only after current behavior and verification are established."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Fix a Spring Data JPA N plus 1 query and transaction-boundary defect, preserve the repository API, and add a PostgreSQL Testcontainers regression test.",
+      "expected_output": "A Java persistence fix routed through java-development, jpa-hibernate-development, spring-development where service transactions are material, and java-testing, with query evidence, explicit fetch and transaction decisions, API preservation, and a real-dialect regression test.",
+      "assertions": [
+        "The response retains java-development for Java source and repository API decisions.",
+        "It selects jpa-hibernate-development for fetching, query count, transactions, and ORM behavior.",
+        "It selects java-testing for Testcontainers and the regression test, using the production database dialect rather than substituting H2.",
+        "It proves the N plus 1 and transaction cause before changing fetch strategies or repository contracts."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Add a Java MyBatis mapper interface and XML query with a whitelisted dynamic sort column, Spring transaction integration, explicit result mapping, and a focused integration test.",
+      "expected_output": "A Java MyBatis change routed through java-development, mybatis-development, spring-development where transaction integration is material, and java-testing, with safe bindings, whitelisted identifiers, explicit mappings, transaction ownership, and focused integration proof.",
+      "assertions": [
+        "The response retains java-development for mapper interfaces, DTOs, services, and Java contracts.",
+        "It selects mybatis-development for XML, bindings, ResultMap, and dynamic SQL behavior.",
+        "It treats dynamic identifiers as an allowlist boundary and does not interpolate untrusted input directly.",
+        "It selects java-testing for the integration test and verifies generated SQL or observable persistence behavior."
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "A flaky JUnit test around CompletableFuture intermittently times out. Diagnose the root cause, add a deterministic regression test, and implement the smallest Java fix.",
+      "expected_output": "An evidence-first Java diagnosis routed through systematic-debugging, java-testing, and java-development, with reproducible timing and executor evidence, a deterministic regression test, explicit timeout and cancellation ownership, and the smallest justified production fix.",
+      "assertions": [
+        "The response does not patch or repeatedly rerun the flaky test before isolating the causal timing, executor, shared-state, or cancellation boundary.",
+        "It selects java-testing for deterministic JUnit behavior and java-development for CompletableFuture, exception, resource, and production-code decisions.",
+        "It preserves interruption and cancellation semantics and does not replace the failure with an arbitrary sleep.",
+        "It verifies the original regression and the nearest affected Java suite."
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "Build a Spring WebFlux endpoint using WebClient with timeout, bounded concurrency, cancellation, backpressure, and StepVerifier tests.",
+      "expected_output": "A reactive Java implementation routed through java-development, spring-webflux, and java-testing, with end-to-end non-blocking boundaries, bounded concurrency, explicit timeout and cancellation behavior, backpressure, stable errors, and reactive tests.",
+      "assertions": [
+        "The response retains java-development for Java types, public contracts, exceptions, resources, and implementation.",
+        "It selects spring-webflux for Reactor, WebClient, schedulers, backpressure, and cancellation decisions.",
+        "It selects java-testing for broader Java test design while using StepVerifier or WebTestClient for reactive behavior.",
+        "It does not introduce blocking JPA or unbounded flatMap concurrency into the reactive path."
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "Implement a Spring Cloud Kafka consumer with an idempotency key, bounded retries, dead-letter handling, tracing propagation, and backward-compatible event evolution.",
+      "expected_output": "A distributed Java change routed through java-development and spring-cloud-microservices, with java-architecture when service or bounded-context ownership is material and java-testing for integration evidence, explicit idempotency, retry limits, poison-message handling, tracing, and event compatibility.",
+      "assertions": [
+        "The response retains java-development for Java source, event types, exceptions, and compatibility decisions.",
+        "It selects spring-cloud-microservices for Kafka, distributed failure, resilience, tracing, and event evolution.",
+        "It treats retries, idempotency, dead-letter behavior, and schema compatibility as explicit contracts.",
+        "It does not load Spring Security, JPA, or MyBatis unless the request makes those concerns material."
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "Fix a JavaScript Node.js async cancellation bug and add Vitest coverage. The project does not use Java, the JVM, Spring, Maven, or Gradle.",
+      "expected_output": "A JavaScript task routed to javascript-development and the appropriate testing guidance without selecting java-development or any Java, JVM, or Spring specialist merely because JavaScript contains the substring Java.",
+      "assertions": [
+        "The response does not select java-development, java-testing, jvm-build-tooling, or Spring skills.",
+        "It recognizes JavaScript and Node.js as a distinct runtime and language task.",
+        "It selects only the smallest JavaScript and testing skill set needed for cancellation and Vitest.",
+        "It does not introduce Java, JVM, Maven, or Gradle commands."
+      ]
+    }
+  ]
+}

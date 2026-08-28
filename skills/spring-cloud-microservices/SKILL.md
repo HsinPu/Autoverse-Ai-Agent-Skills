@@ -11,6 +11,10 @@ metadata:
 
 在設計或維護 Spring Boot microservices、Spring Cloud、service-to-service communication、event-driven flows、gateway、resilience 或 distributed tracing 時使用本 skill。服務內部架構搭配 `java-architecture`；單體 Spring app 優先用 `spring-development`。
 
+## Java Baseline Gate
+
+When distributed-system work creates or changes Java source, clients, consumers, events, resilience code, or public service contracts, read `java-development` before planning. Keep this skill responsible for service boundaries and distributed behavior while `java-development` owns Java language, API, exception, resource, and compatibility decisions.
+
 ## When To Use
 
 Use this skill when the task is about distributed Spring systems rather than one Spring Boot service in isolation.

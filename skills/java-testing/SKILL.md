@@ -11,6 +11,10 @@ metadata:
 
 在撰寫、修正或審查 Java 測試時使用本 skill。若測試重點是 Spring Boot web/data/security slice，搭配 `spring-development`；若是在決定整體測試層級，搭配 `testing-strategy`。
 
+## Java Baseline Gate
+
+Read `java-development` when writing or fixing Java tests, changing production Java, or defining typed fixtures and public contracts. Keep this skill responsible for test levels, JUnit, assertions, mocks, containers, determinism, coverage, and architecture tests while `java-development` owns Java language, type, exception, resource, and production-code decisions.
+
 ## When To Use
 
 Use this skill when the task is to write, repair, review, or improve Java tests.

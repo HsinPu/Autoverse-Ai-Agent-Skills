@@ -45,6 +45,7 @@ Establish the causal failure before changing production behavior.
 - Use `agent-introspection-debugging` when the failing system is an agent run and model, tool, handoff, guardrail, retrieval, or context traces must be reconstructed.
 - Use `python-observability-debugging` for Python tracebacks, runtime diagnostics, profiling, memory, and performance techniques; after confirming the cause, use `python-development` for the implementation fix.
 - Use `typescript-development` for TypeScript compiler, inference, narrowing, module-resolution, declaration, or typed public-API failures; retain this evidence-first workflow until the cause is proven, then add the relevant framework or testing skill only when that surface is involved.
+- Use `java-development` for Java compiler, exception, concurrency, resource, JVM runtime, or public-API failures; add `java-testing` for JUnit reproduction and `jvm-build-tooling` when the causal boundary is Maven, Gradle, a plugin, dependency resolution, or the toolchain.
 - Use the relevant stack-specific debugging skill for other framework or runtime techniques.
 - Use `code-change-workflow` after the owner path and justified fix are known.
 - Use `test-driven-development` to add the regression test and implement the fix in a red-green cycle.

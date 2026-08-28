@@ -11,6 +11,10 @@ metadata:
 
 在使用 Spring WebFlux、Project Reactor、WebClient、R2DBC 或 reactive pipelines 時使用本 skill。若專案是傳統 servlet/blocking stack，優先用 `spring-development`，不要為了流行而改 WebFlux。
 
+## Java Baseline Gate
+
+When WebFlux or Reactor work creates or changes Java source, typed handlers, domain APIs, exceptions, resources, or concurrency behavior, read `java-development` before planning. Keep this skill responsible for reactive pipelines, backpressure, schedulers, WebClient, R2DBC, and reactive tests while `java-development` owns the Java contracts and general implementation.
+
 ## When To Use WebFlux
 
 - 高並發 I/O-bound workload：proxy、streaming、SSE、WebSocket、fan-out HTTP calls。

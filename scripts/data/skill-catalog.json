@@ -1022,16 +1022,50 @@
         "java",
         "architecture",
         "clean-architecture",
+        "clean",
         "hexagonal",
         "ddd",
         "microservices",
-        "spring"
+        "spring",
+        "package",
+        "module",
+        "refactor"
       ]
     },
     "java-development": {
       "category": "software-engineering",
       "tags": [
         "java",
+        "code",
+        "write",
+        "modify",
+        "fix",
+        "review",
+        "refactor",
+        "test",
+        "program",
+        "implementation",
+        "source",
+        "class",
+        "method",
+        "exception",
+        "stacktrace",
+        "javac",
+        "public-api",
+        "generics",
+        "records",
+        "sealed",
+        "concurrency",
+        "spring",
+        "boot",
+        "endpoint",
+        "junit",
+        "jpa",
+        "repository",
+        "mybatis",
+        "mapper",
+        "architecture",
+        "clean-architecture",
         "code-style",
         "design-patterns"
       ]
@@ -1047,7 +1081,10 @@
         "testcontainers",
         "jacoco",
         "archunit",
-        "tdd"
+        "tdd",
+        "test",
+        "regression",
+        "flaky"
       ]
     },
     "javascript-development": {
@@ -1073,7 +1110,12 @@
         "spring-data",
         "persistence",
         "database",
-        "performance"
+        "performance",
+        "repository",
+        "entity",
+        "transaction",
+        "n-plus-one",
+        "testcontainers"
       ]
     },
     "jquery-4-migration": {
@@ -1123,6 +1165,10 @@
         "gradle",
         "build",
         "dependencies",
+        "dependency",
+        "plugin",
+        "toolchain",
+        "wrapper",
         "ci"
       ]
     },
@@ -1304,7 +1350,11 @@
         "spring",
         "transactions",
         "security",
-        "performance"
+        "performance",
+        "mapper",
+        "xml",
+        "dynamic-sql",
+        "result-map"
       ]
     },
     "nextjs-development": {
@@ -2013,8 +2063,12 @@
       "tags": [
         "spring",
         "spring-boot",
+        "boot",
         "java",
         "web",
+        "endpoint",
+        "rest",
+        "controller",
         "data",
         "security",
         "testing",
@@ -3795,6 +3849,65 @@
         {
           "name": "test-driven-development",
           "when": "The TypeScript implementation must proceed through an explicit RED-GREEN-REFACTOR cycle with a focused regression or contract test."
+        }
+      ]
+    },
+    {
+      "id": "java-development",
+      "title": "Java Implementation and JVM Specialist Routing",
+      "decision": "Use java-development as the baseline when Java source, runtime behavior, or public contracts change, then add only the specialist that owns architecture, tests, build tooling, Spring, persistence, debugging, or refactoring. For Maven or Gradle configuration with no Java source or runtime change, use jvm-build-tooling without forcing the Java baseline.",
+      "skills": [
+        {
+          "name": "java-development",
+          "when": "The task creates, modifies, fixes, reviews, refactors, tests, or runs Java source, .java files, javac diagnostics, JVM exceptions, concurrency, resources, or Java public APIs."
+        },
+        {
+          "name": "java-architecture",
+          "when": "The Java task concerns package or module boundaries, Clean Architecture, hexagonal design, DDD, bounded contexts, ports and adapters, or an incremental architecture migration."
+        },
+        {
+          "name": "java-testing",
+          "when": "The task writes or fixes Java tests, JUnit, Mockito, AssertJ, Testcontainers, ArchUnit, deterministic fixtures, regression coverage, or flaky test behavior."
+        },
+        {
+          "name": "jvm-build-tooling",
+          "when": "The task concerns Maven, Gradle, wrappers, plugins, dependencies, toolchains, multi-module builds, Java version alignment, or build phases."
+        },
+        {
+          "name": "spring-development",
+          "when": "The Java task concerns Spring Boot application structure, dependency injection, configuration, controllers, REST APIs, transactions, testing slices, or observability."
+        },
+        {
+          "name": "spring-security",
+          "when": "The Spring Java task concerns authentication, authorization, OAuth2, OIDC, JWT, CSRF, CORS, method security, filter chains, or security tests."
+        },
+        {
+          "name": "spring-webflux",
+          "when": "The Java task concerns WebFlux, Reactor, WebClient, R2DBC, reactive pipelines, backpressure, schedulers, cancellation, WebTestClient, or StepVerifier."
+        },
+        {
+          "name": "spring-cloud-microservices",
+          "when": "The Java task concerns Spring Cloud, service boundaries, gateways, Kafka, distributed events, resilience, tracing, or service-to-service communication."
+        },
+        {
+          "name": "jpa-hibernate-development",
+          "when": "The Java task concerns JPA, Hibernate, Spring Data, entities, repositories, ORM transactions, fetching, N plus 1 queries, projections, or persistence tests."
+        },
+        {
+          "name": "mybatis-development",
+          "when": "The Java task concerns MyBatis mapper interfaces, XML, bindings, ResultMap definitions, dynamic SQL, batch execution, or MyBatis transactions."
+        },
+        {
+          "name": "systematic-debugging",
+          "when": "A Java compiler, build, test, exception, concurrency, resource, JVM runtime, or framework failure has an unknown or disputed cause."
+        },
+        {
+          "name": "code-refactoring",
+          "when": "The Java change must preserve behavior and public contracts while improving structure, naming, duplication, or maintainability."
+        },
+        {
+          "name": "test-driven-development",
+          "when": "The Java implementation must proceed through an explicit RED-GREEN-REFACTOR cycle with a focused regression or contract test."
         }
       ]
     },

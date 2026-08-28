@@ -11,6 +11,10 @@ metadata:
 
 在 Spring / Spring Boot 專案處理 authentication、authorization、OAuth2/OIDC、JWT、CSRF、CORS、headers、method security 或安全審查時使用本 skill。一般 Spring 架構仍搭配 `spring-development`；依賴 CVE 升級搭配 `jvm-build-tooling`。
 
+## Java Baseline Gate
+
+When Spring Security work creates or changes Java configuration, filters, handlers, annotations, domain authorization, or tests, read `java-development` before planning. Keep this skill responsible for the security model and controls while `java-development` owns Java language, API, exception, and resource behavior.
+
 ## Handoff
 
 - Use `spring-development` for general Spring Boot application structure, controllers, services, config, and tests.

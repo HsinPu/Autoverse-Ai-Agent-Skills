@@ -22,6 +22,10 @@ metadata:
 
 Use this skill when the task is about Spring or Spring Boot application code and architecture.
 
+## Java Baseline Gate
+
+When the Spring target creates or changes `.java` source, Java public APIs, exceptions, resources, or runtime behavior, read `java-development` before planning. Keep this skill responsible for Spring Boot boundaries, DI, configuration, web, transactions, testing slices, and observability while `java-development` owns Java language and compatibility decisions.
+
 - Build, review, or refactor controllers, services, repositories, configuration, validation, transactions, or tests.
 - Diagnose dependency injection, profiles, properties, data access, REST APIs, or Actuator/observability behavior.
 - Choose Spring conventions and module boundaries for a Java backend.

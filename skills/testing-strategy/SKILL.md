@@ -37,4 +37,5 @@ Use this skill when deciding what to test and at which level.
 - For Python test implementation, fixtures, mocks, async tests, and pytest or unittest details, use `python-testing-engineering`; pair it with `python-development` when production Python code also changes.
 - For TypeScript unit or Node.js tests, Vitest or Jest fixtures, typed mocks, and production `.ts` changes, use `typescript-development` as the language baseline.
 - For React or other frontend component and hook tests, pair `typescript-development` with `frontend-testing`; for Vue tests, pair it with `vue-testing`.
+- For Java tests, JUnit, Mockito, AssertJ, Spring test slices, Testcontainers, ArchUnit, or flaky test repair, use `java-testing`; pair it with `java-development` for Java language, typed fixtures, production code, exceptions, resources, and public contracts.
 - For other language-specific test practices, use the relevant language skill.

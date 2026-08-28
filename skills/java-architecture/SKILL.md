@@ -1,6 +1,6 @@
 ---
 name: java-architecture
-description: Java architecture guide for Clean Architecture, Hexagonal Architecture, Ports and Adapters, Domain-Driven Design, bounded contexts, aggregates, microservice boundaries, and framework-independent domain modeling. Use when designing or refactoring Java backend architecture, decomposing monoliths, defining package/module boundaries, or separating Spring, persistence, messaging, and external API concerns from domain logic.
+description: Define and migrate Java or Spring package, module, dependency, bounded-context, and service boundaries using Clean Architecture, hexagonal architecture, ports and adapters, and DDD. Use when a request explicitly concerns architecture, Java monolith decomposition, controller-service-repository coupling, vertical-slice migration, package or module cycles, domain and framework separation, or microservice boundaries; use project-architecture-review first for repo-wide cross-language diagnosis.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -12,6 +12,12 @@ metadata:
 在設計或重構 Java 後端架構時使用本 skill。它聚焦 architecture boundaries；實作細節依需要搭配 `java-development`、`spring-development`、`jpa-hibernate-development`、`mybatis-development`、`java-testing`。
 
 若需求是整個 repo 或跨語言系統的架構診斷、目標架構比較、遷移路線規劃，先使用 `project-architecture-review`；再回到本 skill 處理 Java / Spring 的 Clean Architecture、DDD 與 package boundary 細節。
+
+## Java Baseline Gate
+
+When architecture work creates, moves, changes, or plans a migration of Java source, public types, package boundaries, or runtime behavior, read the sibling [`../java-development/SKILL.md`](../java-development/SKILL.md) before planning, even when that skill was omitted from the runtime's initial metadata list. A migration or refactoring plan counts as Java implementation planning even when the current turn is read-only and creates no files. Keep this skill responsible for dependency direction, bounded contexts, ports, adapters, and migration shape while `java-development` owns Java language, API, exception, resource, and compatibility decisions. Only a current-state architecture assessment that proposes no Java implementation or migration may remain with this skill alone.
+
+When the migration requires characterization, regression, ArchUnit, or package-boundary tests, also read the sibling [`../java-testing/SKILL.md`](../java-testing/SKILL.md) before planning. Keep `java-testing` responsible for test level, fixtures, determinism, assertions, and architecture-test mechanics.
 
 ## When To Use
 

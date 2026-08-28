@@ -13,6 +13,10 @@ metadata:
 
 本 skill 以 MyBatis / MyBatis-Spring 官方文件為優先依據，整理偏實務的最佳做法：Mapper 與 XML 結構、參數與結果映射、動態 SQL、與 Spring 交易整合、效能與安全注意事項。
 
+## Java Baseline Gate
+
+When MyBatis work creates or changes Java mapper interfaces, domain or DTO types, services, exceptions, or public contracts, read `java-development` before planning. Keep this skill responsible for mapper XML, bindings, result maps, dynamic SQL, Spring transaction integration, and persistence behavior while `java-development` owns Java language and API decisions.
+
 ## 適用範圍（Assumptions）
 
 - MyBatis 3.5+；若搭配 Spring，預設使用 MyBatis-Spring（或 Spring Boot Starter）

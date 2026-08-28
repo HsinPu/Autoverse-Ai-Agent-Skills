@@ -30,6 +30,7 @@ Do not use this skill for feature work, bug fixes, or architecture selection unl
 - Use `code-change-workflow` first when the entry point, data flow, caller impact, current behavior, or verification path is unclear.
 - Use `incremental-implementation` when the refactor spans many files and needs small verified slices, checkpoints, or commits.
 - Use `project-architecture-review` when the task is to choose a target architecture or migration plan.
+- Use `java-development` for Java language, type, API, exception, resource, and compatibility decisions during a Java refactor.
 - Use stack-specific skills for language or framework implementation details.
 
 ## 核心原則

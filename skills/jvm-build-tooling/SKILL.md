@@ -11,6 +11,10 @@ metadata:
 
 在處理 Maven / Gradle、Java version、dependency、plugin、wrapper、multi-module build 或 CI build failure 時使用本 skill。
 
+## Java Source Gate
+
+Keep build-file-only Maven, Gradle, wrapper, dependency, plugin, toolchain, and CI work in this skill. When the same task changes `.java` source, runtime behavior, compiler-facing public APIs, or Java implementation to resolve the build, read `java-development` before planning and keep this skill responsible for the build graph and toolchain.
+
 ## Handoff
 
 - Use `java-development` for Java code style, APIs, language-level design, or implementation changes.

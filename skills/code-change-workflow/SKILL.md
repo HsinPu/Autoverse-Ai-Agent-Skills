@@ -26,6 +26,7 @@ Use this as the default first skill for existing-code changes. It answers: what 
 - If the requested change is behavior-preserving cleanup, use `code-refactoring` for the refactor rules after the current behavior and verification path are known.
 - When the target contains Python code, `.py`, `pyproject.toml`, requirements files, Python package metadata, or a Python traceback, read `python-development` before planning the implementation and let its routing gate select the smallest required Python specialist.
 - When the target contains TypeScript code, `.ts`, `.tsx`, `tsconfig*.json`, a `typescript` dependency, or a `tsc` or `vue-tsc` diagnostic, read `typescript-development` before planning the implementation and let its routing gate select the smallest required framework, testing, debugging, or refactoring specialist.
+- When the target contains Java source, `.java`, Java source sets, a `javac` diagnostic, or a Java or JVM stack trace, read `java-development` before planning and let its routing gate select the smallest required architecture, framework, persistence, testing, build, debugging, or refactoring specialist. For Maven or Gradle configuration with no Java source or runtime change, use `jvm-build-tooling` without forcing the Java baseline.
 - Use stack-specific skills only after the owner code path is understood.
 - Use `code-review` or `security-code-review` instead when the task is only to review an existing diff.
 

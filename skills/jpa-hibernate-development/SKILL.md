@@ -11,6 +11,10 @@ metadata:
 
 在 Java 專案使用 JPA、Hibernate 或 Spring Data JPA 建立資料層時使用本 skill。若專案使用 MyBatis，改用 `mybatis-development`；若需要 schema / index / migration 設計，也搭配 `database-design`。
 
+## Java Baseline Gate
+
+When JPA or Hibernate work creates or changes Java entities, repositories, projections, services, exceptions, or public contracts, read `java-development` before planning. Keep this skill responsible for ORM mapping, fetching, transactions, queries, migrations, and persistence behavior while `java-development` owns Java type, API, and implementation decisions.
+
 ## When To Use
 
 Use this skill when the task is about JPA, Hibernate, or Spring Data JPA persistence implementation.
