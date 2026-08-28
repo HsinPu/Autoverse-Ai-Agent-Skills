@@ -1,6 +1,6 @@
 ---
 name: python-concurrency-patterns
-description: Design, implement, fix, and review concurrent Python code using asyncio, TaskGroup, cancellation, timeouts, queues, backpressure, workers, or controlled fan-out and fan-in. Use when coordination and task lifetime are the primary Python concern rather than general async I/O basics; pair with python-development.
+description: Python specialist only for designing or changing concurrency ownership, task lifetime, TaskGroup, cancellation, queues, backpressure, workers, or controlled fan-out. Read it with python-development when coordination is primary. For an unknown traceback, failing test, hang, timeout, or asyncio error, read python-observability-debugging first instead.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -27,7 +27,7 @@ Before planning or editing concurrent Python code, read the sibling [`../python-
 
 - Use `python-development` for general async I/O, typing, and code structure.
 - Use `python-backend-development` for framework-specific workers or request flow.
-- Use `python-observability-debugging` for diagnosing race conditions or runtime failures.
+- Use `python-observability-debugging` first for unknown race conditions, tracebacks, failing tests, hangs, timeouts, or runtime failures; add this skill only when the confirmed fix changes concurrency ownership or coordination.
 
 ## Workflow
 

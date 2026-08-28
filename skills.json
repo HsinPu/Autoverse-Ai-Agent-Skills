@@ -2292,7 +2292,7 @@
     },
     {
       "name": "python-automation-scripting",
-      "description": "Write, modify, fix, and review Python scripts, command-line tools, filesystem automation, subprocess orchestration, scheduled jobs, and small utilities. Use when a Python program automates local files, shell commands, batch work, argparse, Click, Typer, or pathlib rather than data analysis or web scraping; pair with python-development.",
+      "description": "Mandatory Python specialist for scripts and CLI automation involving files, subprocesses, batch or scheduled work, argparse, Click, or Typer. Read it with python-development whenever planning, building, modifying, or reviewing that work, including one-file utilities; exclude dataframe pipelines and scraping.",
       "category": "software-engineering",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -2332,7 +2332,7 @@
     },
     {
       "name": "python-concurrency-patterns",
-      "description": "Design, implement, fix, and review concurrent Python code using asyncio, TaskGroup, cancellation, timeouts, queues, backpressure, workers, or controlled fan-out and fan-in. Use when coordination and task lifetime are the primary Python concern rather than general async I/O basics; pair with python-development.",
+      "description": "Python specialist only for designing or changing concurrency ownership, task lifetime, TaskGroup, cancellation, queues, backpressure, workers, or controlled fan-out. Read it with python-development when coordination is primary. For an unknown traceback, failing test, hang, timeout, or asyncio error, read python-observability-debugging first instead.",
       "category": "software-engineering",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -2352,7 +2352,7 @@
     },
     {
       "name": "python-data-engineering",
-      "description": "Build, modify, fix, and review Python data workflows using pandas, Polars, DuckDB, PyArrow, Jupyter, ETL/ELT, CSV, Parquet, or JSON/NDJSON. Use when Python code centers on datasets, cleaning, joins, aggregations, validation, or reproducible file-based pipelines rather than spreadsheet editing or database schema design; pair with python-development.",
+      "description": "Mandatory Python specialist for programs that read, clean, join, aggregate, validate, or write datasets with pandas, Polars, DuckDB, PyArrow, Jupyter, CSV, Parquet, or JSON. Read it with python-development whenever data transformation or a reproducible file pipeline is primary, even for one script or batch job; exclude workbook editing and filesystem-only automation.",
       "category": "backend-data",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -2372,7 +2372,7 @@
     },
     {
       "name": "python-development",
-      "description": "Write, modify, fix, review, refactor, and run Python code, modules, packages, and applications. Use as the primary Python implementation and routing skill whenever code work mentions Python, `.py`, `pyproject.toml`, requirements files, or a Python repository; then load only the specialized Python skill needed for backend, automation, tests, debugging, data, scraping, packaging, concurrency, security, or API clients.",
+      "description": "Mandatory baseline for any request to plan, write, modify, fix, review, test, debug, or run Python code. Read this skill whenever Python, a `.py` file, a Python project, packaging metadata, or a Python traceback is involved, even for one-file or planning-only work; then add only the relevant Python specialist. Do not use for non-Python tasks.",
       "category": "software-engineering",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -2404,7 +2404,7 @@
     },
     {
       "name": "python-observability-debugging",
-      "description": "Diagnose Python exceptions, tracebacks, failing programs, logging problems, slow code, memory growth, profiling results, and environment-specific runtime behavior. Use when the cause of a Python failure or performance problem is unknown and must be isolated before changing code; hand the confirmed fix to python-development.",
+      "description": "Mandatory Python diagnostic specialist for unknown exceptions, tracebacks, failing pytest cases, hangs, timeouts, asyncio task errors, slow code, or memory growth. Read it before changing code, even when asyncio appears; add python-concurrency-patterns only when coordination design itself is the confirmed owner, and pair fixes with python-development.",
       "category": "testing-quality",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -2464,7 +2464,7 @@
     },
     {
       "name": "python-testing-engineering",
-      "description": "Write, fix, refactor, and debug Python tests and test harnesses using pytest or unittest, fixtures, parametrization, monkeypatching, mocks, async tests, temp paths, and capture helpers. Use when implementing Python test behavior rather than choosing the overall test level; pair with python-development for production-code changes.",
+      "description": "Mandatory Python specialist whenever the deliverable includes pytest or unittest test code, fixtures, parametrization, mocks, async tests, regression tests, or a test plan. Read it with python-development for planning, writing, fixing, or stabilizing tests; add python-observability-debugging when the failure cause is unknown.",
       "category": "testing-quality",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -3307,7 +3307,7 @@
     },
     {
       "name": "systematic-debugging",
-      "description": "Evidence-first debugging workflow for reproducing failures, tracing root causes, testing competing hypotheses, and defining the smallest justified fix before editing. Use when a test, build, runtime behavior, integration, or intermittent failure has an unknown or disputed cause; do not use for straightforward implementation with an already-known owner and cause.",
+      "description": "Generic evidence-first debugging for reproducing failures, tracing root causes, testing hypotheses, and defining the smallest justified fix when the cause is unknown or disputed. Never use it alone when a language specialist exists; for any Python failure, also read python-observability-debugging before diagnosis and python-development before the fix.",
       "category": "testing-quality",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",

@@ -1,6 +1,6 @@
 ---
 name: python-observability-debugging
-description: Diagnose Python exceptions, tracebacks, failing programs, logging problems, slow code, memory growth, profiling results, and environment-specific runtime behavior. Use when the cause of a Python failure or performance problem is unknown and must be isolated before changing code; hand the confirmed fix to python-development.
+description: Mandatory Python diagnostic specialist for unknown exceptions, tracebacks, failing pytest cases, hangs, timeouts, asyncio task errors, slow code, or memory growth. Read it before changing code, even when asyncio appears; add python-concurrency-patterns only when coordination design itself is the confirmed owner, and pair fixes with python-development.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -9,7 +9,7 @@ metadata:
 
 # Python Observability and Debugging
 
-Use this skill when Python code is failing, slow, noisy, or hard to understand in runtime.
+Use this skill when Python code or a Python test is failing, hanging, timing out, slow, noisy, or hard to understand at runtime. The presence of `asyncio`, a task, or a timeout does not by itself make concurrency design the owner; diagnose the observed failure here first.
 
 ## Python Baseline Gate
 
@@ -22,11 +22,13 @@ Read the sibling [`../python-development/SKILL.md`](../python-development/SKILL.
 - Correlate logs, traces, and runtime symptoms
 - Diagnose production-only behavior or environment-specific bugs
 - Reduce noise and isolate root cause before changing code
+- Diagnose failing or flaky pytest cases before changing the test or implementation
 
 ## Boundaries
 
 - Use `logging-patterns` for how logs should be written.
 - Use `testing-strategy` for choosing the right test level or test design.
+- Use `python-concurrency-patterns` only when task ownership, cancellation, queues, backpressure, or concurrency structure is the behavior being designed or changed.
 - Use `python-development` for general Python structure and style.
 
 ## Workflow

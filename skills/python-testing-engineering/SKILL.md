@@ -1,6 +1,6 @@
 ---
 name: python-testing-engineering
-description: Write, fix, refactor, and debug Python tests and test harnesses using pytest or unittest, fixtures, parametrization, monkeypatching, mocks, async tests, temp paths, and capture helpers. Use when implementing Python test behavior rather than choosing the overall test level; pair with python-development for production-code changes.
+description: Mandatory Python specialist whenever the deliverable includes pytest or unittest test code, fixtures, parametrization, mocks, async tests, regression tests, or a test plan. Read it with python-development for planning, writing, fixing, or stabilizing tests; add python-observability-debugging when the failure cause is unknown.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -9,7 +9,7 @@ metadata:
 
 # Python Testing Engineering
 
-Use this skill when you need to write or improve Python tests.
+Use this skill whenever Python test code, fixtures, doubles, isolation, or harness behavior is part of the requested deliverable, even when it is only one part of a production-code change.
 
 ## Python Baseline Gate
 

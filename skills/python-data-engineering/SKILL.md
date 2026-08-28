@@ -1,6 +1,6 @@
 ---
 name: python-data-engineering
-description: Build, modify, fix, and review Python data workflows using pandas, Polars, DuckDB, PyArrow, Jupyter, ETL/ELT, CSV, Parquet, or JSON/NDJSON. Use when Python code centers on datasets, cleaning, joins, aggregations, validation, or reproducible file-based pipelines rather than spreadsheet editing or database schema design; pair with python-development.
+description: Mandatory Python specialist for programs that read, clean, join, aggregate, validate, or write datasets with pandas, Polars, DuckDB, PyArrow, Jupyter, CSV, Parquet, or JSON. Read it with python-development whenever data transformation or a reproducible file pipeline is primary, even for one script or batch job; exclude workbook editing and filesystem-only automation.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -9,7 +9,7 @@ metadata:
 
 # Python Data Engineering
 
-Use this skill when the primary deliverable is a dataset, dataframe workflow, or file-based data pipeline.
+Use this skill whenever the primary deliverable is a dataset, dataframe workflow, or reproducible file-based data pipeline. A one-file Python script still belongs here when its main work is transforming or validating data rather than managing files.
 
 ## Python Baseline Gate
 

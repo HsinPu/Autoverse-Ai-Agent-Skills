@@ -1,6 +1,6 @@
 ---
 name: systematic-debugging
-description: Evidence-first debugging workflow for reproducing failures, tracing root causes, testing competing hypotheses, and defining the smallest justified fix before editing. Use when a test, build, runtime behavior, integration, or intermittent failure has an unknown or disputed cause; do not use for straightforward implementation with an already-known owner and cause.
+description: Generic evidence-first debugging for reproducing failures, tracing root causes, testing hypotheses, and defining the smallest justified fix when the cause is unknown or disputed. Never use it alone when a language specialist exists; for any Python failure, also read python-observability-debugging before diagnosis and python-development before the fix.
 license: Apache-2.0
 metadata:
   author: "HsinPu"

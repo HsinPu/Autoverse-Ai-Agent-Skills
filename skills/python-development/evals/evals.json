@@ -66,6 +66,28 @@
         "It treats token handling as a security boundary without loading every Python specialist or exposing a real secret.",
         "It verifies pagination, retry exhaustion, timeouts, remote error mapping, and normal responses."
       ]
+    },
+    {
+      "id": 7,
+      "prompt": "No repository files are available yet. Give a concise implementation plan for a typed Python function that validates an unknown JSON object and returns either a normalized result or a structured error.",
+      "expected_output": "A concise but Python-specific plan routed through python-development despite the absence of files or a framework, with an explicit input boundary, typed result and error model, validation behavior, and a focused verification path without unrelated specialists.",
+      "assertions": [
+        "The response selects python-development even though the request is planning-only and no repository files are supplied.",
+        "It defines the unknown-input boundary and runtime validation before relying on Python type annotations.",
+        "It preserves a stable result or error contract and proposes focused representative checks.",
+        "It does not load an unrelated specialist or a non-Python language skill."
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "A pytest case times out while awaiting an asyncio task and produces an incomplete traceback. Diagnose the failure, add a deterministic regression test, and fix the confirmed cause.",
+      "expected_output": "An evidence-first Python flow routed through python-development, python-observability-debugging, and python-testing-engineering. It uses python-concurrency-patterns only if evidence shows that task lifetime, cancellation, queues, or backpressure design is the owner of the fix.",
+      "assertions": [
+        "The response selects python-observability-debugging as the primary specialist for the unknown timeout and incomplete traceback.",
+        "It does not select python-concurrency-patterns solely because asyncio and a timeout are mentioned.",
+        "It selects python-testing-engineering for the deterministic pytest regression test and python-development for the confirmed production-code change.",
+        "It reproduces and isolates the timeout before proposing a fix, then verifies the original failing path."
+      ]
     }
   ]
 }

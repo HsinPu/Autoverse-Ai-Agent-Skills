@@ -1,6 +1,6 @@
 ---
 name: python-automation-scripting
-description: Write, modify, fix, and review Python scripts, command-line tools, filesystem automation, subprocess orchestration, scheduled jobs, and small utilities. Use when a Python program automates local files, shell commands, batch work, argparse, Click, Typer, or pathlib rather than data analysis or web scraping; pair with python-development.
+description: Mandatory Python specialist for scripts and CLI automation involving files, subprocesses, batch or scheduled work, argparse, Click, or Typer. Read it with python-development whenever planning, building, modifying, or reviewing that work, including one-file utilities; exclude dataframe pipelines and scraping.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -9,7 +9,7 @@ metadata:
 
 # Python Automation and Scripting
 
-Use this skill when the task is a practical script or CLI that automates repetitive work.
+Use this skill whenever the requested deliverable is a Python script or CLI that automates repetitive or operational work. A planning-only request and a small one-file utility still count; do not wait for an existing repository or supplied files.
 
 ## Python Baseline Gate
 
@@ -22,6 +22,7 @@ Before planning or editing a Python script or CLI, read the sibling [`../python-
 - Traverse, rename, copy, move, or clean up files and directories
 - Create CLI tools with `argparse`, `click`, or `typer`
 - Schedule or batch recurring jobs
+- Plan or review any of the above before implementation exists
 
 ## Boundaries
 
