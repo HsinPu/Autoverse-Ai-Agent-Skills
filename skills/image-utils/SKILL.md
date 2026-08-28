@@ -1,6 +1,6 @@
 ---
 name: image-utils
-description: Deterministic image post-processing workflow for resizing, cropping, compositing, converting formats, optimizing assets, adding watermarks, and preparing generated images for web or documentation. Use when modifying existing image files with predictable pixel-level operations rather than generating new images.
+description: Deterministic image post-processing for resizing, cropping, compositing, format conversion, optimization, watermarks, and predictable pixel-level edits. Keep simple single-image operations here. For UI design-image or screenshot requests that require multiple independent cut-out assets, transparency, 2x/3x/4x density, bounding boxes, or a manifest, also load image-to-code-assets.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -29,4 +29,5 @@ Use this skill when the task is to post-process an existing image file.
 
 - For generating new images, use `baoyu-image-gen`.
 - For image prompt design, use `ai-image-prompt-design`.
+- For extracting multiple independent UI assets with transparency, density, bounding boxes, or a manifest, use `image-to-code-assets` while this Skill performs the deterministic pixel operations.
 - For command execution evidence, use `terminal-ops`.

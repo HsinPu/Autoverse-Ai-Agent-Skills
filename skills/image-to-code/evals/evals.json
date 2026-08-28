@@ -11,6 +11,38 @@
         "Missing mobile, hover, loading, and error evidence is surfaced instead of presented as exact fact.",
         "The implementation contract requires semantic, accessible, editable components rather than a flattened image."
       ]
+    },
+    {
+      "id": 2,
+      "prompt": "I drew a full webpage design as a PNG. Turn it into the actual page in my existing project with editable text, responsive layout, and working controls.",
+      "expected_output": "An image-to-code-led implementation that treats the PNG as visual authority, loads frontend-design for production UI, preserves project behavior and conventions, and verifies the real responsive page.",
+      "assertions": [
+        "The response selects image-to-code for a drawn webpage design supplied as raster evidence.",
+        "Frontend-design is loaded as the production UI baseline.",
+        "Text, controls, and layout remain editable and semantic.",
+        "The implementation is rendered and compared at representative viewports."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Use this selected Image Gen website concept as the visual target and implement it as responsive HTML and CSS without turning the whole concept into a background image.",
+      "expected_output": "An image-to-code and frontend-design route that implements the selected generated visual as semantic responsive code and records source assumptions and fidelity evidence.",
+      "assertions": [
+        "The selected Image Gen result is resolved as the visual authority.",
+        "The page is implemented as semantic editable code rather than one flattened image.",
+        "Responsive behavior outside the captured viewport is labeled as inference.",
+        "The response does not load image-to-code-assets unless independent exports are requested."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Crop this photo to a square, resize it to 512 pixels, and convert it to WebP.",
+      "expected_output": "An image-utils route that does not select image-to-code because the task is deterministic post-processing rather than webpage reconstruction.",
+      "assertions": [
+        "The response does not load image-to-code.",
+        "It routes to image-utils.",
+        "The original file is preserved and output dimensions and format are verified."
+      ]
     }
   ]
 }

@@ -1,6 +1,6 @@
 ---
 name: image-to-code
-description: Visual-reference implementation workflow for translating supplied screenshots, approved mockups, multi-state reference sets, or explicitly authorized UI recordings and generated designs into editable, semantic, responsive frontend code with an implementation contract and evidence-based fidelity loop. Use when visual evidence is the primary UI source; use approval-gated page or website workflows when the design direction still needs selection.
+description: Mandatory for any request to turn a website design image, UI screenshot, JPG or PNG mockup, Image Gen result, multiple screenshots, or authorized screen recording into an actual editable, semantic, responsive webpage or frontend code. Use for image-to-code, screenshot-to-code, design-to-HTML or React, UI recreation, and visual-fidelity implementation. Pair with frontend-design, and add image-to-code-assets only for explicit independent asset exports.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -19,6 +19,7 @@ Translate visual evidence into maintainable interface code. Preserve the image's
 Choose the mode before acting:
 
 - **Supplied image:** inspect the provided screenshot or mockup and proceed to analysis.
+- **Asset extraction requested:** read the sibling [`../image-to-code-assets/SKILL.md`](../image-to-code-assets/SKILL.md) when the user explicitly requests independent cut-out assets, transparent PNG or WebP, 2x/3x/4x density, source bounding boxes, an asset manifest, or later Figma-layer handoff. Keep page reconstruction here and asset output in the specialist.
 - **Reference set:** reconcile multiple screenshots by viewport, state, theme, and authority instead of treating the newest image as an automatic replacement.
 - **Recording:** when an authorized screen recording is the primary evidence, extract a minimal set of keyframes and observed transitions before implementation. Do not infer hidden states or backend behavior from motion alone.
 - **Generate then implement:** when the user explicitly authorizes both phases, retain that implementation authorization. Continue in the same execution only when the generation capability can return a usable artifact and permit further work. If its contract ends the response after generation, stop as required and resume implementation in the next turn without inventing a new approval gate; use a delegated generation path only when delegation is allowed and the artifact is returned to the owning workflow. Never claim same-turn implementation when the capability cannot support it.
@@ -122,6 +123,8 @@ Zooming or cropping can help inspect existing pixels, but it cannot invent missi
 
 ### 3. Build the Asset and Content Map
 
+Use `image-to-code-assets` only when independent exported files or a machine-readable asset handoff are part of the requested deliverable. Ordinary screenshot reconstruction should reuse project assets, icon systems, CSS, and semantic code without loading the specialist.
+
 For every visible asset, decide whether to:
 
 - reuse an authorized repository asset;
@@ -220,3 +223,4 @@ Report:
 - In standalone mode, use `website-redesign-to-code` when the request spans several routes, page families, navigation, or the shared shell.
 - In standalone mode, use `webapp-testing`, `visual-regression-testing`, and `accessibility-testing` for browser, fidelity, and accessibility evidence.
 - Use `image-utils` for deterministic local inspection, conversion, cropping, or metadata work.
+- Use `image-to-code-assets` for explicit independent asset slicing, transparent density exports, bounding boxes, manifests, or later raster-to-Figma layer handoff.

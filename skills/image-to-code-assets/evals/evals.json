@@ -1,0 +1,58 @@
+{
+  "skill_name": "image-to-code-assets",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Convert this approved mobile UI design into responsive HTML and also cut out every icon and illustration as transparent 2x and 3x PNG files with source bounding boxes and an asset manifest.",
+      "expected_output": "A routed image-to-code implementation that adds image-to-code-assets for independent transparent density-aware exports, manifest generation, and asset QA without flattening the page.",
+      "assertions": [
+        "The page remains owned by image-to-code and frontend-design.",
+        "The asset specialist is selected because independent transparent density-aware files and a manifest are explicitly requested.",
+        "Text, controls, layout, and simple geometry remain editable code.",
+        "Every asset records source geometry, CSS size, density, output dimensions, alpha, status, and verification."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Extract the product illustration and four badges from this landing-page mockup as transparent WebP and PNG assets, keep their shadows, produce a machine-readable inventory, and prepare a later Figma layer handoff.",
+      "expected_output": "An image-to-code-assets workflow that preserves visual edges and padding, exports only authorized independent assets, writes the asset manifest, verifies alpha and dimensions, and limits the Figma handoff to raster evidence.",
+      "assertions": [
+        "The specialist preserves shadows, antialiasing, and transparent padding.",
+        "The manifest has unique identities, geometry, paths, formats, density, license status, and QA.",
+        "The response does not claim to reconstruct original vectors or hidden Figma structure.",
+        "Temporary processing artifacts have a cleanup owner."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Turn this dashboard screenshot into an editable responsive React page. Reuse the repository icon library and do not export separate image assets.",
+      "expected_output": "An image-to-code and frontend-design route that does not select image-to-code-assets because no independent asset extraction is requested.",
+      "assertions": [
+        "The response does not load image-to-code-assets.",
+        "The page is semantic and editable.",
+        "Existing project icons are reused.",
+        "Responsive and visual verification remain with the page workflow."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Resize this existing product photo to 1200 by 800, convert it to WebP, and preserve the original file.",
+      "expected_output": "A simple image-utils operation that does not select image-to-code or image-to-code-assets.",
+      "assertions": [
+        "The response routes to image-utils.",
+        "It does not load image-to-code-assets.",
+        "It preserves the original and verifies output dimensions and format."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Export 4x transparent icons from the design, but the source image has not been attached.",
+      "expected_output": "A bounded image-to-code-assets failure result that requests the missing source and does not fabricate exported files.",
+      "assertions": [
+        "The missing approved source blocks extraction.",
+        "The response does not invent source geometry or output files.",
+        "It names the minimum source information needed to continue."
+      ]
+    }
+  ]
+}

@@ -956,6 +956,19 @@
         "multi-state"
       ]
     },
+    "image-to-code-assets": {
+      "category": "frontend-design",
+      "tags": [
+        "image-to-code",
+        "asset-extraction",
+        "transparent-png",
+        "webp",
+        "density",
+        "bounding-box",
+        "manifest",
+        "figma-handoff"
+      ]
+    },
     "image-utils": {
       "category": "media-creative",
       "tags": [
@@ -3448,7 +3461,11 @@
         },
         {
           "name": "image-to-code",
-          "when": "Screenshots, raster mockups, generated designs, or approved UI recordings are the primary implementation authority."
+          "when": "A JPG or PNG design image, screenshot, raster mockup, generated design, reference set, or approved UI recording is the primary authority for an actual editable responsive webpage or frontend implementation."
+        },
+        {
+          "name": "image-to-code-assets",
+          "when": "The image-to-code task explicitly requires independent asset slicing, transparent PNG or WebP, 2x/3x/4x density exports, source bounding boxes, an asset manifest, or later Figma-layer handoff. It supplements rather than replaces image-to-code."
         },
         {
           "name": "figma-to-code",

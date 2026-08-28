@@ -1,7 +1,7 @@
 {
   "version": "2.0.0",
   "updated": "2026-08-28T00:00:00Z",
-  "total": 285,
+  "total": 286,
   "categories": [
     {
       "id": "workflow-planning",
@@ -1390,7 +1390,7 @@
     },
     {
       "name": "image-to-code",
-      "description": "Visual-reference implementation workflow for translating supplied screenshots, approved mockups, multi-state reference sets, or explicitly authorized UI recordings and generated designs into editable, semantic, responsive frontend code with an implementation contract and evidence-based fidelity loop. Use when visual evidence is the primary UI source; use approval-gated page or website workflows when the design direction still needs selection.",
+      "description": "Mandatory for any request to turn a website design image, UI screenshot, JPG or PNG mockup, Image Gen result, multiple screenshots, or authorized screen recording into an actual editable, semantic, responsive webpage or frontend code. Use for image-to-code, screenshot-to-code, design-to-HTML or React, UI recreation, and visual-fidelity implementation. Pair with frontend-design, and add image-to-code-assets only for explicit independent asset exports.",
       "category": "frontend-design",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -1413,8 +1413,26 @@
       }
     },
     {
+      "name": "image-to-code-assets",
+      "description": "Mandatory for design-image or UI-screenshot requests that ask to slice, cut out, extract, or export independent assets, transparent PNG or WebP, 2x, 3x, or 4x files, source bounding boxes, an asset manifest, or Figma layers. Pair with image-to-code for page implementation. Exclude ordinary screenshot-to-page reconstruction and simple single-image resize, crop, conversion, or optimization.",
+      "category": "frontend-design",
+      "author": "HsinPu",
+      "source": "HsinPu/CraftRoster",
+      "license": "Apache-2.0",
+      "tags": [
+        "image-to-code",
+        "asset-extraction",
+        "transparent-png",
+        "webp",
+        "density",
+        "bounding-box",
+        "manifest",
+        "figma-handoff"
+      ]
+    },
+    {
       "name": "image-utils",
-      "description": "Deterministic image post-processing workflow for resizing, cropping, compositing, converting formats, optimizing assets, adding watermarks, and preparing generated images for web or documentation. Use when modifying existing image files with predictable pixel-level operations rather than generating new images.",
+      "description": "Deterministic image post-processing for resizing, cropping, compositing, format conversion, optimization, watermarks, and predictable pixel-level edits. Keep simple single-image operations here. For UI design-image or screenshot requests that require multiple independent cut-out assets, transparency, 2x/3x/4x density, bounding boxes, or a manifest, also load image-to-code-assets.",
       "category": "media-creative",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",
@@ -5184,7 +5202,11 @@
         },
         {
           "name": "image-to-code",
-          "when": "Screenshots, raster mockups, generated designs, or approved UI recordings are the primary implementation authority."
+          "when": "A JPG or PNG design image, screenshot, raster mockup, generated design, reference set, or approved UI recording is the primary authority for an actual editable responsive webpage or frontend implementation."
+        },
+        {
+          "name": "image-to-code-assets",
+          "when": "The image-to-code task explicitly requires independent asset slicing, transparent PNG or WebP, 2x/3x/4x density exports, source bounding boxes, an asset manifest, or later Figma-layer handoff. It supplements rather than replaces image-to-code."
         },
         {
           "name": "figma-to-code",

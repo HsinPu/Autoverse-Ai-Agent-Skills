@@ -1,0 +1,4 @@
+interface:
+  display_name: "Image to Code Assets"
+  short_description: "Extract UI assets with density and manifest QA"
+  default_prompt: "Use $image-to-code-assets to extract independent transparent UI assets from this approved design image and return a verified asset manifest."
