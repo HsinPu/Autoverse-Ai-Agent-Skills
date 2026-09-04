@@ -405,6 +405,7 @@ npm run test:catalog
 npm run test:skill-catalog
 npm run test:skill-contracts
 npm run test:skill-evals
+npm run test:skill-routing
 npm run test:skill-originality
 npm run test:skill-sources
 npm run test:package
@@ -424,6 +425,15 @@ npm run audit:agent-originality
 npm run audit:skill-originality
 ```
 
+Skill routing corpus 可以先離線驗證；需要目前 Codex 登入與模型額度時，再執行真實路由評估：
+
+```bash
+npm run eval:skill-routing -- --skill solution-discovery --validate-only
+npm run eval:skill-routing -- --skill solution-discovery
+```
+
+真實評估會為每個案例啟動暫時性、唯讀的 Codex 執行，回報逐案選擇、目標召回率與誤觸發率；它有模型成本且可能受模型版本影響，因此 CI 只執行 corpus、parser 與 scoring 的決定性測試。
+
 [`Validate`](.github/workflows/validate.yml) workflow 在 main push、pull request、手動觸發與每週排程執行。CI 涵蓋 Node 22／24 相容性子集、完整 catalog validation、歷史 digest、remote integrity、Windows PowerShell smoke、Ubuntu Bash smoke、macOS quick smoke，以及 main branch 的隔離 macOS Codex 遠端全量安裝。
 
 ## 來源、品質與授權
@@ -433,7 +443,7 @@ npm run audit:skill-originality
 - Agent references 固定 commit、tree、paths 與 license evidence；Skill references 另外固定逐檔 blob 與 review-controlled lock。
 - `npm run audit:agent-originality` 會針對 237 個 canonical Agent prompt 與 pinned upstream references 檢查長行及逐字片段重疊。
 - Skill originality audit 會逐一比對有 reference 的 canonical packages 與固定 upstream files。
-- Eval gate 目前具名保護 98／286 個 Skill packages、197 個 evals 與 899 個 assertions；不宣稱所有 Skills 都有 eval。
+- Eval gate 目前具名保護 99／286 個 Skill packages、200 個 output evals、909 個 assertions 與 10 個 routing cases；不宣稱所有 Skills 都有 eval。
 - Workflow contract gate 目前涵蓋 7 組跨 Skill contracts；Agent responsibility coverage 由 [31 類 matrix](docs/agent-coverage-matrix.md) 驗證。
 
 詳細來源與改寫紀錄：

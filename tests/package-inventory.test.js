@@ -171,6 +171,7 @@ function verifyStagedPackage() {
     'validate',
     'test:skill-catalog',
     'test:skill-evals',
+    'test:skill-routing',
     'test:skill-originality',
     'test:skill-sources'
   ]) {

@@ -61,6 +61,14 @@ function writeValidEvalDocument(caseRoot, name) {
   });
 }
 
+function writeRoutingDocument(caseRoot, name, document) {
+  const skillDir = createSkill(caseRoot, name);
+  const evalDir = path.join(skillDir, 'evals');
+  fs.mkdirSync(evalDir, { recursive: true });
+  fs.writeFileSync(path.join(evalDir, 'routing.json'), `${JSON.stringify(document, null, 2)}\n`, 'utf8');
+  return skillDir;
+}
+
 function runValidator(caseRoot) {
   return spawnSync(process.execPath, [validator, '--root', caseRoot], {
     cwd: root,
@@ -126,6 +134,66 @@ function safeCleanup() {
 }
 
 try {
+  expectPass('accepts valid routing eval cases', (caseRoot) => {
+    writeCoverageManifest(caseRoot, ['alpha-skill']);
+    writeValidEvalDocument(caseRoot, 'alpha-skill');
+    createSkill(caseRoot, 'beta-skill');
+    writeRoutingDocument(caseRoot, 'alpha-skill', {
+      schema_version: 1,
+      skill_name: 'alpha-skill',
+      cases: [
+        {
+          id: 'positive-natural-request',
+          kind: 'positive',
+          prompt: 'Help me plan the best approach before implementation.',
+          expected_skills: ['alpha-skill'],
+          excluded_skills: [],
+        },
+        {
+          id: 'near-match-other-owner',
+          kind: 'near_match',
+          prompt: 'The direction is approved; create implementation tickets.',
+          expected_skills: ['beta-skill'],
+          excluded_skills: ['alpha-skill'],
+        },
+      ],
+    });
+  }, ['2 routing cases']);
+
+  expectRejected('rejects invalid routing eval contracts', (caseRoot) => {
+    writeCoverageManifest(caseRoot, ['alpha-skill']);
+    writeValidEvalDocument(caseRoot, 'alpha-skill');
+    writeRoutingDocument(caseRoot, 'alpha-skill', {
+      schema_version: 2,
+      skill_name: 'wrong-skill',
+      cases: [
+        {
+          id: 'duplicate-case',
+          kind: 'positive',
+          prompt: ' ',
+          expected_skills: ['beta-skill'],
+          excluded_skills: ['beta-skill'],
+        },
+        {
+          id: 'duplicate-case',
+          kind: 'unknown',
+          prompt: 'A valid prompt.',
+          expected_skills: [],
+          excluded_skills: [],
+        },
+      ],
+    });
+  }, [
+    'routing.json: schema_version must be 1',
+    'routing.json: skill_name must match the Skill directory (alpha-skill)',
+    'cases[0].prompt must be a non-empty string',
+    'cases[0] positive case must expect its owning Skill (alpha-skill)',
+    'cases[0] contains Skill in both expected_skills and excluded_skills: beta-skill',
+    'routing.json: duplicate case id: duplicate-case',
+    'cases[1].kind must be positive, near_match, or negative',
+    'cases[0].expected_skills references unknown Skill: beta-skill',
+  ]);
+
   expectPass('accepts required, additional, and optional uncovered Skills', (caseRoot) => {
     writeCoverageManifest(caseRoot, ['alpha-skill']);
     const skillDir = writeEvalDocument(caseRoot, 'alpha-skill', {

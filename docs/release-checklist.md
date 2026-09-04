@@ -32,6 +32,7 @@ npm run test:cli
 npm run test:catalog
 npm run test:skill-catalog
 npm run test:skill-evals
+npm run test:skill-routing
 npm run test:skill-originality
 npm run test:skill-sources
 npm run test:skill-contracts

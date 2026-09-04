@@ -31,6 +31,10 @@ function formatLabel(skillName) {
   return `skills/${skillName}/evals/evals.json`;
 }
 
+function formatRoutingLabel(skillName) {
+  return `skills/${skillName}/evals/routing.json`;
+}
+
 function readCoverageManifest(root, errors) {
   const manifestPath = path.join(root, ...COVERAGE_MANIFEST.split('/'));
   if (!fs.existsSync(manifestPath)) {
@@ -246,6 +250,119 @@ function validateEvalDocument(skillName, skillDir, document, errors) {
   return summary;
 }
 
+function validateRoutingSkillList(value, field, label, caseIndex, errors) {
+  if (!Array.isArray(value)) {
+    errors.push(`${label}: cases[${caseIndex}].${field} must be an array`);
+    return new Set();
+  }
+
+  const skills = new Set();
+  for (let skillIndex = 0; skillIndex < value.length; skillIndex += 1) {
+    const skillName = value[skillIndex];
+    const itemField = `cases[${caseIndex}].${field}[${skillIndex}]`;
+    if (!isNonEmptyString(skillName) || skillName.trim() !== skillName
+      || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(skillName)) {
+      errors.push(`${label}: ${itemField} must be a normalized kebab-case Skill name`);
+      continue;
+    }
+    if (skills.has(skillName)) {
+      errors.push(`${label}: cases[${caseIndex}].${field} contains duplicate Skill: ${skillName}`);
+      continue;
+    }
+    skills.add(skillName);
+  }
+  return skills;
+}
+
+function validateRoutingDocument(skillName, document, errors, routingReferences) {
+  const label = formatRoutingLabel(skillName);
+  const summary = { routingCaseCount: 0 };
+  if (!isPlainObject(document)) {
+    errors.push(`${label}: root must be a JSON object`);
+    return summary;
+  }
+  if (document.schema_version !== 1) {
+    errors.push(`${label}: schema_version must be 1`);
+  }
+  if (!isNonEmptyString(document.skill_name)) {
+    errors.push(`${label}: skill_name must be a non-empty string`);
+  } else if (document.skill_name.trim() !== skillName) {
+    errors.push(`${label}: skill_name must match the Skill directory (${skillName})`);
+  }
+  if (!Array.isArray(document.cases) || document.cases.length === 0) {
+    errors.push(`${label}: cases must be a non-empty array`);
+    return summary;
+  }
+
+  const ids = new Set();
+  const allowedKinds = new Set(['positive', 'near_match', 'negative']);
+  for (let caseIndex = 0; caseIndex < document.cases.length; caseIndex += 1) {
+    const routingCase = document.cases[caseIndex];
+    summary.routingCaseCount += 1;
+    if (!isPlainObject(routingCase)) {
+      errors.push(`${label}: cases[${caseIndex}] must be an object`);
+      continue;
+    }
+
+    if (!isNonEmptyString(routingCase.id)
+      || routingCase.id.trim() !== routingCase.id
+      || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(routingCase.id)) {
+      errors.push(`${label}: cases[${caseIndex}].id must be a normalized kebab-case identifier`);
+    } else if (ids.has(routingCase.id)) {
+      errors.push(`${label}: duplicate case id: ${routingCase.id}`);
+    } else {
+      ids.add(routingCase.id);
+    }
+
+    if (!allowedKinds.has(routingCase.kind)) {
+      errors.push(`${label}: cases[${caseIndex}].kind must be positive, near_match, or negative`);
+    }
+    if (!isNonEmptyString(routingCase.prompt)) {
+      errors.push(`${label}: cases[${caseIndex}].prompt must be a non-empty string`);
+    }
+
+    const expectedSkills = validateRoutingSkillList(
+      routingCase.expected_skills,
+      'expected_skills',
+      label,
+      caseIndex,
+      errors
+    );
+    const excludedSkills = validateRoutingSkillList(
+      routingCase.excluded_skills,
+      'excluded_skills',
+      label,
+      caseIndex,
+      errors
+    );
+
+    for (const expectedSkill of expectedSkills) {
+      routingReferences.push({ label, caseIndex, field: 'expected_skills', skillName: expectedSkill });
+    }
+    for (const excludedSkill of excludedSkills) {
+      routingReferences.push({ label, caseIndex, field: 'excluded_skills', skillName: excludedSkill });
+    }
+
+    if (routingCase.kind === 'positive' && !expectedSkills.has(skillName)) {
+      errors.push(`${label}: cases[${caseIndex}] positive case must expect its owning Skill (${skillName})`);
+    }
+    if (routingCase.kind === 'near_match' && expectedSkills.size === 0) {
+      errors.push(`${label}: cases[${caseIndex}] near_match case must expect at least one neighboring Skill`);
+    }
+    if ((routingCase.kind === 'near_match' || routingCase.kind === 'negative')
+      && !excludedSkills.has(skillName)) {
+      errors.push(`${label}: cases[${caseIndex}] ${routingCase.kind} case must exclude its owning Skill (${skillName})`);
+    }
+    for (const expectedSkill of expectedSkills) {
+      if (excludedSkills.has(expectedSkill)) {
+        errors.push(`${label}: cases[${caseIndex}] contains Skill in both expected_skills and excluded_skills: ${expectedSkill}`);
+      }
+    }
+  }
+
+  return summary;
+}
+
 function validateRepository(root) {
   const skillsDir = path.join(root, 'skills');
   const errors = [];
@@ -255,6 +372,7 @@ function validateRepository(root) {
     coveredSkills: 0,
     evalCount: 0,
     assertionCount: 0,
+    routingCaseCount: 0,
   };
 
   if (!fs.existsSync(skillsDir) || !fs.statSync(skillsDir).isDirectory()) {
@@ -267,42 +385,70 @@ function validateRepository(root) {
     .sort((left, right) => compareText(left.name, right.name));
   const definedSkills = new Set();
   const coveredSkills = new Set();
+  const routingReferences = [];
 
   for (const entry of skillEntries) {
     const skillDir = path.join(skillsDir, entry.name);
     const skillFile = path.join(skillDir, 'SKILL.md');
     const evalFile = path.join(skillDir, 'evals', 'evals.json');
+    const routingFile = path.join(skillDir, 'evals', 'routing.json');
     const hasSkill = fs.existsSync(skillFile) && fs.statSync(skillFile).isFile();
     const hasEvals = fs.existsSync(evalFile);
+    const hasRouting = fs.existsSync(routingFile);
 
     if (!hasSkill) {
       if (hasEvals) errors.push(`${formatLabel(entry.name)}: evals exist but SKILL.md is missing`);
+      if (hasRouting) errors.push(`${formatRoutingLabel(entry.name)}: routing evals exist but SKILL.md is missing`);
       continue;
     }
 
     summary.totalSkills += 1;
     definedSkills.add(entry.name);
-    if (!hasEvals) continue;
-    summary.coveredSkills += 1;
-    coveredSkills.add(entry.name);
+    if (hasEvals) {
+      summary.coveredSkills += 1;
+      coveredSkills.add(entry.name);
 
-    if (!fs.statSync(evalFile).isFile()) {
-      errors.push(`${formatLabel(entry.name)}: path must be a regular file`);
-      continue;
+      if (!fs.statSync(evalFile).isFile()) {
+        errors.push(`${formatLabel(entry.name)}: path must be a regular file`);
+      } else {
+        let document;
+        try {
+          const source = fs.readFileSync(evalFile, 'utf8').replace(/^\uFEFF/, '');
+          document = JSON.parse(source);
+        } catch (error) {
+          errors.push(`${formatLabel(entry.name)}: invalid JSON`);
+        }
+        if (document !== undefined) {
+          const evalSummary = validateEvalDocument(entry.name, skillDir, document, errors);
+          summary.evalCount += evalSummary.evalCount;
+          summary.assertionCount += evalSummary.assertionCount;
+        }
+      }
     }
 
-    let document;
-    try {
-      const source = fs.readFileSync(evalFile, 'utf8').replace(/^\uFEFF/, '');
-      document = JSON.parse(source);
-    } catch (error) {
-      errors.push(`${formatLabel(entry.name)}: invalid JSON`);
-      continue;
+    if (hasRouting) {
+      if (!fs.statSync(routingFile).isFile()) {
+        errors.push(`${formatRoutingLabel(entry.name)}: path must be a regular file`);
+      } else {
+        let routingDocument;
+        try {
+          const source = fs.readFileSync(routingFile, 'utf8').replace(/^\uFEFF/, '');
+          routingDocument = JSON.parse(source);
+        } catch (error) {
+          errors.push(`${formatRoutingLabel(entry.name)}: invalid JSON`);
+        }
+        if (routingDocument !== undefined) {
+          const routingSummary = validateRoutingDocument(entry.name, routingDocument, errors, routingReferences);
+          summary.routingCaseCount += routingSummary.routingCaseCount;
+        }
+      }
     }
+  }
 
-    const evalSummary = validateEvalDocument(entry.name, skillDir, document, errors);
-    summary.evalCount += evalSummary.evalCount;
-    summary.assertionCount += evalSummary.assertionCount;
+  for (const reference of routingReferences) {
+    if (!definedSkills.has(reference.skillName)) {
+      errors.push(`${reference.label}: cases[${reference.caseIndex}].${reference.field} references unknown Skill: ${reference.skillName}`);
+    }
   }
 
   for (const skillName of requiredSkills) {
@@ -320,7 +466,8 @@ function formatCoverage(summary) {
   const percentage = summary.totalSkills === 0
     ? '0.0'
     : ((summary.coveredSkills / summary.totalSkills) * 100).toFixed(1);
-  return `${summary.coveredSkills}/${summary.totalSkills} skills covered (${percentage}%), ${summary.evalCount} evals, ${summary.assertionCount} assertions`;
+  const routing = summary.routingCaseCount > 0 ? `, ${summary.routingCaseCount} routing cases` : '';
+  return `${summary.coveredSkills}/${summary.totalSkills} skills covered (${percentage}%), ${summary.evalCount} evals, ${summary.assertionCount} assertions${routing}`;
 }
 
 function parseRoot(argv) {

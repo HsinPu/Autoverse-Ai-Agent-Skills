@@ -1,0 +1,36 @@
+{
+  "skill_name": "solution-discovery",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "We need offline document sync, but have not chosen local-first, server-first, or CRDT. Compare viable directions and risks before implementation.",
+      "expected_output": "A decision-oriented comparison that clarifies the outcome and constraints, distinguishes materially different approaches, recommends the smallest suitable direction, and stops for explicit approval before specification or implementation.",
+      "assertions": [
+        "The response separates confirmed goals and constraints from assumptions and open questions.",
+        "At least two materially different solution directions are compared using benefits, costs, risks, reversibility, and operational effects.",
+        "A recommended direction is justified against the current constraints.",
+        "The response requests explicit approval before handing off to specification work."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Plan the membership system for me. I know who it serves, but I do not yet know whether to buy, integrate, or build it. Do not write code yet.",
+      "expected_output": "A compact discovery response that recognizes the undecided solution direction despite the informal request, identifies decision-driving evidence, compares real options, and records the proposed decision boundary.",
+      "assertions": [
+        "The response treats the brief wording as a solution-direction request rather than jumping to implementation tasks.",
+        "The buy, integrate, and build options are compared as distinct approaches rather than cosmetic variants.",
+        "The response states non-goals, unresolved questions, and the decision owner or approval requirement."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Our data synchronization conflicts frequently. What is the best way to improve it? Discuss the direction with me first.",
+      "expected_output": "A proportionate discovery process that does not assume a cause or prescribe an architecture prematurely, gathers only decision-relevant evidence, compares plausible directions, and preserves uncertainty until approval.",
+      "assertions": [
+        "The response does not manufacture repository facts or assume the conflict mechanism.",
+        "Questions and evidence requests are limited to facts that change the solution choice.",
+        "The recommended next direction remains explicitly proposed rather than silently approved."
+      ]
+    }
+  ]
+}

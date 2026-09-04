@@ -2980,7 +2980,7 @@
     },
     {
       "name": "solution-discovery",
-      "description": "Solution discovery workflow for turning an unclear software problem into an approved design direction through goals, constraints, alternatives, tradeoffs, and explicit decision checkpoints. Use before specification or implementation when the desired outcome is known but the solution, scope, or architecture direction is not yet agreed.",
+      "description": "Plan and compare solution approaches before implementation, turning an unclear software problem into an approved direction through goals, constraints, alternatives, tradeoffs, and decision checkpoints. Use when the outcome is known but the approach, scope, or architecture is undecided—including brief requests such as \"plan this,\" \"how should we build it,\" \"compare options,\" or \"discuss before coding.\" Do not use when the direction is already approved and the user wants specifications, tickets, or execution.",
       "category": "research-product",
       "author": "HsinPu",
       "source": "HsinPu/CraftRoster",

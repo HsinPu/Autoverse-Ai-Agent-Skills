@@ -48,6 +48,9 @@ jobs:
       - name: Test Skill eval validation
         run: npm run test:skill-evals
 
+      - name: Test Skill routing evaluation
+        run: npm run test:skill-routing
+
       - name: Test Skill originality audit
         run: npm run test:skill-originality
 
@@ -119,6 +122,9 @@ jobs:
 
       - name: Test Skill eval validation
         run: npm run test:skill-evals
+
+      - name: Test Skill routing evaluation
+        run: npm run test:skill-routing
 
       - name: Test Skill originality audit
         run: npm run test:skill-originality

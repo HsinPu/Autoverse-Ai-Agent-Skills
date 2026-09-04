@@ -1,6 +1,6 @@
 ---
 name: solution-discovery
-description: Solution discovery workflow for turning an unclear software problem into an approved design direction through goals, constraints, alternatives, tradeoffs, and explicit decision checkpoints. Use before specification or implementation when the desired outcome is known but the solution, scope, or architecture direction is not yet agreed.
+description: Plan and compare solution approaches before implementation, turning an unclear software problem into an approved direction through goals, constraints, alternatives, tradeoffs, and decision checkpoints. Use when the outcome is known but the approach, scope, or architecture is undecided—including brief requests such as "plan this," "how should we build it," "compare options," or "discuss before coding." Do not use when the direction is already approved and the user wants specifications, tickets, or execution.
 license: Apache-2.0
 metadata:
   author: "HsinPu"
@@ -13,6 +13,12 @@ metadata:
 # Solution Discovery
 
 Turn a problem statement into a decision that can safely enter specification work.
+
+## Invocation Contract
+
+Select this Skill even when the request is brief or informal if it asks to plan a solution, decide how something should be built, compare approaches, or discuss direction before implementation. The user does not need to say "solution discovery" or list candidate options.
+
+Do not select it merely because every implementation needs some thought. Route an approved direction that needs acceptance criteria or tickets to `spec-flow`, a requested one-question-at-a-time interview to `requirements-deep-dive`, and an already scoped code change to `code-change-workflow`.
 
 ## Workflow
 
