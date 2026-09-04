@@ -90,7 +90,7 @@ curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/ins
 
 ### 依分類安裝
 
-如果不需要完整 catalog，可以使用 Skill 或 Agent 現有的分類，只安裝該分類內的元件。`Name`／`--name` 與 `Category`／`--category` 不能同時使用；分類 Agent 安裝不會自動加入 `subagent-architecture`，除非同時指定主動委派。
+如果不需要完整 catalog，可以使用 Skill 或 Agent 現有的分類，只安裝該分類內的元件。分類 Agent 安裝不會自動加入 `subagent-architecture`，除非同時指定主動委派。
 
 Windows PowerShell：
 
@@ -112,7 +112,7 @@ curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/ins
 curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh | bash -s -- --target codex --type agent --category quality-assurance --dry-run
 ```
 
-可先使用 catalog CLI 查看內容，例如 `node craftroster-cli.js list --type agent --category quality-assurance`。Skill 使用下方 16 個正式分類；Agent 的分類則直接來自 `agents.json`。分類安裝仍會下載完整 repository archive，但只會把所選分類寫入安裝目錄，因此能減少全域檔案數與 runtime 載入內容。
+確認預演內容後，移除 `-DryRun`／`--dry-run` 即可正式安裝。也可先使用 catalog CLI 查看內容，例如 `node craftroster-cli.js list --type agent --category quality-assurance`。可用分類請見 [Agents](#agents) 與 [Skills](#skills)；分類安裝仍會下載完整 repository archive，但只會把所選分類寫入安裝目錄，因此能減少全域檔案數與 runtime 載入內容。
 
 ### 安裝到目前專案
 
@@ -189,7 +189,8 @@ bash scripts/install.sh --target codex --type agent --source-dir . --enable-auto
 |---|---|---|---|
 | 目標 | `-Target` | `--target` | 必填 |
 | 類型 | `-Type skill\|agent` | `--type skill\|agent` | 預設 `skill` |
-| 單一元件 | `-Name` | `--name` | 省略即安裝該類型全部內容 |
+| 單一元件 | `-Name` | `--name` | 與分類互斥 |
+| 分類 | `-Category` | `--category` | 與單一元件互斥；只安裝指定分類 |
 | 遠端 branch | `-Branch` | `--branch` | 預設 `main` |
 | Ownership repository | `-Repo` | `--repo` | 預設 `HsinPu/CraftRoster` |
 | 自訂位置 | `-InstallDir` | `--dir` | 一般 target 是直接目的地；`project` 是 project root |
@@ -382,12 +383,14 @@ Catalog 來源是 [`skills.json`](skills.json) 與 [`agents.json`](agents.json)�
 Canonical Agent: agents/<role>.md
         └─ generate:agents
            ├─ adapters/{codex,claude,cursor,copilot,opencode}/
-           └─ agents.json
+           ├─ agents.json
+           └─ scripts/data/install-category-index.tsv
 
 Canonical Skill: skills/<name>/SKILL.md
 Taxonomy:        scripts/data/skill-catalog.json
         └─ generate:skills
-           └─ skills.json
+           ├─ skills.json
+           └─ scripts/data/install-category-index.tsv
 ```
 
 ```text
@@ -411,7 +414,7 @@ CraftRoster/
 ```
 
 > [!IMPORTANT]
-> `agents/<role>.md` 是 Agent 的唯一人工維護來源，不要直接修改 `adapters/` 或 `agents.json`。Skill 本文在 `skills/<name>/SKILL.md`；分類、tags 與 routing 維護於 `scripts/data/skill-catalog.json`，不要直接修改 generated `skills.json`。
+> `agents/<role>.md` 是 Agent 的唯一人工維護來源，不要直接修改 `adapters/` 或 `agents.json`。Skill 本文在 `skills/<name>/SKILL.md`；分類、tags 與 routing 維護於 `scripts/data/skill-catalog.json`。`skills.json` 與 `scripts/data/install-category-index.tsv` 都是 generated artifacts，不要直接修改。
 
 ## 開發與驗證
 
@@ -429,6 +432,7 @@ npm run validate
 npm run test:cli
 npm run test:catalog
 npm run test:skill-catalog
+npm run test:install-categories
 npm run test:skill-contracts
 npm run test:skill-evals
 npm run test:skill-routing
