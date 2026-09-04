@@ -343,6 +343,46 @@ CANONICAL_DIGEST_ACTUAL="$(node -e 'const fs=require("fs"); console.log(JSON.par
 assert_equal "$CANONICAL_DIGEST_ACTUAL" "$CANONICAL_DIGEST_EXPECTED" "canonical nested/binary/non-ASCII Skill digest"
 log_pass "canonical nested, binary, and non-ASCII Skill digest"
 
+CATEGORY_INDEX="$REPO_ROOT/scripts/data/install-category-index.tsv"
+BROWSER_SKILL_COUNT="$(awk -F '\t' '$1 == "skill" && $2 == "browser-automation" { count++ } END { print count + 0 }' "$CATEGORY_INDEX")"
+FINANCE_AGENT_COUNT="$(awk -F '\t' '$1 == "agent" && $2 == "finance" { count++ } END { print count + 0 }' "$CATEGORY_INDEX")"
+CATEGORY_SKILL_ROOT="$SMOKE_ROOT/category-skill-project"
+CATEGORY_AGENT_ROOT="$SMOKE_ROOT/category-agent-project"
+mkdir -p "$CATEGORY_SKILL_ROOT" "$CATEGORY_AGENT_ROOT"
+
+expect_failure "Skill category and name conflict" "Name and Category cannot be used together" \
+  --target project --type skill --name browser-automation --category browser-automation --source-dir "$REPO_ROOT" --dir "$CATEGORY_SKILL_ROOT"
+expect_failure "invalid Skill category" "Available Skill categories" \
+  --target project --type skill --category missing-category --source-dir "$REPO_ROOT" --dir "$CATEGORY_SKILL_ROOT"
+run_installer "project Skill category dry run" \
+  --target project --type skill --category browser-automation --source-dir "$REPO_ROOT" --dir "$CATEGORY_SKILL_ROOT" --dry-run
+[[ "$LAST_OUTPUT" == *"Selected $BROWSER_SKILL_COUNT skill component(s) from category 'browser-automation'"* ]] ||
+  fail "Skill category dry run did not report the selected component count"
+[[ -z "$(find "$CATEGORY_SKILL_ROOT" -mindepth 1 -maxdepth 1 -print -quit)" ]] ||
+  fail "Skill category dry run wrote to the destination"
+run_installer "project Skill category install" \
+  --target project --type skill --category browser-automation --source-dir "$REPO_ROOT" --dir "$CATEGORY_SKILL_ROOT"
+for root in "$CATEGORY_SKILL_ROOT/.agents/skills" "$CATEGORY_SKILL_ROOT/.claude/skills"; do
+  assert_equal "$(count_skill_dirs "$root")" "$BROWSER_SKILL_COUNT" "$root browser-automation category count"
+done
+
+run_installer "project Agent category install" \
+  --target project --type agent --category finance --source-dir "$REPO_ROOT" --dir "$CATEGORY_AGENT_ROOT"
+CATEGORY_AGENT_ROOTS=(
+  "$CATEGORY_AGENT_ROOT/.codex/agents"
+  "$CATEGORY_AGENT_ROOT/.claude/agents"
+  "$CATEGORY_AGENT_ROOT/.cursor/agents"
+  "$CATEGORY_AGENT_ROOT/.github/agents"
+  "$CATEGORY_AGENT_ROOT/.opencode/agents"
+)
+CATEGORY_AGENT_PATTERNS=('*.toml' '*.md' '*.md' '*.agent.md' '*.md')
+for ((index = 0; index < ${#CATEGORY_AGENT_ROOTS[@]}; index++)); do
+  assert_equal "$(count_profile_files "${CATEGORY_AGENT_ROOTS[$index]}" "${CATEGORY_AGENT_PATTERNS[$index]}")" "$FINANCE_AGENT_COUNT" "Agent category profile $index count"
+done
+[[ ! -d "$CATEGORY_AGENT_ROOT/.agents/skills/subagent-architecture" ]] ||
+  fail "Agent category install unexpectedly installed the companion Skill"
+log_pass "Bash Skill and Agent category installs"
+
 if [[ "$SMOKE_MODE" == "quick" ]]; then
   run_installer "project all Skills install" \
     --target project --type skill --name terminal-ops --source-dir "$REPO_ROOT" --dir "$PROJECT_ROOT"

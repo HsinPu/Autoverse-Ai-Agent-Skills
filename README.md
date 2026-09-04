@@ -88,6 +88,32 @@ curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/ins
 
 省略 `Name`／`--name` 會安裝該 Type 的全部元件。全量 Agent 安裝會一起安裝 `subagent-architecture`；普通的單一 Agent 安裝不會。
 
+### 依分類安裝
+
+如果不需要完整 catalog，可以使用 Skill 或 Agent 現有的分類，只安裝該分類內的元件。`Name`／`--name` 與 `Category`／`--category` 不能同時使用；分類 Agent 安裝不會自動加入 `subagent-architecture`，除非同時指定主動委派。
+
+Windows PowerShell：
+
+```powershell
+# 安裝 Frontend & Design Skills
+powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target codex -Type skill -Category frontend-design'
+
+# 安裝 Quality Assurance Agents，並先預覽
+powershell -ExecutionPolicy Bypass -NoProfile -Command '$s = irm https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.ps1; & ([scriptblock]::Create($s)) -Target codex -Type agent -Category quality-assurance -DryRun'
+```
+
+Linux／macOS：
+
+```bash
+# 安裝 Frontend & Design Skills
+curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh | bash -s -- --target codex --type skill --category frontend-design
+
+# 安裝 Quality Assurance Agents，並先預覽
+curl -fsSL https://raw.githubusercontent.com/HsinPu/CraftRoster/main/scripts/install.sh | bash -s -- --target codex --type agent --category quality-assurance --dry-run
+```
+
+可先使用 catalog CLI 查看內容，例如 `node craftroster-cli.js list --type agent --category quality-assurance`。Skill 使用下方 16 個正式分類；Agent 的分類則直接來自 `agents.json`。分類安裝仍會下載完整 repository archive，但只會把所選分類寫入安裝目錄，因此能減少全域檔案數與 runtime 載入內容。
+
 ### 安裝到目前專案
 
 先切換到專案／workspace root。`project` target 直接使用目前工作目錄，不會自行尋找 Git root。

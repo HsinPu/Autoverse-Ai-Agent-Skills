@@ -134,7 +134,13 @@ function Assert-NoAtomicSkillArtifacts {
         $_.Name -like '.craftroster-stage-*' -or
         $_.Name -like '.craftroster-backup-*' -or
         $_.Name -like '.craftroster-failed-*' -or
-        $_.Name -like '.craftroster-cleanup-*'
+        $_.Name -like '.craftroster-cleanup-*' -or
+        $_.Name -like '.cr-s-*' -or
+        $_.Name -like '.cr-b-*' -or
+        $_.Name -like '.cr-f-*' -or
+        $_.Name -like '.cr-cs-*' -or
+        $_.Name -like '.cr-cb-*' -or
+        $_.Name -like '.cr-cf-*'
     })
     if ($leftovers.Count -gt 0) {
         throw "$Label left atomic Skill artifacts: $($leftovers.Name -join ', ')"
@@ -245,6 +251,56 @@ try {
     $canonicalMetadata = Get-Content -Raw -LiteralPath (Join-Path $canonicalDestinationRoot "canonical-digest-fixture\.skill-meta.json") | ConvertFrom-Json
     Assert-Equal $canonicalMetadata.contentSha256 $canonicalDigestExpected "canonical nested/binary/non-ASCII Skill digest"
     Write-Pass "canonical nested, binary, and non-ASCII Skill digest"
+
+    $categoryIndex = @(Import-Csv -LiteralPath (Join-Path $repoRoot "scripts\data\install-category-index.tsv") -Delimiter "`t")
+    $browserSkillCount = @($categoryIndex | Where-Object { $_.type -ceq "skill" -and $_.category -ceq "browser-automation" }).Count
+    $financeAgentCount = @($categoryIndex | Where-Object { $_.type -ceq "agent" -and $_.category -ceq "finance" }).Count
+    $categorySkillRoot = Join-Path $smokeRoot "category-skill-project"
+    $categoryAgentRoot = Join-Path $smokeRoot "category-agent-project"
+    New-Item -ItemType Directory -Path $categorySkillRoot, $categoryAgentRoot | Out-Null
+
+    Invoke-ExpectedFailure -Label "Skill category and name conflict" -ExpectedMessage "Name and Category cannot be used together" -InstallerArgs @(
+        "-Target", "project", "-Type", "skill", "-Name", "browser-automation", "-Category", "browser-automation", "-SourceDir", $repoRoot, "-InstallDir", $categorySkillRoot
+    )
+    Invoke-ExpectedFailure -Label "invalid Skill category" -ExpectedMessage "Available Skill categories" -InstallerArgs @(
+        "-Target", "project", "-Type", "skill", "-Category", "missing-category", "-SourceDir", $repoRoot, "-InstallDir", $categorySkillRoot
+    )
+    $categoryDryRun = Invoke-InstallerStep -Label "project Skill category dry run" -InstallerArgs @(
+        "-Target", "project", "-Type", "skill", "-Category", "browser-automation", "-SourceDir", $repoRoot, "-InstallDir", $categorySkillRoot, "-DryRun"
+    )
+    $categoryDryRunText = $categoryDryRun.Output -join [Environment]::NewLine
+    if ($categoryDryRunText -notmatch [regex]::Escape("Selected $browserSkillCount skill component(s) from category 'browser-automation'")) {
+        throw "Skill category dry run did not report the selected component count"
+    }
+    if (@(Get-ChildItem -Force -LiteralPath $categorySkillRoot).Count -ne 0) {
+        throw "Skill category dry run wrote to the destination"
+    }
+    Invoke-InstallerStep -Label "project Skill category install" -InstallerArgs @(
+        "-Target", "project", "-Type", "skill", "-Category", "browser-automation", "-SourceDir", $repoRoot, "-InstallDir", $categorySkillRoot
+    ) | Out-Null
+    foreach ($relativeRoot in @(".agents\skills", ".claude\skills")) {
+        $installedCount = @(Get-ChildItem -LiteralPath (Join-Path $categorySkillRoot $relativeRoot) -Directory | Where-Object {
+            Test-Path -LiteralPath (Join-Path $_.FullName "SKILL.md") -PathType Leaf
+        }).Count
+        Assert-Equal $installedCount $browserSkillCount "$relativeRoot browser-automation category count"
+    }
+
+    Invoke-InstallerStep -Label "project Agent category install" -InstallerArgs @(
+        "-Target", "project", "-Type", "agent", "-Category", "finance", "-SourceDir", $repoRoot, "-InstallDir", $categoryAgentRoot
+    ) | Out-Null
+    foreach ($profile in @(
+        @{ Root = ".codex\agents"; Pattern = "*.toml" },
+        @{ Root = ".claude\agents"; Pattern = "*.md" },
+        @{ Root = ".cursor\agents"; Pattern = "*.md" },
+        @{ Root = ".github\agents"; Pattern = "*.agent.md" },
+        @{ Root = ".opencode\agents"; Pattern = "*.md" }
+    )) {
+        Assert-Equal @(Get-ChildItem -LiteralPath (Join-Path $categoryAgentRoot $profile.Root) -File -Filter $profile.Pattern).Count $financeAgentCount "$($profile.Root) finance category count"
+    }
+    if (Test-Path -LiteralPath (Join-Path $categoryAgentRoot ".agents\skills\subagent-architecture")) {
+        throw "Agent category install unexpectedly installed the companion Skill"
+    }
+    Write-Pass "PowerShell Skill and Agent category installs"
 
     Invoke-InstallerStep -Label "project all Skills install" -InstallerArgs @(
         "-Target", "project", "-Type", "skill", "-SourceDir", $repoRoot, "-InstallDir", $projectRoot
@@ -627,10 +683,10 @@ try {
             throw "Skill final-check replacement unexpectedly recreated the destination"
         }
         $replacementBackups = @(Get-ChildItem -Force -LiteralPath $skillOwnershipRoot -Directory | Where-Object {
-            $_.Name -like '.craftroster-backup-terminal-ops-*'
+            $_.Name -like '.cr-b-*'
         })
         $replacementOriginals = @(Get-ChildItem -Force -LiteralPath $skillOwnershipRoot -Directory | Where-Object {
-            $_.Name -like '.craftroster-failed-terminal-ops-*'
+            $_.Name -like '.cr-f-*'
         })
         Assert-Equal $replacementBackups.Count 1 "Skill final-check replacement foreign backup count"
         Assert-Equal $replacementOriginals.Count 1 "Skill final-check replacement original count"
@@ -655,7 +711,7 @@ try {
             throw "Skill destination race removed the newcomer sentinel"
         }
         $raceBackups = @(Get-ChildItem -Force -LiteralPath $skillOwnershipRoot -Directory | Where-Object {
-            $_.Name -like '.craftroster-backup-terminal-ops-*'
+            $_.Name -like '.cr-b-*'
         })
         Assert-Equal $raceBackups.Count 1 "Skill destination race retained backup count"
         $raceBackup = $raceBackups[0].FullName
@@ -687,7 +743,7 @@ try {
             throw "Skill stage collision unexpectedly installed the Skill"
         }
         $collisionStages = @(Get-ChildItem -Force -LiteralPath $stageCollisionRoot -Directory | Where-Object {
-            $_.Name -like '.craftroster-stage-terminal-ops-*'
+            $_.Name -like '.cr-s-*'
         })
         Assert-Equal $collisionStages.Count 1 "Skill stage collision retained newcomer count"
         $collisionStage = $collisionStages[0].FullName

@@ -42,6 +42,9 @@ jobs:
       - name: Test Skill catalog generation
         run: npm run test:skill-catalog
 
+      - name: Test install category index generation
+        run: npm run test:install-categories
+
       - name: Validate Skill evals
         run: npm run validate:skill-evals
 
@@ -119,6 +122,9 @@ jobs:
 
       - name: Test Skill catalog generation
         run: npm run test:skill-catalog
+
+      - name: Test install category index generation
+        run: npm run test:install-categories
 
       - name: Test Skill eval validation
         run: npm run test:skill-evals

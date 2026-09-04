@@ -11,6 +11,7 @@ BRANCH="main"
 TARGET=""
 TYPE="skill"
 NAME=""
+CATEGORY=""
 INSTALL_DIR=""
 SOURCE_DIR=""
 DRY_RUN=0
@@ -43,13 +44,13 @@ usage() {
 CraftRoster installer
 
 Usage:
-  scripts/install.sh --target <target> [--type skill] [--name <skill>] [--dir path] [--dry-run] [--force]
-  scripts/install.sh --target <target> --type agent [--name <role>] [--dir path] [--enable-auto-delegation] [--dry-run] [--force]
+  scripts/install.sh --target <target> [--type skill] [--name <skill> | --category <category>] [--dir path] [--dry-run] [--force]
+  scripts/install.sh --target <target> --type agent [--name <role> | --category <category>] [--dir path] [--enable-auto-delegation] [--dry-run] [--force]
 
 Compatibility aliases:
   --agent is an alias for --target; --skill selects a Skill by name.
   --source-dir installs from a local checkout; otherwise the requested GitHub repo and branch are downloaded.
-  Omit --name with --type agent to install every available Agent.
+  Omit --name and --category to install every available component of the selected Type.
 
 Skill targets:
   codex, claude, cursor, vscode, copilot, opencode, project
@@ -61,6 +62,8 @@ Examples:
   scripts/install.sh --target codex --name python-development
   scripts/install.sh --agent codex --skill python-development
   scripts/install.sh --target codex --type agent --name code-reviewer
+  scripts/install.sh --target codex --type skill --category frontend-design
+  scripts/install.sh --target codex --type agent --category quality-assurance
   scripts/install.sh --target codex --type agent --enable-auto-delegation
   scripts/install.sh --target opencode --type agent
   scripts/install.sh --target project --type agent --name debugger --dry-run
@@ -190,6 +193,7 @@ while [[ $# -gt 0 ]]; do
     --target|--agent) require_option_value "$1" "${2:-}"; TARGET="$2"; shift 2 ;;
     --type) require_option_value "$1" "${2:-}"; TYPE="$2"; shift 2 ;;
     --name) require_option_value "$1" "${2:-}"; NAME="$2"; shift 2 ;;
+    --category) require_option_value "$1" "${2:-}"; CATEGORY="$2"; shift 2 ;;
     --skill) require_option_value "$1" "${2:-}"; TYPE="skill"; NAME="$2"; shift 2 ;;
     --agent-profile) require_option_value "$1" "${2:-}"; TYPE="agent"; NAME="$2"; shift 2 ;;
     --branch) require_option_value "$1" "${2:-}"; BRANCH="$2"; shift 2 ;;
@@ -2469,6 +2473,7 @@ apply_auto_delegation_plan() {
 
 validate_test_fault_config
 if [[ -z "$TARGET" ]]; then usage; log_error "Target is required."; exit 1; fi
+if [[ -n "$NAME" && -n "$CATEGORY" ]]; then log_error "Name and Category cannot be used together."; exit 1; fi
 if [[ "$TYPE" != "skill" && "$TYPE" != "agent" ]]; then log_error "Type must be skill or agent."; exit 1; fi
 if [[ ! "$REPO" =~ ^[A-Za-z0-9._-]+/[A-Za-z0-9._-]+$ ]]; then
   log_error "Invalid GitHub repository '$REPO'. Expected owner/name using letters, numbers, dot, underscore, or hyphen."
@@ -2490,6 +2495,10 @@ if [[ "$ENABLE_AUTO_DELEGATION" -eq 1 && "$TARGET" != "codex" && "$TARGET" != "o
   exit 1
 fi
 validate_name
+if [[ -n "$CATEGORY" && ! "$CATEGORY" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]]; then
+  log_error "Invalid Category '$CATEGORY'. Expected a lowercase hyphen-case category."
+  exit 1
+fi
 
 PROJECT_ROOT="$PWD"
 if [[ "$TARGET" == "project" && -n "$INSTALL_DIR" ]]; then
@@ -2553,6 +2562,74 @@ fi
 LEGACY_SKILL_DIGEST_MANIFEST="$REPO_ROOT/scripts/data/legacy-skill-content-sha256.tsv"
 LEGACY_SKILL_DIGEST_MANIFEST_VALIDATED=0
 
+CATEGORY_NAMES=()
+load_install_category_names() {
+  local index_path="$REPO_ROOT/scripts/data/install-category-index.tsv"
+  local line line_number=0 row_type remainder row_category row_name key
+  local seen_keys=$'\n' available_text="" last_available=""
+  [[ -f "$index_path" && ! -L "$index_path" ]] || {
+    log_error "Install category index not found: $index_path"
+    exit 1
+  }
+  while IFS= read -r line || [[ -n "$line" ]]; do
+    line_number=$((line_number + 1))
+    line="${line%$'\r'}"
+    if [[ "$line_number" -eq 1 ]]; then
+      [[ "$line" == $'type\tcategory\tname' ]] || {
+        log_error "Install category index has an invalid header: $index_path"
+        exit 1
+      }
+      continue
+    fi
+    if [[ "$line" != *$'\t'* ]]; then
+      log_error "Install category index row $line_number must contain type, category, and name."
+      exit 1
+    fi
+    row_type="${line%%$'\t'*}"
+    remainder="${line#*$'\t'}"
+    if [[ "$remainder" != *$'\t'* ]]; then
+      log_error "Install category index row $line_number must contain type, category, and name."
+      exit 1
+    fi
+    row_category="${remainder%%$'\t'*}"
+    row_name="${remainder#*$'\t'}"
+    if [[ "$row_name" == *$'\t'* || ( "$row_type" != "skill" && "$row_type" != "agent" ) ||
+          ! "$row_category" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ||
+          ! "$row_name" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]]; then
+      log_error "Install category index row $line_number contains an invalid value."
+      exit 1
+    fi
+    key="$row_type:$row_name"
+    case "$seen_keys" in
+      *$'\n'"$key"$'\n'*) log_error "Install category index contains duplicate $row_type name: $row_name"; exit 1 ;;
+    esac
+    seen_keys+="$key"$'\n'
+    if [[ "$row_type" == "$TYPE" ]]; then
+      if [[ "$row_category" != "$last_available" ]]; then
+        if [[ -n "$available_text" ]]; then available_text+=", "; fi
+        available_text+="$row_category"
+        last_available="$row_category"
+      fi
+      if [[ "$row_category" == "$CATEGORY" ]]; then CATEGORY_NAMES+=("$row_name"); fi
+    fi
+  done < "$index_path"
+  if [[ "$line_number" -lt 2 ]]; then
+    log_error "Install category index contains no components: $index_path"
+    exit 1
+  fi
+  if [[ "${#CATEGORY_NAMES[@]}" -eq 0 ]]; then
+    local label="Agent"
+    [[ "$TYPE" == "skill" ]] && label="Skill"
+    log_error "Invalid $label category '$CATEGORY'. Available $label categories: $available_text"
+    exit 1
+  fi
+}
+
+if [[ -n "$CATEGORY" ]]; then
+  load_install_category_names
+  log_info "Selected ${#CATEGORY_NAMES[@]} $TYPE component(s) from category '$CATEGORY'"
+fi
+
 if [[ "$TYPE" == "agent" ]]; then
   if [[ "$DRY_RUN" -eq 0 ]]; then
     require_command mktemp
@@ -2585,6 +2662,22 @@ if [[ "$TYPE" == "agent" ]]; then
       AGENT_JOB_SUFFIXES+=("$SUFFIX")
       AGENT_JOB_LEGACY_TARGETS+=("$LEGACY_TARGETS")
       PROFILE_SOURCE_COUNT=1
+    elif [[ -n "$CATEGORY" ]]; then
+      for ROLE in "${CATEGORY_NAMES[@]}"; do
+        SOURCE="$ADAPTER_ROOT/$ROLE$SUFFIX"
+        if [[ ! -f "$SOURCE" ]]; then
+          log_error "Agent category '$CATEGORY' does not match the available $PLATFORM adapter inventory."
+          exit 1
+        fi
+        AGENT_JOB_SOURCES+=("$SOURCE")
+        AGENT_JOB_ROLES+=("$ROLE")
+        AGENT_JOB_PLATFORMS+=("$PLATFORM")
+        AGENT_JOB_DESTINATIONS+=("$DESTINATION")
+        AGENT_JOB_OWNERSHIP_TARGETS+=("$OWNERSHIP_TARGET")
+        AGENT_JOB_SUFFIXES+=("$SUFFIX")
+        AGENT_JOB_LEGACY_TARGETS+=("$LEGACY_TARGETS")
+        PROFILE_SOURCE_COUNT=$((PROFILE_SOURCE_COUNT + 1))
+      done
     else
       for source in "$ADAPTER_ROOT"/*"$SUFFIX"; do
         [[ -f "$source" ]] || continue
@@ -2619,7 +2712,7 @@ if [[ "$TYPE" == "agent" ]]; then
   COMPANION_OWNERSHIP_TARGETS=()
   COMPANION_LEGACY_TARGETS=()
   COMPANION_SOURCE=""
-  if [[ -z "$NAME" || "$ENABLE_AUTO_DELEGATION" -eq 1 ]]; then
+  if [[ ( -z "$NAME" && -z "$CATEGORY" ) || "$ENABLE_AUTO_DELEGATION" -eq 1 ]]; then
     INSTALL_COMPANION_SKILL=1
     COMPANION_SOURCE="$REPO_ROOT/skills/subagent-architecture"
     if [[ ! -f "$COMPANION_SOURCE/SKILL.md" ]]; then log_error "Companion Skill not found in archive: subagent-architecture"; exit 1; fi
@@ -2675,6 +2768,15 @@ else
     [[ -f "$SKILL_PATH/SKILL.md" ]] || SKILL_PATH="$REPO_ROOT/$NAME"
     if [[ ! -f "$SKILL_PATH/SKILL.md" ]]; then log_error "Skill not found in archive: $NAME"; exit 1; fi
     SOURCES+=("$SKILL_PATH")
+  elif [[ -n "$CATEGORY" ]]; then
+    for SKILL_NAME in "${CATEGORY_NAMES[@]}"; do
+      SKILL_PATH="$SKILLS_ROOT/$SKILL_NAME"
+      if [[ ! -f "$SKILL_PATH/SKILL.md" ]]; then
+        log_error "Skill category '$CATEGORY' does not match the available Skill inventory."
+        exit 1
+      fi
+      SOURCES+=("$SKILL_PATH")
+    done
   else
     SCAN_ROOT="$SKILLS_ROOT"
     [[ -d "$SCAN_ROOT" ]] || SCAN_ROOT="$REPO_ROOT"

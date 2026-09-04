@@ -7,6 +7,7 @@ param(
     [string]$Type = "skill",
     [Alias("Skill")]
     [string]$Name,
+    [string]$Category,
     [string]$Branch = "main",
     [string]$Repo = "HsinPu/CraftRoster",
     [string]$SourceDir,
@@ -35,14 +36,14 @@ function Show-Usage {
 CraftRoster installer
 
 Usage:
-  .\scripts\install.ps1 -Target <target> [-Type skill] [-Name <skill>] [-InstallDir path] [-DryRun] [-Force]
-  .\scripts\install.ps1 -Target <target> -Type agent [-Name <role>] [-InstallDir path] [-EnableAutoDelegation] [-DryRun] [-Force]
+  .\scripts\install.ps1 -Target <target> [-Type skill] [-Name <skill> | -Category <category>] [-InstallDir path] [-DryRun] [-Force]
+  .\scripts\install.ps1 -Target <target> -Type agent [-Name <role> | -Category <category>] [-InstallDir path] [-EnableAutoDelegation] [-DryRun] [-Force]
 
 Compatibility aliases:
   -Agent is an alias for -Target; -Skill is an alias for -Name.
   -SourceDir installs from a local checkout; otherwise the requested GitHub repo and branch are downloaded.
   -InstallDir is a direct destination for tool targets and the project root for the 'project' target.
-  Omit -Name with -Type agent to install every available Agent.
+  Omit -Name and -Category to install every available component of the selected Type.
 
 Skill targets:
   codex, claude, cursor, vscode, copilot, opencode, project
@@ -54,6 +55,8 @@ Examples:
   .\scripts\install.ps1 -Target codex -Name python-development
   .\scripts\install.ps1 -Agent codex -Skill python-development
   .\scripts\install.ps1 -Target codex -Type agent -Name code-reviewer
+  .\scripts\install.ps1 -Target codex -Type skill -Category frontend-design
+  .\scripts\install.ps1 -Target codex -Type agent -Category quality-assurance
   .\scripts\install.ps1 -Target codex -Type agent -EnableAutoDelegation
   .\scripts\install.ps1 -Target opencode -Type agent
   .\scripts\install.ps1 -Target project -Type agent -Name debugger -DryRun
@@ -385,6 +388,53 @@ function Get-AgentSources {
     )
     if ($sources.Count -eq 0) { throw "No Agent adapters were found for $Platform." }
     return $sources
+}
+
+function Get-InstallCategoryNames {
+    param([string]$RepoRoot, [string]$ComponentType, [string]$CategoryName)
+    $indexPath = Join-Path $RepoRoot "scripts\data\install-category-index.tsv"
+    if (-not (Test-Path -LiteralPath $indexPath -PathType Leaf)) {
+        throw "Install category index not found: $indexPath"
+    }
+
+    try {
+        $lines = [System.IO.File]::ReadAllLines($indexPath, [System.Text.UTF8Encoding]::new($false, $true))
+    } catch {
+        throw "Install category index is not valid UTF-8: $indexPath"
+    }
+    if ($lines.Count -lt 2 -or $lines[0] -cne "type`tcategory`tname") {
+        throw "Install category index has an invalid header: $indexPath"
+    }
+
+    $seen = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
+    $available = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
+    $selected = [System.Collections.Generic.List[string]]::new()
+    for ($index = 1; $index -lt $lines.Count; $index++) {
+        $parts = @($lines[$index] -split "`t", -1)
+        if ($parts.Count -ne 3) {
+            throw "Install category index row $($index + 1) must contain type, category, and name."
+        }
+        $rowType, $rowCategory, $rowName = $parts
+        if ($rowType -notin @("skill", "agent") -or
+            $rowCategory -notmatch '^[a-z0-9]+(?:-[a-z0-9]+)*$' -or
+            $rowName -notmatch '^[a-z0-9]+(?:-[a-z0-9]+)*$') {
+            throw "Install category index row $($index + 1) contains an invalid value."
+        }
+        if (-not $seen.Add("$rowType`t$rowName")) {
+            throw "Install category index contains duplicate $rowType name: $rowName"
+        }
+        if ($rowType -ceq $ComponentType) {
+            $null = $available.Add($rowCategory)
+            if ($rowCategory -ceq $CategoryName) { $selected.Add($rowName) }
+        }
+    }
+
+    if ($selected.Count -eq 0) {
+        $label = if ($ComponentType -ceq "skill") { "Skill" } else { "Agent" }
+        $availableList = @($available | Sort-Object) -join ", "
+        throw "Invalid $label category '$CategoryName'. Available $label categories: $availableList"
+    }
+    return @($selected)
 }
 
 function Test-TargetWithinRoot {
@@ -1254,13 +1304,15 @@ function Install-AtomicSkillDirectory {
     New-Item -ItemType Directory -Force -Path $DestinationRoot | Out-Null
     $suffix = [Guid]::NewGuid().ToString('N')
     $transactionToken = New-SkillTransactionToken
-    $markerName = '.craftroster-transaction-' + $suffix
-    $stagePath = Join-Path $DestinationRoot ('.craftroster-stage-' + $Source.Name + '-' + $suffix)
-    $backupPath = Join-Path $DestinationRoot ('.craftroster-backup-' + $Source.Name + '-' + $suffix)
-    $failedPath = Join-Path $DestinationRoot ('.craftroster-failed-' + $Source.Name + '-' + $suffix)
-    $stageCleanupPath = Join-Path $DestinationRoot ('.craftroster-cleanup-stage-' + $Source.Name + '-' + $suffix)
-    $backupCleanupPath = Join-Path $DestinationRoot ('.craftroster-cleanup-backup-' + $Source.Name + '-' + $suffix)
-    $failedCleanupPath = Join-Path $DestinationRoot ('.craftroster-cleanup-failed-' + $Source.Name + '-' + $suffix)
+    # Keep transaction-only names short enough for Windows PowerShell 5.1,
+    # which cannot address paths beyond MAX_PATH even when newer runtimes can.
+    $markerName = '.cr-t-' + $suffix
+    $stagePath = Join-Path $DestinationRoot ('.cr-s-' + $suffix)
+    $backupPath = Join-Path $DestinationRoot ('.cr-b-' + $suffix)
+    $failedPath = Join-Path $DestinationRoot ('.cr-f-' + $suffix)
+    $stageCleanupPath = Join-Path $DestinationRoot ('.cr-cs-' + $suffix)
+    $backupCleanupPath = Join-Path $DestinationRoot ('.cr-cb-' + $suffix)
+    $failedCleanupPath = Join-Path $DestinationRoot ('.cr-cf-' + $suffix)
     foreach ($path in @($stagePath, $backupPath, $failedPath, $stageCleanupPath, $backupCleanupPath, $failedCleanupPath)) {
         if (-not (Test-TargetWithinRoot -TargetPath $path -RootPath $DestinationRoot)) {
             throw "Refusing to use an atomic Skill path outside the install directory: $path"
@@ -1272,6 +1324,7 @@ function Install-AtomicSkillDirectory {
     $backupMoved = $false
     $backupVerified = $false
     $committed = $false
+    $failureMessage = $null
     try {
         if ($fault -ceq 'stage-path-collision') {
             $null = New-Item -ItemType Directory -Path $stagePath
@@ -1428,14 +1481,20 @@ function Install-AtomicSkillDirectory {
             }
         }
         if ($recoveryFailure) {
-            throw "Atomic Skill update failed and recovery also failed: $($originalFailure.Exception.Message) Recovery error: $recoveryFailure"
+            $failureMessage = "Atomic Skill update failed and recovery also failed: $($originalFailure.Exception.Message) Recovery error: $recoveryFailure"
+            throw $failureMessage
         }
+        $failureMessage = $originalFailure.Exception.Message
         throw $originalFailure
     } finally {
         if (Test-Path -LiteralPath $stagePath) {
             if (-not $stageSnapshot -or
                 -not (Test-SkillTransactionDirectory -Path $stagePath -MarkerName $markerName -TransactionToken $transactionToken -ExpectedSnapshot $stageSnapshot)) {
-                throw "Manual recovery required: refusing to clean an unrecognized or changed atomic Skill stage at '$stagePath'."
+                $cleanupMessage = "Manual recovery required: refusing to clean an unrecognized or changed atomic Skill stage at '$stagePath'."
+                if ($failureMessage) {
+                    throw "$failureMessage Cleanup error: $cleanupMessage"
+                }
+                throw $cleanupMessage
             }
             Remove-VerifiedSkillDirectory `
                 -Path $stagePath `
@@ -2133,6 +2192,7 @@ function Invoke-AutoDelegationPlan {
 
 try {
     if (-not $Target) { Show-Usage; throw "Target is required." }
+    if ($Name -and $Category) { throw "Name and Category cannot be used together." }
     Test-RepositoryCoordinate -RepoName $Repo
     Test-BranchName -BranchName $Branch
     $Target = Resolve-TargetName -TargetName $Target -ComponentType $Type
@@ -2143,6 +2203,9 @@ try {
         throw "EnableAutoDelegation only supports the global Agent targets 'codex' and 'opencode'."
     }
     Test-ComponentName -ComponentType $Type -ComponentName $Name
+    if ($Category -and $Category -notmatch '^[a-z0-9]+(?:-[a-z0-9]+)*$') {
+        throw "Invalid Category '$Category'. Expected a lowercase hyphen-case category."
+    }
     $tempRoot = $null
     $script:SourceKind = if ($SourceDir) { "local-checkout" } else { "github-archive" }
 
@@ -2160,6 +2223,14 @@ try {
         }
         $script:LegacySkillDigestManifestPath = Join-Path $repoRoot 'scripts\data\legacy-skill-content-sha256.tsv'
         $script:LegacySkillDigestAllowlist = $null
+        $categoryNames = if ($Category) {
+            @(Get-InstallCategoryNames -RepoRoot $repoRoot -ComponentType $Type -CategoryName $Category)
+        } else {
+            @()
+        }
+        if ($Category) {
+            Write-Info "Selected $($categoryNames.Count) $Type component(s) from category '$Category'"
+        }
         if ($Type -eq "agent") {
             $agentProfiles = @(Get-AgentInstallProfiles -TargetName $Target -RequestedInstallDir $InstallDir)
             foreach ($profile in $agentProfiles) {
@@ -2170,13 +2241,20 @@ try {
             $agentPlans = @()
             foreach ($profile in $agentProfiles) {
                 $profileSources = @(Get-AgentSources -RepoRoot $repoRoot -Platform $profile.Platform -OutputSuffix $profile.OutputSuffix -AgentId $Name)
+                if ($Category) {
+                    $profileSources = @($profileSources | Where-Object { $categoryNames -ccontains $_.Id })
+                    if ($profileSources.Count -ne $categoryNames.Count) {
+                        throw "Agent category '$Category' does not match the available $($profile.Platform) adapter inventory."
+                    }
+                }
                 foreach ($agentSource in $profileSources) {
                     Test-AgentProfileInstall -Source $agentSource.Source -RuntimeName $agentSource.RuntimeName -AgentId $agentSource.Id -Platform $agentSource.Platform -OutputSuffix $agentSource.OutputSuffix -DestinationRoot $profile.DestinationRoot -TargetName $profile.TargetName -LegacyTargets $profile.LegacyTargets -RepoName $Repo
                     $agentPlans += @{ Source = $agentSource; Profile = $profile }
                 }
             }
 
-            $installCompanionSkill = (-not $Name) -or $EnableAutoDelegation
+            $isFullInstall = (-not $Name) -and (-not $Category)
+            $installCompanionSkill = $isFullInstall -or $EnableAutoDelegation
             $companionSource = $null
             $companionProfiles = @()
             if ($installCompanionSkill) {
@@ -2214,6 +2292,12 @@ try {
             if ($autoDelegationPlan) { Invoke-AutoDelegationPlan -Plan $autoDelegationPlan }
         } else {
             $sources = @(Get-SkillSources -RepoRoot $repoRoot -SkillName $Name)
+            if ($Category) {
+                $sources = @($sources | Where-Object { $categoryNames -ccontains $_.Name })
+                if ($sources.Count -ne $categoryNames.Count) {
+                    throw "Skill category '$Category' does not match the available Skill inventory."
+                }
+            }
             $skillPlans = @()
             foreach ($source in $sources) {
                 $sourceProfiles = @(Get-SkillInstallProfiles -TargetName $Target -ComponentName $source.Name -RequestedInstallDir $InstallDir -RepoName $Repo -IncomingSkillFile (Join-Path $source.FullName "SKILL.md"))
